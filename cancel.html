@@ -102,7 +102,32 @@
   .footer-legal p{ margin:0 0 4px; font-size:11.5px; color:var(--muted); font-weight:600; line-height:1.6; }
 
   @media (max-width:780px){ .footer-inner{ grid-template-columns:1fr; } }
+  /* ===== Mobile improvements (added) ===== */
+  @media (max-width: 780px){
+    html,body{ overflow-x:hidden; }
+    .site-nav{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .site-nav::-webkit-scrollbar{ display:none; }
+    .site-nav a{ flex:0 0 auto; white-space:nowrap; }
+    .hero-ctas{ flex-direction:column; align-items:stretch; }
+    .hero-ctas .cta{ width:100%; }
+    .promo-band, .cta-band{ flex-direction:column; align-items:flex-start; text-align:left; }
+    .promo-band .cta, .cta-band .cta{ width:100%; text-align:center; }
+  }
+  @media (max-width: 480px){
+    .logo-img{ height:52px; }
+    .logo .name{ font-size:22px; }
+    .topbar{ gap:12px; padding:16px 16px 10px; }
+    .site-nav{ padding:10px 16px; }
+    .section{ padding:6px 16px 18px; }
+    .section-inner{ padding:24px 16px; border-radius:18px; }
+    .hero{ padding:20px 16px 20px; }
+    footer{ padding:6px 16px 28px; }
+    .footer-inner{ padding:22px 16px; border-radius:18px; }
+  }
 </style>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#14103D">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 </head>
 <body>
 <div class="wrap">
@@ -226,5 +251,12 @@
   </footer>
 
 </div>
+  <script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(){});
+    });
+  }
+  </script>
 </body>
 </html>
