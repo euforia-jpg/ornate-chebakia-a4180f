@@ -582,5 +582,5 @@ function formatPriceBadge(price){
 function formatYoutubeBtn(youtubeUrl){
   if(!youtubeUrl) return '';
   const safeUrl = youtubeUrl.replace(/'/g, '%27');
-  return `<button type="button" class="yt-btn" aria-label="관광지 영상 보기" onclick="event.preventDefault();event.stopPropagation();window.open('${safeUrl}','_blank','noopener');"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2c-.3-1-1-1.8-2-2C19.7 3.7 12 3.7 12 3.7s-7.7 0-9.5.5c-1 .2-1.7 1-2 2C0 8 0 12 0 12s0 4 .5 5.8c.3 1 1 1.8 2 2 1.8.5 9.5.5 9.5.5s7.7 0 9.5-.5c1-.2 1.7-1 2-2 .5-1.8.5-5.8.5-5.8s0-4-.5-5.8zM9.5 15.5v-7l6.3 3.5-6.3 3.5z"/></svg></button>`;
+  return `<button type="button" class="yt-btn" aria-label="관광지 영상 보기" onclick="event.preventDefault();event.stopPropagation();window.open('${safeUrl}','_blank','noopener');"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2c-.3-1-1-1.8-2-2C19.7 3.7 12 3.7 12 3.7s-7.7 0-9.5.5c-1 .2-1.7 1-2 2C0 8 0 12 0 12s0 4 .5 5.8c.3 1 1 1.8 2 2 1.8.5 9.5.5 9.5.5s7.7 0 9.5-.5c1-.2 1.7-1 2-2 .5-1.8.5-5.8.5-5.8s0-4-.5-5.8zM9.5 15.5v-7l6.3 3.5-6.3 3.5z"/></svg></button>`;
 }
