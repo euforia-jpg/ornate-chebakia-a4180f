@@ -62,13 +62,14 @@
   .section-head .sub{ color:var(--muted); font-size:13px; font-weight:600; }
   .section-head a.more{ text-decoration:none; font-size:12.5px; font-weight:800; color:var(--violet); }
   .section-head a.more:hover{ text-decoration:underline; }
-
+.tour-price{ display:inline-flex; align-items:stretch; max-width:100%; margin:0 0 14px; border-radius:11px; overflow:hidden; box-shadow:0 8px 16px -9px rgba(230,49,123,0.55); }
   .tour-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
   .tour-card{ background:var(--paper); border-radius:var(--radius); border:2px solid var(--line); overflow:hidden; transition: transform .15s ease, box-shadow .15s ease, border-color .15s; display:block; text-decoration:none; color:inherit; }
   .tour-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px -12px rgba(20,16,61,0.3); border-color: var(--violet); }
+  
   .tour-price .yt-btn{ display:flex; align-items:center; justify-content:center; padding:0 16px; min-width:48px; margin:0; border:none; background:#CC0000; color:#fff; flex-shrink:0; text-decoration:none; cursor:pointer; font:inherit; transition: background .15s ease; }
 .tour-price .yt-btn:hover{ background:#e52d27; }
-  .tour-price .price-chip{ display:block; box-sizing:border-box; min-width:0; flex:1; padding:6px 12px; font-family:'Space Mono'; font-size:12px; font-weight:800; color:#fff; background:linear-gradient(90deg,var(--pink),var(--orange)); line-height:1.4; white-space:normal; word-break:keep-all; }
+  .tour-price .price-chip{ display:block; box-sizing:border-box; flex:0 1 auto; padding:6px 12px; font-family:'Space Mono'; font-size:12px; font-weight:800; color:#fff; background:linear-gradient(90deg,var(--pink),var(--orange)); line-height:1.4; white-space:normal; word-break:keep-all; }
   .tour-price .price-sub{ display:block; font-size:0.78em; font-weight:700; opacity:0.9; margin-top:2px; }
  
   .tour-top{ padding:12px 16px; color:#fff; display:flex; flex-wrap:wrap; gap:4px 12px; justify-content:space-between; align-items:center; }
