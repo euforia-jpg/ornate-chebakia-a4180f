@@ -108,9 +108,10 @@
   .nav-toggle-btn{ display:none; }
   @media (max-width: 780px){
     html,body{ overflow-x:hidden; }
-    .site-nav{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-    .site-nav::-webkit-scrollbar{ display:none; }
-    .site-nav a{ flex:0 0 auto; white-space:nowrap; }
+.nav-toggle-btn{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:10px; border:1.5px solid var(--line); background:rgba(255,255,255,0.75); cursor:pointer; font-size:20px; color:var(--navy); }
+    .site-nav{ display:none; flex-direction:column; align-items:stretch; width:100%; }
+    .nav-toggle:checked ~ .site-nav{ display:flex; }
+    .site-nav a{ width:100%; box-sizing:border-box; }
     .hero-ctas{ flex-direction:column; align-items:stretch; }
     .hero-ctas .cta{ width:100%; }
     .promo-band, .cta-band{ flex-direction:column; align-items:flex-start; text-align:left; }
