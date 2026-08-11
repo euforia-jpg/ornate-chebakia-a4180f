@@ -98,7 +98,10 @@
   .footer-links span{ font-size:12.5px; color:var(--muted); font-weight:600; }
   .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; padding:20px clamp(4px,1vw,12px) 0; color:var(--muted); font-size:11.5px; font-weight:700; }
   .footer-legal{ margin:12px 0 0; }
-  .footer-legal p{ margin:0 0 4px; font-size:11.5px; color:var(--muted); font-weight:600; line-height:1.6; }
+.footer-legal p{ display:flex; align-items:flex-start; gap:8px; margin:0 0 8px; font-size:14px; color:var(--muted); font-weight:600; line-height:1.6; }
+.footer-legal .ft-ico{ flex-shrink:0; font-size:14px; line-height:1.6; }
+.footer-links span{ display:flex; align-items:flex-start; gap:8px; font-size:14px; color:var(--muted); font-weight:600; }
+.footer-links .ft-ico{ flex-shrink:0; font-size:14px; }
 
   @media (max-width:900px){ .value-grid{ grid-template-columns:repeat(3,1fr); } .promise-grid{ grid-template-columns:1fr; } }
   @media (max-width:600px){ .value-grid{ grid-template-columns:1fr 1fr; } }
