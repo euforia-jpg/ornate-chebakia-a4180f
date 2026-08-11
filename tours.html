@@ -276,7 +276,7 @@ function renderGrid(){
         <h3>${p.title}</h3>
         <p>${p.summary}</p>
         <div class="tour-tags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
-        <div class="tour-price"><span class="price-chip">${formatPriceBadge(p.price)}</span>${formatYoutubeBtn(p.youtubeUrl)}</div>
+        <div class="tour-price">${formatPriceBadge(p.price)}${formatYoutubeBtn(p.youtubeUrl)}</div>
         <div class="tour-cta"><span>${p.ctaLabel || '상품 보기'} →</span></div>
       </div>
     </a>
