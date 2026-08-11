@@ -150,7 +150,6 @@ button.price-chip:hover{ opacity:.92; }
 .footer-inner{ padding:22px 16px; border-radius:18px; }
     .tour-grid{ grid-template-columns:1fr; }
   }
-  }
 .addon-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .addon-card{ border-radius:var(--radius); padding:28px; color:#fff; display:flex; flex-direction:column; gap:10px; }
 .addon-card .tag{ display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,.2); font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
@@ -336,7 +335,7 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
     <div class="tour-body">
       <h3>${p.title}</h3>
       <p>${p.summary}</p>
-      <div class="tour-price"><span class="price-chip">${formatPriceBadge(p.price)}</span>${formatYoutubeBtn(p.youtubeUrl)}</div>
+     <div class="tour-price">${formatPriceBadge(p.price)}${formatYoutubeBtn(p.youtubeUrl)}</div>
       <div class="tour-cta">${p.ctaLabel || '상품 보기'} →</div>
     </div>
   </a>
