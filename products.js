@@ -565,10 +565,14 @@ const PRODUCTS = [
 function formatPriceBadge(price){
   const p = price || '가격 문의';
   const idx = p.indexOf('(');
-  if(idx === -1) return p;
-  const main = p.slice(0, idx).trim();
-  const sub = p.slice(idx).trim();
-  return `${main}<span class="price-sub">${sub}</span>`;
+  const inner = idx === -1 ? p : `${p.slice(0, idx).trim()}<span class="price-sub">${p.slice(idx).trim()}</span>`;
+
+  /* 정해진 가격이 없는 '가격 문의' 상품은, 뱃지 자체를 눌러서
+     바로 예약문의 폼(contact.html)으로 이동하는 버튼으로 만들어요. */
+  if(p.indexOf('가격 문의') !== -1){
+    return `<button type="button" class="price-chip" onclick="event.preventDefault();event.stopPropagation();location.href='contact.html';">${inner}<span class="price-cta-label">예약문의 하러 가기 →</span></button>`;
+  }
+  return `<span class="price-chip">${inner}</span>`;
 }
 
 /* 상품에 youtubeUrl이 있으면 가격 뱃지 오른쪽에 빨간 유튜브 버튼을 붙여줘요.
