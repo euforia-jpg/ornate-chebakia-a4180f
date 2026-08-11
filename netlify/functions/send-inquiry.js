@@ -6,6 +6,7 @@ async function getAccessToken() {
     body: new URLSearchParams({
       grant_type: 'refresh_token',
       client_id: process.env.KAKAO_REST_API_KEY,
+      client_secret: process.env.KAKAO_CLIENT_SECRET,
       refresh_token: process.env.KAKAO_REFRESH_TOKEN
     })
   });
