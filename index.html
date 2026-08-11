@@ -303,7 +303,8 @@ const FEATURED_IDS = ['madrid-toledo-day', 'docent-museum', 'portugal-round', 's
 const featured = FEATURED_IDS.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
 
 document.getElementById('tourGrid').innerHTML = featured.map(p => `
-<div class="tour-top ${p.topClass}"><span class="region">${p.region}</span><span class="days">${p.days}</span></div>
+  <a class="tour-card" href="${productLink(p)}">
+    <div class="tour-top ${p.topClass}"><span class="region">${p.region}</span><span class="days">${p.days}</span></div>
     <div class="tour-body">
       <h3>${p.title}</h3>
       <p>${p.summary}</p>
