@@ -125,6 +125,14 @@ button.price-chip:hover{ opacity:.92; }
 
   @media (max-width:900px){ .hero{ grid-template-columns:1fr; } .value-grid{ grid-template-columns:1fr; } }
   @media (max-width:780px){ .footer-inner{ grid-template-columns:1fr; } }
+  .addon-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.addon-card{ border-radius:var(--radius); padding:28px; color:#fff; display:flex; flex-direction:column; gap:10px; }
+.addon-card .tag{ display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,.2); font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
+.addon-card h3{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:20px; margin:0; }
+.addon-card p{ font-size:13.5px; line-height:1.6; opacity:.92; margin:0; flex:1; }
+.addon-card .cta{ align-self:flex-start; margin-top:6px; padding:10px 20px; border-radius:999px; background:#fff; color:var(--navy); font-weight:800; font-size:13px; text-decoration:none; }
+.addon-match{ background: linear-gradient(135deg, var(--violet), #8B5CF6); }
+.addon-show{ background: linear-gradient(135deg, var(--pink), var(--orange)); }
 /* ===== Mobile improvements (added) ===== */
   .nav-toggle{ display:none; }
   .nav-toggle-btn{ display:none; }
@@ -150,14 +158,6 @@ button.price-chip:hover{ opacity:.92; }
 .footer-inner{ padding:22px 16px; border-radius:18px; }
     .tour-grid{ grid-template-columns:1fr; }
   }
-.addon-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-.addon-card{ border-radius:var(--radius); padding:28px; color:#fff; display:flex; flex-direction:column; gap:10px; }
-.addon-card .tag{ display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,.2); font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
-.addon-card h3{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:20px; margin:0; }
-.addon-card p{ font-size:13.5px; line-height:1.6; opacity:.92; margin:0; flex:1; }
-.addon-card .cta{ align-self:flex-start; margin-top:6px; padding:10px 20px; border-radius:999px; background:#fff; color:var(--navy); font-weight:800; font-size:13px; text-decoration:none; }
-.addon-match{ background: linear-gradient(135deg, var(--violet), #8B5CF6); }
-.addon-show{ background: linear-gradient(135deg, var(--pink), var(--orange)); }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
