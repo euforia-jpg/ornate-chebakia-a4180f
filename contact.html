@@ -280,9 +280,35 @@
 <script>
 document.getElementById('inquiryForm').addEventListener('submit', function(e){
   e.preventDefault();
-  document.getElementById('formAlert').classList.add('show');
-  this.reset();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const form = this;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = '보내는 중...';
+
+  const payload = {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    email: document.getElementById('email').value,
+    interest: document.getElementById('interest').value,
+    people: document.getElementById('people').value,
+    date: document.getElementById('date').value,
+    message: document.getElementById('message').value
+  };
+
+  fetch('/.netlify/functions/send-inquiry', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .catch(function(err){ console.error('카카오 전송 실패:', err); })
+  .finally(function(){
+    document.getElementById('formAlert').classList.add('show');
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalBtnText;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 });
 
 /* 상품 상세 페이지에서 "이 상품 예약문의 하기"로 넘어온 경우, 관심 상품·인원·날짜를 자동 입력해요 */
