@@ -274,7 +274,7 @@ function render(){
   el.innerHTML = `
     <div class="layout">
       <div class="section-inner">
-        <div class="p-price"><span class="price-chip">${formatPriceBadge(product.price)}</span>${formatYoutubeBtn(product.youtubeUrl)}</div>
+      <div class="p-price">${formatPriceBadge(product.price)}${formatYoutubeBtn(product.youtubeUrl)}</div>
         <div class="p-top ${product.topClass}">
           <span class="region">${product.region}</span>
           <span class="days">${product.days}</span>
