@@ -13,6 +13,7 @@ exports.handler = async (event) => {
 
   const REST_API_KEY = process.env.KAKAO_REST_API_KEY;
   const REDIRECT_URI = process.env.KAKAO_REDIRECT_URI;
+  const CLIENT_SECRET = process.env.KAKAO_CLIENT_SECRET;
 
   try {
     const res = await fetch('https://kauth.kakao.com/oauth/token', {
@@ -21,6 +22,7 @@ exports.handler = async (event) => {
       body: new URLSearchParams({
         grant_type: 'authorization_code',
         client_id: REST_API_KEY,
+        client_secret: CLIENT_SECRET,
         redirect_uri: REDIRECT_URI,
         code: code
       })
