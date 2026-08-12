@@ -81,23 +81,35 @@ exports.handler = async () => {
     const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
     const REPO = process.env.GITHUB_REPO; // 예: euforia-jpg/ornate-chebakia-a4180f
 
+    console.log('환경변수 확인:', {
+      hasFootballKey: !!FOOTBALL_KEY,
+      hasGithubToken: !!GITHUB_TOKEN,
+      repo: REPO
+    });
+
     // 1. 최신 라리가 경기 일정 가져오기 (오늘부터 100일치)
     const dateFrom = new Date().toISOString().slice(0, 10);
     const dateTo = new Date(Date.now() + 100 * 24 * 3600 * 1000).toISOString().slice(0, 10);
+    console.log('football-data.org 요청:', dateFrom, '~', dateTo);
     const fdRes = await fetch(`https://api.football-data.org/v4/competitions/PD/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
       headers: { 'X-Auth-Token': FOOTBALL_KEY }
     });
+    console.log('football-data.org 응답 상태:', fdRes.status);
     const fdData = await fdRes.json();
     if (!fdData.matches) {
+      console.error('football-data.org 응답 이상:', JSON.stringify(fdData));
       return { statusCode: 500, body: JSON.stringify({ ok:false, error:'football-data.org 응답 이상', detail: fdData }) };
     }
+    console.log('가져온 전체 경기 수:', fdData.matches.length);
 
     // 2. GitHub에서 현재 matchday.html 가져오기
     const ghGetRes = await fetch(`https://api.github.com/repos/${REPO}/contents/matchday.html`, {
       headers: { 'Authorization': `Bearer ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github+json' }
     });
+    console.log('GitHub 파일 조회 응답 상태:', ghGetRes.status);
     const ghGetData = await ghGetRes.json();
     if (!ghGetData.content) {
+      console.error('GitHub 파일 조회 실패:', JSON.stringify(ghGetData));
       return { statusCode: 500, body: JSON.stringify({ ok:false, error:'GitHub 파일 조회 실패', detail: ghGetData }) };
     }
     const html = Buffer.from(ghGetData.content, 'base64').toString('utf-8');
@@ -105,9 +117,11 @@ exports.handler = async () => {
     // 3. 기존 가격/좌석상태 보존하면서 새 배열 생성
     const oldMap = parseOldMatches(html);
     const newArrayText = buildMatchesArray(fdData.matches, oldMap);
+    console.log('필터링 후 우리 구단 경기 수:', (newArrayText.match(/\{ id:/g) || []).length);
     const newHtml = html.replace(/const MATCHES = \[[\s\S]*?\];/, newArrayText);
 
     if (newHtml === html) {
+      console.log('변경사항 없음 (이미 최신 상태)');
       return { statusCode: 200, body: JSON.stringify({ ok:true, changed:false }) };
     }
 
@@ -122,13 +136,17 @@ exports.handler = async () => {
         branch: 'main'
       })
     });
+    console.log('GitHub 커밋 응답 상태:', ghPutRes.status);
     const ghPutData = await ghPutRes.json();
     if (!ghPutRes.ok) {
+      console.error('GitHub 커밋 실패:', JSON.stringify(ghPutData));
       return { statusCode: 500, body: JSON.stringify({ ok:false, error:'GitHub 커밋 실패', detail: ghPutData }) };
     }
 
+    console.log('커밋 성공!');
     return { statusCode: 200, body: JSON.stringify({ ok:true, changed:true }) };
   } catch (err) {
+    console.error('예외 발생:', err.message);
     return { statusCode: 500, body: JSON.stringify({ ok:false, error: err.message }) };
   }
 };
