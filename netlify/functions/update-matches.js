@@ -33,8 +33,9 @@ const AWAY_NAME_MAP = {
   'Málaga CF':                 '말라가 CF',
   'RC Celta de Vigo':          '셀타 비고',
   'Deportivo Alavés':          '데포르티보 알라베스',
-  'Racing de Santander':       '라싱 산탄데르',
-  'RC Deportivo de La Coruña': '데포르티보 라코루냐',
+  'Real Racing Club de Santander': '라싱 산탄데르',
+  'RC Deportivo La Coruña':    '데포르티보 라코루냐',
+  'Levante UD':                '레반테 UD',
 };
 function koreanAwayName(englishName){
   return AWAY_NAME_MAP[englishName] || englishName;
