@@ -1465,7 +1465,10 @@ function renderList(list){
         </span>
       </span>
       <span class="ticket-stub">
-        <span><span class="price-from" style="display:block;">1인 최소</span><span class="price-num">€${m.from}</span></span>
+      ${m.from > 0
+  ? `<span><span class="price-from" style="display:block;">1인 최소</span><span class="price-num">€${m.from}</span></span>`
+  : `<span><span class="price-from" style="display:block;">가격</span><span class="price-num" style="font-size:0.85em;">문의</span></span>`
+}
         <span class="seats-left ${m.seats === 'low' ? 'low' : ''}">${m.seats === 'low' ? '좌석 얼마 안 남음' : '좌석 여유 있음'}</span>
       </span>
     </button>`;
@@ -1658,7 +1661,7 @@ function selectSection(key){
 
   $('secTitle').textContent = s.label;
   $('secSub').textContent = `${venueOf(state.match).name} · 선택한 구역 정보`;
-  $('secPrice').textContent = `€${s.price}`;
+  $('secPrice').textContent = s.price > 0 ? `€${s.price}` : '가격 문의';
   $('secView').textContent = s.view;
 
   const left = seatsLeft(s);
@@ -1697,8 +1700,8 @@ function resetPanel(){
   $('svPlan').querySelectorAll('.seat-sec').forEach(el => el.classList.remove('selected'));
 }
 function updateTotal(){
-  $('secTotal').textContent = state.section && !state.section.carne
-    ? `€${state.section.price * state.qty}` : '—';
+$('secTotal').textContent = state.section && !state.section.carne && state.section.price > 0
+    ? `€${state.section.price * state.qty}` : (state.section && !state.section.carne ? '가격 문의' : '—');
 }
 function changeQty(delta){
   state.qty = Math.max(1, Math.min(MAX_QTY, state.qty + delta));
