@@ -89,23 +89,23 @@ const PRODUCTS = [
     }
   },
   {
-    id: 'camino-100',
+  id: 'camino-100',
     cats: ['camino'],
     topClass: 'camino',
     region: 'CAMINO',
-    days: '4박 5일',
+    days: '5박 6일',
     price: '가격 문의',
     youtubeUrl: 'https://youtu.be/ZijzHwq23qU',
     title: '[순례길 100km] 투이 → 산티아고 데 콤포스텔라',
-    summary: '위로와 치유의 길, 유포리아투어와 함께 투이에서 산티아고 데 콤포스텔라까지 100km를 걷는 입문자 추천 순례길 코스예요.',
+    summary: '위로와 치유의 길, 유포리아투어와 함께 투이에서 산티아고 데 콤포스텔라까지 6일간 걷는 입문자 추천 순례길 코스예요.',
     tags: ['초보자 추천', '짐 이동 지원'],
     detail: {
-      lead: '바다와 산, 마을과 사람을 만나며 삶의 속도를 내려놓고 진짜 나를 만나는 시간 — 콤포스텔라 인증 최소 거리인 투이 구간부터 함께 걸어요.',
-      description: '포르투갈길 중 투이(Tui)에서 포르토미뇨 – 파드론을 거쳐 산티아고 데 콤포스텔라 대성당까지 이어지는 약 100km 구간이에요. 완주 인증서(콤포스텔라) 발급 최소 기준을 충족하면서도 하루 평균 20km 내외로 걷는 부담 없는 난이도라 초보자도 도전할 수 있어요. 아름다운 해안길과 중세 마을을 지나며 현지 특식과 와인을 즐기는 여정이고, 전문 인솔자가 전 일정 동행하며 매일 숙소 예약과 짐 이동을 지원해 드려요. 일상에서 벗어나 자신을 돌아보고 싶은 분, 새로운 도전을 통해 성장하고 싶은 분, 자연과 역사·문화를 함께 경험하고 싶은 분, 혼자가 아닌 함께 걷고 싶은 분께 추천해요.',
-      highlights: ['투이 → 포르토미뇨 → 파드론 → 산티아고 데 콤포스텔라 대성당', '하루 평균 20km 내외 도보', '아름다운 해안길과 중세 마을 탐방', '현지 특식 & 와인으로 즐거운 여정', '전문 인솔자 전 일정 동행'],
+      lead: '바다와 산, 마을과 사람을 만나며 삶의 속도를 내려놓고 진짜 나를 만나는 시간 — 리스본 또는 포르투에서 투이까지 이동한 뒤, 콤포스텔라 인증 최소 거리 구간을 6일 동안 함께 걸어요.',
+      description: '<div style="display:flex; gap:10px; margin-bottom:14px;"><strong style="flex:0 0 auto;">DAY1</strong><span>투이(Tui) → 오 포리뇨(O Porriño) 약 16km 도보.</span></div><div style="display:flex; gap:10px; margin-bottom:14px;"><strong style="flex:0 0 auto;">DAY2</strong><span>오 포리뇨 → 레돈델라(Redondela) 약 16km 도보.</span></div><div style="display:flex; gap:10px; margin-bottom:14px;"><strong style="flex:0 0 auto;">DAY3</strong><span>레돈델라 → 폰테베드라(Pontevedra) 약 21km 도보.</span></div><div style="display:flex; gap:10px; margin-bottom:14px;"><strong style="flex:0 0 auto;">DAY4</strong><span>폰테베드라 → 칼다스 데 레이스(Caldas de Reis) 약 22km 도보.</span></div><div style="display:flex; gap:10px; margin-bottom:14px;"><strong style="flex:0 0 auto;">DAY5</strong><span>칼다스 데 레이스 → 파드론(Padrón) 약 19km 도보.</span></div><div style="display:flex; gap:10px;"><strong style="flex:0 0 auto;">DAY6</strong><span>파드론 → 산티아고 데 콤포스텔라 대성당 약 25km 도보로 완주.</span></div>',
+      highlights: ['투이 → 오 포리뇨 → 레돈델라 → 폰테베드라 → 칼다스 데 레이스 → 파드론 → 산티아고 데 콤포스텔라', '하루 평균 20km 내외, 6일간 총 약 119km 도보', '아름다운 해안길과 중세 마을 탐방', '현지 특식 & 와인으로 즐거운 여정', '전문 인솔자 전 일정 동행'],
       includes: ['전 일정 인솔자 동행', '구간별 숙소 예약 지원', '매일 짐 이동 서비스', '현지 실시간 커뮤니케이션 지원'],
       excludes: ['왕복 항공권', '식비', '개인 순례 장비'],
-      duration: '4박 5일 (약 100km, 하루 20km 내외 도보)'
+      duration: '5박 6일 (약 119km, 하루 평균 20km 내외 도보)'
     }
   },
   {
