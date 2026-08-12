@@ -10,6 +10,7 @@
 ============================================================ */
 
 // football-data.org 영문 팀명 → 우리 사이트 slug(경기장) + 한국어 팀명
+// 경기장 정보(좌석도 등)가 있는 10개 구단은 venue까지, 나머지 10개 구단은 이름만 매핑해요.
 const CLUB_MAP = {
   'Real Madrid CF':        { venue: 'bernabeu',      name: '레알 마드리드' },
   'Club Atlético de Madrid': { venue: 'metropolitano', name: '아틀레티코 마드리드' },
@@ -22,6 +23,22 @@ const CLUB_MAP = {
   'Real Sociedad de Fútbol': { venue: 'realearena',    name: '레알 소시에다드' },
   'Villarreal CF':          { venue: 'ceramica',      name: '비야레알 CF' },
 };
+
+// 경기장 정보는 없지만, 원정팀으로 나올 때 이름만 한국어로 보여주고 싶은 구단들
+const AWAY_NAME_MAP = {
+  'Rayo Vallecano de Madrid': '라요 바예카노',
+  'Getafe CF':                '헤타페 CF',
+  'Elche CF':                 '엘체 CF',
+  'CA Osasuna':                '오사수나',
+  'Málaga CF':                 '말라가 CF',
+  'RC Celta de Vigo':          '셀타 비고',
+  'Deportivo Alavés':          '데포르티보 알라베스',
+  'Racing de Santander':       '라싱 산탄데르',
+  'RC Deportivo de La Coruña': '데포르티보 라코루냐',
+};
+function koreanAwayName(englishName){
+  return AWAY_NAME_MAP[englishName] || englishName;
+}
 
 function toMadridDateTime(utcDate, status) {
   const d = new Date(utcDate);
@@ -61,7 +78,7 @@ function buildMatchesArray(apiMatches, oldMap) {
   for (const m of apiMatches) {
     const homeInfo = CLUB_MAP[m.homeTeam.name];
     if (!homeInfo) continue; // 아직 경기장 정보 없는 구단은 건너뜀
-    const awayName = CLUB_MAP[m.awayTeam.name] ? CLUB_MAP[m.awayTeam.name].name : m.awayTeam.name;
+    const awayName = CLUB_MAP[m.awayTeam.name] ? CLUB_MAP[m.awayTeam.name].name : koreanAwayName(m.awayTeam.name);
     const { date, time } = toMadridDateTime(m.utcDate, m.status);
     const key = `${date}|${homeInfo.name}|${awayName}`;
     const prev = oldMap[key] || { from: 0, seats: 'ok' };
