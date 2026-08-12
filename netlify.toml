@@ -1,0 +1,2 @@
+[functions."update-matches"]
+  schedule = "@weekly"
