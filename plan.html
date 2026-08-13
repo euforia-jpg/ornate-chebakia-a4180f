@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 일정 추천 — Euforia Tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --violet: #6C3CE9; --pink: #E6317B; --orange: #FF7A1A; --teal: #12C9AE;
+    --navy: #14103D; --paper: #FFFFFF; --ink: #171235; --muted: #6E6A93; --line: #EAE7F7;
+    --radius: 18px;
+    --wash-violet: #EFEBFD; --wash-pink: #FDECF3; --wash-orange: #FFF2E6; --wash-teal: #E7F8F5;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: repeating-linear-gradient(115deg, var(--wash-violet) 0 220px, var(--wash-pink) 220px 400px, var(--wash-orange) 400px 560px, var(--wash-teal) 560px 760px);
+    background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
+  }
+  body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(20,16,61,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
+  a{ color:inherit; }
+  .wrap{ position:relative; z-index:1; }
+
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding: 22px clamp(20px,4vw,56px) 14px; }
+  .logo{ display:flex; align-items:center; gap:16px; text-decoration:none; }
+  .logo-img{ height:76px; width:auto; display:block; flex:0 0 auto; }
+  .logo .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:32px; color:var(--navy); line-height:1; }
+  .logo small{ display:block; font-family:'Work Sans'; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+  .lang-switch{ display:flex; gap:4px; background:rgba(255,255,255,0.75); border:1.5px solid var(--line); border-radius:10px; padding:4px; backdrop-filter: blur(6px); }
+  .lang-switch button{ all:unset; cursor:pointer; padding:7px 16px; border-radius:7px; font-size:13px; font-weight:800; color:var(--navy); transition: all .15s ease; }
+  .lang-switch button.active{ background:var(--navy); color:#fff; }
+  .nav-link{ all:unset; cursor:pointer; padding:9px 16px; border-radius:10px; font-size:13px; font-weight:800; color:var(--navy); border:1.5px solid var(--line); background:rgba(255,255,255,0.75); text-decoration:none; }
+  .nav-link:hover{ border-color:var(--violet); color:var(--violet); }
+  .nav-group{ display:flex; align-items:center; gap:10px; }
+  .site-nav{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:14px clamp(20px,4vw,56px); border-top:1.5px solid var(--line); }
+  .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:800; color:var(--muted); padding:8px 14px; border-radius:999px; transition: all .15s ease; }
+  .site-nav a:hover{ color:var(--violet); background:rgba(108,60,233,0.08); }
+  .site-nav a.active{ color:#fff; background:var(--navy); }
+
+  .page-hero{ padding:36px clamp(20px,4vw,56px) 8px; }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; color:#fff; background:var(--navy); font-size:12px; letter-spacing:1px; font-weight:800; margin-bottom:16px; padding:7px 16px; border-radius:999px; }
+  .page-hero h1{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); }
+  .page-hero h1 .hl{ color:#fff; background:var(--violet); padding:0 10px; }
+  .page-hero p{ color:var(--muted); font-size:15.5px; line-height:1.75; max-width:640px; margin:0; font-weight:600; }
+
+  .section{ padding:8px clamp(20px,4vw,56px) 24px; }
+  .section-inner{ background:var(--paper); border-radius:26px; padding:32px clamp(18px,3vw,36px); box-shadow:0 18px 44px -24px rgba(20,16,61,0.32); border:1.5px solid var(--line); max-width:820px; margin:0 auto; }
+  .section-inner h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:20px; margin:0 0 6px; color:var(--navy); }
+  .section-inner .sub{ color:var(--muted); font-size:13px; font-weight:600; margin-bottom:22px; }
+
+  .field-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .field.full{ grid-column:1/-1; }
+  .field label{ font-size:12px; font-weight:800; color:var(--navy); }
+  .field input, .field select{
+    all:unset; border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-size:13.5px;
+    font-family:'Work Sans'; color:var(--ink); box-sizing:border-box; width:100%; background:#fff;
+  }
+  .field input:focus, .field select:focus{ border-color:var(--violet); }
+
+  .cta{ all:unset; display:block; width:100%; text-align:center; padding:15px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; border-radius:12px; cursor:pointer; font-size:14.5px; box-sizing:border-box; }
+  .cta:hover{ filter:brightness(1.06); }
+  .cta:disabled{ opacity:.6; cursor:not-allowed; }
+  .cta.ghost{ all:unset; display:block; width:100%; text-align:center; padding:14px; border:2px solid var(--line); color:var(--navy); font-weight:800; border-radius:12px; cursor:pointer; font-size:13.5px; box-sizing:border-box; margin-top:10px; }
+  .cta.ghost:hover{ border-color:var(--violet); color:var(--violet); }
+
+  .error-box{ display:none; background:#FDECEC; border:2px solid #F5B8B8; border-radius:12px; padding:12px 16px; margin-bottom:18px; font-size:12.5px; font-weight:700; color:#B02A2A; line-height:1.55; }
+  .error-box.show{ display:block; }
+
+  .loading{ display:none; text-align:center; padding:40px 0; color:var(--muted); font-weight:700; font-size:13.5px; }
+  .loading.show{ display:block; }
+  .spinner{ width:34px; height:34px; border:4px solid var(--line); border-top-color:var(--violet); border-radius:50%; margin:0 auto 14px; animation:spin 0.8s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .result{ display:none; }
+  .result.show{ display:block; }
+  .result-summary{ background:var(--navy); color:#fff; border-radius:var(--radius); padding:22px 24px; margin-bottom:22px; }
+  .result-summary p{ margin:0 0 10px; font-size:14px; line-height:1.7; font-weight:600; }
+  .result-summary .cost{ font-family:'Space Mono'; font-size:19px; font-weight:700; color:var(--teal); }
+  .result-summary .cost-label{ font-size:11.5px; color:rgba(255,255,255,0.65); font-weight:700; display:block; margin-bottom:4px; }
+
+  .day-card{ border:1.5px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:14px; }
+  .day-card .day-head{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .day-card .day-num{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:15px; color:#fff; background:var(--violet); padding:4px 12px; border-radius:999px; flex:0 0 auto; }
+  .day-card .day-city{ font-size:12px; font-weight:800; color:var(--muted); letter-spacing:0.5px; }
+  .day-card h4{ margin:0 0 10px; font-family:'Kanit'; font-weight:700; font-style:italic; font-size:16px; color:var(--navy); }
+  .day-card ul{ margin:0 0 10px; padding-left:18px; font-size:13px; line-height:1.8; color:var(--ink); }
+  .day-card .meal, .day-card .tip{ font-size:12px; color:var(--muted); font-weight:600; line-height:1.6; margin-top:4px; }
+  .day-card .meal b, .day-card .tip b{ color:var(--navy); }
+
+  footer{ padding:24px clamp(20px,4vw,56px) 40px; }
+  .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(20,16,61,0.28); max-width:1000px; margin:0 auto; }
+  .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
+  .footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .footer-brand .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; color:var(--navy); }
+  .footer-col p{ margin:0; font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.7; max-width:320px; }
+  .footer-links{ display:flex; flex-direction:column; gap:9px; }
+  .footer-links a{ text-decoration:none; font-size:13px; font-weight:700; color:var(--ink); }
+  .footer-links a:hover{ color:var(--violet); }
+  .footer-links span{ display:flex; align-items:flex-start; gap:8px; font-size:14px; color:var(--muted); font-weight:600; }
+  .footer-links .ft-ico{ flex-shrink:0; font-size:14px; }
+  .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; padding:20px clamp(4px,1vw,12px) 0; color:var(--muted); font-size:11.5px; font-weight:700; max-width:1000px; margin:0 auto; }
+  .footer-legal{ margin:12px 0 0; }
+  .footer-legal p{ display:flex; align-items:flex-start; gap:8px; margin:0 0 8px; font-size:14px; color:var(--muted); font-weight:600; line-height:1.6; }
+  .footer-legal .ft-ico{ flex-shrink:0; font-size:14px; line-height:1.6; }
+
+  @media (max-width:860px){ .field-grid{ grid-template-columns:1fr; } .footer-inner{ grid-template-columns:1fr; } }
+  /* ===== Mobile improvements (added) ===== */
+  .nav-toggle{ display:none; }
+  .nav-toggle-btn{ display:none; }
+  @media (max-width: 780px){
+    html,body{ overflow-x:hidden; }
+    .nav-toggle-btn{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:10px; border:1.5px solid var(--line); background:rgba(255,255,255,0.75); cursor:pointer; font-size:20px; color:var(--navy); }
+    .site-nav{ display:none; flex-direction:column; align-items:stretch; width:100%; }
+    .nav-toggle:checked ~ .site-nav{ display:flex; }
+    .site-nav a{ width:100%; box-sizing:border-box; }
+  }
+  @media (max-width: 480px){
+    .logo-img{ height:52px; }
+    .logo .name{ font-size:22px; }
+    .topbar{ gap:12px; padding:16px 16px 10px; }
+    .site-nav{ padding:10px 16px; }
+    .section{ padding:6px 16px 18px; }
+    .section-inner{ padding:24px 16px; border-radius:18px; }
+    footer{ padding:6px 16px 28px; }
+    .footer-inner{ padding:22px 16px; border-radius:18px; }
+  }
+</style>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#14103D">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+</head>
+<body>
+<div class="wrap">
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <div class="topbar">
+    <a class="logo" href="index.html">
+      <img class="logo-img" src="" alt="Euforia Tour">
+      <span>
+        <span class="name">euforia</span>
+        <small>스페인 · 포르투갈 · 모로코 여행전문</small>
+      </span>
+    </a>
+    <div class="nav-group">
+      <label for="nav-toggle" class="nav-toggle-btn" aria-label="메뉴 열기">&#9776;</label>
+      <a class="nav-link" href="matchday.html">경기 예약</a>
+      <div class="lang-switch">
+        <button class="active" data-lang="ko">KR</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="zh">中文</button>
+      </div>
+    </div>
+  </div>
+  <nav class="site-nav">
+    <a href="about.html">회사소개</a>
+    <a href="tours.html">여행상품</a>
+    <a href="matchday.html">경기 일정</a>
+    <a href="https://euforia-showtime.netlify.app/" target="_blank" rel="noopener">공연 일정</a>
+    <a href="plan.html" class="active">AI 일정짜기</a>
+    <a href="faq.html">자주하는 질문</a>
+    <a href="contact.html">예약문의</a>
+    <a href="deposit.html">입금확인</a>
+    <a href="cancel.html">취소&middot;환불 규정</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="eyebrow">AI 일정 추천</div>
+    <h1>어디로 갈지 고민이라면,<br><span class="hl">AI</span>에게 먼저 물어보세요</h1>
+    <p>출발·도착 도시와 여행 스타일만 알려주시면, AI가 실제 이동 가능한 동선으로 일정과 예상 경비를 짜드려요. 마음에 드시면 그대로 예약문의로 이어가실 수 있어요.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-inner">
+      <h2>여행 조건 입력</h2>
+      <div class="sub">필수 항목만 채워주시면 30초 안에 일정이 나와요.</div>
+
+      <div class="error-box" id="errorBox"></div>
+
+      <form id="planForm">
+        <div class="field-grid">
+          <div class="field">
+            <label for="startRegion">출발 지역 *</label>
+            <select id="startRegion" required></select>
+          </div>
+          <div class="field">
+            <label for="startCity">출발 도시 *</label>
+            <select id="startCity" required></select>
+          </div>
+          <div class="field">
+            <label for="endRegion">마지막 지역 *</label>
+            <select id="endRegion" required></select>
+          </div>
+          <div class="field">
+            <label for="endCity">마지막 도시 *</label>
+            <select id="endCity" required></select>
+          </div>
+          <div class="field">
+            <label for="nights">박수 *</label>
+            <select id="nights" required>
+              <option value="2">2박 3일</option>
+              <option value="3" selected>3박 4일</option>
+              <option value="4">4박 5일</option>
+              <option value="5">5박 6일</option>
+              <option value="6">6박 7일</option>
+              <option value="7">7박 8일</option>
+              <option value="8">8박 9일</option>
+              <option value="9">9박 10일</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="people">인원수 *</label>
+            <input type="number" id="people" min="1" max="30" value="2" required>
+          </div>
+          <div class="field">
+            <label for="gender">성별 *</label>
+            <select id="gender" required>
+              <option value="무관">무관</option>
+              <option value="여성">여성</option>
+              <option value="남성">남성</option>
+              <option value="혼성">혼성</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="age">연령대 *</label>
+            <select id="age" required>
+              <option value="20대">20대</option>
+              <option value="30대" selected>30대</option>
+              <option value="40대">40대</option>
+              <option value="50대">50대</option>
+              <option value="60대 이상">60대 이상</option>
+              <option value="전 연령">전 연령</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="style">여행 스타일 *</label>
+            <select id="style" required>
+              <option value="휴양">휴양</option>
+              <option value="커플여행">커플여행</option>
+              <option value="가족여행">가족여행</option>
+              <option value="솔로여행">솔로여행</option>
+              <option value="출장">출장</option>
+              <option value="미술관여행">미술관여행</option>
+              <option value="문화여행">문화여행</option>
+              <option value="골프여행">골프여행</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="cta" id="submitBtn">AI로 일정 만들기</button>
+      </form>
+
+      <div class="loading" id="loadingBox">
+        <div class="spinner"></div>
+        AI가 일정을 짜고 있어요, 잠시만 기다려주세요...
+      </div>
+
+      <div class="result" id="resultBox">
+        <div class="result-summary">
+          <span class="cost-label">1인 기준 예상 경비</span>
+          <div class="cost" id="resultCost"></div>
+          <p id="resultSummary" style="margin-top:12px;"></p>
+        </div>
+        <div id="resultDays"></div>
+        <a class="cta" id="inquiryBtn" href="contact.html">이 일정으로 예약문의 하기 →</a>
+        <button type="button" class="cta ghost" id="retryBtn">다른 조건으로 다시 만들기</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <span class="name">euforia</span>
+        </div>
+        <p>스페인·포르투갈·모로코 전문 여행사, 유포리아투어예요.</p>
+        <div class="footer-legal">
+          <p><span class="ft-ico">🏢</span>Euforia Das Nuvens S.L</p>
+          <p><span class="ft-ico">📍</span>Calle Gran Via 69, 810, 28013 Madrid</p>
+          <p><span class="ft-ico">🧾</span>NIF B44605574 &middot; CICMA No.4443</p>
+          <p><span class="ft-ico">📍</span>서울특별시 마포구 양화로 64 805호</p>
+          <p><span class="ft-ico">🧾</span>사업자등록번호 508-17-95955 &middot; 대표 김이현</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h6>연락처</h6>
+        <div class="footer-links">
+          <span><span class="ft-ico">📧</span>이메일 euforia@euforiatour.com</span>
+          <span><span class="ft-ico">💬</span>카카오톡(한국 연락처) ID losnuevos</span>
+          <span><span class="ft-ico">📞</span>스페인 현지 연락처 +34 611 209 095</span>
+          <span><span class="ft-ico">🕐</span>업무시간 월&ndash;금 09:00&ndash;18:00 (현지시간 기준)</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Euforia Tour. All rights reserved.</span>
+      <span>AI가 생성한 일정과 예상 경비는 참고용이며, 실제 예약은 상담 후 확정돼요</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+const LOCATIONS = {
+  '스페인': ['마드리드', '바르셀로나', '세비야', '그라나다', '코르도바', '발렌시아', '빌바오', '산세바스티안', '톨레도', '말라가'],
+  '포르투갈': ['리스본', '포르투', '신트라', '알가르베(파루)', '코임브라']
+};
+
+function fillRegions(sel){
+  sel.innerHTML = Object.keys(LOCATIONS).map(r => `<option value="${r}">${r}</option>`).join('');
+}
+function fillCities(regionSel, citySel){
+  const region = regionSel.value;
+  citySel.innerHTML = (LOCATIONS[region] || []).map(c => `<option value="${c}">${c}</option>`).join('');
+}
+
+const startRegion = document.getElementById('startRegion');
+const startCity = document.getElementById('startCity');
+const endRegion = document.getElementById('endRegion');
+const endCity = document.getElementById('endCity');
+
+fillRegions(startRegion); fillRegions(endRegion);
+fillCities(startRegion, startCity); fillCities(endRegion, endCity);
+endRegion.value = '포르투갈'; fillCities(endRegion, endCity);
+
+startRegion.addEventListener('change', () => fillCities(startRegion, startCity));
+endRegion.addEventListener('change', () => fillCities(endRegion, endCity));
+
+const form = document.getElementById('planForm');
+const submitBtn = document.getElementById('submitBtn');
+const loadingBox = document.getElementById('loadingBox');
+const resultBox = document.getElementById('resultBox');
+const errorBox = document.getElementById('errorBox');
+
+form.addEventListener('submit', async function(e){
+  e.preventDefault();
+  errorBox.classList.remove('show');
+  resultBox.classList.remove('show');
+  loadingBox.classList.add('show');
+  submitBtn.disabled = true;
+  form.style.display = 'none';
+
+  const payload = {
+    startRegion: startRegion.value,
+    startCity: startCity.value,
+    endRegion: endRegion.value,
+    endCity: endCity.value,
+    nights: document.getElementById('nights').value,
+    people: document.getElementById('people').value,
+    gender: document.getElementById('gender').value,
+    age: document.getElementById('age').value,
+    style: document.getElementById('style').value
+  };
+
+  try {
+    const res = await fetch('/.netlify/functions/generate-itinerary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json();
+    loadingBox.classList.remove('show');
+
+    if (!json.success) {
+      throw new Error(json.error || '일정을 만드는 데 실패했어요.');
+    }
+
+    renderResult(json.data, payload);
+    resultBox.classList.add('show');
+  } catch (err) {
+    loadingBox.classList.remove('show');
+    form.style.display = 'block';
+    submitBtn.disabled = false;
+    errorBox.textContent = '일정을 만드는 중 문제가 생겼어요: ' + err.message + ' 잠시 후 다시 시도해주세요.';
+    errorBox.classList.add('show');
+  }
+});
+
+document.getElementById('retryBtn').addEventListener('click', function(){
+  resultBox.classList.remove('show');
+  form.style.display = 'block';
+  submitBtn.disabled = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+function renderResult(data, payload){
+  document.getElementById('resultCost').textContent = data.totalEstimatedCost || '문의';
+  document.getElementById('resultSummary').textContent = data.summary || '';
+
+  const daysHtml = (data.days || []).map(d => `
+    <div class="day-card">
+      <div class="day-head">
+        <span class="day-num">DAY ${d.day}</span>
+        <span class="day-city">${d.city || ''}</span>
+      </div>
+      <h4>${d.title || ''}</h4>
+      <ul>${(d.activities || []).map(a => `<li>${a}</li>`).join('')}</ul>
+      ${d.meal ? `<div class="meal"><b>식사</b> ${d.meal}</div>` : ''}
+      ${d.tip ? `<div class="tip"><b>TIP</b> ${d.tip}</div>` : ''}
+    </div>
+  `).join('');
+  document.getElementById('resultDays').innerHTML = daysHtml;
+
+  const interestText = `AI 추천: ${payload.startCity} → ${payload.endCity} (${payload.nights}박 ${Number(payload.nights)+1}일, ${payload.style})`;
+  document.getElementById('inquiryBtn').href =
+    `contact.html?product=${encodeURIComponent(interestText)}&people=${encodeURIComponent(payload.people)}`;
+}
+</script>
+  <script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(){});
+    });
+  }
+  </script>
+</body>
+</html>
