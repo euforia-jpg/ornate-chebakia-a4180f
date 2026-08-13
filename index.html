@@ -219,7 +219,7 @@ button.price-chip:hover{ opacity:.92; }
     </div>
   </div>
   <div class="section">
-    <div class="section-inner">
+    <div class="section-inner" id="productsBox">
       <div class="section-head">
         <div>
           <h2>대표 여행상품</h2>
@@ -354,5 +354,11 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
       navigator.serviceWorker.register('/sw.js').catch(function(){});
     });
   }
+  <script>
+(위에서 드린 booking-toast용 자바스크립트 전체)
+</script>
+<script>
+if('serviceWorker' in navigator){
+  ...
   </script></body>
 </html>
