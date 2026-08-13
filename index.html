@@ -158,6 +158,12 @@ button.price-chip:hover{ opacity:.92; }
 .footer-inner{ padding:22px 16px; border-radius:18px; }
     .tour-grid{ grid-template-columns:1fr; }
   }
+  .ai-plan-card{ background:linear-gradient(135deg, var(--violet), #8B5CF6 55%, var(--pink)); border-radius:var(--radius); padding:32px clamp(20px,4vw,44px); color:#fff; max-width:820px; margin:0 auto; text-align:center; }
+.ai-plan-tag{ display:inline-block; padding:6px 14px; border-radius:999px; background:rgba(255,255,255,.2); font-size:12px; font-weight:800; letter-spacing:0.5px; margin-bottom:14px; }
+.ai-plan-card h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(22px,3vw,28px); margin:0 0 10px; }
+.ai-plan-card p{ font-size:14px; line-height:1.7; opacity:.92; margin:0 auto 20px; max-width:520px; }
+.ai-plan-card .cta{ all:unset; display:inline-block; padding:13px 28px; background:#fff; color:var(--navy); font-weight:800; border-radius:999px; cursor:pointer; font-size:14px; text-decoration:none; }
+.ai-plan-card .cta:hover{ opacity:.9; }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -209,6 +215,15 @@ button.price-chip:hover{ opacity:.92; }
       <div class="row"><span class="k">여행상품 종류</span><span class="v" id="statProducts">0가지</span></div>
       <div class="row"><span class="k">예약 방식</span><span class="v">문의 → 맞춤 견적 → 입금확인</span></div>
       <div class="row"><span class="k">부가 서비스</span><span class="v">라리가 직관(MATCHDAY)</span></div>
+    </div>
+  </div>
+
+<div class="section">
+    <div class="ai-plan-card">
+      <div class="ai-plan-tag">✨ AI 일정 추천</div>
+      <h2>어디로 갈지 아직 고민되신다면</h2>
+      <p>출발·도착 도시와 여행 스타일만 알려주시면, AI가 실제 이동 가능한 동선으로 일정과 예상 경비를 30초 만에 만들어드려요.</p>
+      <a class="cta" href="plan.html">AI로 일정 만들어보기 →</a>
     </div>
   </div>
 
