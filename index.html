@@ -164,6 +164,14 @@ button.price-chip:hover{ opacity:.92; }
 .ai-plan-card p{ font-size:14px; line-height:1.7; opacity:.92; margin:0 auto 20px; max-width:520px; }
 .ai-plan-card .cta{ all:unset; display:inline-block; padding:13px 28px; background:#fff; color:var(--navy); font-weight:800; border-radius:999px; cursor:pointer; font-size:14px; text-decoration:none; }
 .ai-plan-card .cta:hover{ opacity:.9; }
+#productsBox{ position:relative; }
+.booking-toast{ position:absolute; right:16px; top:16px; z-index:20; display:flex; align-items:center; gap:12px; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:14px 18px; box-shadow:0 18px 34px -18px rgba(20,16,61,0.35); max-width:280px; opacity:0; transform:translateY(-12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease; }
+.booking-toast.show{ opacity:1; transform:translateY(0); }
+.booking-toast .bt-dot{ flex:0 0 auto; width:10px; height:10px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 4px rgba(18,201,174,0.18); }
+.booking-toast .bt-text{ font-size:12.5px; line-height:1.5; color:var(--ink); font-weight:600; }
+.booking-toast .bt-text b{ color:var(--navy); font-weight:800; }
+.booking-toast .bt-time{ display:block; margin-top:2px; font-size:11px; color:var(--muted); font-weight:700; }
+@media (max-width:480px){ .booking-toast{ left:12px; right:12px; top:12px; max-width:none; } }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -220,6 +228,10 @@ button.price-chip:hover{ opacity:.92; }
   </div>
   <div class="section">
     <div class="section-inner" id="productsBox">
+      <div class="booking-toast" id="bookingToast">
+        <span class="bt-dot"></span>
+        <span class="bt-text" id="bookingToastText"></span>
+      </div>
       <div class="section-head">
         <div>
           <h2>대표 여행상품</h2>
@@ -354,11 +366,36 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
       navigator.serviceWorker.register('/sw.js').catch(function(){});
     });
   }
-  <script>
-(위에서 드린 booking-toast용 자바스크립트 전체)
 </script>
 <script>
-if('serviceWorker' in navigator){
-  ...
-  </script></body>
+(function(){
+  const SURNAMES = ['김','이','박','최','정','강','조','윤','장','임','한','오','서','신','권'];
+  const TIMES = ['방금 전', '2분 전', '5분 전', '8분 전', '12분 전'];
+
+  function randomName(){
+    const s = SURNAMES[Math.floor(Math.random() * SURNAMES.length)];
+    return s + '**';
+  }
+
+  function showToast(){
+    if (typeof PRODUCTS === 'undefined' || !PRODUCTS.length) return;
+    const p = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
+    const name = randomName();
+    const time = TIMES[Math.floor(Math.random() * TIMES.length)];
+
+    document.getElementById('bookingToastText').innerHTML =
+      `<b>${name}</b>님이 <b>${p.title}</b> 예약문의를 남겼어요<span class="bt-time">${time}</span>`;
+
+    const toast = document.getElementById('bookingToast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  setTimeout(showToast, 3000);
+  setInterval(() => {
+    showToast();
+  }, 10000 + Math.random() * 4000);
+})();
+</script>
+</body>
 </html>
