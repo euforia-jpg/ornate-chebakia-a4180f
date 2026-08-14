@@ -126,6 +126,14 @@
     footer{ padding:6px 16px 28px; }
     .footer-inner{ padding:22px 16px; border-radius:18px; }
   }
+.fx-box{ background:var(--paper); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px; }
+.fx-box h4{ margin:0 0 12px; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:14px; color:var(--navy); }
+.fx-row{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.fx-row input{ all:unset; border:2px solid var(--line); border-radius:8px; padding:9px 11px; font-size:13.5px; width:110px; box-sizing:border-box; font-family:'Space Mono'; }
+.fx-row select{ all:unset; border:2px solid var(--line); border-radius:8px; padding:9px 11px; font-size:13px; font-weight:700; cursor:pointer; background:#fff; }
+.fx-arrow{ color:var(--muted); font-weight:800; }
+.fx-result{ margin-top:12px; font-family:'Space Mono'; font-weight:700; font-size:17px; color:var(--navy); }
+.fx-note{ margin-top:6px; font-size:11px; color:var(--muted); font-weight:600; }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -183,6 +191,20 @@
           <div class="bank">La Caixa Bank</div>
           <div class="num">ES77 2100 1441 6002 0052 4954</div>
           <div class="holder">SWIFT/BIC · CAIXESBBXXX<br>예금주 · Euforia Das Nuvens S.L</div>
+        </div>
+        <div class="fx-box">
+          <h4>💱 환율 계산기</h4>
+          <div class="fx-row">
+            <input type="number" id="fxAmount" value="1000" min="0">
+            <select id="fxFrom">
+              <option value="EUR">EUR (유로)</option>
+              <option value="KRW">KRW (원화)</option>
+            </select>
+            <span class="fx-arrow">→</span>
+            <span id="fxToLabel" style="font-weight:800; color:var(--navy); font-size:13px;">KRW (원화)</span>
+          </div>
+          <div class="fx-result" id="fxResult">계산 중...</div>
+          <div class="fx-note" id="fxNote"></div>
         </div>
         <div class="placeholder-note">⚠ 입금 시 참조번호(입금자명 메모)에 예약번호를 꼭 기재해 주세요. 입금 후에는 아래 양식으로 반드시 확인 요청을 남겨 주셔야 해요.</div>
 
@@ -285,5 +307,44 @@ document.getElementById('depositForm').addEventListener('submit', function(e){
     });
   }
   </script>
+<script>
+(function(){
+  const amountEl = document.getElementById('fxAmount');
+  const fromEl = document.getElementById('fxFrom');
+  const toLabelEl = document.getElementById('fxToLabel');
+  const resultEl = document.getElementById('fxResult');
+  const noteEl = document.getElementById('fxNote');
+
+  function otherCurrency(){
+    return fromEl.value === 'EUR' ? 'KRW' : 'EUR';
+  }
+
+  async function convert(){
+    const to = otherCurrency();
+    toLabelEl.textContent = to === 'KRW' ? 'KRW (원화)' : 'EUR (유로)';
+
+    const amount = Number(amountEl.value) || 0;
+    resultEl.textContent = '계산 중...';
+
+    try {
+      const res = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${fromEl.value}&to=${to}`);
+      const data = await res.json();
+      const converted = data.rates[to];
+      const formatted = to === 'KRW'
+        ? Math.round(converted).toLocaleString('ko-KR') + '원'
+        : '€' + converted.toFixed(2);
+      resultEl.textContent = formatted;
+      noteEl.textContent = `기준 환율일: ${data.date} (frankfurter.app 제공, 실시간 참고용)`;
+    } catch (err) {
+      resultEl.textContent = '환율 조회 실패';
+      noteEl.textContent = '잠시 후 다시 시도해주세요.';
+    }
+  }
+
+  amountEl.addEventListener('input', convert);
+  fromEl.addEventListener('change', convert);
+  convert();
+})();
+</script>
 </body>
 </html>
