@@ -327,7 +327,7 @@ document.getElementById('depositForm').addEventListener('submit', function(e){
     resultEl.textContent = '계산 중...';
 
     try {
-      const res = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${fromEl.value}&to=${to}`);
+      const res = await fetch(`https://api.frankfurter.dev/v1/latest?amount=${amount}&from=${fromEl.value}&to=${to}`);
       const data = await res.json();
       const converted = data.rates[to];
       const formatted = to === 'KRW'
