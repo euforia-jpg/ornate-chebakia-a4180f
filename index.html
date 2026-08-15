@@ -185,6 +185,21 @@ button.price-chip:hover{ opacity:.92; }
 .review-card .quote{ font-size:13px; line-height:1.6; color:var(--ink); margin-bottom:14px; }
 .review-card .who{ font-size:11.5px; color:var(--muted); font-weight:700; }
 @media (max-width:780px){ .review-cards{ grid-template-columns:1fr; } }
+.chat-fab{ position:fixed; right:20px; bottom:20px; z-index:300; width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--violet),#8B5CF6); color:#fff; border:none; font-size:24px; cursor:pointer; box-shadow:0 14px 30px -12px rgba(108,60,233,0.55); display:flex; align-items:center; justify-content:center; }
+.chat-window{ position:fixed; right:20px; bottom:88px; z-index:300; width:340px; max-width:calc(100vw - 40px); height:460px; max-height:calc(100vh - 140px); background:#fff; border-radius:20px; box-shadow:0 24px 60px -20px rgba(20,16,61,0.4); display:none; flex-direction:column; overflow:hidden; border:1.5px solid var(--line); }
+.chat-window.open{ display:flex; }
+.chat-head{ background:var(--navy); color:#fff; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; }
+.chat-head .t{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:14px; }
+.chat-head button{ all:unset; cursor:pointer; color:rgba(255,255,255,0.7); font-size:18px; }
+.chat-body{ flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
+.chat-msg{ max-width:80%; padding:10px 13px; border-radius:14px; font-size:12.5px; line-height:1.55; }
+.chat-msg.bot{ background:var(--wash-violet); color:var(--ink); align-self:flex-start; border-bottom-left-radius:4px; }
+.chat-msg.user{ background:var(--navy); color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
+.chat-msg.loading{ background:var(--wash-violet); color:var(--muted); align-self:flex-start; font-style:italic; }
+.chat-input-row{ display:flex; gap:8px; padding:12px; border-top:1.5px solid var(--line); }
+.chat-input-row input{ all:unset; flex:1; border:2px solid var(--line); border-radius:10px; padding:9px 12px; font-size:12.5px; box-sizing:border-box; }
+.chat-input-row button{ all:unset; background:var(--navy); color:#fff; padding:9px 14px; border-radius:10px; font-size:12.5px; font-weight:800; cursor:pointer; }
+@media (max-width:480px){ .chat-window{ right:12px; bottom:80px; width:calc(100vw - 24px); } .chat-fab{ right:12px; bottom:12px; } }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -462,6 +477,74 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
 
   render();
   setInterval(rotate, 7000);
+})();
+</script>
+ <button class="chat-fab" id="chatFab">💬</button>
+<div class="chat-window" id="chatWindow">
+  <div class="chat-head">
+    <span class="t">✨ 유포리아 AI 상담</span>
+    <button id="chatClose">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg bot">안녕하세요! 유포리아투어예요. 여행 상품, 예약, 취소·환불 등 궁금하신 점을 편하게 물어보세요 😊</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="메시지를 입력하세요...">
+    <button id="chatSend">전송</button>
+  </div>
+</div> 
+<script>
+(function(){
+  const fab = document.getElementById('chatFab');
+  const win = document.getElementById('chatWindow');
+  const closeBtn = document.getElementById('chatClose');
+  const body = document.getElementById('chatBody');
+  const input = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('chatSend');
+
+  let history = [];
+
+  fab.addEventListener('click', () => win.classList.toggle('open'));
+  closeBtn.addEventListener('click', () => win.classList.remove('open'));
+
+  function addMsg(text, cls){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + cls;
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+    return div;
+  }
+
+  async function send(){
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    addMsg(msg, 'user');
+    history.push({ role:'user', text: msg });
+    const loading = addMsg('입력 중...', 'loading');
+
+    try {
+      const res = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg, history })
+      });
+      const json = await res.json();
+      loading.remove();
+
+      if (!json.success) throw new Error(json.error || '오류가 발생했어요.');
+
+      addMsg(json.reply, 'bot');
+      history.push({ role:'bot', text: json.reply });
+    } catch (err) {
+      loading.remove();
+      addMsg('죄송해요, 잠시 오류가 생겼어요. 카카오톡(ID: losnuevos)으로 문의해주세요.', 'bot');
+    }
+  }
+
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
 })();
 </script>
 </body>
