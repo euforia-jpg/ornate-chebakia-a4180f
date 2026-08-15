@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ornate-chebakia-a4180f.netlify.app/sitemap.xml
