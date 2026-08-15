@@ -275,7 +275,7 @@ function render(){
   el.innerHTML = `
     <div class="layout">
       <div class="section-inner">
-      <div class="tour-price">${formatPriceBadge(p.price)}${formatYoutubeBtn(p.youtubeUrl)}${formatAudioBadge(p.hasAudioGuide)}</div>
+      <div class="p-price">${formatPriceBadge(product.price)}${formatYoutubeBtn(product.youtubeUrl)}${formatAudioBadge(product.hasAudioGuide)}</div>
         <div class="p-top ${product.topClass}">
           <span class="region">${product.region}</span>
           <span class="days">${product.days}</span>
