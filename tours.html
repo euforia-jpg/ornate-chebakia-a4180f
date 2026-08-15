@@ -355,7 +355,13 @@ window.toggleAudioGuide = function(btn){
   const url = btn.dataset.audio;
   if (!url) return;
   if (!window.__audioGuidePlayer) window.__audioGuidePlayer = new Audio();
+  if (!window.__bgMusicPlayer) {
+    window.__bgMusicPlayer = new Audio();
+    window.__bgMusicPlayer.loop = true;
+    window.__bgMusicPlayer.volume = 0.18;
+  }
   const player = window.__audioGuidePlayer;
+  const bg = window.__bgMusicPlayer;
 
   function setIcon(el, isPlaying){
     const playSpan = el.querySelector('.al-play');
@@ -371,15 +377,24 @@ window.toggleAudioGuide = function(btn){
 
   if (playing === btn) {
     player.pause();
+    bg.pause();
     setIcon(btn, false);
     return;
   }
   if (playing) setIcon(playing, false);
 
+  bg.pause();
+  const bgUrl = btn.dataset.bg;
+
   player.src = url;
   player.play();
+  if (bgUrl) {
+    if (bg.src.indexOf(bgUrl) === -1) bg.src = bgUrl;
+    bg.currentTime = 0;
+    bg.play();
+  }
   setIcon(btn, true);
-  player.onended = function(){ setIcon(btn, false); };
+  player.onended = function(){ setIcon(btn, false); bg.pause(); };
 };
 </script>
 </body>
