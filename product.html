@@ -541,23 +541,31 @@ window.toggleAudioGuide = function(btn){
   if (!url) return;
   if (!window.__audioGuidePlayer) window.__audioGuidePlayer = new Audio();
   const player = window.__audioGuidePlayer;
-  const playing = document.querySelector('.audio-badge.playing');
+
+  function setIcon(el, isPlaying){
+    const playSpan = el.querySelector('.al-play');
+    if (playSpan) {
+      playSpan.textContent = isPlaying ? '⏸ 정지' : '▶';
+    } else {
+      el.textContent = isPlaying ? '⏸' : '🎧';
+    }
+    el.classList.toggle('playing', isPlaying);
+  }
+
+  const playing = document.querySelector('.audio-badge.playing, .audio-list-item.playing');
 
   if (playing === btn) {
     player.pause();
-    btn.classList.remove('playing');
-    btn.textContent = '🎧';
+    setIcon(btn, false);
     return;
   }
-  if (playing) {
-    playing.classList.remove('playing');
-    playing.textContent = '🎧';
-  }
+  if (playing) setIcon(playing, false);
+
   player.src = url;
   player.play();
-  btn.classList.add('playing');
-  btn.textContent = '⏸';
-  player.onended = function(){ btn.classList.remove('playing'); btn.textContent = '🎧'; };
+  setIcon(btn, true);
+  player.onended = function(){ setIcon(btn, false); };
+};
 };
 </script>
 </body>
