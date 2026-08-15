@@ -619,5 +619,5 @@ function formatYoutubeBtn(youtubeUrl){
 }function formatAudioBadge(audioGuide){
   if (!audioGuide || !audioGuide.length) return '';
   const first = audioGuide[0];
-  return `<button type="button" class="audio-badge" data-audio="${first.url}" title="오디오 가이드 듣기 (${audioGuide.length}곳)" onclick="event.preventDefault();event.stopPropagation();window.toggleAudioGuide(this);">🎧</button>`;
+ return `<button type="button" class="audio-badge" data-audio="${first.url}" data-bg="${first.bg || ''}" title="오디오 가이드 듣기 (${audioGuide.length}곳)" onclick="event.preventDefault();event.stopPropagation();window.toggleAudioGuide(this);">🎧</button>`;
 }
