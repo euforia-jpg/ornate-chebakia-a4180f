@@ -19,6 +19,7 @@ const PRODUCTS = [
     maxPeople: 30,
     youtubeUrl: 'https://www.youtube.com/watch?v=GbQPQytLq74',
     hasAudioGuide: true,
+    audioGuideUrl: '/audio/madrid-toledo-sample.mp3',
     title: '[일일차량 가이드] 마드리드 · 톨레도 · 마드리드',
     summary: '마드리드에서 출발해 유네스코 세계문화유산 도시 톨레도를 둘러보고 당일에 돌아오는 프라이빗 차량 투어예요.',
     tags: ['당일 투어', '프라이빗 차량', '한국인 기사 동행'],
@@ -591,7 +592,7 @@ function formatYoutubeBtn(youtubeUrl){
   if(!youtubeUrl) return '';
   const safeUrl = youtubeUrl.replace(/'/g, '%27');
   return `<button type="button" class="yt-btn" aria-label="관광지 영상 보기" onclick="event.preventDefault();event.stopPropagation();window.open('${safeUrl}','_blank','noopener');"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2c-.3-1-1-1.8-2-2C19.7 3.7 12 3.7 12 3.7s-7.7 0-9.5.5c-1 .2-1.7 1-2 2C0 8 0 12 0 12s0 4 .5 5.8c.3 1 1 1.8 2 2 1.8.5 9.5.5 9.5.5s7.7 0 9.5-.5c1-.2 1.7-1 2-2 .5-1.8.5-5.8.5-5.8s0-4-.5-5.8zM9.5 15.5v-7l6.3 3.5-6.3 3.5z"/></svg></button>`;
-}function formatAudioBadge(hasAudio){
+}function formatAudioBadge(hasAudio, audioUrl){
   if (!hasAudio) return '';
-  return `<span class="audio-badge" title="오디오 가이드 제공">🎧</span>`;
+  return `<button type="button" class="audio-badge" data-audio="${audioUrl || ''}" title="오디오 가이드 듣기" onclick="event.preventDefault();event.stopPropagation();window.toggleAudioGuide(this);">🎧</button>`;
 }
