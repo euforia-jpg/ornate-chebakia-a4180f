@@ -86,7 +86,8 @@ const PRODUCTS = [
     audioGuide: [
       { name: '사그라다 파밀리아 1부 — 144년의 역사', url: '/audio/sagrada-familia-1.mp3' },
       { name: '사그라다 파밀리아 2부 — 세 개의 파사드', url: '/audio/sagrada-familia-2.mp3' },
-      { name: '구엘 공원', url: '/audio/park-guell.mp3' },
+      { name: '구엘 공원 1부 — 동화 속 공원의 탄생', url: '/audio/park-guell-1.mp3' },
+{ name: '구엘 공원 2부 — 숨겨진 정수 시스템과 벤치', url: '/audio/park-guell-2.mp3' },,
     ],
     detail: {
       lead: '가우디의 도시 바르셀로나부터 플라멩코의 본고장 남부 안달루시아까지 이어지는 코스예요.',
