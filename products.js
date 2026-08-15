@@ -91,6 +91,8 @@ const PRODUCTS = [
       { name: '알함브라 궁전 1부 — 붉은 성의 흥망성쇠', url: '/audio/alhambra-1.mp3', bg: '/audio/bg-guitar-alhambra.mp3' },
       { name: '알함브라 궁전 2부 — 나스르 궁전', url: '/audio/alhambra-2.mp3', bg: '/audio/bg-guitar-alhambra.mp3' },
       { name: '알함브라 궁전 3부 — 헤네랄리페 정원', url: '/audio/alhambra-3.mp3', bg: '/audio/bg-guitar-alhambra.mp3' },
+      { name: '세비야 대성당 1부 — 세계에서 가장 큰 고딕 성당', url: '/audio/seville-cathedral-1.mp3' },
+      { name: '세비야 대성당 2부 — 콜럼버스의 무덤과 히랄다 탑', url: '/audio/seville-cathedral-2.mp3' },
     ],
     detail: {
       lead: '가우디의 도시 바르셀로나부터 플라멩코의 본고장 남부 안달루시아까지 이어지는 코스예요.',
