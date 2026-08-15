@@ -579,12 +579,6 @@ window.toggleAudioGuide = function(btn){
   setIcon(btn, true);
   player.onended = function(){ setIcon(btn, false); };
 };
-  player.src = url;
-  player.play();
-  btn.classList.add('playing');
-  btn.textContent = '⏸';
-  player.onended = function(){ btn.classList.remove('playing'); btn.textContent = '🎧'; };
-};
 </script>
 </body>
 </html>
