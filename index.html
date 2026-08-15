@@ -200,6 +200,8 @@ button.price-chip:hover{ opacity:.92; }
 .chat-input-row input{ all:unset; flex:1; border:2px solid var(--line); border-radius:10px; padding:9px 12px; font-size:12.5px; box-sizing:border-box; }
 .chat-input-row button{ all:unset; background:var(--navy); color:#fff; padding:9px 14px; border-radius:10px; font-size:12.5px; font-weight:800; cursor:pointer; }
 @media (max-width:480px){ .chat-window{ right:12px; bottom:80px; width:calc(100vw - 24px); } .chat-fab{ right:12px; bottom:12px; } }
+.audio-badge{ display:inline-flex; align-items:center; justify-content:center; width:36px; flex-shrink:0; background:var(--teal); font-size:15px; border:none; cursor:pointer; color:#fff; }
+.audio-badge.playing{ background:var(--pink); }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -546,6 +548,31 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
   sendBtn.addEventListener('click', send);
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
 })();
+</script>
+  <script>
+window.toggleAudioGuide = function(btn){
+  const url = btn.dataset.audio;
+  if (!url) return;
+  if (!window.__audioGuidePlayer) window.__audioGuidePlayer = new Audio();
+  const player = window.__audioGuidePlayer;
+  const playing = document.querySelector('.audio-badge.playing');
+
+  if (playing === btn) {
+    player.pause();
+    btn.classList.remove('playing');
+    btn.textContent = '🎧';
+    return;
+  }
+  if (playing) {
+    playing.classList.remove('playing');
+    playing.textContent = '🎧';
+  }
+  player.src = url;
+  player.play();
+  btn.classList.add('playing');
+  btn.textContent = '⏸';
+  player.onended = function(){ btn.classList.remove('playing'); btn.textContent = '🎧'; };
+};
 </script>
 </body>
 </html>
