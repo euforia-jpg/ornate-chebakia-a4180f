@@ -152,6 +152,8 @@ button.price-chip:hover{ opacity:.92; }
 .booking-toast .bt-text b{ color:var(--navy); font-weight:800; }
 .booking-toast .bt-time{ display:block; margin-top:2px; font-size:11px; color:var(--muted); font-weight:700; }
 @media (max-width:480px){ .booking-toast{ left:12px; right:12px; top:12px; max-width:none; } }
+.audio-badge{ display:inline-flex; align-items:center; justify-content:center; width:36px; flex-shrink:0; background:var(--teal); font-size:15px; border:none; cursor:pointer; color:#fff; }
+.audio-badge.playing{ background:var(--pink); }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -347,6 +349,31 @@ renderGrid();
     showToast();
   }, 10000 + Math.random() * 4000);
 })();
+</script>
+<script>
+window.toggleAudioGuide = function(btn){
+  const url = btn.dataset.audio;
+  if (!url) return;
+  if (!window.__audioGuidePlayer) window.__audioGuidePlayer = new Audio();
+  const player = window.__audioGuidePlayer;
+  const playing = document.querySelector('.audio-badge.playing');
+
+  if (playing === btn) {
+    player.pause();
+    btn.classList.remove('playing');
+    btn.textContent = '🎧';
+    return;
+  }
+  if (playing) {
+    playing.classList.remove('playing');
+    playing.textContent = '🎧';
+  }
+  player.src = url;
+  player.play();
+  btn.classList.add('playing');
+  btn.textContent = '⏸';
+  player.onended = function(){ btn.classList.remove('playing'); btn.textContent = '🎧'; };
+};
 </script>
 </body>
 </html>
