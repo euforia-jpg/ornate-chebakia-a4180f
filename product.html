@@ -299,7 +299,7 @@ function render(){
           <h3>🎧 오디오 가이드</h3>
           <div class="audio-list">
             ${product.audioGuide.map(a => `
-              <button type="button" class="audio-list-item" data-audio="${a.url}" onclick="window.toggleAudioGuide(this);">
+            <button type="button" class="audio-list-item" data-audio="${a.url}" data-bg="${a.bg || ''}" onclick="window.toggleAudioGuide(this);">
                 <span class="al-icon">🎧</span>
                 <span class="al-name">${a.name}</span>
                 <span class="al-play">▶</span>
@@ -554,17 +554,21 @@ window.toggleAudioGuide = function(btn){
 
   const playing = document.querySelector('.audio-badge.playing, .audio-list-item.playing');
 
-  if (playing === btn) {
-    player.pause();
-    setIcon(btn, false);
-    return;
-  }
-  if (playing) setIcon(playing, false);
+ if (playing) setIcon(playing, false);
+
+  bg.pause();
+  const bgUrl = btn.dataset.bg;
 
   player.src = url;
   player.play();
+  if (bgUrl) {
+    if (bg.src.indexOf(bgUrl) === -1) bg.src = bgUrl;
+    bg.currentTime = 0;
+    bg.play();
+  }
   setIcon(btn, true);
-  player.onended = function(){ setIcon(btn, false); };
+  player.onended = function(){ setIcon(btn, false); bg.pause(); };
+};
 };
 </script>
 </body>
