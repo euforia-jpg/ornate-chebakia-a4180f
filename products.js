@@ -87,7 +87,7 @@ const PRODUCTS = [
       { name: '사그라다 파밀리아 1부 — 144년의 역사', url: '/audio/sagrada-familia-1.mp3' },
       { name: '사그라다 파밀리아 2부 — 세 개의 파사드', url: '/audio/sagrada-familia-2.mp3' },
       { name: '구엘 공원 1부 — 동화 속 공원의 탄생', url: '/audio/park-guell-1.mp3' },
-{ name: '구엘 공원 2부 — 숨겨진 정수 시스템과 벤치', url: '/audio/park-guell-2.mp3' },,
+{ name: '구엘 공원 2부 — 숨겨진 정수 시스템과 벤치', url: '/audio/park-guell-2.mp3' },
     ],
     detail: {
       lead: '가우디의 도시 바르셀로나부터 플라멩코의 본고장 남부 안달루시아까지 이어지는 코스예요.',
@@ -104,6 +104,11 @@ const PRODUCTS = [
     topClass: 'camino',
     region: 'CAMINO',
     days: '5박 6일',
+    audioGuide: [
+  { name: '알함브라 궁전 1부 — 붉은 성의 흥망성쇠', url: '/audio/alhambra-1.mp3', bg: '/audio/bg-guitar-alhambra.mp3' },
+  { name: '알함브라 궁전 2부 — 나스르 궁전', url: '/audio/alhambra-2.mp3', bg: '/audio/bg-guitar-alhambra.mp3' },
+  { name: '알함브라 궁전 3부 — 헤네랄리페 정원', url: '/audio/alhambra-3.mp3', bg: '/audio/bg-guitar-alhambra.mp3' },
+],
     price: '가격 문의',
     youtubeUrl: 'https://youtu.be/ZijzHwq23qU',
     title: '[순례길 100km] 투이 → 산티아고 데 콤포스텔라',
