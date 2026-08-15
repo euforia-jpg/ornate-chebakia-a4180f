@@ -74,6 +74,13 @@ button.price-chip:hover{ opacity:.92; }
 
   .p-block{ margin-bottom:24px; }
   .p-block h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:15.5px; color:var(--navy); margin:0 0 12px; }
+  .audio-list{ display:flex; flex-direction:column; gap:8px; }
+  .audio-list-item{ all:unset; display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--wash-violet); border-radius:12px; cursor:pointer; box-sizing:border-box; width:100%; }
+  .audio-list-item:hover{ background:color-mix(in srgb, var(--violet) 18%, white); }
+  .audio-list-item .al-name{ flex:1; font-size:13px; font-weight:700; color:var(--navy); }
+  .audio-list-item .al-play{ font-size:11px; color:var(--violet); }
+  .audio-list-item.playing{ background:var(--violet); }
+  .audio-list-item.playing .al-name, .audio-list-item.playing .al-play{ color:#fff; }
   .p-list{ display:flex; flex-direction:column; gap:8px; margin:0; padding:0; list-style:none; }
   .p-list li{ display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--ink); font-weight:600; line-height:1.6; }
   .p-list li .dot{ width:7px;height:7px;border-radius:50%; background:var(--violet); margin-top:7px; flex:0 0 auto; }
@@ -285,7 +292,22 @@ function render(){
         <h1 class="p-title">${product.title}</h1>
         <p class="p-lead">${d.lead}</p>
         <p class="p-desc">${d.description}</p>
-        <div class="p-tags">${product.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+       <div class="p-tags">${product.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+
+        ${product.audioGuide && product.audioGuide.length ? `
+        <div class="p-block audio-list-block">
+          <h3>🎧 오디오 가이드</h3>
+          <div class="audio-list">
+            ${product.audioGuide.map(a => `
+              <button type="button" class="audio-list-item" data-audio="${a.url}" onclick="window.toggleAudioGuide(this);">
+                <span class="al-icon">🎧</span>
+                <span class="al-name">${a.name}</span>
+                <span class="al-play">▶</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+        ` : ''}
 
         <div class="p-block">
           <h3>이런 경험을 할 수 있어요</h3>
