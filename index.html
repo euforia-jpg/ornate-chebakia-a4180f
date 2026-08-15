@@ -127,7 +127,7 @@ button.price-chip:hover{ opacity:.92; }
 
   @media (max-width:900px){ .hero{ grid-template-columns:1fr; } .value-grid{ grid-template-columns:1fr; } }
   @media (max-width:780px){ .footer-inner{ grid-template-columns:1fr; } }
-  .addon-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+ .addon-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
 .addon-card{ border-radius:var(--radius); padding:28px; color:#fff; display:flex; flex-direction:column; gap:10px; }
 .addon-card .tag{ display:inline-block; align-self:flex-start; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,.2); font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
 .addon-card h3{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:20px; margin:0; }
@@ -135,6 +135,7 @@ button.price-chip:hover{ opacity:.92; }
 .addon-card .cta{ align-self:flex-start; margin-top:6px; padding:10px 20px; border-radius:999px; background:#fff; color:var(--navy); font-weight:800; font-size:13px; text-decoration:none; }
 .addon-match{ background: linear-gradient(135deg, var(--violet), #8B5CF6); }
 .addon-show{ background: linear-gradient(135deg, var(--pink), var(--orange)); }
+.addon-audio{ background: linear-gradient(135deg, var(--teal), #0E9E8B); }
 /* ===== Mobile improvements (added) ===== */
   .nav-toggle{ display:none; }
   .nav-toggle-btn{ display:none; }
@@ -293,6 +294,12 @@ button.price-chip:hover{ opacity:.92; }
           <h3>특별한 공연도 함께</h3>
           <p>플라멩코, 파두, 오페라, 뮤지컬, 오케스트라까지 — 스페인·포르투갈 현지 공연 일정을 확인하고 관람을 더할 수 있어요.</p>
           <a class="cta" href="https://euforia-showtime.netlify.app/" target="_blank" rel="noopener">공연 일정 보러가기 →</a>
+        </div>
+        <div class="addon-card addon-audio">
+          <span class="tag">🎧 AUDIO</span>
+          <h3>여행지의 이야기도 함께</h3>
+          <p>톨레도 대성당부터 알함브라 궁전까지, 여행지마다 담긴 역사와 이야기를 밝고 친근한 목소리로 들려드려요.</p>
+          <a class="cta" href="audio-guide.html">오디오 가이드 듣기 →</a>
         </div>
       </div>
     </div>
