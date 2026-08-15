@@ -390,7 +390,7 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
     <div class="tour-body">
       <h3>${p.title}</h3>
       <p>${p.summary}</p>
-     <div class="tour-price">${formatPriceBadge(p.price)}${formatYoutubeBtn(p.youtubeUrl)}</div>
+     <div class="p-price">${formatPriceBadge(product.price)}${formatYoutubeBtn(product.youtubeUrl)}${formatAudioBadge(product.hasAudioGuide)}</div>
       <div class="tour-cta">${p.ctaLabel || '상품 보기'} →</div>
     </div>
   </a>
