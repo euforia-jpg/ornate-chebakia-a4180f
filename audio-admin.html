@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오디오 가이드 생성 도구 (관리자용)</title>
+<style>
+  :root{ --violet:#6C3CE9; --navy:#14103D; --paper:#fff; --muted:#6E6A93; --line:#EAE7F7; }
+  body{ font-family:'Pretendard','Noto Sans KR',sans-serif; background:#f4f2fb; padding:32px 16px; margin:0; }
+  .wrap{ max-width:640px; margin:0 auto; background:#fff; border-radius:20px; padding:28px 26px; box-shadow:0 18px 44px -28px rgba(20,16,61,0.32); }
+  h1{ font-size:19px; color:var(--navy); margin:0 0 6px; }
+  .sub{ color:var(--muted); font-size:12.5px; margin-bottom:20px; }
+  label{ display:block; font-size:12px; font-weight:800; color:var(--navy); margin-bottom:6px; }
+  textarea{ width:100%; box-sizing:border-box; border:2px solid var(--line); border-radius:10px; padding:12px; font-size:13.5px; font-family:inherit; min-height:220px; margin-bottom:14px; }
+  select{ width:100%; box-sizing:border-box; border:2px solid var(--line); border-radius:10px; padding:10px; font-size:13px; margin-bottom:16px; }
+  button{ all:unset; display:block; width:100%; box-sizing:border-box; text-align:center; padding:13px; background:var(--violet); color:#fff; font-weight:800; border-radius:10px; cursor:pointer; font-size:14px; }
+  button:disabled{ opacity:.6; cursor:not-allowed; }
+  .result{ margin-top:20px; padding-top:20px; border-top:1.5px solid var(--line); display:none; }
+  .result.show{ display:block; }
+  audio{ width:100%; margin-bottom:12px; }
+  .dl-link{ display:inline-block; padding:10px 18px; background:var(--navy); color:#fff; border-radius:8px; text-decoration:none; font-size:13px; font-weight:800; }
+  .error{ color:#B02A2A; background:#FDECEC; border:2px solid #F5B8B8; border-radius:10px; padding:10px 14px; font-size:12.5px; margin-top:14px; display:none; }
+  .error.show{ display:block; }
+  .hint{ font-size:11.5px; color:var(--muted); margin-top:8px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎧 오디오 가이드 생성 도구</h1>
+  <div class="sub">내부 관리자용 — 사이트 메뉴에는 연결 안 되어 있어요.</div>
+
+  <label for="voiceSelect">음성 선택</label>
+  <select id="voiceSelect">
+    <option value="ko-KR-Chirp3-HD-Aoede">Aoede — 밝고 자연스러운 여성 (프리미엄, 추천)</option>
+    <option value="ko-KR-Chirp3-HD-Leda">Leda — 여성 (프리미엄)</option>
+    <option value="ko-KR-Chirp3-HD-Zephyr">Zephyr — 여성 (프리미엄)</option>
+    <option value="ko-KR-Neural2-A">Neural2-A — 여성 (일반)</option>
+  </select>
+
+  <label for="scriptText">설명 텍스트</label>
+  <textarea id="scriptText" placeholder="여기에 설명문을 붙여넣으세요...">안녕하세요, 유포리아 가이드솔이입니다! </textarea>
+
+  <button id="genBtn">음성 생성하기</button>
+  <div class="error" id="errorBox"></div>
+
+  <div class="result" id="resultBox">
+    <audio id="player" controls></audio>
+    <a class="dl-link" id="dlLink" download="audio-guide.mp3">⬇ MP3 다운로드</a>
+    <div class="hint">다운로드한 파일 이름을 원하는 대로 바꾸고(예: madrid-toledo-cathedral.mp3), GitHub의 <b>audio</b> 폴더에 업로드하시면 돼요. products.js의 audioGuideUrl 경로와 파일명을 맞춰주세요.</div>
+  </div>
+</div>
+
+<script>
+const genBtn = document.getElementById('genBtn');
+const errorBox = document.getElementById('errorBox');
+const resultBox = document.getElementById('resultBox');
+const player = document.getElementById('player');
+const dlLink = document.getElementById('dlLink');
+
+genBtn.addEventListener('click', async () => {
+  const text = document.getElementById('scriptText').value.trim();
+  const voiceName = document.getElementById('voiceSelect').value;
+  if (!text) return;
+
+  errorBox.classList.remove('show');
+  resultBox.classList.remove('show');
+  genBtn.disabled = true;
+  genBtn.textContent = '생성 중...';
+
+  try {
+    const res = await fetch('/.netlify/functions/generate-audio', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, voiceName })
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.error || '생성 실패');
+
+    const byteChars = atob(json.audioContent);
+    const byteNumbers = new Array(byteChars.length);
+    for (let i = 0; i < byteChars.length; i++) byteNumbers[i] = byteChars.charCodeAt(i);
+    const blob = new Blob([new Uint8Array(byteNumbers)], { type: 'audio/mp3' });
+    const url = URL.createObjectURL(blob);
+
+    player.src = url;
+    dlLink.href = url;
+    resultBox.classList.add('show');
+  } catch (err) {
+    errorBox.textContent = '오류: ' + err.message;
+    errorBox.classList.add('show');
+  } finally {
+    genBtn.disabled = false;
+    genBtn.textContent = '음성 생성하기';
+  }
+});
+</script>
+</body>
+</html>
