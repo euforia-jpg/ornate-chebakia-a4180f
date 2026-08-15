@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오디오 가이드 — Euforia Tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --violet: #6C3CE9; --pink: #E6317B; --orange: #FF7A1A; --teal: #12C9AE;
+    --navy: #14103D; --paper: #FFFFFF; --ink: #171235; --muted: #6E6A93; --line: #EAE7F7;
+    --radius: 18px;
+    --wash-violet: #EFEBFD; --wash-pink: #FDECF3; --wash-orange: #FFF2E6; --wash-teal: #E7F8F5;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: repeating-linear-gradient(115deg, var(--wash-violet) 0 220px, var(--wash-pink) 220px 400px, var(--wash-orange) 400px 560px, var(--wash-teal) 560px 760px);
+    background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
+  }
+  body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(20,16,61,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
+  a{ color:inherit; }
+  .wrap{ position:relative; z-index:1; }
+
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding: 22px clamp(20px,4vw,56px) 14px; }
+  .logo{ display:flex; align-items:center; gap:16px; text-decoration:none; }
+  .logo-img{ height:76px; width:auto; display:block; flex:0 0 auto; }
+  .logo .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:32px; color:var(--navy); line-height:1; }
+  .logo small{ display:block; font-family:'Work Sans'; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+  .lang-switch{ display:flex; gap:4px; background:rgba(255,255,255,0.75); border:1.5px solid var(--line); border-radius:10px; padding:4px; backdrop-filter: blur(6px); }
+  .lang-switch button{ all:unset; cursor:pointer; padding:7px 16px; border-radius:7px; font-size:13px; font-weight:800; color:var(--navy); transition: all .15s ease; }
+  .lang-switch button.active{ background:var(--navy); color:#fff; }
+  .nav-link{ all:unset; cursor:pointer; padding:9px 16px; border-radius:10px; font-size:13px; font-weight:800; color:var(--navy); border:1.5px solid var(--line); background:rgba(255,255,255,0.75); text-decoration:none; }
+  .nav-link:hover{ border-color:var(--violet); color:var(--violet); }
+  .nav-group{ display:flex; align-items:center; gap:10px; }
+  .site-nav{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:14px clamp(20px,4vw,56px); border-top:1.5px solid var(--line); }
+  .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:800; color:var(--muted); padding:8px 14px; border-radius:999px; transition: all .15s ease; }
+  .site-nav a:hover{ color:var(--violet); background:rgba(108,60,233,0.08); }
+  .site-nav a.active{ color:#fff; background:var(--navy); }
+
+  .page-hero{ padding:36px clamp(20px,4vw,56px) 8px; }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; color:#fff; background:var(--navy); font-size:12px; letter-spacing:1px; font-weight:800; margin-bottom:16px; padding:7px 16px; border-radius:999px; }
+  .page-hero h1{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); }
+  .page-hero h1 .hl{ color:#fff; background:var(--violet); padding:0 10px; }
+  .page-hero p{ color:var(--muted); font-size:15.5px; line-height:1.75; max-width:640px; margin:0; font-weight:600; }
+
+  .section{ padding:8px clamp(20px,4vw,56px) 24px; }
+  .group-title{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:18px; color:var(--navy); margin:28px 0 14px; display:flex; align-items:center; gap:10px; }
+  .group-title a{ font-family:'Work Sans'; font-size:12px; font-weight:700; color:var(--violet); text-decoration:underline; margin-left:auto; }
+  .group-title:first-child{ margin-top:0; }
+
+  .audio-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:14px; }
+  .audio-card{ all:unset; display:flex; align-items:center; gap:12px; padding:16px 18px; background:#fff; border:1.5px solid var(--line); border-radius:16px; cursor:pointer; box-sizing:border-box; box-shadow:0 10px 24px -18px rgba(20,16,61,0.25); }
+  .audio-card:hover{ border-color:var(--violet); }
+  .audio-card .ac-icon{ flex:0 0 auto; width:38px; height:38px; border-radius:50%; background:var(--wash-violet); display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .audio-card .ac-body{ flex:1; min-width:0; }
+  .audio-card .ac-name{ font-size:13.5px; font-weight:800; color:var(--navy); }
+  .audio-card .ac-play{ font-size:11px; color:var(--muted); font-weight:700; margin-top:2px; }
+  .audio-card.playing{ border-color:var(--violet); background:var(--wash-violet); }
+  .audio-card.playing .ac-icon{ background:var(--violet); color:#fff; }
+
+  .empty-note{ color:var(--muted); font-size:13.5px; font-weight:600; padding:20px 0; }
+
+  footer{ padding:24px clamp(20px,4vw,56px) 40px; }
+  .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(20,16,61,0.28); max-width:1000px; margin:0 auto; }
+  .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
+  .footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .footer-brand .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; color:var(--navy); }
+  .footer-col p{ margin:0; font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.7; max-width:320px; }
+  .footer-links{ display:flex; flex-direction:column; gap:9px; }
+  .footer-links span{ display:flex; align-items:flex-start; gap:8px; font-size:14px; color:var(--muted); font-weight:600; }
+  .footer-links .ft-ico{ flex-shrink:0; font-size:14px; }
+  .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; padding:20px clamp(4px,1vw,12px) 0; color:var(--muted); font-size:11.5px; font-weight:700; max-width:1000px; margin:0 auto; }
+  .footer-legal{ margin:12px 0 0; }
+  .footer-legal p{ display:flex; align-items:flex-start; gap:8px; margin:0 0 8px; font-size:14px; color:var(--muted); font-weight:600; line-height:1.6; }
+  .footer-legal .ft-ico{ flex-shrink:0; font-size:14px; line-height:1.6; }
+
+  @media (max-width:860px){ .footer-inner{ grid-template-columns:1fr; } }
+  /* ===== Mobile improvements (added) ===== */
+  .nav-toggle{ display:none; }
+  .nav-toggle-btn{ display:none; }
+  @media (max-width: 780px){
+    html,body{ overflow-x:hidden; }
+    .nav-toggle-btn{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:10px; border:1.5px solid var(--line); background:rgba(255,255,255,0.75); cursor:pointer; font-size:20px; color:var(--navy); }
+    .site-nav{ display:none; flex-direction:column; align-items:stretch; width:100%; }
+    .nav-toggle:checked ~ .site-nav{ display:flex; }
+    .site-nav a{ width:100%; box-sizing:border-box; }
+  }
+  @media (max-width: 480px){
+    .logo-img{ height:52px; }
+    .logo .name{ font-size:22px; }
+    .topbar{ gap:12px; padding:16px 16px 10px; }
+    .site-nav{ padding:10px 16px; }
+    .section{ padding:6px 16px 18px; }
+    footer{ padding:6px 16px 28px; }
+    .footer-inner{ padding:22px 16px; border-radius:18px; }
+  }
+</style>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#14103D">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+</head>
+<body>
+<div class="wrap">
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <div class="topbar">
+    <a class="logo" href="index.html">
+      <img class="logo-img" src="" alt="Euforia Tour">
+      <span>
+        <span class="name">euforia</span>
+        <small>스페인 · 포르투갈 · 모로코 여행전문</small>
+      </span>
+    </a>
+    <div class="nav-group">
+      <label for="nav-toggle" class="nav-toggle-btn" aria-label="메뉴 열기">&#9776;</label>
+      <a class="nav-link" href="matchday.html">경기 예약</a>
+      <div class="lang-switch">
+        <button class="active" data-lang="ko">KR</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="zh">中文</button>
+      </div>
+    </div>
+  </div>
+  <nav class="site-nav">
+    <a href="about.html">회사소개</a>
+    <a href="tours.html">여행상품</a>
+    <a href="matchday.html">경기 일정</a>
+    <a href="https://euforia-showtime.netlify.app/" target="_blank" rel="noopener">공연 일정</a>
+    <a href="plan.html">AI 일정짜기</a>
+    <a href="audio-guide.html" class="active">오디오 가이드</a>
+    <a href="faq.html">자주하는 질문</a>
+    <a href="contact.html">예약문의</a>
+    <a href="deposit.html">입금확인</a>
+    <a href="cancel.html">취소&middot;환불 규정</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="eyebrow">🎧 오디오 가이드</div>
+    <h1>여행지마다 담긴 <span class="hl">이야기</span>를 들어보세요</h1>
+    <p>유포리아투어와 함께하는 여행지의 역사와 숨은 이야기를, 밝고 친근한 목소리로 직접 들려드려요. 궁금한 관광지를 눌러서 바로 들어보세요.</p>
+  </div>
+
+  <div class="section">
+    <div id="audioGroups"></div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <span class="name">euforia</span>
+        </div>
+        <p>스페인·포르투갈·모로코 전문 여행사, 유포리아투어예요.</p>
+        <div class="footer-legal">
+          <p><span class="ft-ico">🏢</span>Euforia Das Nuvens S.L</p>
+          <p><span class="ft-ico">📍</span>Calle Gran Via 69, 810, 28013 Madrid</p>
+          <p><span class="ft-ico">🧾</span>NIF B44605574 &middot; CICMA No.4443</p>
+          <p><span class="ft-ico">📍</span>서울특별시 마포구 양화로 64 805호</p>
+          <p><span class="ft-ico">🧾</span>사업자등록번호 508-17-95955 &middot; 대표 김이현</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h6>연락처</h6>
+        <div class="footer-links">
+          <span><span class="ft-ico">📧</span>이메일 euforia@euforiatour.com</span>
+          <span><span class="ft-ico">💬</span>카카오톡(한국 연락처) ID losnuevos</span>
+          <span><span class="ft-ico">📞</span>스페인 현지 연락처 +34 611 209 095</span>
+          <span><span class="ft-ico">🕐</span>업무시간 월&ndash;금 09:00&ndash;18:00 (현지시간 기준)</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Euforia Tour. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+<script src="products.js"></script>
+<script>
+(function(){
+  const container = document.getElementById('audioGroups');
+  const withAudio = (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []).filter(p => p.audioGuide && p.audioGuide.length);
+
+  if (!withAudio.length) {
+    container.innerHTML = '<div class="empty-note">아직 등록된 오디오 가이드가 없어요. 곧 업데이트될 예정이에요!</div>';
+    return;
+  }
+
+  container.innerHTML = withAudio.map(p => `
+    <div class="group-title">
+      ${p.title}
+      <a href="product.html?id=${encodeURIComponent(p.id)}">상품 보기 →</a>
+    </div>
+    <div class="audio-grid">
+      ${p.audioGuide.map(a => `
+        <button type="button" class="audio-card" data-audio="${a.url}" data-bg="${a.bg || ''}" onclick="window.toggleAudioGuide(this);">
+          <span class="ac-icon">🎧</span>
+          <span class="ac-body">
+            <span class="ac-name">${a.name}</span>
+            <span class="ac-play">▶ 재생</span>
+          </span>
+        </button>
+      `).join('')}
+    </div>
+  `).join('');
+})();
+</script>
+<script>
+window.toggleAudioGuide = function(btn){
+  const url = btn.dataset.audio;
+  if (!url) return;
+  if (!window.__audioGuidePlayer) window.__audioGuidePlayer = new Audio();
+  if (!window.__bgMusicPlayer) {
+    window.__bgMusicPlayer = new Audio();
+    window.__bgMusicPlayer.loop = true;
+    window.__bgMusicPlayer.volume = 0.18;
+  }
+  const player = window.__audioGuidePlayer;
+  const bg = window.__bgMusicPlayer;
+
+  function setIcon(el, isPlaying){
+    const playSpan = el.querySelector('.ac-play');
+    if (playSpan) {
+      playSpan.textContent = isPlaying ? '⏸ 정지' : '▶ 재생';
+    }
+    el.classList.toggle('playing', isPlaying);
+  }
+
+  const playing = document.querySelector('.audio-card.playing');
+
+  if (playing === btn) {
+    player.pause();
+    bg.pause();
+    setIcon(btn, false);
+    return;
+  }
+  if (playing) setIcon(playing, false);
+
+  bg.pause();
+  const bgUrl = btn.dataset.bg;
+
+  player.src = url;
+  player.play();
+  if (bgUrl) {
+    if (bg.src.indexOf(bgUrl) === -1) bg.src = bgUrl;
+    bg.currentTime = 0;
+    bg.play();
+  }
+  setIcon(btn, true);
+  player.onended = function(){ setIcon(btn, false); bg.pause(); };
+};
+</script>
+  <script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(){});
+    });
+  }
+  </script>
+</body>
+</html>
