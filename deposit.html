@@ -297,7 +297,37 @@
 <script>
 document.getElementById('depositForm').addEventListener('submit', function(e){
   e.preventDefault();
-  document.getElementById('formAlert').classList.add('show');
+  const form = this;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = '보내는 중...';
+
+  const payload = {
+    depositor: document.getElementById('depositor').value,
+    refNo: document.getElementById('refNo').value,
+    amount: document.getElementById('amount').value,
+    depositDate: document.getElementById('depositDate').value,
+    contactPhone: document.getElementById('contactPhone').value,
+    note: document.getElementById('note').value,
+    hasReceipt: document.getElementById('receipt').files.length > 0
+  };
+
+  fetch('/.netlify/functions/send-deposit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .catch(function(err){ console.error('카카오 전송 실패:', err); })
+  .finally(function(){
+    document.getElementById('formAlert').classList.add('show');
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalBtnText;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</parameter>
   this.reset();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
