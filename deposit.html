@@ -249,10 +249,6 @@
               <label for="contactPhone">연락처 *</label>
               <input type="tel" id="contactPhone" placeholder="010-0000-0000" required>
             </div>
-            <div class="field">
-              <label for="receipt">입금 확인증 (선택)</label>
-              <input type="file" id="receipt" accept="image/*,application/pdf">
-            </div>
             <div class="field full">
               <label for="note">전달할 메모</label>
               <textarea id="note" placeholder="예약 내용이나 확인이 필요한 사항을 남겨 주세요."></textarea>
@@ -308,9 +304,8 @@ document.getElementById('depositForm').addEventListener('submit', function(e){
     refNo: document.getElementById('refNo').value,
     amount: document.getElementById('amount').value,
     depositDate: document.getElementById('depositDate').value,
-    contactPhone: document.getElementById('contactPhone').value,
-    note: document.getElementById('note').value,
-    hasReceipt: document.getElementById('receipt').files.length > 0
+   contactPhone: document.getElementById('contactPhone').value,
+    note: document.getElementById('note').value
   };
 
   fetch('/.netlify/functions/send-deposit', {
