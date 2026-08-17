@@ -71,6 +71,27 @@
 
   .empty-note{ color:var(--muted); font-size:13.5px; font-weight:600; padding:20px 0; }
 
+  .promo-section{ padding-top:0; padding-bottom:6px; }
+  .promo-banner{ position:relative; background:var(--navy); border-radius:26px; padding:clamp(22px,3.4vw,38px) clamp(20px,3.6vw,40px); overflow:hidden; box-shadow:0 24px 48px -26px rgba(20,16,61,0.5); }
+  .promo-banner::before{ content:''; position:absolute; inset:0; background:radial-gradient(600px 260px at 8% 0%, rgba(108,60,233,0.55), transparent 60%), radial-gradient(500px 220px at 100% 100%, rgba(230,49,123,0.4), transparent 60%); pointer-events:none; }
+  .promo-banner-head{ position:relative; max-width:640px; }
+  .promo-badge{ display:inline-flex; align-items:center; gap:6px; color:var(--navy); background:#fff; font-size:11.5px; letter-spacing:0.5px; font-weight:800; padding:6px 14px; border-radius:999px; margin-bottom:14px; }
+  .promo-banner-head h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(21px,2.6vw,28px); line-height:1.3; color:#fff; margin:0 0 10px; }
+  .promo-banner-head h2 .hl{ color:var(--navy); background:var(--teal); padding:0 8px; }
+  .promo-banner-head p{ color:rgba(255,255,255,0.72); font-size:14px; line-height:1.7; font-weight:600; margin:0; }
+  .promo-grid{ position:relative; display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:14px; margin-top:24px; }
+  .promo-card{ all:unset; box-sizing:border-box; display:flex; flex-direction:column; align-items:flex-start; gap:6px; padding:20px; background:rgba(255,255,255,0.96); border-radius:18px; cursor:pointer; transition: transform .15s ease, box-shadow .15s ease; }
+  a.promo-card:hover{ transform:translateY(-3px); box-shadow:0 16px 30px -18px rgba(0,0,0,0.45); }
+  .promo-card-tag{ font-size:10.5px; font-weight:800; letter-spacing:0.5px; color:#fff; background:var(--pink); padding:4px 10px; border-radius:999px; }
+  .promo-card-tag.soon{ background:var(--muted); }
+  .promo-card-icon{ font-size:26px; margin-top:4px; }
+  .promo-card-name{ font-family:'Kanit'; font-weight:700; font-style:italic; font-size:16.5px; color:var(--navy); }
+  .promo-card-desc{ font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.55; min-height:32px; }
+  .promo-card-cta{ margin-top:6px; font-size:12.5px; font-weight:800; color:var(--violet); }
+  .promo-card-cta.muted{ color:var(--muted); }
+  .promo-card.is-soon{ opacity:0.62; cursor:default; }
+  @media (max-width:480px){ .promo-banner{ border-radius:20px; padding:20px 16px; } .promo-grid{ margin-top:18px; } }
+
   footer{ padding:24px clamp(20px,4vw,56px) 40px; }
   .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(20,16,61,0.28); max-width:1000px; margin:0 auto; }
   .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
@@ -146,6 +167,39 @@
     <div class="eyebrow">🎧 오디오 가이드</div>
     <h1>여행지마다 담긴 <span class="hl">이야기</span>를 들어보세요</h1>
     <p>유포리아투어와 함께하는 여행지의 역사와 숨은 이야기를, 밝고 친근한 목소리로 직접 들려드려요. 궁금한 관광지를 눌러서 바로 들어보세요.</p>
+  </div>
+
+  <div class="section promo-section">
+    <div class="promo-banner">
+      <div class="promo-banner-head">
+        <span class="promo-badge">🎁 EUFORIA ONLY</span>
+        <h2>유포리아 고객 특별 혜택 — <span class="hl">무료 오디오 앱</span>을 만나보세요</h2>
+        <p>유포리아투어와 함께하시는 고객님만을 위한 프리미엄 오디오 가이드 앱이에요. 관광지 앞에서 앱 하나면, 전문 해설사와 함께 걷는 듯한 여행이 시작돼요.</p>
+      </div>
+      <div class="promo-grid">
+        <div class="promo-card is-soon" aria-disabled="true">
+          <span class="promo-card-tag soon">준비중</span>
+          <span class="promo-card-icon">🖼️</span>
+          <span class="promo-card-name">프라도 미술관</span>
+          <span class="promo-card-desc">벨라스케스 · 고야의 명화 해설, 곧 만나보실 수 있어요</span>
+          <span class="promo-card-cta muted">오픈 예정</span>
+        </div>
+        <a class="promo-card" href="https://sage-cheesecake-458faa.netlify.app/" target="_blank" rel="noopener">
+          <span class="promo-card-tag">NEW</span>
+          <span class="promo-card-icon">⛪</span>
+          <span class="promo-card-name">사그라다 파밀리아</span>
+          <span class="promo-card-desc">가우디 루트 전용 오디오 앱, 6개 파트 · 약 61분</span>
+          <span class="promo-card-cta">무료로 체험하기 →</span>
+        </a>
+        <div class="promo-card is-soon" aria-disabled="true">
+          <span class="promo-card-tag soon">준비중</span>
+          <span class="promo-card-icon">🏰</span>
+          <span class="promo-card-name">알함브라 궁전</span>
+          <span class="promo-card-desc">나스르 왕조의 이야기, 곧 만나보실 수 있어요</span>
+          <span class="promo-card-cta muted">오픈 예정</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="section">
