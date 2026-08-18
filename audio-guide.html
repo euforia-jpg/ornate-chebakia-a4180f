@@ -61,8 +61,7 @@
   .audio-card.playing .ac-icon{ background:var(--violet); color:#fff; }
   .ac-video-link{ display:block; text-align:center; font-size:11px; color:var(--pink); font-weight:800; text-decoration:none; margin-top:-4px; padding-bottom:2px; }
   .ac-video-link:hover{ text-decoration:underline; }
-  .media-panel{ display:none; grid-column:1/-1; }
-  .media-panel.open{ display:block; animation:mediaIn .2s ease; }
+  
   @keyframes mediaIn{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
   .media-panel-inner{ display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:14px; margin-top:2px; background:var(--wash-violet); border:1.5px solid var(--line); border-radius:16px; }
   .media-frame{ position:relative; width:100%; padding-top:60%; border-radius:12px; overflow:hidden; background:#e9e5f9; }
@@ -256,15 +255,13 @@
     </div>
     <div class="audio-grid">
       ${p.audioGuide.map(a => `
-               <button type="button" class="audio-card" data-audio="${a.url}" data-bg="${a.bg || ''}" onclick="window.toggleAudioGuide(this);">
+          <button type="button" class="audio-card" data-audio="${a.url}" data-bg="${a.bg || ''}" onclick="window.toggleAudioGuide(this);">
           <span class="ac-icon">🎧</span>
           <span class="ac-body">
             <span class="ac-name">${a.name}</span>
             <span class="ac-play">▶ 재생</span>
           </span>
         </button>
-        ${a.video ? `<a href="${a.video}" target="_blank" rel="noopener" class="ac-video-link" onclick="event.stopPropagation();">▶ 영상으로 보기</a>` : ''}
-      `).join('')}
     </div>
   `).join('');
 
