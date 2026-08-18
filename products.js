@@ -43,7 +43,7 @@ const PRODUCTS = [
     days: '반나절',
     price: '가격 문의',
     audioGuide: [
-  { name: '1부 — 그림 속의 그림, 시녀들', url: '/audio/prado-1-meninas.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
+  { name: '1부 — 그림 속의 그림, 시녀들', url: '/audio/prado-1-meninas.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: '3tUN9rq2MyU' },
   { name: '2부 — 전쟁의 참혹함, 1808년 5월 3일', url: '/audio/prado-2-tresmayo.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
   { name: '3부 — 고야의 어두운 걸작, 아들을 삼키는 사투르누스', url: '/audio/prado-3-saturno.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
   { name: '4부 — 상상력의 끝판왕, 세속적 쾌락의 동산', url: '/audio/prado-4-jardin.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
@@ -97,7 +97,7 @@ const PRODUCTS = [
   tags: ['5박 6일', '자유일정 가능'],
     audioGuide: [
            { name: '사그라다 파밀리아 1부 — 144년의 역사', url: '/audio/sagrada-familia-1.mp3', bg: '/audio/bg-ballade-no1.mp3', lat: 41.4036, lng: 2.1744, yt: 'VCM3tho_PFQ' },
-      { name: '사그라다 파밀리아 2부 — 세 개의 파사드', url: '/audio/sagrada-familia-2.mp3', bg: '/audio/bg-ballade-no1.mp3', lat: 41.4036, lng: 2.1744, yt: 'VCM3tho_PFQ' },
+      { name: '사그라다 파밀리아 2부 — 세 개의 파사드', url: '/audio/sagrada-familia-2.mp3', bg: '/audio/bg-ballade-no1.mp3', lat: 41.4036, lng: 2.1744, yt: 'KqMD2RBqUxA' },
       { name: '구엘 공원 1부 — 동화 속 공원의 탄생', url: '/audio/park-guell-1.mp3', lat: 41.4145, lng: 2.1527, yt: 'Rk9UM6Dv-0w' },
 { name: '구엘 공원 2부 — 숨겨진 정수 시스템과 벤치', url: '/audio/park-guell-2.mp3', lat: 41.4145, lng: 2.1527, yt: 'Rk9UM6Dv-0w' },
       { name: '알함브라 궁전 1부 — 붉은 성의 흥망성쇠', url: '/audio/alhambra-1.mp3', bg: '/audio/bg-guitar-alhambra.mp3', lat: 37.1760, lng: -3.5986, yt: '5dwYDPhM_qg' },
