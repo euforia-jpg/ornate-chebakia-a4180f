@@ -45,7 +45,7 @@ const PRODUCTS = [
     audioGuide: [
   { name: '1부 — 그림 속의 그림, 시녀들', url: '/audio/prado-1-meninas.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: '3tUN9rq2MyU' },
   { name: '2부 — 전쟁의 참혹함, 1808년 5월 3일', url: '/audio/prado-2-tresmayo.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'JfLrdnL1pHM' },
-  { name: '3부 — 고야의 어두운 걸작, 아들을 삼키는 사투르누스', url: '/audio/prado-3-saturno.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
+  { name: '3부 — 고야의 어두운 걸작, 아들을 삼키는 사투르누스', url: '/audio/prado-3-saturno.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'xD7dXIzPVrc' },
   { name: '4부 — 상상력의 끝판왕, 세속적 쾌락의 동산', url: '/audio/prado-4-jardin.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
   { name: '5부 — 스페인 최대의 미술 스캔들, 마하 두 점', url: '/audio/prado-5-maja.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
   { name: '6부 — 엘 그레코, 가슴에 손을 얹은 기사', url: '/audio/prado-6-caballero.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
