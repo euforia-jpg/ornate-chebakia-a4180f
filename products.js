@@ -20,8 +20,8 @@ const PRODUCTS = [
        youtubeUrl: 'https://youtu.be/odJZqZPfMcg',
     audioGuide: [
      { name: '톨레도 대성당', url: '/audio/madrid-toledo-sample.mp3', lat: 39.8578, lng: -4.0273, yt: 'odJZqZPfMcg' },
-      { name: '톨레도 대성당 정식판 1부 — 800년의 시간', url: '/audio/toledo-cathedral-full-1.mp3', lat: 39.8578, lng: -4.0273, yt: 'olivUENa-PA' },
-      { name: '톨레도 대성당 정식판 2부 — 트란스파렌테의 기적', url: '/audio/toledo-cathedral-full-2.mp3', lat: 39.8578, lng: -4.0273, yt: 'olivUENa-PA' },
+           { name: '톨레도 대성당 정식판 1부 — 800년의 시간', url: '/audio/toledo-cathedral-full-1.mp3', lat: 39.8578, lng: -4.0273, yt: 'odJZqZPfMcg' },
+      { name: '톨레도 대성당 정식판 2부 — 트란스파렌테의 기적', url: '/audio/toledo-cathedral-full-2.mp3', lat: 39.8578, lng: -4.0273, yt: 'odJZqZPfMcg' },
     ],
     title: '[일일차량 가이드] 마드리드 · 톨레도 · 마드리드',
     summary: '마드리드에서 출발해 유네스코 세계문화유산 도시 톨레도를 둘러보고 당일에 돌아오는 프라이빗 차량 투어예요.',
