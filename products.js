@@ -19,7 +19,7 @@ const PRODUCTS = [
     maxPeople: 30,
        youtubeUrl: 'https://youtu.be/odJZqZPfMcg',
     audioGuide: [
-     { name: '톨레도 대성당', url: '/audio/madrid-toledo-sample.mp3', video: 'https://youtu.be/odJZqZPfMcg', lat: 39.8578, lng: -4.0273, yt: 'olivUENa-PA' },
+     { name: '톨레도 대성당', url: '/audio/madrid-toledo-sample.mp3', lat: 39.8578, lng: -4.0273, yt: 'odJZqZPfMcg' },
       { name: '톨레도 대성당 정식판 1부 — 800년의 시간', url: '/audio/toledo-cathedral-full-1.mp3', lat: 39.8578, lng: -4.0273, yt: 'olivUENa-PA' },
       { name: '톨레도 대성당 정식판 2부 — 트란스파렌테의 기적', url: '/audio/toledo-cathedral-full-2.mp3', lat: 39.8578, lng: -4.0273, yt: 'olivUENa-PA' },
     ],
