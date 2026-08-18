@@ -17,7 +17,7 @@ const PRODUCTS = [
     price: '1인 80유로 (4인 이상 출발 기준)',
     minPeople: 4,
     maxPeople: 30,
-    youtubeUrl: 'https://www.youtube.com/watch?v=GbQPQytLq74',
+    youtubeUrl: '    youtubeUrl: 'https://youtu.be/odJZqZPfMcg',',
     audioGuide: [
       { name: '톨레도 대성당', url: '/audio/madrid-toledo-sample.mp3', lat: 39.8578, lng: -4.0273, yt: 'olivUENa-PA' },
       { name: '산토토메', url: '/audio/toledo-santotome.mp3', lat: 39.8567, lng: -4.0298, yt: 'olivUENa-PA' },
