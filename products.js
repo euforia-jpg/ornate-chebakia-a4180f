@@ -96,8 +96,8 @@ const PRODUCTS = [
     summary: '바르셀로나에서 스페인 남부까지, 대표 도시를 잇는 5박6일 일주 코스예요.',
   tags: ['5박 6일', '자유일정 가능'],
     audioGuide: [
-      { name: '사그라다 파밀리아 1부 — 144년의 역사', url: '/audio/sagrada-familia-1.mp3', bg: '/audio/bg-sagrada-organ-choir.mp3', lat: 41.4036, lng: 2.1744, yt: 'VCM3tho_PFQ' },
-      { name: '사그라다 파밀리아 2부 — 세 개의 파사드', url: '/audio/sagrada-familia-2.mp3', bg: '/audio/bg-sagrada-organ-choir.mp3', lat: 41.4036, lng: 2.1744, yt: 'KqMD2RBqUxA' },
+      { name: '사그라다 파밀리아 1부 — 144년의 역사', url: '/audio/sagrada-familia-1.mp3', bg: '/audio/bg-sagrada-organ-choir.mp3', bgVolume: 0.10, lat: 41.4036, lng: 2.1744, yt: 'VCM3tho_PFQ' },
+      { name: '사그라다 파밀리아 2부 — 세 개의 파사드', url: '/audio/sagrada-familia-2.mp3', bg: '/audio/bg-sagrada-organ-choir.mp3', bgVolume: 0.10, lat: 41.4036, lng: 2.1744, yt: 'KqMD2RBqUxA' },
       { name: '구엘 공원 1부 — 동화 속 공원의 탄생', url: '/audio/park-guell-1.mp3', lat: 41.4145, lng: 2.1527, yt: 'Rk9UM6Dv-0w' },
 { name: '구엘 공원 2부 — 숨겨진 정수 시스템과 벤치', url: '/audio/park-guell-2.mp3', lat: 41.4145, lng: 2.1527, yt: 'Rk9UM6Dv-0w' },
       { name: '알함브라 궁전 1부 — 붉은 성의 흥망성쇠', url: '/audio/alhambra-1.mp3', bg: '/audio/bg-guitar-alhambra.mp3', lat: 37.1760, lng: -3.5986, yt: '5dwYDPhM_qg' },
