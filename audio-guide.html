@@ -59,16 +59,14 @@
   .audio-card .ac-play{ font-size:11px; color:var(--muted); font-weight:700; margin-top:2px; }
   .audio-card.playing{ border-color:var(--violet); background:var(--wash-violet); }
   .audio-card.playing .ac-icon{ background:var(--violet); color:#fff; }
-  .ac-video-link{ display:block; text-align:center; font-size:11px; color:var(--pink); font-weight:800; text-decoration:none; margin-top:-4px; padding-bottom:2px; }
-  .ac-video-link:hover{ text-decoration:underline; }
-  
+
+  .media-panel{ display:none; grid-column:1/-1; }
+  .media-panel.open{ display:block; animation:mediaIn .2s ease; }
   @keyframes mediaIn{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
   .media-panel-inner{ display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:14px; margin-top:2px; background:var(--wash-violet); border:1.5px solid var(--line); border-radius:16px; }
   .media-frame{ position:relative; width:100%; padding-top:60%; border-radius:12px; overflow:hidden; background:#e9e5f9; }
   .media-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
   .media-frame-label{ position:absolute; top:8px; left:8px; z-index:1; background:rgba(20,16,61,0.72); color:#fff; font-size:10.5px; font-weight:800; padding:4px 9px; border-radius:999px; pointer-events:none; }
-  .media-panel{ display:none; grid-column: 1 / -1; }
-  .media-panel.open{ display:block; }
   @media (max-width:640px){ .media-panel-inner{ grid-template-columns:1fr; } }
 
   .empty-note{ color:var(--muted); font-size:13.5px; font-weight:600; padding:20px 0; }
@@ -250,14 +248,14 @@
     return;
   }
 
-   container.innerHTML = withAudio.map(p => `
+  container.innerHTML = withAudio.map(p => `
     <div class="group-title">
       ${p.title}
       <a href="product.html?id=${encodeURIComponent(p.id)}">상품 보기 →</a>
     </div>
     <div class="audio-grid">
       ${p.audioGuide.map(a => `
-        <button type="button" class="audio-card" data-audio="${a.url}" data-bg="${a.bg || ''}" data-lat="${a.lat || ''}" data-lng="${a.lng || ''}" data-yt="${a.yt || ''}" onclick="window.toggleAudioGuide(this);">
+        <button type="button" class="audio-card" data-audio="${a.url}" data-bg="${a.bg || ''}" data-bg-vol="${a.bgVolume != null ? a.bgVolume : ''}" data-lat="${a.lat || ''}" data-lng="${a.lng || ''}" data-yt="${a.yt || ''}" onclick="window.toggleAudioGuide(this);">
           <span class="ac-icon">🎧</span>
           <span class="ac-body">
             <span class="ac-name">${a.name}</span>
@@ -267,6 +265,7 @@
       `).join('')}
     </div>
   `).join('');
+
   // 재생 중인 카드 바로 아래에 지도·영상을 띄우는 패널 (그리드마다 재사용, 클릭한 카드 뒤로 옮겨 붙임)
   const mediaPanel = document.createElement('div');
   mediaPanel.className = 'media-panel';
@@ -363,11 +362,13 @@ window.toggleAudioGuide = function(btn){
 
   bg.pause();
   const bgUrl = btn.dataset.bg;
+  const bgVol = parseFloat(btn.dataset.bgVol);
 
   player.src = url;
   player.play();
   if (bgUrl) {
     if (bg.src.indexOf(bgUrl) === -1) bg.src = bgUrl;
+    bg.volume = !isNaN(bgVol) ? bgVol : 0.18;
     bg.currentTime = 0;
     bg.play();
   }
