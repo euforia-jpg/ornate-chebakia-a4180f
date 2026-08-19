@@ -52,7 +52,7 @@ const PRODUCTS = [
   { name: '6부 — 엘 그레코, 가슴에 손을 얹은 기사', url: '/audio/prado-6-caballero.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: '7cKbY4_mQXk' },
   { name: '7부 — 눈물의 명작, 십자가에서 내려지는 그리스도', url: '/audio/prado-7-descendimiento.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
   { name: '8부 — 왕실을 향한 우아한 조롱, 카를로스 4세의 가족', url: '/audio/prado-8-familia.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'eC3-4vrZP_k' },
-  { name: '9부 — 독일 르네상스의 자존심, 아담과 이브', url: '/audio/prado-9-adaneva.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: 'KdQRjgvqxwg' },
+  { name: '9부 — 독일 르네상스의 자존심, 아담과 이브', url: '/audio/prado-9-adaneva.mp3', bg: '/audio/bg-boccherini-minuet.mp3' , lat: 40.4138, lng: -3.6921, yt: '' },
 ],
     title: '[도슨트] 프라도 & 레이나소피아 미술관',
     summary: '마드리드 프라도 미술관과 레이나소피아 미술관을 한국어 도슨트와 함께 깊이 있게 둘러보는 투어예요.',
