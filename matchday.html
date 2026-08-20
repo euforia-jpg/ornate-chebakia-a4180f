@@ -1965,7 +1965,7 @@ async function submitBooking(){
   showView('doneView');
 
   btn.disabled = false;
-  btn.textContent = '결제하고 예약 확정';
+  btn.textContent = '예약 신청하기';
 }
 
 function backToPassport(){
@@ -1976,10 +1976,10 @@ function backToPassport(){
 /* ============ 예약 완료 / 조회 결과 ============ */
 function renderDone(b, opts = {}){
   const lookup = !!opts.lookup;
-  $('doneTitle').textContent = lookup ? '예약 내용' : '예약이 확정됐어요';
+   $('doneTitle').textContent = lookup ? '예약 내용' : '예약 신청이 접수됐어요';
   $('doneSub').textContent = lookup
-    ? '아래 내용으로 예약되어 있어요. 경기장에는 예약에 등록한 여권을 꼭 가져가세요.'
-    : '예약번호와 영문 성만 있으면 언제든 다시 조회할 수 있어요. 경기장에는 예약에 등록한 여권을 꼭 가져가세요.';
+    ? '아래 내용으로 신청되어 있어요. 담당자가 확인 후 결제를 안내해 드려요.'
+    : '예약번호와 영문 성만 있으면 언제든 다시 조회할 수 있어요. 담당자가 확인 후 카카오톡이나 연락처로 결제 안내를 드려요.';
 
   $('dnRef').textContent = b.reference;
   $('dnTeams').textContent = b.match.label;
