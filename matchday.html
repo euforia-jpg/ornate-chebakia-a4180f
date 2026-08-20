@@ -1962,49 +1962,34 @@ async function submitBooking(){
 
   const m = state.match;
   const v = venueOf(m);
-  const { unit } = orderAmounts();
+  const { unit, total } = orderAmounts();
 
-  try{
-    const res = await fetch('/api/bookings', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        match: { id:m.id, label:`${m.home} vs ${m.away}`, date:m.date, time:m.time, venue:v.name, city:cityName(m) },
-        section: { key: state.section.key, label: state.section.label },
-        qty: state.qty,
-        unitPrice: unit,
-        mode: state.mode,
-        delivery: state.delivery,
-        travelers: state.travelers,
-      }),
-    });
+  const reference = 'MD-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+  const booking = {
+    reference,
+    match: { id:m.id, label:`${m.home} vs ${m.away}`, date:m.date, time:m.time, venue:v.name, city:cityName(m) },
+    section: { key: state.section.key, label: state.section.label },
+    qty: state.qty,
+    unitPrice: unit,
+    totalPrice: total,
+    mode: state.mode,
+    delivery: state.delivery,
+    travelers: state.travelers,
+  };
 
-    const data = await res.json().catch(() => ({}));
+  fetch('/.netlify/functions/send-matchday-booking', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(booking)
+  }).catch(function(err){ console.error('카카오 전송 실패:', err); });
 
-    if(!res.ok){
-      // 서버가 여권 문제를 잡아냈다면 다시 입력 화면으로 보낸다.
-      if(data.fieldErrors){
-        showView('passView');
-        const first = paintTravelerErrors(data.fieldErrors);
-        showAlert('passAlert', data.error || '여권 정보를 다시 확인해 주세요.');
-        first?.scrollIntoView({ behavior:'smooth', block:'center' });
-        return;
-      }
-      showAlert('payAlert', data.error || '예약을 확정하지 못했어요. 잠시 후 다시 시도해 주세요.');
-      return;
-    }
+  stopHold();
+  state.booking = booking;
+  renderDone(booking);
+  showView('doneView');
 
-    stopHold();
-    state.booking = data;
-    renderDone(data);
-    showView('doneView');
-    loadAvailability(m.id);
-  }catch{
-    showAlert('payAlert', '네트워크 문제로 예약을 확정하지 못했어요. 연결을 확인하고 다시 시도해 주세요.');
-  }finally{
-    btn.disabled = false;
-    btn.textContent = '결제하고 예약 확정';
-  }
+  btn.disabled = false;
+  btn.textContent = '결제하고 예약 확정';
 }
 
 function backToPassport(){
