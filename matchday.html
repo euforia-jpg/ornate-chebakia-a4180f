@@ -910,9 +910,9 @@
             <span class="amt" id="opTotal">—</span>
           </div>
 
-          <button class="cta" id="payBtn">결제하고 예약 확정</button>
+                    <button class="cta" id="payBtn">예약 신청하기</button>
           <button class="cta secondary" onclick="backToPassport()">이전으로</button>
-          <div class="note" id="opNote">결제 버튼을 누르면 예약이 확정되고 예약번호가 발급됩니다.</div>
+          <div class="note" id="opNote">신청 버튼을 누르면 예약번호가 발급되고, 담당자가 확인 후 결제를 안내해 드려요.</div>
         </div>
       </div>
 
@@ -920,7 +920,7 @@
       <div class="doneview" id="doneView">
         <div class="done-head">
           <div class="tick">✓</div>
-          <h2 id="doneTitle">예약이 확정됐어요</h2>
+          <h2 id="doneTitle">예약 신청이 접수됐어요</h2>
           <p id="doneSub">예약번호와 영문 성만 있으면 언제든 다시 조회할 수 있어요. 경기장에는 예약에 등록한 여권을 꼭 가져가세요.</p>
         </div>
 
@@ -1892,10 +1892,6 @@ function tickHold(){
 
 function validatePayment(){
   const checks = [
-    ['cardNo',   v => /^\d{13,19}$/.test(v.replace(/\s/g, ''))],
-    ['cardExp',  v => isValidExpiry(v)],
-    ['cardCvc',  v => /^\d{3,4}$/.test(v)],
-    ['cardName', v => NAME_RE.test(v.trim())],
     ['payEmail', v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())],
   ];
 
@@ -1911,9 +1907,9 @@ function validatePayment(){
   $('agreeWrap').classList.toggle('err', !agreed);
 
   if(first || !agreed){
-    showAlert('payAlert', !first
-      ? '취소·환불 규정에 동의해야 결제를 진행할 수 있어요.'
-      : '결제 정보를 다시 확인해 주세요.');
+       showAlert('payAlert', !first
+      ? '취소·환불 규정에 동의해야 신청을 진행할 수 있어요.'
+      : '이메일 주소를 다시 확인해 주세요.');
     (first || $('agreeChk')).focus({ preventScroll:true });
     (first || $('agreeChk')).scrollIntoView({ behavior:'smooth', block:'center' });
     return false;
