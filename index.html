@@ -405,8 +405,7 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
         ${p.isNew ? '<span class="card-badge new-badge">NEW</span>' : ''}
         <span class="card-badge best-badge" data-best-badge>BEST</span>
       </div>
-      ${p.isNew ? '<span class="card-badge new-badge">NEW</span>' : ''}
-      <span class="card-badge best-badge" data-best-badge>BEST</span>
+
     <div class="tour-top ${p.topClass}"><span class="region">${p.region}</span><span class="days">${p.days}</span></div>
     <div class="tour-body">
       <h3>${p.title}</h3>
