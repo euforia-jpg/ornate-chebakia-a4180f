@@ -589,7 +589,7 @@ price: '가격 문의',
     tags: ['구장 3곳 우선 안내', '검색으로 전 구장 확인'],
     link: 'matchday.html',
     ctaLabel: '경기 일정 보기'
-  }
+  },
 {
     id: 'basque-navarra-6days',
     cats: ['spain'],
