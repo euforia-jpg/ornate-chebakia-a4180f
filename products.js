@@ -590,8 +590,415 @@ price: '가격 문의',
     link: 'matchday.html',
     ctaLabel: '경기 일정 보기'
   }
-];
+{
+    id: 'basque-navarra-6days',
+    cats: ['spain'],
+    topClass: 'spain',
+    region: '바스크 · 나바라',
+    days: '5박 6일',
+    price: '가격 문의',
+    title: '[바스크 & 나바라] 프랑스 바스크와 나바라 5박 6일',
+    summary: '비스케이 만의 해안선을 따라 국경을 넘나드는 여정 — 산세바스티안부터 생장드뤼즈, 바즈탄 계곡까지.',
+    tags: ['5박 6일', '전용버스', '인솔자 동행'],
+    detail: {
+      lead: '스페인 산세바스티안·온다리비아부터 프랑스 생장드뤼즈·아이노아, 나바라 바즈탄 계곡까지 — 하나의 바스크 문화가 두 나라에 걸쳐 이어지는 6일간의 여정이에요.',
+      description: `<!-- ── Euforia Tour · 프랑스 바스크와 나바라 5박 6일 · 붙여넣기용 조각 ──
+     이 블록 전체를 상세설명 HTML 칸에 그대로 붙여 넣으십시오.
+     모든 스타일이 .eu-itin 안으로만 적용되므로 사이트의 기존 디자인과 부딪히지 않습니다. ── -->
+<div class="eu-itin">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap");
+/* ── 사이트 기존 테마가 이 조각 안으로 새어 들어오지 않도록 막는다 ── */
+.eu-itin h1,.eu-itin h2,.eu-itin h3,.eu-itin h4,.eu-itin h5{
+  color:var(--ink);font-family:inherit;margin:0;line-height:1.25;text-transform:none;
+}
+.eu-itin p,.eu-itin li,.eu-itin dl,.eu-itin dt,.eu-itin dd,.eu-itin span,.eu-itin div,.eu-itin strong,.eu-itin b,.eu-itin em{
+  font-family:inherit;
+}
+.eu-itin .display{font-family:"Fraunces","Gowun Batang",Georgia,serif}
+.eu-itin h1 em{color:var(--accent);font-style:normal}
+.eu-itin a{color:var(--accent);text-decoration:none}
+.eu-itin ul,.eu-itin ol{margin:0}
+.eu-itin section,.eu-itin article,.eu-itin footer{margin:0;background:none;border:0}
+.eu-itin svg{max-width:100%}
+.eu-itin{background:var(--ground)}
 
+.eu-itin{
+  --ground:#FAF9F6;
+  --surface:#FFFFFF;
+  --surface-2:#F1EFE9;
+  --ink:#1B201D;
+  --ink-2:#4A524D;
+  --ink-3:#7C837E;
+  --line:#DCD9D0;
+  --line-soft:#E9E6DE;
+  --accent:#8C2B2B;
+  --accent-soft:#F0E2DE;
+  --pine:#1F3D34;
+  --pine-soft:#E1E8E3;
+  --sea:#DCE4E3;
+  --shadow:0 1px 2px rgba(27,32,29,.05),0 8px 24px -14px rgba(27,32,29,.22);
+}.eu-itin *{box-sizing:border-box}.eu-itin{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans KR","IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;
+  font-weight:400;
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all;
+}.eu-itin .wrap{max-width:1040px;margin:0 auto;padding:0 24px}.eu-itin .display{font-family:"Fraunces","Gowun Batang",Georgia,serif;font-weight:700;letter-spacing:-.01em;text-wrap:balance;line-height:1.2}.eu-itin .label{
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);
+}.eu-itin /* ── 헤더 ── */
+.masthead{
+  border-bottom:1px solid var(--line);
+  background:var(--surface);
+}.eu-itin .masthead .wrap{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-top:18px;padding-bottom:18px;flex-wrap:wrap;
+}.eu-itin .brand{display:flex;align-items:baseline;gap:10px}.eu-itin .brand strong{font-family:"Fraunces",serif;font-weight:700;font-size:19px;letter-spacing:-.01em}.eu-itin .brand span{font-size:12px;color:var(--ink-3);letter-spacing:.06em}.eu-itin /* ── 히어로 ── */
+.hero{padding:64px 0 0}.eu-itin .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}.eu-itin .eyebrow .rule{height:1px;flex:0 0 40px;background:var(--accent)}.eu-itin h1{font-size:clamp(38px,6.4vw,64px);margin:0 0 22px}.eu-itin h1 em{font-style:normal;color:var(--accent)}.eu-itin .lede{
+  font-size:clamp(17px,2.1vw,19px);color:var(--ink-2);max-width:60ch;margin:0 0 34px;
+  font-weight:300;line-height:1.85;
+}.eu-itin .facts{
+  display:grid;gap:1px;background:var(--line);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  border:1px solid var(--line);border-radius:2px;overflow:hidden;
+}.eu-itin .fact{background:var(--surface);padding:18px 20px}.eu-itin .fact dt{margin:0 0 6px}.eu-itin .fact dd{margin:0;font-size:16px;font-weight:500;line-height:1.5}.eu-itin /* ── 고추 장식 ── */
+.garland{margin:56px 0 0;color:var(--accent);opacity:.9}.eu-itin .garland svg{display:block;width:100%;height:34px}.eu-itin /* ── 지도 ── */
+.mapsec{padding:56px 0 8px}.eu-itin .mapcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:2px;
+  padding:26px 26px 18px;box-shadow:var(--shadow);
+}.eu-itin .mapcard h2{font-size:20px;margin:0 0 4px}.eu-itin .mapcard p.note{font-size:13px;color:var(--ink-3);margin:0 0 18px}.eu-itin .mapscroll{overflow-x:auto}.eu-itin .mapscroll svg{display:block;min-width:500px;width:100%;max-width:720px;margin:0 auto;height:auto}.eu-itin .mp-sea{fill:var(--sea)}.eu-itin .mp-coast{fill:none;stroke:var(--ink-3);stroke-width:.4;opacity:.55}.eu-itin .mp-border{fill:none;stroke:var(--accent);stroke-width:.45;stroke-dasharray:1.5 1.2;opacity:.85}.eu-itin .mp-dot{fill:var(--pine)}.eu-itin .mp-dot.es{fill:var(--accent)}.eu-itin .mp-base{fill:var(--surface);stroke:var(--accent);stroke-width:.7}.eu-itin .mp-t{font-size:1.9px;fill:var(--ink-2);font-family:"IBM Plex Sans KR",sans-serif;font-weight:500}.eu-itin .mp-c{font-size:1.9px;fill:var(--ink-3);font-family:"IBM Plex Sans KR",sans-serif;letter-spacing:.16em}.eu-itin .mp-n{font-size:1.7px;fill:var(--ink-3);font-family:"IBM Plex Sans KR",sans-serif}.eu-itin .maplegend{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-size:12.5px;color:var(--ink-2)}.eu-itin .maplegend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:1px}.eu-itin /* ── 일정 ── */
+.itin{padding:56px 0 0}.eu-itin .itin > h2{font-size:clamp(24px,3.4vw,30px);margin:0 0 6px}.eu-itin .itin > p.sub{color:var(--ink-3);margin:0 0 36px;font-size:14.5px}.eu-itin .day{
+  display:grid;grid-template-columns:196px 1fr;gap:36px;
+  padding:34px 0;border-top:1px solid var(--line);
+}.eu-itin .day:last-of-type{border-bottom:1px solid var(--line)}.eu-itin .daykey{position:relative}.eu-itin .daynum{
+  font-family:"Fraunces",serif;font-weight:300;font-size:52px;line-height:1;
+  color:var(--accent);letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+}.eu-itin .daynum sub{font-size:15px;font-weight:500;vertical-align:baseline;margin-left:4px;color:var(--ink-3)}.eu-itin .places{margin:14px 0 0;padding:0;list-style:none}.eu-itin .places li{
+  font-weight:500;font-size:15.5px;line-height:1.5;padding:3px 0;
+}.eu-itin .places li .lat{display:block;font-family:"Fraunces",serif;font-weight:300;font-size:13px;color:var(--ink-3);letter-spacing:.01em}.eu-itin .daybody h3{font-size:19px;margin:0 0 12px;font-weight:600;letter-spacing:-.005em}.eu-itin .daybody p{margin:0 0 14px;color:var(--ink-2);max-width:62ch}.eu-itin .daybody p:last-child{margin-bottom:0}.eu-itin .daybody strong{color:var(--ink);font-weight:600}.eu-itin .meals{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding-top:16px;
+  border-top:1px dashed var(--line);
+}.eu-itin .meal{
+  font-size:12px;font-weight:500;letter-spacing:.02em;
+  padding:4px 11px;border-radius:2px;
+  background:var(--pine-soft);color:var(--pine);
+}.eu-itin .meal.free{background:var(--surface-2);color:var(--ink-3)}.eu-itin .meal.star{background:var(--accent-soft);color:var(--accent)}.eu-itin .tag-stay{
+  display:inline-block;margin-top:14px;font-size:12.5px;color:var(--ink-3);
+}.eu-itin /* ── 포함 / 불포함 ── */
+.incl{padding:64px 0 0}.eu-itin .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px}.eu-itin .card{
+  border:1px solid var(--line);border-radius:2px;padding:26px 26px 28px;
+  background:var(--surface);
+}.eu-itin .card.no{background:var(--surface-2)}.eu-itin .card h3{font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:9px;font-weight:600}.eu-itin .card h3 .pip{width:8px;height:8px;border-radius:50%;background:var(--pine);flex:0 0 auto}.eu-itin .card.no h3 .pip{background:var(--ink-3)}.eu-itin .card ul{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}.eu-itin .card li{
+  font-size:14.5px;line-height:1.65;color:var(--ink-2);
+  padding-left:16px;position:relative;
+}.eu-itin .card li::before{
+  content:"";position:absolute;left:0;top:.7em;
+  width:6px;height:1px;background:var(--line);
+}.eu-itin .card li b{color:var(--ink);font-weight:600;display:block;font-size:13px;letter-spacing:.02em}.eu-itin /* ── 안내 ── */
+.notes{padding:52px 0 0}.eu-itin .notes ol{margin:18px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:10px}.eu-itin .notes li{font-size:14px;color:var(--ink-2);line-height:1.7}.eu-itin /* ── 문의 ── */
+.cta{margin:64px 0 0;border-top:2px solid var(--accent);background:var(--surface);padding:38px 0 44px}.eu-itin .cta .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap}.eu-itin .cta h2{font-size:clamp(22px,3vw,28px);margin:8px 0 10px}.eu-itin .cta p{margin:0;color:var(--ink-2);font-size:15px;max-width:46ch}.eu-itin .contact{display:flex;flex-direction:column;gap:6px;font-size:15px}.eu-itin .contact a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft);font-weight:500}.eu-itin .contact a:hover, .eu-itin .contact a:focus-visible{border-bottom-color:var(--accent)}.eu-itin footer{padding:26px 0 60px;color:var(--ink-3);font-size:12.5px}.eu-itin footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.eu-itin a:focus-visible, .eu-itin li:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+@media (max-width:800px){.eu-itin .day{grid-template-columns:1fr;gap:18px}.eu-itin .daykey{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}.eu-itin .daynum{font-size:40px}.eu-itin .places{margin-top:0;display:flex;gap:18px;flex-wrap:wrap}.eu-itin .cols{grid-template-columns:1fr}.eu-itin .hero{padding-top:44px}
+}
+@media (prefers-reduced-motion:reduce){.eu-itin *{animation:none!important;transition:none!important}}
+
+.eu-itin{padding:8px 0 40px}
+.eu-itin .hero{padding-top:8px}
+.eu-itin .wrap{max-width:1040px}
+.eu-itin footer{padding:22px 0 0}
+</style>
+<div class="eu-main">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span><span class="label">5박 6일 · 전용버스 · 인솔자 동행</span></div>
+    <h1>프랑스 바스크와 <em>나바라</em></h1>
+    <p class="lede">
+      비스케이 만의 해안선을 따라 국경을 넘나드는 여정입니다. 스페인 쪽 산세바스티안과 온다리비아,
+      프랑스 쪽 생장드뤼즈와 아이노아, 그리고 피레네 남쪽 바즈탄 계곡의 나바라까지—
+      하나의 문화권이 두 나라에 걸쳐 어떻게 이어지는지를 엿새 동안 따라갑니다.
+    </p>
+    <dl class="facts">
+      <div class="fact"><dt class="label">일정</dt><dd>5박 6일</dd></div>
+      <div class="fact"><dt class="label">숙박</dt><dd>기푸스코아 3성급 5박</dd></div>
+      <div class="fact"><dt class="label">이동</dt><dd>전 일정 전용버스</dd></div>
+      <div class="fact"><dt class="label">인솔</dt><dd>전문 인솔자 동행</dd></div>
+      <div class="fact"><dt class="label">출발·해산</dt><dd>마드리드</dd></div>
+    </dl>
+  </div>
+
+  <div class="wrap garland" aria-hidden="true">
+    <svg viewBox="0 0 600 34">
+      <path d="M0 5 Q150 15 300 5 T600 5" fill="none" stroke="currentColor" stroke-width=".8" opacity=".4"/>
+      <g stroke="var(--pine)" stroke-width=".9" fill="none" opacity=".8">
+        <path d="M40 6 v-3"/><path d="M92 7 v-3"/><path d="M148 5 v-3"/><path d="M206 8 v-3"/><path d="M262 6 v-3"/>
+        <path d="M318 5 v-3"/><path d="M376 7 v-3"/><path d="M432 6 v-3"/><path d="M490 5 v-3"/><path d="M546 7 v-3"/>
+      </g>
+      <g fill="currentColor">
+        <g opacity=".9"><path d="M40 6 q3 0 3.4 4 q.4 5-3.4 12 q-3.8-7-3.4-12 Q37 6 40 6z"/></g>
+        <g opacity=".7"><path d="M92 7 q2.6 0 3 3.4 q.4 4.4-3 10.6 q-3.4-6.2-3-10.6 Q89.4 7 92 7z"/></g>
+        <g opacity=".95"><path d="M148 5 q3.2 0 3.6 4.4 q.4 5.4-3.6 13 q-4-7.6-3.6-13 Q144.8 5 148 5z"/></g>
+        <g opacity=".65"><path d="M206 8 q2.4 0 2.8 3.2 q.4 4-2.8 9.8 q-3.2-5.8-2.8-9.8 Q203.6 8 206 8z"/></g>
+        <g opacity=".9"><path d="M262 6 q3 0 3.4 4 q.4 5-3.4 12 q-3.8-7-3.4-12 Q259 6 262 6z"/></g>
+        <g opacity=".75"><path d="M318 5 q2.7 0 3.1 3.6 q.4 4.6-3.1 11 q-3.5-6.4-3.1-11 Q315.3 5 318 5z"/></g>
+        <g opacity=".95"><path d="M376 7 q3.2 0 3.6 4.2 q.4 5.2-3.6 12.4 q-4-7.2-3.6-12.4 Q372.8 7 376 7z"/></g>
+        <g opacity=".6"><path d="M432 6 q2.4 0 2.8 3.2 q.4 4-2.8 9.6 q-3.2-5.6-2.8-9.6 Q429.6 6 432 6z"/></g>
+        <g opacity=".9"><path d="M490 5 q3 0 3.4 4 q.4 5-3.4 12.4 q-3.8-7.4-3.4-12.4 Q487 5 490 5z"/></g>
+        <g opacity=".7"><path d="M546 7 q2.6 0 3 3.4 q.4 4.4-3 10.4 q-3.4-6-3-10.4 Q543.4 7 546 7z"/></g>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="mapsec">
+  <div class="wrap">
+    <div class="mapcard">
+      <h2 class="display">국경을 사이에 둔 두 바스크</h2>
+      <p class="note">방문지의 상대적 위치를 나타낸 개념도입니다. 실제 축척과 해안선 형태는 다릅니다.</p>
+      <div class="mapscroll">
+        <svg viewBox="0 0 100 72" role="img" aria-label="비스케이 만 연안과 피레네 서부의 방문 도시 위치 개념도. 국경선을 기준으로 북쪽에 프랑스 바스크의 앙다예·생장드뤼즈·비아리츠·바욘·사르·아이노아·에스플레트가, 남쪽에 스페인의 산세바스티안·온다리비아와 나바라의 아마이우르·엘리손도·팜플로나가 있습니다.">
+          <path class="mp-sea" d="M0 0 H100 V2 L72 2 L62 5.5 L52 9.5 L42 13.5 L33 19 L26 22.5 L14 28.5 L2 44.5 L0 44.5 Z"/>
+          <path class="mp-coast" d="M2 44.5 L14 28.5 L26 22.5 L33 19 L42 13.5 L52 9.5 L62 5.5 L72 2 L100 1"/>
+          <text class="mp-c" x="10" y="13">비스케이 만</text>
+
+          <path class="mp-border" d="M33 19 L38 26 L42 33 L50 37.5 L58 42.5 L70 46 L84 47.5"/>
+          <text class="mp-c" x="79" y="31" fill="var(--accent)" opacity=".75">FRANCE</text>
+          <text class="mp-c" x="26" y="58" fill="var(--accent)" opacity=".75">ESPAÑA</text>
+
+          <path d="M3 67 L13.5 60.5" stroke="var(--ink-3)" stroke-width=".35" fill="none" stroke-dasharray="1.3 1.1"/>
+          <text class="mp-n" x="2.5" y="70.4">← 마드리드 · 1일차 출발, 6일차 귀환</text>
+
+          <circle class="mp-base" cx="19" cy="36" r="1.4"/>
+          <text class="mp-t" x="21.4" y="36.7">기푸스코아 · 숙소 5박</text>
+
+          <circle class="mp-dot es" cx="16" cy="31" r=".72"/><text class="mp-t" x="14.2" y="31.6" text-anchor="end">산세바스티안</text>
+          <circle class="mp-dot es" cx="34" cy="23.5" r=".72"/><text class="mp-t" x="32.2" y="22.6" text-anchor="end">온다리비아</text>
+          <circle class="mp-dot" cx="38.5" cy="20.5" r=".72"/><text class="mp-t" x="40.2" y="19.7">앙다예</text>
+          <circle class="mp-dot" cx="46" cy="16.5" r=".72"/><text class="mp-t" x="47.7" y="15.8">생장드뤼즈</text>
+          <circle class="mp-dot" cx="57" cy="10" r=".72"/><text class="mp-t" x="58.7" y="9.4">비아리츠</text>
+          <circle class="mp-dot" cx="64" cy="13.5" r=".72"/><text class="mp-t" x="65.7" y="14.6">바욘</text>
+          <circle class="mp-dot" cx="44" cy="30" r=".72"/><text class="mp-t" x="44" y="28.2" text-anchor="middle">사르</text>
+          <circle class="mp-dot" cx="51.5" cy="31.5" r=".72"/><text class="mp-t" x="53.2" y="32.2">아이노아</text>
+          <circle class="mp-dot" cx="56" cy="26" r=".72"/><text class="mp-t" x="57.7" y="25.4">에스플레트</text>
+          <circle class="mp-dot es" cx="52" cy="41" r=".72"/><text class="mp-t" x="50.3" y="42.2" text-anchor="end">아마이우르</text>
+          <circle class="mp-dot es" cx="51" cy="47.5" r=".72"/><text class="mp-t" x="52.7" y="48.1">엘리손도</text>
+          <circle class="mp-dot es" cx="63" cy="61" r=".72"/><text class="mp-t" x="64.7" y="61.6">팜플로나</text>
+        </svg>
+      </div>
+      <div class="maplegend">
+        <span><i style="background:var(--accent)"></i>스페인 — 기푸스코아 · 나바라</span>
+        <span><i style="background:var(--pine)"></i>프랑스 — 피레네자틀랑티크</span>
+        <span><i style="background:var(--accent);opacity:.5"></i>국경선</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="itin">
+  <div class="wrap">
+    <h2 class="display">일정</h2>
+    <p class="sub">현지 사정과 기상, 교통 상황에 따라 방문 순서가 조정될 수 있습니다.</p>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">01<sub>일차</sub></div>
+        <ul class="places">
+          <li>마드리드 출발<span class="lat">Madrid</span></li>
+          <li>기푸스코아<span class="lat">Gipuzkoa</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>북쪽으로</h3>
+        <p>마드리드를 출발해 카스티야의 고원을 지나 북쪽 바스크 지방으로 향합니다. 여정 중 적절한 휴식 시간을 갖습니다.</p>
+        <p>기푸스코아 지역 호텔에 도착해 <strong>체크인</strong>합니다. 이후 닷새 동안 같은 호텔에 머무르므로, 매일 짐을 옮길 필요가 없습니다.</p>
+        <div class="meals"><span class="meal">석식</span></div>
+        <span class="tag-stay">숙박 — 기푸스코아 3성급 호텔</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">02<sub>일차</sub></div>
+        <ul class="places">
+          <li>산세바스티안<span class="lat">San Sebastián</span></li>
+          <li>생장드뤼즈<span class="lat">Saint-Jean-de-Luz</span></li>
+          <li>앙다예<span class="lat">Hendaye</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>라 콘차 만에서 국경의 강까지</h3>
+        <p>조식 후 현지 가이드와 만나 <strong>산세바스티안</strong> 관광을 시작합니다. 반달 모양으로 완만하게 휘어진 <strong>라 콘차(La Concha) 만</strong>과 해변을 따라 걸으며, 산 비센테 교회와 대성당, 해변을 따라 이어지는 불레바르(Boulevard), 그리고 강어귀에 자리한 쿠르살(Kursaal)을 둘러봅니다.</p>
+        <p>중식은 호텔로 복귀해 드십니다.</p>
+        <p>오후에는 국경을 넘어 프랑스 바스크 해안의 아름다운 마을 <strong>생장드뤼즈</strong>를 방문합니다. 루이 14세가 머물렀던 <strong>메종 루이 14세</strong>와 그의 혼례가 치러진 <strong>생장바티스트 교회</strong> 등 품격 있는 건축을 살펴봅니다.</p>
+        <p>이어 <strong>앙다예 만</strong>으로 이동합니다. 이곳 해안은 수천만 년의 퇴적층이 켜켜이 드러난 <strong>플리시(flysch)</strong> 지형으로 알려져 있습니다. 아바디아 성(입장료 별도)과, 프랑스와 스페인이 6개월씩 번갈아 관할하는 세계에서 가장 작은 공동 통치 영토 <strong>꿩의 섬(Isla de los Faisanes)</strong>도 이곳에서 만납니다.</p>
+        <p>일정을 마친 후 호텔로 복귀합니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식 · 호텔</span><span class="meal">석식</span></div>
+        <span class="tag-stay">숙박 — 기푸스코아 3성급 호텔</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">03<sub>일차</sub></div>
+        <ul class="places">
+          <li>사르<span class="lat">Sare</span></li>
+          <li>아이노아<span class="lat">Ainhoa</span></li>
+          <li>에스플레트<span class="lat">Espelette</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>동굴과 붉은 고추의 마을</h3>
+        <p>조식 후 바다와 산 사이에 자리한 <strong>사르</strong>로 출발합니다. 프랑스에서 가장 아름다운 마을로 꼽히는 곳입니다. 이곳에서 <strong>사르 동굴</strong>을 견학합니다. 200만 년 전의 모습을 그대로 간직한 석회암 동굴로, <strong>입장료가 포함</strong>되어 있습니다.</p>
+        <p>중식은 자유식입니다. 마을의 작은 식당과 카페를 자유롭게 이용하실 수 있습니다.</p>
+        <p>오후에는 전형적인 프랑스 바스크 마을인 <strong>아이노아</strong>와 <strong>에스플레트</strong>를 방문합니다. 흰 회벽에 붉거나 짙은 초록으로 칠한 창틀이 늘어선 거리가 이 지방의 얼굴입니다. 특히 에스플레트는 처마마다 <strong>붉은 고추를 엮어 말리는 풍경</strong>으로 널리 알려져 있습니다.</p>
+        <p>일정을 마친 후 호텔로 복귀합니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal">석식</span></div>
+        <span class="tag-stay">숙박 — 기푸스코아 3성급 호텔</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">04<sub>일차</sub></div>
+        <ul class="places">
+          <li>팜플로나<span class="lat">Pamplona</span></li>
+          <li>아마이우르<span class="lat">Amaiur</span></li>
+          <li>엘리손도<span class="lat">Elizondo</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>나바라의 주도와 바즈탄 계곡</h3>
+        <p>조식 후 나바라의 주도 <strong>팜플로나</strong>를 탐방합니다. 도시의 거실이라 불리는 <strong>카스티요 광장</strong>, 바이올리니스트 사라사테의 이름을 딴 <strong>사라사테 산책로</strong>, <strong>시청 광장</strong>, 그리고 회랑이 아름다운 <strong>산타 마리아 라 레알 대성당</strong>을 둘러봅니다.</p>
+        <p>중식은 <strong>팜플로나 시내 레스토랑에서 제공</strong>됩니다.</p>
+        <p>오후에는 그림 같은 마을 <strong>아마이우르</strong>로 향합니다. 아레체아 궁전(Palacio Arretxea)과 아리아다 저택(Casa Arriada) 같은 석조 저택들이 좁은 길을 따라 늘어서 있습니다.</p>
+        <p>이어 바즈탄 계곡의 중심지 <strong>엘리손도</strong>로 이동합니다. 바로크 양식의 아리스쿠네네아(Arizkunenea) 궁전, 시청사, 다투에(Datue) 궁전, 부왕의 저택(Casa del Virrey), 산티아고 교회가 강을 끼고 모여 있습니다.</p>
+        <p>일정을 마친 후 호텔로 복귀합니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal star">중식 · 레스토랑</span><span class="meal">석식</span></div>
+        <span class="tag-stay">숙박 — 기푸스코아 3성급 호텔</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">05<sub>일차</sub></div>
+        <ul class="places">
+          <li>비아리츠<span class="lat">Biarritz</span></li>
+          <li>바욘<span class="lat">Bayonne</span></li>
+          <li>온다리비아<span class="lat">Hondarribia</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>포경 마을에서 성벽 마을로</h3>
+        <p>조식 후 과거 포경 마을이었다가 19세기 유럽 왕실의 휴양지로 변모한 <strong>비아리츠</strong>를 방문합니다. 해양 박물관, 생 마르탱 교회, 러시아 정교회 성당 등을 둘러봅니다.</p>
+        <p>이어 <strong>바욘</strong>으로 이동합니다. 생트 마리 대성당, 구 성(Castillo Viejo), 지역 식재료가 모이는 <strong>레 알(Les Halles) 시장</strong>, 시청과 식물원을 둘러봅니다.</p>
+        <p>중식은 자유식입니다. 레 알 시장 주변에서 바스크의 식재료를 직접 맛보실 수 있습니다.</p>
+        <p>오후에는 다시 스페인으로 넘어와 <strong>온다리비아</strong>를 방문합니다. 하이스키벨(Jaizkibel) 산기슭에 자리해 높고 두꺼운 성벽이 구시가지를 감싸고 있으며, 프랑스와의 자연 국경을 이루는 곳입니다. 카를로스 5세 성, 누에스트라 세뇨라 델 만사노 교회, 에체베스테 저택(Casa de Etxebeste), 기푸스코아 광장과 중세의 거리를 걷습니다.</p>
+        <p>일정을 마친 후 호텔로 복귀합니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal">석식</span></div>
+        <span class="tag-stay">숙박 — 기푸스코아 3성급 호텔</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">06<sub>일차</sub></div>
+        <ul class="places">
+          <li>마드리드 귀환<span class="lat">Madrid</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>귀환</h3>
+        <p>조식 후 마드리드로 귀환 여정을 시작합니다. 경로상 짧은 휴식 시간을 가지며 이동합니다.</p>
+        <p>중식은 자유식입니다.</p>
+        <p>목적지 도착 후 모든 여행 서비스가 종료됩니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="incl">
+  <div class="wrap">
+    <h2 class="display">포함 · 불포함</h2>
+    <div class="cols">
+      <div class="card">
+        <h3><span class="pip"></span>포함 사항</h3>
+        <ul>
+          <li><b>숙박</b>기푸스코아 지역 3성급 호텔 5박</li>
+          <li><b>차량</b>전 일정 전용 버스(Autocar) 이동</li>
+          <li><b>식사</b>일정표에 표기된 식사</li>
+          <li><b>음료</b>제공 식사 시 물과 와인</li>
+          <li><b>특별 식사</b>4일차 팜플로나 레스토랑 중식</li>
+          <li><b>인솔</b>전 일정 전문 인솔자 동행</li>
+          <li><b>입장</b>3일차 사르 동굴 입장료</li>
+        </ul>
+      </div>
+      <div class="card no">
+        <h3><span class="pip"></span>불포함 사항</h3>
+        <ul>
+          <li><b>가이드 · 입장료</b>별도 명시된 경우를 제외한 현지 가이드 투어와 관광지 입장료</li>
+          <li><b>아바디아 성</b>2일차 앙다예 아바디아 성 입장료</li>
+          <li><b>관광세</b>숙박지 관광세(Tourist tax)</li>
+          <li><b>선택 관광</b>선택(옵션) 투어</li>
+          <li><b>보험</b>여행자 보험</li>
+          <li><b>개인 비용</b>위 항목에 명시되지 않은 모든 개인 비용</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="notes">
+  <div class="wrap">
+    <h2 class="display">예약 전 확인해 주십시오</h2>
+    <ol>
+      <li>본 일정은 <strong>마드리드 출발·해산</strong> 기준입니다. 항공권은 포함되어 있지 않습니다.</li>
+      <li>2일차 산세바스티안 관광에는 현지 가이드가 동행하며, 그 외 구간은 인솔자가 안내합니다.</li>
+      <li>사르 동굴은 내부 온도가 연중 약 11~14℃로 유지됩니다. 여름에도 <strong>겉옷</strong>을 준비해 주십시오. 동굴 내부에는 계단과 경사 구간이 있습니다.</li>
+      <li>프랑스와 스페인 국경을 여러 차례 통과합니다. <strong>여권을 항상 소지</strong>해 주십시오.</li>
+      <li>일부 소도시는 차량 진입이 제한되어 도보 이동 구간이 있습니다. 편한 신발을 권해 드립니다.</li>
+      <li>현지 사정과 기상, 도로 상황, 시설 휴관일에 따라 방문 순서와 내용이 조정될 수 있습니다.</li>
+      <li>요금과 출발일은 별도 문의해 주십시오. 인원과 시즌에 따라 달라집니다.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div>
+      <div class="label">문의</div>
+      <h2 class="display">일정을 원하시는 대로 맞춰 드립니다</h2>
+      <p>인원, 출발일, 호텔 등급, 식사 구성에 따라 맞춤 견적을 드립니다. 스페인 현지에서 직접 운영하므로 일정 변경과 긴급 상황에도 빠르게 대응합니다.</p>
+    </div>
+    <div class="contact">
+      <span class="label">Euforia Tour Spain</span>
+      <a href="mailto:euforia@euforiatour.com">euforia@euforiatour.com</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>EUFORIA DAS NUVENS S.L. · Madrid, España</span>
+    <span>País Vasco francés y Navarra · 5박 6일</span>
+  </div>
+</footer>
+</div>
+`,
+      highlights: ['산세바스티안 라 콘차 만 · 현지 가이드 투어', '생장드뤼즈 · 앙다예 플리시 해안', '사르 동굴 탐험 (입장료 포함)', '아이노아 · 에스플레트 붉은 고추 마을', '팜플로나 · 바즈탄 계곡 엘리손도'],
+      includes: ['기푸스코아 3성급 호텔 5박', '전 일정 전용버스 이동', '전문 인솔자 동행', '일정표 표기 식사 및 음료(물·와인)', '사르 동굴 입장료'],
+      excludes: ['왕복 항공권', '현지 가이드 투어·관광지 입장료(별도 명시 제외)', '아바디아 성 입장료', '숙박지 관광세', '여행자 보험', '개인 경비'],
+      duration: '5박 6일 (마드리드 출발·해산)'
+    }
+  },
+];
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
    괄호 부분(조건, 예: (4인 이상 출발 기준))은 아래 줄에 작게 표시해요.
    괄호가 없는 가격(예: '가격 문의')은 그대로 한 줄로 나와요. */
