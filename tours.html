@@ -62,6 +62,11 @@
   .tour-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:22px; }
   .tour-card{ background:var(--paper); border-radius:var(--radius); border:2px solid var(--line); overflow:hidden; transition: transform .15s ease, box-shadow .15s ease, border-color .15s; display:block; text-decoration:none; color:inherit; }
   .tour-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px -12px rgba(20,16,61,0.3); border-color: var(--violet); }
+  .tour-card{ position:relative; }
+.card-badge{ position:absolute; top:12px; z-index:5; padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.5px; color:#fff; box-shadow:0 6px 14px -6px rgba(20,16,61,0.4); }
+.card-badge.new-badge{ left:12px; background:linear-gradient(90deg,var(--teal),#0E9E8B); }
+.card-badge.best-badge{ right:12px; background:linear-gradient(90deg,var(--orange),#FFB84D); opacity:0; pointer-events:none; transition:opacity .4s ease; }
+.card-badge.best-badge.show{ opacity:1; }
   .tour-price{ display:inline-flex; align-items:stretch; max-width:100%; margin:0 0 14px; border-radius:11px; overflow:hidden; box-shadow:0 8px 16px -9px rgba(230,49,123,0.55); }
   .tour-price .yt-btn{ display:flex; align-items:center; justify-content:center; padding:0 16px; min-width:48px; margin:0; border:none; background:#CC0000; color:#fff; flex-shrink:0; text-decoration:none; cursor:pointer; font:inherit; transition: background .15s ease; }
 .tour-price .yt-btn:hover{ background:#e52d27; }
@@ -291,7 +296,19 @@ function renderFilters(){
     });
   });
 }
-
+<script>
+(function(){
+  function rotateBest(){
+    const badges = document.querySelectorAll('[data-best-badge]');
+    if (!badges.length) return;
+    badges.forEach(b => b.classList.remove('show'));
+    const order = Array.from({length: badges.length}, (_, i) => i).sort(() => Math.random() - 0.5);
+    order.slice(0, Math.min(3, badges.length)).forEach(i => badges[i].classList.add('show'));
+  }
+  setTimeout(rotateBest, 800);
+  setInterval(rotateBest, 15000);
+})();
+</script>
 function renderGrid(){
   const grid = document.getElementById('tourGrid');
   const list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cats.includes(activeFilter));
