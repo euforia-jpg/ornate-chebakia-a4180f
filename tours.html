@@ -304,7 +304,11 @@ function renderGrid(){
   const grid = document.getElementById('tourGrid');
   const list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cats.includes(activeFilter));
   grid.innerHTML = list.map(p => `
-    <a class="tour-card" href="${productLink(p)}">
+       <a class="tour-card" href="${productLink(p)}">
+      <div class="badge-group">
+        ${p.isNew ? '<span class="card-badge new-badge">NEW</span>' : ''}
+        <span class="card-badge best-badge" data-best-badge>BEST</span>
+      </div>
      <div class="tour-top ${p.topClass}"><span class="region">${p.region}</span><span class="days">${p.days}</span></div>
       <div class="tour-body">
         <h3>${p.title}</h3>
