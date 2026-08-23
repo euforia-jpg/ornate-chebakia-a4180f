@@ -414,5 +414,18 @@ window.toggleAudioGuide = function(btn){
   player.onended = function(){ setIcon(btn, false); bg.pause(); };
 };
 </script>
+<script>
+(function(){
+  function rotateBest(){
+    const badges = document.querySelectorAll('[data-best-badge]');
+    if (!badges.length) return;
+    badges.forEach(b => b.classList.remove('show'));
+    const order = Array.from({length: badges.length}, (_, i) => i).sort(() => Math.random() - 0.5);
+    order.slice(0, Math.min(3, badges.length)).forEach(i => badges[i].classList.add('show'));
+  }
+  setTimeout(rotateBest, 800);
+  setInterval(rotateBest, 15000);
+})();
+</script>
 </body>
 </html>
