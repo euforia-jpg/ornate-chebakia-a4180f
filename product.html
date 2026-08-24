@@ -182,6 +182,8 @@ button.price-chip:hover{ opacity:.92; }
   }
 .audio-badge{ display:inline-flex; align-items:center; justify-content:center; width:36px; flex-shrink:0; background:var(--teal); font-size:15px; border:none; cursor:pointer; color:#fff; }
 .audio-badge.playing{ background:var(--pink); }
+.avail-box{ opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+.avail-box.in-view{ opacity:1; transform:translateY(0); }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -584,5 +586,20 @@ window.toggleAudioGuide = function(btn){
   player.onended = function(){ setIcon(btn, false); bg.pause(); };
 };
 </script>
+<script>
+(function(){
+  const box = document.getElementById('availBox');
+  if (!box) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        box.classList.add('in-view');
+        observer.unobserve(box);
+      }
+    });
+  }, { threshold: 0.2 });
+  observer.observe(box);
+})();
+</script>  
 </body>
 </html>
