@@ -298,8 +298,8 @@ function renderFilters(){
     });
   });
 }
+}
 
-</script>
 function renderGrid(){
   const grid = document.getElementById('tourGrid');
   const list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cats.includes(activeFilter));
