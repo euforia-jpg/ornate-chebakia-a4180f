@@ -1031,7 +1031,7 @@ price: '가격 문의',
 .eu-itin ul,.eu-itin ol{margin:0}
 .eu-itin section,.eu-itin article,.eu-itin footer{margin:0;background:none;border:0}
 .eu-itin svg{max-width:100%}
-.eu-itin{background:var(--ground)}
+.eu-itin{background:var(--ground);overflow-x:hidden;max-width:100%;}
 
 .eu-itin{
   --ground:#FAF9F6;
