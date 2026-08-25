@@ -2994,6 +2994,408 @@ price: '가격 문의',
       duration: '11박 12일 (바르셀로나 IN/OUT · 관광 9일+휴식 3일)'
     }
   },
+{
+    id: 'north-cantabria-basque',
+    cats: ['spain'],
+    topClass: 'spain',
+    region: '스페인북부',
+    days: '5박 6일',
+    price: '가격 문의',
+    title: '[스페인북부] 칸타브리아와 바스크 5박 6일',
+    summary: '대서양이 만든 초록색 스페인 — 칸타브리아의 중세 마을과 가우디의 첫 집에서 시작해 비스케이 만의 어촌을 지나 빌바오 구겐하임과 산세바스티안까지 가는 5박 6일이에요.',
+    tags: ['5박 6일', '마드리드 현지 집합', '전용차량 + 한국인 인솔', '구겐하임 입장'],
+    isNew: true,
+    detail: {
+      lead: '산탄데르 3박·빌바오 2박으로 짐을 두 번만 풀고, 관광일 주행이 모두 200km 이내라 하루가 버스 안에서 지나가지 않아요.',
+      description: `<!-- ── Euforia Tour · 붙여넣기용 조각 · 모든 스타일이 .eu-itin 안으로만 적용됩니다 ── -->
+<div class="eu-itin">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap");
+/* ── 사이트 기존 테마가 이 조각 안으로 새어 들어오지 않도록 막는다 ── */
+.eu-itin h1,.eu-itin h2,.eu-itin h3,.eu-itin h4,.eu-itin h5{color:var(--ink);font-family:var(--f-kr);margin:0;line-height:1.3;text-transform:none;letter-spacing:-.015em}
+.eu-itin p,.eu-itin li,.eu-itin dl,.eu-itin dt,.eu-itin dd,.eu-itin span,.eu-itin div,.eu-itin strong,.eu-itin b,.eu-itin em,.eu-itin td,.eu-itin th{font-family:var(--f-kr)}
+.eu-itin ul,.eu-itin ol{margin:0}
+.eu-itin section,.eu-itin article,.eu-itin footer,.eu-itin header{margin:0;background:none;border:0}
+.eu-itin img,.eu-itin svg{max-width:100%}
+.eu-itin em{font-style:normal}
+.eu-itin,.eu-itin p,.eu-itin li,.eu-itin dl,.eu-itin dt,.eu-itin dd,.eu-itin div,.eu-itin span,.eu-itin td,.eu-itin th,.eu-itin small,.eu-itin b,.eu-itin strong{text-transform:none;letter-spacing:normal}
+.eu-itin{
+  --ink:#20292B;
+  --tilegreen:#2E5A66;
+  --tilegreen-soft:#7BA3AC;
+  --ochre:#9E2B2B;
+  --stone:#66716F;
+  --paper:#F7F6F2;
+  --tile:#EAE9E3;
+  --line:#D6D3CA;
+  --muted:#68726F;
+  --pattern-op:.16;
+  --f-kr:"IBM Plex Sans KR","Noto Sans KR","Malgun Gothic",system-ui,-apple-system,sans-serif;
+  --f-disp:var(--f-kr);
+  --f-body:var(--f-kr);
+}
+.eu-itin *{box-sizing:border-box}
+.eu-itin{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-weight:300; font-size:16px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all; overflow-wrap:anywhere;
+}
+.eu-itin h1, .eu-itin h2, .eu-itin h3, .eu-itin h4{font-family:var(--f-disp); font-weight:600; text-wrap:balance; margin:0; line-height:1.3; letter-spacing:-.015em}
+.eu-itin p{margin:0}
+.eu-itin a{color:var(--tilegreen)}
+.eu-itin .wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+.eu-itin /* ── 라우부루(바스크 십자) 밴드 ───────────────── */
+.mudejar{
+  height:18px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%232E5A66' stroke-width='1.2'%3E%3Cpath d='M20 20 A5 5 0 0 1 10 20 A5 5 0 0 0 0 20'/%3E%3Cpath d='M20 20 A5 5 0 0 0 20 10 A5 5 0 0 1 20 0'/%3E%3Cpath d='M20 20 A5 5 0 0 0 30 20 A5 5 0 0 1 40 20'/%3E%3Cpath d='M20 20 A5 5 0 0 1 20 30 A5 5 0 0 0 20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:20px 20px;
+  opacity:var(--pattern-op);
+}
+.eu-itin /* ── masthead ─────────────────────────────────── */
+header.mast{padding:64px 0 44px}
+.eu-itin .eyebrow{
+  font-size:11.5px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--tilegreen); margin-bottom:20px;
+}
+.eu-itin h1{font-size:clamp(36px,5.8vw,60px); font-weight:700; letter-spacing:-.03em}
+.eu-itin h1 .lat{font-weight:300; color:var(--tilegreen)}
+.eu-itin .lede{margin-top:20px; max-width:56ch; font-size:17.5px; color:var(--muted); line-height:1.85}
+.eu-itin .route{
+  margin-top:34px; padding-top:22px; border-top:1px solid var(--line);
+  font-weight:400; font-size:13px; line-height:2.2; color:var(--stone);
+}
+.eu-itin .route b{color:var(--ink); font-weight:500}
+.eu-itin .route em{color:var(--ochre); font-style:normal; font-weight:500}
+.eu-itin /* ── facts ────────────────────────────────────── */
+.facts{
+  display:grid; gap:1px; background:var(--line);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  border:1px solid var(--line); margin:44px 0 8px;
+}
+.eu-itin .fact{background:var(--paper); padding:20px 22px}
+.eu-itin .fact dt{font-size:12px; font-weight:500; color:var(--muted); margin-bottom:6px}
+.eu-itin .fact dd{margin:0; font-weight:600; font-size:21px; line-height:1.35; font-variant-numeric:tabular-nums}
+.eu-itin .fact dd small{display:block; font-weight:300; font-size:13px; color:var(--muted); margin-top:4px}
+.eu-itin /* ── sections ─────────────────────────────────── */
+.sec{padding:64px 0 8px}
+.eu-itin .sec-label{
+  font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--tilegreen); margin-bottom:12px;
+}
+.eu-itin .sec h2{font-size:clamp(26px,3.4vw,34px)}
+.eu-itin .sec .sub{margin-top:12px; color:var(--muted); max-width:62ch}
+.eu-itin /* ── itinerary spine ──────────────────────────── */
+.days{margin-top:40px}
+.eu-itin .day{display:grid; grid-template-columns:104px 1fr; gap:0 28px; padding-bottom:44px; position:relative}
+.eu-itin .rail{position:relative}
+.eu-itin .rail::before{content:""; position:absolute; left:19px; top:44px; bottom:-44px; width:1px; background:var(--line)}
+.eu-itin .day:last-child .rail::before{display:none}
+.eu-itin .dnum{
+  width:40px; height:40px; border-radius:50%;
+  background:var(--paper); border:1px solid var(--tilegreen); color:var(--tilegreen);
+  display:grid; place-items:center; font-size:14px; font-weight:500;
+  position:relative; z-index:1;
+}
+.eu-itin .day.hub .dnum{background:var(--tilegreen); border-color:var(--tilegreen); color:var(--paper)}
+.eu-itin .day.rest .dnum{background:var(--ochre); border-color:var(--ochre); color:var(--paper)}
+.eu-itin .day.rest .drive span::before{background:var(--ochre)}
+.eu-itin .day.rest ul.stops li::before{background:var(--ochre)}
+.eu-itin .day.rest .stay{border-left-color:var(--ochre)}
+.eu-itin .dwhen{
+  width:80px; text-align:center; padding:7px 0 3px; margin-left:-20px;
+  background:var(--paper); position:relative; z-index:1;
+  font-weight:400; font-size:11.5px; color:var(--muted); white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.eu-itin .day.rest .dwhen{color:var(--ochre); font-weight:500}
+.eu-itin .body{min-width:0}
+.eu-itin .dtitle{font-size:23px; letter-spacing:-.005em}
+.eu-itin .dtitle .via{color:var(--muted); font-weight:400}
+.eu-itin .drive{
+  margin-top:10px; display:flex; flex-wrap:wrap; gap:6px 14px;
+  font-weight:400; font-size:12.5px; color:var(--stone); font-variant-numeric:tabular-nums;
+}
+.eu-itin .drive span{display:inline-flex; align-items:center; gap:6px}
+.eu-itin .drive span::before{content:""; width:5px; height:5px; background:var(--tilegreen-soft); border-radius:50%}
+.eu-itin ul.stops{list-style:none; padding:0; margin:18px 0 0; display:grid; gap:11px}
+.eu-itin ul.stops li{padding-left:18px; position:relative; line-height:1.7}
+.eu-itin ul.stops li::before{content:""; position:absolute; left:0; top:.72em; width:7px; height:1px; background:var(--tilegreen)}
+.eu-itin ul.stops b{font-weight:600; color:var(--ink)}
+.eu-itin .tag{
+  display:inline-block; margin-left:6px; padding:1px 7px; border-radius:2px;
+  font-weight:400; font-size:11px;
+  border:1px solid var(--tilegreen); color:var(--tilegreen); vertical-align:2px;
+}
+.eu-itin .tag.opt{border-color:var(--ochre); color:var(--ochre)}
+.eu-itin .tag.xmas{border-color:var(--ochre); color:var(--paper); background:var(--ochre)}
+.eu-itin .stay{
+  margin-top:18px; padding:12px 16px; background:var(--tile); border-left:2px solid var(--tilegreen);
+  font-size:13.5px; display:flex; flex-wrap:wrap; gap:4px 18px;
+}
+.eu-itin .stay dt{font-size:12px; font-weight:500; color:var(--muted); align-self:center}
+.eu-itin .stay dd{margin:0; font-weight:500}
+.eu-itin /* ── tables / cards ───────────────────────────── */
+.scroll{overflow-x:auto; margin-top:24px}
+.eu-itin table{border-collapse:collapse; width:100%; font-size:14px; min-width:560px}
+.eu-itin th, .eu-itin td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+.eu-itin th{font-size:12.5px; color:var(--muted); font-weight:500; border-bottom-color:var(--ink)}
+.eu-itin td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+.eu-itin td small{display:block; font-weight:300; font-size:12.5px; color:var(--muted); margin-top:3px; font-variant-numeric:tabular-nums}
+.eu-itin .cols{display:grid; gap:32px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:28px}
+.eu-itin .card{border:1px solid var(--line); padding:24px}
+.eu-itin .card h3{font-size:18px; margin-bottom:14px}
+.eu-itin .card ul{list-style:none; padding:0; margin:0; display:grid; gap:9px; font-size:14.5px}
+.eu-itin .card li{padding-left:16px; position:relative}
+.eu-itin .card li::before{content:""; position:absolute; left:0; top:.7em; width:6px; height:1px; background:var(--tilegreen)}
+.eu-itin .card.excl li::before{background:var(--muted)}
+.eu-itin .note{margin-top:28px; padding:24px 26px; border:1px solid var(--line); background:var(--tile)}
+.eu-itin .note .why{display:grid; gap:14px; counter-reset:w}
+.eu-itin .note .why div{padding-left:20px; position:relative}
+.eu-itin .note .why div::before{
+  content:counter(w); counter-increment:w; position:absolute; left:0; top:.1em;
+  font-weight:500; font-size:13px; color:var(--tilegreen);
+}
+.eu-itin .note.warn{border-left:3px solid var(--ochre)}
+.eu-itin .note.warn .why div::before{color:var(--ochre)}
+.eu-itin footer{
+  margin-top:72px; padding:36px 0 56px; border-top:1px solid var(--line);
+  font-size:13px; color:var(--muted); display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
+}
+.eu-itin footer b{color:var(--ink); font-weight:600; letter-spacing:.02em}
+@media (max-width:640px){ .eu-itin .day{grid-template-columns:52px 1fr; gap:0 14px}
+.eu-itin .dwhen{width:52px; margin-left:-6px; font-size:10px}
+.eu-itin header.mast{padding:44px 0 32px}
+}
+</style>
+<div class="mudejar"></div>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Euforia Tour · Green Spain · Cantabria &amp; País Vasco</div>
+    <h1>칸타브리아와 <span class="lat">바스크</span> 6일</h1>
+    <p class="lede">
+      대서양이 만든 초록색 스페인입니다. 칸타브리아의 중세 마을과 가우디의 첫 집에서 시작해
+      비스케이 만의 어촌을 지나 빌바오와 산세바스티안까지 —
+      건조한 남부와 완전히 다른 스페인을 엿새에 담았습니다.
+    </p>
+    <div class="route">
+      <b>마드리드</b> → 부르고스 → <b>산탄데르</b> → <em>산티야나 델 마르</em> → 코미야스 →
+      산토냐 → 라레도 → 카스트로 우르디알레스 → 포르투갈레테 → 게초 → <b>빌바오</b> →
+      게타리아 → 사라우스 → <em>산세바스티안</em> → 마드리드
+    </div>
+
+    <dl class="facts">
+      <div class="fact"><dt>일정</dt><dd>6일 5박<small>출발일 협의 · 연중 진행</small></dd></div>
+      <div class="fact"><dt>집합</dt><dd>마드리드 현지<small>국제선 항공 불포함</small></dd></div>
+      <div class="fact"><dt>숙박</dt><dd>산탄데르 3 · 빌바오 2<small>4성급 · 조식 포함</small></dd></div>
+      <div class="fact"><dt>이동</dt><dd>전 구간 차량<small>국내선·열차 없음</small></dd></div>
+      <div class="fact"><dt>총 주행</dt><dd>약 1,400km<small>관광일 평균 150km</small></dd></div>
+    </dl>
+  </header>
+
+
+  <section class="sec">
+    <div class="sec-label">Why North</div>
+    <h2>왜 이 코스인가</h2>
+    <div class="note">
+      <div class="why">
+        <div><b>「에스파냐 베르데」입니다.</b> 대서양에서 올라온 습기로 사철 초록이고 여름에도 시원합니다. 남부가 가장 더울 때 이곳이 성수기인 이유입니다. 마드리드·바르셀로나·안달루시아를 이미 다녀오신 손님께 내놓을 수 있는 두 번째 스페인입니다.</div>
+        <div><b>거점을 둘로 나눴습니다.</b> 앞의 사흘은 산탄데르에 묵으며 칸타브리아 해안을 좌우로 훑고, 뒤의 이틀은 빌바오에 묵으며 바스크로 넘어갑니다. <b>관광일 주행이 전부 200km 이내</b>로 들어와 하루가 버스 안에서 지나가지 않습니다.</div>
+        <div><b>미식이 목적지가 됩니다.</b> 빌바오 카스코 비에호의 핀초스 골목, 산세바스티안 파르테 비에하의 바 카운터, 게타리아의 생선 숯불구이까지 — 이 지역에서는 식사가 관광 사이의 휴식이 아니라 관광 그 자체입니다.</div>
+        <div><b>마드리드에서 들고 납니다.</b> 인천–빌바오 직항이 없어 북부만 도는 구성은 유럽 경유가 붙습니다. 마드리드 왕복 직항을 쓰고 첫날과 마지막 날을 이동에 배분하면 항공이 왕복 한 건으로 끝납니다.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec">
+    <div class="sec-label">Itinerary</div>
+    <h2>일정</h2>
+    <p class="sub">
+      <b>마드리드 현지 집합</b>으로 시작하는 5박 6일입니다. 산탄데르 3박 · 빌바오 2박.
+      중식·석식은 자유식을 기본으로 하며, 가이드가 도시별 핀초스 골목과 식당을 안내합니다.
+    </p>
+
+    <div class="days">
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">1</div><div class="dwhen">1일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">마드리드 <span class="via">→</span> 부르고스 <span class="via">→</span> 산탄데르</h3>
+          <div class="drive"><span>약 400km</span><span>주행 4시간</span><span>08:00 마드리드 집합</span></div>
+          <ul class="stops">
+            <li><b>부르고스 대성당</b><span class="tag">세계유산</span> — 스페인 고딕의 정점, 엘 시드가 묻힌 자리. 중식 정차를 겸합니다</li>
+            <li><b>산티아고 순례길</b><span class="tag">세계유산</span> — 부르고스는 프랑스길의 큰 기착지입니다</li>
+            <li>칸타브리아 산맥을 넘어 <b>산탄데르</b> 도착</li>
+            <li>저녁 <b>사르디네로 해변</b>과 마그달레나 반도 산책</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>산탄데르 (1/3박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">2</div><div class="dwhen">2일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">산티야나 델 마르 <span class="via">·</span> 코미야스</h3>
+          <div class="drive"><span>약 95km</span><span>주행 1시간 30분</span><span>도보 구간 다수</span></div>
+          <ul class="stops">
+            <li><b>산티야나 델 마르</b> — 돌바닥과 귀족 저택이 그대로 남은 중세 마을, 사르트르가 「스페인에서 가장 아름다운 마을」이라 부른 곳</li>
+            <li><b>알타미라 박물관</b><span class="tag">세계유산</span> — 1만 5천 년 전 들소 벽화. 원본 동굴은 보존을 위해 닫혀 있고 정밀 복제 동굴을 관람합니다</li>
+            <li><b>엘 카프리초</b> — 가우디가 스페인 밖 카탈루냐 지역에 남긴 세 채 중 하나, 해바라기 타일의 여름 별장</li>
+            <li><b>소브레야노 궁전</b>과 코미야스 묘지 · 대학 언덕</li>
+            <li>산탄데르로 돌아와 저녁 자유식</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>산탄데르 (2/3박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">3</div><div class="dwhen">3일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">산토냐 <span class="via">·</span> 라레도 <span class="via">·</span> 카스트로 우르디알레스</h3>
+          <div class="drive"><span>약 175km</span><span>주행 2시간 30분</span><span>동부 칸타브리아 해안</span></div>
+          <ul class="stops">
+            <li><b>산토냐</b> — 스페인 안초비의 본고장. 절임 공정을 손으로 하는 공장 견학<span class="tag opt">선택</span></li>
+            <li><b>라레도</b> — 라 살베 해변이 5km로 이어지는 옛 항구 마을, 푸에블라 비에하 골목</li>
+            <li><b>카스트로 우르디알레스</b> — 바위 위 산타 마리아 성당과 등대, 로마 다리가 한 화면에 들어오는 항구</li>
+            <li>산탄데르로 돌아와 <b>메르카도 데 라 에스페란사</b> 자유 시간</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>산탄데르 (3/3박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">4</div><div class="dwhen">4일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">비스카야 다리 <span class="via">·</span> 게초 <span class="via">→</span> 빌바오</h3>
+          <div class="drive"><span>약 125km</span><span>주행 2시간</span><span>구겐하임 오후 입장</span></div>
+          <ul class="stops">
+            <li><b>비스카야 다리</b><span class="tag">세계유산</span> — 1893년 세워진 세계 최초의 운반교. 곤돌라가 사람과 차를 매달아 강을 건넙니다</li>
+            <li><b>포르투갈레테</b>와 <b>게초</b> — 철강으로 부유했던 시절의 저택 거리와 대서양 전망</li>
+            <li><b>구겐하임 빌바오</b> — 티타늄 곡면이 강물에 반사되는 프랭크 게리의 건물. 쿤스의 「퍼피」와 부르주아의 「마망」<span class="tag">입장</span></li>
+            <li>저녁 <b>카스코 비에호</b> — 일곱 거리의 바르에서 핀초스</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>빌바오 (1/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">5</div><div class="dwhen">5일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">게타리아 <span class="via">·</span> 사라우스 <span class="via">·</span> 산세바스티안</h3>
+          <div class="drive"><span>약 205km</span><span>주행 3시간</span><span>해안 도로 경유</span></div>
+          <ul class="stops">
+            <li><b>게타리아</b> — 마젤란 함대를 완주한 엘카노와 디자이너 발렌시아가의 고향. 생선을 통째로 숯불에 굽는 어촌</li>
+            <li><b>사라우스</b> — 서핑 해변과 바스크 해안 지질공원의 층암 절벽</li>
+            <li><b>산세바스티안 라 콘차 해변</b> — 도시를 품에 안은 조개 모양 만</li>
+            <li><b>몬테 이겔도</b> — 100년 된 케이블카로 오르는 전망대, 만 전체가 한눈에</li>
+            <li><b>파르테 비에하</b> — 바 카운터에 핀초스를 쌓아 두는 바스크식 미식 골목</li>
+            <li>빌바오로 돌아옵니다</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>빌바오 (2/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">6</div><div class="dwhen">6일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">빌바오 <span class="via">→</span> 마드리드</h3>
+          <div class="drive"><span>약 400km</span><span>주행 4시간</span><span>07:30 출발</span></div>
+          <ul class="stops">
+            <li>이른 아침 빌바오 출발, 카스티야 평원을 가로질러 남하</li>
+            <li>중간 휴게 정차 후 <b>마드리드</b> 도착 · 일정 종료</li>
+            <li>귀국편 시각에 맞춰 공항 또는 시내 호텔로 안내해 드립니다</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="sec">
+    <div class="sec-label">Inclusions</div>
+    <h2>포함 · 불포함</h2>
+    <div class="cols">
+      <div class="card">
+        <h3>포함 사항</h3>
+        <ul>
+          <li>4성급 호텔 5박 · <b>조식 포함</b> (산탄데르 3 · 빌바오 2)</li>
+          <li>전용 차량 및 기사 (현지 6일 · 전 구간)</li>
+          <li><b>한국인 인솔 가이드 전 일정 동행</b></li>
+          <li>일정표 명시 입장료 — 부르고스 대성당 · 알타미라 박물관 · <b>구겐하임 빌바오</b> · 비스카야 다리 곤돌라</li>
+          <li>여행자 보험</li>
+        </ul>
+      </div>
+      <div class="card excl">
+        <h3>불포함 사항</h3>
+        <ul>
+          <li><b>왕복 국제선 항공권</b> — 마드리드 현지 집합 상품입니다</li>
+          <li><b>마드리드 전후 숙박</b> — 집합 전날 숙박은 별도로 안내해 드립니다</li>
+          <li><b>중식 · 석식</b> — 자유식 기준. 유료 식사를 넣는 구성도 가능합니다</li>
+          <li>선택 관광 비용</li>
+          <li>가이드 · 기사 팁 · 개인 경비</li>
+          <li><b>바스크 관광숙박세</b> — 2027년 1월 1일부터 빌바오에 신설됩니다. 해당 세액은 견적에 포함되지 않으며 출발 시점 확정 금액으로 별도 청구됩니다</li>
+          <li>초과 수하물 요금</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec">
+    <div class="sec-label">Optional</div>
+    <h2>선택 관광</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>일차</th><th>선택 관광</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="num">3일차</td><td>산토냐 안초비 공장 견학</td><td>손으로 하는 절임 공정 참관 · 시식</td></tr>
+          <tr><td class="num">5일차</td><td>산세바스티안 미식 투어</td><td>구시가 바르 3~4곳 순회 · 핀초스와 지역 와인 차콜리</td></tr>
+          <tr><td class="num">5일차</td><td>산 후안 데 가스텔루가체</td><td>바다로 뻗은 바위섬 위 암자 · 241계단 · 왕복 약 1시간 (동선 조정 필요)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top:20px">선택 관광은 현지 사정과 인원에 따라 진행 여부가 결정됩니다. 요금은 별도 문의해 주십시오.</p>
+  </section>
+
+
+  <section class="sec">
+    <div class="sec-label">Highlights</div>
+    <h2>이 일정에 담긴 것</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>세계유산</td><td>부르고스 대성당 · 비스카야 다리 · 알타미라와 북부 스페인 구석기 동굴미술 · 산티아고 순례길(부르고스) <b>(4곳)</b></td></tr>
+          <tr><td>미술관</td><td>구겐하임 빌바오 <b>입장</b> · 알타미라 박물관</td></tr>
+          <tr><td>해안 마을</td><td>코미야스 · 산토냐 · 라레도 · 카스트로 우르디알레스 · 게타리아 · 사라우스</td></tr>
+          <tr><td>미식</td><td>빌바오 카스코 비에호 핀초스 · 산세바스티안 파르테 비에하 · 게타리아 생선 숯불구이 · 산토냐 안초비</td></tr>
+          <tr><td>이동 방식</td><td>전 구간 전용 차량 — 관광일 주행이 모두 200km 이내입니다</td></tr>
+          <tr><td>숙박</td><td>산탄데르 3박 · 빌바오 2박 <b>(5박)</b> — 짐을 두 번만 풉니다</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <footer>
+    <div><b>EUFORIA TOUR SPAIN</b> · Euforia das Nuvens, S.L. · Calle Gran Vía 69, Madrid</div>
+    <div>일정과 순서는 현지 사정에 따라 조정될 수 있습니다.</div>
+  </footer>
+
+</div>
+
+<div class="mudejar"></div>
+</div>`,
+      highlights: ['부르고스 대성당 (세계유산)', '산티야나 델 마르와 알타미라 박물관 (세계유산)', '코미야스 · 가우디의 엘 카프리초', '산토냐 안초비 · 라레도 · 카스트로 우르디알레스', '비스카야 다리 곤돌라 (세계유산)', '구겐하임 빌바오 입장', '게타리아 · 사라우스 · 산세바스티안 라 콘차'],
+      includes: ['4성급 호텔 5박 · 조식 포함 (산탄데르 3 · 빌바오 2)', '전용 차량 및 기사 (현지 6일 · 전 구간)', '한국인 인솔 가이드 전 일정 동행', '일정표 명시 입장료 — 부르고스 대성당 · 알타미라 박물관 · 구겐하임 빌바오 · 비스카야 다리 곤돌라', '여행자 보험'],
+      excludes: ['왕복 국제선 항공권 — 마드리드 현지 집합 상품입니다', '마드리드 전후 숙박 (집합 전날 숙박은 별도 안내)', '중식 · 석식 (자유식 기준 · 유료 식사 구성 가능)', '선택 관광 비용', '가이드 · 기사 팁 · 개인 경비', '바스크 관광숙박세 — 2027년 1월 1일부터 빌바오에 신설, 출발 시점 확정 금액으로 별도 청구', '초과 수하물 요금'],
+      duration: '5박 6일 (마드리드 현지 집합 · 관광일 주행 200km 이내 · 일정은 현지 사정에 따라 변경될 수 있어요)'
+    }
+  },
 ];
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요.
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
