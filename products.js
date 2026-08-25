@@ -1455,9 +1455,7 @@ price: '가격 문의',
     </div>
   </div>
 </section>
-
 </div>
-
 <footer>
   <div class="wrap">
     <span>EUFORIA DAS NUVENS S.L. · Madrid, España</span>
