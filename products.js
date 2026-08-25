@@ -3396,6 +3396,407 @@ header.mast{padding:64px 0 44px}
       duration: '5박 6일 (마드리드 현지 집합 · 관광일 주행 200km 이내 · 일정은 현지 사정에 따라 변경될 수 있어요)'
     }
   },
+{
+    id: 'north-asturias-picos',
+    cats: ['spain'],
+    topClass: 'spain',
+    region: '스페인북부',
+    days: '5박 6일',
+    price: '가격 문의',
+    title: '[스페인북부] 아스투리아스와 피코스 데 에우로파 5박 6일',
+    summary: '스페인 최초의 국립공원 피코스 데 에우로파와 레콘키스타가 시작된 코바동가 성지, 그리고 칸타브리아 해안의 중세 마을을 잇는 5박 6일이에요.',
+    tags: ['5박 6일', '마드리드 현지 집합', '전용차량 + 한국인 인솔', '케이블카 · 국립공원'],
+    isNew: true,
+    detail: {
+      lead: '오비에도 2박·산탄데르 3박. 오전에 협곡을 오르고 오후에 해변에 서는 일이 자연스러운 지역이에요.',
+      description: `<!-- ── Euforia Tour · 붙여넣기용 조각 · 모든 스타일이 .eu-itin 안으로만 적용됩니다 ── -->
+<div class="eu-itin">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap");
+/* ── 사이트 기존 테마가 이 조각 안으로 새어 들어오지 않도록 막는다 ── */
+.eu-itin h1,.eu-itin h2,.eu-itin h3,.eu-itin h4,.eu-itin h5{color:var(--ink);font-family:var(--f-kr);margin:0;line-height:1.3;text-transform:none;letter-spacing:-.015em}
+.eu-itin p,.eu-itin li,.eu-itin dl,.eu-itin dt,.eu-itin dd,.eu-itin span,.eu-itin div,.eu-itin strong,.eu-itin b,.eu-itin em,.eu-itin td,.eu-itin th{font-family:var(--f-kr)}
+.eu-itin ul,.eu-itin ol{margin:0}
+.eu-itin section,.eu-itin article,.eu-itin footer,.eu-itin header{margin:0;background:none;border:0}
+.eu-itin img,.eu-itin svg{max-width:100%}
+.eu-itin em{font-style:normal}
+.eu-itin,.eu-itin p,.eu-itin li,.eu-itin dl,.eu-itin dt,.eu-itin dd,.eu-itin div,.eu-itin span,.eu-itin td,.eu-itin th,.eu-itin small,.eu-itin b,.eu-itin strong{text-transform:none;letter-spacing:normal}
+.eu-itin{
+  --ink:#20292B;
+  --tilegreen:#2E5A66;
+  --tilegreen-soft:#7BA3AC;
+  --ochre:#9E2B2B;
+  --stone:#66716F;
+  --paper:#F7F6F2;
+  --tile:#EAE9E3;
+  --line:#D6D3CA;
+  --muted:#68726F;
+  --pattern-op:.16;
+  --f-kr:"IBM Plex Sans KR","Noto Sans KR","Malgun Gothic",system-ui,-apple-system,sans-serif;
+  --f-disp:var(--f-kr);
+  --f-body:var(--f-kr);
+}
+.eu-itin *{box-sizing:border-box}
+.eu-itin{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-weight:300; font-size:16px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all; overflow-wrap:anywhere;
+}
+.eu-itin h1, .eu-itin h2, .eu-itin h3, .eu-itin h4{font-family:var(--f-disp); font-weight:600; text-wrap:balance; margin:0; line-height:1.3; letter-spacing:-.015em}
+.eu-itin p{margin:0}
+.eu-itin a{color:var(--tilegreen)}
+.eu-itin .wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+.eu-itin /* ── 라우부루(바스크 십자) 밴드 ───────────────── */
+.mudejar{
+  height:18px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%232E5A66' stroke-width='1.2'%3E%3Cpath d='M20 20 A5 5 0 0 1 10 20 A5 5 0 0 0 0 20'/%3E%3Cpath d='M20 20 A5 5 0 0 0 20 10 A5 5 0 0 1 20 0'/%3E%3Cpath d='M20 20 A5 5 0 0 0 30 20 A5 5 0 0 1 40 20'/%3E%3Cpath d='M20 20 A5 5 0 0 1 20 30 A5 5 0 0 0 20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:20px 20px;
+  opacity:var(--pattern-op);
+}
+.eu-itin /* ── masthead ─────────────────────────────────── */
+header.mast{padding:64px 0 44px}
+.eu-itin .eyebrow{
+  font-size:11.5px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--tilegreen); margin-bottom:20px;
+}
+.eu-itin h1{font-size:clamp(36px,5.8vw,60px); font-weight:700; letter-spacing:-.03em}
+.eu-itin h1 .lat{font-weight:300; color:var(--tilegreen)}
+.eu-itin .lede{margin-top:20px; max-width:56ch; font-size:17.5px; color:var(--muted); line-height:1.85}
+.eu-itin .route{
+  margin-top:34px; padding-top:22px; border-top:1px solid var(--line);
+  font-weight:400; font-size:13px; line-height:2.2; color:var(--stone);
+}
+.eu-itin .route b{color:var(--ink); font-weight:500}
+.eu-itin .route em{color:var(--ochre); font-style:normal; font-weight:500}
+.eu-itin /* ── facts ────────────────────────────────────── */
+.facts{
+  display:grid; gap:1px; background:var(--line);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  border:1px solid var(--line); margin:44px 0 8px;
+}
+.eu-itin .fact{background:var(--paper); padding:20px 22px}
+.eu-itin .fact dt{font-size:12px; font-weight:500; color:var(--muted); margin-bottom:6px}
+.eu-itin .fact dd{margin:0; font-weight:600; font-size:21px; line-height:1.35; font-variant-numeric:tabular-nums}
+.eu-itin .fact dd small{display:block; font-weight:300; font-size:13px; color:var(--muted); margin-top:4px}
+.eu-itin /* ── sections ─────────────────────────────────── */
+.sec{padding:64px 0 8px}
+.eu-itin .sec-label{
+  font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--tilegreen); margin-bottom:12px;
+}
+.eu-itin .sec h2{font-size:clamp(26px,3.4vw,34px)}
+.eu-itin .sec .sub{margin-top:12px; color:var(--muted); max-width:62ch}
+.eu-itin /* ── itinerary spine ──────────────────────────── */
+.days{margin-top:40px}
+.eu-itin .day{display:grid; grid-template-columns:104px 1fr; gap:0 28px; padding-bottom:44px; position:relative}
+.eu-itin .rail{position:relative}
+.eu-itin .rail::before{content:""; position:absolute; left:19px; top:44px; bottom:-44px; width:1px; background:var(--line)}
+.eu-itin .day:last-child .rail::before{display:none}
+.eu-itin .dnum{
+  width:40px; height:40px; border-radius:50%;
+  background:var(--paper); border:1px solid var(--tilegreen); color:var(--tilegreen);
+  display:grid; place-items:center; font-size:14px; font-weight:500;
+  position:relative; z-index:1;
+}
+.eu-itin .day.hub .dnum{background:var(--tilegreen); border-color:var(--tilegreen); color:var(--paper)}
+.eu-itin .day.rest .dnum{background:var(--ochre); border-color:var(--ochre); color:var(--paper)}
+.eu-itin .day.rest .drive span::before{background:var(--ochre)}
+.eu-itin .day.rest ul.stops li::before{background:var(--ochre)}
+.eu-itin .day.rest .stay{border-left-color:var(--ochre)}
+.eu-itin .dwhen{
+  width:80px; text-align:center; padding:7px 0 3px; margin-left:-20px;
+  background:var(--paper); position:relative; z-index:1;
+  font-weight:400; font-size:11.5px; color:var(--muted); white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.eu-itin .day.rest .dwhen{color:var(--ochre); font-weight:500}
+.eu-itin .body{min-width:0}
+.eu-itin .dtitle{font-size:23px; letter-spacing:-.005em}
+.eu-itin .dtitle .via{color:var(--muted); font-weight:400}
+.eu-itin .drive{
+  margin-top:10px; display:flex; flex-wrap:wrap; gap:6px 14px;
+  font-weight:400; font-size:12.5px; color:var(--stone); font-variant-numeric:tabular-nums;
+}
+.eu-itin .drive span{display:inline-flex; align-items:center; gap:6px}
+.eu-itin .drive span::before{content:""; width:5px; height:5px; background:var(--tilegreen-soft); border-radius:50%}
+.eu-itin ul.stops{list-style:none; padding:0; margin:18px 0 0; display:grid; gap:11px}
+.eu-itin ul.stops li{padding-left:18px; position:relative; line-height:1.7}
+.eu-itin ul.stops li::before{content:""; position:absolute; left:0; top:.72em; width:7px; height:1px; background:var(--tilegreen)}
+.eu-itin ul.stops b{font-weight:600; color:var(--ink)}
+.eu-itin .tag{
+  display:inline-block; margin-left:6px; padding:1px 7px; border-radius:2px;
+  font-weight:400; font-size:11px;
+  border:1px solid var(--tilegreen); color:var(--tilegreen); vertical-align:2px;
+}
+.eu-itin .tag.opt{border-color:var(--ochre); color:var(--ochre)}
+.eu-itin .tag.xmas{border-color:var(--ochre); color:var(--paper); background:var(--ochre)}
+.eu-itin .stay{
+  margin-top:18px; padding:12px 16px; background:var(--tile); border-left:2px solid var(--tilegreen);
+  font-size:13.5px; display:flex; flex-wrap:wrap; gap:4px 18px;
+}
+.eu-itin .stay dt{font-size:12px; font-weight:500; color:var(--muted); align-self:center}
+.eu-itin .stay dd{margin:0; font-weight:500}
+.eu-itin /* ── tables / cards ───────────────────────────── */
+.scroll{overflow-x:auto; margin-top:24px}
+.eu-itin table{border-collapse:collapse; width:100%; font-size:14px; min-width:560px}
+.eu-itin th, .eu-itin td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+.eu-itin th{font-size:12.5px; color:var(--muted); font-weight:500; border-bottom-color:var(--ink)}
+.eu-itin td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+.eu-itin td small{display:block; font-weight:300; font-size:12.5px; color:var(--muted); margin-top:3px; font-variant-numeric:tabular-nums}
+.eu-itin .cols{display:grid; gap:32px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:28px}
+.eu-itin .card{border:1px solid var(--line); padding:24px}
+.eu-itin .card h3{font-size:18px; margin-bottom:14px}
+.eu-itin .card ul{list-style:none; padding:0; margin:0; display:grid; gap:9px; font-size:14.5px}
+.eu-itin .card li{padding-left:16px; position:relative}
+.eu-itin .card li::before{content:""; position:absolute; left:0; top:.7em; width:6px; height:1px; background:var(--tilegreen)}
+.eu-itin .card.excl li::before{background:var(--muted)}
+.eu-itin .note{margin-top:28px; padding:24px 26px; border:1px solid var(--line); background:var(--tile)}
+.eu-itin .note .why{display:grid; gap:14px; counter-reset:w}
+.eu-itin .note .why div{padding-left:20px; position:relative}
+.eu-itin .note .why div::before{
+  content:counter(w); counter-increment:w; position:absolute; left:0; top:.1em;
+  font-weight:500; font-size:13px; color:var(--tilegreen);
+}
+.eu-itin .note.warn{border-left:3px solid var(--ochre)}
+.eu-itin .note.warn .why div::before{color:var(--ochre)}
+.eu-itin footer{
+  margin-top:72px; padding:36px 0 56px; border-top:1px solid var(--line);
+  font-size:13px; color:var(--muted); display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
+}
+.eu-itin footer b{color:var(--ink); font-weight:600; letter-spacing:.02em}
+@media (max-width:640px){ .eu-itin .day{grid-template-columns:52px 1fr; gap:0 14px}
+.eu-itin .dwhen{width:52px; margin-left:-6px; font-size:10px}
+.eu-itin header.mast{padding:44px 0 32px}
+}
+</style>
+<div class="mudejar"></div>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Euforia Tour · Green Spain · Asturias &amp; Picos de Europa</div>
+    <h1>아스투리아스와 <span class="lat">피코스</span> 6일</h1>
+    <p class="lede">
+      스페인 사람들이 「자연의 낙원」이라 부르는 곳입니다. 레콘키스타가 시작된 코바동가 성지에서
+      2,000미터 석회암 봉우리 아래까지 올라갔다가, 칸타브리아 해안으로 내려와 중세 마을에서 끝납니다.
+      시드라를 머리 위로 들어 따르는 저녁이 매일 있습니다.
+    </p>
+    <div class="route">
+      <b>마드리드</b> → 레온 → <b>오비에도</b> → 캉가스 데 오니스 → <em>코바동가</em> → 리바데세야 →
+      야네스 → 라 에르미다 협곡 → 포테스 → <em>푸엔테 데</em> → <b>산탄데르</b> →
+      산티야나 델 마르 → 코미야스 → 마드리드
+    </div>
+
+    <dl class="facts">
+      <div class="fact"><dt>일정</dt><dd>6일 5박<small>출발일 협의 · 연중 진행</small></dd></div>
+      <div class="fact"><dt>집합</dt><dd>마드리드 현지<small>국제선 항공 불포함</small></dd></div>
+      <div class="fact"><dt>숙박</dt><dd>오비에도 2 · 산탄데르 3<small>4성급 · 조식 포함</small></dd></div>
+      <div class="fact"><dt>이동</dt><dd>전 구간 차량<small>국내선·열차 없음</small></dd></div>
+      <div class="fact"><dt>총 주행</dt><dd>약 1,610km<small>실측 경로 기준</small></dd></div>
+    </dl>
+  </header>
+
+
+  <section class="sec">
+    <div class="sec-label">Why Picos</div>
+    <h2>왜 이 코스인가</h2>
+    <div class="note">
+      <div class="why">
+        <div><b>스페인의 첫 국립공원입니다.</b> 피코스 데 에우로파는 1918년에 지정된 스페인 최초의 국립공원이고, 바다에서 20km 떨어진 곳에 2,600미터 석회암 봉우리가 솟아 있습니다. 케이블카 한 번으로 그 한가운데까지 올라갑니다.</div>
+        <div><b>스페인이 시작된 자리를 지납니다.</b> 코바동가는 이슬람 세력에 맞서 첫 승리를 거둔 곳이자 아스투리아스 왕국이 세워진 자리입니다. 스페인 사람들에게는 관광지가 아니라 성지입니다.</div>
+        <div><b>바다와 산이 붙어 있습니다.</b> 오전에 협곡을 오르고 오후에 해변에 서는 일이 이 지역에서는 자연스럽습니다. 리바데세야와 야네스의 해안이 국립공원에서 한 시간 거리입니다.</div>
+        <div><b>거점을 둘로 나눴습니다.</b> 앞의 이틀은 오비에도, 뒤의 사흘은 산탄데르입니다. 짐을 두 번만 풀고 여섯 날을 씁니다.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec">
+    <div class="sec-label">Itinerary</div>
+    <h2>일정</h2>
+    <p class="sub">
+      <b>마드리드 현지 집합</b>으로 시작하는 5박 6일입니다. 오비에도 2박 · 산탄데르 3박.
+      중식·석식은 자유식을 기본으로 하며, 가이드가 시드레리아와 지역 식당을 안내합니다.
+    </p>
+
+    <div class="days">
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">1</div><div class="dwhen">1일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">마드리드 <span class="via">→</span> 레온 <span class="via">→</span> 오비에도</h3>
+          <div class="drive"><span>약 468km</span><span>주행 4시간 50분</span><span>07:30 마드리드 집합</span><span>법정 휴식 45분 포함</span></div>
+          <ul class="stops">
+            <li><b>레온 대성당</b> — 벽면 대부분이 스테인드글라스인 프랑스식 고딕. 중식 정차를 겸합니다</li>
+            <li><b>산티아고 순례길</b><span class="tag">세계유산</span> — 레온은 프랑스길의 큰 기착지입니다</li>
+            <li>칸타브리아 산맥을 넘어 <b>오비에도</b> 도착</li>
+            <li>저녁 <b>가스코나 거리</b> — 시드라를 머리 위로 들어 따르는 시드레리아 골목</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>오비에도 (1/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">2</div><div class="dwhen">2일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">코바동가 <span class="via">·</span> 리바데세야 <span class="via">·</span> 야네스</h3>
+          <div class="drive"><span>약 255km</span><span>주행 3시간 30분</span><span>산과 바다를 한 날에</span></div>
+          <ul class="stops">
+            <li><b>캉가스 데 오니스</b> — 아스투리아스 왕국의 첫 수도, 로마 다리에 매달린 승리의 십자가</li>
+            <li><b>코바동가 성지</b> — 바위 동굴 안의 산타 쿠에바와 분홍빛 대성당. 스페인 레콘키스타가 시작된 자리</li>
+            <li><b>코바동가 호수</b><span class="tag opt">선택</span> — 엔올과 에르시나 두 빙하호. <b>6월 1일~10월 18일에는 대형 차량 진입이 금지되어 셔틀버스로 환승합니다</b></li>
+            <li><b>리바데세야</b> — 티토 부스티요 동굴이 있는 항구, 세야 강 하구</li>
+            <li><b>야네스</b> — 성벽과 어항, 「기억의 큐브」 조각이 놓인 방파제</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>오비에도 (2/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">3</div><div class="dwhen">3일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">라 에르미다 협곡 <span class="via">·</span> 포테스 <span class="via">·</span> 푸엔테 데 <span class="via">→</span> 산탄데르</h3>
+          <div class="drive"><span>약 316km</span><span>주행 4시간 20분</span><span>협곡 도로 · 케이블카</span></div>
+          <ul class="stops">
+            <li><b>오비에도 구시가</b> 오전 — 대성당과 「카마라 산타」, <b>산타 마리아 델 나랑코</b><span class="tag">세계유산</span> 9세기 아스투리아스 선로마네스크</li>
+            <li><b>라 에르미다 협곡</b> — 20km에 걸쳐 수직 절벽 사이를 지나는 데바 강 협곡 도로</li>
+            <li><b>산토 토리비오 데 리에바나 수도원</b> — 그리스도 십자가의 가장 큰 조각을 보관한다는 리에바나 계곡의 수도원</li>
+            <li><b>포테스</b> — 돌탑과 나무 발코니가 남은 산간 마을, 중식</li>
+            <li><b>푸엔테 데 케이블카</b><span class="tag">입장</span> — 4분 만에 해발 1,823m까지 오르는 절벽 케이블카, 피코스 한가운데의 전망</li>
+            <li>산맥을 내려와 <b>산탄데르</b> 도착</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>산탄데르 (1/3박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">4</div><div class="dwhen">4일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">산탄데르 종일</h3>
+          <div class="drive"><span>시내 약 25km</span><span>도보 구간 다수</span><span>전날 산행의 회복일</span></div>
+          <ul class="stops">
+            <li><b>마그달레나 반도</b>와 왕실 별궁 — 바다로 뻗은 곶 전체가 공원입니다</li>
+            <li><b>사르디네로 해변</b>과 그란 카시노 — 20세기 초 왕실 피서지의 흔적</li>
+            <li><b>센트로 보틴</b> — 렌초 피아노가 물 위에 띄운 문화센터<span class="tag opt">선택</span></li>
+            <li><b>메르카도 데 라 에스페란사</b>와 대성당 · 페레다 산책로</li>
+            <li>저녁 자유식 — 칸타브리아 해산물</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>산탄데르 (2/3박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">5</div><div class="dwhen">5일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">산티야나 델 마르 <span class="via">·</span> 코미야스</h3>
+          <div class="drive"><span>약 95km</span><span>주행 1시간 30분</span><span>도보 구간 다수</span></div>
+          <ul class="stops">
+            <li><b>산티야나 델 마르</b> — 돌바닥과 귀족 저택이 그대로 남은 중세 마을, 사르트르가 「스페인에서 가장 아름다운 마을」이라 부른 곳</li>
+            <li><b>알타미라 박물관</b><span class="tag">세계유산</span> — 1만 5천 년 전 들소 벽화. 원본 동굴은 보존을 위해 닫혀 있고 정밀 복제 동굴을 관람합니다</li>
+            <li><b>엘 카프리초</b> — 가우디가 남긴 해바라기 타일의 여름 별장</li>
+            <li><b>소브레야노 궁전</b>과 코미야스 묘지 · 대학 언덕</li>
+            <li>산탄데르로 돌아와 마지막 저녁</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>산탄데르 (3/3박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">6</div><div class="dwhen">6일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">산탄데르 <span class="via">→</span> 마드리드</h3>
+          <div class="drive"><span>약 455km</span><span>주행 4시간 50분</span><span>07:30 출발</span><span>법정 휴식 45분 포함</span></div>
+          <ul class="stops">
+            <li>이른 아침 산탄데르 출발, 칸타브리아 산맥을 넘어 카스티야 평원으로</li>
+            <li>중간 휴게 정차 후 <b>마드리드</b> 도착 · 일정 종료</li>
+            <li>귀국편 시각에 맞춰 공항 또는 시내 호텔로 안내해 드립니다</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="sec">
+    <div class="sec-label">Inclusions</div>
+    <h2>포함 · 불포함</h2>
+    <div class="cols">
+      <div class="card">
+        <h3>포함 사항</h3>
+        <ul>
+          <li>4성급 호텔 5박 · <b>조식 포함</b> (오비에도 2 · 산탄데르 3)</li>
+          <li>전용 차량 및 기사 (현지 6일 · 전 구간)</li>
+          <li><b>한국인 인솔 가이드 전 일정 동행</b></li>
+          <li>일정표 명시 입장료 — 레온 대성당 · 산타 마리아 델 나랑코 · 산토 토리비오 수도원 · <b>푸엔테 데 케이블카</b> · 알타미라 박물관</li>
+          <li>여행자 보험</li>
+        </ul>
+      </div>
+      <div class="card excl">
+        <h3>불포함 사항</h3>
+        <ul>
+          <li><b>왕복 국제선 항공권</b> — 마드리드 현지 집합 상품입니다</li>
+          <li><b>마드리드 전후 숙박</b> — 집합 전날 숙박은 별도로 안내해 드립니다</li>
+          <li><b>중식 · 석식</b> — 자유식 기준. 유료 식사를 넣는 구성도 가능합니다</li>
+          <li><b>코바동가 호수 선택 관광</b> — 성수기 셔틀버스 요금 포함, 별도 문의</li>
+          <li>그 밖의 선택 관광 비용</li>
+          <li>가이드 · 기사 팁 · 개인 경비</li>
+          <li>초과 수하물 요금</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec">
+    <div class="sec-label">Notes</div>
+    <h2>미리 알려 드립니다</h2>
+    <div class="note warn">
+      <div class="why">
+        <div><b>코바동가 호수는 성수기에 대형 차량이 올라가지 못합니다.</b> 6월 1일부터 10월 18일까지 진입이 통제되어 아래 주차장에서 셔틀버스로 갈아탑니다. 환승과 대기에 한 시간 정도가 더 듭니다 — 이 시기 출발이면 2일차 일정을 그에 맞춰 조정합니다.</div>
+        <div><b>푸엔테 데 케이블카는 날씨에 좌우됩니다.</b> 강풍이나 짙은 안개가 있으면 운행이 중단됩니다. 운행하지 않는 날에는 포테스와 리에바나 계곡 일정으로 대체합니다.</div>
+        <div><b>1·6일차는 장거리 이동일입니다.</b> 마드리드와 북부 사이가 왕복 900km가 넘어 이틀은 이동이 중심이 됩니다. 대신 레온을 중간에 끊어 대성당과 중식을 넣었고, EU 규정에 따른 기사 법정 휴식 45분도 일정에 반영돼 있습니다.</div>
+        <div><b>산간 구간의 고도차가 있습니다.</b> 3일차는 협곡 도로를 오르내리며 케이블카로 해발 1,800m까지 올라갑니다. 여름에도 산 위는 서늘하니 겉옷을 준비해 주십시오.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec">
+    <div class="sec-label">Highlights</div>
+    <h2>이 일정에 담긴 것</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>세계유산</td><td>오비에도 아스투리아스 선로마네스크 · 알타미라와 북부 스페인 구석기 동굴미술 · 산티아고 순례길(레온) <b>(3곳)</b></td></tr>
+          <tr><td>국립공원</td><td>피코스 데 에우로파 — 1918년 지정된 스페인 최초의 국립공원</td></tr>
+          <tr><td>성지</td><td>코바동가 산타 쿠에바와 대성당 · 산토 토리비오 데 리에바나 수도원</td></tr>
+          <tr><td>해안</td><td>리바데세야 · 야네스 · 사르디네로 · 코미야스</td></tr>
+          <tr><td>미식</td><td>오비에도 가스코나 시드레리아 · 아스투리아스 파바다 · 칸타브리아 해산물</td></tr>
+          <tr><td>숙박</td><td>오비에도 2박 · 산탄데르 3박 <b>(5박)</b> — 짐을 두 번만 풉니다</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <footer>
+    <div><b>EUFORIA TOUR SPAIN</b> · Euforia das Nuvens, S.L. · Calle Gran Vía 69, Madrid</div>
+    <div>일정과 순서는 현지 사정에 따라 조정될 수 있습니다.</div>
+  </footer>
+
+</div>
+
+<div class="mudejar"></div>
+</div>`,
+      highlights: ['레온 대성당과 산티아고 순례길 (세계유산)', '코바동가 성지 · 산타 쿠에바', '피코스 데 에우로파 · 푸엔테 데 케이블카 (해발 1,823m)', '라 에르미다 협곡과 포테스 · 산토 토리비오 수도원', '오비에도 선로마네스크 산타 마리아 델 나랑코 (세계유산)', '산티야나 델 마르와 알타미라 박물관 (세계유산)', '리바데세야 · 야네스 · 코미야스 해안'],
+      includes: ['4성급 호텔 5박 · 조식 포함 (오비에도 2 · 산탄데르 3)', '전용 차량 및 기사 (현지 6일 · 전 구간)', '한국인 인솔 가이드 전 일정 동행', '일정표 명시 입장료 — 레온 대성당 · 산타 마리아 델 나랑코 · 산토 토리비오 수도원 · 푸엔테 데 케이블카 · 알타미라 박물관', '여행자 보험'],
+      excludes: ['왕복 국제선 항공권 — 마드리드 현지 집합 상품입니다', '마드리드 전후 숙박 (집합 전날 숙박은 별도 안내)', '중식 · 석식 (자유식 기준 · 유료 식사 구성 가능)', '코바동가 호수 선택 관광 — 6/1~10/18 셔틀버스 환승 구간, 별도 문의', '그 밖의 선택 관광 비용', '가이드 · 기사 팁 · 개인 경비', '초과 수하물 요금'],
+      duration: '5박 6일 (마드리드 현지 집합 · 총 주행 약 1,610km 실측 · 일정은 현지 사정에 따라 변경될 수 있어요)'
+    }
+  },
 ];
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요.
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
