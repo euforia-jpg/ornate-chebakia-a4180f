@@ -1231,7 +1231,7 @@ price: '가격 문의',
         <p><strong>벨렘탑(세계유산)</strong>과 <strong>발견기념비</strong> — 테주 강가에서 배들이 떠나던 자리를 둘러봅니다. 이어 1837년부터 같은 자리에서 굽는 원조 에그타르트, <strong>파스테이스 드 벨렝</strong>을 맛봅니다.</p>
         <p><strong>코메르시우 광장 · 아우구스타 개선문 · 산타 주스타 엘리베이터</strong>를 지나, 1755년 대지진에도 살아남은 옛 골목 <strong>알파마</strong>와 <strong>상 조르지 성</strong>에서 도시 전경을 봅니다. 언덕과 골목을 그대로 훑고 지나가는 <strong>28번 트램</strong>도 체험 승차합니다.</p>
         <p>시내 이동 약 40km, 도보 구간이 많습니다. (선택) 유네스코 무형문화유산인 <strong>파두 디너쇼</strong>를 즐기실 수 있습니다.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal">석식</span></div>
+       <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 리스본 (2/3박)</span>
       </div>
     </article>
@@ -1250,7 +1250,7 @@ price: '가격 문의',
         <p><strong>신트라 문화경관(세계유산)</strong> — 왕과 귀족들이 여름을 나던 안개 낀 산자락입니다. 노랑과 빨강으로 칠한 낭만주의 궁전 <strong>페나 궁전</strong>에서 산 능선을 통째로 내려다보고, 지하 27m로 나선을 그리며 내려가는 입회의 우물 <strong>킨타 다 헤갈레이라</strong>를 둘러봅니다. 신트라 구시가에서 명물 페이스트리 <strong>트라베세이루</strong>도 맛봅니다.</p>
         <p><strong>까보 다 로카</strong> — 유라시아 대륙 최서단입니다. "여기 땅이 끝나고 바다가 시작된다"는 카몽이스의 시구가 새겨져 있습니다.</p>
         <p><strong>카스카이스</strong>와 대서양이 절벽을 파고든 <strong>보카 두 인페르누(지옥의 입)</strong>를 지나, 에스토릴 해안도로를 따라 리스본으로 돌아옵니다. 약 110km, 주행 2시간입니다.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal">석식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 리스본 (3/3박)</span>
       </div>
     </article>
@@ -1290,7 +1290,7 @@ price: '가격 문의',
         <p><strong>코임브라 대학(세계유산)</strong> — 1290년에 문을 연, 유럽에서 가장 오래된 대학 중 하나입니다. 금박 서가와 책벌레를 잡는 박쥐가 사는 <strong>조아니나 도서관</strong>, 검은 망토를 걸친 학생들의 풍경을 봅니다.</p>
         <p><strong>아베이루</strong> — 운하를 젓는 색색의 몰리세이루 배와, 달걀 과자 <strong>오보스 몰레스</strong>를 맛봅니다. <strong>코스타 노바</strong> — 대서양을 등지고 늘어선 줄무늬 목조 가옥을 봅니다.</p>
         <p>저녁 포르투에 도착합니다. 약 220km, 주행 2시간 40분입니다.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal">석식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 포르투 (1/3박)</span>
       </div>
     </article>
@@ -1307,7 +1307,7 @@ price: '가격 문의',
         <p><strong>포르투 역사지구(세계유산)</strong> — 두루 강을 끼고 층층이 쌓아 올린 옛 도시입니다. 아줄레주 2만 장으로 벽을 채운 <strong>상 벤투 역</strong>, <strong>렐루 서점 · 클레리구스 탑 · 카르무 성당 · 포르투 대성당</strong>을 둘러봅니다.</p>
         <p>에펠의 제자가 놓은 2층 철교 <strong>동 루이스 1세 다리</strong>를 위층으로 걸어서 건넙니다. <strong>히베이라 강변</strong>과 가이아행 케이블카를 지나 <strong>빌라 노바 드 가이아</strong>의 포트와인 셀러에서 견학과 시음을 합니다.</p>
         <p>강 위에서 보는 포르투 전경, <strong>두루강 6다리 유람선</strong>도 탑승합니다. 시내 약 30km, 도보 구간이 많습니다.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal">석식</span></div>
+       <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 포르투 (2/3박)</span>
       </div>
     </article>
@@ -1325,7 +1325,7 @@ price: '가격 문의',
         <p><strong>봉 제수스 두 몬트(세계유산)</strong> — 오감을 하나씩 지나 올라가는 바로크 계단과, 물로 움직이는 푸니쿨라를 체험합니다. <strong>브라가 대성당</strong>과 구시가 — 포르투갈에서 가장 오래된 대성당입니다.</p>
         <p><strong>기마랑이스(세계유산)</strong> — 성벽에 "여기서 포르투갈이 태어났다"고 적혀 있는 건국의 도시입니다. <strong>기마랑이스 성 · 브라간사 공작 궁전 · 올리베이라 광장</strong>을 둘러봅니다.</p>
         <p>(선택) <strong>두루 밸리 피녀웅 와이너리 + 두루 열차(대안 세계유산)</strong> 코스로 대체하실 수 있습니다. 약 140km, 주행 1시간 50분입니다.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal">석식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 포르투 (3/3박)</span>
       </div>
     </article>
