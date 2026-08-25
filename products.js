@@ -1475,7 +1475,504 @@ price: '가격 문의',
       duration: '8일 7박 (리스본 IN/OUT · 실 관광일 7일)'
     }
   },
-];
+{
+    id: 'portugal-10days',
+    cats: ['portugal'],
+    topClass: 'portugal',
+    region: 'PORTUGAL',
+    days: '9박10일',
+    price: '가격 문의',
+    title: '[포르투갈 남북종단] 리스본 IN/OUT 9박10일 (남부 포함)',
+    summary: '리스본에서 알가르베(베나길·라구스·사그레스)까지 내려갔다가, 성벽 마을과 성지를 지나 포르투·기마랑이스까지 — 유네스코 세계유산 10곳을 담은 남북 종단 일주예요.',
+    tags: ['9박 10일', '왕복 직항', '남부+북부 종단'],
+    isNew: true,
+    detail: {
+      lead: '리스본 3박·알부페이라 2박·파티마 1박·포르투 3박, 남쪽 알가르베부터 북쪽 포르투까지 한 번에 잇는 포르투갈 종단 일주예요.',
+      description: `<!-- ── Euforia Tour · 포르투갈 일주 10일(남부+북부) · 붙여넣기용 조각 ──
+     이 블록 전체를 상세설명 HTML 칸에 그대로 붙여 넣으십시오. ── -->
+<div class="eu-itin">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap");
+.eu-itin h1,.eu-itin h2,.eu-itin h3,.eu-itin h4,.eu-itin h5{
+  color:var(--ink);font-family:inherit;margin:0;line-height:1.25;text-transform:none;
+}
+.eu-itin p,.eu-itin li,.eu-itin dl,.eu-itin dt,.eu-itin dd,.eu-itin span,.eu-itin div,.eu-itin strong,.eu-itin b,.eu-itin em{
+  font-family:inherit;
+}
+.eu-itin .display{font-family:"Fraunces","Gowun Batang",Georgia,serif}
+.eu-itin h1 em{color:var(--accent);font-style:normal}
+.eu-itin a{color:var(--accent);text-decoration:none}
+.eu-itin ul,.eu-itin ol{margin:0}
+.eu-itin section,.eu-itin article,.eu-itin footer{margin:0;background:none;border:0}
+.eu-itin svg{max-width:100%}
+.eu-itin{background:var(--ground);overflow-x:hidden;max-width:100%;}
+
+.eu-itin{
+  --ground:#FAF9F6;
+  --surface:#FFFFFF;
+  --surface-2:#F1EFE9;
+  --ink:#1B201D;
+  --ink-2:#4A524D;
+  --ink-3:#7C837E;
+  --line:#DCD9D0;
+  --line-soft:#E9E6DE;
+  --accent:#1E5C4E;
+  --accent-soft:#DEEBE6;
+  --pine:#8C2B2B;
+  --pine-soft:#F0E2DE;
+  --sea:#DCE4E3;
+  --shadow:0 1px 2px rgba(27,32,29,.05),0 8px 24px -14px rgba(27,32,29,.22);
+}.eu-itin *{box-sizing:border-box}.eu-itin{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans KR","IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;
+  font-weight:400;
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all;
+}.eu-itin .wrap{max-width:1040px;margin:0 auto;padding:0 24px}.eu-itin .display{font-family:"Fraunces","Gowun Batang",Georgia,serif;font-weight:700;letter-spacing:-.01em;text-wrap:balance;line-height:1.2}.eu-itin .label{
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);
+}.eu-itin .hero{padding:64px 0 0}.eu-itin .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}.eu-itin .eyebrow .rule{height:1px;flex:0 0 40px;background:var(--accent)}.eu-itin h1{font-size:clamp(38px,6.4vw,64px);margin:0 0 22px}.eu-itin h1 em{font-style:normal;color:var(--accent)}.eu-itin .lede{
+  font-size:clamp(17px,2.1vw,19px);color:var(--ink-2);max-width:60ch;margin:0 0 34px;
+  font-weight:300;line-height:1.85;
+}.eu-itin .facts{
+  display:grid;gap:1px;background:var(--line);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  border:1px solid var(--line);border-radius:2px;overflow:hidden;
+}.eu-itin .fact{background:var(--surface);padding:18px 20px}.eu-itin .fact dt{margin:0 0 6px}.eu-itin .fact dd{margin:0;font-size:16px;font-weight:500;line-height:1.5}.eu-itin .garland{margin:56px 0 0;color:var(--accent);opacity:.9}.eu-itin .garland svg{display:block;width:100%;height:34px}.eu-itin .mapsec{padding:56px 0 8px}.eu-itin .mapcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:2px;
+  padding:26px 26px 18px;box-shadow:var(--shadow);
+}.eu-itin .mapcard h2{font-size:20px;margin:0 0 4px}.eu-itin .mapcard p.note{font-size:13px;color:var(--ink-3);margin:0 0 18px}.eu-itin .mapscroll{overflow-x:auto}.eu-itin .mapscroll svg{display:block;min-width:0;width:100%;max-width:520px;margin:0 auto;height:auto}.eu-itin .mp-sea{fill:var(--sea)}.eu-itin .mp-coast{fill:none;stroke:var(--ink-3);stroke-width:.4;opacity:.55}.eu-itin .mp-route{fill:none;stroke:var(--pine);stroke-width:.5;stroke-dasharray:1.4 1.1;opacity:.85}.eu-itin .mp-dot{fill:var(--accent)}.eu-itin .mp-dot.stay{fill:var(--pine)}.eu-itin .mp-base{fill:var(--surface);stroke:var(--pine);stroke-width:.7}.eu-itin .mp-t{font-size:2.1px;fill:var(--ink-2);font-family:"IBM Plex Sans KR",sans-serif;font-weight:500}.eu-itin .mp-c{font-size:2.1px;fill:var(--ink-3);font-family:"IBM Plex Sans KR",sans-serif;letter-spacing:.14em}.eu-itin .mp-n{font-size:1.9px;fill:var(--ink-3);font-family:"IBM Plex Sans KR",sans-serif}.eu-itin .maplegend{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-size:12.5px;color:var(--ink-2)}.eu-itin .maplegend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:1px}.eu-itin .itin{padding:56px 0 0}.eu-itin .itin > h2{font-size:clamp(24px,3.4vw,30px);margin:0 0 6px}.eu-itin .itin > p.sub{color:var(--ink-3);margin:0 0 36px;font-size:14.5px}.eu-itin .day{
+  display:grid;grid-template-columns:196px 1fr;gap:36px;
+  padding:34px 0;border-top:1px solid var(--line);
+}.eu-itin .day:last-of-type{border-bottom:1px solid var(--line)}.eu-itin .daykey{position:relative}.eu-itin .daynum{
+  font-family:"Fraunces",serif;font-weight:300;font-size:52px;line-height:1;
+  color:var(--accent);letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+}.eu-itin .daynum sub{font-size:15px;font-weight:500;vertical-align:baseline;margin-left:4px;color:var(--ink-3)}.eu-itin .places{margin:14px 0 0;padding:0;list-style:none}.eu-itin .places li{
+  font-weight:500;font-size:15.5px;line-height:1.5;padding:3px 0;
+}.eu-itin .places li .lat{display:block;font-family:"Fraunces",serif;font-weight:300;font-size:13px;color:var(--ink-3);letter-spacing:.01em}.eu-itin .daybody h3{font-size:19px;margin:0 0 12px;font-weight:600;letter-spacing:-.005em}.eu-itin .daybody p{margin:0 0 14px;color:var(--ink-2);max-width:62ch}.eu-itin .daybody p:last-child{margin-bottom:0}.eu-itin .daybody strong{color:var(--ink);font-weight:600}.eu-itin .meals{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding-top:16px;
+  border-top:1px dashed var(--line);
+}.eu-itin .meal{
+  font-size:12px;font-weight:500;letter-spacing:.02em;
+  padding:4px 11px;border-radius:2px;
+  background:var(--accent-soft);color:var(--accent);
+}.eu-itin .meal.free{background:var(--surface-2);color:var(--ink-3)}.eu-itin .meal.star{background:var(--pine-soft);color:var(--pine)}.eu-itin .tag-stay{
+  display:inline-block;margin-top:14px;font-size:12.5px;color:var(--ink-3);
+}.eu-itin .info{padding:60px 0 0}.eu-itin .info h2{font-size:clamp(22px,3vw,26px);margin:0 0 22px}.eu-itin .info .why{display:flex;flex-direction:column;gap:16px}.eu-itin .info .why p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.8;max-width:70ch}.eu-itin .info .why strong{color:var(--ink);font-weight:600}.eu-itin .cmp{padding:52px 0 0}.eu-itin .cmp h2{font-size:clamp(22px,3vw,26px);margin:0 0 22px}.eu-itin .cmptable{width:100%;border-collapse:collapse;font-size:13.5px}.eu-itin .cmptable th{text-align:left;padding:10px 14px;background:var(--surface-2);color:var(--ink-3);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--line)}.eu-itin .cmptable td{padding:12px 14px;border-bottom:1px solid var(--line-soft);color:var(--ink-2)}.eu-itin .cmptable td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}.eu-itin .cmptable p.note{margin:14px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.75}.eu-itin .opt{padding:56px 0 0}.eu-itin .opt h2{font-size:clamp(22px,3vw,26px);margin:0 0 22px}.eu-itin .opttable{width:100%;border-collapse:collapse;font-size:13.5px}.eu-itin .opttable th{text-align:left;padding:10px 14px;background:var(--surface-2);color:var(--ink-3);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--line)}.eu-itin .opttable td{padding:12px 14px;border-bottom:1px solid var(--line-soft);color:var(--ink-2)}.eu-itin .opttable td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}.eu-itin .incl{padding:64px 0 0}.eu-itin .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px}.eu-itin .card{
+  border:1px solid var(--line);border-radius:2px;padding:26px 26px 28px;
+  background:var(--surface);
+}.eu-itin .card.no{background:var(--surface-2)}.eu-itin .card h3{font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:9px;font-weight:600}.eu-itin .card h3 .pip{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:0 0 auto}.eu-itin .card.no h3 .pip{background:var(--ink-3)}.eu-itin .card ul{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}.eu-itin .card li{
+  font-size:14.5px;line-height:1.65;color:var(--ink-2);
+  padding-left:16px;position:relative;
+}.eu-itin .card li::before{
+  content:"";position:absolute;left:0;top:.7em;
+  width:6px;height:1px;background:var(--line);
+}.eu-itin .card li b{color:var(--ink);font-weight:600;display:block;font-size:13px;letter-spacing:.02em}.eu-itin .notes{padding:52px 0 0}.eu-itin .notes ol{margin:18px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:10px}.eu-itin .notes li{font-size:14px;color:var(--ink-2);line-height:1.7}.eu-itin .cta{margin:64px 0 0;border-top:2px solid var(--accent);background:var(--surface);padding:38px 0 44px}.eu-itin .cta .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap}.eu-itin .cta h2{font-size:clamp(22px,3vw,28px);margin:8px 0 10px}.eu-itin .cta p{margin:0;color:var(--ink-2);font-size:15px;max-width:46ch}.eu-itin .contact{display:flex;flex-direction:column;gap:6px;font-size:15px}.eu-itin .contact a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft);font-weight:500}.eu-itin .contact a:hover, .eu-itin .contact a:focus-visible{border-bottom-color:var(--accent)}.eu-itin footer{padding:26px 0 60px;color:var(--ink-3);font-size:12.5px}.eu-itin footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.eu-itin a:focus-visible, .eu-itin li:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+@media (max-width:800px){.eu-itin .day{grid-template-columns:1fr;gap:18px}.eu-itin .daykey{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}.eu-itin .daynum{font-size:40px}.eu-itin .places{margin-top:0;display:flex;gap:18px;flex-wrap:wrap}.eu-itin .cols{grid-template-columns:1fr}.eu-itin .hero{padding-top:44px}
+}
+@media (prefers-reduced-motion:reduce){.eu-itin *{animation:none!important;transition:none!important}}
+
+.eu-itin{padding:8px 0 40px}
+.eu-itin .hero{padding-top:8px}
+.eu-itin .wrap{max-width:1040px}
+.eu-itin footer{padding:22px 0 0}
+</style>
+<div class="eu-main">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span><span class="label">9박 10일 · 남부+북부 종단 · 전용차량+한국인 인솔</span></div>
+    <h1>포르투갈 <em>남북 종단</em></h1>
+    <p class="lede">
+      리스본에서 남쪽 알가르베 해안까지 내려갔다가, 성벽 마을과 성지를 지나 북쪽 포르투와 건국의 도시 기마랑이스까지 올라갑니다.
+      나라를 남에서 북으로 한 번에 훑는 동선이에요. 유네스코 세계유산 10곳을 담았습니다.
+    </p>
+    <dl class="facts">
+      <div class="fact"><dt class="label">일정</dt><dd>9박 10일</dd></div>
+      <div class="fact"><dt class="label">구간</dt><dd>리스본 IN/OUT · KE921·KE922</dd></div>
+      <div class="fact"><dt class="label">숙박</dt><dd>3·2·1·3 (리스본·알부페이라·파티마·포르투)</dd></div>
+      <div class="fact"><dt class="label">세계유산</dt><dd>10곳 (선택 관광 포함 시 12곳)</dd></div>
+      <div class="fact"><dt class="label">총 주행</dt><dd>약 1,820km (남북 종단 780km 포함)</dd></div>
+    </dl>
+  </div>
+
+  <div class="wrap garland" aria-hidden="true">
+    <svg viewBox="0 0 600 34">
+      <path d="M0 5 Q150 15 300 5 T600 5" fill="none" stroke="currentColor" stroke-width=".8" opacity=".4"/>
+      <g fill="currentColor" opacity=".8">
+        <circle cx="40" cy="8" r="2.4"/><circle cx="120" cy="6" r="2.4"/><circle cx="200" cy="9" r="2.4"/>
+        <circle cx="280" cy="6" r="2.4"/><circle cx="360" cy="8" r="2.4"/><circle cx="440" cy="6" r="2.4"/>
+        <circle cx="520" cy="9" r="2.4"/><circle cx="580" cy="6" r="2.4"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="mapsec">
+  <div class="wrap">
+    <div class="mapcard">
+      <h2 class="display">남쪽 끝까지, 그리고 다시 북쪽 끝까지</h2>
+      <p class="note">방문지의 상대적 위치를 나타낸 개념도입니다. 실제 축척과 해안선 형태는 다릅니다.</p>
+      <div class="mapscroll">
+        <svg viewBox="0 0 62 132" role="img" aria-label="포르투갈 종단 여정 개념도. 리스본에서 남쪽 에보라·알부페이라·베나길·라구스·사그레스까지 내려갔다가, 다시 북쪽 오비두스·나자레·파티마·코임브라·포르투·브라가·기마랑이스까지 올라가는 경로입니다.">
+          <path class="mp-sea" d="M0 0 H62 V132 H0 Z"/>
+          <path class="mp-coast" d="M6 4 L5 20 L4 36 L3 52 L2 68 L2.5 84 L4 100 L6 112 L9 122 L12 130"/>
+          <text class="mp-c" x="18" y="14">ATLÂNTICO</text>
+
+          <path class="mp-route" d="M13 108 L11 104 L9 98 L11 92 L14 88 L17 92 L19 98 L17 104 L15 110 L13 116 L11 112 L9 106 L8 100 L7 94 L8 88 L10 82 L13 78 L15 72 L14 66 L12 60 L10 54 L8 48 L7 42 L8 36 L10 30 L13 26 L16 22 L18 16 L20 10 L18 5"/>
+
+          <circle class="mp-dot stay" cx="13" cy="108" r="1.2"/>
+          <text class="mp-t" x="15.6" y="108.6">리스본 · 3박</text>
+
+          <circle class="mp-dot" cx="14" cy="88" r=".8"/><text class="mp-t" x="16.6" y="88.6">에보라</text>
+
+          <circle class="mp-dot stay" cx="13" cy="78" r="1.2"/>
+          <text class="mp-t" x="15.6" y="78.6">알부페이라 · 2박</text>
+
+          <circle class="mp-dot" cx="9" cy="72" r=".8"/><text class="mp-t" x="6.4" y="72.6" text-anchor="end">베나길</text>
+          <circle class="mp-dot" cx="6" cy="76" r=".8"/><text class="mp-t" x="3.4" y="80" text-anchor="end">라구스</text>
+          <circle class="mp-dot" cx="4" cy="82" r=".8"/><text class="mp-t" x="1.4" y="86" text-anchor="end">사그레스</text>
+
+          <circle class="mp-dot" cx="11" cy="54" r=".8"/><text class="mp-t" x="13.6" y="54.6">오비두스</text>
+          <circle class="mp-dot" cx="8" cy="48" r=".8"/><text class="mp-t" x="5.4" y="48.6" text-anchor="end">나자레</text>
+          <circle class="mp-dot" cx="9" cy="42" r=".8"/><text class="mp-t" x="11.6" y="42.6">알코바사·바탈랴</text>
+
+          <circle class="mp-dot stay" cx="13" cy="36" r="1.2"/>
+          <text class="mp-t" x="15.6" y="36.6">파티마 · 1박</text>
+
+          <circle class="mp-dot" cx="16" cy="27" r=".8"/><text class="mp-t" x="18.6" y="27.6">코임브라</text>
+          <circle class="mp-dot" cx="12" cy="21" r=".8"/><text class="mp-t" x="9.4" y="21.6" text-anchor="end">아베이루</text>
+
+          <circle class="mp-dot stay" cx="18" cy="16" r="1.2"/>
+          <text class="mp-t" x="20.6" y="16.6">포르투 · 3박</text>
+
+          <circle class="mp-dot" cx="24" cy="10" r=".8"/><text class="mp-t" x="26.6" y="10.6">브라가</text>
+          <circle class="mp-dot" cx="22" cy="13" r=".8"/><text class="mp-t" x="19.4" y="13.6" text-anchor="end">기마랑이스</text>
+
+          <path d="M13 114 L13 122" stroke="var(--ink-3)" stroke-width=".35" fill="none" stroke-dasharray="1.1 1"/>
+          <text class="mp-n" x="13" y="126" text-anchor="middle">↑ 1일차 도착 · 10일차 출국</text>
+        </svg>
+      </div>
+      <div class="maplegend">
+        <span><i style="background:var(--pine)"></i>숙박 도시 — 리스본·알부페이라·파티마·포르투</span>
+        <span><i style="background:var(--accent)"></i>당일 방문지</span>
+        <span><i style="background:var(--accent);opacity:.5"></i>이동 경로</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="itin">
+  <div class="wrap">
+    <h2 class="display">일정</h2>
+    <p class="sub">대한항공 직항은 수·금·일 주 3회 운항합니다. 리스본 도착이 저녁이고 귀국편이 밤 늦게 출발하므로, 첫날은 이동만 하고 마지막 날은 온전히 관광에 씁니다. 중식·석식은 전 일정 자유식으로, 가이드가 현지 식당을 안내해 드려요.</p>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">01<sub>일차</sub></div>
+        <ul class="places">
+          <li>인천 → 리스본<span class="lat">Incheon → Lisboa</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>인천 → 리스본</h3>
+        <p>수·금·일 KE921편, 13:00 인천공항 출발, 15시간 20분 비행 후 20:15 리스본 도착합니다.</p>
+        <p>현지 가이드 미팅 후 호텔로 이동합니다(공항–호텔 약 20분). 첫날은 이동과 휴식에 씁니다.</p>
+        <div class="meals"><span class="meal free">기내식</span></div>
+        <span class="tag-stay">숙박 — 리스본 (1/3박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">02<sub>일차</sub></div>
+        <ul class="places">
+          <li>리스본 종일<span class="lat">Lisboa</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>대항해시대의 도시</h3>
+        <p><strong>제로니무스 수도원(세계유산)</strong> — 대항해시대의 부로 지은 마누엘 양식의 정점, 바스쿠 다 가마가 잠든 곳입니다. <strong>벨렘탑(세계유산)</strong>과 <strong>발견기념비</strong>를 지나, 1837년부터 같은 자리에서 굽는 원조 에그타르트 <strong>파스테이스 드 벨렝</strong>을 맛봅니다.</p>
+        <p><strong>코메르시우 광장 · 아우구스타 개선문 · 산타 주스타 엘리베이터</strong>를 지나, <strong>알파마</strong>와 <strong>상 조르지 성</strong>에서 도시 전경을 보고, 언덕과 골목을 그대로 훑고 지나가는 <strong>28번 트램</strong>도 체험 승차합니다. (선택) 유네스코 무형문화유산인 <strong>파두 디너쇼</strong>를 즐기실 수 있습니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 리스본 (2/3박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">03<sub>일차</sub></div>
+        <ul class="places">
+          <li>신트라<span class="lat">Sintra</span></li>
+          <li>까보 다 로카<span class="lat">Cabo da Roca</span></li>
+          <li>카스카이스<span class="lat">Cascais</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>대륙의 끝, 유라시아 최서단</h3>
+        <p><strong>신트라 문화경관(세계유산)</strong> — 노랑과 빨강으로 칠한 낭만주의 궁전 <strong>페나 궁전</strong>에서 산 능선을 내려다보고, 지하 27m로 나선을 그리며 내려가는 입회의 우물 <strong>킨타 다 헤갈레이라</strong>를 둘러봅니다. 신트라 구시가에서 명물 페이스트리 <strong>트라베세이루</strong>도 맛봅니다.</p>
+        <p><strong>까보 다 로카</strong> — 유라시아 대륙 최서단입니다. <strong>카스카이스</strong>와 대서양이 절벽을 파고든 <strong>보카 두 인페르누</strong>를 지나, 에스토릴 해안도로를 따라 리스본으로 돌아옵니다. 약 110km, 주행 2시간입니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 리스본 (3/3박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">04<sub>일차</sub></div>
+        <ul class="places">
+          <li>에보라<span class="lat">Évora</span></li>
+          <li>알부페이라 도착<span class="lat">Albufeira</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>남부 구간의 시작</h3>
+        <p><strong>에보라 역사지구(세계유산)</strong> — 성벽 안이 통째로 유산인 알렌테주의 옛 수도입니다. 5천 구의 유골로 벽을 쌓고 "우리 뼈가 당신 뼈를 기다린다"고 새겨 둔 <strong>뼈 예배당</strong>, <strong>디아나 로마 신전 · 에보라 대성당 · 히랄두 광장</strong>을 둘러봅니다.</p>
+        <p>알렌테주 평원의 코르크나무 숲을 지나 남하해 <strong>알부페이라</strong>에 도착합니다. 구시가 골목과 해변 절벽을 둘러봅니다. 약 350km, 주행 4시간으로 남부 구간이 시작돼요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 알부페이라 (1/2박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">05<sub>일차</sub></div>
+        <ul class="places">
+          <li>베나길<span class="lat">Benagil</span></li>
+          <li>라구스<span class="lat">Lagos</span></li>
+          <li>사그레스<span class="lat">Sagres</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>알가르베 황금빛 해안</h3>
+        <p><strong>베나길 동굴</strong> — 천장이 뚫린 해식 동굴로, 바다에서 보트로만 들어갈 수 있습니다(보트 승선 포함). <strong>카르보에이루 등대 절벽길</strong>과 알가르베 황금빛 사암 해안을 지납니다.</p>
+        <p><strong>라구스</strong>와 바다가 깎아 세운 기암 절벽 <strong>폰타 다 피에다드</strong>, 엔히크 왕자의 항해 학교가 있던 유럽 남서쪽 끝 <strong>사그레스 곶</strong>을 둘러봅니다. 대서양 해산물 식당이 모여 있는 알부페이라 구시가에서 자유 시간을 가집니다. 약 150km, 주행 2시간 20분(보트 45~60분).</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 알부페이라 (2/2박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">06<sub>일차</sub></div>
+        <ul class="places">
+          <li>오비두스<span class="lat">Óbidos</span></li>
+          <li>나자레<span class="lat">Nazaré</span></li>
+          <li>알코바사 · 바탈랴<span class="lat">Alcobaça · Batalha</span></li>
+          <li>파티마<span class="lat">Fátima</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>가장 긴 하루, 다시 북쪽으로</h3>
+        <p>이른 아침 출발, 리스본을 지나 대서양 연안으로 북상합니다(오전에 320km 연속 주행). <strong>오비두스</strong> — 왕비에게 결혼 선물로 준 성벽 마을에서 초콜릿 잔에 담아 마시는 진자 리큐르를 맛봅니다.</p>
+        <p><strong>나자레</strong> — 겨울이면 30m 파도가 서는 프라이아 두 노르트를 봅니다. <strong>알코바사 수도원(세계유산)</strong>과 지붕을 끝내 얹지 못한 '미완의 예배당' <strong>바탈랴 수도원(세계유산)</strong>을 지나 <strong>파티마</strong>에 도착합니다, 1917년 성모 발현 성지를 둘러봅니다. (선택) 야간 촛불 행렬에 참여하실 수 있습니다. 약 440km, 주행 5시간입니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 파티마 (1박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">07<sub>일차</sub></div>
+        <ul class="places">
+          <li>코임브라<span class="lat">Coimbra</span></li>
+          <li>아베이루 · 코스타 노바<span class="lat">Aveiro · Costa Nova</span></li>
+          <li>포르투 도착<span class="lat">Porto</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>유럽 최고(最古)의 대학에서 줄무늬 마을까지</h3>
+        <p>(선택) <strong>토마르 그리스도 수도원(세계유산)</strong> — 템플기사단의 본거지도 경유 가능합니다. <strong>코임브라 대학(세계유산)</strong> — 1290년에 문을 연, 유럽에서 가장 오래된 대학 중 하나입니다. 금박 서가와 책벌레를 잡는 박쥐가 사는 <strong>조아니나 도서관</strong>을 봅니다.</p>
+        <p><strong>아베이루</strong> — 운하를 젓는 색색의 몰리세이루 배와 달걀 과자 오보스 몰레스를 맛봅니다. <strong>코스타 노바</strong> — 대서양을 등지고 늘어선 줄무늬 목조 가옥을 보고, 저녁 포르투에 도착합니다. 약 220km, 주행 2시간 40분입니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 포르투 (1/3박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">08<sub>일차</sub></div>
+        <ul class="places">
+          <li>포르투 종일<span class="lat">Porto</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>두루 강을 낀 옛 도시</h3>
+        <p><strong>포르투 역사지구(세계유산)</strong> — 아줄레주 2만 장으로 벽을 채운 <strong>상 벤투 역</strong>, <strong>렐루 서점 · 클레리구스 탑 · 카르무 성당 · 포르투 대성당</strong>을 둘러봅니다. 에펠의 제자가 놓은 2층 철교 <strong>동 루이스 1세 다리</strong>를 위층으로 걸어서 건넙니다.</p>
+        <p><strong>히베이라 강변</strong>과 가이아행 케이블카를 지나 <strong>빌라 노바 드 가이아</strong>의 포트와인 셀러에서 견학과 시음을 하고, 강 위에서 보는 포르투 전경 <strong>두루강 6다리 유람선</strong>도 탑승합니다. 시내 약 30km, 도보 구간이 많습니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 포르투 (2/3박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">09<sub>일차</sub></div>
+        <ul class="places">
+          <li>브라가<span class="lat">Braga</span></li>
+          <li>기마랑이스<span class="lat">Guimarães</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>포르투갈이 태어난 곳</h3>
+        <p><strong>봉 제수스 두 몬트(세계유산)</strong> — 바로크 계단과 물로 움직이는 푸니쿨라를 체험합니다. <strong>브라가 대성당</strong>과 구시가 — 포르투갈에서 가장 오래된 대성당입니다.</p>
+        <p><strong>기마랑이스(세계유산)</strong> — 성벽에 "여기서 포르투갈이 태어났다"고 적혀 있는 건국의 도시입니다. <strong>기마랑이스 성 · 브라간사 공작 궁전 · 올리베이라 광장</strong>을 둘러봅니다. (선택) <strong>두루 밸리 피녀웅 와이너리 + 두루 열차(대안 세계유산)</strong> 코스로 대체하실 수 있습니다. 약 140km, 주행 1시간 50분입니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 포르투 (3/3박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey">
+        <div class="daynum">10<sub>일차</sub></div>
+        <ul class="places">
+          <li>포르투 → 리스본 → 인천<span class="lat">Porto → Lisboa → Incheon</span></li>
+        </ul>
+      </div>
+      <div class="daybody">
+        <h3>귀환</h3>
+        <p>오전 <strong>포르투 볼량 시장</strong> 또는 자유 시간을 즐깁니다. A1 고속도로로 리스본까지 이동합니다(약 320km, 주행 3시간).</p>
+        <p>리스본 시내에서 자유 시간·쇼핑을 즐긴 뒤, 19:30 공항으로 이동해 22:15 KE922편으로 출발, 이튿날 19:15 인천 도착합니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">기내식</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="info">
+  <div class="wrap">
+    <h2 class="display">왜 이 동선인가</h2>
+    <div class="why">
+      <p><strong>남쪽을 먼저 끝내고 북으로 한 번에 올라갑니다.</strong> 알가르베는 리스본에서 막다른 남쪽 끝입니다. 리스본 관광을 마친 뒤 내려갔다가, 올라오는 길에 오비두스·나자레·알코바사·바탈랴를 차례로 지나며 북상합니다. 같은 길을 두 번 지나지 않습니다.</p>
+      <p><strong>에보라는 내려가는 길에 넣었습니다.</strong> 리스본에서 알가르베로 곧장 내려가면 250km가 그냥 이동입니다. 중간에 에보라를 끼우면 같은 하루에 세계유산 한 곳이 더 붙습니다.</p>
+      <p><strong>짐은 네 번만 풉니다.</strong> 리스본 3박, 알부페이라 2박, 파티마 1박, 포르투 3박. 10일 일정에서 이동 숙박은 파티마 하룻밤뿐입니다.</p>
+      <p><strong>가장 긴 날은 6일차 하루입니다.</strong> 440km 중 320km가 오전 고속도로 연속 구간이고, 오후에는 15~40분 간격으로 네 곳을 끊어서 돕니다. 이 하루를 감수하는 대신 남부와 북부를 하나의 여정으로 잇습니다.</p>
+      <p><strong>항공 스케줄에 맞춰 앞뒤를 설계했습니다.</strong> 리스본 도착이 밤 8시대라 첫날은 이동만 하고, 귀국편이 밤 10시대라 마지막 날을 온전한 관광일로 씁니다. 10일 일정에서 실제 관광일이 9일 나옵니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cmp">
+  <div class="wrap">
+    <h2 class="display">8일 상품과의 차이</h2>
+    <table class="cmptable">
+      <thead><tr><th></th><th>8일 7박</th><th>9박10일 (남부 포함)</th></tr></thead>
+      <tbody>
+        <tr><td>남부 알가르베</td><td>없음</td><td>2박 — 베나길·라구스·사그레스</td></tr>
+        <tr><td>에보라</td><td>없음</td><td>포함</td></tr>
+        <tr><td>세계유산</td><td>9곳</td><td>10곳</td></tr>
+        <tr><td>숙박 도시</td><td>3곳</td><td>4곳</td></tr>
+        <tr><td>총 주행</td><td>약 1,090km</td><td>약 1,820km</td></tr>
+        <tr><td>최장 주행일</td><td>230km</td><td>440km (6일차)</td></tr>
+        <tr><td>포르투·브라가</td><td>3박 · 종일 + 근교</td><td>3박 · 종일 + 근교 (동일)</td></tr>
+      </tbody>
+    </table>
+    <p class="note">북부 구성은 두 상품이 같아요. 10일 상품은 앞쪽에 남부 사흘을 얹은 구조라, 8일 상품에서 아무것도 덜어내지 않고 알가르베와 에보라를 더한 셈이에요.</p>
+  </div>
+</section>
+
+<section class="opt">
+  <div class="wrap">
+    <h2 class="display">선택 관광</h2>
+    <div style="overflow-x:auto;">
+    <table class="opttable">
+      <thead><tr><th>일차</th><th>선택 관광</th><th>내용</th><th>최소 인원</th></tr></thead>
+      <tbody>
+        <tr><td>2일차</td><td>리스본 파두 디너쇼</td><td>유네스코 무형문화유산 · 석식 겸용</td><td>10명</td></tr>
+        <tr><td>5일차</td><td>알가르베 지프 사파리</td><td>내륙 산악마을 · 반나절</td><td>10명</td></tr>
+        <tr><td>6일차</td><td>파티마 야간 촛불 행렬</td><td>저녁 기도 참여 · 도보</td><td>—</td></tr>
+        <tr><td>7일차</td><td>토마르 그리스도 수도원</td><td>템플기사단 본거지 · 세계유산</td><td>10명</td></tr>
+        <tr><td>8일차</td><td>포르투 두루강 6다리 유람선</td><td>50분 크루즈</td><td>10명</td></tr>
+        <tr><td>9일차</td><td>두루 밸리 · 피녀웅</td><td>브라가·기마랑이스 대안 · 와이너리 + 두루 열차</td><td>15명</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="incl">
+  <div class="wrap">
+    <h2 class="display">포함 · 불포함</h2>
+    <div class="cols">
+      <div class="card">
+        <h3><span class="pip"></span>포함 사항</h3>
+        <ul>
+          <li><b>숙박</b>전 일정 4성급 호텔 9박 · 조식 포함</li>
+          <li><b>차량</b>전용 차량 및 기사(현지 10일)</li>
+          <li><b>인솔</b>한국인 인솔 가이드 전 일정 동행</li>
+          <li><b>현지 가이드</b>일정표 명시 도시</li>
+          <li><b>입장료</b>일정표 명시 입장료 전액</li>
+          <li><b>베나길</b>베나길 동굴 보트 승선</li>
+          <li><b>보험</b>여행자 보험</li>
+        </ul>
+      </div>
+      <div class="card no">
+        <h3><span class="pip"></span>불포함 사항</h3>
+        <ul>
+          <li><b>항공</b>왕복 국제선 항공권 — 지상 수배 상품이에요</li>
+          <li><b>식사</b>중식·석식(전 일정 자유식) — 가이드가 현지 식당을 안내해 드려요</li>
+          <li><b>선택 관광</b>선택 관광 비용</li>
+          <li><b>팁</b>가이드 · 기사 팁</li>
+          <li><b>개인 경비</b>개인 경비</li>
+          <li><b>관광세</b>포르투갈 도시별 숙박세(1인 1박 €2~4, 현지 납부)</li>
+          <li><b>수하물</b>초과 수하물 요금</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="notes">
+  <div class="wrap">
+    <h2 class="display">예약 전 확인해 주십시오</h2>
+    <ol>
+      <li>본 일정은 <strong>리스본 IN/OUT</strong> 기준의 <strong>지상 수배 상품</strong>이에요. 항공권은 별도로 준비해 주세요.</li>
+      <li>일정표에 명시된 도시는 현지 가이드가 동행하며, 그 외 구간은 한국인 인솔자가 안내해요.</li>
+      <li><strong>중식·석식은 전 일정 자유식</strong>이에요. 가이드가 현지 식당을 추천·안내해 드려요.</li>
+      <li>6일차는 오전 320km 연속 주행이 있는 최장 이동일이에요. 편한 옷차림을 권해 드려요.</li>
+      <li>도보 구간이 많은 날이 있어요(리스본·포르투 시내). <strong>편한 신발</strong>을 권해 드려요.</li>
+      <li>포르투갈 전 도시는 숙박세(Tourist tax)가 별도이며 현지에서 직접 납부해요.</li>
+      <li>현지 사정과 기상, 도로 상황, 시설 휴관일에 따라 방문 순서와 내용이 조정될 수 있어요.</li>
+      <li>요금과 출발일은 별도 문의해 주세요. 인원과 시즌에 따라 달라져요.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div>
+      <div class="label">문의</div>
+      <h2 class="display">일정을 원하시는 대로 맞춰 드립니다</h2>
+      <p>인원, 출발일, 호텔 등급에 따라 맞춤 견적을 드려요. 8일 상품(남부 제외)으로 조정도 가능해요. 스페인 현지에서 직접 운영하므로 일정 변경과 긴급 상황에도 빠르게 대응해요.</p>
+    </div>
+    <div class="contact">
+      <span class="label">Euforia Tour Spain</span>
+      <a href="mailto:euforia@euforiatour.com">euforia@euforiatour.com</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>EUFORIA DAS NUVENS S.L. · Madrid, España</span>
+    <span>Portugal Grand Tour North &amp; South · 9박 10일</span>
+  </div>
+</footer>
+</div>
+`,
+      highlights: ['에보라 역사지구 (세계유산) · 뼈 예배당', '베나길 동굴 보트 승선 · 라구스 · 사그레스 곶', '오비두스 · 나자레 · 알코바사 · 바탈랴 세계유산 벨트', '파티마 성지 순례', '포르투 역사지구 · 동 루이스 1세 다리 · 포트와인 셀러', '브라가 · 기마랑이스 (포르투갈 건국의 도시)'],
+      includes: ['전 일정 4성급 호텔 9박 · 조식 포함', '전용 차량 및 기사(현지 10일)', '한국인 인솔 가이드 전 일정 동행', '일정표 명시 도시 현지 가이드', '일정표 명시 입장료 전액', '베나길 동굴 보트 승선', '여행자 보험'],
+      excludes: ['왕복 국제선 항공권(지상 수배 상품)', '중식·석식(전 일정 자유식)', '선택 관광 비용', '가이드 · 기사 팁', '개인 경비', '포르투갈 도시별 숙박세(1인 1박 €2~4, 현지 납부)', '초과 수하물 요금'],
+      duration: '9박 10일 (리스본 IN/OUT · 실 관광일 9일)'
+    }
+  },
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
    괄호 부분(조건, 예: (4인 이상 출발 기준))은 아래 줄에 작게 표시해요.
    괄호가 없는 가격(예: '가격 문의')은 그대로 한 줄로 나와요. */
