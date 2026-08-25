@@ -1362,6 +1362,7 @@ price: '가격 문의',
 <section class="opt">
   <div class="wrap">
     <h2 class="display">선택 관광</h2>
+    <div style="overflow-x:auto;">
     <table class="opttable">
       <thead><tr><th>일차</th><th>선택 관광</th><th>내용</th><th>최소 인원</th></tr></thead>
       <tbody>
@@ -1370,10 +1371,13 @@ price: '가격 문의',
         <tr><td>4일차</td><td>파티마 야간 촛불 행렬</td><td>저녁 기도 참여 · 도보</td><td>—</td></tr>
         <tr><td>6일차</td><td>포르투 두루강 6다리 유람선</td><td>50분 크루즈</td><td>10명</td></tr>
         <tr><td>7일차</td><td>두루 밸리 · 피녀웅</td><td>브라가·기마랑이스 대안 · 와이너리 + 두루 열차</td><td>15명</td></tr>
-      </tbody>
+           </tbody>
     </table>
+    </div>
   </div>
 </section>
+
+<section class="incl">
 
 <section class="incl">
   <div class="wrap">
@@ -1382,23 +1386,24 @@ price: '가격 문의',
       <div class="card">
         <h3><span class="pip"></span>포함 사항</h3>
         <ul>
-          <li><b>항공</b>왕복 국제선 항공(대한항공 직항)</li>
           <li><b>숙박</b>전 일정 4성급 호텔 7박 · 조식</li>
           <li><b>특별 식사</b>파티마 호텔 석식 포함</li>
           <li><b>차량</b>전용 차량 및 기사(현지 8일)</li>
           <li><b>인솔</b>한국인 인솔 가이드 전 일정 동행</li>
           <li><b>현지 가이드</b>일정표 명시 도시</li>
           <li><b>입장료</b>일정표 명시 입장료 전액</li>
-          <li><b>식사</b>일정표 명시 식사(조식 7 · 중식 6 · 석식 6)</li>
+          <li><b>식사</b>일정표 명시 식사(조식 7. 석식 1)</li>
           <li><b>보험</b>여행자 보험</li>
         </ul>
       </div>
       <div class="card no">
         <h3><span class="pip"></span>불포함 사항</h3>
         <ul>
+           <li><b>항공</b>왕복 국제선 항공(대한항공 직항)</li>
           <li><b>선택 관광</b>선택 관광 비용</li>
           <li><b>팁</b>가이드 · 기사 팁</li>
-          <li><b>개인 경비</b>개인 경비 및 매식(자유 시간 중 식사)</li>
+          <li><b>식사</b>일정표 명시 식사이외 전체 자유식</li>
+          <li><b>개인 경비</b>개인 경비 </li>
           <li><b>관광세</b>포르투갈 도시별 숙박세(1인 1박 €2~4, 현지 납부)</li>
           <li><b>수하물</b>초과 수하물 요금</li>
         </ul>
