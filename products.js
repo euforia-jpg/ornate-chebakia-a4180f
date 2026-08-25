@@ -2475,6 +2475,525 @@ price: '가격 문의',
       duration: '11박 12일 (리스본 IN · 마드리드 OUT · 관광 9일+휴식 3일)'
     }
   },
+{
+    id: 'spain-12days-barcelona',
+    cats: ['spain'],
+    topClass: 'spain',
+    region: 'SPAIN',
+    days: '11박12일',
+    price: '가격 문의',
+    title: '[스페인 일주] 바르셀로나 IN/OUT 11박12일',
+    summary: '바르셀로나에서 지중해를 따라 남하해 알함브라와 백색마을을 지나고, 안달루시아 파라도르에서 사흘을 쉰 뒤 세비야·코르도바·마드리드를 거쳐 돌아오는 스페인 일주예요.',
+    tags: ['11박 12일', '파라도르 3박', '관광 9일+휴식 3일'],
+    isNew: true,
+    detail: {
+      lead: '바르셀로나 2박·발렌시아 1박·그라나다 1박·론다 파라도르 2박·카르모나 파라도르 1박·세비야 2박·마드리드 2박, 시계 방향으로 스페인을 한 바퀴 도는 일주예요.',
+      description: `<!-- ── Euforia Tour · 스페인 일주 12일(바르셀로나 IN/OUT) · 붙여넣기용 조각 ──
+     이 블록 전체를 상세설명 HTML 칸에 그대로 붙여 넣으십시오.
+     모든 스타일이 .eu-spain12a 안으로만 적용되므로 사이트의 기존 디자인과 부딪히지 않습니다. ── -->
+<div class="eu-spain12a">
+<style>
+.eu-spain12a{
+  --ink:#20292B;
+  --tilegreen:#1F6F6B;
+  --tilegreen-soft:#5E9A96;
+  --ochre:#A9682B;
+  --stone:#6E7B78;
+  --paper:#FAF7F1;
+  --tile:#EFEDE5;
+  --line:#DAD6CA;
+  --muted:#6B7573;
+  --pattern-op:.16;
+  --f-kr:"IBM Plex Sans KR","Noto Sans KR","Malgun Gothic",system-ui,-apple-system,sans-serif;
+  --f-disp:var(--f-kr);
+  --f-body:var(--f-kr);
+}
+.eu-spain12a *{box-sizing:border-box}
+.eu-spain12a{overflow-x:hidden;max-width:100%;
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-weight:300; font-size:16px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all; overflow-wrap:anywhere;
+}
+.eu-spain12a h1, .eu-spain12a h2, .eu-spain12a h3, .eu-spain12a h4{font-family:var(--f-disp); font-weight:600; text-wrap:balance; margin:0; line-height:1.3; letter-spacing:-.015em}
+.eu-spain12a p{margin:0}
+.eu-spain12a a{color:var(--tilegreen)}
+.eu-spain12a .wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+
+
+/* ── 알함브라 팔각 성형 타일 밴드 ─────────────── */
+.eu-spain12a .mudejar{
+  height:18px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg fill='none' stroke='%231F6F6B' stroke-width='1.15'%3E%3Crect x='9' y='9' width='26' height='26'/%3E%3Crect x='9' y='9' width='26' height='26' transform='rotate(45 22 22)'/%3E%3Ccircle cx='22' cy='22' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:22px 22px;
+  opacity:var(--pattern-op);
+}
+
+
+/* ── masthead ─────────────────────────────────── */
+.eu-spain12a header.mast{padding:64px 0 44px}
+.eu-spain12a .eyebrow{
+  font-size:11.5px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--tilegreen); margin-bottom:20px;
+}
+.eu-spain12a h1{font-size:clamp(36px,5.8vw,60px); font-weight:700; letter-spacing:-.03em}
+.eu-spain12a h1 .lat{font-weight:300; color:var(--tilegreen)}
+.eu-spain12a .lede{margin-top:20px; max-width:56ch; font-size:17.5px; color:var(--muted); line-height:1.85}
+.eu-spain12a .route{
+  margin-top:34px; padding-top:22px; border-top:1px solid var(--line);
+  font-weight:400; font-size:13px; line-height:2.2; color:var(--stone);
+}
+.eu-spain12a .route b{color:var(--ink); font-weight:500}
+.eu-spain12a .route em{color:var(--ochre); font-style:normal; font-weight:500}
+
+
+/* ── facts ────────────────────────────────────── */
+.eu-spain12a .facts{
+  display:grid; gap:1px; background:var(--line);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  border:1px solid var(--line); margin:44px 0 8px;
+}
+.eu-spain12a .fact{background:var(--paper); padding:20px 22px}
+.eu-spain12a .fact dt{font-size:12px; font-weight:500; color:var(--muted); margin-bottom:6px}
+.eu-spain12a .fact dd{margin:0; font-weight:600; font-size:21px; line-height:1.35; font-variant-numeric:tabular-nums}
+.eu-spain12a .fact dd small{display:block; font-weight:300; font-size:13px; color:var(--muted); margin-top:4px}
+
+
+/* ── sections ─────────────────────────────────── */
+.eu-spain12a .sec{padding:64px 0 8px}
+.eu-spain12a .sec-label{
+  font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--tilegreen); margin-bottom:12px;
+}
+.eu-spain12a .sec h2{font-size:clamp(26px,3.4vw,34px)}
+.eu-spain12a .sec .sub{margin-top:12px; color:var(--muted); max-width:62ch}
+
+
+/* ── itinerary spine ──────────────────────────── */
+.eu-spain12a .days{margin-top:40px}
+.eu-spain12a .day{display:grid; grid-template-columns:104px 1fr; gap:0 28px; padding-bottom:44px; position:relative}
+.eu-spain12a .rail{position:relative}
+.eu-spain12a .rail::before{content:""; position:absolute; left:19px; top:44px; bottom:-44px; width:1px; background:var(--line)}
+.eu-spain12a .day:last-child .rail::before{display:none}
+.eu-spain12a .dnum{
+  width:40px; height:40px; border-radius:50%;
+  background:var(--paper); border:1px solid var(--tilegreen); color:var(--tilegreen);
+  display:grid; place-items:center; font-size:14px; font-weight:500;
+  position:relative; z-index:1;
+}
+.eu-spain12a .day.hub .dnum{background:var(--tilegreen); border-color:var(--tilegreen); color:var(--paper)}
+.eu-spain12a .day.rest .dnum{background:var(--ochre); border-color:var(--ochre); color:var(--paper)}
+.eu-spain12a .day.rest .drive span::before{background:var(--ochre)}
+.eu-spain12a .day.rest ul.stops li::before{background:var(--ochre)}
+.eu-spain12a .day.rest .stay{border-left-color:var(--ochre)}
+.eu-spain12a .dwhen{
+  width:80px; text-align:center; padding:7px 0 3px; margin-left:-20px;
+  background:var(--paper); position:relative; z-index:1;
+  font-weight:400; font-size:11.5px; color:var(--muted); white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.eu-spain12a .day.rest .dwhen{color:var(--ochre); font-weight:500}
+.eu-spain12a .body{min-width:0}
+.eu-spain12a .dtitle{font-size:23px; letter-spacing:-.005em}
+.eu-spain12a .dtitle .via{color:var(--muted); font-weight:400}
+.eu-spain12a .drive{
+  margin-top:10px; display:flex; flex-wrap:wrap; gap:6px 14px;
+  font-weight:400; font-size:12.5px; color:var(--stone); font-variant-numeric:tabular-nums;
+}
+.eu-spain12a .drive span{display:inline-flex; align-items:center; gap:6px}
+.eu-spain12a .drive span::before{content:""; width:5px; height:5px; background:var(--tilegreen-soft); border-radius:50%}
+.eu-spain12a ul.stops{list-style:none; padding:0; margin:18px 0 0; display:grid; gap:11px}
+.eu-spain12a ul.stops li{padding-left:18px; position:relative; line-height:1.7}
+.eu-spain12a ul.stops li::before{content:""; position:absolute; left:0; top:.72em; width:7px; height:1px; background:var(--tilegreen)}
+.eu-spain12a ul.stops b{font-weight:600; color:var(--ink)}
+.eu-spain12a .tag{
+  display:inline-block; margin-left:6px; padding:1px 7px; border-radius:2px;
+  font-weight:400; font-size:11px;
+  border:1px solid var(--tilegreen); color:var(--tilegreen); vertical-align:2px;
+}
+.eu-spain12a .tag.opt{border-color:var(--ochre); color:var(--ochre)}
+.eu-spain12a .tag.xmas{border-color:var(--ochre); color:var(--paper); background:var(--ochre)}
+.eu-spain12a .stay{
+  margin-top:18px; padding:12px 16px; background:var(--tile); border-left:2px solid var(--tilegreen);
+  font-size:13.5px; display:flex; flex-wrap:wrap; gap:4px 18px;
+}
+.eu-spain12a .stay dt{font-size:12px; font-weight:500; color:var(--muted); align-self:center}
+.eu-spain12a .stay dd{margin:0; font-weight:500}
+
+
+/* ── tables / cards ───────────────────────────── */
+.eu-spain12a .scroll{overflow-x:auto; margin-top:24px}
+.eu-spain12a table{border-collapse:collapse; width:100%; font-size:14px; min-width:560px}
+.eu-spain12a th, .eu-spain12a td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+.eu-spain12a th{font-size:12.5px; color:var(--muted); font-weight:500; border-bottom-color:var(--ink)}
+.eu-spain12a td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+.eu-spain12a td small{display:block; font-weight:300; font-size:12.5px; color:var(--muted); margin-top:3px; font-variant-numeric:tabular-nums}
+.eu-spain12a .cols{display:grid; gap:32px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:28px}
+.eu-spain12a .card{border:1px solid var(--line); padding:24px}
+.eu-spain12a .card h3{font-size:18px; margin-bottom:14px}
+.eu-spain12a .card ul{list-style:none; padding:0; margin:0; display:grid; gap:9px; font-size:14.5px}
+.eu-spain12a .card li{padding-left:16px; position:relative}
+.eu-spain12a .card li::before{content:""; position:absolute; left:0; top:.7em; width:6px; height:1px; background:var(--tilegreen)}
+.eu-spain12a .card.excl li::before{background:var(--muted)}
+.eu-spain12a .note{margin-top:28px; padding:24px 26px; border:1px solid var(--line); background:var(--tile)}
+.eu-spain12a .note .why{display:grid; gap:14px; counter-reset:w}
+.eu-spain12a .note .why div{padding-left:20px; position:relative}
+.eu-spain12a .note .why div::before{
+  content:counter(w); counter-increment:w; position:absolute; left:0; top:.1em;
+  font-weight:500; font-size:13px; color:var(--tilegreen);
+}
+.eu-spain12a .note.warn{border-left:3px solid var(--ochre)}
+.eu-spain12a .note.warn .why div::before{color:var(--ochre)}
+.eu-spain12a footer{
+  margin-top:72px; padding:36px 0 56px; border-top:1px solid var(--line);
+  font-size:13px; color:var(--muted); display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
+}
+.eu-spain12a footer b{color:var(--ink); font-weight:600; letter-spacing:.02em}
+@media (max-width:640px){.eu-spain12a .day{grid-template-columns:52px 1fr; gap:0 14px}
+.eu-spain12a .dwhen{width:52px; margin-left:-6px; font-size:10px}
+.eu-spain12a header.mast{padding:44px 0 32px}
+
+}
+
+</style>
+
+
+<div class="mudejar"></div>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Euforia Tour · Spain Grand Tour</div>
+    <h1>스페인 일주 <span class="lat">12일</span></h1>
+    <p class="lede">
+      바르셀로나에서 지중해를 따라 남하해 알함브라와 백색마을을 지나고,
+      안달루시아 파라도르에서 사흘을 쉰 뒤 세비야·코르도바·마드리드를 거쳐 돌아옵니다.
+      관광 아홉 날과 쉬는 사흘을 처음부터 나눠 설계했고, 전 구간을 전용 차량으로만 이동합니다.
+    </p>
+    <div class="route">
+      <b>바르셀로나</b> → 몬세라트 → <b>발렌시아</b> → <b>그라나다</b> → 네르하 → 프리힐리아나 →
+      <em>론다</em> → 백색마을 → <em>카르모나</em> → <b>세비야</b> → 코르도바 → <b>마드리드</b> → 사라고사 → 바르셀로나
+    </div>
+
+    <dl class="facts">
+      <div class="fact"><dt>일정</dt><dd>12일 11박<small>출발일 협의 · 연중 진행</small></dd></div>
+      <div class="fact"><dt>구성</dt><dd>관광 9 · 휴식 3<small>휴식은 6~8일차 연속</small></dd></div>
+      <div class="fact"><dt>구간</dt><dd>바르셀로나 IN/OUT<small>항공 별도 · 아시아나 OZ511/512</small></dd></div>
+      <div class="fact"><dt>이동</dt><dd>전 구간 차량<small>국내선·열차 없음</small></dd></div>
+      <div class="fact"><dt>총 주행</dt><dd>약 2,700km<small>11일 평균 245km</small></dd></div>
+    </dl>
+  </header>
+
+
+  <section class="sec">
+    <div class="sec-label">Flights</div>
+    <h2>항공 안내</h2>
+    <p class="sub">이 상품은 <b>지상 수배</b>입니다. 국제선 항공권은 불포함이며, 아래는 인천에서 오갈 수 있는 직항편입니다.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>구간</th><th>항공사 · 편명</th><th>운항</th><th>소요</th></tr></thead>
+        <tbody><tr><td>인천 → 바르셀로나</td><td>아시아나 <b>OZ511</b><br><small>11:50 → 19:10</small></td><td><b>매일</b><br><small>2026년 9월 1일부터</small></td><td>약 14시간 20분</td></tr><tr><td>바르셀로나 → 인천</td><td>아시아나 <b>OZ512</b><br><small>20:50 → 16:20 (+1)</small></td><td><b>매일</b></td><td>약 13시간 30분</td></tr><tr><td>인천 ↔ 바르셀로나</td><td>티웨이 TW407 / TW408<br><small>11:05 → 19:00</small></td><td>주 4회</td><td>약 14시간 55분</td></tr><tr><td>인천 ↔ 바르셀로나</td><td>대한항공</td><td>직항 노선 <b>없음</b></td><td>—</td></tr></tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:24px"><div class="why">
+      <div><b>출발 요일에 제한이 없습니다.</b> 아시아나가 2026년 9월 1일부터 인천–바르셀로나를 매일 운항합니다. 가는 편도 오는 편도 매일 있으니 어느 요일에 출발해도 12일이 그대로 나옵니다. 세 노선 가운데 날짜를 가장 자유롭게 잡을 수 있습니다.</div>
+      <div><b>시각은 시즌마다 바뀝니다.</b> 동계(10월 말~3월 말)와 하계 스케줄이 달라 출발·도착 시각이 한두 시간 움직입니다. 위 시각은 동계 기준이며, <b>출발일이 정해지면 그 시점 스케줄로 다시 확인해 드립니다.</b></div>
+    </div></div>
+    <p class="sub" style="margin-top:20px">대한항공은 인천–바르셀로나 직항 노선이 없습니다. 티웨이는 주 4회 운항이라 출발 요일이 맞아야 합니다. 좌석은 운항 요일과 별개이므로, 특히 연말·여름 성수기에는 <b>단체 좌석 확보가 먼저입니다.</b></p>
+  </section>
+
+  <section class="sec">
+    <div class="sec-label">Itinerary</div>
+    <h2>일정</h2>
+    <p class="sub">
+      휴식 사흘은 6~8일차에 연속으로 둡니다. 안달루시아 국영 고성 호텔 파라도르 두 곳에서 묵습니다.
+      중식·석식은 전 일정 자유식입니다.
+    </p>
+
+    <div class="days">
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">1</div><div class="dwhen">1일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">인천 <span class="via">→</span> 바르셀로나</h3>
+          <div class="drive"><span>공항–호텔 약 20km</span><span>인천 오전 출발 · 바르셀로나 저녁 도착</span></div>
+          <ul class="stops">
+            <li>바르셀로나 공항 미팅 후 호텔 이동 — 첫날은 휴식에 씁니다</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>바르셀로나 (1/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">2</div><div class="dwhen">2일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">바르셀로나 종일</h3>
+          <div class="drive"><span>시내 약 40km</span><span>도보 구간 다수</span></div>
+          <ul class="stops">
+            <li><b>사그라다 파밀리아</b><span class="tag">세계유산</span> — 가우디가 43년을 매달린 미완의 성당</li>
+            <li><b>구엘 공원</b><span class="tag">세계유산</span> · <b>까사 바트요</b>와 까사 밀라 — 가우디 작품군</li>
+            <li><b>고딕 지구</b>와 바르셀로나 대성당 · 보케리아 시장 · 람블라스 거리</li>
+            <li><b>산타 마리아 델 마르 성당</b>과 보른 지구 — 카탈루냐 고딕의 정수</li>
+            <li><b>몬주익 언덕</b> 전망과 마법의 분수 조명</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>바르셀로나 (2/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">3</div><div class="dwhen">3일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">몬세라트 <span class="via">→</span> 발렌시아</h3>
+          <div class="drive"><span>약 410km</span><span>주행 4시간 30분</span><span>08:30 출발</span></div>
+          <ul class="stops">
+            <li><b>몬세라트 수도원</b> — 톱니 모양 바위산 위 베네딕토회 수도원, 검은 성모 라 모레네타</li>
+            <li>몬세라트 <b>케이블카</b> 또는 산악열차 · 소년 합창단 에스콜라니아</li>
+            <li>지중해 연안을 따라 남하 — 발렌시아 도착</li>
+            <li>저녁 <b>발렌시아 구시가</b> 산책</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>발렌시아 (1박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">4</div><div class="dwhen">4일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">발렌시아 <span class="via">→</span> 그라나다</h3>
+          <div class="drive"><span>약 500km</span><span>주행 5시간</span><span>오전 관광 후 이동</span></div>
+          <ul class="stops">
+            <li><b>라 론하 데 라 세다</b><span class="tag">세계유산</span> — 지중해 무역 전성기의 비단 거래소</li>
+            <li><b>중앙시장</b> — 유럽 최대 규모 재래시장 중 하나, 모데르니스모 철골 건축</li>
+            <li><b>발렌시아 대성당</b>과 성배 예배당 · 미겔레테 탑</li>
+            <li><b>예술과학도시</b> 외관 — 칼라트라바의 백색 구조물</li>
+            <li>오후 내륙을 가로질러 그라나다로 이동</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>그라나다 (1박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">5</div><div class="dwhen">5일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">알함브라 <span class="via">·</span> 네르하 <span class="via">·</span> 프리힐리아나 <span class="via">→</span> 론다</h3>
+          <div class="drive"><span>약 300km</span><span>주행 3시간 30분</span><span>알함브라 오전 지정 입장</span></div>
+          <ul class="stops">
+            <li><b>알함브라 궁전</b><span class="tag">세계유산</span> — 나스르 왕조의 붉은 성. 사자의 중정, 헤네랄리페 정원</li>
+            <li><b>네르하 발콘 데 에우로파</b> — 지중해로 튀어나온 절벽 전망대</li>
+            <li><b>프리힐리아나</b> — 안달루시아에서 가장 아름다운 백색마을로 꼽히는 곳</li>
+            <li>해 지기 전 <b>론다</b> 입성 — 파라도르 체크인, 타호 협곡 전망</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>론다 파라도르 (1/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day rest">
+        <div class="rail"><div class="dnum">6</div><div class="dwhen">6일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">휴식 <span class="via">·</span> 론다 파라도르</h3>
+          <div class="drive"><span>일정 없음</span><span>완전 자유</span></div>
+          <ul class="stops">
+            <li>옛 시청사를 고쳐 만든 <b>론다 파라도르</b> — 누에보 다리 바로 옆, 절벽 위에 서 있습니다</li>
+            <li>늦은 아침, 협곡을 내려다보는 테라스에서 시작하는 하루</li>
+            <li>원하는 만큼만 걷는 론다 구시가 — 누에보 다리, 투우장, 아랍 목욕탕</li>
+            <li>세테닐 데 라스 보데가스 · 그라살레마 백색마을<span class="tag opt">선택</span> — 반나절 근교</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>론다 파라도르 (2/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day rest">
+        <div class="rail"><div class="dnum">7</div><div class="dwhen">7일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">백색마을 길 <span class="via">→</span> 카르모나 파라도르</h3>
+          <div class="drive"><span>약 165km</span><span>주행 2시간</span><span>오전 자유 · 오후 이동</span></div>
+          <ul class="stops">
+            <li>오전 론다에서 늦게까지 자유 — 체크아웃 서두르지 않습니다</li>
+            <li>올리브 밭과 백색마을을 지나는 안달루시아 시골길</li>
+            <li><b>카르모나 파라도르</b> — 페드로 1세가 쓰던 무어인 성채를 고쳐 만든 호텔</li>
+            <li>성벽 테라스에서 베가 평원으로 지는 해 — 이 파라도르의 전부입니다</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>카르모나 파라도르 (1박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day rest">
+        <div class="rail"><div class="dnum">8</div><div class="dwhen">8일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">카르모나 자유 <span class="via">→</span> 세비야</h3>
+          <div class="drive"><span>약 35km</span><span>주행 40분</span><span>오전 완전 자유</span></div>
+          <ul class="stops">
+            <li>오전 카르모나 완전 자유 — 파라도르 수영장, 성벽 산책, 로마 시대 네크로폴리스</li>
+            <li>세비야 문과 코르도바 문 사이 언덕 마을을 천천히 걷습니다</li>
+            <li>오후 <b>세비야</b> 이동 · 체크인 후 과달키비르 강변 산책</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>세비야 (1/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">9</div><div class="dwhen">9일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">세비야 종일</h3>
+          <div class="drive"><span>시내 약 20km</span><span>실내 관람은 오전 집중</span></div>
+          <ul class="stops">
+            <li><b>세비야 대성당과 히랄다 탑</b><span class="tag">세계유산</span> — 세계 최대 고딕 성당, 콜럼버스의 관</li>
+            <li><b>레알 알카사르</b><span class="tag">세계유산</span> — 무데하르 양식 왕궁과 정원</li>
+            <li><b>스페인 광장</b> — 반원형 회랑과 타일 벤치, 오후에도 열려 있는 야외 명소</li>
+            <li><b>산타 크루스 골목</b>과 황금의 탑 · 과달키비르 강변</li>
+            <li>저녁 자유식 — 가이드가 구시가의 타파스 골목과 추천 식당을 미리 안내합니다</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>세비야 (2/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">10</div><div class="dwhen">10일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">코르도바 <span class="via">→</span> 마드리드</h3>
+          <div class="drive"><span>약 540km</span><span>주행 5시간 30분</span><span>실내 관람 없는 날</span></div>
+          <ul class="stops">
+            <li>세비야에서 마드리드로 북상하는 이동일 — 코르도바를 중간에 끊어 야외 위주로 봅니다</li>
+            <li><b>코르도바 유대인 지구</b><span class="tag">세계유산</span> — 골목과 파티오, 메스키타 외관과 종탑</li>
+            <li><b>로마교</b>와 칼라오라 탑 — 과달키비르 강 건너에서 보는 옛 도시</li>
+            <li>오후 마드리드로 북상</li>
+            <li>저녁 <b>마요르 광장</b>과 <b>그란 비아</b> · 솔 광장</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>마드리드 (1/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="rail"><div class="dnum">11</div><div class="dwhen">11일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">마드리드 종일</h3>
+          <div class="drive"><span>시내 약 30km</span><span>실내 관람 위주</span></div>
+          <ul class="stops">
+            <li><b>프라도 미술관</b><span class="tag">세계유산</span> — 벨라스케스 「시녀들」, 고야, 보스의 「쾌락의 정원」</li>
+            <li><b>파세오 델 프라도와 부엔 레티로</b><span class="tag">세계유산</span> — 2021년 등재된 계몽 시대 도시경관</li>
+            <li><b>마드리드 왕궁</b>과 알무데나 대성당 · 근위병 교대</li>
+            <li><b>마요르 광장</b>과 <b>산 미겔 시장</b> — 19세기 철골 시장 건물</li>
+            <li>솔 광장 · 그란 비아 자유 시간</li>
+          </ul>
+          <dl class="stay"><dt>숙박</dt><dd>마드리드 (2/2박)</dd></dl>
+        </div>
+      </article>
+
+      <article class="day hub">
+        <div class="rail"><div class="dnum">12</div><div class="dwhen">12일차</div></div>
+        <div class="body">
+          <h3 class="dtitle">사라고사 <span class="via">→</span> 바르셀로나 <span class="via">→</span> 인천</h3>
+          <div class="drive"><span>약 635km</span><span>주행 6시간 20분</span><span>07:30 출발</span><span>바르셀로나 저녁 출발편 기준</span></div>
+          <ul class="stops">
+            <li>이른 아침 마드리드 출발, 아라곤 평원을 가로질러 사라고사로</li>
+            <li><b>필라르 대성당</b> — 성모가 기둥 위에 나타났다는 자리에 세운 스페인 최대 바로크 성당</li>
+            <li><b>알하페리아 궁전</b><span class="tag">세계유산</span> — 아라곤 무데하르 건축</li>
+            <li>사라고사 중식 후 바르셀로나로 이동, 공항 도착</li>
+            <li>바르셀로나 저녁 출발 — 이튿날 인천 도착</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-label">Design note</div>
+    <h2>왜 이 동선인가</h2>
+    <div class="note">
+      <div class="why">
+        <div><b>시계 방향 한 바퀴입니다.</b> 바르셀로나에서 지중해를 따라 남하해 안달루시아를 돌고, 마드리드와 사라고사를 지나 바르셀로나로 돌아옵니다. 되돌아가는 구간이 없어야 전 구간 차량 이동이 성립합니다.</div>
+        <div><b>휴식 사흘을 여정 한가운데 두었습니다.</b> 앞의 닷새는 바르셀로나부터 알함브라까지 밀도가 높습니다. 그 다음 사흘을 파라도르에서 쉬고, 다시 세비야부터 마드리드까지 나흘을 돕니다. 지쳐서 쉬는 게 아니라 쉬고 나서 후반을 도는 구조입니다.</div>
+        <div><b>파라도르 두 곳을 골랐습니다.</b> 론다는 절벽 위 옛 시청사, 카르모나는 언덕 위 무어인 성채입니다. 둘 다 그 자체가 목적지라 밖에 나가지 않아도 하루가 채워집니다. 리조트 대신 이쪽을 고른 이유입니다.</div>
+        <div><b>가장 긴 날은 마지막 날입니다.</b> 12일차 635km는 사라고사를 중간에 끊어 두 구간으로 나눕니다. 아침 일찍 출발해 도로가 비어 있고, 짐은 이미 차에 실린 상태입니다.</div>
+        <div><b>국내선과 열차를 쓰지 않습니다.</b> 전 구간 전용 차량이라 짐을 옮겨 싣는 일이 없고, 백색마을처럼 대중교통이 닿지 않는 곳을 그대로 일정에 넣을 수 있습니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-label">Inclusions</div>
+    <h2>포함 · 불포함</h2>
+    <div class="cols">
+      <div class="card">
+        <h3>포함 사항</h3>
+        <ul>
+          <li>4성급 호텔 8박 · <b>조식 포함</b></li>
+          <li><b>파라도르 3박</b> (론다 2 · 카르모나 1) · 조식 포함</li>
+          <li>전용 차량 및 기사 (현지 12일 · 전 구간)</li>
+          <li>한국인 인솔 가이드 전 일정 동행</li>
+          <li>일정표 명시 도시의 현지 가이드</li>
+          <li>일정표 명시 입장료 전액</li>
+          <li>여행자 보험</li>
+        </ul>
+      </div>
+      <div class="card excl">
+        <h3>불포함 사항</h3>
+        <ul>
+          <li><b>왕복 국제선 항공권</b> — 지상 수배 상품입니다</li>
+          <li><b>중식 · 석식 (전 일정 자유식)</b> — 가이드가 현지 식당을 안내합니다</li>
+          <li>선택 관광 비용</li>
+          <li>가이드 · 기사 팁</li>
+          <li>개인 경비</li>
+          <li>바르셀로나 숙박세 (카탈루냐 관광세, 현지 납부)</li>
+          <li>초과 수하물 요금</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-label">Optional</div>
+    <h2>선택 관광</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>일차</th><th>선택 관광</th><th>내용</th><th>최소 인원</th></tr></thead>
+        <tbody>
+          <tr><td class="num">4일차</td><td>발렌시아 오세아노그라픽</td><td>유럽 최대 수족관 · 예술과학도시 내부</td><td class="num">10명</td></tr>
+          <tr><td class="num">5일차</td><td>네르하 동굴</td><td>종유석 대공동 · 선사시대 벽화</td><td class="num">10명</td></tr>
+          <tr><td class="num">6일차</td><td>세테닐 · 그라살레마 백색마을</td><td>론다 근교 반나절 · 바위 아래 지은 마을</td><td class="num">10명</td></tr>
+          <tr><td class="num">7일차</td><td>파라도르 특선 만찬</td><td>카르모나 파라도르 안달루시아 코스</td><td class="num">—</td></tr>
+          <tr><td class="num">9일차</td><td>세비야 플라멩코</td><td>유네스코 무형문화유산 · 타블라오 공연</td><td class="num">10명</td></tr>
+          <tr><td class="num">11일차</td><td>톨레도 반일 투어</td><td>마드리드 근교 75km · 대성당과 산토토메</td><td class="num">15명</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-label">Highlights</div>
+    <h2>이 일정에 담긴 것</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>세계유산</td><td>바르셀로나 가우디 작품군 · 발렌시아 라 론하 · 알함브라와 헤네랄리페 · 세비야 대성당과 알카사르 · 코르도바 역사지구 · 파세오 델 프라도와 부엔 레티로 · 사라고사 알하페리아 <b>(7곳)</b></td></tr>
+          <tr><td>백색마을</td><td>프리힐리아나 · 론다 · 카르모나 · 세테닐(선택) · 그라살레마(선택)</td></tr>
+          <tr><td>파라도르</td><td>론다(옛 시청사, 절벽 위) 2박 · 카르모나(무어인 성채) 1박</td></tr>
+          <tr><td>이동 방식</td><td>전 구간 전용 차량 — 국내선·열차 없이 12일을 한 대로 이동합니다</td></tr>
+          <tr><td>숙박 도시</td><td>바르셀로나 2 · 발렌시아 1 · 그라나다 1 · 론다 2 · 카르모나 1 · 세비야 2 · 마드리드 2 <b>(11박)</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div><b>EUFORIA TOUR SPAIN</b> · Euforia das Nuvens, S.L. · Calle Gran Vía 69, Madrid</div>
+    <div>일정과 순서는 현지 사정에 따라 조정될 수 있습니다.</div>
+  </footer>
+
+</div>
+
+<div class="mudejar"></div>
+
+
+</div>
+`,
+      highlights: ['사그라다 파밀리아 · 구엘 공원 (세계유산)', '몬세라트 수도원 · 발렌시아 라 론하 (세계유산)', '알함브라 궁전 (세계유산) · 프리힐리아나 백색마을', '론다·카르모나 파라도르(국영 고성 호텔) 3박', '세비야 대성당 · 레알 알카사르 (세계유산)', '코르도바 역사지구 (세계유산)', '프라도 미술관 · 파세오 델 프라도 (세계유산)', '사라고사 필라르 대성당 · 알하페리아 궁전 (세계유산)'],
+      includes: ['4성급 호텔 8박 · 조식 포함', '파라도르 3박(론다 2·카르모나 1) · 조식 포함', '전용 차량 및 기사(현지 12일 · 전 구간)', '한국인 인솔 가이드 전 일정 동행', '일정표 명시 도시 현지 가이드', '일정표 명시 입장료 전액', '여행자 보험'],
+      excludes: ['왕복 국제선 항공권(지상 수배 상품)', '중식·석식(전 일정 자유식)', '선택 관광 비용', '가이드 · 기사 팁', '개인 경비', '바르셀로나 숙박세(카탈루냐 관광세, 현지 납부)', '초과 수하물 요금'],
+      duration: '11박 12일 (바르셀로나 IN/OUT · 관광 9일+휴식 3일)'
+    }
+  },
 ];
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요.
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
