@@ -396,7 +396,7 @@ function productLink(p){
 }
 
 /* 홈 화면에는 대표 상품만 골라서 보여줘요. 다른 상품으로 바꾸려면 이 id 목록만 수정하면 돼요. */
-const FEATURED_IDS = ['madrid-toledo-day', 'docent-museum', 'portugal-round', 'spain-round', 'basque-navarra-6days', 'camino-100', 'matchday'];
+const FEATURED_IDS = ['madrid-toledo-day', 'docent-museum', 'portugal-round', 'spain-round', 'basque-navarra-6days', 'portugal-8days', 'portugal-10days', 'camino-100', 'matchday'];
 const featured = FEATURED_IDS.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
 
 document.getElementById('tourGrid').innerHTML = featured.map(p => `
