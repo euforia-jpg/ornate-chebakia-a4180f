@@ -2233,21 +2233,15 @@ render();
     <div class="notice-body">
       <p>여기에 이번 달 안내 문구를 자유롭게 넣어주세요. 예: 신규 오픈 경기, 한정 프로모션, 마감 임박 안내 등이요.</p>
       <button class="cta" id="noticeCta">경기 일정 보러가기</button>
-      <label class="hide-today">
-        <input type="checkbox" id="noticeHideToday" style="margin:0;">
-        오늘 하루 보지 않기
-      </label>
     </div>
   </div>
 </div>
 <script>
 (function(){
-  const KEY = 'noticeHiddenDate';
   const today = new Date().toISOString().slice(0, 10);
   const overlay = document.getElementById('noticeOverlay');
   const closeBtn = document.getElementById('noticeClose');
   const ctaBtn = document.getElementById('noticeCta');
-  const hideCheckbox = document.getElementById('noticeHideToday');
 
   // 아틀레티코 마드리드의 다음 홈경기를 MATCHES 데이터에서 자동으로 찾아요.
   const noticeTitleEl = document.querySelector('#noticeOverlay h3');
@@ -2264,15 +2258,10 @@ render();
     }
   }
 
-  if (localStorage.getItem(KEY) !== today) {
-    setTimeout(() => overlay.classList.add('show'), 600);
-  }
+  setTimeout(() => overlay.classList.add('show'), 600);
 
   function closeNotice(){
     overlay.classList.remove('show');
-    if (hideCheckbox.checked) {
-      localStorage.setItem(KEY, today);
-    }
   }
 
   closeBtn.addEventListener('click', closeNotice);
