@@ -2222,9 +2222,13 @@ render();
   </script> 
 <div class="notice-overlay" id="noticeOverlay">
   <div class="notice-box">
-      <div class="notice-banner" style="background:none; padding:0;">
-      <button class="notice-close" id="noticeClose" aria-label="닫기" style="background:rgba(20,16,61,0.5);">✕</button>
-      <img src="/images/notice-banner.jpg" alt="이번 달 공지" style="width:100%; display:block;">
+         <div class="notice-banner" style="background:repeating-linear-gradient(90deg, #C8102E 0 22px, #FFFFFF 22px 44px); padding:0; position:relative; overflow:hidden;">
+      <div style="position:absolute; inset:0; background:radial-gradient(circle at 30% 20%, rgba(20,16,61,0.05), rgba(20,16,61,0.65) 75%);"></div>
+      <button class="notice-close" id="noticeClose" aria-label="닫기" style="background:rgba(255,255,255,0.25); z-index:2;">✕</button>
+      <div style="position:relative; z-index:1; padding:32px 24px 26px;">
+        <span class="tag" style="background:rgba(255,255,255,0.9); color:#C8102E;">⚽ 이번 달 티켓 오픈</span>
+        <h3 style="color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.5);">아틀레티코 마드리드<br>홈경기, 지금 예약하세요</h3>
+      </div>
     </div>
     <div class="notice-body">
       <p>여기에 이번 달 안내 문구를 자유롭게 넣어주세요. 예: 신규 오픈 경기, 한정 프로모션, 마감 임박 안내 등이요.</p>
