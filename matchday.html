@@ -2241,6 +2241,7 @@ render();
   </div>
 </div>
 <script>
+<script>
 (function(){
   const KEY = 'noticeHiddenDate';
   const today = new Date().toISOString().slice(0, 10);
@@ -2248,6 +2249,21 @@ render();
   const closeBtn = document.getElementById('noticeClose');
   const ctaBtn = document.getElementById('noticeCta');
   const hideCheckbox = document.getElementById('noticeHideToday');
+
+  // 아틀레티코 마드리드의 다음 홈경기를 MATCHES 데이터에서 자동으로 찾아요.
+  const noticeTitleEl = document.querySelector('#noticeOverlay h3');
+  if (typeof MATCHES !== 'undefined' && noticeTitleEl) {
+    const next = MATCHES
+      .filter(m => m.home === '아틀레티코 마드리드' && m.date >= today)
+      .sort((a, b) => a.date.localeCompare(b.date))[0];
+
+    if (next) {
+      const d = new Date(next.date + 'T00:00:00');
+      const dow = ['일','월','화','수','목','금','토'][d.getDay()];
+      const dateLabel = `${d.getMonth()+1}/${d.getDate()}(${dow})`;
+      noticeTitleEl.innerHTML = `아틀레티코 마드리드<br>홈경기 ${dateLabel}, 지금 예약하세요`;
+    }
+  }
 
   if (localStorage.getItem(KEY) !== today) {
     setTimeout(() => overlay.classList.add('show'), 600);
