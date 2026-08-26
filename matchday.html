@@ -625,6 +625,17 @@
     footer{ padding:6px 16px 28px; }
     .footer-inner{ padding:22px 16px; border-radius:18px; }
   }
+.notice-overlay{ position:fixed; inset:0; background:rgba(20,16,61,0.55); z-index:500; display:none; align-items:center; justify-content:center; padding:20px; }
+.notice-overlay.show{ display:flex; }
+.notice-box{ background:#fff; border-radius:20px; max-width:400px; width:100%; overflow:hidden; box-shadow:0 30px 60px -20px rgba(20,16,61,0.5); }
+.notice-banner{ background:linear-gradient(135deg,var(--violet),var(--pink)); padding:28px 24px 24px; color:#fff; position:relative; }
+.notice-banner .tag{ display:inline-block; background:rgba(255,255,255,0.2); padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.5px; margin-bottom:12px; }
+.notice-banner h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:20px; margin:0; line-height:1.3; }
+.notice-close{ position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.2); border:none; color:#fff; width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; }
+.notice-body{ padding:22px 24px 24px; }
+.notice-body p{ margin:0 0 18px; font-size:13.5px; color:var(--ink); line-height:1.7; font-weight:600; }
+.notice-body .cta{ all:unset; display:block; width:100%; box-sizing:border-box; text-align:center; padding:13px; background:var(--navy); color:#fff; font-weight:800; border-radius:10px; cursor:pointer; font-size:13.5px; margin-bottom:10px; }
+.notice-body .hide-today{ display:flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); font-weight:700; cursor:pointer; justify-content:center; }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -2209,5 +2220,46 @@ render();
     });
   }
   </script> 
+<div class="notice-overlay" id="noticeOverlay">
+  <div class="notice-box">
+      <div class="notice-banner" style="background:none; padding:0;">
+      <button class="notice-close" id="noticeClose" aria-label="닫기" style="background:rgba(20,16,61,0.5);">✕</button>
+      <img src="/images/notice-banner.jpg" alt="이번 달 공지" style="width:100%; display:block;">
+    </div>
+    <div class="notice-body">
+      <p>여기에 이번 달 안내 문구를 자유롭게 넣어주세요. 예: 신규 오픈 경기, 한정 프로모션, 마감 임박 안내 등이요.</p>
+      <button class="cta" id="noticeCta">경기 일정 보러가기</button>
+      <label class="hide-today">
+        <input type="checkbox" id="noticeHideToday" style="margin:0;">
+        오늘 하루 보지 않기
+      </label>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const KEY = 'noticeHiddenDate';
+  const today = new Date().toISOString().slice(0, 10);
+  const overlay = document.getElementById('noticeOverlay');
+  const closeBtn = document.getElementById('noticeClose');
+  const ctaBtn = document.getElementById('noticeCta');
+  const hideCheckbox = document.getElementById('noticeHideToday');
+
+  if (localStorage.getItem(KEY) !== today) {
+    setTimeout(() => overlay.classList.add('show'), 600);
+  }
+
+  function closeNotice(){
+    overlay.classList.remove('show');
+    if (hideCheckbox.checked) {
+      localStorage.setItem(KEY, today);
+    }
+  }
+
+  closeBtn.addEventListener('click', closeNotice);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeNotice(); });
+  ctaBtn.addEventListener('click', closeNotice);
+})();
+</script>
 </body>
 </html>
