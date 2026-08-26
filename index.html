@@ -213,6 +213,25 @@ button.price-chip:hover{ opacity:.92; }
 .app-badge{ display:inline-flex; align-items:center; gap:6px; margin-top:16px; padding:10px 20px; border-radius:999px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; font-size:13.5px; text-decoration:none; box-shadow:0 8px 16px -9px rgba(230,49,123,0.55); }
 .app-badge:hover{ opacity:.9; }
 </style>
+  .feature-overlay{ position:fixed; inset:0; background:rgba(20,16,61,0.6); z-index:500; display:none; align-items:center; justify-content:center; padding:20px; }
+.feature-overlay.show{ display:flex; }
+.feature-box{ background:#fff; border-radius:24px; max-width:520px; width:100%; overflow:hidden; box-shadow:0 30px 70px -20px rgba(20,16,61,0.55); position:relative; }
+.feature-close{ position:absolute; top:16px; right:16px; z-index:5; background:rgba(20,16,61,0.35); border:none; color:#fff; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; }
+.feature-head{ padding:30px 28px 22px; text-align:center; background:linear-gradient(160deg, var(--violet), var(--pink) 120%); color:#fff; }
+.feature-head .eyebrow{ display:inline-block; background:rgba(255,255,255,0.2); padding:5px 14px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:1px; margin-bottom:12px; }
+.feature-head h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:21px; margin:0; line-height:1.35; }
+.feature-head h3 em{ font-style:normal; text-decoration:underline; text-decoration-color:rgba(255,255,255,0.55); text-underline-offset:4px; }
+.feature-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); }
+.feature-card{ background:#fff; padding:24px 20px; text-align:center; }
+.feature-card .ico{ width:52px; height:52px; border-radius:16px; margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+.feature-card.audio .ico{ background:linear-gradient(135deg, var(--teal), #0E9E8B); }
+.feature-card.ai .ico{ background:linear-gradient(135deg, var(--violet), #8B5CF6); }
+.feature-card h4{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:15px; margin:0 0 8px; color:var(--navy); }
+.feature-card p{ font-size:12px; color:var(--muted); line-height:1.6; margin:0 0 16px; font-weight:600; }
+.feature-card .go{ all:unset; display:block; padding:9px; border-radius:999px; font-size:12px; font-weight:800; cursor:pointer; text-decoration:none; }
+.feature-card.audio .go{ background:var(--wash-teal); color:#0E9E8B; }
+.feature-card.ai .go{ background:var(--wash-violet); color:var(--violet); }
+@media (max-width:480px){ .feature-grid{ grid-template-columns:1fr; } }
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
@@ -651,6 +670,39 @@ window.toggleAudioGuide = function(btn){
   }
   setTimeout(rotateBest, 800);
   setInterval(rotateBest, 15000);
+})();
+</script>
+<div class="feature-overlay" id="featureOverlay">
+  <div class="feature-box">
+    <button class="feature-close" id="featureClose" aria-label="닫기">✕</button>
+    <div class="feature-head">
+      <span class="eyebrow">✨ EUFORIA ONLY</span>
+      <h3>여행이 <em>더 특별해지는</em><br>두 가지 방법</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card audio">
+        <div class="ico">🎧</div>
+        <h4>무료 오디오 가이드</h4>
+        <p>톨레도 대성당부터 알함브라 궁전까지, <strong>밝고 친근한 목소리</strong>로 들려드려요.</p>
+        <a class="go" href="audio-guide.html">들으러 가기 →</a>
+      </div>
+      <div class="feature-card ai">
+        <div class="ico">🗺️</div>
+        <h4>AI 일정 만들기</h4>
+        <p>가고 싶은 도시만 알려주시면, <strong>30초 만에</strong> 나만의 일정이 완성돼요.</p>
+        <a class="go" href="plan.html">만들어보기 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const overlay = document.getElementById('featureOverlay');
+  const closeBtn = document.getElementById('featureClose');
+  setTimeout(() => overlay.classList.add('show'), 700);
+  function closeFeature(){ overlay.classList.remove('show'); }
+  closeBtn.addEventListener('click', closeFeature);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFeature(); });
 })();
 </script>
 </body>
