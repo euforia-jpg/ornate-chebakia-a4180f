@@ -1002,6 +1002,7 @@ price: '가격 문의',
   },
  {
     id: 'portugal-8days',
+    downloadUrl: '/docs/portugal-8days-itinerary.pdf',
     cats: ['portugal'],
     topClass: 'portugal',
     region: 'PORTUGAL',
@@ -1390,7 +1391,6 @@ price: '가격 문의',
           <li><b>인솔</b>한국인 인솔 가이드 전 일정 동행</li>
           <li><b>현지 가이드</b>일정표 명시 도시</li>
           <li><b>입장료</b>일정표 명시 입장료 전액</li>
-          <li><b>식사</b>일정표 명시 식사(조식 7. 석식 1)</li>
           <li><b>보험</b>여행자 보험</li>
         </ul>
       </div>
@@ -1400,7 +1400,7 @@ price: '가격 문의',
            <li><b>항공</b>왕복 국제선 항공(대한항공 직항)</li>
           <li><b>선택 관광</b>선택 관광 비용</li>
           <li><b>팁</b>가이드 · 기사 팁</li>
-          <li><b>식사</b>일정표 명시 식사이외 전체 자유식</li>
+          <li><b>식사</b>호텔 조식 7회 · 파티마 호텔 석식 1회를 제외한 전 일정 식사 — 중식 · 석식 모두 자유식</li>
           <li><b>개인 경비</b>개인 경비 </li>
           <li><b>관광세</b>포르투갈 도시별 숙박세(1인 1박 €2~4, 현지 납부)</li>
           <li><b>수하물</b>초과 수하물 요금</li>
@@ -1475,6 +1475,7 @@ price: '가격 문의',
   },
 {
     id: 'portugal-10days',
+    downloadUrl: '/docs/portugal-10days-itinerary.pdf',
     cats: ['portugal'],
     topClass: 'portugal',
     region: 'PORTUGAL',
@@ -1973,6 +1974,7 @@ price: '가격 문의',
   },
 {
     id: 'iberia-12days',
+    downloadUrl: '/docs/iberia-12days-itinerary.pdf',
     cats: ['spain'],
     topClass: 'spain',
     region: 'SPAIN · PORTUGAL',
@@ -2475,6 +2477,7 @@ price: '가격 문의',
   },
 {
     id: 'spain-12days-barcelona',
+    downloadUrl: '/docs/spain-12days-itinerary.pdf',
     cats: ['spain'],
     topClass: 'spain',
     region: 'SPAIN',
@@ -2994,6 +2997,7 @@ price: '가격 문의',
   },
 {
     id: 'north-cantabria-basque',
+    downloadUrl: '/docs/north-cantabria-basque-itinerary.pdf',
     cats: ['spain'],
     topClass: 'spain',
     region: '스페인북부',
@@ -3396,6 +3400,7 @@ header.mast{padding:64px 0 44px}
   },
 {
     id: 'north-asturias-picos',
+    downloadUrl: '/docs/north-asturias-picos-itinerary.pdf',
     cats: ['spain'],
     topClass: 'spain',
     region: '스페인북부',
@@ -3797,6 +3802,7 @@ header.mast{padding:64px 0 44px}
   },
 {
     id: 'iberia-14days-madrid',
+    downloadUrl: '/docs/iberia-14days-itinerary.pdf',
     cats: ['spain'],
     topClass: 'spain',
     region: 'SPAIN · PORTUGAL',
@@ -3998,7 +4004,7 @@ header.mast{padding:64px 0 44px}
         <h3>마드리드 시내</h3>
         <p><strong>프라도 미술관</strong> — 벨라스케스 「시녀들」, 고야의 검은 그림을 만나요. <strong>마드리드 왕궁</strong>과 <strong>알무데나 대성당</strong>을 둘러봅니다.</p>
         <p><strong>마요르 광장</strong>과 <strong>산 미겔 시장</strong>에서 이베리코 하몽과 타파스를 맛보고, <strong>솔 광장·그란비아</strong>에서 저녁 산책과 자유 시간을 가져요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 마드리드</span>
       </div>
     </article>
@@ -4011,7 +4017,7 @@ header.mast{padding:64px 0 44px}
         <h3>마드리드 → 사라고사 (약 315km · 3시간)</h3>
         <p><strong>필라르 성모 대성당</strong> — 에브로 강변에 선 스페인 최초의 성모 발현지예요. <strong>알하페리아 궁전</strong> — 이슬람 왕궁 위에 세워진 무데하르 건축의 정수입니다.</p>
         <p><strong>로마교</strong>와 에브로 강변, 구시가 골목을 걸어요. 패키지 일정에서 잘 다루지 않는 도시라, 저녁의 사라고사는 조용하고 물가도 순해요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 사라고사</span>
       </div>
     </article>
@@ -4024,7 +4030,7 @@ header.mast{padding:64px 0 44px}
         <h3>사라고사 → 바르셀로나 (약 310km · 3시간)</h3>
         <p>오전 이동 후 바르셀로나 도착, 점심 식사. <strong>고딕 지구</strong> — 바르셀로나 대성당, 왕의 광장, 로마 성벽의 흔적을 봅니다.</p>
         <p><strong>산타 마리아 델 마르 성당</strong>과 보른 지구 — 카탈루냐 고딕의 정수예요. <strong>람블라스 거리</strong>와 <strong>보케리아 시장</strong>도 둘러봅니다.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 바르셀로나 (1/2박)</span>
       </div>
     </article>
@@ -4037,7 +4043,7 @@ header.mast{padding:64px 0 44px}
         <h3>가우디의 하루</h3>
         <p><strong>사그라다 파밀리아</strong> — 내부 입장. 오전 빛이 동쪽 탄생의 파사드를 통과해요. <strong>구엘 공원</strong> — 모자이크 벤치와 도시 전망을 즐깁니다.</p>
         <p><strong>카사 바트요 또는 카사 밀라</strong> 외관 — 그라시아 거리를 걷고, <strong>몬주익 언덕</strong>에서 내려다보는 지중해와 항구로 마무리해요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 바르셀로나 (2/2박)</span>
       </div>
     </article>
@@ -4050,7 +4056,7 @@ header.mast{padding:64px 0 44px}
         <h3>바르셀로나 → 발렌시아 (약 350km · 3시간 30분 · 지중해 연안)</h3>
         <p><strong>예술과학도시</strong> — 칼라트라바가 마른 강바닥에 세운 미래 도시예요. <strong>발렌시아 대성당</strong> — 성배 예배당, 미겔레테 종탑을 봅니다.</p>
         <p><strong>중앙시장</strong>과 <strong>라 론하</strong> — 유럽 최대급 모더니즘 시장이에요. 파에야가 태어난 도시라, 저녁은 알부페라 쪽 자유식을 권해 드려요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 발렌시아</span>
       </div>
     </article>
@@ -4063,7 +4069,7 @@ header.mast{padding:64px 0 44px}
         <h3>발렌시아 → 그라나다 (약 500km · 5시간 · 최장 구간)</h3>
         <p>오전 출발, 중간 휴게하며 이동해요. 차창 밖으로 올리브 밭이 지평선까지 이어집니다.</p>
         <p>도착 후 <strong>산 니콜라스 전망대</strong> — 시에라네바다 설산을 배경으로 한 알함브라의 정면을 봅니다. <strong>알바이신</strong> 백색 골목 — 유네스코 세계유산인 옛 무슬림 거주 구역이에요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 그라나다</span>
       </div>
     </article>
@@ -4076,7 +4082,7 @@ header.mast{padding:64px 0 44px}
         <h3>그라나다 → 세비야 (약 250km · 3시간)</h3>
         <p><strong>알함브라 궁전</strong> — 나스르 궁전 지정 시간 입장, 헤네랄리페 정원, 카를로스 5세 궁을 봅니다. 나스르 궁전은 입장 시각이 분 단위로 지정돼서, 이날 오전 일정은 그 시각에 맞춰 짜요.</p>
         <p>오후 세비야로 이동, 과달키비르 강변에서 저녁을 맞습니다.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 세비야 (1/2박)</span>
       </div>
     </article>
@@ -4089,7 +4095,7 @@ header.mast{padding:64px 0 44px}
         <h3>안달루시아의 심장</h3>
         <p><strong>세비야 대성당</strong>과 히랄다 탑 — 콜럼버스의 관이 있어요. <strong>알카사르</strong> — 무데하르 양식의 왕궁과 정원입니다.</p>
         <p><strong>스페인 광장</strong> — 반원형 회랑과 타일로 새긴 스페인 전 주(州)를 봅니다. 산타크루스 옛 유대인 지구 골목을 지나, 저녁엔 (선택) 플라멩코 공연도 즐기실 수 있어요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 세비야 (2/2박)</span>
       </div>
     </article>
@@ -4102,7 +4108,7 @@ header.mast{padding:64px 0 44px}
         <h3>세비야 → 파티마 (약 500km · 5시간 30분 · 국경 통과)</h3>
         <p>스페인–포르투갈 국경을 넘어 북상해요. 리스본을 지나쳐 내륙으로 올라갑니다. 여기서부터 시계를 한 시간 뒤로 돌리고, 대서양을 따라 일정이 이어져요.</p>
         <p><strong>파티마 성모 발현 성지</strong> — 발현 소성당, 로사리오 대성당, 삼위일체 성당을 봅니다. 해가 지면 성지 광장에 촛불 행렬이 서요. 신자가 아니어도 오래 남는 장면이에요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 파티마</span>
       </div>
     </article>
@@ -4115,7 +4121,7 @@ header.mast{padding:64px 0 44px}
         <h3>파티마 → 코임브라 → 포르투 (약 185km · 코임브라 경유)</h3>
         <p><strong>코임브라 대학</strong> — 유럽에서 가장 오래된 대학 중 하나예요. <strong>조아니나 도서관</strong> — 금박 서가와, 벌레를 잡기 위해 사는 박쥐들이 있어요.</p>
         <p>오후 포르투 도착. 도루 강이 대서양으로 빠지는 도시예요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 포르투 (1/2박)</span>
       </div>
     </article>
@@ -4128,7 +4134,7 @@ header.mast{padding:64px 0 44px}
         <h3>도루 강의 하루</h3>
         <p><strong>렐루 서점</strong> — 붉은 계단의 네오고딕 서점이에요. <strong>상 벤투 역</strong> — 벽면 2만 장의 아줄레주가 포르투갈 역사를 그립니다.</p>
         <p><strong>동 루이스 1세 다리</strong>와 히베이라 강변 — 유네스코 세계유산 구역이에요. <strong>빌라노바드가이아</strong> 포트와인 셀러 방문과 시음도 함께해요.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 포르투 (2/2박)</span>
       </div>
     </article>
@@ -4141,7 +4147,7 @@ header.mast{padding:64px 0 44px}
         <h3>포르투 → 리스본 (약 310km · 3시간)</h3>
         <p>오전 이동, 오후 리스본 벨렝 지구로 향합니다. <strong>제로니모스 수도원</strong> — 마누엘 양식의 정점, 바스쿠 다 가마가 잠든 곳이에요.</p>
         <p><strong>벨렝 탑</strong>과 발견 기념비 — 대항해가 시작된 강어귀예요. <strong>파스테이스 드 벨렝</strong> — 1837년부터 같은 자리에서 굽는 에그타르트를 맛봅니다.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span></div>
         <span class="tag-stay">숙박 — 리스본</span>
       </div>
     </article>
@@ -4154,7 +4160,7 @@ header.mast{padding:64px 0 44px}
         <h3>수요일, 리스본 출발</h3>
         <p>체크아웃 후 짐은 차량에 싣고 온종일 일정을 소화해요. 비행기가 밤 늦게 뜹니다. <strong>신트라</strong> — 페나 궁전과 헤갈레이라 별장(또는 리스본 시내 알파마·상 조르제 성)을 둘러봐요.</p>
         <p><strong>호카곶</strong> — 유라시아 대륙의 서쪽 끝이에요. "여기서 땅이 끝나고 바다가 시작된다." 저녁 식사 후 리스본 공항으로 이동, 출국 수속을 밟습니다. KE922편, 야간 출발, 직항 약 13시간.</p>
-        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal">석식</span><span class="meal free">기내식</span></div>
+        <div class="meals"><span class="meal">조식</span><span class="meal free">중식 · 자유식</span><span class="meal free">석식 · 자유식</span><span class="meal free">기내식</span></div>
       </div>
     </article>
   </div>
@@ -4170,7 +4176,6 @@ header.mast{padding:64px 0 44px}
           <li><b>차량</b>전 일정 전용 차량 — 공항 픽업부터 샌딩까지</li>
           <li><b>인솔</b>한국인 인솔자 전 일정 동행</li>
           <li><b>숙박</b>호텔 13박 · 2인 1실 기준 · 조식 13회</li>
-          <li><b>식사</b>1일 1식(중식 또는 석식) 포함</li>
           <li><b>입장료</b>일정에 명시된 입장료 전부</li>
           <li><b>보험</b>여행자 보험</li>
         </ul>
@@ -4179,7 +4184,7 @@ header.mast{padding:64px 0 44px}
         <h3><span class="pip"></span>불포함 사항</h3>
         <ul>
           <li><b>항공</b>국제선 항공권 — 스케줄 확인은 일정표를 참고해 주세요, 항공사에 직접 문의하시는 게 가장 정확해요</li>
-          <li><b>식사</b>조식·1식 외 식사 — 전부 자유식</li>
+          <li><b>식사</b>조식 외 전 일정 식사 — 중식 · 석식 모두 자유식</li>
           <li><b>개인 경비</b>개인 경비, 기념품</li>
           <li><b>선택 관광</b>플라멩코, 포트와인 셀러 추가 시음 등</li>
           <li><b>팁</b>가이드 · 기사 팁</li>
@@ -4230,8 +4235,8 @@ header.mast{padding:64px 0 44px}
 </div>
 `,
       highlights: ['프라도 미술관 · 마드리드 왕궁', '필라르 성모 대성당 · 알하페리아 궁전 (사라고사)', '사그라다 파밀리아 · 구엘 공원 (가우디의 하루)', '예술과학도시 (발렌시아) · 알함브라 궁전 (그라나다)', '세비야 대성당 · 알카사르 · 스페인 광장', '파티마 성지 순례 · 코임브라 대학', '포르투 역사지구 · 포트와인 셀러', '벨렝 지구 · 호카곶 (유라시아 대륙 서쪽 끝)'],
-      includes: ['전 일정 전용 차량(공항 픽업~샌딩)', '한국인 인솔자 전 일정 동행', '호텔 13박 · 2인 1실 기준 · 조식 13회', '1일 1식(중식 또는 석식) 포함', '일정에 명시된 입장료 전부', '여행자 보험'],
-      excludes: ['국제선 항공권(마드리드 IN·리스본 OUT 오픈조 별도 안내)', '조식·1식 외 식사(전부 자유식)', '개인 경비 · 기념품', '선택 관광(플라멩코, 포트와인 셀러 추가 시음 등)', '가이드 · 기사 팁', '싱글차지(1인 1실 이용 시)'],
+      includes: ['전 일정 전용 차량(공항 픽업~샌딩)', '한국인 인솔자 전 일정 동행', '호텔 13박 · 2인 1실 기준 · 조식 13회', '일정에 명시된 입장료 전부', '여행자 보험'],
+      excludes: ['국제선 항공권(마드리드 IN·리스본 OUT 오픈조 별도 안내)', '조식 외 전 일정 식사(중식 · 석식 모두 자유식)', '개인 경비 · 기념품', '선택 관광(플라멩코, 포트와인 셀러 추가 시음 등)', '가이드 · 기사 팁', '싱글차지(1인 1실 이용 시)'],
       duration: '13박 14일 (마드리드 IN · 리스본 OUT · 목요일 출발 · 최소 출발 4인)'
     }
   },
