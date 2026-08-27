@@ -3797,7 +3797,444 @@ header.mast{padding:64px 0 44px}
       duration: '5박 6일 (마드리드 현지 집합 · 총 주행 약 1,610km 실측 · 일정은 현지 사정에 따라 변경될 수 있어요)'
     }
   },
-];
+{
+    id: 'iberia-14days-madrid',
+    cats: ['spain'],
+    topClass: 'spain',
+    region: 'SPAIN · PORTUGAL',
+    days: '13박14일',
+    price: '가격 문의',
+    title: '[이베리아 대종단] 마드리드 IN · 리스본 OUT 13박14일',
+    summary: '지중해에서 대서양까지 — 마드리드에 내려 스페인 여섯 도시(사라고사·바르셀로나·발렌시아·그라나다·세비야)와 포르투갈 세 도시(파티마·포르투·리스본)를 전용 차량 한 대로 잇는 9개 도시 종단 여정이에요.',
+    tags: ['13박 14일', '9개 도시', '목요일 출발'],
+    isNew: true,
+    detail: {
+      lead: '마드리드 2박·사라고사 1박·바르셀로나 2박·발렌시아 1박·그라나다 1박·세비야 2박·파티마 1박·포르투 2박·리스본 1박, 스페인 6개 도시와 포르투갈 3개 도시를 전용 차량으로 잇는 대종단이에요.',
+      description: `<div class="eu-iberia14">
+<style>
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap");
+.eu-iberia14 h1,.eu-iberia14 h2,.eu-iberia14 h3,.eu-iberia14 h4,.eu-iberia14 h5{
+  color:var(--ink);font-family:inherit;margin:0;line-height:1.25;text-transform:none;
+}
+.eu-iberia14 p,.eu-iberia14 li,.eu-iberia14 dl,.eu-iberia14 dt,.eu-iberia14 dd,.eu-iberia14 span,.eu-iberia14 div,.eu-iberia14 strong,.eu-iberia14 b,.eu-iberia14 em{
+  font-family:inherit;
+}
+.eu-iberia14 .display{font-family:"Fraunces","Gowun Batang",Georgia,serif}
+.eu-iberia14 h1 em{color:var(--accent);font-style:normal}
+.eu-iberia14 a{color:var(--accent);text-decoration:none}
+.eu-iberia14 ul,.eu-iberia14 ol{margin:0}
+.eu-iberia14 section,.eu-iberia14 article,.eu-iberia14 footer{margin:0;background:none;border:0}
+.eu-iberia14 svg{max-width:100%}
+.eu-iberia14{background:var(--ground);overflow-x:hidden;max-width:100%;}
+
+.eu-iberia14{
+  --ground:#FAF9F6;
+  --surface:#FFFFFF;
+  --surface-2:#F1EFE9;
+  --ink:#1B201D;
+  --ink-2:#4A524D;
+  --ink-3:#7C837E;
+  --line:#DCD9D0;
+  --line-soft:#E9E6DE;
+  --accent:#1E5C4E;
+  --accent-soft:#DEEBE6;
+  --pine:#8C2B2B;
+  --pine-soft:#F0E2DE;
+  --sea:#DCE4E3;
+  --shadow:0 1px 2px rgba(27,32,29,.05),0 8px 24px -14px rgba(27,32,29,.22);
+}.eu-iberia14 *{box-sizing:border-box}.eu-iberia14{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans KR","IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;
+  font-weight:400;
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all;
+}.eu-iberia14 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}.eu-iberia14 .display{font-family:"Fraunces","Gowun Batang",Georgia,serif;font-weight:700;letter-spacing:-.01em;text-wrap:balance;line-height:1.2}.eu-iberia14 .label{
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);
+}.eu-iberia14 .hero{padding:64px 0 0}.eu-iberia14 .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}.eu-iberia14 .eyebrow .rule{height:1px;flex:0 0 40px;background:var(--accent)}.eu-iberia14 h1{font-size:clamp(38px,6.4vw,64px);margin:0 0 22px}.eu-iberia14 h1 em{font-style:normal;color:var(--accent)}.eu-iberia14 .lede{
+  font-size:clamp(17px,2.1vw,19px);color:var(--ink-2);max-width:60ch;margin:0 0 34px;
+  font-weight:300;line-height:1.85;
+}.eu-iberia14 .facts{
+  display:grid;gap:1px;background:var(--line);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  border:1px solid var(--line);border-radius:2px;overflow:hidden;
+}.eu-iberia14 .fact{background:var(--surface);padding:18px 20px}.eu-iberia14 .fact dt{margin:0 0 6px}.eu-iberia14 .fact dd{margin:0;font-size:16px;font-weight:500;line-height:1.5}.eu-iberia14 .garland{margin:56px 0 0;color:var(--accent);opacity:.9}.eu-iberia14 .garland svg{display:block;width:100%;height:34px}.eu-iberia14 .mapsec{padding:56px 0 8px}.eu-iberia14 .mapcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:2px;
+  padding:26px 26px 18px;box-shadow:var(--shadow);
+}.eu-iberia14 .mapcard h2{font-size:20px;margin:0 0 4px}.eu-iberia14 .mapcard p.note{font-size:13px;color:var(--ink-3);margin:0 0 18px}.eu-iberia14 .mapscroll{overflow-x:auto}.eu-iberia14 .mapscroll svg{display:block;min-width:0;width:100%;max-width:520px;margin:0 auto;height:auto}.eu-iberia14 .mp-sea{fill:var(--sea)}.eu-iberia14 .mp-coast{fill:none;stroke:var(--ink-3);stroke-width:.4;opacity:.55}.eu-iberia14 .mp-route{fill:none;stroke:var(--pine);stroke-width:.5;stroke-dasharray:1.4 1.1;opacity:.85}.eu-iberia14 .mp-dot{fill:var(--accent)}.eu-iberia14 .mp-dot.stay{fill:var(--pine)}.eu-iberia14 .mp-base{fill:var(--surface);stroke:var(--pine);stroke-width:.7}.eu-iberia14 .mp-t{font-size:2.1px;fill:var(--ink-2);font-family:"IBM Plex Sans KR",sans-serif;font-weight:500}.eu-iberia14 .mp-c{font-size:2.1px;fill:var(--ink-3);font-family:"IBM Plex Sans KR",sans-serif;letter-spacing:.14em}.eu-iberia14 .mp-n{font-size:1.9px;fill:var(--ink-3);font-family:"IBM Plex Sans KR",sans-serif}.eu-iberia14 .maplegend{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-size:12.5px;color:var(--ink-2)}.eu-iberia14 .maplegend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:1px}.eu-iberia14 .itin{padding:56px 0 0}.eu-iberia14 .itin > h2{font-size:clamp(24px,3.4vw,30px);margin:0 0 6px}.eu-iberia14 .itin > p.sub{color:var(--ink-3);margin:0 0 36px;font-size:14.5px}.eu-iberia14 .day{
+  display:grid;grid-template-columns:196px 1fr;gap:36px;
+  padding:34px 0;border-top:1px solid var(--line);
+}.eu-iberia14 .day:last-of-type{border-bottom:1px solid var(--line)}.eu-iberia14 .daykey{position:relative}.eu-iberia14 .daynum{
+  font-family:"Fraunces",serif;font-weight:300;font-size:52px;line-height:1;
+  color:var(--accent);letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+}.eu-iberia14 .daynum sub{font-size:15px;font-weight:500;vertical-align:baseline;margin-left:4px;color:var(--ink-3)}.eu-iberia14 .places{margin:14px 0 0;padding:0;list-style:none}.eu-iberia14 .places li{
+  font-weight:500;font-size:15.5px;line-height:1.5;padding:3px 0;
+}.eu-iberia14 .places li .lat{display:block;font-family:"Fraunces",serif;font-weight:300;font-size:13px;color:var(--ink-3);letter-spacing:.01em}.eu-iberia14 .daybody h3{font-size:19px;margin:0 0 12px;font-weight:600;letter-spacing:-.005em}.eu-iberia14 .daybody p{margin:0 0 14px;color:var(--ink-2);max-width:62ch}.eu-iberia14 .daybody p:last-child{margin-bottom:0}.eu-iberia14 .daybody strong{color:var(--ink);font-weight:600}.eu-iberia14 .meals{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding-top:16px;
+  border-top:1px dashed var(--line);
+}.eu-iberia14 .meal{
+  font-size:12px;font-weight:500;letter-spacing:.02em;
+  padding:4px 11px;border-radius:2px;
+  background:var(--accent-soft);color:var(--accent);
+}.eu-iberia14 .meal.free{background:var(--surface-2);color:var(--ink-3)}.eu-iberia14 .meal.star{background:var(--pine-soft);color:var(--pine)}.eu-iberia14 .tag-stay{
+  display:inline-block;margin-top:14px;font-size:12.5px;color:var(--ink-3);
+}.eu-iberia14 .info{padding:60px 0 0}.eu-iberia14 .info h2{font-size:clamp(22px,3vw,26px);margin:0 0 22px}.eu-iberia14 .info .why{display:flex;flex-direction:column;gap:16px}.eu-iberia14 .info .why p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.8;max-width:70ch}.eu-iberia14 .info .why strong{color:var(--ink);font-weight:600}.eu-iberia14 .cmp{padding:52px 0 0}.eu-iberia14 .cmp h2{font-size:clamp(22px,3vw,26px);margin:0 0 22px}.eu-iberia14 .cmptable{width:100%;border-collapse:collapse;font-size:13.5px}.eu-iberia14 .cmptable th{text-align:left;padding:10px 14px;background:var(--surface-2);color:var(--ink-3);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--line)}.eu-iberia14 .cmptable td{padding:12px 14px;border-bottom:1px solid var(--line-soft);color:var(--ink-2)}.eu-iberia14 .cmptable td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}.eu-iberia14 .cmptable p.note{margin:14px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.75}.eu-iberia14 .opt{padding:56px 0 0}.eu-iberia14 .opt h2{font-size:clamp(22px,3vw,26px);margin:0 0 22px}.eu-iberia14 .opttable{width:100%;border-collapse:collapse;font-size:13.5px}.eu-iberia14 .opttable th{text-align:left;padding:10px 14px;background:var(--surface-2);color:var(--ink-3);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--line)}.eu-iberia14 .opttable td{padding:12px 14px;border-bottom:1px solid var(--line-soft);color:var(--ink-2)}.eu-iberia14 .opttable td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}.eu-iberia14 .incl{padding:64px 0 0}.eu-iberia14 .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px}.eu-iberia14 .card{
+  border:1px solid var(--line);border-radius:2px;padding:26px 26px 28px;
+  background:var(--surface);
+}.eu-iberia14 .card.no{background:var(--surface-2)}.eu-iberia14 .card h3{font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:9px;font-weight:600}.eu-iberia14 .card h3 .pip{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:0 0 auto}.eu-iberia14 .card.no h3 .pip{background:var(--ink-3)}.eu-iberia14 .card ul{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}.eu-iberia14 .card li{
+  font-size:14.5px;line-height:1.65;color:var(--ink-2);
+  padding-left:16px;position:relative;
+}.eu-iberia14 .card li::before{
+  content:"";position:absolute;left:0;top:.7em;
+  width:6px;height:1px;background:var(--line);
+}.eu-iberia14 .card li b{color:var(--ink);font-weight:600;display:block;font-size:13px;letter-spacing:.02em}.eu-iberia14 .notes{padding:52px 0 0}.eu-iberia14 .notes ol{margin:18px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:10px}.eu-iberia14 .notes li{font-size:14px;color:var(--ink-2);line-height:1.7}.eu-iberia14 .cta{margin:64px 0 0;border-top:2px solid var(--accent);background:var(--surface);padding:38px 0 44px}.eu-iberia14 .cta .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap}.eu-iberia14 .cta h2{font-size:clamp(22px,3vw,28px);margin:8px 0 10px}.eu-iberia14 .cta p{margin:0;color:var(--ink-2);font-size:15px;max-width:46ch}.eu-iberia14 .contact{display:flex;flex-direction:column;gap:6px;font-size:15px}.eu-iberia14 .contact a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft);font-weight:500}.eu-iberia14 .contact a:hover, .eu-iberia14 .contact a:focus-visible{border-bottom-color:var(--accent)}.eu-iberia14 footer{padding:26px 0 60px;color:var(--ink-3);font-size:12.5px}.eu-iberia14 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.eu-iberia14 a:focus-visible, .eu-iberia14 li:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+@media (max-width:800px){.eu-iberia14 .day{grid-template-columns:1fr;gap:18px}.eu-iberia14 .daykey{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}.eu-iberia14 .daynum{font-size:40px}.eu-iberia14 .places{margin-top:0;display:flex;gap:18px;flex-wrap:wrap}.eu-iberia14 .cols{grid-template-columns:1fr}.eu-iberia14 .hero{padding-top:44px}
+}
+@media (prefers-reduced-motion:reduce){.eu-iberia14 *{animation:none!important;transition:none!important}}
+
+.eu-iberia14{padding:8px 0 40px}
+.eu-iberia14 .hero{padding-top:8px}
+.eu-iberia14 .wrap{max-width:1040px}
+.eu-iberia14 footer{padding:22px 0 0}
+
+</style>
+<div class="eu-main">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span><span class="label">13박 14일 · 마드리드 IN · 리스본 OUT · 전용차량+한국인 인솔</span></div>
+    <h1>이베리아 <em>대종단</em></h1>
+    <p class="lede">
+      지중해에서 대서양까지 — 마드리드에 내려 스페인 여섯 도시와 포르투갈 세 도시를 전용 차량 한 대로 이어 가는 여정이에요.
+      짐을 옮겨 싣는 일도, 기차역을 찾는 일도 없어요.
+    </p>
+    <dl class="facts">
+      <div class="fact"><dt class="label">일정</dt><dd>13박 14일</dd></div>
+      <div class="fact"><dt class="label">항공</dt><dd>대한항공 직항 IN/OUT</dd></div>
+      <div class="fact"><dt class="label">도시</dt><dd>9개 도시</dd></div>
+      <div class="fact"><dt class="label">이동</dt><dd>전 일정 전용 차량 · 약 2,720km</dd></div>
+      <div class="fact"><dt class="label">최소 출발</dt><dd>4인</dd></div>
+    </dl>
+  </div>
+  <div class="wrap garland" aria-hidden="true">
+    <svg viewBox="0 0 600 34">
+      <path d="M0 5 Q150 15 300 5 T600 5" fill="none" stroke="currentColor" stroke-width=".8" opacity=".4"/>
+      <g fill="currentColor" opacity=".8">
+        <circle cx="40" cy="8" r="2.4"/><circle cx="120" cy="6" r="2.4"/><circle cx="200" cy="9" r="2.4"/>
+        <circle cx="280" cy="6" r="2.4"/><circle cx="360" cy="8" r="2.4"/><circle cx="440" cy="6" r="2.4"/>
+        <circle cx="520" cy="9" r="2.4"/><circle cx="580" cy="6" r="2.4"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="info">
+  <div class="wrap">
+    <h2 class="display">항공 스케줄 — 확인 결과 (2026-08-27 조회)</h2>
+    <div class="why">
+      <p>마드리드로 들어가 리스본에서 나오는 오픈조 구간이에요. 두 구간 모두 대한항공 직항으로 연결돼요.</p>
+      <p><strong>이 일정은 목요일 출발만 성립해요.</strong> 13박 14일이면 돌아오는 날이 출발일로부터 정확히 13일 뒤, 요일로는 6일 뒤예요. 마드리드행 KE913은 화·목·금·일, 리스본발 KE922는 수·금·일에만 뜨는데, 이 둘이 맞물리는 조합은 <strong>목요일 출발 → 수요일 귀국</strong> 하나뿐이에요.</p>
+      <p>날짜를 넓게 잡고 싶으시면 방향을 뒤집는 방법이 있어요. 리스본으로 들어가 마드리드에서 나오면(KE921 IN / KE914 OUT) 수요일·금요일 두 요일이 성립해요. 다만 그러면 도시 순서가 리스본 → 포르투 → 파티마 → 세비야 → … → 마드리드로 완전히 뒤집혀요.</p>
+      <p>확인 중인 사항이 하나 있어요. 대한항공이 2026년 9월 21일부터 인천–리스본을 주 4회로 증편한다고 발표했어요. 다만 추가되는 요일이 어디인지는 아직 공시되지 않아서, 확정 전에 다시 확인해 드릴게요.</p>
+    </div>
+    <table class="cmptable" style="margin-top:20px;">
+      <thead><tr><th>구간</th><th>편명</th><th>운항 요일</th><th>하계(~10/23)</th><th>동계(10/25~)</th></tr></thead>
+      <tbody>
+        <tr><td>인천 → 마드리드</td><td>KE913</td><td>화·목·금·일</td><td>09:55→18:00</td><td>12:10→19:25</td></tr>
+        <tr><td>리스본 → 인천</td><td>KE922</td><td>수·금·일</td><td>22:15→19:15+1</td><td>21:40→20:00+1</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="cmp">
+  <div class="wrap">
+    <h2 class="display">동선 — 전 구간 육로 약 2,720km</h2>
+    <p class="note" style="margin-bottom:16px;">주신 도시 순서에서 사라고사의 위치만 앞으로 옮겼어요. 사라고사는 마드리드와 바르셀로나를 잇는 고속도로 A-2 위에 정확히 놓여 있어, 가는 길에 들르면 우회 거리가 사실상 0이에요.</p>
+    <table class="cmptable">
+      <thead><tr><th>구간</th><th>거리</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>마드리드 → 사라고사</td><td>약 315km</td><td>A-2 · 가는 길</td></tr>
+        <tr><td>사라고사 → 바르셀로나</td><td>약 310km</td><td>A-2 · 가는 길</td></tr>
+        <tr><td>바르셀로나 → 발렌시아</td><td>약 350km</td><td>지중해 연안</td></tr>
+        <tr><td>발렌시아 → 그라나다</td><td>약 500km</td><td>최장 구간</td></tr>
+        <tr><td>그라나다 → 세비야</td><td>약 250km</td><td>안달루시아</td></tr>
+        <tr><td>세비야 → 파티마</td><td>약 500km</td><td>국경 통과 · 최장 구간</td></tr>
+        <tr><td>파티마 → 포르투</td><td>약 185km</td><td>코임브라 경유</td></tr>
+        <tr><td>포르투 → 리스본</td><td>약 310km</td><td>대서양 연안</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:16px;">사라고사를 바르셀로나 다음에 두면 265km가 더 늘어나요. 마드리드에서 바르셀로나로 곧장 간 뒤(620km) 되돌아 내려오는 형태가 되기 때문이에요. 앞으로 옮기면 마드리드–바르셀로나 620km 하루 이동이 사라지고, 대신 315km + 310km 이틀로 나뉘어요. 첫 이동일 피로가 크게 줄어들어요.</p>
+  </div>
+</section>
+
+<section class="itin">
+  <div class="wrap">
+    <h2 class="display">일정</h2>
+    <p class="sub">1일차 목요일 인천 출발, 14일차 수요일 리스본에서 귀국해요.</p>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">01<sub>일차</sub></div>
+        <ul class="places"><li>인천 → 마드리드<span class="lat">Incheon → Madrid</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>목요일, 인천 출발</h3>
+        <p>KE913편, 직항 약 15시간. 인천공항 3층 출발층에서 미팅 후 탑승 수속을 진행해요.</p>
+        <p>마드리드 바라하스 공항 도착 — 인솔자가 입국장에서 대기해요. 전용 차량으로 시내 호텔로 이동해 여장을 풉니다.</p>
+        <div class="meals"><span class="meal free">기내식</span></div>
+        <span class="tag-stay">숙박 — 마드리드</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">02<sub>일차</sub></div>
+        <ul class="places"><li>마드리드<span class="lat">Madrid</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>마드리드 시내</h3>
+        <p><strong>프라도 미술관</strong> — 벨라스케스 「시녀들」, 고야의 검은 그림을 만나요. <strong>마드리드 왕궁</strong>과 <strong>알무데나 대성당</strong>을 둘러봅니다.</p>
+        <p><strong>마요르 광장</strong>과 <strong>산 미겔 시장</strong>에서 이베리코 하몽과 타파스를 맛보고, <strong>솔 광장·그란비아</strong>에서 저녁 산책과 자유 시간을 가져요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 마드리드</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">03<sub>일차</sub></div>
+        <ul class="places"><li>사라고사<span class="lat">Zaragoza</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>마드리드 → 사라고사 (약 315km · 3시간)</h3>
+        <p><strong>필라르 성모 대성당</strong> — 에브로 강변에 선 스페인 최초의 성모 발현지예요. <strong>알하페리아 궁전</strong> — 이슬람 왕궁 위에 세워진 무데하르 건축의 정수입니다.</p>
+        <p><strong>로마교</strong>와 에브로 강변, 구시가 골목을 걸어요. 패키지 일정에서 잘 다루지 않는 도시라, 저녁의 사라고사는 조용하고 물가도 순해요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 사라고사</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">04<sub>일차</sub></div>
+        <ul class="places"><li>바르셀로나<span class="lat">Barcelona</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>사라고사 → 바르셀로나 (약 310km · 3시간)</h3>
+        <p>오전 이동 후 바르셀로나 도착, 점심 식사. <strong>고딕 지구</strong> — 바르셀로나 대성당, 왕의 광장, 로마 성벽의 흔적을 봅니다.</p>
+        <p><strong>산타 마리아 델 마르 성당</strong>과 보른 지구 — 카탈루냐 고딕의 정수예요. <strong>람블라스 거리</strong>와 <strong>보케리아 시장</strong>도 둘러봅니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 바르셀로나 (1/2박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">05<sub>일차</sub></div>
+        <ul class="places"><li>바르셀로나 종일<span class="lat">Barcelona</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>가우디의 하루</h3>
+        <p><strong>사그라다 파밀리아</strong> — 내부 입장. 오전 빛이 동쪽 탄생의 파사드를 통과해요. <strong>구엘 공원</strong> — 모자이크 벤치와 도시 전망을 즐깁니다.</p>
+        <p><strong>카사 바트요 또는 카사 밀라</strong> 외관 — 그라시아 거리를 걷고, <strong>몬주익 언덕</strong>에서 내려다보는 지중해와 항구로 마무리해요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 바르셀로나 (2/2박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">06<sub>일차</sub></div>
+        <ul class="places"><li>발렌시아<span class="lat">Valencia</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>바르셀로나 → 발렌시아 (약 350km · 3시간 30분 · 지중해 연안)</h3>
+        <p><strong>예술과학도시</strong> — 칼라트라바가 마른 강바닥에 세운 미래 도시예요. <strong>발렌시아 대성당</strong> — 성배 예배당, 미겔레테 종탑을 봅니다.</p>
+        <p><strong>중앙시장</strong>과 <strong>라 론하</strong> — 유럽 최대급 모더니즘 시장이에요. 파에야가 태어난 도시라, 저녁은 알부페라 쪽 자유식을 권해 드려요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 발렌시아</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">07<sub>일차</sub></div>
+        <ul class="places"><li>그라나다<span class="lat">Granada</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>발렌시아 → 그라나다 (약 500km · 5시간 · 최장 구간)</h3>
+        <p>오전 출발, 중간 휴게하며 이동해요. 차창 밖으로 올리브 밭이 지평선까지 이어집니다.</p>
+        <p>도착 후 <strong>산 니콜라스 전망대</strong> — 시에라네바다 설산을 배경으로 한 알함브라의 정면을 봅니다. <strong>알바이신</strong> 백색 골목 — 유네스코 세계유산인 옛 무슬림 거주 구역이에요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 그라나다</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">08<sub>일차</sub></div>
+        <ul class="places"><li>세비야<span class="lat">Sevilla</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>그라나다 → 세비야 (약 250km · 3시간)</h3>
+        <p><strong>알함브라 궁전</strong> — 나스르 궁전 지정 시간 입장, 헤네랄리페 정원, 카를로스 5세 궁을 봅니다. 나스르 궁전은 입장 시각이 분 단위로 지정돼서, 이날 오전 일정은 그 시각에 맞춰 짜요.</p>
+        <p>오후 세비야로 이동, 과달키비르 강변에서 저녁을 맞습니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 세비야 (1/2박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">09<sub>일차</sub></div>
+        <ul class="places"><li>세비야 종일<span class="lat">Sevilla</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>안달루시아의 심장</h3>
+        <p><strong>세비야 대성당</strong>과 히랄다 탑 — 콜럼버스의 관이 있어요. <strong>알카사르</strong> — 무데하르 양식의 왕궁과 정원입니다.</p>
+        <p><strong>스페인 광장</strong> — 반원형 회랑과 타일로 새긴 스페인 전 주(州)를 봅니다. 산타크루스 옛 유대인 지구 골목을 지나, 저녁엔 (선택) 플라멩코 공연도 즐기실 수 있어요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 세비야 (2/2박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">10<sub>일차</sub></div>
+        <ul class="places"><li>파티마<span class="lat">Fátima</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>세비야 → 파티마 (약 500km · 5시간 30분 · 국경 통과)</h3>
+        <p>스페인–포르투갈 국경을 넘어 북상해요. 리스본을 지나쳐 내륙으로 올라갑니다. 여기서부터 시계를 한 시간 뒤로 돌리고, 대서양을 따라 일정이 이어져요.</p>
+        <p><strong>파티마 성모 발현 성지</strong> — 발현 소성당, 로사리오 대성당, 삼위일체 성당을 봅니다. 해가 지면 성지 광장에 촛불 행렬이 서요. 신자가 아니어도 오래 남는 장면이에요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 파티마</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">11<sub>일차</sub></div>
+        <ul class="places"><li>포르투<span class="lat">Porto</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>파티마 → 코임브라 → 포르투 (약 185km · 코임브라 경유)</h3>
+        <p><strong>코임브라 대학</strong> — 유럽에서 가장 오래된 대학 중 하나예요. <strong>조아니나 도서관</strong> — 금박 서가와, 벌레를 잡기 위해 사는 박쥐들이 있어요.</p>
+        <p>오후 포르투 도착. 도루 강이 대서양으로 빠지는 도시예요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 포르투 (1/2박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">12<sub>일차</sub></div>
+        <ul class="places"><li>포르투 종일<span class="lat">Porto</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>도루 강의 하루</h3>
+        <p><strong>렐루 서점</strong> — 붉은 계단의 네오고딕 서점이에요. <strong>상 벤투 역</strong> — 벽면 2만 장의 아줄레주가 포르투갈 역사를 그립니다.</p>
+        <p><strong>동 루이스 1세 다리</strong>와 히베이라 강변 — 유네스코 세계유산 구역이에요. <strong>빌라노바드가이아</strong> 포트와인 셀러 방문과 시음도 함께해요.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 포르투 (2/2박)</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">13<sub>일차</sub></div>
+        <ul class="places"><li>리스본<span class="lat">Lisboa</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>포르투 → 리스본 (약 310km · 3시간)</h3>
+        <p>오전 이동, 오후 리스본 벨렝 지구로 향합니다. <strong>제로니모스 수도원</strong> — 마누엘 양식의 정점, 바스쿠 다 가마가 잠든 곳이에요.</p>
+        <p><strong>벨렝 탑</strong>과 발견 기념비 — 대항해가 시작된 강어귀예요. <strong>파스테이스 드 벨렝</strong> — 1837년부터 같은 자리에서 굽는 에그타르트를 맛봅니다.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal free">석식 · 자유식</span></div>
+        <span class="tag-stay">숙박 — 리스본</span>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="daykey"><div class="daynum">14<sub>일차</sub></div>
+        <ul class="places"><li>리스본 → 인천<span class="lat">Lisboa → Incheon</span></li></ul>
+      </div>
+      <div class="daybody">
+        <h3>수요일, 리스본 출발</h3>
+        <p>체크아웃 후 짐은 차량에 싣고 온종일 일정을 소화해요. 비행기가 밤 늦게 뜹니다. <strong>신트라</strong> — 페나 궁전과 헤갈레이라 별장(또는 리스본 시내 알파마·상 조르제 성)을 둘러봐요.</p>
+        <p><strong>호카곶</strong> — 유라시아 대륙의 서쪽 끝이에요. "여기서 땅이 끝나고 바다가 시작된다." 저녁 식사 후 리스본 공항으로 이동, 출국 수속을 밟습니다. KE922편, 야간 출발, 직항 약 13시간.</p>
+        <div class="meals"><span class="meal">조식</span><span class="meal">중식</span><span class="meal">석식</span><span class="meal free">기내식</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="incl">
+  <div class="wrap">
+    <h2 class="display">포함 · 불포함</h2>
+    <div class="cols">
+      <div class="card">
+        <h3><span class="pip"></span>포함 사항</h3>
+        <ul>
+          <li><b>차량</b>전 일정 전용 차량 — 공항 픽업부터 샌딩까지</li>    
+        </ul>
+      </div>
+      <div class="card no">
+        <h3><span class="pip"></span>불포함 사항</h3>
+        <ul>
+          <li><b>항공</b>국제선 항공권 — 별도 안내드려요</li>
+           <li><b>숙박</b>호텔 13박 · 2인 1실 기준 · 조식 13회</li>
+          <li><b>식사</b>— 전부 자유식</li>
+          <li><b>입장료</li>
+          <li><b>개인 경비</b>개인 경비, 기념품</li>
+          <li><b>선택 관광</b>플라멩코, 포트와인 셀러 추가 시음 등</li>
+          <li><b>팁</b>가이드 · 기사 팁</li>
+          <li><b>보험</b>여행자 보험</li>
+         
+        </ul>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px;">국제선 항공권은 상품에 포함되지 않아요. 위 항공 스케줄을 참고해 직접 발권하시거나, 원하시면 목요일 출발 조건에 맞는 좌석 현황을 확인해 안내해 드려요. 마드리드 IN · 리스본 OUT의 오픈조 항공권으로 예약하셔야 해요.</p>
+  </div>
+</section>
+
+<section class="notes">
+  <div class="wrap">
+    <h2 class="display">예약 전 확인해 주십시오</h2>
+    <ol>
+      <li>본 일정은 <strong>마드리드 IN · 리스본 OUT</strong> 오픈조 항공권 기준이에요. 목요일 출발만 성립해요(귀국은 그다음 주 수요일).</li>
+      <li>2026년 9월 21일부터 인천–리스본 노선이 주 4회로 증편될 예정이라, 추가 요일이 공시되면 출발 가능일이 늘어날 수 있어요.</li>
+      <li>알함브라 나스르 궁전, 사그라다 파밀리아 등 지정 시각 입장 시설은 예약 상황에 따라 방문 순서가 조정될 수 있어요.</li>
+      <li>최소 출발 인원은 4인이에요.</li>
+      <li>이동 거리는 실제 도로 기준 근사치예요.</li>
+      <li>현지 사정과 기상, 도로 상황, 시설 휴관일에 따라 방문 순서와 내용이 조정될 수 있어요.</li>
+      <li>요금과 정확한 출발일은 별도 문의해 주세요.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div>
+      <div class="label">문의</div>
+      <h2 class="display">항공 스케줄부터 함께 확인해 드려요</h2>
+      <p>목요일 출발 조건에 맞는 항공 좌석 현황과 정확한 견적을 안내해 드려요. 스페인 현지에서 직접 운영하므로 일정 변경에도 빠르게 대응해요.</p>
+    </div>
+    <div class="contact">
+      <span class="label">Euforia Tour Spain</span>
+      <a href="mailto:euforia@euforiatour.com">euforia@euforiatour.com</a>
+    </div>
+  </div>
+</section>
+
+</div>
+<footer>
+  <div class="wrap">
+    <span>EUFORIA DAS NUVENS S.L. · Madrid, España</span>
+    <span>Iberia Grand Tour · 13박 14일</span>
+  </div>
+</footer>
+</div>
+`,
+      highlights: ['프라도 미술관 · 마드리드 왕궁', '필라르 성모 대성당 · 알하페리아 궁전 (사라고사)', '사그라다 파밀리아 · 구엘 공원 (가우디의 하루)', '예술과학도시 (발렌시아) · 알함브라 궁전 (그라나다)', '세비야 대성당 · 알카사르 · 스페인 광장', '파티마 성지 순례 · 코임브라 대학', '포르투 역사지구 · 포트와인 셀러', '벨렝 지구 · 호카곶 (유라시아 대륙 서쪽 끝)'],
+      includes: ['전 일정 전용 차량(공항 픽업~샌딩)', '한국인 인솔자 전 일정 동행', '호텔 13박 · 2인 1실 기준 · 조식 13회', '1일 1식(중식 또는 석식) 포함', '일정에 명시된 입장료 전부', '여행자 보험'],
+      excludes: ['국제선 항공권(마드리드 IN·리스본 OUT 오픈조 별도 안내)', '조식·1식 외 식사(전부 자유식)', '개인 경비 · 기념품', '선택 관광(플라멩코, 포트와인 셀러 추가 시음 등)', '가이드 · 기사 팁', '싱글차지(1인 1실 이용 시)'],
+      duration: '13박 14일 (마드리드 IN · 리스본 OUT · 목요일 출발 · 최소 출발 4인)'
+    }
+  },
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요.
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
    괄호 부분(조건, 예: (4인 이상 출발 기준))은 아래 줄에 작게 표시해요.
