@@ -444,7 +444,19 @@ function productLink(p){
 
 /* 홈 화면에는 대표 상품만 골라서 보여줘요. 다른 상품으로 바꾸려면 이 id 목록만 수정하면 돼요. */
 const FEATURED_IDS = ['madrid-toledo-day', 'docent-museum', 'portugal-round', 'spain-round', 'basque-navarra-6days', 'portugal-8days', 'portugal-10days', 'iberia-12days', 'spain-12days-barcelona', 'camino-100', 'matchday'];
-const featured = FEATURED_IDS.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+
+/* 노출 순서를 무작위로 섞어요(피셔–예이츠). 홈에 들어올 때마다 순서가 바뀌어서
+   목록 뒤쪽 상품도 돌아가며 위쪽에 노출됩니다. 원본 배열은 건드리지 않아요. */
+function shuffled(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const featured = shuffled(FEATURED_IDS.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean));
 
 document.getElementById('tourGrid').innerHTML = featured.map(p => `
    <a class="tour-card" href="${productLink(p)}">
