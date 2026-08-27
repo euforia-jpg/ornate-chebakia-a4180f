@@ -421,6 +421,118 @@ window.toggleAudioGuide = function(btn){
   setTimeout(rotateBest, 800);
   setInterval(rotateBest, 15000);
 })();
-</script> 
+</script>
+
+<!-- ============ 맞춤일정 안내 팝업 배너 ============ -->
+<style>
+  .euf-pop{ position:fixed; inset:0; z-index:900; display:none;
+            align-items:center; justify-content:center; padding:20px;
+            background:rgba(20,16,61,0.62); backdrop-filter:blur(2px); }
+  .euf-pop.show{ display:flex; animation:eufFade .28s ease both; }
+  @keyframes eufFade{ from{opacity:0} to{opacity:1} }
+  @keyframes eufRise{ from{opacity:0; transform:translateY(16px) scale(.985)} to{opacity:1; transform:none} }
+
+  .euf-pop .box{ background:#fff; width:100%; max-width:430px; max-height:88vh; overflow-y:auto;
+                 border-radius:22px; box-shadow:0 34px 70px -24px rgba(20,16,61,0.55);
+                 animation:eufRise .34s cubic-bezier(.2,.8,.3,1) both; }
+
+  .euf-pop .head{ position:relative; padding:30px 26px 24px; color:#fff;
+                  background:linear-gradient(135deg,var(--navy) 0%, var(--violet) 62%, var(--pink) 100%); }
+  .euf-pop .head .tag{ display:inline-block; background:rgba(255,255,255,0.18);
+                       border:1px solid rgba(255,255,255,0.28);
+                       padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800;
+                       letter-spacing:.06em; margin-bottom:12px; }
+  .euf-pop .head h3{ font-family:'Kanit'; font-weight:800; font-style:italic;
+                     font-size:22px; line-height:1.32; margin:0 0 8px; }
+  .euf-pop .head p{ margin:0; font-size:13px; font-weight:600; color:rgba(255,255,255,0.86); line-height:1.6; }
+  .euf-pop .x{ position:absolute; top:15px; right:15px; width:30px; height:30px; border:0;
+               border-radius:50%; background:rgba(255,255,255,0.2); color:#fff; cursor:pointer;
+               font-size:15px; line-height:1; display:flex; align-items:center; justify-content:center; }
+  .euf-pop .x:hover{ background:rgba(255,255,255,0.34); }
+
+  .euf-pop .body{ padding:22px 26px 24px; }
+  .euf-pop ol{ list-style:none; margin:0 0 20px; padding:0; counter-reset:eufc; }
+  .euf-pop ol li{ counter-increment:eufc; position:relative; padding:0 0 15px 40px; }
+  .euf-pop ol li:last-child{ padding-bottom:4px; }
+  .euf-pop ol li::before{ content:counter(eufc); position:absolute; left:0; top:1px;
+                          width:26px; height:26px; border-radius:9px;
+                          background:var(--navy); color:#fff;
+                          font-family:'Kanit'; font-weight:800; font-size:13px;
+                          display:flex; align-items:center; justify-content:center; }
+  .euf-pop ol li b{ display:block; font-size:14px; font-weight:800; color:var(--ink); margin-bottom:3px; }
+  .euf-pop ol li span{ display:block; font-size:12.6px; font-weight:600; color:var(--muted); line-height:1.62; }
+  .euf-pop ol li em{ font-style:normal; color:var(--violet); font-weight:800; }
+
+  .euf-pop .go{ all:unset; box-sizing:border-box; display:block; width:100%; text-align:center;
+                padding:14px; border-radius:12px; background:var(--navy); color:#fff;
+                font-size:14px; font-weight:800; cursor:pointer; margin-bottom:9px; }
+  .euf-pop .go:hover{ background:var(--violet); }
+  .euf-pop .later{ all:unset; box-sizing:border-box; display:block; width:100%; text-align:center;
+                   padding:9px 4px; font-size:12.5px; font-weight:700; color:var(--muted); cursor:pointer; }
+  .euf-pop .later:hover{ color:var(--ink); }
+
+  @media (max-width:420px){
+    .euf-pop .head{ padding:26px 20px 20px; }
+    .euf-pop .head h3{ font-size:19.5px; }
+    .euf-pop .body{ padding:20px 20px 22px; }
+    .euf-pop ol li{ padding-left:36px; }
+  }
+</style>
+
+<div class="euf-pop" id="eufPop" role="dialog" aria-modal="true" aria-labelledby="eufPopTitle">
+  <div class="box">
+    <div class="head">
+      <button class="x" id="eufPopX" aria-label="닫기">✕</button>
+      <span class="tag">EUFORIA TOUR · 맞춤일정</span>
+      <h3 id="eufPopTitle">필요한 것만 담아<br>일정을 직접 만드세요</h3>
+      <p>정해진 패키지가 아니라, 기본에서 시작해 원하는 만큼 더하는 방식이에요.</p>
+    </div>
+    <div class="body">
+      <ol>
+        <li>
+          <b>기본일정은 차량과 가이드부터</b>
+          <span>모든 일정은 <em>전용 차량 + 한국인 가이드</em> 구성으로 시작합니다.</span>
+        </li>
+        <li>
+          <b>가고 싶은 곳, 먹고 싶은 것만</b>
+          <span>호텔 · 식사 · 입장지는 <em>원하시는 것만 골라</em> 기본일정에 더하시면 됩니다.</span>
+        </li>
+        <li>
+          <b>일정은 맞춤으로 진행합니다</b>
+          <span>인원 · 출발일 · 관심사에 맞춰 동선을 다시 짜 드립니다.</span>
+        </li>
+        <li>
+          <b>VIP · 프라이빗 행사 전문</b>
+          <span>소규모 프라이빗 투어와 의전 · 인센티브 행사를 스페인 현지에서 직접 운영합니다.</span>
+        </li>
+      </ol>
+      <a class="go" id="eufPopGo" href="contact.html">맞춤일정 문의하기</a>
+      <button type="button" class="later" id="eufPopLater">괜찮아요, 상품 먼저 볼게요</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* 여행상품 페이지 맞춤일정 안내 팝업.
+   페이지에 들어올 때마다 한 번 뜨고, 닫으면 그 페이지를 보는 동안에는 다시 뜨지 않아요.
+   날짜를 기억해 두는 방식(오늘 하루 보지 않기)은 쓰지 않기 때문에,
+   다른 페이지에 갔다가 여행상품 페이지로 다시 들어오면 새로 보여줍니다. */
+(function(){
+  var pop = document.getElementById('eufPop');
+  if(!pop) return;
+
+  setTimeout(function(){ pop.classList.add('show'); }, 900);
+
+  function close(){ pop.classList.remove('show'); }
+
+  document.getElementById('eufPopX').addEventListener('click', close);
+  document.getElementById('eufPopLater').addEventListener('click', close);
+  document.getElementById('eufPopGo').addEventListener('click', close);
+  pop.addEventListener('click', function(e){ if(e.target === pop) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && pop.classList.contains('show')) close();
+  });
+})();
+</script>
 </body>
 </html>
