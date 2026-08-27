@@ -156,6 +156,35 @@ button.price-chip:hover{ opacity:.92; }
 .footer-links .ft-ico{ flex-shrink:0; font-size:14px; }
 
   @media (max-width:860px){ .layout{ grid-template-columns:1fr; } .inc-exc{ grid-template-columns:1fr; } .side-card{ position:static; } .footer-inner{ grid-template-columns:1fr; } }
+
+/* ===== 일정표 하단 PDF 다운로드 바 ===== */
+  .itin-dl{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+            margin:18px 0 28px; padding:16px 20px; border-radius:16px;
+            border:1.5px solid var(--line); background:linear-gradient(180deg,#fff,#FAF9FF); }
+  .itin-dl .idl-txt{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+  .itin-dl .idl-title{ font-size:14px; font-weight:800; color:var(--navy); }
+  .itin-dl .idl-sub{ font-size:12px; font-weight:600; color:var(--muted); }
+  .itin-dl .idl-btn{ display:inline-flex; align-items:center; gap:7px; flex-shrink:0; cursor:pointer;
+                     padding:11px 20px; border-radius:11px; border:1.5px solid var(--navy); background:var(--navy);
+                     color:#fff; font-size:13px; font-weight:800; text-decoration:none;
+                     font-family:inherit; transition:all .15s ease; }
+  .itin-dl .idl-btn:hover{ background:var(--violet); border-color:var(--violet); }
+  @media (max-width:560px){ .itin-dl{ flex-direction:column; align-items:stretch; } .itin-dl .idl-btn{ justify-content:center; } }
+
+/* ===== 인쇄 / PDF로 저장 ===== */
+  @media print{
+    @page{ size:A4; margin:14mm 12mm; }
+    body{ background:#fff !important; }
+    .topbar, .site-nav, .nav-toggle, footer, .side-card,
+    .itin-dl, .p-price, .yt-btn, .audio-badge, .audio-list-block,
+    .chat-launcher, .chat-panel, .popup-banner{ display:none !important; }
+    .layout{ display:block !important; max-width:none !important; }
+    .section-inner{ border:0 !important; box-shadow:none !important; padding:0 !important; }
+    .p-desc, .p-block{ break-inside:auto; }
+    article.day, .day, .incl .card, .p-block{ break-inside:avoid; page-break-inside:avoid; }
+    h1,h2,h3{ break-after:avoid; page-break-after:avoid; }
+    a[href]:after{ content:""; }
+  }
 /* ===== Mobile improvements (added) ===== */
   .nav-toggle{ display:none; }
   .nav-toggle-btn{ display:none; }
@@ -297,7 +326,6 @@ function render(){
         <p class="p-lead">${d.lead}</p>
         <p class="p-desc">${d.description}</p>
                <div class="p-tags">${product.tags.map(t=>`<span>${t}</span>`).join('')}</div>
-        ${product.downloadUrl ? `<a href="${product.downloadUrl}" download class="dl-itin-btn">📄 일정표 다운로드</a>` : ''}
 
         ${product.audioGuide && product.audioGuide.length ? `
         <div class="p-block audio-list-block">
@@ -377,7 +405,57 @@ function render(){
     </div>
   `;
 
+  placeItineraryDownload(product);
   initAvailCalendar(product);
+}
+
+/* 일정표 바로 아래에 PDF 일정 다운로드 바를 항상 붙여줘요.
+   상품에 downloadUrl(미리 만들어 둔 PDF 파일 경로)이 있으면 그 파일을 바로 내려받게 하고,
+   아직 PDF가 없는 상품은 브라우저의 "PDF로 저장" 인쇄 기능을 열어줘요.
+   (인쇄용 CSS가 상단 메뉴 · 사이드바 · 푸터를 숨기므로 일정표만 깔끔하게 저장됩니다.)
+
+   붙이는 위치는 상품 설명 안의 일정 섹션(.itin) 바로 뒤예요.
+   일정 섹션을 못 찾으면 설명 맨 끝에 붙여서, 어떤 상품이든 버튼이 빠지지 않게 했어요. */
+function placeItineraryDownload(product){
+  /* 주의: 상품 설명은 <p class="p-desc"> 안에 넣지만, 설명이 <div>/<section>으로 시작하기 때문에
+     브라우저가 <p>를 먼저 닫아버려요. 그래서 실제 일정표 마크업은 .p-desc의 자식이 아니라
+     형제 요소가 됩니다. 따라서 .p-desc가 아니라 바깥 컨테이너에서 찾아야 해요. */
+  const root = document.querySelector('#content .section-inner') || document.getElementById('content');
+  if(!root) return;
+
+  const hasFile = !!product.downloadUrl;
+  const bar = document.createElement('div');
+  bar.className = 'itin-dl';
+  bar.innerHTML = `
+    <span class="idl-txt">
+      <span class="idl-title">📄 일정표 PDF로 받아보기</span>
+      <span class="idl-sub">${hasFile
+        ? '전체 일정과 포함 · 불포함 사항이 담긴 일정표예요.'
+        : '화면의 일정표를 그대로 PDF 파일로 저장하실 수 있어요.'}</span>
+    </span>
+    ${hasFile
+      ? `<a class="idl-btn" href="${product.downloadUrl}" download>일정표 다운로드</a>`
+      : `<button type="button" class="idl-btn">PDF로 저장하기</button>`}
+  `;
+
+  if(!hasFile){
+    bar.querySelector('.idl-btn').addEventListener('click', function(){ window.print(); });
+  }
+
+  /* 일정 섹션 바로 뒤에 붙여요.
+     상품마다 마크업이 두 가지예요 — .itin 클래스를 쓰는 것과, class="sec"에 <h2>일정</h2>만 있는 것.
+     둘 다 찾아보고, 그래도 없으면 태그 목록 앞(설명 맨 끝)에 붙입니다. */
+  let itin = root.querySelector('section.itin') || root.querySelector('.itin');
+  if(!itin){
+    itin = Array.prototype.find.call(root.querySelectorAll('section'), function(s){
+      const h = s.querySelector('h2');
+      return h && h.textContent.replace(/\s+/g,'') === '일정';
+    }) || null;
+  }
+  const tags = root.querySelector('.p-tags');
+  if(itin && itin.parentNode){ itin.insertAdjacentElement('afterend', bar); }
+  else if(tags && tags.parentNode){ tags.insertAdjacentElement('beforebegin', bar); }
+  else { root.appendChild(bar); }
 }
 
 /* 예약 인원에 맞춰 출발 가능한 날짜를 보여주는 달력 위젯이에요.
