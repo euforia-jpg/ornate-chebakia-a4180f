@@ -281,6 +281,27 @@ const FILTER_LABELS = [
 ];
 let activeFilter = 'all';
 
+/* ===== 상품 노출 순서 무작위 섞기 =====
+   페이지에 들어올 때마다, 그리고 필터를 바꿀 때마다 카드 순서를 새로 섞어요.
+   덕분에 목록 아래쪽 상품도 돌아가며 첫 화면에 노출됩니다.
+
+   SHUFFLE_INTERVAL_MS
+     0      → 들어올 때만 섞어요 (권장 · 기본값)
+     20000  → 20초마다 자동으로 다시 섞어요 (숫자는 밀리초)
+   자동으로 섞을 때는 카드에 마우스를 올려둔 동안이나 다른 탭을 보고 있을 때는
+   건너뛰어서, 누르려던 카드가 갑자기 움직이지 않도록 했어요. */
+const SHUFFLE_INTERVAL_MS = 0;
+
+/* 피셔–예이츠 셔플 — 원본 배열은 건드리지 않고 섞은 사본을 돌려줘요. */
+function shuffled(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function productLink(p){
   return p.link || ('product.html?id=' + encodeURIComponent(p.id));
 }
@@ -301,7 +322,8 @@ function renderFilters(){
 
 function renderGrid(){
   const grid = document.getElementById('tourGrid');
-  const list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cats.includes(activeFilter));
+  const base = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cats.includes(activeFilter));
+  const list = shuffled(base);
   grid.innerHTML = list.map(p => `
        <a class="tour-card" href="${productLink(p)}">
       <div class="badge-group">
@@ -322,6 +344,22 @@ function renderGrid(){
 
 renderFilters();
 renderGrid();
+
+/* SHUFFLE_INTERVAL_MS 가 0보다 클 때만 주기적으로 다시 섞어요. */
+if (SHUFFLE_INTERVAL_MS > 0) {
+  setInterval(function(){
+    const grid = document.getElementById('tourGrid');
+    if (!grid) return;
+    if (document.hidden) return;              // 다른 탭을 보고 있을 때는 건너뛰어요
+    if (grid.matches(':hover')) return;       // 카드를 보고 있을 때는 건너뛰어요
+    grid.style.transition = 'opacity .25s ease';
+    grid.style.opacity = '0';
+    setTimeout(function(){
+      renderGrid();
+      grid.style.opacity = '1';
+    }, 250);
+  }, SHUFFLE_INTERVAL_MS);
+}
 </script>
   <script>
   if('serviceWorker' in navigator){
