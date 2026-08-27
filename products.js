@@ -4169,15 +4169,9 @@ header.mast{padding:64px 0 44px}
       <div class="card">
         <h3><span class="pip"></span>포함 사항</h3>
         <ul>
-          <li><b>차량</b>전 일정 전용 차량 — 공항 픽업부터 샌딩까지</li>    
-        </ul>
-      </div>
-      <div class="card no">
-        <h3><span class="pip"></span>포함 사항</h3>
-        <ul>
           <li><b>차량</b>전 일정 전용 차량 — 공항 픽업부터 샌딩까지</li>
           <li><b>인솔</b>한국인 인솔자 전 일정 동행</li>
-          <li><b>숙박</b></li>
+          <li><b>숙박</b>호텔 13박 · 2인 1실 기준 · 조식 13회</li>
           <li><b>식사</b>1일 1식(중식 또는 석식) 포함</li>
           <li><b>입장료</b>일정에 명시된 입장료 전부</li>
           <li><b>보험</b>여행자 보험</li>
@@ -4186,16 +4180,16 @@ header.mast{padding:64px 0 44px}
       <div class="card no">
         <h3><span class="pip"></span>불포함 사항</h3>
         <ul>
-          <li><b>항공</b>국제선 항공권 </li>
-          <li><b>호텔</b>전일정 </li>
-          <li><b>식사</b>전부 자유식</li>
-          <li><b>개인 경비</b>개인 경비</li>
+          <li><b>항공</b>국제선 항공권 — 스케줄 확인은 일정표를 참고해 주세요, 항공사에 직접 문의하시는 게 가장 정확해요</li>
+          <li><b>식사</b>조식·1식 외 식사 — 전부 자유식</li>
+          <li><b>개인 경비</b>개인 경비, 기념품</li>
           <li><b>선택 관광</b>플라멩코, 포트와인 셀러 추가 시음 등</li>
           <li><b>팁</b>가이드 · 기사 팁</li>
           <li><b>싱글차지</b>1인 1실 이용 시 별도</li>
         </ul>
       </div>
     </div>
+  </div>
     <p class="note" style="margin-top:16px;">국제선 항공권은 상품에 포함되지 않아요. 위 항공 스케줄을 참고해 직접 발권하시거나, 원하시면 목요일 출발 조건에 맞는 좌석 현황을 확인해 안내해 드려요. 마드리드 IN · 리스본 OUT의 오픈조 항공권으로 예약하셔야 해요.</p>
   </div>
 </section>
