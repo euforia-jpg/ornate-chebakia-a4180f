@@ -3956,7 +3956,7 @@ header.mast{padding:64px 0 44px}
 <section class="cmp">
   <div class="wrap">
     <h2 class="display">동선 — 전 구간 육로 약 2,720km</h2>
-    <p class="note" style="margin-bottom:16px;">주신 도시 순서에서 사라고사의 위치만 앞으로 옮겼어요. 사라고사는 마드리드와 바르셀로나를 잇는 고속도로 A-2 위에 정확히 놓여 있어, 가는 길에 들르면 우회 거리가 사실상 0이에요.</p>
+    <p class="note" style="margin-bottom:16px;">.</p>
     <table class="cmptable">
       <thead><tr><th>구간</th><th>거리</th><th>비고</th></tr></thead>
       <tbody>
@@ -3970,7 +3970,7 @@ header.mast{padding:64px 0 44px}
         <tr><td>포르투 → 리스본</td><td>약 310km</td><td>대서양 연안</td></tr>
       </tbody>
     </table>
-    <p class="note" style="margin-top:16px;">사라고사를 바르셀로나 다음에 두면 265km가 더 늘어나요. 마드리드에서 바르셀로나로 곧장 간 뒤(620km) 되돌아 내려오는 형태가 되기 때문이에요. 앞으로 옮기면 마드리드–바르셀로나 620km 하루 이동이 사라지고, 대신 315km + 310km 이틀로 나뉘어요. 첫 이동일 피로가 크게 줄어들어요.</p>
+    <p class="note" style="margin-top:16px;"></p>
   </div>
 </section>
 
