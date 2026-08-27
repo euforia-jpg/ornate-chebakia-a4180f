@@ -1378,8 +1378,6 @@ price: '가격 문의',
 </section>
 
 <section class="incl">
-
-<section class="incl">
   <div class="wrap">
     <h2 class="display">포함 · 불포함</h2>
     <div class="cols">
@@ -4189,7 +4187,6 @@ header.mast{padding:64px 0 44px}
         </ul>
       </div>
     </div>
-  </div>
     <p class="note" style="margin-top:16px;">국제선 항공권은 상품에 포함되지 않아요. 위 항공 스케줄을 참고해 직접 발권하시거나, 원하시면 목요일 출발 조건에 맞는 좌석 현황을 확인해 안내해 드려요. 마드리드 IN · 리스본 OUT의 오픈조 항공권으로 예약하셔야 해요.</p>
   </div>
 </section>
