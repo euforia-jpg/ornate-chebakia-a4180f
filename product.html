@@ -314,24 +314,28 @@ function render(){
         </div>
         ` : ''}
 
+              ${d.highlights && d.highlights.length ? `
         <div class="p-block">
           <h3>이런 경험을 할 수 있어요</h3>
           <ul class="p-list">${d.highlights.map(h=>`<li><span class="dot"></span>${h}</li>`).join('')}</ul>
         </div>
+        ` : ''}
 
+        ${(d.includes && d.includes.length) || (d.excludes && d.excludes.length) ? `
         <div class="p-block">
           <h3>포함 · 불포함 사항</h3>
           <div class="inc-exc">
             <div class="ok">
               <h4>포함</h4>
-              <ul>${d.includes.map(i=>`<li>${i}</li>`).join('')}</ul>
+              <ul>${(d.includes||[]).map(i=>`<li>${i}</li>`).join('')}</ul>
             </div>
             <div class="no">
               <h4>불포함</h4>
-              <ul>${d.excludes.map(i=>`<li>${i}</li>`).join('')}</ul>
+              <ul>${(d.excludes||[]).map(i=>`<li>${i}</li>`).join('')}</ul>
             </div>
           </div>
         </div>
+        ` : ''}
       </div>
 
       <div>
