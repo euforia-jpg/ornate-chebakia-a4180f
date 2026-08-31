@@ -4240,7 +4240,7 @@ header.mast{padding:64px 0 44px}
       duration: '13박 14일 (마드리드 IN · 리스본 OUT · 목요일 출발 · 최소 출발 4인)'
     }
   },
-  {
+ {
     id: 'galicia-a-marina',
     cats: ['spain'],
     topClass: 'spain',
@@ -4256,39 +4256,28 @@ header.mast{padding:64px 0 44px}
       description: `<style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap');
 
+/* 중립색은 다른 일정표(.eu-itin / .eu-iberia12)와 동일한 값을 씁니다.
+   갈리시아 고유색은 강조색(--gal / --sea)에만 둡니다. 다른 일정표와 같이 라이트 전용입니다. */
 .eu-galicia6{
-  --paper:#F6F6F3; --card:#FFFFFF; --sunk:#ECEDE9;
-  --ink:#181B1A; --muted:#585F5B; --faint:#878E89;
-  --line:#DFE1DC; --hair:#EBEDE8;
-  --gal:#1D4E89; --gal-soft:#E4EBF3;
-  --sea:#2C6E63; --sea-soft:#E3EFEC;
-  --stone:#6B7169;
-  --shadow:0 1px 0 rgba(24,27,26,.04), 0 1px 3px rgba(24,27,26,.05);
+  --ink:#20292B;
+  --paper:#F7F6F2;
+  --tile:#EAE9E3;
+  --line:#D6D3CA;
+  --muted:#68726F;
+  --stone:#66716F;
+  --card:#FFFFFF;
+  --sunk:#EAE9E3;
+  --faint:#8B938F;
+  --hair:#E4E2DA;
+  --gal:#1D4E89; --gal-soft:#E6ECF4;
+  --sea:#2C6E63; --sea-soft:#E5EFEC;
+  --shadow:0 1px 0 rgba(32,41,43,.04), 0 1px 3px rgba(32,41,43,.05);
 
   font-family:"IBM Plex Sans KR","Malgun Gothic",sans-serif;
   font-size:15.5px; line-height:1.7; font-weight:400;
   color:var(--ink); background:var(--paper);
   word-break:keep-all; -webkit-font-smoothing:antialiased;
-}
-@media (prefers-color-scheme: dark){
-  .eu-galicia6:not([data-theme="light"]){
-    --paper:#141715; --card:#1B1F1D; --sunk:#212523;
-    --ink:#E8E9E5; --muted:#9AA09B; --faint:#757B77;
-    --line:#2C312E; --hair:#242927;
-    --gal:#7FA8D4; --gal-soft:#1A2733;
-    --sea:#6EB3A5; --sea-soft:#1A2C29;
-    --stone:#9AA09B;
-    --shadow:0 1px 0 rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.3);
-  }
-}
-:root[data-theme="dark"] .eu-galicia6{
-  --paper:#141715; --card:#1B1F1D; --sunk:#212523;
-  --ink:#E8E9E5; --muted:#9AA09B; --faint:#757B77;
-  --line:#2C312E; --hair:#242927;
-  --gal:#7FA8D4; --gal-soft:#1A2733;
-  --sea:#6EB3A5; --sea-soft:#1A2C29;
-  --stone:#9AA09B;
-  --shadow:0 1px 0 rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.3);
+  overflow-x:hidden; max-width:100%;
 }
 
 .eu-galicia6 *{box-sizing:border-box}
@@ -4588,9 +4577,10 @@ header.mast{padding:64px 0 44px}
         '전 일정 전용 차량 (산티아고 픽업 ~ 샌딩)',
         '한국인 인솔자 전 일정 동행',
         '호텔 5박 (2인 1실 기준) + 호텔 조식 5회',
+        '1일 1식 (중식 또는 석식)',
         '사르가델로스 공방 가이드 투어 · 산 시브라오 해양박물관 입장 · 산티아고 대성당 입장',
         '대성당 해변 사전 예약 대행 (예약 필요 시기)',
-        
+        '여행자 보험'
       ],
       excludes: [
         '국제선 항공권 및 스페인 국내선',
@@ -4599,7 +4589,7 @@ header.mast{padding:64px 0 44px}
         '개인 경비, 음료, 기념품',
         '가이드·기사 팁',
         '싱글 차지 (1인 1실 이용 시)',
-        '여행 보험 (선택)'
+        '여행 취소 보험 (선택)'
       ],
       duration: '5박 6일 · 산티아고 데 콤포스텔라 현지 집합/해산 · 최소 출발 4인'
     }
