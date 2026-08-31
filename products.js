@@ -4594,6 +4594,552 @@ header.mast{padding:64px 0 44px}
       duration: '5박 6일 · 산티아고 데 콤포스텔라 현지 집합/해산 · 최소 출발 4인'
     }
   },
+  {
+    id: 'iberia-15days-grand',
+    cats: ['spain','portugal'],
+    topClass: 'spain',
+    region: '스페인+포르투갈',
+    days: '14박 15일',
+    price: '가격 문의',
+    title: '[스페인+포르투갈] 이베리아 대일주 14박 15일',
+    summary: '바르셀로나에서 출발해 지중해를 따라 남쪽으로, 안달루시아를 지나 포르투갈로 넘어갔다가, 대서양을 타고 북상해 산티아고와 북부 해안을 거쳐 다시 바르셀로나로 돌아오는 완전한 원 하나. 이베리아 반도를 한 번에 다 보는 14박 15일이에요.',
+    tags: ['14박 15일', '바르셀로나 왕복', '전용차량 + 한국인 인솔', '스페인 북부·갈리시아 포함'],
+    isNew: true,
+    detail: {
+      lead: '반도의 네 모서리를 전부 지나는 약 4,000km — 바르셀로나에서 시작해 바르셀로나로 돌아오는 14박 15일',
+      description: `<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+/* 중립색은 다른 일정표(.eu-iberia12 / .eu-itin)와 동일. 라이트 전용. */
+.eu-iberia15{
+  --ink:#20292B;
+  --paper:#FAF7F1;
+  --tile:#EFEDE5;
+  --line:#DAD6CA;
+  --muted:#6B7573;
+  --stone:#6E7B78;
+  --card:#FFFFFF;
+  --faint:#8E9794;
+  --hair:#E7E3D9;
+  --sp:#1F6F6B; --sp-soft:#E4EFEE;
+  --och:#A9682B; --och-soft:#F6EEE3;
+  --pt:#2A5A8C; --pt-soft:#E6ECF3;
+  --shadow:0 1px 0 rgba(32,41,43,.04), 0 1px 3px rgba(32,41,43,.05);
+
+  font-family:"IBM Plex Sans KR","Malgun Gothic",sans-serif;
+  font-size:15.5px; line-height:1.7; font-weight:400;
+  color:var(--ink); background:var(--paper);
+  word-break:keep-all; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden; max-width:100%;
+}
+.eu-iberia15 *{box-sizing:border-box}
+.eu-iberia15 .i-wrap{max-width:940px; margin:0 auto; padding:40px 22px 80px}
+.eu-iberia15 h1,.eu-iberia15 h2,.eu-iberia15 h3{margin:0; font-weight:600; line-height:1.3; letter-spacing:-.015em; color:var(--ink)}
+.eu-iberia15 p{margin:0}
+.eu-iberia15 .i-mono{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+
+.eu-iberia15 .i-hero{border-bottom:2px solid var(--ink); padding-bottom:22px}
+.eu-iberia15 .i-kick{font-size:11.5px; font-weight:600; letter-spacing:.18em; color:var(--sp); text-transform:uppercase}
+.eu-iberia15 .i-hero h1{font-size:clamp(28px,5.2vw,44px); margin-top:12px}
+.eu-iberia15 .i-sub{margin-top:14px; color:var(--muted); font-size:16px; max-width:62ch}
+.eu-iberia15 .i-facts{display:flex; flex-wrap:wrap; margin-top:20px; border:1px solid var(--line);
+  background:var(--card); box-shadow:var(--shadow)}
+.eu-iberia15 .i-fact{flex:1 1 140px; padding:12px 16px; border-right:1px solid var(--hair)}
+.eu-iberia15 .i-fact:last-child{border-right:0}
+.eu-iberia15 .i-fact .k{font-size:11px; font-weight:600; letter-spacing:.07em; color:var(--faint)}
+.eu-iberia15 .i-fact .v{margin-top:3px; font-size:15px; font-weight:600}
+
+.eu-iberia15 .i-sec{margin-top:46px}
+.eu-iberia15 .i-shead{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  border-bottom:1px solid var(--ink); padding-bottom:8px}
+.eu-iberia15 .i-shead h2{font-size:20px}
+.eu-iberia15 .i-shead .t{font-size:11.5px; color:var(--muted); font-family:"IBM Plex Mono",monospace}
+.eu-iberia15 .i-lead{margin-top:14px; color:var(--muted); max-width:68ch; font-size:15px}
+.eu-iberia15 .i-lead b{color:var(--ink); font-weight:600}
+
+.eu-iberia15 .i-scroll{overflow-x:auto; margin-top:16px; border:1px solid var(--line); background:var(--card); box-shadow:var(--shadow)}
+.eu-iberia15 table{width:100%; border-collapse:collapse; font-size:14px}
+.eu-iberia15 th,.eu-iberia15 td{padding:9px 13px; text-align:left; border-bottom:1px solid var(--hair); vertical-align:middle; color:var(--muted)}
+.eu-iberia15 thead th{font-size:11px; font-weight:600; letter-spacing:.08em; color:var(--muted);
+  text-transform:uppercase; background:var(--tile); border-bottom:1px solid var(--line); white-space:nowrap}
+.eu-iberia15 tbody tr:last-child td{border-bottom:0}
+.eu-iberia15 td.n,.eu-iberia15 th.n{text-align:right; white-space:nowrap; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+.eu-iberia15 tr.hi td{background:var(--sp-soft); color:var(--ink); font-weight:500}
+.eu-iberia15 td b{color:var(--ink); font-weight:600}
+
+.eu-iberia15 .i-note{margin-top:14px; padding:15px 18px; background:var(--och-soft);
+  border-left:3px solid var(--och); font-size:14.5px; line-height:1.65; color:var(--muted)}
+.eu-iberia15 .i-note.sp{background:var(--sp-soft); border-left-color:var(--sp)}
+.eu-iberia15 .i-note.pt{background:var(--pt-soft); border-left-color:var(--pt)}
+.eu-iberia15 .i-note b{color:var(--ink); font-weight:600}
+.eu-iberia15 .i-note + .i-note{margin-top:10px}
+
+.eu-iberia15 .i-days{margin-top:22px}
+.eu-iberia15 .i-day{display:grid; grid-template-columns:104px 1fr; gap:0 20px; position:relative; padding-bottom:26px}
+.eu-iberia15 .i-rail{position:relative; padding-top:2px}
+.eu-iberia15 .i-rail::before{content:""; position:absolute; left:17px; top:38px; bottom:-26px; width:1px; background:var(--line)}
+.eu-iberia15 .i-day:last-child .i-rail::before{display:none}
+.eu-iberia15 .i-num{width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:var(--sp); color:#fff; font-family:"IBM Plex Mono",monospace; font-size:14px; font-weight:600;
+  position:relative; z-index:2}
+.eu-iberia15 .i-day.pt .i-num{background:var(--pt)}
+.eu-iberia15 .i-when{margin-top:8px; font-size:12px; font-weight:600; color:var(--muted); letter-spacing:.02em; line-height:1.4}
+.eu-iberia15 .i-body{padding-top:4px}
+.eu-iberia15 .i-city{font-size:17.5px; font-weight:600; letter-spacing:-.01em; color:var(--ink)}
+.eu-iberia15 .i-move{margin-top:3px; font-size:12.5px; color:var(--faint); font-family:"IBM Plex Mono",monospace}
+.eu-iberia15 .i-body ul{margin:10px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
+.eu-iberia15 .i-body li{font-size:14.5px; color:var(--muted); line-height:1.6; padding-left:14px; position:relative}
+.eu-iberia15 .i-body li::before{content:""; position:absolute; left:0; top:9px; width:5px; height:5px;
+  background:var(--och); border-radius:50%}
+.eu-iberia15 .i-day.pt .i-body li::before{background:var(--pt)}
+.eu-iberia15 .i-body li b{color:var(--ink); font-weight:500}
+.eu-iberia15 .i-meal{margin-top:10px; font-size:12px; color:var(--faint); font-family:"IBM Plex Mono",monospace; letter-spacing:.03em}
+.eu-iberia15 .i-stay{display:inline-block; margin-top:8px; padding:2px 9px; font-size:11.5px; font-weight:600;
+  background:var(--tile); color:var(--stone); letter-spacing:.02em}
+@media (max-width:600px){
+  .eu-iberia15 .i-day{grid-template-columns:1fr; gap:8px}
+  .eu-iberia15 .i-rail{display:flex; align-items:center; gap:12px}
+  .eu-iberia15 .i-rail::before{display:none}
+  .eu-iberia15 .i-when{margin-top:0}
+}
+
+.eu-iberia15 .i-band{margin:6px 0 30px; padding:16px 20px; background:var(--pt-soft);
+  border-top:2px solid var(--pt); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.eu-iberia15 .i-band svg{flex:0 0 auto; color:var(--pt)}
+.eu-iberia15 .i-band .bt{font-size:14.5px; line-height:1.6; color:var(--muted)}
+.eu-iberia15 .i-band .bt b{color:var(--ink); font-weight:600}
+.eu-iberia15 .i-band.back{background:var(--sp-soft); border-top-color:var(--sp)}
+.eu-iberia15 .i-band.back svg{color:var(--sp)}
+
+.eu-iberia15 .i-incl{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px}
+.eu-iberia15 .i-box{background:var(--card); border:1px solid var(--line); padding:16px 18px 17px; box-shadow:var(--shadow)}
+.eu-iberia15 .i-box h3{font-size:14.5px; letter-spacing:.02em}
+.eu-iberia15 .i-box.in h3{color:var(--sp)}
+.eu-iberia15 .i-box.out h3{color:var(--och)}
+.eu-iberia15 .i-box ul{margin:10px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
+.eu-iberia15 .i-box li{font-size:14px; color:var(--muted); line-height:1.55; padding-left:15px; position:relative}
+.eu-iberia15 .i-box.in li::before{content:"+"; position:absolute; left:0; top:0; color:var(--sp); font-weight:600}
+.eu-iberia15 .i-box.out li::before{content:"−"; position:absolute; left:0; top:0; color:var(--och); font-weight:600}
+.eu-iberia15 .i-box li b{color:var(--ink); font-weight:500}
+@media (max-width:600px){ .eu-iberia15 .i-incl{grid-template-columns:1fr} }
+
+.eu-iberia15 .i-foot{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
+  font-size:12px; color:var(--faint); line-height:1.7}
+.eu-iberia15 .i-foot b{color:var(--muted); font-weight:500}
+</style>
+
+<div class="eu-iberia15">
+<div class="i-wrap">
+
+<div class="i-hero">
+  <p class="i-kick">Euforia Tour Spain · 이베리아 반도 대일주</p>
+  <h1>스페인과 포르투갈을 한 바퀴, 14박 15일</h1>
+  <p class="i-sub">바르셀로나에서 출발해 지중해를 따라 남쪽으로, 안달루시아를 지나 포르투갈로 넘어갔다가, 대서양을 타고 북상해 산티아고와 북부 해안을 거쳐 다시 바르셀로나로 돌아오는 완전한 원 하나. 이베리아 반도를 한 번에 다 보는 일정입니다.</p>
+  <div class="i-facts">
+    <div class="i-fact"><p class="k">기간</p><p class="v">14박 15일</p></div>
+    <div class="i-fact"><p class="k">집합 · 해산</p><p class="v">바르셀로나</p></div>
+    <div class="i-fact"><p class="k">방문 국가</p><p class="v">스페인 · 포르투갈</p></div>
+    <div class="i-fact"><p class="k">이동</p><p class="v">전 일정 전용 차량</p></div>
+    <div class="i-fact"><p class="k">최소 출발</p><p class="v">4인</p></div>
+  </div>
+</div>
+
+<div class="i-sec">
+  <div class="i-shead">
+    <h2>이 일정이 지나는 곳</h2>
+    <span class="t">약 4,000km · 원을 그리며 한 바퀴</span>
+  </div>
+  <p class="i-lead">바르셀로나를 떠나 <b>지중해 연안</b>(페니스콜라·발렌시아·알리칸테) → <b>안달루시아</b>(그라나다·네르하·말라가·론다·세비야) → <b>포르투갈</b>(에보라·리스본·파티마·포르투·브라가) → <b>갈리시아</b>(산티아고·루고) → <b>북부 해안</b>(레온·오비에도·코바동가·산탄데르·빌바오) → <b>라 리오하와 사라고사</b>를 거쳐 바르셀로나로 돌아옵니다.</p>
+  <p class="i-lead" style="margin-top:12px">일반 패키지가 마드리드와 바르셀로나 사이만 오가는 데 비해, 이 일정은 <b>반도의 네 모서리를 전부 지납니다.</b> 스페인 북부와 갈리시아, 포르투갈 북부까지 한 번에 넣은 구성은 흔치 않습니다.</p>
+</div>
+
+<div class="i-sec">
+  <div class="i-shead">
+    <h2>항공 — 바르셀로나 왕복</h2>
+    <span class="t">2026-08-31 조회 · 국제선은 불포함입니다</span>
+  </div>
+  <p class="i-lead">인천과 바르셀로나 사이에는 <b>아시아나 직항</b>이 있습니다. 14박 15일은 <b>돌아오는 날이 출발일로부터 정확히 2주 뒤</b>, 즉 요일이 같습니다. 가는 편과 오는 편이 같은 요일에 뜨므로 <b>운항하는 어느 요일에 나가도 일정이 성립</b>합니다.</p>
+
+  <div class="i-scroll">
+    <table>
+      <thead>
+        <tr><th>구간</th><th>편명</th><th>운항</th><th>소요</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hi"><td><b>인천 → 바르셀로나</b></td><td class="i-mono">OZ511</td><td>주 5회 이상</td><td>약 14시간 20분</td></tr>
+        <tr class="hi"><td><b>바르셀로나 → 인천</b></td><td class="i-mono">OZ512</td><td>주 5회 이상</td><td>약 13시간 30분</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="i-note sp">
+    <b>요일 제약이 사실상 없는 일정입니다.</b> 저희 다른 14일 상품(마드리드 IN · 리스본 OUT)은 항공 요일이 맞물려 목요일 출발만 가능한데, 이 일정은 <b>15일이 딱 2주</b>라 출발 요일과 귀국 요일이 같습니다. 원하시는 날짜에 맞추기가 훨씬 수월합니다.
+  </div>
+
+  <div class="i-note">
+    <b>운항 요일은 시기에 따라 바뀝니다.</b> 조회 시점 기준 주 5회이고, 가을 성수기에는 증편되어 사실상 매일 뜨는 기간이 있습니다. 항공 자료마다 요일 표기가 조금씩 달라, <b>출발일이 정해지면 그 날짜의 좌석과 운항 여부를 확인해 안내</b>해 드립니다. 대한항공은 인천–바르셀로나 직항이 없어 경유해야 합니다.
+  </div>
+</div>
+
+<div class="i-sec">
+  <div class="i-shead">
+    <h2>일정</h2>
+    <span class="t">1일 ~ 15일</span>
+  </div>
+
+  <div class="i-days">
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">1</div><div class="i-when">바르셀로나<br>집합</div></div>
+      <div class="i-body">
+        <p class="i-city">바르셀로나 도착</p>
+        <p class="i-move">공항 픽업</p>
+        <ul>
+          <li>바르셀로나 엘 프라트 공항 입국장에서 <b>인솔자와 미팅</b>, 전용 차량으로 호텔 이동</li>
+          <li>여장을 풀고 가볍게 <b>람블라스 거리</b> 산책 (도착 시각에 따라)</li>
+        </ul>
+        <p class="i-meal">식사 — 기내식</p><br><span class="i-stay">바르셀로나 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">2</div><div class="i-when">바르셀로나</div></div>
+      <div class="i-body">
+        <p class="i-city">바르셀로나</p>
+        <p class="i-move">가우디와 고딕의 하루</p>
+        <ul>
+          <li><b>사그라다 파밀리아</b> 내부 입장 — 아침 빛이 탄생의 파사드를 통과합니다</li>
+          <li><b>구엘 공원</b>과 <b>카사 바트요·카사 밀라</b> 외관, 그라시아 거리</li>
+          <li><b>고딕 지구</b> — 대성당, 왕의 광장, 로마 성벽의 흔적</li>
+          <li><b>몬주익 언덕</b>에서 내려다보는 항구와 지중해</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">바르셀로나 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">3</div><div class="i-when">발렌시아</div></div>
+      <div class="i-body">
+        <p class="i-city">바르셀로나 → 페니스콜라 → 발렌시아</p>
+        <p class="i-move">약 350km · 지중해 연안</p>
+        <ul>
+          <li><b>페니스콜라</b> — 바다로 튀어나온 바위 위에 성이 서 있는 마을. 템플기사단이 지은 성입니다</li>
+          <li><b>발렌시아 예술과학도시</b> — 칼라트라바가 마른 강바닥에 세운 미래 도시</li>
+          <li><b>발렌시아 대성당</b>(성배 예배당)과 <b>중앙시장</b>, 라 론하</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">발렌시아 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">4</div><div class="i-when">그라나다</div></div>
+      <div class="i-body">
+        <p class="i-city">발렌시아 → 알리칸테 → 과딕스 → 그라나다</p>
+        <p class="i-move">약 550km · 이 일정의 최장 이동일</p>
+        <ul>
+          <li><b>알리칸테</b> — 산타 바르바라 성에서 내려다보는 코스타 블랑카의 흰 해안</li>
+          <li><b>과딕스</b> — 주민들이 지금도 살고 있는 <b>동굴집 마을</b>. 지붕 대신 굴뚝만 언덕에 솟아 있습니다</li>
+          <li>저녁 그라나다 도착. 시에라네바다 산자락이 보이기 시작합니다</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">그라나다 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">5</div><div class="i-when">그라나다</div></div>
+      <div class="i-body">
+        <p class="i-city">그라나다</p>
+        <p class="i-move">알함브라의 하루</p>
+        <ul>
+          <li><b>알함브라 궁전</b> — 나스르 궁전 지정 시간 입장, 헤네랄리페 정원, 카를로스 5세 궁</li>
+          <li><b>알바이신</b> 백색 골목과 <b>산 니콜라스 전망대</b> — 설산을 배경으로 한 알함브라의 정면</li>
+          <li>저녁 사크로몬테 동굴 플라멩코 (선택)</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">그라나다 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">6</div><div class="i-when">세비야</div></div>
+      <div class="i-body">
+        <p class="i-city">그라나다 → 네르하 → 말라가 → 론다 → 세비야</p>
+        <p class="i-move">약 450km · 안달루시아 횡단</p>
+        <ul>
+          <li><b>네르하</b> — 「유럽의 발코니」, 지중해로 튀어나온 전망대</li>
+          <li><b>말라가</b> — 피카소가 태어난 도시, 알카사바와 항구</li>
+          <li><b>론다</b> — 100m 협곡 위에 걸린 <b>누에보 다리</b>와 스페인에서 가장 오래된 투우장</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">세비야 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">7</div><div class="i-when">세비야</div></div>
+      <div class="i-body">
+        <p class="i-city">세비야</p>
+        <p class="i-move">안달루시아의 심장</p>
+        <ul>
+          <li><b>세비야 대성당</b>과 히랄다 탑 — 콜럼버스의 관</li>
+          <li><b>알카사르</b> — 무데하르 양식의 왕궁과 정원</li>
+          <li><b>스페인 광장</b>과 산타크루스 옛 유대인 지구</li>
+          <li><b>과달키비르 강 유람선</b> — 황금의 탑을 지나는 물길</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">세비야 1박</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="i-band">
+    <svg width="42" height="42" viewBox="0 0 42 42" aria-hidden="true">
+      <rect x="1" y="1" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".35"/>
+      <path d="M21 6 L28 13 L21 20 L14 13 Z" fill="currentColor" opacity=".8"/>
+      <path d="M21 22 L28 29 L21 36 L14 29 Z" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".8"/>
+      <circle cx="21" cy="13" r="2.4" fill="var(--paper)"/>
+    </svg>
+    <p class="bt"><b>여기서 포르투갈로 넘어갑니다.</b> 시계를 <b>한 시간 뒤로</b> 돌리고, 8일차부터 11일차까지 나흘을 포르투갈에서 보냅니다. 아래 파란 번호가 포르투갈 구간입니다.</p>
+  </div>
+
+  <div class="i-days">
+
+    <div class="i-day pt">
+      <div class="i-rail"><div class="i-num">8</div><div class="i-when">리스본</div></div>
+      <div class="i-body">
+        <p class="i-city">세비야 → 메리다 → 에보라 → 리스본</p>
+        <p class="i-move">약 470km · 국경 통과</p>
+        <ul>
+          <li><b>메리다</b> — 로마 원형극장과 극장이 거의 그대로 남은 도시. 유네스코 세계유산</li>
+          <li>국경을 넘어 <b>에보라</b> — 성벽 안이 통째로 세계유산인 알렌테주의 옛 도시</li>
+          <li>에보라 <b>인골 예배당</b> — 벽과 기둥을 사람 뼈로 쌓아 올린 곳입니다</li>
+          <li>저녁 리스본 도착</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">리스본 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day pt">
+      <div class="i-rail"><div class="i-num">9</div><div class="i-when">리스본</div></div>
+      <div class="i-body">
+        <p class="i-city">리스본</p>
+        <p class="i-move">대항해가 시작된 강어귀</p>
+        <ul>
+          <li><b>제로니모스 수도원</b> — 마누엘 양식의 정점, 바스쿠 다 가마가 잠든 곳</li>
+          <li><b>벨렝 탑</b>과 발견 기념비</li>
+          <li><b>파스테이스 드 벨렝</b> — 1837년부터 같은 자리에서 굽는 에그타르트</li>
+          <li><b>알파마</b> 골목과 상 조르제 성, 28번 트램이 지나는 언덕</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">리스본 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day pt">
+      <div class="i-rail"><div class="i-num">10</div><div class="i-when">포르투</div></div>
+      <div class="i-body">
+        <p class="i-city">리스본 → 파티마 → 포르투</p>
+        <p class="i-move">약 320km</p>
+        <ul>
+          <li><b>파티마 성모 발현 성지</b> — 발현 소성당과 로사리오 대성당</li>
+          <li>오후 <b>포르투</b> 도착 — 도루 강이 대서양으로 빠지는 도시</li>
+          <li><b>상 벤투 역</b>의 아줄레주 2만 장, <b>동 루이스 1세 다리</b>와 히베이라 강변</li>
+          <li>빌라노바드가이아 <b>포트와인 셀러</b> 방문과 시음</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">포르투 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day pt">
+      <div class="i-rail"><div class="i-num">11</div><div class="i-when">산티아고</div></div>
+      <div class="i-body">
+        <p class="i-city">포르투 → 브라가 → 캄바도스 → 산티아고</p>
+        <p class="i-move">약 300km · 다시 스페인으로</p>
+        <ul>
+          <li><b>브라가 · 봉 제주스 두 몬트</b> — 지그재그로 오르는 바로크 계단. <b>물의 힘으로 움직이는 200년 된 케이블카</b>를 탑니다</li>
+          <li>국경을 넘어 갈리시아 <b>캄바도스</b> — 알바리뇨 화이트와인의 고향, 리아스 바이샤스 해안</li>
+          <li>저녁 <b>산티아고 데 콤포스텔라</b> 도착. 순례길 800km가 끝나는 오브라도이로 광장</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">산티아고 1박</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="i-band back">
+    <svg width="42" height="42" viewBox="0 0 42 42" aria-hidden="true">
+      <rect x="1" y="1" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".35"/>
+      <path d="M21 5 L24.5 15 L21 21 L17.5 15 Z" fill="currentColor" opacity=".75"/>
+      <path d="M21 37 L17.5 27 L21 21 L24.5 27 Z" fill="currentColor" opacity=".75"/>
+      <path d="M5 21 L15 17.5 L21 21 L15 24.5 Z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M37 21 L27 24.5 L21 21 L27 17.5 Z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    </svg>
+    <p class="bt"><b>여기서부터 북부 해안을 따라 동쪽으로 돌아옵니다.</b> 갈리시아를 지나 아스투리아스·칸타브리아·바스크를 거쳐 라 리오하와 사라고사로. 한국 여행자에게 가장 덜 알려진 스페인입니다.</p>
+  </div>
+
+  <div class="i-days">
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">12</div><div class="i-when">오비에도</div></div>
+      <div class="i-body">
+        <p class="i-city">산티아고 → 루고 → 오 세브레이로 → 레온 → 오비에도</p>
+        <p class="i-move">약 500km · 순례길을 거슬러 오릅니다</p>
+        <ul>
+          <li>오전 <b>산티아고 대성당</b> — 성 야고보의 유해가 안치된 지하 묘실</li>
+          <li><b>루고 로마 성벽</b> — 세계에서 유일하게 온전히 남은 로마 성벽. 유네스코 세계유산</li>
+          <li><b>오 세브레이로</b> — 순례길이 갈리시아로 들어서는 해발 1,300m 고갯마을. 초가지붕 <b>파요사</b>가 남아 있습니다</li>
+          <li><b>레온 대성당</b> — 1,800㎡의 스테인드글라스로 채워진 프랑스식 고딕</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">오비에도 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">13</div><div class="i-when">산탄데르</div></div>
+      <div class="i-body">
+        <p class="i-city">오비에도 → 코바동가 → 산티야나 델 마르 → 산탄데르</p>
+        <p class="i-move">약 250km · 피코스 데 에우로파</p>
+        <ul>
+          <li><b>코바동가</b> — 국토회복운동이 시작된 동굴 성지와 호수. 피코스 데 에우로파 국립공원 안입니다</li>
+          <li><b>산티야나 델 마르</b> — 「거짓말 세 개의 마을」이라 불리는 중세 마을. 성인도, 평지도, 바다도 없다는 뜻입니다</li>
+          <li><b>알타미라 박물관</b> — 구석기 벽화의 정밀 복제 동굴(네오쿠에바). 원본 동굴은 보존을 위해 일반 공개하지 않습니다</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">산탄데르 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">14</div><div class="i-when">사라고사</div></div>
+      <div class="i-body">
+        <p class="i-city">산탄데르 → 빌바오 → 라 리오하 → 사라고사</p>
+        <p class="i-move">약 430km</p>
+        <ul>
+          <li><b>빌바오 구겐하임</b> — 게리가 티타늄으로 지은 건물 자체가 작품인 미술관</li>
+          <li><b>라 리오하</b> — 스페인 최고의 와인 산지. 포도밭 사이에 게리와 칼라트라바가 지은 와이너리가 서 있습니다</li>
+          <li>저녁 <b>사라고사</b> 도착 — 에브로 강변 필라르 성모 대성당의 야경</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">사라고사 1박</span>
+      </div>
+    </div>
+
+    <div class="i-day">
+      <div class="i-rail"><div class="i-num">15</div><div class="i-when">바르셀로나<br>해산</div></div>
+      <div class="i-body">
+        <p class="i-city">사라고사 → 포블레트 → 바르셀로나</p>
+        <p class="i-move">약 330km · 원이 닫힙니다</p>
+        <ul>
+          <li>오전 <b>필라르 성모 대성당</b>과 알하페리아 궁전</li>
+          <li><b>포블레트 수도원</b> — 아라곤 왕들이 묻힌 시토회 수도원. 유네스코 세계유산</li>
+          <li>오후 바르셀로나 도착, 공항 샌딩 후 해산</li>
+        </ul>
+        <p class="i-meal">식사 — 조식 · 중식</p><br><span class="i-stay">일정 종료</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="i-sec">
+  <div class="i-shead">
+    <h2>이 일정의 속도</h2>
+    <span class="t">미리 아셔야 할 것</span>
+  </div>
+  <p class="i-lead">반도를 한 바퀴 도는 일정이라 <b>이동이 많습니다.</b> 15일 가운데 한 도시에 머무는 날은 나흘(바르셀로나·그라나다·세비야·리스본)이고, 나머지 열하루는 <b>이동하면서 중간 도시를 보는 날</b>입니다. 매일 짐을 싸는 날은 아니지만, 차에 앉아 있는 시간이 긴 일정인 것은 맞습니다.</p>
+
+  <div class="i-scroll">
+    <table>
+      <thead>
+        <tr><th>구간</th><th class="n">거리</th><th>성격</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hi"><td><b>4일 · 발렌시아 → 그라나다</b></td><td class="n">약 550km</td><td>최장 이동일. 알리칸테·과딕스 경유</td></tr>
+        <tr class="hi"><td><b>12일 · 산티아고 → 오비에도</b></td><td class="n">약 500km</td><td>루고·오 세브레이로·레온 경유</td></tr>
+        <tr><td>8일 · 세비야 → 리스본</td><td class="n">약 470km</td><td>메리다·에보라 경유, 국경 통과</td></tr>
+        <tr><td>6일 · 그라나다 → 세비야</td><td class="n">약 450km</td><td>네르하·말라가·론다 경유</td></tr>
+        <tr><td>14일 · 산탄데르 → 사라고사</td><td class="n">약 430km</td><td>빌바오·라 리오하 경유</td></tr>
+        <tr><td>그 밖 이동일</td><td class="n">250 ~ 350km</td><td>여유 있는 편</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="i-note">
+    <b>편하게 다니고 싶으시면 두 가지를 조정할 수 있습니다.</b> ① 4일차에서 <b>알리칸테를 빼면</b> 550km가 450km로 줄고 과딕스 동굴집에 시간을 더 쓸 수 있습니다. ② 12일차의 <b>레온에서 1박을 넣어 16일</b>로 늘리면 가장 힘든 두 날이 모두 풀립니다. 어느 쪽이든 문의 주시면 다시 짜 드립니다.
+  </div>
+
+  <div class="i-note sp">
+    <b>반대로, 더 짧게 보고 싶으시다면</b> 같은 지역을 나눠 담은 <b>12일 상품</b>이나 <b>북부 6일</b>, <b>갈리시아 6일</b> 상품이 따로 있습니다. 이 15일은 「한 번에 다 보고 싶다」는 분을 위한 구성입니다.
+  </div>
+</div>
+
+<div class="i-sec">
+  <div class="i-shead">
+    <h2>포함 · 불포함</h2>
+  </div>
+  <div class="i-incl">
+    <div class="i-box in">
+      <h3>포함됩니다</h3>
+      <ul>
+        <li><b>전 일정 전용 차량</b> — 바르셀로나 픽업부터 샌딩까지</li>
+        <li><b>한국인 인솔자</b> 전 일정 동행</li>
+        <li>호텔 <b>14박</b> · 2인 1실 기준</li>
+        <li><b>호텔 조식 14회</b></li>
+        <li><b>1일 1식</b> — 중식 또는 석식</li>
+        <li>일정에 명시된 <b>입장료</b> — 사그라다 파밀리아, 알함브라, 세비야 대성당·알카사르, 제로니모스 수도원, 산티아고 대성당, 메리다 로마 유적, 알타미라 박물관, 포블레트 수도원 등</li>
+        <li><b>과달키비르 강 유람선</b> · <b>봉 제주스 케이블카</b></li>
+        <li>여행자 보험</li>
+      </ul>
+    </div>
+    <div class="i-box out">
+      <h3>포함되지 않습니다</h3>
+      <ul>
+        <li><b>국제선 항공권</b> — 별도 안내드립니다</li>
+        <li><b>조식·1식 외 식사</b> — 전부 자유식</li>
+        <li>일정에 적히지 않은 <b>개별 입장료</b></li>
+        <li>선택 관광 — 플라멩코, 포트와인 추가 시음, 와이너리 투어 등</li>
+        <li>개인 경비, 음료, 기념품</li>
+        <li>가이드·기사 팁</li>
+        <li>싱글 차지 (1인 1실 이용 시)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="i-note pt"><b>국제선 항공권은 저희 상품에 포함되지 않습니다.</b> 인천–바르셀로나 아시아나 직항 기준으로 안내드리며, 출발일이 정해지면 <b>그 날짜의 운항 여부와 좌석 현황을 확인</b>해 드립니다. 다른 항공사로 경유해 오시는 경우에도 도착 시각에 맞춰 픽업합니다.</div>
+</div>
+
+<p class="i-foot">
+  <b>Euforia Tour Spain</b> · EUFORIA DAS NUVENS S.L. · 마드리드<br>
+  이동 거리는 실제 도로 기준 근사치입니다 · 항공 스케줄은 2026년 8월 31일 기준이며 항공사 사정에 따라 변경될 수 있습니다 · 알함브라 나스르 궁전, 사그라다 파밀리아 등 지정 시각 입장 시설은 예약 상황에 따라 방문 순서가 조정될 수 있습니다 · 알타미라는 원본 동굴이 아닌 정밀 복제 동굴(네오쿠에바)을 관람합니다 · 최소 출발 인원 4인
+</p>
+
+</div>
+</div>`,
+      highlights: [
+        '바르셀로나 — 사그라다 파밀리아 내부 입장, 구엘 공원, 고딕 지구',
+        '그라나다 알함브라 — 나스르 궁전 지정 시간 입장, 헤네랄리페 정원',
+        '안달루시아 횡단 — 네르하, 말라가, 론다 누에보 다리, 세비야 대성당과 알카사르',
+        '포르투갈 나흘 — 에보라 인골 예배당, 리스본 벨렝 지구, 파티마, 포르투 도루 강',
+        '산티아고 데 콤포스텔라 — 순례길 800km가 끝나는 오브라도이로 광장과 대성당',
+        '순례길을 거슬러 — 루고 로마 성벽, 해발 1,300m 오 세브레이로, 레온 대성당',
+        '스페인 북부 — 코바동가, 산티야나 델 마르와 알타미라, 빌바오 구겐하임, 라 리오하'
+      ],
+      includes: [
+        '전 일정 전용 차량 (바르셀로나 픽업 ~ 샌딩)',
+        '한국인 인솔자 전 일정 동행',
+        '호텔 14박 (2인 1실 기준) + 호텔 조식 14회',
+        '1일 1식 (중식 또는 석식)',
+        '일정에 명시된 입장료 — 사그라다 파밀리아, 알함브라, 세비야 대성당·알카사르, 제로니모스 수도원, 산티아고 대성당, 메리다 로마 유적, 알타미라 박물관, 포블레트 수도원 등',
+        '과달키비르 강 유람선 · 봉 제주스 케이블카',
+        '여행자 보험'
+      ],
+      excludes: [
+        '국제선 항공권',
+        '조식·1식 외 식사 (전부 자유식)',
+        '일정에 적히지 않은 개별 입장료',
+        '선택 관광 (플라멩코, 포트와인 추가 시음, 와이너리 투어 등)',
+        '개인 경비, 음료, 기념품',
+        '가이드·기사 팁',
+        '싱글 차지 (1인 1실 이용 시)'
+      ],
+      duration: '14박 15일 · 바르셀로나 집합/해산 · 최소 출발 4인 · 총 이동 약 4,000km'
+    }
+  },
 ];
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요.
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
