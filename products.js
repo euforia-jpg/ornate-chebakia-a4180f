@@ -4240,7 +4240,371 @@ header.mast{padding:64px 0 44px}
       duration: '13박 14일 (마드리드 IN · 리스본 OUT · 목요일 출발 · 최소 출발 4인)'
     }
   },
-  ];
+  {
+    id: 'galicia-a-marina',
+    cats: ['spain'],
+    topClass: 'spain',
+    region: '스페인북부',
+    days: '5박 6일',
+    price: '가격 문의',
+    title: '[스페인북부] 갈리시아와 루고 해안 5박 6일',
+    summary: '순례길이 끝나는 산티아고에서 시작해 이베리아 반도 최북단 절벽까지 올라갔다가, 물이 빠져야만 걸을 수 있는 대성당 해변을 지나 돌아오는 5박 6일이에요. 한국 여행자에게는 아직 낯선 스페인의 대서양 쪽입니다.',
+    tags: ['5박 6일', '산티아고 현지 집합', '전용차량 + 한국인 인솔', '대성당 해변 예약 대행'],
+    isNew: true,
+    detail: {
+      lead: '비 오는 초록의 스페인 — 산티아고에서 반도 최북단까지, 관광객이 적은 루고 해안을 도는 5박 6일',
+      description: `<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+.eu-galicia6{
+  --paper:#F6F6F3; --card:#FFFFFF; --sunk:#ECEDE9;
+  --ink:#181B1A; --muted:#585F5B; --faint:#878E89;
+  --line:#DFE1DC; --hair:#EBEDE8;
+  --gal:#1D4E89; --gal-soft:#E4EBF3;
+  --sea:#2C6E63; --sea-soft:#E3EFEC;
+  --stone:#6B7169;
+  --shadow:0 1px 0 rgba(24,27,26,.04), 0 1px 3px rgba(24,27,26,.05);
+
+  font-family:"IBM Plex Sans KR","Malgun Gothic",sans-serif;
+  font-size:15.5px; line-height:1.7; font-weight:400;
+  color:var(--ink); background:var(--paper);
+  word-break:keep-all; -webkit-font-smoothing:antialiased;
+}
+@media (prefers-color-scheme: dark){
+  .eu-galicia6:not([data-theme="light"]){
+    --paper:#141715; --card:#1B1F1D; --sunk:#212523;
+    --ink:#E8E9E5; --muted:#9AA09B; --faint:#757B77;
+    --line:#2C312E; --hair:#242927;
+    --gal:#7FA8D4; --gal-soft:#1A2733;
+    --sea:#6EB3A5; --sea-soft:#1A2C29;
+    --stone:#9AA09B;
+    --shadow:0 1px 0 rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"] .eu-galicia6{
+  --paper:#141715; --card:#1B1F1D; --sunk:#212523;
+  --ink:#E8E9E5; --muted:#9AA09B; --faint:#757B77;
+  --line:#2C312E; --hair:#242927;
+  --gal:#7FA8D4; --gal-soft:#1A2733;
+  --sea:#6EB3A5; --sea-soft:#1A2C29;
+  --stone:#9AA09B;
+  --shadow:0 1px 0 rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.3);
+}
+
+.eu-galicia6 *{box-sizing:border-box}
+.eu-galicia6 .g-wrap{max-width:920px; margin:0 auto; padding:40px 22px 80px}
+.eu-galicia6 h1,.eu-galicia6 h2,.eu-galicia6 h3{margin:0; font-weight:600; line-height:1.3; letter-spacing:-.015em}
+.eu-galicia6 p{margin:0}
+.eu-galicia6 .g-mono{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+
+/* 머리 */
+.eu-galicia6 .g-hero{border-bottom:2px solid var(--ink); padding-bottom:22px}
+.eu-galicia6 .g-kick{font-size:11.5px; font-weight:600; letter-spacing:.18em; color:var(--gal); text-transform:uppercase}
+.eu-galicia6 .g-hero h1{font-size:clamp(28px,5.2vw,42px); margin-top:12px}
+.eu-galicia6 .g-sub{margin-top:14px; color:var(--muted); font-size:16px; max-width:62ch}
+.eu-galicia6 .g-facts{display:flex; flex-wrap:wrap; margin-top:20px; border:1px solid var(--line);
+  background:var(--card); box-shadow:var(--shadow)}
+.eu-galicia6 .g-fact{flex:1 1 140px; padding:12px 16px; border-right:1px solid var(--hair)}
+.eu-galicia6 .g-fact:last-child{border-right:0}
+.eu-galicia6 .g-fact .k{font-size:11px; font-weight:600; letter-spacing:.07em; color:var(--faint)}
+.eu-galicia6 .g-fact .v{margin-top:3px; font-size:15px; font-weight:600}
+
+/* 섹션 */
+.eu-galicia6 .g-sec{margin-top:46px}
+.eu-galicia6 .g-shead{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  border-bottom:1px solid var(--ink); padding-bottom:8px}
+.eu-galicia6 .g-shead h2{font-size:20px}
+.eu-galicia6 .g-shead .t{font-size:11.5px; color:var(--muted); font-family:"IBM Plex Mono",monospace}
+.eu-galicia6 .g-lead{margin-top:14px; color:var(--muted); max-width:68ch; font-size:15px}
+.eu-galicia6 .g-lead b{color:var(--ink); font-weight:600}
+
+/* 강조 박스 */
+.eu-galicia6 .g-note{margin-top:14px; padding:15px 18px; background:var(--gal-soft);
+  border-left:3px solid var(--gal); font-size:14.5px; line-height:1.65; color:var(--muted)}
+.eu-galicia6 .g-note.sea{background:var(--sea-soft); border-left-color:var(--sea)}
+.eu-galicia6 .g-note b{color:var(--ink); font-weight:600}
+.eu-galicia6 .g-note + .g-note{margin-top:10px}
+
+/* 일정 스파인 */
+.eu-galicia6 .g-days{margin-top:22px}
+.eu-galicia6 .g-day{display:grid; grid-template-columns:104px 1fr; gap:0 20px; position:relative; padding-bottom:26px}
+.eu-galicia6 .g-rail{position:relative; padding-top:2px}
+.eu-galicia6 .g-rail::before{content:""; position:absolute; left:17px; top:38px; bottom:-26px; width:1px; background:var(--line)}
+.eu-galicia6 .g-day:last-child .g-rail::before{display:none}
+.eu-galicia6 .g-num{width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:var(--gal); color:#fff; font-family:"IBM Plex Mono",monospace; font-size:14px; font-weight:600;
+  position:relative; z-index:2}
+.eu-galicia6 .g-when{margin-top:8px; font-size:12px; font-weight:600; color:var(--muted); letter-spacing:.02em; line-height:1.4}
+.eu-galicia6 .g-body{padding-top:4px}
+.eu-galicia6 .g-city{font-size:17.5px; font-weight:600; letter-spacing:-.01em}
+.eu-galicia6 .g-move{margin-top:3px; font-size:12.5px; color:var(--faint); font-family:"IBM Plex Mono",monospace}
+.eu-galicia6 .g-body ul{margin:10px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
+.eu-galicia6 .g-body li{font-size:14.5px; color:var(--muted); line-height:1.6; padding-left:14px; position:relative}
+.eu-galicia6 .g-body li::before{content:""; position:absolute; left:0; top:9px; width:5px; height:5px;
+  background:var(--sea); border-radius:50%}
+.eu-galicia6 .g-body li b{color:var(--ink); font-weight:500}
+.eu-galicia6 .g-meal{margin-top:10px; font-size:12px; color:var(--faint); font-family:"IBM Plex Mono",monospace; letter-spacing:.03em}
+@media (max-width:600px){
+  .eu-galicia6 .g-day{grid-template-columns:1fr; gap:8px}
+  .eu-galicia6 .g-rail{display:flex; align-items:center; gap:12px}
+  .eu-galicia6 .g-rail::before{display:none}
+  .eu-galicia6 .g-when{margin-top:0}
+}
+
+/* 조수 카드 */
+.eu-galicia6 .g-tide{margin-top:20px; border:1px solid var(--sea); background:var(--card); box-shadow:var(--shadow)}
+.eu-galicia6 .g-tide .h{padding:13px 18px; background:var(--sea-soft); border-bottom:1px solid var(--sea);
+  font-size:14.5px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.eu-galicia6 .g-tide .h svg{flex:0 0 auto; color:var(--sea)}
+.eu-galicia6 .g-tide .c{padding:15px 18px 17px}
+.eu-galicia6 .g-tide ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px}
+.eu-galicia6 .g-tide li{font-size:14.5px; color:var(--muted); line-height:1.6; padding-left:15px; position:relative}
+.eu-galicia6 .g-tide li::before{content:"·"; position:absolute; left:2px; top:-2px; color:var(--sea); font-size:20px; font-weight:700}
+.eu-galicia6 .g-tide li b{color:var(--ink); font-weight:600}
+
+/* 포함 */
+.eu-galicia6 .g-incl{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px}
+.eu-galicia6 .g-box{background:var(--card); border:1px solid var(--line); padding:16px 18px 17px; box-shadow:var(--shadow)}
+.eu-galicia6 .g-box h3{font-size:14.5px; letter-spacing:.02em}
+.eu-galicia6 .g-box.in h3{color:var(--sea)}
+.eu-galicia6 .g-box.out h3{color:var(--stone)}
+.eu-galicia6 .g-box ul{margin:10px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
+.eu-galicia6 .g-box li{font-size:14px; color:var(--muted); line-height:1.55; padding-left:15px; position:relative}
+.eu-galicia6 .g-box.in li::before{content:"+"; position:absolute; left:0; top:0; color:var(--sea); font-weight:600}
+.eu-galicia6 .g-box.out li::before{content:"−"; position:absolute; left:0; top:0; color:var(--stone); font-weight:600}
+.eu-galicia6 .g-box li b{color:var(--ink); font-weight:500}
+@media (max-width:600px){ .eu-galicia6 .g-incl{grid-template-columns:1fr} }
+
+.eu-galicia6 .g-foot{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
+  font-size:12px; color:var(--faint); line-height:1.7}
+.eu-galicia6 .g-foot b{color:var(--muted); font-weight:500}
+</style>
+
+<div class="eu-galicia6">
+<div class="g-wrap">
+
+<div class="g-hero">
+  <p class="g-kick">Euforia Tour Spain · 스페인 북서부</p>
+  <h1>비 오는 초록의 스페인, 갈리시아 5박 6일</h1>
+  <p class="g-sub">순례길이 끝나는 산티아고에서 출발해 이베리아 반도 최북단까지 올라갔다가, 하루 두 번 바다가 물러나야만 걸을 수 있는 「대성당 해변」을 지나 돌아옵니다. 한국 여행자에게는 아직 낯선 스페인의 대서양 쪽입니다.</p>
+  <div class="g-facts">
+    <div class="g-fact"><p class="k">기간</p><p class="v">5박 6일</p></div>
+    <div class="g-fact"><p class="k">집합 · 해산</p><p class="v">산티아고 현지</p></div>
+    <div class="g-fact"><p class="k">이동</p><p class="v">전 일정 전용 차량</p></div>
+    <div class="g-fact"><p class="k">최소 출발</p><p class="v">4인</p></div>
+  </div>
+</div>
+
+<div class="g-sec">
+  <div class="g-shead">
+    <h2>이 일정이 다루는 곳</h2>
+    <span class="t">산티아고 · 아 코루냐 · 오르테갈 · 비베이로 · 리바데오 · 루고</span>
+  </div>
+  <p class="g-lead">갈리시아는 스페인이면서 스페인 같지 않습니다. 일 년의 절반이 흐리고, 땅은 초록이고, 바다는 지중해가 아니라 대서양입니다. 화강암으로 지은 마을과 <b>오레오</b>(돌기둥 위에 세운 곡식 창고)가 이어지고, 사람들은 카스티야어가 아니라 갈리시아어를 씁니다. 파에야도 플라멩코도 없는 대신 <b>문어와 조개, 알바리뇨 화이트와인</b>이 있습니다.</p>
+  <p class="g-lead" style="margin-top:12px">이 일정은 갈리시아 안에서도 관광객이 적은 <b>루고 해안(A Mariña)</b>을 중심으로 짰습니다. 산티아고와 아 코루냐 같은 널리 알려진 곳을 앞뒤에 두고, 가운데 사흘은 <b>절벽과 어촌</b>으로 채웁니다.</p>
+</div>
+
+<div class="g-sec">
+  <div class="g-shead">
+    <h2>일정</h2>
+    <span class="t">1일 ~ 6일</span>
+  </div>
+
+  <div class="g-days">
+
+    <div class="g-day">
+      <div class="g-rail"><div class="g-num">1</div><div class="g-when">산티아고<br>집합</div></div>
+      <div class="g-body">
+        <p class="g-city">산티아고 데 콤포스텔라</p>
+        <p class="g-move">현지 집합 · 공항 또는 시내</p>
+        <ul>
+          <li>산티아고 공항 또는 시내 지정 장소에서 <b>인솔자와 미팅</b>, 호텔 체크인</li>
+          <li><b>오브라도이로 광장</b> — 800km를 걸어온 순례자들이 배낭을 내려놓는 자리입니다. 저녁이면 매일 누군가 도착합니다</li>
+          <li>구시가 골목과 <b>프라자 다 킨타나</b>, 화강암 아케이드 산책</li>
+          <li>갈리시아식 문어 요리 <b>풀포 아 페이라</b>로 첫 저녁 (자유식)</li>
+        </ul>
+        <p class="g-meal">식사 — 자유식 / 산티아고 1박</p>
+      </div>
+    </div>
+
+    <div class="g-day">
+      <div class="g-rail"><div class="g-num">2</div><div class="g-when">비베이로</div></div>
+      <div class="g-body">
+        <p class="g-city">산티아고 → 아 코루냐 → 비베이로</p>
+        <p class="g-move">약 230km</p>
+        <ul>
+          <li><b>산티아고 대성당</b> 내부 — 성 야고보의 유해가 안치된 지하 묘실, 영광의 문</li>
+          <li>대성당의 대향로 <b>보타푸메이로</b> — 여덟 명이 밧줄을 당겨 흔드는 60kg짜리 향로입니다. 정해진 미사에서만 볼 수 있습니다</li>
+          <li><b>아 코루냐 · 헤라클레스의 탑</b> — 로마 시대에 세워져 지금도 불을 밝히는 등대, 유네스코 세계유산</li>
+          <li>대서양 산책로를 지나 북쪽 해안 <b>비베이로</b>로 이동</li>
+        </ul>
+        <p class="g-meal">식사 — 조식 · 중식 / 비베이로 1박</p>
+      </div>
+    </div>
+
+    <div class="g-day">
+      <div class="g-rail"><div class="g-num">3</div><div class="g-when">반도 최북단</div></div>
+      <div class="g-body">
+        <p class="g-city">오르테갈 곶과 에스타카 데 바레스</p>
+        <p class="g-move">약 200km 순환 · 하루 종일 절벽</p>
+        <ul>
+          <li><b>산 안드레스 데 테이시도</b> — 「살아서 못 가면 죽어서라도 간다」는 갈리시아 속담이 붙은 순례지입니다</li>
+          <li><b>카보 오르테갈</b> — 유럽에서 손꼽히는 높이의 해식 절벽. 대서양과 칸타브리아 해가 여기서 만납니다</li>
+          <li><b>로이바 절벽</b> — 벤치 하나가 놓여 있고, 영국 신문이 「세계에서 가장 좋은 벤치」라고 부른 그 자리입니다</li>
+          <li><b>에스타카 데 바레스</b> — 이베리아 반도의 최북단. 등대와 낡은 풍력 발전기 몇 대뿐입니다</li>
+        </ul>
+        <p class="g-meal">식사 — 조식 · 중식 / 비베이로 1박</p>
+      </div>
+    </div>
+
+    <div class="g-day">
+      <div class="g-rail"><div class="g-num">4</div><div class="g-when">리바데오</div></div>
+      <div class="g-body">
+        <p class="g-city">비베이로 → 세르보 → 리바데오</p>
+        <p class="g-move">약 90km · 짧게 이동하고 오래 머무는 날</p>
+        <ul>
+          <li><b>사르가델로스 도자기 공방</b> — 1806년에 문을 연 갈리시아의 상징. 흰 바탕에 코발트 블루로 그린 그릇을 만드는 과정을 안내받으며 봅니다</li>
+          <li><b>산 시브라오 해양박물관</b> — 고래잡이로 살던 마을의 기록</li>
+          <li><b>포스</b>와 <b>부렐라</b> — 아직 배가 나가는 작은 어항들</li>
+          <li><b>소우토 다 레토르타</b> — 「유칼립투스 대성당」이라 불리는 숲. 60m가 넘는 나무들이 서 있습니다</li>
+        </ul>
+        <p class="g-meal">식사 — 조식 · 중식 / 리바데오 1박</p>
+      </div>
+    </div>
+
+    <div class="g-day">
+      <div class="g-rail"><div class="g-num">5</div><div class="g-when">대성당 해변</div></div>
+      <div class="g-body">
+        <p class="g-city">리바데오 → 몬도녜도 → 루고 → 산티아고</p>
+        <p class="g-move">약 210km · 간조 시각에 맞춰 출발</p>
+        <ul>
+          <li><b>프라이아 다스 카테드라이스(대성당 해변)</b> — 파도가 화강암을 깎아 만든 30m 높이의 아치와 동굴. 물이 빠진 두어 시간 동안만 백사장으로 내려갈 수 있습니다</li>
+          <li><b>몬도녜도</b> — 한때 갈리시아 왕국의 수도였던 중세 마을과 대성당</li>
+          <li><b>루고 로마 성벽</b> — 세계에서 유일하게 온전히 남은 로마 성벽. 2km 성벽 위를 한 바퀴 걷습니다. 유네스코 세계유산</li>
+          <li>저녁 산티아고 복귀</li>
+        </ul>
+        <p class="g-meal">식사 — 조식 · 중식 / 산티아고 1박</p>
+      </div>
+    </div>
+
+    <div class="g-day">
+      <div class="g-rail"><div class="g-num">6</div><div class="g-when">산티아고<br>해산</div></div>
+      <div class="g-body">
+        <p class="g-city">산티아고 데 콤포스텔라</p>
+        <p class="g-move">자유 시간 후 해산</p>
+        <ul>
+          <li>체크아웃 후 <b>메르카도 데 아바스토스</b> — 갈리시아 최고의 재래시장. 산 것을 그 자리에서 요리해 줍니다</li>
+          <li>정오 <b>순례자 미사</b> 참석 (선택, 시간이 맞는 경우)</li>
+          <li>공항 또는 역까지 샌딩 후 해산</li>
+        </ul>
+        <p class="g-meal">식사 — 조식 / 일정 종료</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="g-sec">
+  <div class="g-shead">
+    <h2>대성당 해변에 대해 미리 아셔야 할 것</h2>
+    <span class="t">이 일정에서 가장 까다로운 하루</span>
+  </div>
+
+  <div class="g-tide">
+    <p class="h">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M1 12c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M1 16c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+        <path d="M6 7V3M10 8V2M14 7V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+      </svg>
+      이 해변은 하루에 두 번 사라집니다
+    </p>
+    <div class="c">
+      <ul>
+        <li><b>간조 때만 내려갈 수 있습니다.</b> 물이 차면 아치도 동굴도 바닷속에 잠기고, 전망대에서 바다만 보게 됩니다. 그래서 5일차는 <b>그날의 간조 시각에 맞춰 출발 시간을 정합니다.</b> 조수는 매일 약 50분씩 늦어져서, 같은 날짜라도 해마다 시각이 다릅니다.</li>
+        <li><b>부활절 주간과 7월 1일 ~ 9월 30일에는 사전 예약이 의무입니다.</b> 예약 자체는 무료이고, 갈리시아 자치정부 공식 사이트에서만 받습니다. <b>이 예약은 저희가 대신 잡아 드립니다.</b> 인원과 날짜가 확정되면 바로 신청합니다</li>
+        <li>예약을 받는 시기에는 <b>입장 인원에 한도</b>가 있습니다. 성수기 출발은 일정을 일찍 확정하실수록 좋습니다</li>
+        <li>비가 오거나 파도가 높으면 안전상 접근이 통제될 수 있습니다. 그런 날은 <b>몬도녜도와 루고에 시간을 더 씁니다</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="g-note">여행사가 「대성당 해변 입장권」을 유료로 판다면 확인해 보셔야 합니다. <b>공식 예약은 무료</b>이고, 수수료를 받는 사설 사이트가 여럿 있습니다.</p>
+</div>
+
+<div class="g-sec">
+  <div class="g-shead">
+    <h2>포함 · 불포함</h2>
+  </div>
+  <div class="g-incl">
+    <div class="g-box in">
+      <h3>포함됩니다</h3>
+      <ul>
+        <li><b>전 일정 전용 차량</b> — 산티아고 픽업부터 샌딩까지</li>
+        <li><b>한국인 인솔자</b> 전 일정 동행</li>
+        <li>호텔 <b>5박</b> · 2인 1실 기준</li>
+        <li><b>호텔 조식 5회</b></li>
+        <li><b>1일 1식</b> — 중식 또는 석식</li>
+        <li><b>사르가델로스 공방</b> 가이드 투어</li>
+        <li><b>산 시브라오 해양박물관</b> 입장</li>
+        <li><b>산티아고 대성당</b> 입장</li>
+        <li><b>대성당 해변 사전 예약 대행</b> (예약 필요 시기)</li>
+        <li>여행자 보험</li>
+      </ul>
+    </div>
+    <div class="g-box out">
+      <h3>포함되지 않습니다</h3>
+      <ul>
+        <li><b>국제선 항공권</b> 및 스페인 국내선</li>
+        <li><b>조식·1식 외 식사</b> — 전부 자유식</li>
+        <li>일정에 적히지 않은 <b>개별 입장료</b></li>
+        <li>개인 경비, 음료, 기념품</li>
+        <li>가이드·기사 팁</li>
+        <li>싱글 차지 (1인 1실 이용 시)</li>
+        <li>여행 취소 보험 (선택)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="g-note sea"><b>산티아고까지는 어떻게 가나요.</b> 마드리드·바르셀로나에서 산티아고(SCQ)까지 국내선이 매일 있고, 한 시간 남짓 걸립니다. 마드리드에서 고속열차로 오시는 방법도 있습니다. <b>어느 쪽이든 저희가 시간표를 확인해 안내</b>해 드리며, 도착 시각에 맞춰 픽업합니다. 다른 스페인 일정과 이어서 다니실 경우 <b>육로 연결</b>도 가능합니다.</p>
+</div>
+
+<p class="g-foot">
+  <b>Euforia Tour Spain</b> · EUFORIA DAS NUVENS S.L. · 마드리드<br>
+  이동 거리는 실제 도로 기준 근사치입니다 · 대성당 해변 접근은 조수와 기상에 따라 결정되며, 접근이 통제될 경우 대체 일정으로 운영합니다 · 보타푸메이로는 지정된 미사에서만 운용되어 방문일에 따라 볼 수 없을 수 있습니다 · 최소 출발 인원 4인
+</p>
+
+</div>
+</div>`,
+      highlights: [
+        '산티아고 데 콤포스텔라 — 대성당 내부와 성 야고보 유해 안치소, 오브라도이로 광장',
+        '아 코루냐 헤라클레스의 탑 — 로마 시대에 세워져 지금도 불을 밝히는 등대 (유네스코)',
+        '카보 오르테갈과 로이바 절벽 — 대서양과 칸타브리아 해가 만나는 해식 절벽',
+        '에스타카 데 바레스 — 이베리아 반도의 최북단',
+        '사르가델로스 도자기 공방 — 1806년부터 이어 온 코발트 블루 도자기, 가이드 투어 포함',
+        '프라이아 다스 카테드라이스(대성당 해변) — 간조 시각에 맞춰 방문, 사전 예약 대행',
+        '루고 로마 성벽 — 온전히 남은 유일한 로마 성벽 2km 위를 한 바퀴 (유네스코)'
+      ],
+      includes: [
+        '전 일정 전용 차량 (산티아고 픽업 ~ 샌딩)',
+        '한국인 인솔자 전 일정 동행',
+        '호텔 5박 (2인 1실 기준) + 호텔 조식 5회',
+        '사르가델로스 공방 가이드 투어 · 산 시브라오 해양박물관 입장 · 산티아고 대성당 입장',
+        '대성당 해변 사전 예약 대행 (예약 필요 시기)',
+        
+      ],
+      excludes: [
+        '국제선 항공권 및 스페인 국내선',
+        '조식·1식 외 식사 (전부 자유식)',
+        '일정에 적히지 않은 개별 입장료',
+        '개인 경비, 음료, 기념품',
+        '가이드·기사 팁',
+        '싱글 차지 (1인 1실 이용 시)',
+        '여행 보험 (선택)'
+      ],
+      duration: '5박 6일 · 산티아고 데 콤포스텔라 현지 집합/해산 · 최소 출발 4인'
+    }
+  },
+];
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요.
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
    괄호 부분(조건, 예: (4인 이상 출발 기준))은 아래 줄에 작게 표시해요.
