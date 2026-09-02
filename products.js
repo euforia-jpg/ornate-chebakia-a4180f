@@ -105,8 +105,8 @@ const PRODUCTS = [
       { name: '알함브라 궁전 3부 — 헤네랄리페 정원', url: '/audio/alhambra-3.mp3', bg: '/audio/bg-guitar-alhambra.mp3', lat: 37.1760, lng: -3.5986, yt: 'tz1STsTltVc' },
       { name: '세비야 대성당 1부 — 세계에서 가장 큰 고딕 성당', url: '/audio/seville-cathedral-1.mp3', lat: 37.3860, lng: -5.9926, yt: '' },
       { name: '세비야 대성당 2부 — 콜럼버스의 무덤과 히랄다 탑', url: '/audio/seville-cathedral-2.mp3', lat: 37.3860, lng: -5.9926, yt: '' },
-      { name: '마드리드 왕궁 1부 — (제목 확인 후 채울게요)', url: '/audio/madrid-palace-1.mp3', lat: 40.4180, lng: -3.7143, yt: '' },
-      { name: '마드리드 왕궁 2부 — (제목 확인 후 채울게요)', url: '/audio/madrid-palace-2.mp3', lat: 40.4180, lng: -3.7143, yt: '' },
+      { name: '마드리드 왕궁 1부 — (왕궁의역사&내부 1)', url: '/audio/madrid-palace-1.mp3', lat: 40.4180, lng: -3.7143, yt: '' },
+      { name: '마드리드 왕궁 2부 — (왕궁의화려함)', url: '/audio/madrid-palace-2.mp3', lat: 40.4180, lng: -3.7143, yt: '' },
     ],
     detail: {
       lead: '가우디의 도시 바르셀로나부터 플라멩코의 본고장 남부 안달루시아까지 이어지는 코스예요.',
