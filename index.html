@@ -130,12 +130,12 @@
   @media (max-width:820px){
     .nav-toggle{ display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:10px; border:1.5px solid var(--line); background:rgba(255,255,255,0.85); cursor:pointer; flex-shrink:0; }
     .nav-toggle svg{ width:20px; height:20px; }
-    .nav-group{ display:none; width:100%; flex-direction:column; align-items:stretch; gap:10px; margin-top:14px; padding-top:14px; border-top:1.5px solid var(--line); }
-    .nav-group .lang-switch{ justify-content:center; }
-    .nav-group .nav-link{ text-align:center; }
+    .nav-group{ flex-wrap:wrap; }
+    .nav-links{ display:none; width:100%; flex-direction:column; align-items:stretch; gap:10px; margin-top:14px; padding-top:14px; border-top:1.5px solid var(--line); }
+    .nav-links .nav-link{ text-align:center; }
     .site-nav{ display:none; flex-direction:column; align-items:stretch; gap:4px; }
     .site-nav a{ text-align:center; padding:12px; }
-    body.nav-open .nav-group{ display:flex; }
+    body.nav-open .nav-links{ display:flex; }
     body.nav-open .site-nav{ display:flex; }
   }
 </style>
@@ -151,17 +151,19 @@
         <small>SPAIN &middot; PORTUGAL &middot; TRAVEL</small>
       </div>
     </a>
-    <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" onclick="toggleMobileNav()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
     <div class="nav-group">
-      <a class="nav-link" href="matchday.html">경기 예약</a>
-      <a class="nav-link" href="concert.html">공연 예약</a>
+      <div class="nav-links">
+        <a class="nav-link" href="matchday.html">경기 예약</a>
+        <a class="nav-link" href="concert.html">공연 예약</a>
+      </div>
       <div class="lang-switch">
         <button class="active" data-lang="ko">KR</button>
         <button data-lang="en">EN</button>
         <button data-lang="zh">中文</button>
       </div>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" onclick="toggleMobileNav()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </div>
   <nav class="site-nav">
