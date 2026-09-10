@@ -244,6 +244,56 @@
   .side-card:not(.light) .mv-soon{ background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.28); color:#fff; }
   .mv-fee h3{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
   .mv-sum .row .v.soon{ color:var(--orange); }
+
+/* ----- 예약 조건 안내 ----- */
+  .mv-cond{ display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin:2px 0 6px; }
+  .mv-cond div{ border-radius:13px; padding:14px 15px; background:#FFF8F2; border:1.5px solid #FFE0C4; }
+  .mv-cond b{ display:block; font-size:12.5px; font-weight:800; color:#B54708; }
+  .mv-cond em{ display:block; font-style:normal; font-size:11.5px; font-weight:600; color:var(--muted);
+    margin-top:5px; line-height:1.6; }
+
+/* ----- 예약 확정 절차 ----- */
+  .mv-flow{ display:grid; grid-template-columns:repeat(7,1fr); gap:0; margin-top:26px; position:relative; }
+  .mv-flow .st{ position:relative; padding:0 9px; text-align:center; }
+  .mv-flow .st::before{ content:''; position:absolute; top:17px; left:-50%; width:100%; height:2px;
+    background:var(--line); z-index:0; }
+  .mv-flow .st:first-child::before{ display:none; }
+  .mv-flow .n{ position:relative; z-index:1; width:34px; height:34px; margin:0 auto 11px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:#fff; border:2px solid var(--line); color:var(--muted);
+    font-size:13px; font-weight:800; }
+  .mv-flow .st.key .n{ background:var(--violet); border-color:var(--violet); color:#fff; }
+  .mv-flow .st.done .n{ background:var(--teal); border-color:var(--teal); color:#fff; }
+  .mv-flow b{ display:block; font-size:12.5px; font-weight:800; color:var(--ink); line-height:1.45; }
+  .mv-flow em{ display:block; font-style:normal; font-size:11px; font-weight:600; color:var(--muted);
+    margin-top:6px; line-height:1.6; }
+
+  .mv-policy{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    margin-top:28px; padding:18px 22px; border-radius:14px;
+    background:#FAF9FE; border:1.5px solid var(--line); }
+  .mv-policy p{ margin:0; font-size:12.5px; font-weight:600; color:var(--muted); line-height:1.7; }
+  .mv-policy p b{ color:var(--navy); font-weight:800; }
+  .mv-policy a{ flex:0 0 auto; padding:11px 20px; border-radius:999px; background:var(--navy); color:#fff;
+    font-size:12.5px; font-weight:800; text-decoration:none; white-space:nowrap; }
+  .mv-policy a:hover{ background:var(--violet); }
+
+  .mv-link{ display:inline-block; margin-top:13px; font-size:12.5px; font-weight:800;
+    color:var(--violet); text-decoration:none; }
+  .mv-link:hover{ text-decoration:underline; }
+
+  @media (max-width:980px){ .mv-flow{ grid-template-columns:repeat(4,1fr); row-gap:26px; }
+    .mv-flow .st:nth-child(5)::before{ display:none; } }
+  @media (max-width:700px){ .mv-cond{ grid-template-columns:1fr; }
+    .mv-flow{ grid-template-columns:1fr; row-gap:0; }
+    .mv-flow .st{ display:grid; grid-template-columns:34px 1fr; gap:14px; text-align:left;
+      padding:0 0 20px; }
+    .mv-flow .st::before{ display:none !important; }
+    .mv-flow .st::after{ content:''; position:absolute; left:16px; top:34px; bottom:0; width:2px;
+      background:var(--line); }
+    .mv-flow .st:last-child::after{ display:none; }
+    .mv-flow .n{ margin:0; }
+    .mv-flow em{ margin-top:4px; }
+    .mv-policy{ flex-direction:column; align-items:flex-start; } }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -294,7 +344,7 @@
         <span>시간제 대절</span>
         <span>근교 당일 투어</span>
       </div>
-      <p style="margin-top:16px;font-size:12.5px;font-weight:700;opacity:.85;position:relative;z-index:1;">요금표는 준비 중입니다 — 신청해 주시면 확정 요금을 안내해 드립니다.</p>
+      <p style="margin-top:16px;font-size:12.5px;font-weight:700;opacity:.85;position:relative;z-index:1;">이용일 7일 전까지 신청해 주세요 · 당일 예약은 받지 않습니다 · 요금표는 준비 중입니다</p>
     </div>
   </div>
 
@@ -307,6 +357,12 @@
         <div class="form-alert" id="formAlert">
           <span>&#10003;</span>
           <span>예약 신청이 접수되었습니다. 담당자가 확인 후 차량 배정과 확정 요금을 안내해 드리겠습니다.<br>급하신 경우 <b>+34 611 209 095</b> 로 연락 주세요.</span>
+        </div>
+
+        <div class="mv-cond">
+          <div><b>당일 예약은 받지 않습니다</b><em>차량과 기사 배정에 시간이 필요합니다</em></div>
+          <div><b>최소 7일 전까지 신청</b><em>이용일 기준 일주일 전까지 접수해 주세요</em></div>
+          <div><b>성수기에는 마감될 수 있습니다</b><em>시즌·현지 행사에 따라 배정이 어려울 수 있습니다</em></div>
         </div>
 
         <form id="moveForm">
@@ -501,12 +557,13 @@
         <div class="side-card light">
           <h3>이용 안내</h3>
           <div class="side-list" style="gap:11px;">
-            <div class="row" style="border-color:var(--line);"><span class="k" style="color:var(--muted);">예약 접수</span><span class="v" style="color:var(--navy);">출발 48시간 전까지</span></div>
+            <div class="row" style="border-color:var(--line);"><span class="k" style="color:var(--muted);">예약 접수</span><span class="v" style="color:var(--navy);">이용일 7일 전까지</span></div>
             <div class="row" style="border-color:var(--line);"><span class="k" style="color:var(--muted);">공항 대기</span><span class="v" style="color:var(--navy);">도착 후 60분 무료</span></div>
             <div class="row" style="border-color:var(--line);"><span class="k" style="color:var(--muted);">결제</span><span class="v" style="color:var(--navy);">확정 후 계좌 입금</span></div>
             <div class="row" style="border-color:var(--line);"><span class="k" style="color:var(--muted);">상담</span><span class="v" style="color:var(--navy);">한국어 · 카카오톡</span></div>
           </div>
           <p style="font-size:12px;line-height:1.7;margin:14px 0 0;">항공편이 지연되어도 도착 시간을 확인해 기사님이 맞춰 대기합니다. 항공편명을 요청사항에 남겨 주세요.</p>
+          <a class="mv-link" href="cancel.html">취소 · 환불 규정 보기 →</a>
         </div>
 
         <div class="side-card light">
@@ -525,6 +582,28 @@
           <p style="font-size:12.5px;line-height:1.7;margin:6px 0 12px;">차량 하나가 아니라 며칠짜리 일정을 찾고 계시다면, 가이드와 차량이 함께 붙는 여행상품을 확인해 보세요.</p>
           <a href="tours.html" style="display:inline-block;padding:10px 18px;border-radius:999px;background:var(--navy);color:#fff;font-size:12.5px;font-weight:800;text-decoration:none;">여행상품 보러가기 →</a>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-inner" style="max-width:1000px;margin:0 auto;">
+      <h2>예약은 이렇게 진행됩니다</h2>
+      <div class="sub">문의부터 차량 이용까지 일곱 단계입니다. 각 단계마다 담당자가 이메일로 안내해 드립니다.</div>
+
+      <div class="mv-flow">
+          <div class="st"><div class="n">1</div><div><b>예약 문의</b><em>아래 양식으로 이동 정보를 남겨 주세요</em></div></div>
+          <div class="st"><div class="n">2</div><div><b>이메일 연락 확인</b><em>담당자가 접수 내용을 이메일로 확인해 드립니다</em></div></div>
+          <div class="st"><div class="n">3</div><div><b>차량 가능 여부 확인</b><em>해당 날짜의 차량과 기사 배정이 가능한지 확인합니다</em></div></div>
+          <div class="st key"><div class="n">4</div><div><b>예약금 30% 입금</b><em>안내드린 확정 요금의 30%를 입금해 주세요</em></div></div>
+          <div class="st key"><div class="n">5</div><div><b>예약 확정</b><em>입금이 확인되면 예약이 확정됩니다</em></div></div>
+          <div class="st key"><div class="n">6</div><div><b>잔금 70% 입금</b><em>이용일 3일 전까지 나머지 금액을 입금해 주세요</em></div></div>
+          <div class="st done"><div class="n">7</div><div><b>차량 이용</b><em>약속 장소에서 기사님이 기다립니다</em></div></div>
+      </div>
+
+      <div class="mv-policy">
+        <p><b>일정이 바뀌거나 취소해야 하실 때는</b><br>입금 시점과 이용일까지 남은 기간에 따라 환불 기준이 정해집니다. 자세한 내용은 규정을 확인해 주세요.</p>
+        <a href="cancel.html">취소 · 환불 규정 보기 →</a>
       </div>
     </div>
   </div>
@@ -640,11 +719,23 @@
   form.addEventListener('input', refresh);
   form.addEventListener('change', refresh);
 
-  /* 오늘 이전 날짜는 고르지 못하게 한다 */
+  /* 당일 예약은 받지 않으므로 이용일은 최소 7일 뒤부터 고를 수 있게 한다 */
   (function(){
-    var today = new Date();
-    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
-    document.getElementById('date').min = today.toISOString().slice(0,10);
+    var d = new Date();
+    d.setDate(d.getDate() + 7);
+    d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    var min = d.toISOString().slice(0,10);
+    var input = document.getElementById('date');
+    input.min = min;
+    input.addEventListener('change', function(){
+      if(input.value && input.value < min){
+        input.setCustomValidity('당일 예약은 어렵습니다. 이용일 7일 전까지 신청해 주세요.');
+        input.reportValidity();
+        input.value = '';
+      } else {
+        input.setCustomValidity('');
+      }
+    });
   })();
 
   form.addEventListener('submit', function(e){
