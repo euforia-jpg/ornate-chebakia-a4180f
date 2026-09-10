@@ -294,6 +294,27 @@ button.price-chip:hover{ opacity:.92; }
   @media (max-width:620px){ .euf-footer .ef-inner{ grid-template-columns:1fr; padding:26px 18px 24px; border-radius:18px; }
     .euf-footer .ef-bottom{ flex-direction:column; align-items:flex-start; }
     footer.euf-footer{ padding:6px 16px 28px; } }
+
+/* ===== EUFORIA MOVE 와이드 카드 ===== */
+  .mv-wide{ display:grid; grid-template-columns:1.55fr 1fr; gap:30px; align-items:center;
+    border-radius:var(--radius); padding:30px clamp(20px,2.6vw,34px); margin-bottom:20px; color:#fff;
+    background:linear-gradient(120deg, var(--navy) 0%, #2A1F6B 52%, var(--violet) 100%);
+    position:relative; overflow:hidden; }
+  .mv-wide::after{ content:''; position:absolute; right:-60px; top:-80px; width:260px; height:260px;
+    border-radius:50%; background:radial-gradient(circle, rgba(18,201,174,0.34), transparent 68%); pointer-events:none; }
+  .mv-wide .mv-left{ position:relative; z-index:1; }
+  .mv-wide .tag{ display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,.2);
+    font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
+  .mv-wide h3{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:23px; margin:13px 0 9px; }
+  .mv-wide h3 .hl{ color:var(--teal); }
+  .mv-wide p{ font-size:13.5px; line-height:1.68; opacity:.9; margin:0 0 18px; max-width:520px; }
+  .mv-wide .cta{ align-self:flex-start; display:inline-block; padding:11px 22px; border-radius:999px;
+    background:#fff; color:var(--navy); font-weight:800; font-size:13px; text-decoration:none; }
+  .mv-wide .mv-right{ position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+  .mv-wide .mv-right span{ padding:12px 14px; border-radius:12px; background:rgba(255,255,255,.11);
+    border:1.5px solid rgba(255,255,255,.2); font-size:12.5px; font-weight:700; line-height:1.4; }
+  @media (max-width:860px){ .mv-wide{ grid-template-columns:1fr; gap:22px; padding:26px 20px; }
+    .mv-wide p{ margin-bottom:16px; } }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -345,6 +366,7 @@ button.price-chip:hover{ opacity:.92; }
   <nav class="site-nav">
     <a href="about.html">회사소개</a>
     <a href="tours.html">여행상품</a>
+    <a href="move.html">교통 예약</a>
     <a href="matchday.html">경기 일정</a>
     <a href="https://euforia-showtime.netlify.app/" target="_blank" rel="noopener">공연 일정</a>
     <a href="faq.html">자주하는 질문</a>
@@ -369,7 +391,7 @@ button.price-chip:hover{ opacity:.92; }
       <div class="row"><span class="k">대표 여행 지역</span><span class="v">스페인 · 포르투갈 · 모로코</span></div>
       <div class="row"><span class="k">여행상품 종류</span><span class="v" id="statProducts">0가지</span></div>
       <div class="row"><span class="k">예약 방식</span><span class="v">문의 → 맞춤 견적 → 입금확인</span></div>
-      <div class="row"><span class="k">부가 서비스</span><span class="v">라리가 직관(MATCHDAY)</span></div>
+      <div class="row"><span class="k">부가 서비스</span><span class="v">교통 예약 · 라리가 직관 · 공연</span></div>
     </div>
   </div>
   <div class="section">
@@ -394,7 +416,21 @@ button.price-chip:hover{ opacity:.92; }
       <div class="section-head">
         <div>
           <h2>부가 서비스</h2>
-          <div class="sub">여행 일정에 라리가 직관이나 특별한 공연 관람을 더할 수 있어요</div>
+          <div class="sub">이동은 미리 예약하고, 일정에는 직관 · 공연 · 해설을 자유롭게 더하세요</div>
+        </div>
+      </div>
+      <div class="mv-wide">
+        <div class="mv-left">
+          <span class="tag">Euforia Move</span>
+          <h3>스페인 어디에서 어디로든, <span class="hl">미리 예약</span>하는 이동</h3>
+          <p>공항 픽업부터 도시 간 장거리 이동, 하루 전세 차량까지 — 현지에서 직접 운영하는 차량과 기사님을 한국어로 미리 예약하실 수 있어요. 낯선 곳에서 차를 잡느라 시간을 쓰지 않으셔도 됩니다.</p>
+          <a class="cta" href="move.html">이동 예약하기 →</a>
+        </div>
+        <div class="mv-right">
+          <span>공항 픽업 · 샌딩</span>
+          <span>도시 간 이동</span>
+          <span>시간제 대절</span>
+          <span>근교 당일 투어</span>
         </div>
       </div>
       <div class="addon-grid">
