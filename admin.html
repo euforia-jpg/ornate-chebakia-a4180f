@@ -112,7 +112,8 @@
   .chk{ display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; cursor:pointer;
     padding:10px 0; }
   /* 체크박스는 위의 input 규칙(width:100%)을 따라가면 안 돼요 */
-  .chk input[type=checkbox]{ width:17px; height:17px; flex:0 0 17px; padding:0; margin:0; accent-color:var(--violet); }
+  .chk input[type=checkbox], .chk input[type=radio]{ width:17px; height:17px; flex:0 0 17px;
+    padding:0; margin:0; accent-color:var(--violet); }
 
   .editor-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
     margin-bottom:18px; padding-bottom:16px; border-bottom:1.5px solid var(--line); }
@@ -156,6 +157,22 @@
   .savebar .note{ margin-right:auto; font-size:12.5px; font-weight:700; color:var(--muted); }
   .savebar .note b{ color:var(--orange); }
 
+  /* ---------- 원가표 ---------- */
+  .cs-total td{ background:#F5F3FE; font-weight:800; color:var(--navy); font-size:13px; }
+  .cs-sum{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }
+  .cs-box{ border:1.5px solid var(--line); border-radius:14px; padding:16px 18px; background:#FAF9FE; }
+  .cs-box span{ display:block; font-size:11.5px; font-weight:800; color:var(--muted);
+    letter-spacing:.03em; margin-bottom:7px; }
+  .cs-box b{ display:block; font-size:23px; font-weight:800; color:var(--navy);
+    font-family:'Kanit'; font-style:italic; }
+  .cs-box.warn b{ color:var(--danger); }
+  .cs-box.good b{ color:#0E9E8B; }
+  .cs-note{ margin:14px 0 0; font-size:12.5px; font-weight:700; line-height:1.7;
+    background:#FFF4E8; border:1.5px solid #FFD8B0; color:#9A4A08; border-radius:12px; padding:12px 15px; }
+  tr.cs-hit td{ background:#EFEBFD; font-weight:800; }
+  tr.cs-hit td:first-child{ white-space:nowrap; }
+  tr.cs-hit td:first-child::after{ content:' ← 현재'; color:var(--violet); font-size:11px; }
+  td.num, th.num{ text-align:right; font-variant-numeric:tabular-nums; }
   .empty{ padding:36px 20px; text-align:center; font-size:13px; font-weight:600; color:var(--muted); }
   .spin{ display:inline-block; width:13px; height:13px; border:2px solid rgba(255,255,255,.4);
     border-top-color:#fff; border-radius:50%; animation:sp .7s linear infinite; vertical-align:-2px; margin-right:7px; }
@@ -195,6 +212,7 @@
     <button type="button" class="on" data-tab="products">여행상품</button>
     <button type="button" data-tab="concerts">공연 일정</button>
     <button type="button" data-tab="fares">교통 요금</button>
+    <button type="button" data-tab="costsheets">원가표 · 마진</button>
     <button type="button" data-tab="deploy">배포 · 이력</button>
   </div>
 
@@ -269,6 +287,104 @@
       </div>
     </div>
 
+    <!-- ---------- 원가표 · 마진 ---------- -->
+    <div class="panel" id="p-costsheets">
+      <div class="card">
+        <h2>단체 정보</h2>
+        <div class="sub">상품을 고르면 홈페이지에 올라간 판매가를 그대로 가져와 원가와 비교해 드립니다.</div>
+        <div class="grid">
+          <div class="f full">
+            <label>상품 <em>· 홈페이지 상품과 연계</em></label>
+            <select id="csProduct"><option value="">직접 입력 (상품 연계 안 함)</option></select>
+          </div>
+          <div class="f">
+            <label for="csName">단체명 · 코드</label>
+            <input type="text" id="csName" placeholder="예: KEA SPAIN 2610">
+          </div>
+          <div class="f">
+            <label for="csPax">인원 <em>· 명</em></label>
+            <input type="number" id="csPax" min="1" value="20">
+          </div>
+          <div class="f">
+            <label for="csDays">일수 <em>· 일</em></label>
+            <input type="number" id="csDays" min="1" value="6">
+          </div>
+          <div class="f">
+            <label for="csNights">숙박 <em>· 박</em></label>
+            <input type="number" id="csNights" min="0" value="5">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>원가 입력</h2>
+        <div class="sub">
+          <b>팀당</b>은 인원과 상관없이 한 팀에 드는 비용(차량·기사·가이드 등),
+          <b>1인당</b>은 사람 수만큼 늘어나는 비용(식사·입장료·호텔 등)입니다.
+          수량은 일수·박수·횟수를 넣으시면 됩니다.
+        </div>
+        <div class="bar">
+          <button type="button" class="btn dark" id="csAddRow">+ 항목 추가</button>
+          <button type="button" class="btn sm" id="csReset">기본 항목으로 되돌리기</button>
+          <span class="count" id="csRowCount"></span>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>항목</th><th style="width:96px;">단위</th><th style="width:104px;">단가 (유로)</th>
+              <th style="width:88px;">수량</th><th class="num" style="width:118px;">소계</th>
+              <th class="num" style="width:112px;">1인당</th><th class="act"></th>
+            </tr></thead>
+            <tbody id="csRows"></tbody>
+            <tfoot><tr class="cs-total">
+              <td colspan="4">합계</td>
+              <td class="num" id="csSubtotal">—</td><td class="num" id="csPerPax">—</td><td></td>
+            </tr></tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>원가 요약</h2>
+        <div class="cs-sum">
+          <div class="cs-box"><span>팀 전체 원가</span><b id="csTotalTeam">—</b></div>
+          <div class="cs-box"><span>1인당 원가</span><b id="csTotalPax">—</b></div>
+          <div class="cs-box" id="csSaleBox" hidden><span>홈페이지 판매가 (1인)</span><b id="csSale">—</b></div>
+          <div class="cs-box" id="csMarginBox" hidden><span>현재 마진율</span><b id="csMarginNow">—</b></div>
+        </div>
+        <p class="cs-note" id="csWarn" hidden></p>
+      </div>
+
+      <div class="card">
+        <h2>마진별 판매가</h2>
+        <div class="sub">1인당 원가에 마진을 얹은 판매가입니다. 홈페이지 판매가와 가장 가까운 줄은 표시해 드립니다.</div>
+        <div class="bar">
+          <label class="chk"><input type="radio" name="csMode" value="revenue" checked> 매출 기준 <span style="font-weight:600;color:var(--muted);">(원가 ÷ (1−마진))</span></label>
+          <label class="chk"><input type="radio" name="csMode" value="markup"> 원가 기준 <span style="font-weight:600;color:var(--muted);">(원가 × (1+마진))</span></label>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th style="width:118px;">마진</th><th style="width:130px;">1인 판매가</th>
+              <th style="width:130px;">1인 이익</th><th style="width:150px;">팀 전체 매출</th>
+              <th>팀 전체 이익</th>
+            </tr></thead>
+            <tbody id="csMarginRows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>저장된 원가표</h2>
+        <div class="sub">단체별로 저장해 두면 나중에 그대로 불러올 수 있습니다.</div>
+        <div class="bar">
+          <button type="button" class="btn dark" id="csSave">현재 원가표 저장</button>
+          <span class="count" id="csSavedCount"></span>
+        </div>
+        <div class="list" id="csSavedRows"></div>
+      </div>
+    </div>
+
     <!-- ---------- 배포 · 이력 ---------- -->
     <div class="panel" id="p-deploy">
       <div class="card">
@@ -320,7 +436,8 @@
   var store = {
     products: { data:null, orig:null, sha:null, loaded:false },
     concerts: { data:null, orig:null, sha:null, loaded:false },
-    fares:    { data:null, orig:null, sha:null, loaded:false }
+    fares:    { data:null, orig:null, sha:null, loaded:false },
+    costsheets:{ data:null, orig:null, sha:null, loaded:false }
   };
   var editingIndex = -1;
 
@@ -365,7 +482,7 @@
     var on = changed();
     $('savebar').hidden = !on;
     if(on){
-      var n = { products:'상품', concerts:'공연', fares:'요금 구간' }[tab];
+      var n = { products:'상품', concerts:'공연', fares:'요금 구간', costsheets:'원가표' }[tab];
       $('saveNote').innerHTML = '<b>저장하지 않은 변경</b>이 있습니다 · ' + n;
     }
   }
@@ -443,6 +560,7 @@
     if(name === 'products') renderProducts();
     if(name === 'concerts') renderConcerts();
     if(name === 'fares') renderFares();
+    if(name === 'costsheets') renderCost();
   }
 
   function renderProducts(){
@@ -617,6 +735,228 @@
     });
   }
 
+  /* ---------------------------------------------------- 원가표 · 마진 */
+
+  /* 기본 항목 — 단위(team=팀당, pax=1인당)와 수량 기본값(일수/박수)을 미리 정해 둡니다 */
+  var CS_DEFAULT = [
+    { name:'차량',        unit:'team', qtyFrom:'days'   },
+    { name:'기사',        unit:'team', qtyFrom:'days'   },
+    { name:'가이드',      unit:'team', qtyFrom:'days'   },
+    { name:'로컬가이드',  unit:'team', qtyFrom:''       },
+    { name:'식사',        unit:'pax',  qtyFrom:''       },
+    { name:'입장료',      unit:'pax',  qtyFrom:''       },
+    { name:'호텔',        unit:'pax',  qtyFrom:'nights' },
+    { name:'기사숙식',    unit:'team', qtyFrom:'days'   },
+    { name:'가이드숙식',  unit:'team', qtyFrom:'days'   },
+    { name:'시티택스',    unit:'pax',  qtyFrom:'nights' },
+    { name:'가이드교통비',unit:'team', qtyFrom:''       }
+  ];
+  var MARGINS = [5, 10, 15, 20, 25, 30];
+
+  var sheet = null;      // 지금 작업 중인 원가표
+  var CATALOG = null;    // 홈페이지 상품 (products.js 에서 읽어옴)
+
+  function num(v){ var n = parseFloat(v); return isFinite(n) ? n : 0; }
+  function eur(n){
+    if(!isFinite(n)) return '—';
+    return Math.round(n).toLocaleString('ko-KR') + '유로';
+  }
+  function eur2(n){
+    if(!isFinite(n)) return '—';
+    return (Math.round(n * 10) / 10).toLocaleString('ko-KR') + '유로';
+  }
+
+  function freshSheet(){
+    return {
+      name:'', productId:'', pax:20, days:6, nights:5,
+      rows: CS_DEFAULT.map(function(d){
+        return { name:d.name, unit:d.unit, qtyFrom:d.qtyFrom, price:'', qty:'', auto:true };
+      })
+    };
+  }
+
+  /*
+    수량을 일수·박수에서 자동으로 채웁니다.
+    사용자가 직접 고친 칸(auto=false)은 그대로 두고, 자동으로 넣은 칸만 따라 바뀝니다.
+  */
+  function fillQty(){
+    sheet.rows.forEach(function(r){
+      if(r.auto === false) return;
+      if(r.qtyFrom === 'days')   r.qty = sheet.days;
+      if(r.qtyFrom === 'nights') r.qty = sheet.nights;
+    });
+  }
+
+  /* "1인 80유로 (4인 이상 출발 기준)" → 80 */
+  function priceOf(text){
+    var m = String(text || '').replace(/,/g, '').match(/([0-9]+(?:\.[0-9]+)?)\s*유로/);
+    return m ? parseFloat(m[1]) : null;
+  }
+
+  /* products.js 는 사이트에 이미 올라가 있는 파일이라 그대로 읽어 씁니다 */
+  function loadProducts(){
+    if(CATALOG) { fillProductSelect(); return; }
+    var s = document.createElement('script');
+    s.src = '/products.js';
+    s.onload = function(){
+      /* products.js 는 const 로 선언되어 window 에 붙지 않습니다. 전역 이름으로 직접 읽어요. */
+      CATALOG = (typeof PRODUCTS !== 'undefined') ? PRODUCTS
+              : (typeof window.PRODUCTS !== 'undefined') ? window.PRODUCTS : null;
+      if(!CATALOG){ toast('상품 목록을 읽지 못했습니다.', true); return; }
+      fillProductSelect();
+    };
+    s.onerror = function(){ toast('상품 목록(products.js)을 읽지 못했습니다.', true); };
+    document.head.appendChild(s);
+  }
+
+  function fillProductSelect(){
+    var sel = $('csProduct');
+    if(!CATALOG || sel.options.length > 1) return;
+    CATALOG.slice().sort(function(a,b){
+      return String(a.region).localeCompare(String(b.region)) ||
+             String(a.title).localeCompare(String(b.title));
+    }).forEach(function(p){
+      var o = document.createElement('option');
+      o.value = p.id;
+      o.textContent = p.title + (p.price ? '  —  ' + p.price : '');
+      sel.appendChild(o);
+    });
+    if(sheet && sheet.productId) sel.value = sheet.productId;
+  }
+
+  function findProduct(id){
+    if(!CATALOG || !id) return null;
+    return CATALOG.filter(function(p){ return p.id === id; })[0] || null;
+  }
+
+  function renderCostRows(){
+    var pax = Math.max(1, num(sheet.pax));
+    $('csRows').innerHTML = sheet.rows.map(function(r, i){
+      var sub = num(r.price) * num(r.qty);
+      var teamSub = r.unit === 'pax' ? sub * pax : sub;
+      var perPax  = r.unit === 'pax' ? sub : sub / pax;
+      return '<tr>' +
+        '<td><input type="text" data-r="' + i + '" data-k="name" value="' + esc(r.name) + '"></td>' +
+        '<td><select data-r="' + i + '" data-k="unit">' +
+          '<option value="team"' + (r.unit === 'team' ? ' selected' : '') + '>팀당</option>' +
+          '<option value="pax"'  + (r.unit === 'pax'  ? ' selected' : '') + '>1인당</option>' +
+        '</select></td>' +
+        '<td><input type="number" step="0.01" min="0" data-r="' + i + '" data-k="price" value="' + esc(r.price) + '"></td>' +
+        '<td><input type="number" step="0.5" min="0" data-r="' + i + '" data-k="qty" value="' + esc(r.qty) + '"></td>' +
+        '<td class="num">' + (sub ? eur(teamSub) : '—') + '</td>' +
+        '<td class="num">' + (sub ? eur2(perPax) : '—') + '</td>' +
+        '<td class="act"><button type="button" class="icon-btn" data-csdel="' + i + '">✕</button></td>' +
+      '</tr>';
+    }).join('');
+    $('csRowCount').textContent = sheet.rows.length + '개 항목';
+  }
+
+  function recalc(){
+    var pax = Math.max(1, num(sheet.pax));
+    var teamTotal = 0;
+    sheet.rows.forEach(function(r){
+      var sub = num(r.price) * num(r.qty);
+      teamTotal += (r.unit === 'pax') ? sub * pax : sub;
+    });
+    var perPax = teamTotal / pax;
+
+    $('csSubtotal').textContent = teamTotal ? eur(teamTotal) : '—';
+    $('csPerPax').textContent   = teamTotal ? eur2(perPax) : '—';
+    $('csTotalTeam').textContent = teamTotal ? eur(teamTotal) : '—';
+    $('csTotalPax').textContent  = teamTotal ? eur2(perPax) : '—';
+
+    /* 홈페이지 판매가와 비교 */
+    var p = findProduct(sheet.productId);
+    var sale = p ? priceOf(p.price) : null;
+    var mode = (document.querySelector('input[name="csMode"]:checked') || {}).value || 'revenue';
+
+    $('csSaleBox').hidden = !sale;
+    $('csMarginBox').hidden = !(sale && teamTotal);
+    $('csWarn').hidden = true;
+
+    if(sale){
+      $('csSale').textContent = eur(sale);
+      if(teamTotal){
+        var rate = mode === 'revenue' ? (sale - perPax) / sale : (sale - perPax) / perPax;
+        var box = $('csMarginBox');
+        $('csMarginNow').textContent = (rate * 100).toFixed(1) + '%';
+        box.className = 'cs-box ' + (rate < 0 ? 'warn' : rate >= 0.15 ? 'good' : '');
+        if(rate < 0){
+          $('csWarn').hidden = false;
+          $('csWarn').textContent = '판매가가 원가보다 낮습니다. 1인당 ' +
+            eur2(perPax - sale) + ' 손해입니다. 원가 입력이나 판매가를 확인해 주세요.';
+        } else if(rate < 0.1){
+          $('csWarn').hidden = false;
+          $('csWarn').textContent = '마진이 ' + (rate * 100).toFixed(1) +
+            '% 로 얇습니다. 환율이나 현지 요금이 조금만 올라도 적자가 될 수 있습니다.';
+        }
+      }
+    }
+
+    /*
+      마진별 판매가표.
+      지금 판매가의 실제 마진율과 가까운 줄(±2.5%p)만 "현재"로 표시합니다.
+      실제 마진이 5~30% 범위를 벗어나면 아무 줄도 표시하지 않아요.
+    */
+    var hit = null;
+    if(sale && teamTotal){
+      var now = mode === 'revenue' ? (sale - perPax) / sale : (sale - perPax) / perPax;
+      var gap = Infinity;
+      MARGINS.forEach(function(m){
+        var d = Math.abs(now * 100 - m);
+        if(d < gap && d <= 2.5){ gap = d; hit = m; }
+      });
+    }
+
+    $('csMarginRows').innerHTML = MARGINS.map(function(m){
+      if(!teamTotal){
+        return '<tr><td>' + m + '%</td><td class="num">—</td><td class="num">—</td>' +
+               '<td class="num">—</td><td class="num">—</td></tr>';
+      }
+      var s = mode === 'revenue' ? perPax / (1 - m / 100) : perPax * (1 + m / 100);
+      var profit = s - perPax;
+      return '<tr' + (m === hit ? ' class="cs-hit"' : '') + '>' +
+        '<td>' + m + '%</td>' +
+        '<td class="num">' + eur2(s) + '</td>' +
+        '<td class="num">' + eur2(profit) + '</td>' +
+        '<td class="num">' + eur(s * pax) + '</td>' +
+        '<td class="num">' + eur(profit * pax) + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function renderSaved(){
+    var list = (store.costsheets.data || []);
+    $('csSavedCount').textContent = list.length + '건';
+    if(!list.length){
+      $('csSavedRows').innerHTML = '<div class="empty">저장된 원가표가 없습니다.</div>';
+      return;
+    }
+    $('csSavedRows').innerHTML = list.map(function(c, i){
+      return '<div class="row" data-csload="' + i + '">' +
+        '<div class="t">' + esc(c.name || '(이름 없음)') +
+          '<em>' + esc(c.savedAt || '') + '</em></div>' +
+        '<div class="m hide-s">' + esc(c.pax) + '명 · ' + esc(c.days) + '일</div>' +
+        '<div class="m hide-s">1인 원가 ' + esc(c.perPax != null ? eur2(c.perPax) : '—') + '</div>' +
+        '<div class="m"><button type="button" class="icon-btn" data-csremove="' + i + '">✕</button></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function renderCost(){
+    if(!sheet) sheet = freshSheet();
+    loadProducts();
+    fillQty();
+    $('csName').value    = sheet.name || '';
+    $('csPax').value     = sheet.pax;
+    $('csDays').value    = sheet.days;
+    $('csNights').value  = sheet.nights;
+    $('csProduct').value = sheet.productId || '';
+    renderCostRows();
+    recalc();
+    renderSaved();
+  }
+
   /* ---------------------------------------------------- 저장 · 배포 */
   function save(){
     if(tab === 'products') collectProduct();
@@ -727,6 +1067,112 @@
   });
   bindTable('conRows', 'concerts', CON);
   bindTable('fareRows', 'fares', FARE);
+
+  /* ----- 원가표 ----- */
+  ['csName','csPax','csDays','csNights','csProduct'].forEach(function(id){
+    $(id).addEventListener('input', function(){
+      sheet.name      = $('csName').value;
+      sheet.pax       = num($('csPax').value) || 1;
+      sheet.days      = num($('csDays').value);
+      sheet.nights    = num($('csNights').value);
+      sheet.productId = $('csProduct').value;
+      fillQty();
+      renderCostRows();
+      recalc();
+    });
+    $(id).addEventListener('change', function(){
+      sheet.productId = $('csProduct').value;
+      recalc();
+    });
+  });
+
+  $('csRows').addEventListener('input', function(e){
+    var t = e.target;
+    if(!t.dataset || t.dataset.r === undefined) return;
+    var r = sheet.rows[Number(t.dataset.r)];
+    r[t.dataset.k] = t.value;
+    if(t.dataset.k === 'qty') r.auto = false;   /* 직접 고친 수량은 자동으로 덮지 않아요 */
+    recalc();
+    /* 소계·1인당 칸만 다시 그려 입력 중 커서가 튀지 않게 합니다 */
+    var tr = t.closest('tr');
+    var pax = Math.max(1, num(sheet.pax));
+    var sub = num(r.price) * num(r.qty);
+    var cells = tr.querySelectorAll('td.num');
+    if(cells.length === 2){
+      cells[0].textContent = sub ? eur(r.unit === 'pax' ? sub * pax : sub) : '—';
+      cells[1].textContent = sub ? eur2(r.unit === 'pax' ? sub : sub / pax) : '—';
+    }
+  });
+  $('csRows').addEventListener('change', function(e){
+    if(e.target.dataset && e.target.dataset.k === 'unit'){ renderCostRows(); recalc(); }
+  });
+  $('csRows').addEventListener('click', function(e){
+    var b = e.target.closest('[data-csdel]');
+    if(!b) return;
+    sheet.rows.splice(Number(b.dataset.csdel), 1);
+    renderCostRows(); recalc();
+  });
+
+  $('csAddRow').addEventListener('click', function(){
+    sheet.rows.push({ name:'', unit:'team', qtyFrom:'', price:'', qty:'', auto:false });
+    renderCostRows(); recalc();
+  });
+  $('csReset').addEventListener('click', function(){
+    if(!confirm('입력하신 금액이 모두 지워집니다. 기본 항목으로 되돌릴까요?')) return;
+    var keep = { name:sheet.name, productId:sheet.productId, pax:sheet.pax,
+                 days:sheet.days, nights:sheet.nights };
+    sheet = freshSheet();
+    Object.keys(keep).forEach(function(k){ sheet[k] = keep[k]; });
+    fillQty();
+    renderCost();
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="csMode"]'), function(r){
+    r.addEventListener('change', recalc);
+  });
+
+  $('csSave').addEventListener('click', function(){
+    if(!sheet.name.trim()){ toast('단체명을 먼저 적어 주세요.', true); $('csName').focus(); return; }
+    var pax = Math.max(1, num(sheet.pax));
+    var team = 0;
+    sheet.rows.forEach(function(r){
+      var sub = num(r.price) * num(r.qty);
+      team += (r.unit === 'pax') ? sub * pax : sub;
+    });
+    var entry = JSON.parse(JSON.stringify(sheet));
+    entry.perPax = team / pax;
+    entry.teamTotal = team;
+    entry.savedAt = new Date().toISOString().slice(0, 10);
+
+    var list = store.costsheets.data || (store.costsheets.data = []);
+    var at = list.findIndex(function(c){ return c.name === entry.name; });
+    if(at >= 0){
+      if(!confirm('같은 이름의 원가표가 있습니다. 덮어쓸까요?')) return;
+      list[at] = entry;
+    } else {
+      list.unshift(entry);
+    }
+    renderSaved();
+    refreshSaveBar();
+    toast('목록에 담았습니다. 아래 "저장하고 배포"를 눌러야 실제로 저장됩니다.');
+  });
+
+  $('csSavedRows').addEventListener('click', function(e){
+    var del = e.target.closest('[data-csremove]');
+    if(del){
+      e.stopPropagation();
+      if(!confirm('이 원가표를 지울까요?')) return;
+      store.costsheets.data.splice(Number(del.dataset.csremove), 1);
+      renderSaved(); refreshSaveBar();
+      return;
+    }
+    var open = e.target.closest('[data-csload]');
+    if(!open) return;
+    sheet = JSON.parse(JSON.stringify(store.costsheets.data[Number(open.dataset.csload)]));
+    renderCost();
+    window.scrollTo({ top:0, behavior:'smooth' });
+    toast('원가표를 불러왔습니다.');
+  });
 
   $('saveBtn').addEventListener('click', save);
   $('revertBtn').addEventListener('click', revert);

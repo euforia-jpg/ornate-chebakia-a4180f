@@ -27,9 +27,10 @@ const BR   = process.env.GITHUB_BRANCH || 'main';
 
 /* 관리할 파일 목록 — 여기 없는 경로는 건드리지 못하게 막아요 */
 const FILES = {
-  products: 'products.js',
-  concerts: 'data/concerts.json',
-  fares:    'data/fares.json',
+  products:   'products.js',
+  concerts:   'data/concerts.json',
+  fares:      'data/fares.json',
+  costsheets: 'data/costsheets.json',
 };
 
 /* ---------------------------------------------------------- 공통 */
@@ -116,6 +117,43 @@ async function writeFile(path, content, message, sha) {
       sha: sha || undefined,
     }),
   });
+}
+
+/* ---------------------------------------------------------- 축구 API 점검 */
+
+/*
+  경기 일정 자동 갱신(update-matches)이 쓰는 football-data.org 키를 확인합니다.
+  변수 이름을 저장소마다 다르게 쓸 수 있어 흔한 이름을 모두 찾아봐요.
+*/
+const FOOTBALL_KEYS = [
+  'FOOTBALL_API_KEY', 'FOOTBALL_DATA_KEY', 'FOOTBALL_DATA_TOKEN',
+  'FOOTBALL_TOKEN', 'FOOTBALLDATA_API_KEY', 'API_FOOTBALL_KEY',
+];
+
+async function checkFootball(out) {
+  const name = FOOTBALL_KEYS.find(function (k) { return process.env[k]; });
+  if (!name) { out.축구키 = '없음 — 이 사이트에 설정된 축구 API 키를 찾지 못했습니다'; return; }
+
+  const raw = process.env[name];
+  const key = raw.trim();
+  out.축구키 = name + ' (' + raw.length + '자)' +
+    (raw !== key ? ' · 앞뒤공백 있음 — 원인일 수 있습니다' : '');
+
+  try {
+    const r = await fetch('https://api.football-data.org/v4/competitions/PD', {
+      headers: { 'X-Auth-Token': key },
+    });
+    if (r.ok) {
+      out.축구키확인 = '정상';
+    } else {
+      const t = await r.text();
+      let m = t;
+      try { m = JSON.parse(t).message || t; } catch (e) {}
+      out.축구키확인 = '실패 (' + r.status + ') ' + String(m).slice(0, 80);
+    }
+  } catch (e) {
+    out.축구키확인 = '확인 불가 — ' + e.message;
+  }
 }
 
 /* ---------------------------------------------------------- products.js */
@@ -241,6 +279,9 @@ exports.handler = async function (event) {
         out.파일확인 = '실패 (' + (e.status || '?') + ') ' + e.message;
       }
 
+      /* 4) 경기 일정 자동 갱신이 쓰는 축구 API 키도 같이 봐 줍니다 */
+      await checkFootball(out);
+
       return json(200, { diag: out });
     }
 
@@ -274,7 +315,8 @@ exports.handler = async function (event) {
         content = JSON.stringify(req.items, null, 2) + '\n';
       }
 
-      const label = { products: '여행상품', concerts: '공연 일정', fares: '교통 요금표' }[req.file];
+      const label = { products: '여행상품', concerts: '공연 일정', fares: '교통 요금표',
+                      costsheets: '원가표' }[req.file];
       const msg = `[관리자] ${label} 수정${note ? ' — ' + note : ''}`;
       const res = await writeFile(path, content, msg, sha);
 
