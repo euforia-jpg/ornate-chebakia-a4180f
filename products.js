@@ -1619,7 +1619,10 @@ const PRODUCTS = [
         "초과 수하물 요금"
       ],
       "duration": "5박 6일 (마드리드 현지 집합 · 관광일 주행 200km 이내 · 일정은 현지 사정에 따라 변경될 수 있어요)"
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "youtubeUrl": ""
   },
   {
     "id": "north-asturias-picos",
