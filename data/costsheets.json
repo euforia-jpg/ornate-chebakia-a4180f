@@ -1,1 +1,102 @@
-[]
+[
+  {
+    "name": "SL-01C",
+    "productId": "car-sevilla-benagil-lisbon",
+    "pax": 4,
+    "days": 1,
+    "nights": 0,
+    "rows": [
+      {
+        "name": "차량",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "500",
+        "qty": 1,
+        "auto": true
+      },
+      {
+        "name": "기사",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "",
+        "qty": "0",
+        "auto": false
+      },
+      {
+        "name": "가이드",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "",
+        "qty": "0",
+        "auto": false
+      },
+      {
+        "name": "로컬가이드",
+        "unit": "team",
+        "qtyFrom": "",
+        "price": "",
+        "qty": "",
+        "auto": true
+      },
+      {
+        "name": "식사",
+        "unit": "pax",
+        "qtyFrom": "",
+        "price": "",
+        "qty": "",
+        "auto": true
+      },
+      {
+        "name": "입장료",
+        "unit": "pax",
+        "qtyFrom": "",
+        "price": "",
+        "qty": "",
+        "auto": true
+      },
+      {
+        "name": "호텔",
+        "unit": "pax",
+        "qtyFrom": "nights",
+        "price": "",
+        "qty": "0",
+        "auto": false
+      },
+      {
+        "name": "기사숙식",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "",
+        "qty": "0",
+        "auto": false
+      },
+      {
+        "name": "가이드숙식",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "",
+        "qty": "0",
+        "auto": false
+      },
+      {
+        "name": "시티택스",
+        "unit": "pax",
+        "qtyFrom": "nights",
+        "price": "",
+        "qty": "0",
+        "auto": false
+      },
+      {
+        "name": "가이드교통비",
+        "unit": "team",
+        "qtyFrom": "",
+        "price": "",
+        "qty": "",
+        "auto": true
+      }
+    ],
+    "perPax": 125,
+    "teamTotal": 500,
+    "savedAt": "2026-09-12"
+  }
+]
