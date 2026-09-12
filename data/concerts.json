@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "date": "2026-10-04",
+    "time": "21:00",
+    "city": "세비야",
+    "venue": "Casa de la Memoria",
+    "title": "정통 플라멩코 타블라오",
+    "genre": "플라멩코",
+    "price": "1인 25유로",
+    "link": ""
+  },
+  {
+    "date": "2026-10-18",
+    "time": "20:00",
+    "city": "마드리드",
+    "venue": "Teatro Real",
+    "title": "오페라 카르멘",
+    "genre": "오페라",
+    "price": "1인 65유로부터",
+    "link": "https://예매주소"
+  }
+]
