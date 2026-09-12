@@ -313,6 +313,18 @@
             <label for="csNights">숙박 <em>· 박</em></label>
             <input type="number" id="csNights" min="0" value="5">
           </div>
+          <div class="f">
+            <label for="csChannel">판매 경로</label>
+            <select id="csChannel">
+              <option value="0">직판 (커미션 없음)</option>
+              <option value="20" selected>광고 플랫폼 (커미션 20%)</option>
+              <option value="custom">직접 입력</option>
+            </select>
+          </div>
+          <div class="f">
+            <label for="csCommission">커미션 <em>· 판매가의 %</em></label>
+            <input type="number" id="csCommission" min="0" max="90" step="0.5" value="20">
+          </div>
         </div>
       </div>
 
@@ -350,24 +362,33 @@
           <div class="cs-box"><span>팀 전체 원가</span><b id="csTotalTeam">—</b></div>
           <div class="cs-box"><span>1인당 원가</span><b id="csTotalPax">—</b></div>
           <div class="cs-box" id="csSaleBox" hidden><span>홈페이지 판매가 (1인)</span><b id="csSale">—</b></div>
-          <div class="cs-box" id="csMarginBox" hidden><span>현재 마진율</span><b id="csMarginNow">—</b></div>
+          <div class="cs-box" id="csComBox" hidden><span>커미션 (1인)</span><b id="csCom">—</b></div>
+          <div class="cs-box" id="csNetBox" hidden><span>실수령액 (1인)</span><b id="csNet">—</b></div>
+          <div class="cs-box" id="csMarginBox" hidden><span>현재 순마진율</span><b id="csMarginNow">—</b></div>
         </div>
         <p class="cs-note" id="csWarn" hidden></p>
       </div>
 
       <div class="card">
         <h2>마진별 판매가</h2>
-        <div class="sub">1인당 원가에 마진을 얹은 판매가입니다. 홈페이지 판매가와 가장 가까운 줄은 표시해 드립니다.</div>
+        <div class="sub">
+          커미션을 떼고도 목표 마진이 남으려면 판매가를 얼마로 받아야 하는지 보여 줍니다.
+          홈페이지 판매가와 마진이 맞는 줄은 표시해 드립니다.
+        </div>
         <div class="bar">
           <label class="chk"><input type="radio" name="csMode" value="revenue" checked> 매출 기준 <span style="font-weight:600;color:var(--muted);">(원가 ÷ (1−마진))</span></label>
           <label class="chk"><input type="radio" name="csMode" value="markup"> 원가 기준 <span style="font-weight:600;color:var(--muted);">(원가 × (1+마진))</span></label>
         </div>
+        <p class="cs-note" id="csCompare" hidden></p>
         <div class="tbl-wrap">
           <table>
             <thead><tr>
-              <th style="width:118px;">마진</th><th style="width:130px;">1인 판매가</th>
-              <th style="width:130px;">1인 이익</th><th style="width:150px;">팀 전체 매출</th>
-              <th>팀 전체 이익</th>
+              <th style="width:112px;">목표 마진</th>
+              <th class="num" style="width:124px;">1인 판매가</th>
+              <th class="num" style="width:112px;">커미션</th>
+              <th class="num" style="width:118px;">1인 실수령</th>
+              <th class="num" style="width:112px;">1인 순이익</th>
+              <th class="num">팀 순이익</th>
             </tr></thead>
             <tbody id="csMarginRows"></tbody>
           </table>
@@ -768,7 +789,7 @@
 
   function freshSheet(){
     return {
-      name:'', productId:'', pax:20, days:6, nights:5,
+      name:'', productId:'', pax:20, days:6, nights:5, commission:20,
       rows: CS_DEFAULT.map(function(d){
         return { name:d.name, unit:d.unit, qtyFrom:d.qtyFrom, price:'', qty:'', auto:true };
       })
@@ -853,6 +874,7 @@
 
   function recalc(){
     var pax = Math.max(1, num(sheet.pax));
+    var c = Math.min(0.9, Math.max(0, num(sheet.commission) / 100));   /* 커미션 비율 */
     var teamTotal = 0;
     sheet.rows.forEach(function(r){
       var sub = num(r.price) * num(r.qty);
@@ -865,42 +887,63 @@
     $('csTotalTeam').textContent = teamTotal ? eur(teamTotal) : '—';
     $('csTotalPax').textContent  = teamTotal ? eur2(perPax) : '—';
 
-    /* 홈페이지 판매가와 비교 */
     var p = findProduct(sheet.productId);
     var sale = p ? priceOf(p.price) : null;
     var mode = (document.querySelector('input[name="csMode"]:checked') || {}).value || 'revenue';
 
-    $('csSaleBox').hidden = !sale;
+    $('csSaleBox').hidden   = !sale;
+    $('csComBox').hidden    = !(sale && c > 0);
+    $('csNetBox').hidden    = !(sale && c > 0);
     $('csMarginBox').hidden = !(sale && teamTotal);
     $('csWarn').hidden = true;
 
     if(sale){
+      /* 커미션은 판매가에서 떼어 가므로, 우리 손에 들어오는 돈은 실수령액입니다 */
+      var com = sale * c;
+      var net = sale - com;
       $('csSale').textContent = eur(sale);
+      $('csCom').textContent  = eur2(com);
+      $('csNet').textContent  = eur2(net);
+
       if(teamTotal){
-        var rate = mode === 'revenue' ? (sale - perPax) / sale : (sale - perPax) / perPax;
+        var profit = net - perPax;
+        var rate = mode === 'revenue' ? profit / sale : profit / perPax;
         var box = $('csMarginBox');
         $('csMarginNow').textContent = (rate * 100).toFixed(1) + '%';
         box.className = 'cs-box ' + (rate < 0 ? 'warn' : rate >= 0.15 ? 'good' : '');
+
         if(rate < 0){
           $('csWarn').hidden = false;
-          $('csWarn').textContent = '판매가가 원가보다 낮습니다. 1인당 ' +
-            eur2(perPax - sale) + ' 손해입니다. 원가 입력이나 판매가를 확인해 주세요.';
+          $('csWarn').textContent = c > 0
+            ? '커미션 ' + (c * 100) + '% 를 떼고 나면 1인당 ' + eur2(-profit) +
+              ' 손해입니다. 판매가 ' + eur(sale) + ' 중 ' + eur2(com) +
+              ' 이 플랫폼으로 나가고 ' + eur2(net) + ' 만 남는데, 원가는 ' + eur2(perPax) + ' 입니다.'
+            : '판매가가 원가보다 낮습니다. 1인당 ' + eur2(-profit) + ' 손해입니다.';
         } else if(rate < 0.1){
           $('csWarn').hidden = false;
-          $('csWarn').textContent = '마진이 ' + (rate * 100).toFixed(1) +
+          $('csWarn').textContent = '순마진이 ' + (rate * 100).toFixed(1) +
             '% 로 얇습니다. 환율이나 현지 요금이 조금만 올라도 적자가 될 수 있습니다.';
         }
       }
     }
 
     /*
-      마진별 판매가표.
-      지금 판매가의 실제 마진율과 가까운 줄(±2.5%p)만 "현재"로 표시합니다.
-      실제 마진이 5~30% 범위를 벗어나면 아무 줄도 표시하지 않아요.
+      목표 마진을 남기려면 판매가를 얼마로 받아야 하는가.
+        매출 기준 : 판매가×(1−커미션) − 원가 = 마진×판매가  →  판매가 = 원가 ÷ (1 − 커미션 − 마진)
+        원가 기준 : 판매가×(1−커미션) − 원가 = 마진×원가     →  판매가 = 원가×(1+마진) ÷ (1 − 커미션)
     */
+    function saleFor(m){
+      if(mode === 'revenue'){
+        var den = 1 - c - m / 100;
+        return den > 0 ? perPax / den : null;
+      }
+      return perPax * (1 + m / 100) / (1 - c);
+    }
+
     var hit = null;
     if(sale && teamTotal){
-      var now = mode === 'revenue' ? (sale - perPax) / sale : (sale - perPax) / perPax;
+      var now = mode === 'revenue' ? (sale * (1 - c) - perPax) / sale
+                                   : (sale * (1 - c) - perPax) / perPax;
       var gap = Infinity;
       MARGINS.forEach(function(m){
         var d = Math.abs(now * 100 - m);
@@ -910,19 +953,38 @@
 
     $('csMarginRows').innerHTML = MARGINS.map(function(m){
       if(!teamTotal){
-        return '<tr><td>' + m + '%</td><td class="num">—</td><td class="num">—</td>' +
-               '<td class="num">—</td><td class="num">—</td></tr>';
+        return '<tr><td>' + m + '%</td>' +
+          '<td class="num">—</td><td class="num">—</td><td class="num">—</td>' +
+          '<td class="num">—</td><td class="num">—</td></tr>';
       }
-      var s = mode === 'revenue' ? perPax / (1 - m / 100) : perPax * (1 + m / 100);
-      var profit = s - perPax;
+      var sp = saleFor(m);
+      if(sp === null){
+        return '<tr><td>' + m + '%</td><td class="num" colspan="5" style="color:var(--danger);">' +
+          '커미션 ' + (c * 100) + '% 로는 이 마진을 만들 수 없습니다</td></tr>';
+      }
+      var com2 = sp * c, net2 = sp - com2, pf = net2 - perPax;
       return '<tr' + (m === hit ? ' class="cs-hit"' : '') + '>' +
         '<td>' + m + '%</td>' +
-        '<td class="num">' + eur2(s) + '</td>' +
-        '<td class="num">' + eur2(profit) + '</td>' +
-        '<td class="num">' + eur(s * pax) + '</td>' +
-        '<td class="num">' + eur(profit * pax) + '</td>' +
+        '<td class="num">' + eur2(sp) + '</td>' +
+        '<td class="num">' + (c > 0 ? '−' + eur2(com2) : '—') + '</td>' +
+        '<td class="num">' + eur2(net2) + '</td>' +
+        '<td class="num">' + eur2(pf) + '</td>' +
+        '<td class="num">' + eur(pf * pax) + '</td>' +
       '</tr>';
     }).join('');
+
+    /* 직판이었다면 얼마를 받으면 되는지 나란히 보여 줍니다 */
+    var cmp = $('csCompare');
+    if(teamTotal && c > 0){
+      var withC = saleFor(20), noC = mode === 'revenue' ? perPax / 0.8 : perPax * 1.2;
+      cmp.hidden = false;
+      cmp.textContent = '마진 20% 를 남기려면 — 직판은 ' + eur2(noC) +
+        ' 이면 되지만, 커미션 ' + (c * 100) + '% 플랫폼에서는 ' +
+        (withC === null ? '아무리 올려도 불가능' : eur2(withC) + ' 을 받아야 합니다 (1인당 ' +
+        eur2(withC - noC) + ' 더).');
+    } else {
+      cmp.hidden = true;
+    }
   }
 
   function renderSaved(){
@@ -952,6 +1014,8 @@
     $('csDays').value    = sheet.days;
     $('csNights').value  = sheet.nights;
     $('csProduct').value = sheet.productId || '';
+    $('csCommission').value = (sheet.commission == null ? 20 : sheet.commission);
+    syncChannel();
     renderCostRows();
     recalc();
     renderSaved();
@@ -1069,6 +1133,25 @@
   bindTable('fareRows', 'fares', FARE);
 
   /* ----- 원가표 ----- */
+  /* 판매 경로를 고르면 커미션 칸이 따라 바뀌고, 직접 고치면 "직접 입력"으로 넘어갑니다 */
+  function syncChannel(){
+    var v = String(num(sheet.commission));
+    var sel = $('csChannel');
+    sel.value = (v === '0') ? '0' : (v === '20') ? '20' : 'custom';
+  }
+  $('csChannel').addEventListener('change', function(){
+    var v = $('csChannel').value;
+    if(v === 'custom'){ $('csCommission').focus(); return; }
+    sheet.commission = num(v);
+    $('csCommission').value = sheet.commission;
+    recalc();
+  });
+  $('csCommission').addEventListener('input', function(){
+    sheet.commission = num($('csCommission').value);
+    syncChannel();
+    recalc();
+  });
+
   ['csName','csPax','csDays','csNights','csProduct'].forEach(function(id){
     $(id).addEventListener('input', function(){
       sheet.name      = $('csName').value;
@@ -1142,6 +1225,7 @@
     var entry = JSON.parse(JSON.stringify(sheet));
     entry.perPax = team / pax;
     entry.teamTotal = team;
+    entry.commission = num(sheet.commission);
     entry.savedAt = new Date().toISOString().slice(0, 10);
 
     var list = store.costsheets.data || (store.costsheets.data = []);
