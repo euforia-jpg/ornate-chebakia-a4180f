@@ -175,6 +175,33 @@
   @media (max-width:620px){ .euf-footer .ef-inner{ grid-template-columns:1fr; padding:26px 18px 24px; border-radius:18px; }
     .euf-footer .ef-bottom{ flex-direction:column; align-items:flex-start; }
     footer.euf-footer{ padding:6px 16px 28px; } }
+
+/* ===== 공연 일정 목록 ===== */
+  .con-month{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:19px; color:var(--navy);
+    margin:26px 0 14px; display:flex; align-items:center; gap:12px; }
+  .con-month::after{ content:''; flex:1; height:1.5px; background:var(--line); }
+  .con-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+  .con-card{ display:flex; gap:16px; padding:18px; border-radius:16px; background:#fff;
+    border:1.5px solid var(--line); transition:border-color .15s, transform .15s; }
+  .con-card:hover{ border-color:var(--violet); transform:translateY(-2px); }
+  .con-date{ flex:0 0 58px; text-align:center; border-radius:12px; background:#F5F3FE;
+    border:1.5px solid var(--line); padding:9px 0; align-self:flex-start; }
+  .con-date b{ display:block; font-family:'Kanit'; font-weight:800; font-size:21px; color:var(--navy); line-height:1; }
+  .con-date span{ display:block; font-size:10.5px; font-weight:800; color:var(--muted); margin-top:4px;
+    letter-spacing:.04em; }
+  .con-body{ flex:1; min-width:0; }
+  .con-body h3{ margin:0 0 6px; font-size:15px; font-weight:800; color:var(--ink); line-height:1.4; }
+  .con-meta{ display:flex; flex-wrap:wrap; gap:5px 10px; font-size:12px; font-weight:600;
+    color:var(--muted); margin-bottom:10px; }
+  .con-meta b{ color:var(--ink); font-weight:700; }
+  .con-tag{ display:inline-block; padding:3px 10px; border-radius:999px; background:var(--wash-pink);
+    color:var(--pink); font-size:10.5px; font-weight:800; letter-spacing:.03em; }
+  .con-foot{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .con-price{ font-size:13px; font-weight:800; color:var(--navy); }
+  .con-btn{ padding:8px 16px; border-radius:999px; background:var(--navy); color:#fff; font-size:12px;
+    font-weight:800; text-decoration:none; white-space:nowrap; }
+  .con-btn:hover{ background:var(--violet); }
+  @media (max-width:520px){ .con-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -222,11 +249,12 @@
 
   <div class="section">
     <div class="section-inner">
-      <div class="section-head" style="text-align:center;">
+      <div class="section-head" style="text-align:center;" id="conIntro">
         <div class="policy-note">공연 예약 서비스 준비중</div>
         <h2>플라멩코 쇼를 비롯한 현지 공연을 곧 만나보실 수 있어요</h2>
         <div class="sub">여행 일정에 특별한 공연 관람을 더하고 싶으신 분들을 위해 준비하고 있어요. 원하시는 공연이나 날짜가 있다면 아래 버튼으로 미리 문의해 주세요.</div>
       </div>
+      <div id="conList"></div>
     </div>
 
     <div class="cta-band">
@@ -314,5 +342,85 @@
   </script>
 
 </div>
+<script>
+/* 공연 일정 — 관리자 대쉬보드에서 저장한 data/concerts.json 을 읽어 보여줍니다.
+   등록된 공연이 없으면 위쪽 "준비중" 안내가 그대로 남습니다. */
+(function(){
+  var MON = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  var DOW = ['일','월','화','수','목','금','토'];
+
+  function esc(v){
+    return String(v == null ? '' : v).replace(/[&<>"]/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];
+    });
+  }
+
+  fetch('/data/concerts.json', { cache: 'no-store' })
+    .then(function(r){ return r.ok ? r.json() : []; })
+    .then(function(list){
+      if(!Array.isArray(list) || !list.length) return;
+
+      /* 오늘 지난 공연은 빼고, 날짜순으로 정렬합니다 */
+      var today = new Date(); today.setHours(0,0,0,0);
+      list = list.filter(function(c){
+        if(!c || !c.date) return false;
+        var d = new Date(c.date + 'T00:00:00');
+        return !isNaN(d) && d >= today;
+      }).sort(function(a,b){ return a.date.localeCompare(b.date); });
+
+      if(!list.length) return;
+
+      /* 월별로 묶습니다 */
+      var groups = [], last = null;
+      list.forEach(function(c){
+        var d = new Date(c.date + 'T00:00:00');
+        var key = d.getFullYear() + '-' + d.getMonth();
+        if(!last || last.key !== key){
+          last = { key: key, label: d.getFullYear() + '년 ' + MON[d.getMonth()], items: [] };
+          groups.push(last);
+        }
+        last.items.push({ c: c, d: d });
+      });
+
+      var html = groups.map(function(g){
+        return '<div class="con-month">' + esc(g.label) + '</div><div class="con-grid">' +
+          g.items.map(function(x){
+            var c = x.c, d = x.d;
+            var where = [c.city, c.venue].filter(Boolean).map(esc);
+            var meta = [];
+            if(where.length) meta.push('<span><b>' + where.join('</b> · ') + '</span>');
+            if(c.time) meta.push('<span>' + esc(c.time) + '</span>');
+            var link = c.link
+              ? '<a class="con-btn" href="' + esc(c.link) + '" target="_blank" rel="noopener">예매하기 →</a>'
+              : '<a class="con-btn" href="contact.html">예약 문의 →</a>';
+            return '<div class="con-card">' +
+              '<div class="con-date"><b>' + d.getDate() + '</b><span>' + DOW[d.getDay()] + '요일</span></div>' +
+              '<div class="con-body">' +
+                (c.genre ? '<span class="con-tag">' + esc(c.genre) + '</span>' : '') +
+                '<h3>' + esc(c.title) + '</h3>' +
+                (meta.length ? '<div class="con-meta">' + meta.join('') + '</div>' : '') +
+                '<div class="con-foot">' +
+                  '<span class="con-price">' + esc(c.price || '요금 문의') + '</span>' + link +
+                '</div>' +
+              '</div></div>';
+          }).join('') + '</div>';
+      }).join('');
+
+      document.getElementById('conList').innerHTML = html;
+
+      /* 공연이 올라왔으니 "준비중" 안내는 실제 안내로 바꿉니다 */
+      var intro = document.getElementById('conIntro');
+      if(intro){
+        var note = intro.querySelector('.policy-note');
+        var h2 = intro.querySelector('h2');
+        var sub = intro.querySelector('.sub');
+        if(note) note.textContent = '공연 일정';
+        if(h2) h2.textContent = '스페인 · 포르투갈 현지 공연 일정';
+        if(sub) sub.textContent = '관람을 원하시는 공연을 골라 예약 문의를 남겨 주세요. 여행 일정에 맞춰 좌석과 이동까지 함께 준비해 드립니다.';
+      }
+    })
+    .catch(function(){ /* 목록을 못 불러와도 기존 안내가 그대로 보입니다 */ });
+})();
+</script>
 </body>
 </html>

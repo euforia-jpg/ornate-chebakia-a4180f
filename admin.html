@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>관리자 — Euforia Tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --violet:#6C3CE9; --pink:#E6317B; --orange:#FF7A1A; --teal:#12C9AE;
+    --navy:#14103D; --paper:#FFFFFF; --ink:#171235; --muted:#6E6A93; --line:#EAE7F7;
+    --bg:#F6F5FC; --danger:#D92D5E;
+  }
+  *{box-sizing:border-box;}
+  /* .savebar 처럼 display 를 지정한 요소도 hidden 이면 확실히 숨기도록 */
+  [hidden]{ display:none !important; }
+  html,body{margin:0;padding:0;}
+  body{ background:var(--bg); color:var(--ink); font-family:'Work Sans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+    min-height:100vh; -webkit-font-smoothing:antialiased; font-size:14px; }
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  /* ---------- 로그인 ---------- */
+  .login{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .login .box{ width:100%; max-width:380px; background:#fff; border:1.5px solid var(--line); border-radius:22px;
+    padding:38px 32px; box-shadow:0 24px 60px -34px rgba(20,16,61,.4); }
+  .login h1{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:26px; margin:0 0 6px; color:var(--navy); }
+  .login p{ margin:0 0 24px; font-size:13px; color:var(--muted); font-weight:600; }
+  .login input{ width:100%; padding:13px 15px; border:2px solid var(--line); border-radius:12px; font-size:14px;
+    font-family:inherit; outline:none; }
+  .login input:focus{ border-color:var(--violet); }
+  .login button{ all:unset; display:block; width:100%; text-align:center; margin-top:12px; padding:14px;
+    border-radius:12px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800;
+    cursor:pointer; box-sizing:border-box; }
+  .login .err{ margin-top:12px; font-size:12.5px; font-weight:700; color:var(--danger); min-height:18px; }
+
+  /* ---------- 뼈대 ---------- */
+  .top{ background:var(--navy); color:#fff; padding:16px clamp(16px,3vw,32px); display:flex; align-items:center;
+    justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .top .brand{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:19px; }
+  .top .brand span{ font-family:'Work Sans'; font-style:normal; font-weight:700; font-size:11px;
+    letter-spacing:1.4px; opacity:.6; display:block; margin-top:2px; }
+  .top .right{ display:flex; align-items:center; gap:10px; font-size:12.5px; font-weight:700; }
+  .top a.site{ text-decoration:none; opacity:.8; }
+  .top a.site:hover{ opacity:1; }
+  .top button{ all:unset; cursor:pointer; padding:8px 14px; border-radius:999px; border:1.5px solid rgba(255,255,255,.28);
+    font-size:12px; font-weight:800; }
+  .top button:hover{ background:rgba(255,255,255,.1); }
+
+  .tabs{ display:flex; gap:4px; padding:0 clamp(16px,3vw,32px); background:var(--navy);
+    overflow-x:auto; scrollbar-width:none; }
+  .tabs::-webkit-scrollbar{ display:none; }
+  .tabs button{ all:unset; cursor:pointer; padding:12px 18px; font-size:13px; font-weight:800; color:rgba(255,255,255,.62);
+    border-bottom:3px solid transparent; white-space:nowrap; }
+  .tabs button.on{ color:#fff; border-bottom-color:var(--teal); }
+
+  .wrap{ padding:clamp(16px,3vw,28px); max-width:1240px; margin:0 auto; }
+  .panel{ display:none; }
+  .panel.on{ display:block; }
+
+  .card{ background:#fff; border:1.5px solid var(--line); border-radius:18px; padding:22px; margin-bottom:16px; }
+  .card h2{ font-size:16px; font-weight:800; margin:0 0 4px; color:var(--navy); }
+  .card .sub{ font-size:12.5px; color:var(--muted); font-weight:600; margin-bottom:18px; line-height:1.6; }
+
+  .bar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px; }
+  .bar input[type=search], .bar select{ padding:10px 13px; border:2px solid var(--line); border-radius:10px;
+    font-size:13px; font-family:inherit; outline:none; background:#fff; }
+  .bar input[type=search]{ flex:1; min-width:180px; }
+  .bar input:focus, .bar select:focus{ border-color:var(--violet); }
+  .count{ font-size:12.5px; font-weight:700; color:var(--muted); }
+
+  .btn{ all:unset; cursor:pointer; padding:10px 18px; border-radius:10px; font-size:13px; font-weight:800;
+    border:2px solid var(--line); background:#fff; color:var(--ink); box-sizing:border-box; }
+  .btn:hover{ border-color:var(--violet); color:var(--violet); }
+  .btn.primary{ background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; border-color:transparent; }
+  .btn.primary:hover{ opacity:.92; color:#fff; }
+  .btn.dark{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .btn.dark:hover{ background:var(--violet); border-color:var(--violet); color:#fff; }
+  .btn.danger{ color:var(--danger); border-color:#F6D3DE; }
+  .btn.danger:hover{ border-color:var(--danger); color:var(--danger); }
+  .btn[disabled]{ opacity:.45; cursor:not-allowed; }
+  .btn.sm{ padding:7px 13px; font-size:12px; }
+
+  /* ---------- 목록 ---------- */
+  .list{ border:1.5px solid var(--line); border-radius:14px; overflow:hidden; }
+  .row{ display:grid; grid-template-columns:1fr 190px 140px 90px; gap:12px; align-items:center;
+    padding:12px 16px; border-bottom:1px solid var(--line); cursor:pointer; background:#fff; }
+  .row:last-child{ border-bottom:none; }
+  .row:hover{ background:#FAF9FE; }
+  .row.head{ background:#F5F3FE; font-size:11.5px; font-weight:800; color:var(--navy); cursor:default;
+    letter-spacing:.04em; text-transform:uppercase; }
+  .row.head:hover{ background:#F5F3FE; }
+  .row .t{ font-size:13.5px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .row .t em{ display:block; font-style:normal; font-size:11px; color:var(--muted); font-weight:600; margin-top:2px; }
+  .row .m{ font-size:12.5px; font-weight:600; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .row .edited{ display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--orange); margin-right:6px; }
+
+  /* ---------- 편집 폼 ---------- */
+  .grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .f{ display:flex; flex-direction:column; gap:6px; }
+  .f.full{ grid-column:1/-1; }
+  .f label{ font-size:11.5px; font-weight:800; color:var(--navy); }
+  .f label em{ font-style:normal; font-weight:600; color:var(--muted); }
+  .f input, .f select, .f textarea{ padding:10px 13px; border:2px solid var(--line); border-radius:10px;
+    font-size:13px; font-family:inherit; outline:none; background:#fff; color:var(--ink); width:100%; }
+  .f input:focus, .f select:focus, .f textarea:focus{ border-color:var(--violet); }
+  .f textarea{ min-height:90px; resize:vertical; line-height:1.65; }
+  .f textarea.code{ font-family:'Menlo','Consolas',monospace; font-size:12px; min-height:240px; }
+  .f .hint{ font-size:11px; color:var(--muted); font-weight:600; }
+  .chk{ display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; cursor:pointer;
+    padding:10px 0; }
+  /* 체크박스는 위의 input 규칙(width:100%)을 따라가면 안 돼요 */
+  .chk input[type=checkbox]{ width:17px; height:17px; flex:0 0 17px; padding:0; margin:0; accent-color:var(--violet); }
+
+  .editor-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    margin-bottom:18px; padding-bottom:16px; border-bottom:1.5px solid var(--line); }
+  .editor-head h2{ margin:0; font-size:16px; }
+  .editor-head .id{ font-size:11.5px; font-weight:700; color:var(--muted); font-family:'Menlo',monospace; margin-top:3px; }
+
+  /* ---------- 표 ---------- */
+  .tbl-wrap{ overflow-x:auto; border:1.5px solid var(--line); border-radius:14px; }
+  table{ border-collapse:collapse; width:100%; min-width:820px; }
+  th, td{ text-align:left; padding:9px 11px; border-bottom:1px solid var(--line); font-size:12.5px; }
+  th{ background:#F5F3FE; font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase;
+    letter-spacing:.04em; white-space:nowrap; }
+  tr:last-child td{ border-bottom:none; }
+  td input, td select{ width:100%; padding:7px 9px; border:1.5px solid var(--line); border-radius:8px;
+    font-size:12.5px; font-family:inherit; outline:none; }
+  td input:focus, td select:focus{ border-color:var(--violet); }
+  td.act{ width:52px; text-align:center; }
+  .icon-btn{ all:unset; cursor:pointer; width:26px; height:26px; border-radius:7px; display:inline-flex;
+    align-items:center; justify-content:center; color:var(--muted); font-weight:800; }
+  .icon-btn:hover{ background:#FDECF3; color:var(--danger); }
+
+  /* ---------- 이력 ---------- */
+  .commits{ display:flex; flex-direction:column; gap:2px; }
+  .commit{ display:flex; gap:12px; align-items:baseline; padding:11px 14px; border-radius:10px; }
+  .commit:nth-child(odd){ background:#FAF9FE; }
+  .commit code{ font-family:'Menlo',monospace; font-size:11.5px; color:var(--violet); font-weight:700; flex:0 0 58px; }
+  .commit .msg{ flex:1; font-size:12.5px; font-weight:700; }
+  .commit .when{ font-size:11.5px; color:var(--muted); font-weight:600; white-space:nowrap; }
+
+  /* ---------- 알림 ---------- */
+  .toast{ position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px); opacity:0;
+    background:var(--navy); color:#fff; padding:13px 22px; border-radius:999px; font-size:13px; font-weight:700;
+    box-shadow:0 16px 36px -18px rgba(20,16,61,.7); pointer-events:none; transition:opacity .2s, transform .2s;
+    z-index:60; max-width:calc(100vw - 32px); text-align:center; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  .toast.bad{ background:var(--danger); }
+
+  .savebar{ position:sticky; bottom:0; background:rgba(255,255,255,.96); backdrop-filter:blur(8px);
+    border-top:1.5px solid var(--line); padding:14px clamp(16px,3vw,28px); display:flex; gap:12px;
+    align-items:center; justify-content:flex-end; flex-wrap:wrap; z-index:20; }
+  .savebar .note{ margin-right:auto; font-size:12.5px; font-weight:700; color:var(--muted); }
+  .savebar .note b{ color:var(--orange); }
+
+  .empty{ padding:36px 20px; text-align:center; font-size:13px; font-weight:600; color:var(--muted); }
+  .spin{ display:inline-block; width:13px; height:13px; border:2px solid rgba(255,255,255,.4);
+    border-top-color:#fff; border-radius:50%; animation:sp .7s linear infinite; vertical-align:-2px; margin-right:7px; }
+  @keyframes sp{ to{ transform:rotate(360deg); } }
+
+  @media (max-width:820px){
+    .grid{ grid-template-columns:1fr; }
+    .row{ grid-template-columns:1fr 100px; }
+    .row .m.hide-s{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= 로그인 ================= -->
+<div class="login" id="login">
+  <div class="box">
+    <h1>Euforia Admin</h1>
+    <p>홈페이지 내용을 수정하고 배포하는 곳입니다.</p>
+    <input type="password" id="pw" placeholder="비밀번호" autocomplete="current-password">
+    <button type="button" id="loginBtn">로그인</button>
+    <div class="err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- ================= 본체 ================= -->
+<div id="app" hidden>
+  <div class="top">
+    <div class="brand">Euforia Admin<span>TOUREPLUS.CO.KR</span></div>
+    <div class="right">
+      <a class="site" href="https://toureplus.co.kr" target="_blank" rel="noopener">사이트 보기 ↗</a>
+      <button type="button" id="logoutBtn">로그아웃</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button type="button" class="on" data-tab="products">여행상품</button>
+    <button type="button" data-tab="concerts">공연 일정</button>
+    <button type="button" data-tab="fares">교통 요금</button>
+    <button type="button" data-tab="deploy">배포 · 이력</button>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ---------- 여행상품 ---------- -->
+    <div class="panel on" id="p-products">
+      <div class="card" id="prodList">
+        <h2>여행상품</h2>
+        <div class="sub">수정할 상품을 누르세요. 저장하면 GitHub에 커밋되고 1~2분 뒤 사이트에 반영됩니다.</div>
+        <div class="bar">
+          <input type="search" id="prodSearch" placeholder="상품명 · 지역 · 코드로 찾기">
+          <select id="prodFilter"><option value="">전체 지역</option></select>
+          <span class="count" id="prodCount"></span>
+        </div>
+        <div class="list" id="prodRows"><div class="empty">불러오는 중…</div></div>
+      </div>
+
+      <div class="card" id="prodEditor" hidden>
+        <div class="editor-head">
+          <div>
+            <h2 id="edTitle">상품 수정</h2>
+            <div class="id" id="edId"></div>
+          </div>
+          <button type="button" class="btn" id="edBack">← 목록으로</button>
+        </div>
+        <div class="grid" id="edFields"></div>
+      </div>
+    </div>
+
+    <!-- ---------- 공연 일정 ---------- -->
+    <div class="panel" id="p-concerts">
+      <div class="card">
+        <h2>공연 일정</h2>
+        <div class="sub">플라멩코 · 파두 · 오페라 등 공연 일정입니다. 날짜가 지난 공연은 사이트에서 자동으로 숨겨집니다.</div>
+        <div class="bar">
+          <button type="button" class="btn dark" id="addConcert">+ 공연 추가</button>
+          <span class="count" id="conCount"></span>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th style="width:118px;">날짜</th><th style="width:78px;">시간</th><th style="width:100px;">도시</th>
+              <th style="width:150px;">공연장</th><th>공연명</th><th style="width:110px;">장르</th>
+              <th style="width:110px;">요금</th><th style="width:150px;">예매 링크</th><th class="act"></th>
+            </tr></thead>
+            <tbody id="conRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- 교통 요금 ---------- -->
+    <div class="panel" id="p-fares">
+      <div class="card">
+        <h2>교통 요금 (EUFORIA MOVE)</h2>
+        <div class="sub">1인 요금 기준입니다. 비워 두면 해당 인원 구간은 사이트에 표시되지 않습니다.</div>
+        <div class="bar">
+          <button type="button" class="btn dark" id="addFare">+ 구간 추가</button>
+          <span class="count" id="fareCount"></span>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th style="width:110px;">분류</th><th>구간</th><th style="width:78px;">km</th>
+              <th style="width:92px;">2–3인</th><th style="width:92px;">4–6인</th><th style="width:92px;">7–10인</th>
+              <th style="width:170px;">비고</th><th class="act"></th>
+            </tr></thead>
+            <tbody id="fareRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- 배포 · 이력 ---------- -->
+    <div class="panel" id="p-deploy">
+      <div class="card">
+        <h2>배포</h2>
+        <div class="sub">저장할 때마다 자동으로 배포됩니다. 아래 버튼은 사이트가 갱신되지 않을 때만 쓰세요.</div>
+        <div class="bar">
+          <button type="button" class="btn dark" id="deployBtn">지금 다시 배포하기</button>
+          <span class="count">보통 1~2분이면 반영됩니다.</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>연결 진단</h2>
+        <div class="sub">저장이 안 되거나 GitHub 오류가 날 때 눌러 보세요. 어디가 막혔는지 알려 줍니다. 토큰 값 자체는 표시되지 않습니다.</div>
+        <div class="bar">
+          <button type="button" class="btn sm" id="pingBtn">진단하기</button>
+        </div>
+        <div id="pingRows"></div>
+      </div>
+      <div class="card">
+        <h2>최근 변경 이력</h2>
+        <div class="sub">누가 언제 무엇을 고쳤는지 보여줍니다. 잘못 저장했다면 GitHub에서 되돌릴 수 있습니다.</div>
+        <div class="bar">
+          <button type="button" class="btn sm" id="histBtn">새로고침</button>
+        </div>
+        <div class="commits" id="histRows"><div class="empty">새로고침을 눌러 주세요.</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="savebar" id="savebar" hidden>
+    <div class="note" id="saveNote"></div>
+    <button type="button" class="btn" id="revertBtn">되돌리기</button>
+    <button type="button" class="btn primary" id="saveBtn">저장하고 배포</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var API = '/.netlify/functions/admin-api';
+  var token = sessionStorage.getItem('euf_admin_token') || '';
+  var tab = 'products';
+
+  /* 파일별 상태 — 원본(orig)과 현재(data)를 비교해 변경 여부를 판단해요 */
+  var store = {
+    products: { data:null, orig:null, sha:null, loaded:false },
+    concerts: { data:null, orig:null, sha:null, loaded:false },
+    fares:    { data:null, orig:null, sha:null, loaded:false }
+  };
+  var editingIndex = -1;
+
+  /* ---------------------------------------------------- 공통 */
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+
+  var toastTimer;
+  function toast(msg, bad){
+    var t = $('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (bad ? ' bad' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.className = 'toast'; }, bad ? 5200 : 3200);
+  }
+
+  function api(payload){
+    payload.token = token;
+    return fetch(API, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(r){
+      return r.json().catch(function(){ return {error:'서버 응답을 읽지 못했습니다'}; })
+        .then(function(j){
+          if(!r.ok){
+            if(r.status === 401){ logout(true); }
+            throw new Error(j.error || ('오류 ' + r.status));
+          }
+          return j;
+        });
+    });
+  }
+
+  function changed(){
+    var s = store[tab];
+    if(!s || !s.loaded) return false;
+    return JSON.stringify(s.data) !== s.orig;
+  }
+  function refreshSaveBar(){
+    var on = changed();
+    $('savebar').hidden = !on;
+    if(on){
+      var n = { products:'상품', concerts:'공연', fares:'요금 구간' }[tab];
+      $('saveNote').innerHTML = '<b>저장하지 않은 변경</b>이 있습니다 · ' + n;
+    }
+  }
+
+  /* ---------------------------------------------------- 로그인 */
+  function login(){
+    var pw = $('pw').value;
+    if(!pw){ $('loginErr').textContent = '비밀번호를 입력해 주세요.'; return; }
+    $('loginBtn').disabled = true;
+    $('loginBtn').innerHTML = '<span class="spin"></span>확인 중';
+    fetch(API, { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'login', password: pw }) })
+      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+      .then(function(res){
+        if(!res.ok) throw new Error(res.j.error || '로그인에 실패했습니다');
+        token = res.j.token;
+        sessionStorage.setItem('euf_admin_token', token);
+        start();
+      })
+      .catch(function(e){ $('loginErr').textContent = e.message; })
+      .finally(function(){
+        $('loginBtn').disabled = false;
+        $('loginBtn').textContent = '로그인';
+      });
+  }
+
+  function logout(expired){
+    token = '';
+    sessionStorage.removeItem('euf_admin_token');
+    $('app').hidden = true;
+    $('login').style.display = 'flex';
+    $('pw').value = '';
+    $('loginErr').textContent = expired ? '로그인이 만료되었습니다. 다시 로그인해 주세요.' : '';
+  }
+
+  function start(){
+    $('login').style.display = 'none';
+    $('app').hidden = false;
+    loadTab('products');
+  }
+
+  /* ---------------------------------------------------- 탭 */
+  function switchTab(name){
+    if(changed() && !confirm('저장하지 않은 변경이 있습니다. 그래도 이동할까요?')) return;
+    if(changed()){ store[tab].data = JSON.parse(store[tab].orig); }
+    tab = name;
+    Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function(b){
+      b.classList.toggle('on', b.dataset.tab === name);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.panel'), function(p){
+      p.classList.toggle('on', p.id === 'p-' + name);
+    });
+    refreshSaveBar();
+    if(name !== 'deploy') loadTab(name);
+  }
+
+  function loadTab(name){
+    var s = store[name];
+    if(!s) return;
+    if(s.loaded){ render(name); refreshSaveBar(); return; }
+    api({ action:'load', file:name })
+      .then(function(j){
+        s.data = j.items || [];
+        s.orig = JSON.stringify(s.data);
+        s.sha = j.sha || null;
+        s.loaded = true;
+        render(name);
+        refreshSaveBar();
+      })
+      .catch(function(e){ toast(e.message, true); });
+  }
+
+  /* ---------------------------------------------------- 여행상품 */
+  function render(name){
+    if(name === 'products') renderProducts();
+    if(name === 'concerts') renderConcerts();
+    if(name === 'fares') renderFares();
+  }
+
+  function renderProducts(){
+    var list = store.products.data || [];
+    var sel = $('prodFilter');
+    if(sel.options.length <= 1){
+      var regions = {};
+      list.forEach(function(p){ if(p.region) regions[p.region] = 1; });
+      Object.keys(regions).sort().forEach(function(r){
+        var o = document.createElement('option'); o.value = r; o.textContent = r; sel.appendChild(o);
+      });
+    }
+    var q = $('prodSearch').value.trim().toLowerCase();
+    var reg = sel.value;
+    var orig = JSON.parse(store.products.orig || '[]');
+
+    var rows = ['<div class="row head"><div>상품명</div><div class="m hide-s">요금</div>' +
+                '<div class="m hide-s">기간</div><div class="m">지역</div></div>'];
+    var shown = 0;
+    list.forEach(function(p, i){
+      if(reg && p.region !== reg) return;
+      if(q && (String(p.title) + p.id + p.region + p.summary).toLowerCase().indexOf(q) === -1) return;
+      shown++;
+      var dirty = JSON.stringify(p) !== JSON.stringify(orig[i]);
+      rows.push('<div class="row" data-i="' + i + '">' +
+        '<div class="t">' + (dirty ? '<span class="edited"></span>' : '') + esc(p.title) +
+          '<em>' + esc(p.id) + '</em></div>' +
+        '<div class="m hide-s">' + esc(p.price) + '</div>' +
+        '<div class="m hide-s">' + esc(p.days) + '</div>' +
+        '<div class="m">' + esc(p.region) + '</div></div>');
+    });
+    $('prodRows').innerHTML = rows.length > 1 ? rows.join('') : '<div class="empty">조건에 맞는 상품이 없습니다.</div>';
+    $('prodCount').textContent = shown + ' / ' + list.length + '개';
+  }
+
+  /* 편집 폼 정의 — [키, 라벨, 종류, 도움말] */
+  var FIELDS = [
+    ['title',    '상품명',        'text'],
+    ['price',    '요금',          'text', '예: 1인 80유로 (4인 이상 출발 기준)'],
+    ['days',     '기간',          'text', '예: 당일 (09:00~17:00)'],
+    ['region',   '지역 · 분류',   'text'],
+    ['minPeople','최소 인원',     'number'],
+    ['maxPeople','최대 인원',     'number'],
+    ['tags',     '태그',          'lines', '한 줄에 하나씩'],
+    ['cats',     '카테고리 코드', 'lines', '한 줄에 하나씩 (spain, transfer 등)'],
+    ['summary',  '요약',          'area',  '목록 카드에 보이는 한두 문장'],
+    ['link',     '연결 주소',     'text'],
+    ['ctaLabel', '버튼 문구',     'text'],
+    ['downloadUrl','일정표 PDF',  'text', '예: /docs/xxx-itinerary.pdf'],
+    ['youtubeUrl','유튜브 주소',  'text'],
+    ['isNew',    'NEW 배지 표시', 'bool'],
+    ['detail.lead',        '상세 머리말',  'area'],
+    ['detail.duration',    '상세 기간',    'text'],
+    ['detail.highlights',  '하이라이트',   'lines', '한 줄에 하나씩'],
+    ['detail.includes',    '포함 사항',    'lines', '한 줄에 하나씩'],
+    ['detail.excludes',    '불포함 사항',  'lines', '한 줄에 하나씩'],
+    ['detail.description', '상세 내용 (HTML)', 'code', '일정표 전체입니다. 태그 구조를 깨지 않도록 조심해 주세요.']
+  ];
+
+  function getv(o, path){
+    return path.split('.').reduce(function(x,k){ return (x==null?undefined:x[k]); }, o);
+  }
+  function setv(o, path, val){
+    var ks = path.split('.'), t = o;
+    for(var i=0;i<ks.length-1;i++){ if(t[ks[i]]==null) t[ks[i]] = {}; t = t[ks[i]]; }
+    t[ks[ks.length-1]] = val;
+  }
+
+  function openProduct(i){
+    editingIndex = i;
+    var p = store.products.data[i];
+    $('prodList').hidden = true;
+    $('prodEditor').hidden = false;
+    $('edTitle').textContent = p.title || '(제목 없음)';
+    $('edId').textContent = p.id;
+
+    var html = FIELDS.map(function(f){
+      var key = f[0], label = f[1], kind = f[2], hint = f[3] || '';
+      var v = getv(p, key);
+      var full = (kind === 'area' || kind === 'code' || kind === 'lines') ? ' full' : '';
+      var body;
+      if(kind === 'bool'){
+        body = '<label class="chk"><input type="checkbox" data-k="' + key + '" data-kind="bool"' +
+               (v ? ' checked' : '') + '> 표시함</label>';
+      } else if(kind === 'lines'){
+        body = '<textarea data-k="' + key + '" data-kind="lines">' +
+               esc((Array.isArray(v) ? v : []).join('\n')) + '</textarea>';
+      } else if(kind === 'area'){
+        body = '<textarea data-k="' + key + '" data-kind="text">' + esc(v) + '</textarea>';
+      } else if(kind === 'code'){
+        body = '<textarea class="code" data-k="' + key + '" data-kind="text">' + esc(v) + '</textarea>';
+      } else {
+        body = '<input type="' + (kind === 'number' ? 'number' : 'text') + '" data-k="' + key +
+               '" data-kind="' + kind + '" value="' + esc(v) + '">';
+      }
+      return '<div class="f' + full + '"><label>' + esc(label) +
+             (hint ? ' <em>· ' + esc(hint) + '</em>' : '') + '</label>' + body + '</div>';
+    }).join('');
+    $('edFields').innerHTML = html;
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+
+  function collectProduct(){
+    if(editingIndex < 0) return;
+    var p = store.products.data[editingIndex];
+    Array.prototype.forEach.call($('edFields').querySelectorAll('[data-k]'), function(el){
+      var k = el.dataset.k, kind = el.dataset.kind, v;
+      if(kind === 'bool') v = el.checked;
+      else if(kind === 'lines') v = el.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+      else if(kind === 'number') v = el.value === '' ? undefined : Number(el.value);
+      else v = el.value;
+      setv(p, k, v);
+    });
+    refreshSaveBar();
+  }
+
+  /* ---------------------------------------------------- 공연 일정 */
+  var CON = [
+    ['date','date'], ['time','time'], ['city','text'], ['venue','text'],
+    ['title','text'], ['genre','text'], ['price','text'], ['link','text']
+  ];
+
+  function renderConcerts(){
+    var list = store.concerts.data || [];
+    list.sort(function(a,b){ return String(a.date||'').localeCompare(String(b.date||'')); });
+    $('conRows').innerHTML = list.map(function(c, i){
+      return '<tr>' + CON.map(function(f){
+        return '<td><input type="' + f[1] + '" data-r="' + i + '" data-k="' + f[0] +
+               '" value="' + esc(c[f[0]]) + '"></td>';
+      }).join('') + '<td class="act"><button type="button" class="icon-btn" data-del="' + i + '">✕</button></td></tr>';
+    }).join('') || '<tr><td colspan="9"><div class="empty">등록된 공연이 없습니다. 위 버튼으로 추가해 주세요.</div></td></tr>';
+    $('conCount').textContent = list.length + '건';
+  }
+
+  /* ---------------------------------------------------- 교통 요금 */
+  var FARE = [
+    ['group','text'], ['route','text'], ['km','number'],
+    ['p23','number'], ['p46','number'], ['p710','number'], ['note','text']
+  ];
+
+  function renderFares(){
+    var list = store.fares.data || [];
+    $('fareRows').innerHTML = list.map(function(r, i){
+      return '<tr>' + FARE.map(function(f){
+        return '<td><input type="' + f[1] + '" data-r="' + i + '" data-k="' + f[0] +
+               '" value="' + esc(r[f[0]]) + '"></td>';
+      }).join('') + '<td class="act"><button type="button" class="icon-btn" data-del="' + i + '">✕</button></td></tr>';
+    }).join('') || '<tr><td colspan="8"><div class="empty">등록된 구간이 없습니다.</div></td></tr>';
+    $('fareCount').textContent = list.length + '개 구간';
+  }
+
+  /* 표(공연·요금) 입력 반영 */
+  function bindTable(tbodyId, fileKey, defs){
+    var el = $(tbodyId);
+    el.addEventListener('input', function(e){
+      var t = e.target;
+      if(!t.dataset || t.dataset.r === undefined) return;
+      var row = store[fileKey].data[Number(t.dataset.r)];
+      var def = defs.filter(function(d){ return d[0] === t.dataset.k; })[0];
+      row[t.dataset.k] = (def && def[1] === 'number')
+        ? (t.value === '' ? '' : Number(t.value))
+        : t.value;
+      refreshSaveBar();
+    });
+    el.addEventListener('click', function(e){
+      var b = e.target.closest('[data-del]');
+      if(!b) return;
+      if(!confirm('이 줄을 지울까요?')) return;
+      store[fileKey].data.splice(Number(b.dataset.del), 1);
+      render(fileKey);
+      refreshSaveBar();
+    });
+  }
+
+  /* ---------------------------------------------------- 저장 · 배포 */
+  function save(){
+    if(tab === 'products') collectProduct();
+    var s = store[tab];
+    if(!changed()){ toast('바뀐 내용이 없습니다.'); return; }
+    var btn = $('saveBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span>저장 중';
+    api({ action:'save', file:tab, items:s.data, sha:s.sha })
+      .then(function(j){
+        s.orig = JSON.stringify(s.data);
+        s.sha = j.sha || s.sha;
+        refreshSaveBar();
+        if(tab === 'products') renderProducts();
+        toast(j.message + (j.commit ? ' (' + j.commit + ')' : ''));
+      })
+      .catch(function(e){ toast(e.message, true); })
+      .finally(function(){ btn.disabled = false; btn.textContent = '저장하고 배포'; });
+  }
+
+  function revert(){
+    if(!confirm('저장하지 않은 변경을 모두 되돌릴까요?')) return;
+    var s = store[tab];
+    s.data = JSON.parse(s.orig);
+    if(tab === 'products'){ $('prodEditor').hidden = true; $('prodList').hidden = false; editingIndex = -1; }
+    render(tab);
+    refreshSaveBar();
+    toast('되돌렸습니다.');
+  }
+
+  function history(){
+    $('histRows').innerHTML = '<div class="empty">불러오는 중…</div>';
+    api({ action:'history' })
+      .then(function(j){
+        $('histRows').innerHTML = (j.commits || []).map(function(c){
+          var d = new Date(c.date);
+          var when = isNaN(d) ? '' : (d.getMonth()+1) + '월 ' + d.getDate() + '일 ' +
+            String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+          return '<div class="commit"><code>' + esc(c.sha) + '</code>' +
+                 '<div class="msg">' + esc(c.message) + '</div>' +
+                 '<div class="when">' + esc(when) + '</div></div>';
+        }).join('') || '<div class="empty">이력이 없습니다.</div>';
+      })
+      .catch(function(e){ $('histRows').innerHTML = '<div class="empty">' + esc(e.message) + '</div>'; });
+  }
+
+  function ping(){
+    var b = $('pingBtn');
+    b.disabled = true; b.innerHTML = '<span class="spin"></span>확인 중';
+    $('pingRows').innerHTML = '';
+    api({ action:'ping' })
+      .then(function(j){
+        var d = j.diag || {};
+        $('pingRows').innerHTML = '<div class="commits">' + Object.keys(d).map(function(k){
+          var v = String(d[k]);
+          var bad = /실패|없음 —|있음 —|알 수 없음/.test(v);
+          return '<div class="commit"><code style="flex:0 0 92px;">' + esc(k) + '</code>' +
+                 '<div class="msg"' + (bad ? ' style="color:var(--danger);"' : '') + '>' + esc(v) + '</div></div>';
+        }).join('') + '</div>';
+      })
+      .catch(function(e){ $('pingRows').innerHTML = '<div class="empty">' + esc(e.message) + '</div>'; })
+      .finally(function(){ b.disabled = false; b.textContent = '진단하기'; });
+  }
+
+  function deploy(){
+    var b = $('deployBtn');
+    b.disabled = true; b.innerHTML = '<span class="spin"></span>요청 중';
+    api({ action:'deploy' })
+      .then(function(j){ toast(j.message); })
+      .catch(function(e){ toast(e.message, true); })
+      .finally(function(){ b.disabled = false; b.textContent = '지금 다시 배포하기'; });
+  }
+
+  /* ---------------------------------------------------- 연결 */
+  $('loginBtn').addEventListener('click', login);
+  $('pw').addEventListener('keydown', function(e){ if(e.key === 'Enter') login(); });
+  $('logoutBtn').addEventListener('click', function(){
+    if(changed() && !confirm('저장하지 않은 변경이 있습니다. 로그아웃할까요?')) return;
+    logout(false);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function(b){
+    b.addEventListener('click', function(){ switchTab(b.dataset.tab); });
+  });
+
+  $('prodSearch').addEventListener('input', renderProducts);
+  $('prodFilter').addEventListener('change', renderProducts);
+  $('prodRows').addEventListener('click', function(e){
+    var r = e.target.closest('.row[data-i]');
+    if(r) openProduct(Number(r.dataset.i));
+  });
+  $('edBack').addEventListener('click', function(){
+    collectProduct();
+    $('prodEditor').hidden = true;
+    $('prodList').hidden = false;
+    editingIndex = -1;
+    renderProducts();
+  });
+  $('edFields').addEventListener('input', collectProduct);
+
+  $('addConcert').addEventListener('click', function(){
+    store.concerts.data.unshift({ date:'', time:'', city:'', venue:'', title:'', genre:'', price:'', link:'' });
+    renderConcerts(); refreshSaveBar();
+  });
+  $('addFare').addEventListener('click', function(){
+    store.fares.data.push({ group:'', route:'', km:'', p23:'', p46:'', p710:'', note:'' });
+    renderFares(); refreshSaveBar();
+  });
+  bindTable('conRows', 'concerts', CON);
+  bindTable('fareRows', 'fares', FARE);
+
+  $('saveBtn').addEventListener('click', save);
+  $('revertBtn').addEventListener('click', revert);
+  $('histBtn').addEventListener('click', history);
+  $('pingBtn').addEventListener('click', ping);
+  $('deployBtn').addEventListener('click', deploy);
+
+  window.addEventListener('beforeunload', function(e){
+    if(changed()){ e.preventDefault(); e.returnValue = ''; }
+  });
+
+  /* 이미 로그인해 둔 상태면 바로 들어갑니다 */
+  if(token) start();
+})();
+</script>
+</body>
+</html>
