@@ -183,6 +183,67 @@
     .row{ grid-template-columns:1fr 100px; }
     .row .m.hide-s{ display:none; }
   }
+
+  /* ---------- 쓰레드 광고 ---------- */
+  .th-status{ display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:16px 18px; border-radius:14px; border:1.5px solid var(--line); background:#FAF9FE; }
+  .th-dot{ width:10px; height:10px; border-radius:50%; background:var(--line); flex:0 0 10px; }
+  .th-dot.on{ background:#0E9E8B; } .th-dot.off{ background:var(--danger); }
+  .th-dot.warn{ background:var(--orange); }
+  .th-who{ font-size:14px; font-weight:800; color:var(--navy); }
+  .th-who em{ display:block; font-style:normal; font-size:12px; font-weight:600;
+    color:var(--muted); margin-top:3px; }
+  .th-life{ margin-left:auto; font-size:12.5px; font-weight:700; color:var(--muted); text-align:right; }
+  .th-life b{ display:block; font-size:19px; font-family:'Kanit'; font-style:italic;
+    color:var(--navy); }
+  .th-life b.warn{ color:var(--orange); }
+
+  .th-draft{ border:1.5px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px;
+    background:#fff; }
+  .th-draft.done{ border-color:#B7ECDE; background:#F6FDFB; }
+  .th-head{ display:flex; align-items:center; gap:9px; margin-bottom:10px; flex-wrap:wrap; }
+  .th-kind{ padding:3px 10px; border-radius:999px; font-size:10.5px; font-weight:800;
+    letter-spacing:.03em; background:#F5F3FE; color:var(--violet); }
+  .th-kind.con{ background:var(--wash-pink,#FDECF3); color:var(--pink); }
+  .th-kind.mov{ background:#E7F8F5; color:#0E9E8B; }
+  .th-kind.mat{ background:#FFF2E6; color:#C2560A; }
+  .th-src{ font-size:11.5px; font-weight:600; color:var(--muted);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .th-len{ margin-left:auto; font-size:11.5px; font-weight:700; color:var(--muted);
+    font-variant-numeric:tabular-nums; }
+  .th-len.over{ color:var(--danger); }
+  .th-draft textarea{ width:100%; min-height:150px; padding:12px 14px; border:2px solid var(--line);
+    border-radius:11px; font-family:inherit; font-size:13px; line-height:1.75; resize:vertical;
+    outline:none; color:var(--ink); background:#fff; }
+  .th-draft textarea:focus{ border-color:var(--violet); }
+  .th-acts{ display:flex; gap:8px; margin-top:11px; flex-wrap:wrap; align-items:center; }
+  .th-ok{ font-size:12.5px; font-weight:800; color:#0B7A6A; }
+  .th-ok a{ color:var(--violet); }
+  .th-empty{ padding:32px 20px; text-align:center; font-size:13px; font-weight:600; color:var(--muted); }
+
+  /* ---------- 페이지 갱신 ---------- */
+  .pg-top{ display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap;
+    padding-bottom:16px; margin-bottom:16px; border-bottom:1.5px solid var(--line); }
+  .pg-name{ font-size:15px; font-weight:800; color:var(--navy); }
+  .pg-name em{ display:block; font-style:normal; font-size:12px; font-weight:600;
+    color:var(--muted); margin-top:4px; }
+  .pg-live{ margin-left:auto; display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; color:var(--muted); }
+  .pg-live .dot{ width:9px; height:9px; border-radius:50%; background:var(--line); }
+  .pg-live .dot.on{ background:#0E9E8B; } .pg-live .dot.off{ background:var(--danger); }
+  .pg-live .dot.warn{ background:var(--orange); }
+  .pg-nums{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px;
+    margin-bottom:16px; }
+  .pg-num{ border:1.5px solid var(--line); border-radius:12px; padding:13px 15px; background:#FAF9FE; }
+  .pg-num b{ display:block; font-family:'Kanit'; font-style:italic; font-weight:800;
+    font-size:22px; color:var(--navy); line-height:1; font-variant-numeric:tabular-nums; }
+  .pg-num b.zero{ color:var(--orange); }
+  .pg-num span{ display:block; margin-top:7px; font-size:11.5px; font-weight:700; color:var(--muted); }
+  .pg-log{ margin-top:14px; font-size:12.5px; font-weight:600; line-height:1.8;
+    background:var(--paper); border:1.5px solid var(--line); border-radius:12px;
+    padding:13px 15px; color:var(--muted); white-space:pre-wrap; word-break:break-word; }
+  .pg-log.bad{ background:#FDECF3; border-color:#F6D3DE; color:#9A1240; }
+  .pg-log.good{ background:#E7F9F5; border-color:#B7ECDE; color:#0A6E5D; }
 </style>
 </head>
 <body>
@@ -213,6 +274,8 @@
     <button type="button" data-tab="concerts">공연 일정</button>
     <button type="button" data-tab="fares">교통 요금</button>
     <button type="button" data-tab="costsheets">원가표 · 마진</button>
+    <button type="button" data-tab="threads">쓰레드 광고</button>
+    <button type="button" data-tab="pages">페이지 갱신</button>
     <button type="button" data-tab="deploy">배포 · 이력</button>
   </div>
 
@@ -406,6 +469,107 @@
       </div>
     </div>
 
+    <!-- ---------- 쓰레드 광고 ---------- -->
+    <div class="panel" id="p-threads">
+      <div class="card">
+        <h2>쓰레드 연결</h2>
+        <div class="sub">
+          이 기능은 <b>다른 탭과 완전히 분리</b>되어 있습니다. GitHub 토큰을 쓰지 않고,
+          발행 이력도 저장소가 아니라 쓰레드에서 직접 읽어옵니다.
+          여기가 멈춰도 사이트와 다른 탭은 멀쩡합니다.
+        </div>
+        <div class="th-status" id="thStatus">
+          <span class="th-dot"></span>
+          <span class="th-who">확인 전<em>아래 버튼을 눌러 주세요</em></span>
+        </div>
+        <div class="bar" style="margin:16px 0 0;">
+          <button type="button" class="btn dark" id="thCheck">연결 확인</button>
+          <span class="count">쓰레드 토큰은 60일마다 새로 발급해야 합니다.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>광고 초안 만들기</h2>
+        <div class="sub">
+          사이트에 올라간 상품 · 공연 · 요금 · 경기 정보를 읽어 문장 틀에 끼워 넣습니다.
+          만들어진 글은 <b>고쳐서 올리실 수 있고</b>, 발행 버튼을 눌러야 실제로 올라갑니다.
+        </div>
+        <div class="bar">
+          <label class="chk"><input type="checkbox" id="thUseProd" checked> 여행상품</label>
+          <label class="chk"><input type="checkbox" id="thUseCon" checked> 공연 일정</label>
+          <label class="chk"><input type="checkbox" id="thUseMov" checked> 교통 예약</label>
+          <label class="chk"><input type="checkbox" id="thUseMat" checked> 경기 일정</label>
+        </div>
+        <div class="bar">
+          <span class="count">몇 개</span>
+          <select id="thCount" style="padding:10px 13px;border:2px solid var(--line);border-radius:10px;font-family:inherit;font-size:13px;">
+            <option>3</option><option selected>5</option><option>8</option><option>12</option>
+          </select>
+          <button type="button" class="btn dark" id="thMake">초안 만들기</button>
+          <button type="button" class="btn sm" id="thClear">전부 지우기</button>
+          <span class="count" id="thCount2"></span>
+        </div>
+      </div>
+
+      <div id="thDrafts"></div>
+
+      <div class="card">
+        <h2>최근 올린 글</h2>
+        <div class="sub">쓰레드 계정에서 직접 가져옵니다.</div>
+        <div class="bar"><button type="button" class="btn sm" id="thHist">불러오기</button></div>
+        <div class="commits" id="thHistRows"><div class="th-empty">불러오기를 눌러 주세요.</div></div>
+      </div>
+    </div>
+
+    <!-- ---------- 페이지 갱신 ---------- -->
+    <div class="panel" id="p-pages">
+      <div class="card">
+        <h2>공연 페이지</h2>
+        <div class="sub">
+          <b>toureplus.co.kr/concert</b> — 공연 일정 탭에서 저장하면 바로 반영됩니다.
+          지난 공연은 화면에서 자동으로 사라지지만, 목록에서 완전히 지우고 싶으실 때 아래 버튼을 쓰세요.
+        </div>
+        <div class="pg-top">
+          <div class="pg-name">공연 일정<em>data/concerts.json → concert.html</em></div>
+          <div class="pg-live" id="pgConLive"><span class="dot"></span>확인 전</div>
+        </div>
+        <div class="pg-nums">
+          <div class="pg-num"><b id="pgConAll">—</b><span>등록된 공연</span></div>
+          <div class="pg-num"><b id="pgConNext">—</b><span>예정된 공연</span></div>
+          <div class="pg-num"><b id="pgConPast">—</b><span>지난 공연</span></div>
+        </div>
+        <div class="bar" style="margin:0;">
+          <button type="button" class="btn dark" id="pgConCheck">지금 확인</button>
+          <button type="button" class="btn" id="pgConClean">지난 공연 정리</button>
+          <a class="btn sm" href="https://toureplus.co.kr/concert" target="_blank" rel="noopener">페이지 열기 ↗</a>
+        </div>
+        <div class="pg-log" id="pgConLog" hidden></div>
+      </div>
+
+      <div class="card">
+        <h2>경기 페이지</h2>
+        <div class="sub">
+          <b>toureplus.co.kr/matchday</b> — 라리가 일정을 football-data.org 에서 받아 옵니다.
+          정해진 시각에 자동으로 돌지만, 지금 바로 받아오고 싶으실 때 아래 버튼을 쓰세요.
+        </div>
+        <div class="pg-top">
+          <div class="pg-name">경기 일정<em>football-data.org → matchday.html</em></div>
+          <div class="pg-live" id="pgMatLive"><span class="dot"></span>확인 전</div>
+        </div>
+        <div class="pg-nums">
+          <div class="pg-num"><b id="pgMatAll">—</b><span>등록된 경기</span></div>
+          <div class="pg-num"><b id="pgMatNext">—</b><span>남은 경기</span></div>
+          <div class="pg-num"><b id="pgMatDate">—</b><span>가장 가까운 경기</span></div>
+        </div>
+        <div class="bar" style="margin:0;">
+          <button type="button" class="btn dark" id="pgMatCheck">지금 확인</button>
+          <button type="button" class="btn primary" id="pgMatRun">지금 갱신하기</button>
+          <a class="btn sm" href="https://toureplus.co.kr/matchday" target="_blank" rel="noopener">페이지 열기 ↗</a>
+        </div>
+        <div class="pg-log" id="pgMatLog" hidden></div>
+      </div>
+    </div>
+
     <!-- ---------- 배포 · 이력 ---------- -->
     <div class="panel" id="p-deploy">
       <div class="card">
@@ -562,7 +726,7 @@
 
   function loadTab(name){
     var s = store[name];
-    if(!s) return;
+    if(!s){ render(name); return; }   /* 쓰레드처럼 저장소를 안 쓰는 탭 */
     if(s.loaded){ render(name); refreshSaveBar(); return; }
     api({ action:'load', file:name })
       .then(function(j){
@@ -582,6 +746,8 @@
     if(name === 'concerts') renderConcerts();
     if(name === 'fares') renderFares();
     if(name === 'costsheets') renderCost();
+    if(name === 'threads') renderThreads();
+    if(name === 'pages') renderPages();
   }
 
   function renderProducts(){
@@ -1021,6 +1187,407 @@
     renderSaved();
   }
 
+  /* ---------------------------------------------------- 쓰레드 광고 */
+
+  var THAPI = '/.netlify/functions/threads-api';
+  var SITE = 'https://toureplus.co.kr';
+  var drafts = [];
+  var thData = { concerts:null, fares:null, matches:null };
+
+  /* 쓰레드 전용 호출 — admin-api 와 다른 함수를 씁니다 */
+  function thCall(payload){
+    payload.token = token;
+    return fetch(THAPI, {
+      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    }).then(function(r){
+      return r.json().catch(function(){ return {error:'서버 응답을 읽지 못했습니다'}; })
+        .then(function(j){
+          if(!r.ok){
+            if(r.status === 401 && !j.notConnected) logout(true);
+            var e = new Error(j.detail || j.error || ('오류 ' + r.status));
+            e.notConnected = j.notConnected;
+            throw e;
+          }
+          return j;
+        });
+    });
+  }
+
+  /* ----- 문장 틀 ----- */
+  /* {} 안의 이름이 실제 값으로 바뀝니다. 한 소재마다 여러 틀을 두고 돌아가며 씁니다. */
+  var TPL = {
+    product: [
+      '{title}\n\n{summary}\n\n{hi}\n\n{price}\n{days}\n\n자세히 보기 → {url}\n\n{tags}',
+      '{summary}\n\n{title}\n{days} · {price}\n\n{hi}\n\n일정과 요금 → {url}\n\n{tags}',
+      '{hi}\n\n{title}\n{price} · {days}\n\n예약 문의 → {url}\n\n{tags}'
+    ],
+    concert: [
+      '{date} {city}\n{title}\n\n{venue}에서 열립니다.{time}\n{price}\n\n여행 일정에 공연 한 편을 더해 보세요.\n좌석 문의 → {url}\n\n#스페인여행 #{genre} #유포리아투어',
+      '[{genre}] {title}\n\n{date} · {city} {venue}{time}\n{price}\n\n관람을 원하시면 미리 말씀해 주세요. 좌석과 이동까지 함께 준비해 드립니다.\n{url}\n\n#스페인공연 #유포리아투어'
+    ],
+    move: [
+      'EUFORIA MOVE — 스페인 어디에서 어디로든\n\n공항 픽업부터 도시 간 이동, 하루 전세 차량까지 현지에서 직접 운영합니다.\n한국어로 미리 예약하시면 낯선 곳에서 차를 잡느라 시간을 쓰지 않으셔도 됩니다.\n\n· 공항 픽업 · 샌딩\n· 도시 간 이동\n· 시간제 대절\n· 근교 당일 투어\n\n이용일 7일 전까지 신청해 주세요.\n{url}/move\n\n#스페인여행 #마드리드 #바르셀로나 #유포리아투어',
+      '스페인 도착하시는 날, 공항에서 헤매지 않으셔도 됩니다.\n\n도착 게이트에서 이름표를 들고 기다립니다. 항공편이 지연되어도 도착 시간을 확인해 맞춰 대기합니다.\n\n공항 픽업 · 도시 간 이동 · 시간제 대절\n한국어 상담으로 미리 예약하세요.\n\n{url}/move\n\n#스페인여행 #공항픽업 #유포리아투어'
+    ],
+    match: [
+      '{date} {home} vs {away}\n{venue}\n\n라리가 직관을 여행 일정에 더할 수 있습니다.\n좌석 확보와 경기장 이동까지 함께 준비해 드립니다.\n\n경기 일정 보기 → {url}/matchday\n\n#라리가 #스페인축구 #{tag} #유포리아투어',
+      '스페인까지 가셨는데 경기 한 번은 보셔야죠.\n\n{date} · {home} vs {away}\n{venue}\n\n좌석 문의와 경기장 이동 → {url}/matchday\n\n#라리가 #직관 #유포리아투어'
+    ]
+  };
+
+  function pick(arr, i){ return arr[i % arr.length]; }
+  function fill(t, v){
+    return t.replace(/\{(\w+)\}/g, function(_, k){ return v[k] == null ? '' : String(v[k]); })
+            .replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  /* ----- 소재별 초안 만들기 ----- */
+  function draftsFromProducts(n){
+    if(!CATALOG) return [];
+    /* 요금이 적힌 상품만, 순서를 섞어서 */
+    var list = CATALOG.filter(function(p){ return p.price && p.price.indexOf('문의') === -1; });
+    for(var i = list.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = list[i]; list[i] = list[j]; list[j] = t;
+    }
+    return list.slice(0, n).map(function(p, i){
+      var hi = (p.detail && p.detail.highlights || p.tags || []).slice(0, 3)
+                 .map(function(h){ return '· ' + h; }).join('\n');
+      return {
+        kind:'product', kindLabel:'여행상품', cls:'',
+        source: p.title,
+        text: fill(pick(TPL.product, i), {
+          title: p.title, summary: p.summary || '', hi: hi,
+          price: p.price, days: p.days, region: p.region,
+          url: SITE + '/product?id=' + p.id,
+          tags: (p.tags || []).slice(0, 3).map(function(x){ return '#' + String(x).replace(/\s+/g,''); }).join(' ')
+                 + ' #유포리아투어'
+        })
+      };
+    });
+  }
+
+  function draftsFromConcerts(n){
+    var list = (thData.concerts || []).filter(function(c){
+      return c && c.date && new Date(c.date + 'T00:00:00') >= new Date(new Date().toDateString());
+    }).sort(function(a,b){ return a.date.localeCompare(b.date); });
+    return list.slice(0, n).map(function(c, i){
+      var d = new Date(c.date + 'T00:00:00');
+      return {
+        kind:'concert', kindLabel:'공연', cls:'con',
+        source: c.title + ' · ' + c.date,
+        text: fill(pick(TPL.concert, i), {
+          date: (d.getMonth()+1) + '월 ' + d.getDate() + '일',
+          city: c.city || '', venue: c.venue || '', title: c.title || '',
+          genre: String(c.genre || '공연').replace(/\s+/g,''),
+          time: c.time ? ' ' + c.time + ' 시작.' : '',
+          price: c.price ? c.price : '',
+          url: c.link || (SITE + '/concert')
+        })
+      };
+    });
+  }
+
+  function draftsFromMove(n){
+    return TPL.move.slice(0, Math.max(1, Math.min(n, TPL.move.length))).map(function(t){
+      return { kind:'move', kindLabel:'교통 예약', cls:'mov',
+               source:'EUFORIA MOVE', text: fill(t, { url: SITE }) };
+    });
+  }
+
+  function draftsFromMatches(n){
+    var list = (thData.matches || []).slice(0, n);
+    return list.map(function(m, i){
+      var d = new Date(String(m.date || '').slice(0,10) + 'T00:00:00');
+      var when = isNaN(d) ? String(m.date || '')
+                          : (d.getMonth()+1) + '월 ' + d.getDate() + '일';
+      return {
+        kind:'match', kindLabel:'경기', cls:'mat',
+        source: m.home + ' vs ' + m.away,
+        text: fill(pick(TPL.match, i), {
+          date: when, home: m.home, away: m.away, venue: m.venue || '',
+          tag: String(m.home).replace(/\s+/g,''), url: SITE
+        })
+      };
+    });
+  }
+
+  /* 공연·경기 데이터는 사이트에서 바로 읽습니다 (GitHub 불필요) */
+  function loadThreadSources(){
+    var jobs = [];
+    if(thData.concerts === null){
+      jobs.push(fetch('/data/concerts.json', {cache:'no-store'})
+        .then(function(r){ return r.ok ? r.json() : []; })
+        .then(function(j){ thData.concerts = Array.isArray(j) ? j : []; })
+        .catch(function(){ thData.concerts = []; }));
+    }
+    if(thData.matches === null){
+      jobs.push(fetch('/matchday.html', {cache:'no-store'})
+        .then(function(r){ return r.ok ? r.text() : ''; })
+        .then(function(html){
+          /* matchday.html 안의 MATCHES 배열을 그대로 읽어옵니다 */
+          var m = /const\s+MATCHES\s*=\s*(\[[\s\S]*?\n\];)/.exec(html);
+          thData.matches = [];
+          if(m){
+            try {
+              var arr = new Function('return ' + m[1].replace(/;$/, ''))();
+              var today = new Date(new Date().toDateString());
+              thData.matches = arr.filter(function(x){
+                var d = new Date(String(x.date || '').slice(0,10) + 'T00:00:00');
+                return !isNaN(d) && d >= today;
+              }).slice(0, 20);
+            } catch(e){ thData.matches = []; }
+          }
+        })
+        .catch(function(){ thData.matches = []; }));
+    }
+    return Promise.all(jobs);
+  }
+
+  function renderDrafts(){
+    var box = $('thDrafts');
+    $('thCount2').textContent = drafts.length ? drafts.length + '개 초안' : '';
+    if(!drafts.length){
+      box.innerHTML = '<div class="card"><div class="th-empty">' +
+        '아직 초안이 없습니다. 위에서 소재를 고르고 “초안 만들기”를 눌러 주세요.</div></div>';
+      return;
+    }
+    box.innerHTML = drafts.map(function(d, i){
+      var len = d.text.length;
+      return '<div class="th-draft' + (d.posted ? ' done' : '') + '" data-d="' + i + '">' +
+        '<div class="th-head">' +
+          '<span class="th-kind ' + d.cls + '">' + esc(d.kindLabel) + '</span>' +
+          '<span class="th-src">' + esc(d.source) + '</span>' +
+          '<span class="th-len' + (len > 500 ? ' over' : '') + '">' + len + ' / 500</span>' +
+        '</div>' +
+        '<textarea data-t="' + i + '"' + (d.posted ? ' readonly' : '') + '>' + esc(d.text) + '</textarea>' +
+        '<div class="th-acts">' +
+          (d.posted
+            ? '<span class="th-ok">✓ 올렸습니다' + (d.url ? ' — <a href="' + esc(d.url) + '" target="_blank" rel="noopener">쓰레드에서 보기 ↗</a>' : '') + '</span>'
+            : '<button type="button" class="btn primary" data-pub="' + i + '">쓰레드에 올리기</button>' +
+              '<button type="button" class="btn sm" data-copy="' + i + '">복사</button>' +
+              '<button type="button" class="btn sm danger" data-del="' + i + '">버리기</button>') +
+        '</div></div>';
+    }).join('');
+  }
+
+  function renderThStatus(s){
+    var box = $('thStatus');
+    if(!s){
+      box.innerHTML = '<span class="th-dot"></span><span class="th-who">확인 전' +
+        '<em>아래 버튼을 눌러 주세요</em></span>';
+      return;
+    }
+    if(s.err){
+      box.innerHTML = '<span class="th-dot off"></span><span class="th-who">연결 안 됨' +
+        '<em>' + esc(s.err) + '</em></span>';
+      return;
+    }
+    var warn = s.tokenWarn;
+    var life = s.tokenDaysLeft === null || s.tokenDaysLeft === undefined
+      ? '<b>—</b>발급일 미입력'
+      : '<b class="' + (warn ? 'warn' : '') + '">' + s.tokenDaysLeft + '일</b>토큰 남음';
+    box.innerHTML = '<span class="th-dot ' + (warn ? 'warn' : 'on') + '"></span>' +
+      '<span class="th-who">@' + esc(s.username) +
+        '<em>' + (s.matchesEnv ? '계정 확인됨' : '⚠ THREADS_USER_ID 가 실제 계정과 다릅니다') + '</em></span>' +
+      '<span class="th-life">' + life + '</span>';
+  }
+
+  /* ---------------------------------------------------- 페이지 갱신 */
+
+  /*
+    두 페이지의 상태는 사이트에 올라간 파일을 그대로 읽어서 확인합니다.
+    GitHub 을 거치지 않으므로 토큰이 막혀 있어도 상태 확인은 됩니다.
+  */
+  function pgLog(id, msg, kind){
+    var el = $(id);
+    el.hidden = !msg;
+    el.textContent = msg || '';
+    el.className = 'pg-log' + (kind ? ' ' + kind : '');
+  }
+  function pgLive(id, state, text){
+    $(id).innerHTML = '<span class="dot ' + state + '"></span>' + esc(text);
+  }
+  function today0(){ return new Date(new Date().toDateString()); }
+
+  /* ----- 공연 페이지 ----- */
+  function pgCheckConcerts(){
+    var b = $('pgConCheck');
+    b.disabled = true; b.innerHTML = '<span class="spin"></span>확인 중';
+    pgLog('pgConLog', '');
+    fetch('/data/concerts.json', { cache:'no-store' })
+      .then(function(r){
+        if(!r.ok) throw new Error('data/concerts.json 을 찾지 못했습니다 (' + r.status + ')');
+        return r.json();
+      })
+      .then(function(list){
+        if(!Array.isArray(list)) throw new Error('공연 파일 형식이 목록이 아닙니다');
+        var t = today0(), next = 0, past = 0, bad = 0;
+        list.forEach(function(c){
+          var d = new Date(String(c && c.date || '') + 'T00:00:00');
+          if(isNaN(d)) { bad++; return; }
+          if(d >= t) next++; else past++;
+        });
+        $('pgConAll').textContent = list.length;
+        $('pgConNext').textContent = next;
+        $('pgConNext').classList.toggle('zero', next === 0);
+        $('pgConPast').textContent = past;
+        thData.concerts = list;    /* 쓰레드 초안에서도 같은 데이터를 씁니다 */
+
+        if(!list.length){
+          pgLive('pgConLive', 'warn', '등록 없음');
+          pgLog('pgConLog', '등록된 공연이 없어 페이지에는 “공연 예약 서비스 준비중” 안내가 나옵니다.', '');
+        } else if(next === 0){
+          pgLive('pgConLive', 'warn', '예정 없음');
+          pgLog('pgConLog', '등록된 ' + list.length + '건이 모두 지난 공연입니다. 페이지에는 아무것도 표시되지 않습니다.', 'bad');
+        } else {
+          pgLive('pgConLive', 'on', '정상');
+          pgLog('pgConLog', '페이지에 ' + next + '건이 월별로 표시되고 있습니다.' +
+            (past ? ' 지난 공연 ' + past + '건은 자동으로 숨겨져 있습니다.' : ''), 'good');
+        }
+        if(bad) pgLog('pgConLog', '날짜 형식이 잘못된 항목이 ' + bad + '건 있습니다. 2026-10-04 형식이어야 합니다.', 'bad');
+      })
+      .catch(function(e){
+        pgLive('pgConLive', 'off', '확인 실패');
+        pgLog('pgConLog', e.message, 'bad');
+      })
+      .finally(function(){ b.disabled = false; b.textContent = '지금 확인'; });
+  }
+
+  function pgCleanConcerts(){
+    var s = store.concerts;
+    if(!s.loaded){
+      /* 공연 목록을 아직 안 불러왔으면 여기서 먼저 불러옵니다 */
+      var b = $('pgConClean');
+      b.disabled = true; b.innerHTML = '<span class="spin"></span>목록 불러오는 중';
+      api({ action:'load', file:'concerts' })
+        .then(function(j){
+          s.data = j.items || [];
+          s.orig = JSON.stringify(s.data);
+          s.sha  = j.sha || null;
+          s.loaded = true;
+          refreshSaveBar();
+          cleanConcertsNow();
+        })
+        .catch(function(e){
+          pgLog('pgConLog', '공연 목록을 불러오지 못했습니다. ' + e.message, 'bad');
+          toast(e.message, true);
+        })
+        .finally(function(){ b.disabled = false; b.textContent = '지난 공연 정리'; });
+      return;
+    }
+    cleanConcertsNow();
+  }
+
+  function cleanConcertsNow(){
+    var s = store.concerts;
+    var t = today0();
+    var keep = (s.data || []).filter(function(c){
+      var d = new Date(String(c && c.date || '') + 'T00:00:00');
+      return isNaN(d) ? true : d >= t;     /* 날짜가 이상한 건 함부로 지우지 않습니다 */
+    });
+    var gone = (s.data || []).length - keep.length;
+    if(!gone){ toast('정리할 지난 공연이 없습니다.'); return; }
+    if(!confirm('지난 공연 ' + gone + '건을 목록에서 지웁니다.\n\n' +
+                '지금 화면에서만 빠지고, 공연 일정 탭에서 “저장하고 배포”를 눌러야 실제로 반영됩니다.\n계속할까요?')) return;
+    s.data = keep;
+    renderConcerts();
+    refreshSaveBar();
+    pgLog('pgConLog', gone + '건을 목록에서 뺐습니다. 공연 일정 탭으로 가서 “저장하고 배포”를 눌러 주세요.', '');
+    toast(gone + '건 정리했습니다. 저장까지 눌러 주세요.');
+  }
+
+  /* ----- 경기 페이지 ----- */
+  function pgCheckMatches(){
+    var b = $('pgMatCheck');
+    b.disabled = true; b.innerHTML = '<span class="spin"></span>확인 중';
+    pgLog('pgMatLog', '');
+    fetch('/matchday.html', { cache:'no-store' })
+      .then(function(r){
+        if(!r.ok) throw new Error('matchday.html 을 읽지 못했습니다 (' + r.status + ')');
+        return r.text();
+      })
+      .then(function(html){
+        var m = /const\s+MATCHES\s*=\s*(\[[\s\S]*?\n\];)/.exec(html);
+        if(!m) throw new Error('matchday.html 에서 경기 목록(MATCHES)을 찾지 못했습니다');
+        var arr = new Function('return ' + m[1].replace(/;$/, ''))();
+        if(!Array.isArray(arr)) throw new Error('경기 목록 형식이 배열이 아닙니다');
+
+        var t = today0(), next = [];
+        arr.forEach(function(x){
+          var d = new Date(String(x && x.date || '').slice(0,10) + 'T00:00:00');
+          if(!isNaN(d) && d >= t) next.push({ d:d, x:x });
+        });
+        next.sort(function(a,b){ return a.d - b.d; });
+        thData.matches = next.map(function(n){ return n.x; }).slice(0, 20);
+
+        $('pgMatAll').textContent = arr.length;
+        $('pgMatNext').textContent = next.length;
+        $('pgMatNext').classList.toggle('zero', next.length === 0);
+        $('pgMatDate').textContent = next.length
+          ? (next[0].d.getMonth()+1) + '월 ' + next[0].d.getDate() + '일' : '—';
+
+        if(!next.length){
+          pgLive('pgMatLive', 'off', '갱신 필요');
+          pgLog('pgMatLog', '남은 경기가 없습니다. 등록된 ' + arr.length +
+            '건이 모두 지난 경기입니다. 아래 “지금 갱신하기”를 눌러 주세요.', 'bad');
+        } else if(next.length < 5){
+          pgLive('pgMatLive', 'warn', '얼마 안 남음');
+          pgLog('pgMatLog', '남은 경기가 ' + next.length + '건뿐입니다. 곧 갱신하시는 게 좋습니다.', '');
+        } else {
+          pgLive('pgMatLive', 'on', '정상');
+          pgLog('pgMatLog', '남은 경기 ' + next.length + '건이 페이지에 표시되고 있습니다.', 'good');
+        }
+      })
+      .catch(function(e){
+        pgLive('pgMatLive', 'off', '확인 실패');
+        pgLog('pgMatLog', e.message, 'bad');
+      })
+      .finally(function(){ b.disabled = false; b.textContent = '지금 확인'; });
+  }
+
+  /*
+    경기 갱신은 기존 update-matches 함수를 그대로 부릅니다.
+    그 함수가 football-data.org 에서 일정을 받아 matchday.html 을 고쳐 커밋합니다.
+  */
+  function pgRunMatches(){
+    if(!confirm('football-data.org 에서 경기 일정을 받아 matchday.html 을 갱신합니다.\n\n' +
+                '1~2분 뒤 사이트에 반영됩니다. 계속할까요?')) return;
+    var b = $('pgMatRun');
+    b.disabled = true; b.innerHTML = '<span class="spin"></span>갱신 중';
+    pgLog('pgMatLog', '경기 일정을 받아오는 중입니다. 30초쯤 걸릴 수 있습니다.', '');
+
+    fetch('/.netlify/functions/update-matches', { method:'POST' })
+      .then(function(r){
+        return r.text().then(function(t){ return { ok:r.ok, status:r.status, body:t }; });
+      })
+      .then(function(res){
+        var body = res.body || '';
+        try { var j = JSON.parse(body); body = j.message || j.error || JSON.stringify(j); } catch(e){}
+
+        if(res.status === 404){
+          pgLog('pgMatLog', 'update-matches 함수를 찾지 못했습니다 (404).\n' +
+            '저장소의 netlify/functions/update-matches.js 가 배포되었는지 확인해 주세요.', 'bad');
+        } else if(!res.ok){
+          pgLog('pgMatLog', '갱신에 실패했습니다 (' + res.status + ')\n' + body.slice(0, 400) +
+            '\n\nBad credentials 가 보이면 GITHUB_TOKEN 문제입니다. 배포 · 이력 탭의 진단하기를 눌러 보세요.', 'bad');
+        } else {
+          pgLog('pgMatLog', '갱신을 요청했습니다.\n' + body.slice(0, 400) +
+            '\n\n1~2분 뒤 “지금 확인”을 눌러 반영됐는지 보세요.', 'good');
+          toast('경기 일정 갱신을 요청했습니다.');
+        }
+      })
+      .catch(function(e){
+        pgLog('pgMatLog', '요청을 보내지 못했습니다 — ' + e.message, 'bad');
+      })
+      .finally(function(){ b.disabled = false; b.textContent = '지금 갱신하기'; });
+  }
+
+  function renderPages(){
+    pgCheckConcerts();
+    pgCheckMatches();
+  }
+
   /* ---------------------------------------------------- 저장 · 배포 */
   function save(){
     if(tab === 'products') collectProduct();
@@ -1257,6 +1824,127 @@
     window.scrollTo({ top:0, behavior:'smooth' });
     toast('원가표를 불러왔습니다.');
   });
+
+  /* ----- 쓰레드 ----- */
+  function renderThreads(){
+    loadProducts();                 /* 상품 목록은 products.js 에서 */
+    loadThreadSources();            /* 공연·경기는 사이트 파일에서 */
+    renderDrafts();
+  }
+
+  $('thCheck').addEventListener('click', function(){
+    var b = $('thCheck');
+    b.disabled = true; b.innerHTML = '<span class="spin"></span>확인 중';
+    thCall({ action:'check' })
+      .then(function(j){
+        renderThStatus(j);
+        if(j.tokenWarn) toast('쓰레드 토큰이 ' + j.tokenDaysLeft + '일 남았습니다. 곧 새로 발급하세요.', true);
+        else toast('쓰레드에 연결되어 있습니다.');
+      })
+      .catch(function(e){ renderThStatus({ err:e.message }); toast(e.message, true); })
+      .finally(function(){ b.disabled = false; b.textContent = '연결 확인'; });
+  });
+
+  $('thMake').addEventListener('click', function(){
+    var n = Number($('thCount').value) || 5;
+    loadThreadSources().then(function(){
+      var pool = [];
+      if($('thUseProd').checked) pool = pool.concat(draftsFromProducts(n));
+      if($('thUseCon').checked)  pool = pool.concat(draftsFromConcerts(n));
+      if($('thUseMov').checked)  pool = pool.concat(draftsFromMove(2));
+      if($('thUseMat').checked)  pool = pool.concat(draftsFromMatches(n));
+
+      if(!pool.length){
+        toast('만들 수 있는 초안이 없습니다. 공연·경기 데이터가 비어 있는지 확인해 주세요.', true);
+        return;
+      }
+      /* 소재가 골고루 섞이도록 */
+      for(var i = pool.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+      }
+      drafts = pool.slice(0, n).concat(drafts.filter(function(d){ return d.posted; }));
+      renderDrafts();
+      toast(Math.min(n, pool.length) + '개 초안을 만들었습니다. 내용을 보시고 올려 주세요.');
+    });
+  });
+
+  $('thClear').addEventListener('click', function(){
+    if(!drafts.length) return;
+    if(!confirm('초안을 전부 지울까요? (이미 올린 글은 쓰레드에 그대로 남습니다)')) return;
+    drafts = [];
+    renderDrafts();
+  });
+
+  $('thDrafts').addEventListener('input', function(e){
+    var t = e.target;
+    if(!t.dataset || t.dataset.t === undefined) return;
+    var i = Number(t.dataset.t);
+    drafts[i].text = t.value;
+    var el = t.closest('.th-draft').querySelector('.th-len');
+    el.textContent = t.value.length + ' / 500';
+    el.classList.toggle('over', t.value.length > 500);
+  });
+
+  $('thDrafts').addEventListener('click', function(e){
+    var pub = e.target.closest('[data-pub]');
+    var del = e.target.closest('[data-del]');
+    var cp  = e.target.closest('[data-copy]');
+
+    if(del){
+      drafts.splice(Number(del.dataset.del), 1);
+      renderDrafts();
+      return;
+    }
+    if(cp){
+      var txt = drafts[Number(cp.dataset.copy)].text;
+      if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ toast('복사했습니다.'); });
+      else toast('복사를 지원하지 않는 브라우저입니다.', true);
+      return;
+    }
+    if(!pub) return;
+
+    var i = Number(pub.dataset.pub);
+    var d = drafts[i];
+    if(d.text.length > 500){ toast('500자를 넘었습니다. 줄여 주세요.', true); return; }
+    if(!confirm('쓰레드에 올립니다. 올린 글은 대쉬보드에서 지울 수 없습니다.\n\n계속할까요?')) return;
+
+    pub.disabled = true; pub.innerHTML = '<span class="spin"></span>올리는 중';
+    thCall({ action:'publish', text:d.text })
+      .then(function(j){
+        d.posted = true;
+        d.url = j.id ? 'https://www.threads.net/@' + (window.__thUser || '') + '/post/' + j.id : '';
+        renderDrafts();
+        toast('쓰레드에 올렸습니다.');
+      })
+      .catch(function(err){
+        toast(err.message, true);
+        pub.disabled = false; pub.textContent = '쓰레드에 올리기';
+      });
+  });
+
+  $('thHist').addEventListener('click', function(){
+    $('thHistRows').innerHTML = '<div class="th-empty">불러오는 중…</div>';
+    thCall({ action:'history', limit:10 })
+      .then(function(j){
+        $('thHistRows').innerHTML = (j.posts || []).map(function(p){
+          var d = new Date(p.at);
+          var when = isNaN(d) ? '' : (d.getMonth()+1) + '월 ' + d.getDate() + '일';
+          return '<div class="commit">' +
+            '<code style="flex:0 0 62px;">' + esc(when) + '</code>' +
+            '<div class="msg" style="font-weight:600;">' + esc(p.text) + '</div>' +
+            (p.url ? '<a class="when" href="' + esc(p.url) + '" target="_blank" rel="noopener" style="color:var(--violet);">보기 ↗</a>' : '') +
+          '</div>';
+        }).join('') || '<div class="th-empty">아직 올린 글이 없습니다.</div>';
+      })
+      .catch(function(e){ $('thHistRows').innerHTML = '<div class="th-empty">' + esc(e.message) + '</div>'; });
+  });
+
+  /* ----- 페이지 갱신 ----- */
+  $('pgConCheck').addEventListener('click', pgCheckConcerts);
+  $('pgConClean').addEventListener('click', pgCleanConcerts);
+  $('pgMatCheck').addEventListener('click', pgCheckMatches);
+  $('pgMatRun').addEventListener('click', pgRunMatches);
 
   $('saveBtn').addEventListener('click', save);
   $('revertBtn').addEventListener('click', revert);
