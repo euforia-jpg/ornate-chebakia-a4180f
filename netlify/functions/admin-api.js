@@ -126,6 +126,7 @@ async function writeFile(path, content, message, sha) {
   변수 이름을 저장소마다 다르게 쓸 수 있어 흔한 이름을 모두 찾아봐요.
 */
 const FOOTBALL_KEYS = [
+  'FOOTBALL_DATA_API_KEY',                                   /* ← 이 사이트가 실제로 쓰는 이름 */
   'FOOTBALL_API_KEY', 'FOOTBALL_DATA_KEY', 'FOOTBALL_DATA_TOKEN',
   'FOOTBALL_TOKEN', 'FOOTBALLDATA_API_KEY', 'API_FOOTBALL_KEY',
 ];
