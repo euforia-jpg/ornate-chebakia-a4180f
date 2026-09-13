@@ -1,1 +1,3 @@
-/threads-connect  /.netlify/functions/threads-connect  200
+/threads-connect    /.netlify/functions/threads-connect   200
+/threads-uninstall  /.netlify/functions/threads-callback  200
+/threads-delete     /.netlify/functions/threads-callback  200
