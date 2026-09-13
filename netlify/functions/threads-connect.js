@@ -237,11 +237,16 @@ exports.handler = async function (event) {
     return fail('로그인이 필요합니다', '대쉬보드에 로그인한 뒤 “쓰레드 연결하기” 버튼으로 시작해 주세요.');
   }
 
+  /*
+    force_reauth 를 붙이면 이미 로그인돼 있어도 메타가 계정을 다시 묻습니다.
+    계정이 여러 개일 때 엉뚱한 계정으로 승인되는 것을 막아 줍니다.
+  */
   const url = AUTHORIZE + '?' + new URLSearchParams({
     client_id: appId(),
     redirect_uri: redirectUri,
     scope: SCOPES,
     response_type: 'code',
+    force_reauth: 'true',
     state: makeState(),
   }).toString();
 
