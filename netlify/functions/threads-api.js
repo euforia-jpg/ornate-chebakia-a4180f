@@ -16,6 +16,8 @@
     THREADS_USER_ID        쓰레드 사용자 ID (숫자)
     THREADS_TOKEN          장기 액세스 토큰 (60일마다 갱신 필요)
     THREADS_TOKEN_ISSUED   토큰 발급일 YYYY-MM-DD (남은 기간 계산용, 선택)
+    THREADS_ACCOUNT        올려야 할 계정 이름 (예: es.ronda)
+                           ★ 넣어 두면 다른 계정 토큰으로는 발행을 막습니다 ★
 
   로그인 확인만 관리자 대쉬보드와 공유합니다 (ADMIN_SECRET).
   대쉬보드에 로그인한 사람만 이 함수를 부를 수 있게 하기 위해서예요.
@@ -120,6 +122,32 @@ exports.handler = async function (event) {
     if (req.action === 'publish') {
       const text = String(req.text || '').trim();
       if (!text) return json(400, { error: '올릴 내용이 비어 있습니다' });
+
+      /*
+        ★ 계정 확인 ★
+        토큰이 어느 계정 것인지 올리기 직전에 반드시 확인합니다.
+        쓰레드 승인 화면은 그때 브라우저에 로그인돼 있던 계정의 토큰을 내주기 때문에,
+        다른 계정으로 로그인한 채 연결하면 엉뚱한 계정에 글이 올라갑니다.
+        THREADS_ACCOUNT 에 적어 둔 계정이 아니면 여기서 막습니다.
+      */
+      const want = String(process.env.THREADS_ACCOUNT || '').trim().replace(/^@/, '');
+      if (want) {
+        let me;
+        try { me = await th('/me', { fields: 'id,username' }); }
+        catch (e) { return json(400, { error: '계정을 확인하지 못해 올리지 않았습니다. ' + e.message }); }
+        const got = String((me && me.username) || '').replace(/^@/, '');
+        if (got.toLowerCase() !== want.toLowerCase()) {
+          return json(409, {
+            error: '다른 계정이라 올리지 않았습니다',
+            detail: '올려야 할 계정은 @' + want + ' 인데 지금 연결된 토큰은 @' + (got || '알 수 없음') +
+                    ' 의 것입니다. 쓰레드에서 @' + want + ' 로 로그인한 뒤 대쉬보드에서 ' +
+                    '“쓰레드 연결하기” 를 다시 눌러 토큰을 새로 받아 주세요.',
+            wrongAccount: true,
+            expected: want,
+            actual: got,
+          });
+        }
+      }
       if (text.length > 500) {
         return json(400, { error: '쓰레드는 500자까지입니다. 현재 ' + text.length + '자입니다.' });
       }
