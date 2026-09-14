@@ -59,13 +59,14 @@ function lastDays(n) {
 }
 
 function blank(date) {
-  return { date: date, views: 0, visits: 0, pages: {}, products: {}, clicks: {}, refs: {} };
+  return { date: date, views: 0, visits: 0, pages: {}, products: {}, clicks: {}, refs: {},
+           countries: {}, regions: {}, geoSrc: {} };
 }
 
 function mergeInto(sum, day) {
   sum.views += day.views || 0;
   sum.visits += day.visits || 0;
-  ['pages', 'products', 'clicks', 'refs'].forEach(function (k) {
+  ['pages', 'products', 'clicks', 'refs', 'countries', 'regions', 'geoSrc'].forEach(function (k) {
     const src = day[k] || {};
     Object.keys(src).forEach(function (key) {
       sum[k][key] = (sum[k][key] || 0) + src[key];
@@ -99,6 +100,38 @@ async function readAll(store, dates) {
   return out;
 }
 
+/*
+  저장소 열기 — hit.js 와 똑같은 방식이어야 합니다.
+
+  Netlify 는 새 방식 함수에만 NETLIFY_BLOBS_CONTEXT 를 넣어 줍니다.
+  옛 방식(람다형)에서는 connectLambda(event) 로 연결하는데,
+  그 길에는 캐시를 거치지 않는 주소가 없어서 consistency:'strong' 을 쓰면
+  읽기·쓰기가 모두 BlobsConsistencyError 로 막힙니다. 그래서 기본값을 씁니다.
+*/
+function openStore(event) {
+  if (!process.env.NETLIFY_BLOBS_CONTEXT) {
+    try { connectLambda(event); } catch (e) { /* 지역 시험용 */ }
+  }
+  return getStore({ name: STORE });
+}
+
+/*
+  숫자가 하나도 없을 때, 그게 "아직 방문이 없어서" 인지
+  "저장이 안 되고 있어서" 인지 가려 줍니다.
+  아주 작은 표식 하나를 썼다가 되읽어 보는 것으로 확인합니다.
+*/
+async function selfCheck(store) {
+  try {
+    const k = '_check';
+    await store.setJSON(k, { t: Date.now() });
+    const back = await store.get(k, { type: 'json' });
+    if (back && back.t) return { ok: true };
+    return { ok: false, detail: '썼는데 되읽히지 않았습니다' };
+  } catch (e) {
+    return { ok: false, detail: (e && e.name ? e.name + ': ' : '') + (e && e.message) };
+  }
+}
+
 exports.handler = async function (event) {
   event = event || {};
 
@@ -114,11 +147,9 @@ exports.handler = async function (event) {
   if (!Number.isFinite(days) || days < 1) days = 30;
   if (days > MAX_DAYS) days = MAX_DAYS;
 
-  try { connectLambda(event); } catch (e) { /* 지역 시험용 */ }
-
   let store;
   try {
-    store = getStore({ name: STORE, consistency: 'strong' });
+    store = openStore(event);
   } catch (e) {
     return json(200, {
       ready: false,
@@ -135,8 +166,22 @@ exports.handler = async function (event) {
     return json(200, { ready: false, reason: '통계를 읽지 못했습니다', detail: e.message });
   }
 
-  const sum = { views: 0, visits: 0, pages: {}, products: {}, clicks: {}, refs: {} };
+  const sum = { views: 0, visits: 0, pages: {}, products: {}, clicks: {}, refs: {},
+                countries: {}, regions: {}, geoSrc: {} };
   rows.forEach(function (r) { mergeInto(sum, r); });
+
+  /* 위치 정보를 못 받고 있으면, 어떤 헤더가 오는지 이름만 모아 알려 줍니다 */
+  let 위치헤더 = null;
+  for (let i = rows.length - 1; i >= 0; i--) {
+    if (rows[i] && rows[i]._headers) { 위치헤더 = rows[i]._headers; break; }
+  }
+
+  /* 아무 숫자도 없으면, 저장 자체가 되는 상태인지 확인해서 알려 줍니다 */
+  let 저장확인 = null;
+  if (!sum.views) {
+    const c = await selfCheck(store);
+    저장확인 = c.ok ? '정상' : ('저장이 되지 않습니다 — ' + c.detail);
+  }
 
   /* 최근 7일 / 그 앞 7일을 견줘서 늘었는지 줄었는지 보여 줍니다 */
   const tail = rows.slice(-7);
@@ -147,6 +192,7 @@ exports.handler = async function (event) {
 
   return json(200, {
     ready: true,
+    저장확인: 저장확인,
     기간: { 시작: dates[0], 끝: dates[dates.length - 1], 일수: days },
     합계: {
       조회: sum.views,
@@ -161,6 +207,10 @@ exports.handler = async function (event) {
     일별: rows.map(function (r) {
       return { date: r.date, views: r.views || 0, visits: r.visits || 0 };
     }),
+    나라: top(sum.countries, 12),
+    지역: top(sum.regions, 12),
+    위치출처: top(sum.geoSrc, 4),
+    위치헤더: 위치헤더,
     인기페이지: top(sum.pages, 12),
     인기상품: top(sum.products, 12),
     버튼클릭: top(sum.clicks, 12),

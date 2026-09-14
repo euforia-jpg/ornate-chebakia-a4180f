@@ -56,6 +56,9 @@ const CLICKS = [
 
 const REFS = ['naver', 'google', 'daum', 'sns', 'other', 'direct'];
 
+const MAX_COUNTRIES = 60;
+const MAX_REGIONS = 200;
+
 function noBody(status) {
   return {
     statusCode: status,
@@ -101,6 +104,9 @@ function blank(date) {
     products: {},  // 상품별 조회
     clicks: {},    // 버튼별 클릭
     refs: {},      // 들어온 경로
+    countries: {}, // 나라별 방문 (아이피가 아니라 나라 이름만)
+    regions: {},   // 나라|지역별 방문
+    geoSrc: {},    // 위치 정보를 어느 길로 받았는지
   };
 }
 
@@ -115,6 +121,83 @@ function add(obj, key, cap) {
 
 function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 
+/* 헤더 이름은 대소문자가 뒤섞여 올 수 있어 전부 소문자로 맞춥니다 */
+function lowerHeaders(h) {
+  const out = {};
+  Object.keys(h || {}).forEach(function (k) { out[String(k).toLowerCase()] = h[k]; });
+  return out;
+}
+
+function pickCode(v) {
+  if (!v) return '';
+  const c = (typeof v === 'object') ? (v.code || v.name || '') : v;
+  return String(c).replace(/[^A-Za-z0-9-]/g, '').toUpperCase().slice(0, 6);
+}
+function pickName(v) {
+  if (!v) return '';
+  const n = (typeof v === 'object') ? (v.name || v.code || '') : v;
+  return String(n).replace(/[^A-Za-z0-9 .'\-]/g, '').trim().slice(0, 40);
+}
+
+/*
+  방문자가 어느 나라·지역에서 왔는지.
+
+  ★ 아이피는 읽지도, 남기지도 않습니다 ★
+  Netlify 가 요청마다 "이 사람은 한국 서울에서 왔다" 정도만 알려 주는데,
+  우리는 그 이름만 받아 "한국 12명" 처럼 숫자만 더합니다.
+  누가 어디서 왔는지는 어디에도 남지 않습니다.
+
+  옛 방식(람다형) 함수에서 이 정보가 어느 자리로 오는지 확실하지 않아
+  세 갈래를 모두 시도하고, 어느 길이 통했는지도 함께 적어 둡니다.
+  (셋 다 막혔으면 어떤 헤더가 왔는지 이름만 적어 둡니다 — 값은 적지 않습니다)
+*/
+function readGeo(event, context) {
+  const h = lowerHeaders(event.headers);
+
+  const g1 = (context && context.geo) ||
+             (context && context.clientContext && context.clientContext.geo);
+  if (g1 && (g1.country || g1.subdivision)) {
+    return { src: 'context', cc: pickCode(g1.country), region: pickName(g1.subdivision) };
+  }
+
+  const raw = h['x-nf-geo'];
+  if (raw) {
+    try {
+      const g = JSON.parse(Buffer.from(String(raw), 'base64').toString('utf8'));
+      if (g && (g.country || g.subdivision)) {
+        return { src: 'x-nf-geo', cc: pickCode(g.country), region: pickName(g.subdivision) };
+      }
+    } catch (e) { /* 모양이 다르면 다음 갈래로 */ }
+  }
+
+  const cc = h['x-country'] || h['x-nf-country'] || h['x-geo-country'] || '';
+  if (cc) return { src: 'x-country', cc: pickCode(cc), region: '' };
+
+  return {
+    src: '없음', cc: '', region: '',
+    seen: Object.keys(h).filter(function (k) { return k.indexOf('x-') === 0; }).sort().slice(0, 25),
+  };
+}
+
+/*
+  저장소 열기.
+
+  Netlify 는 새 방식 함수에는 NETLIFY_BLOBS_CONTEXT 라는 환경값을 알아서 넣어 줍니다.
+  그 안에는 캐시를 거치지 않는 주소(uncachedEdgeURL)까지 들어 있습니다.
+  옛 방식(람다형) 함수에는 그 값이 없어서 connectLambda(event) 로 직접 연결해야 하는데,
+  이 길로 연결하면 캐시를 거치지 않는 주소가 채워지지 않습니다.
+
+  ★ 그래서 consistency:'strong' 을 쓰면 안 됩니다.
+    읽기든 쓰기든 전부 BlobsConsistencyError 로 막혀 버립니다.
+    기본값(eventual)으로 두고, 어긋나면 etag 조건부 쓰기가 다시 시도하게 합니다.
+*/
+function openStore(event) {
+  if (!process.env.NETLIFY_BLOBS_CONTEXT) {
+    try { connectLambda(event); } catch (e) { /* 지역에서 시험할 때는 없어도 됩니다 */ }
+  }
+  return getStore({ name: STORE });
+}
+
 /*
   읽고 → 고치고 → 조건부로 쓰기.
   내가 읽은 뒤에 남이 먼저 썼으면 modified:false 로 돌아오니 다시 시도합니다.
@@ -123,7 +206,7 @@ async function update(store, key, mutate) {
   for (let i = 0; i < TRIES; i++) {
     let cur = null;
     try {
-      cur = await store.getWithMetadata(key, { type: 'json', consistency: 'strong' });
+      cur = await store.getWithMetadata(key, { type: 'json' });
     } catch (e) { cur = null; }
 
     if (!cur) {
@@ -143,7 +226,7 @@ async function update(store, key, mutate) {
   return false;
 }
 
-exports.handler = async function (event) {
+exports.handler = async function (event, context) {
   event = event || {};
 
   if (event.httpMethod === 'OPTIONS') return noBody(204);
@@ -157,13 +240,11 @@ exports.handler = async function (event) {
   try { b = JSON.parse(raw); } catch (e) { return noBody(204); }
   if (!b || typeof b !== 'object') return noBody(204);
 
-  /* 옛 방식(람다형) 함수에서 저장소를 쓰려면 이 한 줄이 먼저 필요합니다 */
-  try { connectLambda(event); } catch (e) { /* 지역에서 시험할 때는 없어도 됩니다 */ }
-
   let store;
   try {
-    store = getStore({ name: STORE, consistency: 'strong' });
+    store = openStore(event);
   } catch (e) {
+    console.error('[hit] 저장소를 열지 못했습니다:', e && e.message);
     return noBody(204);   // 저장소를 못 열어도 홈페이지에는 아무 영향이 없어야 합니다
   }
 
@@ -177,6 +258,9 @@ exports.handler = async function (event) {
   const click = CLICKS.indexOf(String(b.c || '')) !== -1 ? String(b.c) : 'etc';
   const fresh = b.n === 1 || b.n === '1';
 
+  /* 나라·지역은 "새 방문" 일 때만 셉니다 (페이지를 여러 장 봐도 한 명은 한 명) */
+  const geo = (kind === 'view' && fresh) ? readGeo(event, context) : null;
+
   try {
     await update(store, key, function (o) {
       if (kind === 'click') {
@@ -189,10 +273,21 @@ exports.handler = async function (event) {
         }
         add(o.pages, path, MAX_PAGES);
         if (prod) add(o.products, prod, MAX_PRODUCTS);
+
+        if (geo) {
+          if (!o.countries) { o.countries = {}; o.regions = {}; o.geoSrc = {}; }
+          add(o.geoSrc, geo.src, 8);
+          add(o.countries, geo.cc || 'ZZ', MAX_COUNTRIES);
+          if (geo.cc && geo.region) add(o.regions, geo.cc + '|' + geo.region, MAX_REGIONS);
+          /* 위치를 못 받았을 때만, 어떤 헤더가 왔는지 이름만 한 번 적어 둡니다 */
+          if (geo.seen && !o._headers) o._headers = geo.seen;
+        }
       }
     });
   } catch (e) {
-    /* 세는 데 실패해도 방문자에게는 아무 일도 일어나지 않습니다 */
+    /* 세는 데 실패해도 방문자에게는 아무 일도 일어나지 않습니다.
+       다만 조용히 묻히지 않도록 Netlify 함수 기록에는 남깁니다. */
+    console.error('[hit] 기록 실패:', e && e.message);
   }
 
   return noBody(204);

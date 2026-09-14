@@ -1817,10 +1817,44 @@
     other:'다른 사이트', direct:'주소 직접 입력·즐겨찾기'
   };
 
+  /* 나라 코드를 우리말로 (없는 코드는 코드 그대로 보여 줍니다) */
+  var ST_COUNTRY = {
+    KR:'대한민국', ES:'스페인', PT:'포르투갈', MA:'모로코', FR:'프랑스', IT:'이탈리아',
+    DE:'독일', GB:'영국', US:'미국', JP:'일본', CN:'중국', TW:'대만', HK:'홍콩',
+    SG:'싱가포르', TH:'태국', VN:'베트남', PH:'필리핀', ID:'인도네시아', MY:'말레이시아',
+    AU:'호주', CA:'캐나다', NL:'네덜란드', CH:'스위스', AT:'오스트리아', BE:'벨기에',
+    AE:'아랍에미리트', TR:'튀르키예', RU:'러시아', BR:'브라질', MX:'멕시코', AR:'아르헨티나',
+    ZZ:'확인 안 됨'
+  };
+
+  /* 지역 이름은 Netlify 가 영어로 줍니다. 자주 나올 곳만 우리말로 바꿔 둡니다 */
+  var ST_REGION = {
+    'Seoul':'서울', 'Gyeonggi-do':'경기', 'Gyeonggi':'경기', 'Incheon':'인천',
+    'Busan':'부산', 'Daegu':'대구', 'Daejeon':'대전', 'Gwangju':'광주', 'Ulsan':'울산',
+    'Sejong':'세종', 'Jeju-do':'제주', 'Jeju':'제주',
+    'Gangwon-do':'강원', 'Chungcheongbuk-do':'충북', 'Chungcheongnam-do':'충남',
+    'Jeollabuk-do':'전북', 'Jeollanam-do':'전남',
+    'Gyeongsangbuk-do':'경북', 'Gyeongsangnam-do':'경남',
+    'Madrid':'마드리드', 'Catalonia':'카탈루냐', 'Andalusia':'안달루시아',
+    'Basque Country':'바스크', 'Valencia':'발렌시아', 'Galicia':'갈리시아',
+    'Navarre':'나바라', 'Aragon':'아라곤', 'Castile and Leon':'카스티야레온',
+    'Balearic Islands':'발레아레스', 'Canary Islands':'카나리아'
+  };
+
+  function stCountry(code){ return ST_COUNTRY[code] || code || '확인 안 됨'; }
+  function stRegion(key){
+    var i = String(key).indexOf('|');
+    if(i === -1) return ST_REGION[key] || key;
+    var cc = key.slice(0, i), rg = key.slice(i + 1);
+    return stCountry(cc) + ' · ' + (ST_REGION[rg] || rg);
+  }
+
   function stPretty(kind, key){
     if(kind === 'page') return ST_PAGE_NAME[key] || key;
     if(kind === 'click') return ST_CLICK_NAME[key] || key;
     if(kind === 'ref') return ST_REF_NAME[key] || key;
+    if(kind === 'country') return stCountry(key);
+    if(kind === 'region') return stRegion(key);
     return key;
   }
 
@@ -1995,6 +2029,14 @@
       '</div>';
 
     if(!anyData){
+      /* 저장 자체가 막혀 있으면 "방문이 없다" 가 아니라 그 사실을 알려 줍니다 */
+      if(j.저장확인 && j.저장확인 !== '정상'){
+        html += '<div class="st-note warn"><b>기록이 저장되지 않고 있습니다.</b><br>' +
+          esc(j.저장확인) + '<br><br>' +
+          'Netlify 함수 설정 문제일 가능성이 큽니다. 이 문구를 그대로 알려 주시면 됩니다.</div>';
+        box.innerHTML = html;
+        return;
+      }
       html += '<div class="st-note"><b>아직 들어온 기록이 없습니다.</b><br>' +
         '홈페이지에 세기용 조각을 붙이면 그때부터 쌓이기 시작합니다. ' +
         'Netlify → Project configuration → Build &amp; deploy → Post processing → ' +
@@ -2016,7 +2058,19 @@
       '<div class="st-col"><h3>많이 본 상품</h3>' + stRank('prod', j.인기상품) + '</div>' +
       '<div class="st-col"><h3>눌린 단추</h3>' + stRank('click', j.버튼클릭) + '</div>' +
       '<div class="st-col"><h3>어디서 들어왔나</h3>' + stRank('ref', j.유입경로) + '</div>' +
+      '<div class="st-col"><h3>어느 나라에서</h3>' + stRank('country', j.나라) + '</div>' +
+      '<div class="st-col"><h3>어느 지역에서</h3>' + stRank('region', j.지역) + '</div>' +
       '</div>';
+
+    /* 위치를 전혀 못 받고 있으면 그 사실과 단서를 그대로 보여 줍니다 */
+    var 출처 = (j.위치출처 || []).map(function(x){ return x.name; });
+    if(출처.length && 출처.indexOf('없음') !== -1 && 출처.length === 1){
+      html += '<div class="st-note warn" style="margin-top:18px;">' +
+        '<b>나라·지역 정보가 오지 않고 있습니다.</b><br>' +
+        'Netlify 가 이 방식의 함수에는 위치를 넘겨 주지 않는 것으로 보입니다. ' +
+        '아래 목록을 그대로 알려 주시면 다른 방법으로 바꿔 드리겠습니다.<br>' +
+        '<code>' + esc((j.위치헤더 || []).join(', ') || '(헤더 없음)') + '</code></div>';
+    }
 
     html += '<div style="margin-top:22px;">' +
       '<button type="button" class="btn sm" id="stTableBtn">표로 보기</button>' +
