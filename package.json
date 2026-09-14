@@ -1,0 +1,9 @@
+{
+  "name": "toureplus-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "유포리아투어 홈페이지 - Netlify 함수용 꾸러미 목록",
+  "dependencies": {
+    "@netlify/blobs": "11.1.0"
+  }
+}

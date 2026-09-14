@@ -29,7 +29,12 @@ const AUTHORIZE = 'https://www.threads.com/oauth/authorize';
 /* 메타가 .net 과 .com 을 함께 쓰고 있어 둘 다 시도합니다 */
 const GRAPH_HOSTS = ['https://graph.threads.net', 'https://graph.threads.com'];
 
-const SCOPES = 'threads_basic,threads_content_publish';
+/*
+  threads_manage_insights 는 "올린 글이 몇 번 노출됐는지" 를 읽기 위한 권한입니다.
+  메타 앱 쪽에서 이 권한을 켜 두지 않았다면 연결 화면에서 거절당할 수 있는데,
+  그때는 이 줄에서 맨 뒤 항목만 지우면 예전처럼 발행만 되는 상태로 돌아갑니다.
+*/
+const SCOPES = 'threads_basic,threads_content_publish,threads_manage_insights';
 const STATE_TTL = 10 * 60 * 1000;      /* 승인에 쓸 수 있는 시간: 10분 */
 
 const appId = () => String(process.env.THREADS_APP_ID || '').trim();
