@@ -1202,16 +1202,16 @@ const MATCHES = [
     home:'레알 소시에다드', away:'데포르티보 라코루냐', from:0, seats:'ok' },
   { id:'m13', date:'2026-10-11', time:'18:30', round:'8라운드', venue:'villamarin',
     home:'레알 베티스', away:'오사수나', from:0, seats:'ok' },
-  { id:'m14', date:'2026-10-17', time:'14:00', round:'9라운드', venue:'rcde',
-    home:'RCD 에스파뇰', away:'아틀레티코 마드리드', from:0, seats:'ok' },
-  { id:'m15', date:'2026-10-17', time:'16:15', round:'9라운드', venue:'ceramica',
+  { id:'m14', date:'2026-10-18', time:'미정', round:'9라운드', venue:'ceramica',
     home:'비야레알 CF', away:'엘체 CF', from:0, seats:'ok' },
-  { id:'m16', date:'2026-10-17', time:'18:30', round:'9라운드', venue:'villamarin',
-    home:'레알 베티스', away:'FC 바르셀로나', from:0, seats:'ok' },
-  { id:'m17', date:'2026-10-17', time:'21:00', round:'9라운드', venue:'mestalla',
-    home:'발렌시아 CF', away:'아틀레틱 클루브', from:0, seats:'ok' },
-  { id:'m18', date:'2026-10-18', time:'21:00', round:'9라운드', venue:'bernabeu',
+  { id:'m15', date:'2026-10-18', time:'미정', round:'9라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'세비야 FC', from:0, seats:'ok' },
+  { id:'m16', date:'2026-10-18', time:'미정', round:'9라운드', venue:'rcde',
+    home:'RCD 에스파뇰', away:'아틀레티코 마드리드', from:0, seats:'ok' },
+  { id:'m17', date:'2026-10-18', time:'미정', round:'9라운드', venue:'mestalla',
+    home:'발렌시아 CF', away:'아틀레틱 클루브', from:0, seats:'ok' },
+  { id:'m18', date:'2026-10-18', time:'미정', round:'9라운드', venue:'villamarin',
+    home:'레알 베티스', away:'FC 바르셀로나', from:0, seats:'ok' },
   { id:'m19', date:'2026-10-25', time:'미정', round:'10라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'헤타페 CF', from:0, seats:'ok' },
   { id:'m20', date:'2026-10-25', time:'미정', round:'10라운드', venue:'pizjuan',
@@ -1457,6 +1457,35 @@ const state = {
 };
 const TODAY = new Date();
 
+/* ============ 지난 경기는 자동으로 빠집니다 ============
+   경기 일정은 정해진 시각에 자동으로 받아 오지만, 그 사이에 날짜가 지나간
+   경기는 목록에 그대로 남습니다. 그래서 화면에 그릴 때 한 번 더 걸러 냅니다.
+
+   기준은 스페인 현지 날짜입니다. 경기 날짜가 스페인 기준으로 적혀 있어서,
+   한국에서 보시는 분에게 하루 일찍 사라지거나 늦게 사라지는 일이 없습니다.
+   오늘 열리는 경기는 그날이 끝날 때까지 남겨 둡니다.
+
+   아래에서 화면에 쓰는 것은 전부 UPCOMING 입니다.
+   원본 MATCHES 는 자동 갱신이 통째로 갈아 끼우는 자리라 그대로 둡니다.        */
+function todaySpain(){
+  try{
+    const f = new Intl.DateTimeFormat('en-CA', {
+      timeZone:'Europe/Madrid', year:'numeric', month:'2-digit', day:'2-digit'
+    });
+    const p = {};
+    f.formatToParts(new Date()).forEach(function(x){ p[x.type] = x.value; });
+    return p.year + '-' + p.month + '-' + p.day;
+  }catch(e){
+    /* 아주 오래된 브라우저라면 보시는 분의 날짜를 씁니다 */
+    const d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth()+1).padStart(2,'0') + '-' +
+      String(d.getDate()).padStart(2,'0');
+  }
+}
+const TODAY_ES = todaySpain();
+const UPCOMING = MATCHES.filter(function(m){ return m && m.date >= TODAY_ES; });
+
 /* ============ 필터링 ============ */
 function haystack(m){
   const v = venueOf(m);
@@ -1470,10 +1499,10 @@ function haystack(m){
 }
 function visibleMatches(){
   const q = state.query.trim().toLowerCase();
-  if(q) return MATCHES.filter(m => haystack(m).includes(q));
-  if(state.filter === 'derby') return MATCHES.filter(m => m.derby);
-  if(state.filter === 'all')   return MATCHES.filter(m => FEATURED.includes(cityOf(m)));
-  return MATCHES.filter(m => cityOf(m) === state.filter);
+  if(q) return UPCOMING.filter(m => haystack(m).includes(q));
+  if(state.filter === 'derby') return UPCOMING.filter(m => m.derby);
+  if(state.filter === 'all')   return UPCOMING.filter(m => FEATURED.includes(cityOf(m)));
+  return UPCOMING.filter(m => cityOf(m) === state.filter);
 }
 
 /* ============ 도시별 구장 카드 ============ */
@@ -1494,7 +1523,7 @@ function renderVenueCards(){
     const vs = Object.entries(VENUES).filter(([,v]) => v.city === city);
     const [mainKey, main] = vs[0];
     const others = vs.slice(1).map(([,v]) => v.name).join(' · ');
-    const cnt = MATCHES.filter(m => cityOf(m) === city).length;
+    const cnt = UPCOMING.filter(m => cityOf(m) === city).length;
     const active = (!state.query && state.filter === city) ? ' active' : '';
     return `<button class="venue-card${active}" data-city="${city}">
       <span class="plan">${miniPlan(main.plan, colors[city])}</span>
@@ -1512,7 +1541,7 @@ function renderVenueCards(){
       state.query = '';
       $('searchInput').value = '';
       state.filter = (state.filter === city) ? 'all' : city;
-      const first = MATCHES.filter(m => cityOf(m) === state.filter)[0];
+      const first = UPCOMING.filter(m => cityOf(m) === state.filter)[0];
       if(first) state.calMonth = new Date(dateOf(first).getFullYear(), dateOf(first).getMonth(), 1);
       render();
     });
@@ -1633,10 +1662,16 @@ function render(){
   $('viewCal').setAttribute('aria-selected', state.view === 'calendar');
 
   if(!has){
-    $('emptyTitle').textContent = searching ? '검색 결과가 없어요' : '이 조건에 맞는 경기가 없어요';
-    $('emptyText').textContent = searching
-      ? '팀 이름(발렌시아), 구장 이름(메스타야), 도시나 월(9월)로도 찾을 수 있어요.'
-      : '다른 도시를 선택하거나 검색으로 라리가 전체 일정을 확인해 보세요.';
+    /* 일정 자체가 비어 있는 것과, 고른 조건에 안 맞는 것은 다른 이야기입니다 */
+    if(!UPCOMING.length){
+      $('emptyTitle').textContent = '예정된 경기가 없어요';
+      $('emptyText').textContent = '지난 경기는 날짜가 지나면 자동으로 사라져요. 다음 시즌 일정이 나오면 바로 올라옵니다.';
+    } else {
+      $('emptyTitle').textContent = searching ? '검색 결과가 없어요' : '이 조건에 맞는 경기가 없어요';
+      $('emptyText').textContent = searching
+        ? '팀 이름(발렌시아), 구장 이름(메스타야), 도시나 월(9월)로도 찾을 수 있어요.'
+        : '다른 도시를 선택하거나 검색으로 라리가 전체 일정을 확인해 보세요.';
+    }
     return;
   }
 
@@ -1655,7 +1690,7 @@ function render(){
 
 /* ============ 좌석 배치도 ============ */
 function openSeatmap(id){
-  const m = MATCHES.find(x => x.id === id);
+  const m = UPCOMING.find(x => x.id === id);
   if(!m) return;
   state.match = m;
   state.section = null;
@@ -2290,7 +2325,7 @@ $('lkBtn').addEventListener('click', findBooking);
 });
 
 /* ============ 초기화 ============ */
-$('statMatches').textContent = MATCHES.length;
+$('statMatches').textContent = UPCOMING.length;
 $('statVenues').textContent = Object.keys(VENUES).length;
 state.calMonth = new Date(TODAY.getFullYear(), TODAY.getMonth(), 1);
 render();
