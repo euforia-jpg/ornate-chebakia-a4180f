@@ -2302,53 +2302,218 @@ render();
     });
   }
   </script> 
+<style>
+/* ===== 팝업 배너의 골 장면 (그림 파일 없이 이모지 + CSS 로만 움직입니다) ===== */
+.goal-scene{ position:relative; height:70px; margin:-4px 0 10px; }
+.goal-scene span{ position:absolute; line-height:1; filter:drop-shadow(0 2px 5px rgba(0,0,0,.45)); }
+.goal-scene .gs-net{ right:6%; bottom:4px; font-size:38px; transform-origin:50% 100%;
+  animation:eufNet 4.4s linear infinite; }
+.goal-scene .gs-ball{ left:8%; bottom:6px; font-size:23px; animation:eufShot 4.4s ease-in-out infinite; }
+.goal-scene .gs-cheer{ left:10%; bottom:8px; font-size:30px; opacity:0; animation:eufCheer 4.4s ease-out infinite; }
+.goal-scene .gs-spark{ left:30%; bottom:30px; font-size:19px; opacity:0; animation:eufCheer 4.4s ease-out .12s infinite; }
+.goal-scene .gs-goal{ left:50%; bottom:40px; transform:translateX(-50%); opacity:0;
+  font-family:'Kanit',sans-serif; font-style:italic; font-weight:800; font-size:17px;
+  letter-spacing:.06em; color:#fff; animation:eufGoal 4.4s ease-out infinite; }
+
+@keyframes eufShot{
+  0%   { left:8%;  bottom:6px;  opacity:1; transform:rotate(0deg); }
+  38%  { left:44%; bottom:44px; opacity:1; transform:rotate(520deg); }
+  56%  { left:74%; bottom:12px; opacity:1; transform:rotate(880deg); }
+  62%  { left:78%; bottom:10px; opacity:0; transform:rotate(940deg); }
+  100% { left:8%;  bottom:6px;  opacity:0; transform:rotate(0deg); }
+}
+@keyframes eufNet{
+  0%,55%   { transform:none; }
+  58%      { transform:translateX(3px) scale(1.07); }
+  62%      { transform:translateX(-2px) scale(1.03); }
+  67%,100% { transform:none; }
+}
+@keyframes eufCheer{
+  0%,57%   { opacity:0; transform:translateY(8px) scale(.6); }
+  67%      { opacity:1; transform:translateY(-7px) scale(1.18); }
+  88%      { opacity:1; transform:translateY(-4px) scale(1); }
+  97%,100% { opacity:0; transform:translateY(0) scale(.9); }
+}
+@keyframes eufGoal{
+  0%,57%   { opacity:0; transform:translateX(-50%) scale(.6); }
+  66%      { opacity:1; transform:translateX(-50%) scale(1.2); }
+  86%      { opacity:1; transform:translateX(-50%) scale(1); }
+  96%,100% { opacity:0; transform:translateX(-50%) scale(.95); }
+}
+
+/* 움직이는 화면이 불편한 분께는 멈춰 둔 장면만 보여 드립니다 */
+@media (prefers-reduced-motion: reduce){
+  .goal-scene .gs-net,.goal-scene .gs-ball,.goal-scene .gs-cheer,
+  .goal-scene .gs-spark,.goal-scene .gs-goal{ animation:none; }
+  .goal-scene .gs-ball{ left:60%; bottom:16px; }
+  .goal-scene .gs-cheer,.goal-scene .gs-spark{ opacity:1; }
+  .goal-scene .gs-goal{ opacity:1; transform:translateX(-50%); }
+}
+</style>
 <div class="notice-overlay" id="noticeOverlay">
   <div class="notice-box">
-         <div class="notice-banner" style="background:repeating-linear-gradient(90deg, #C8102E 0 22px, #FFFFFF 22px 44px); padding:0; position:relative; overflow:hidden;">
-      <div style="position:absolute; inset:0; background:radial-gradient(circle at 30% 20%, rgba(20,16,61,0.05), rgba(20,16,61,0.65) 75%);"></div>
-      <button class="notice-close" id="noticeClose" aria-label="닫기" style="background:rgba(255,255,255,0.25); z-index:2;">✕</button>
-      <div style="position:relative; z-index:1; padding:32px 24px 26px;">
-        <span class="tag" style="background:rgba(255,255,255,0.9); color:#C8102E;">⚽ 이번 달 티켓 오픈</span>
-        <h3 style="color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.5);">아틀레티코 마드리드<br>홈경기, 지금 예약하세요</h3>
+    <div class="notice-banner" id="noticeBanner" style="padding:0; position:relative; overflow:hidden;">
+      <div id="noticeGlow" style="position:absolute; inset:0; background:radial-gradient(circle at 30% 18%, rgba(20,16,61,0.04), rgba(20,16,61,0.70) 78%);"></div>
+      <button class="notice-close" id="noticeClose" aria-label="닫기" style="background:rgba(255,255,255,0.25); z-index:3;">✕</button>
+      <div style="position:relative; z-index:1; padding:20px 24px 24px;">
+
+        <div class="goal-scene" aria-hidden="true">
+          <span class="gs-net">🥅</span>
+          <span class="gs-ball">⚽</span>
+          <span class="gs-cheer">🙌</span>
+          <span class="gs-spark">✨</span>
+          <span class="gs-goal">GOL!</span>
+        </div>
+
+        <span class="tag" id="noticeTag" style="background:rgba(255,255,255,0.92); color:#14103D;">⚽ 티켓 오픈</span>
+        <h3 id="noticeTitle" style="color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.55);"></h3>
+        <div id="noticeWhen" style="margin-top:10px; font-size:12.5px; font-weight:700; color:rgba(255,255,255,0.93); text-shadow:0 1px 6px rgba(0,0,0,0.5); line-height:1.6;"></div>
       </div>
     </div>
     <div class="notice-body">
-      <p>티켓예약은 싸이트 예약하기로 문의주시면 이메일로 연락드립니다.</p>
-      <button class="cta" id="noticeCta">경기 일정 보러가기</button>
+      <p id="noticeText">예약하기로 문의 남겨 주시면 좌석과 요금을 이메일로 안내드립니다.</p>
+      <button class="cta" id="noticeCta">예약 문의하기</button>
+      <label class="hide-today"><input type="checkbox" id="noticeHide" style="accent-color:#6C3CE9;"> 오늘 하루 보지 않기</label>
     </div>
   </div>
 </div>
 <script>
+/*
+  ===========================================================
+  경기 팝업
+  -----------------------------------------------------------
+  위의 MATCHES 목록에서 "지금 알릴 만한 경기" 를 골라 띄웁니다.
+  경기 일정이 자동으로 갱신되면 팝업도 알아서 따라갑니다.
+  (자동 갱신은 MATCHES 목록만 바꾸므로 이 부분은 그대로 남습니다)
+
+  고르는 순서
+    1. 빅매치 — 엘 클라시코 > 마드리드 더비 > 세비야 더비 > 그 밖
+       같은 급이면 가까운 날짜를 씁니다
+    2. 빅매치가 없으면 마드리드 두 팀(아틀레티코·레알)의 다음 홈경기
+    3. 그것도 없으면 가장 가까운 경기
+    4. 아무것도 없으면 팝업을 아예 띄우지 않습니다
+
+  이틀 안에 열리는 경기는 건너뜁니다. 그때 알려 봐야 예약을 못 받습니다.
+  ===========================================================
+*/
 (function(){
-  const today = new Date().toISOString().slice(0, 10);
-  const overlay = document.getElementById('noticeOverlay');
-  const closeBtn = document.getElementById('noticeClose');
-  const ctaBtn = document.getElementById('noticeCta');
+  var LEAD_DAYS = 2;     // 최소 이만큼은 남아 있어야 알립니다
+  var MAX_DAYS  = 100;   // 너무 먼 경기는 띄우지 않습니다
 
-  // 아틀레티코 마드리드의 다음 홈경기를 MATCHES 데이터에서 자동으로 찾아요.
-  const noticeTitleEl = document.querySelector('#noticeOverlay h3');
-  if (typeof MATCHES !== 'undefined' && noticeTitleEl) {
-    const next = MATCHES
-      .filter(m => m.home === '아틀레티코 마드리드' && m.date >= today)
-      .sort((a, b) => a.date.localeCompare(b.date))[0];
+  var overlay  = document.getElementById('noticeOverlay');
+  var closeBtn = document.getElementById('noticeClose');
+  var ctaBtn   = document.getElementById('noticeCta');
+  var hideBox  = document.getElementById('noticeHide');
+  if (!overlay) return;
 
-    if (next) {
-      const d = new Date(next.date + 'T00:00:00');
-      const dow = ['일','월','화','수','목','금','토'][d.getDay()];
-      const dateLabel = `${d.getMonth()+1}/${d.getDate()}(${dow})`;
-      noticeTitleEl.innerHTML = `아틀레티코 마드리드<br>홈경기 ${dateLabel}, 지금 예약하세요`;
+  /* "오늘 하루 보지 않기" 를 눌러 두셨으면 조용히 넘어갑니다 */
+  var HIDE_KEY = 'euf_notice_hide';
+  try {
+    if (localStorage.getItem(HIDE_KEY) === new Date().toDateString()) return;
+  } catch (e) { /* 저장을 막아 둔 브라우저라면 그냥 띄웁니다 */ }
+
+  if (typeof MATCHES === 'undefined' || !MATCHES.length) return;
+
+  function ymd(d){
+    return d.getFullYear() + '-' +
+           String(d.getMonth()+1).padStart(2,'0') + '-' +
+           String(d.getDate()).padStart(2,'0');
+  }
+  var now  = new Date();
+  var from = new Date(now); from.setDate(from.getDate() + LEAD_DAYS);
+  var till = new Date(now); till.setDate(till.getDate() + MAX_DAYS);
+  var FROM = ymd(from), TILL = ymd(till);
+
+  var pool = MATCHES
+    .filter(function(m){ return m && m.date >= FROM && m.date <= TILL; })
+    .sort(function(a,b){ return a.date.localeCompare(b.date); });
+  if (!pool.length) return;
+
+  /* 두 팀이 맞붙는 경기인지 (홈·원정 어느 쪽이든) */
+  function pair(m, a, b){
+    return (m.home === a && m.away === b) || (m.home === b && m.away === a);
+  }
+
+  /* 급이 높을수록 먼저. 같은 급이면 가까운 날짜 */
+  var BIG = [
+    { name:'엘 클라시코',  tag:'엘 클라시코 티켓 오픈',
+      bg:'linear-gradient(135deg,#004D98 0%,#6A0F3C 55%,#A50044 100%)',
+      is:function(m){ return pair(m,'FC 바르셀로나','레알 마드리드'); } },
+    { name:'마드리드 더비', tag:'마드리드 더비 티켓 오픈',
+      bg:'repeating-linear-gradient(90deg,#C8102E 0 22px,#FFFFFF 22px 44px)',
+      is:function(m){ return pair(m,'아틀레티코 마드리드','레알 마드리드'); } },
+    { name:'빅매치',      tag:'빅매치 티켓 오픈',
+      bg:'linear-gradient(135deg,#004D98 0%,#C8102E 100%)',
+      is:function(m){ return pair(m,'FC 바르셀로나','아틀레티코 마드리드'); } },
+    { name:'세비야 더비',  tag:'세비야 더비 티켓 오픈',
+      bg:'linear-gradient(135deg,#D00027 0%,#0B6E34 100%)',
+      is:function(m){ return pair(m,'세비야 FC','레알 베티스'); } }
+  ];
+
+  var pick = null;
+  for (var i = 0; i < BIG.length && !pick; i++) {
+    for (var j = 0; j < pool.length; j++) {
+      if (BIG[i].is(pool[j])) { pick = { m: pool[j], kind: BIG[i] }; break; }
     }
   }
 
-  setTimeout(() => overlay.classList.add('show'), 600);
+  /* 빅매치가 없으면 마드리드 두 팀의 다음 홈경기 */
+  if (!pick) {
+    for (var k = 0; k < pool.length; k++) {
+      if (pool[k].home === '아틀레티코 마드리드' || pool[k].home === '레알 마드리드') {
+        pick = { m: pool[k], kind: {
+          name: pool[k].home + ' 홈경기', tag: '이번 달 티켓 오픈',
+          bg: 'linear-gradient(135deg,#6C3CE9,#E6317B)'
+        } };
+        break;
+      }
+    }
+  }
+  /* 그것도 없으면 가장 가까운 경기 */
+  if (!pick) {
+    pick = { m: pool[0], kind: {
+      name: pool[0].home + ' 홈경기', tag: '티켓 오픈',
+      bg: 'linear-gradient(135deg,#6C3CE9,#E6317B)'
+    } };
+  }
+
+  var m = pick.m, kind = pick.kind;
+  var d = new Date(m.date + 'T00:00:00');
+  var dow = ['일','월','화','수','목','금','토'][d.getDay()];
+  var when = (d.getMonth()+1) + '/' + d.getDate() + '(' + dow + ')';
+  /* 킥오프 시각이 아직 안 정해진 경기는 '미정' 이라고 들어옵니다. 그때는 아예 뺍니다 */
+  if (/^\d{1,2}:\d{2}$/.test(String(m.time || '').trim())) when += ' ' + m.time;
+
+  var place = '';
+  try {
+    if (typeof VENUES !== 'undefined' && VENUES[m.venue] && VENUES[m.venue].name) {
+      place = VENUES[m.venue].name;
+    }
+  } catch (e) {}
+
+  document.getElementById('noticeBanner').style.background = kind.bg;
+  document.getElementById('noticeTag').textContent = '⚽ ' + kind.tag;
+  document.getElementById('noticeTitle').innerHTML =
+    kind.name + '<br>' + m.home + ' vs ' + m.away;
+  document.getElementById('noticeWhen').textContent =
+    when + (place ? ' · ' + place : '') + (m.round ? ' · ' + m.round : '');
+
+  setTimeout(function(){ overlay.classList.add('show'); }, 600);
 
   function closeNotice(){
+    try {
+      if (hideBox && hideBox.checked) localStorage.setItem(HIDE_KEY, new Date().toDateString());
+    } catch (e) {}
     overlay.classList.remove('show');
   }
 
   closeBtn.addEventListener('click', closeNotice);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeNotice(); });
-  ctaBtn.addEventListener('click', closeNotice);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeNotice(); });
+  ctaBtn.addEventListener('click', function(){
+    var q = kind.name + ' ' + m.home + ' vs ' + m.away + ' (' + m.date + ')';
+    closeNotice();
+    location.href = 'contact.html?product=' + encodeURIComponent(q);
+  });
 })();
 </script>
 <script>
