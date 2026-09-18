@@ -288,6 +288,24 @@
     font-variant-numeric:tabular-nums; }
   .ib-flag{ font-size:11px; font-weight:800; padding:3px 9px; border-radius:999px;
     background:#FFF0E4; color:#8A4A06; }
+  .ib-act{ margin-left:8px; }
+  .ib-act .btn{ padding:5px 11px; font-size:11.5px; }
+  .ib-del{ all:unset; cursor:pointer; padding:5px 11px; border-radius:8px; font-size:11.5px;
+    font-weight:800; color:var(--muted); border:1.5px solid var(--line); }
+  .ib-del:hover{ color:var(--danger); border-color:#F6D3DE; }
+  .ib-ask{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:12px;
+    padding:11px 14px; border-radius:10px; background:#FDECF3; border:1.5px solid #F6D3DE;
+    font-size:12.5px; font-weight:700; color:#9A1240; }
+  .ib-ask .grow{ flex:1; min-width:180px; }
+  .ib-ask button{ all:unset; cursor:pointer; padding:6px 13px; border-radius:8px; font-size:12px; font-weight:800; }
+  .ib-ask .yes{ background:var(--danger); color:#fff; }
+  .ib-ask .no{ border:1.5px solid #F6D3DE; color:#9A1240; }
+  .ib-undo{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:10px;
+    padding:12px 16px; border-radius:12px; background:#FAF9FE; border:1.5px solid var(--line);
+    font-size:12.5px; font-weight:700; color:var(--muted); }
+  .ib-undo b{ color:var(--navy); }
+  .ib-undo button{ all:unset; cursor:pointer; padding:6px 14px; border-radius:8px;
+    background:var(--navy); color:#fff; font-size:12px; font-weight:800; }
   .ib-rows{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:4px 20px; }
   .ib-row{ display:flex; gap:8px; font-size:13px; line-height:1.7; }
   .ib-row b{ flex:0 0 74px; color:var(--muted); font-weight:700; font-size:12.5px; }
@@ -756,6 +774,7 @@
           <span class="ib-when" id="ibWhen"></span>
         </div>
 
+        <div id="ibUndoBox"></div>
         <div id="ibBody"><div class="empty">불러오는 중…</div></div>
       </div>
     </div>
@@ -1905,9 +1924,81 @@
         '<span class="ib-sum">' + esc(r.요약 || '') + '</span>' +
         (r.sent ? '' : '<span class="ib-flag">카톡 못 감</span>') +
         '<span class="ib-at">' + esc(String(r.at || '').replace('T', ' ')) + '</span>' +
+        '<span class="ib-act"><button type="button" class="ib-del" data-del="' +
+          esc(r.key || '') + '">지우기</button></span>' +
       '</div>' +
       '<div class="ib-rows">' + (rows || '<div class="ib-row"><span>내용이 비어 있습니다.</span></div>') + '</div>' +
     '</div>';
+  }
+
+  /*
+    지우기 — 손님이 보낸 내용을 영영 없애는 일이라 두 번 확인합니다.
+      1) "지우기" 를 누르면 그 자리에 빨간 확인 줄이 펼쳐집니다
+      2) "네, 지웁니다" 를 눌러야 실제로 지웁니다
+
+    지운 직후에는 맨 위에 되돌리기 줄이 뜹니다.
+    화면이 들고 있던 내용을 그대로 다시 써 넣는 방식이라,
+    이 화면을 벗어나거나 새로고침하면 되돌릴 수 없습니다. 그 점도 적어 둡니다.
+  */
+  var ibUndo = null;   /* { key, row, 요약 } */
+
+  function ibAskDelete(btn){
+    var item = btn.closest('.ib-item');
+    if(!item || item.querySelector('.ib-ask')) return;
+    var key = btn.dataset.del;
+    var 요약 = (item.querySelector('.ib-sum') || {}).textContent || '이 건';
+    var ask = document.createElement('div');
+    ask.className = 'ib-ask';
+    ask.innerHTML = '<span class="grow"><b>' + esc(요약) + '</b> 을(를) 지울까요? ' +
+      '손님이 보낸 내용이라 되돌리기는 이 화면에서만 됩니다.</span>' +
+      '<button type="button" class="yes">네, 지웁니다</button>' +
+      '<button type="button" class="no">그만두기</button>';
+    item.appendChild(ask);
+    ask.querySelector('.no').addEventListener('click', function(){ ask.remove(); });
+    ask.querySelector('.yes').addEventListener('click', function(){
+      ask.querySelector('.yes').textContent = '지우는 중…';
+      ibDelete(key, 요약, item);
+    });
+  }
+
+  function ibDelete(key, 요약, item){
+    /* 되돌릴 수 있도록 지우기 전에 내용을 챙겨 둡니다 */
+    var row = null;
+    if(ibCache && ibCache[0] && ibCache[0].목록){
+      row = ibCache[0].목록.filter(function(x){ return x.key === key; })[0] || null;
+    }
+    ibCall({ action:'delete', key:key })
+      .then(function(j){
+        if(j && j.ok === false) throw new Error(j.error || '지우지 못했습니다');
+        ibUndo = row ? { key:key, row:JSON.parse(JSON.stringify(row)), 요약:요약 } : null;
+        if(item) item.remove();
+        ibPaintUndo();
+        toast('지웠습니다.');
+        ibLoad();
+      })
+      .catch(function(e){
+        toast(e.message, true);
+        if(item){ var a = item.querySelector('.ib-ask'); if(a) a.remove(); }
+      });
+  }
+
+  function ibPaintUndo(){
+    var box = $('ibUndoBox');
+    if(!box) return;
+    if(!ibUndo){ box.innerHTML = ''; return; }
+    box.innerHTML = '<div class="ib-undo"><span><b>' + esc(ibUndo.요약) + '</b> 을(를) 지웠습니다. ' +
+      '잘못 누르셨다면 지금 되돌릴 수 있습니다 — 화면을 벗어나면 되돌릴 수 없습니다.</span>' +
+      '<button type="button" id="ibUndoBtn">되돌리기</button></div>';
+    $('ibUndoBtn').addEventListener('click', function(){
+      var u = ibUndo;
+      $('ibUndoBtn').textContent = '되돌리는 중…';
+      ibCall({ action:'restore', key:u.key, row:u.row })
+        .then(function(j){
+          if(j && j.ok === false) throw new Error(j.error || '되돌리지 못했습니다');
+          ibUndo = null; ibPaintUndo(); toast('되돌렸습니다.'); ibLoad();
+        })
+        .catch(function(e){ toast(e.message, true); });
+    });
   }
 
   function ibRender(j){
@@ -2502,6 +2593,10 @@
     b.addEventListener('click', function(){ switchTab(b.dataset.tab); });
   });
 
+  $('ibBody').addEventListener('click', function(e){
+    var b = e.target.closest ? e.target.closest('[data-del]') : null;
+    if(b) ibAskDelete(b);
+  });
   $('ibKind').addEventListener('change', ibLoad);
   $('ibReload').addEventListener('click', ibLoad);
   $('stDays').addEventListener('change', stLoad);

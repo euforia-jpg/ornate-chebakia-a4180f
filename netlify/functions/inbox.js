@@ -14,6 +14,19 @@
   손님 개인정보가 들어 있는 곳이라 더 조심합니다.
 
   -----------------------------------------------------------
+  지우기
+
+  action:'delete' 로 한 건을 지웁니다. 되돌릴 수 없으니
+  대쉬보드에서 한 번 더 물어본 뒤에만 부릅니다.
+
+  실수로 지우셨을 때를 위해 action:'restore' 도 있습니다.
+  대쉬보드가 화면에 들고 있던 내용을 그대로 다시 써 넣습니다.
+  (화면을 새로 고치면 그 내용도 사라지므로, 그 자리에서만 됩니다)
+
+  열쇠 모양을 꼭 확인합니다. 아무 이름이나 받아 주면
+  통계 같은 다른 자료까지 지워질 수 있습니다.
+
+  -----------------------------------------------------------
   덤으로 카카오 상태도 봐 드립니다
 
   action:'kakao' 로 부르면 실제로 토큰을 갱신해 보고
@@ -96,6 +109,12 @@ async function kakaoHealth() {
   }
 }
 
+/*
+  열쇠는 반드시 "종류/날짜/시각-무작위" 모양이어야 합니다.
+  이 검사가 없으면 아무 이름이나 넣어 다른 자료를 지울 수 있습니다.
+*/
+const KEY_RE = /^(inquiry|deposit|matchday)\/\d{4}-\d{2}-\d{2}\/[A-Za-z0-9_-]{1,60}$/;
+
 exports.handler = async function (event) {
   event = event || {};
 
@@ -118,6 +137,29 @@ exports.handler = async function (event) {
     store = openStore(event);
   } catch (e) {
     return json(200, { ready: false, reason: '문의함 저장소를 열지 못했습니다', detail: e.message });
+  }
+
+  /* ---------- 지우기 ---------- */
+  if (action === 'delete' || action === 'restore') {
+    const key = String(body.key || q.key || '');
+    if (!KEY_RE.test(key)) {
+      return json(400, { error: '지울 수 없는 열쇠입니다', key: key.slice(0, 80) });
+    }
+    try {
+      if (action === 'delete') {
+        await store.delete(key);
+        return json(200, { ok: true, 지움: key });
+      }
+      const row = body.row;
+      if (!row || typeof row !== 'object') {
+        return json(400, { error: '되돌릴 내용이 없습니다' });
+      }
+      delete row.key;                      /* 저장할 때는 열쇠를 안에 넣지 않습니다 */
+      await store.setJSON(key, row);
+      return json(200, { ok: true, 되돌림: key });
+    } catch (e) {
+      return json(200, { ok: false, error: (e && e.message) || String(e) });
+    }
   }
 
   /* ---------- 목록 ---------- */
