@@ -83,6 +83,12 @@
 
   .form-alert{ display:none; align-items:flex-start; gap:10px; background:#E7F9F5; border:2px solid #B7ECDE; border-radius:12px; padding:12px 16px; margin-bottom:18px; font-size:12.5px; font-weight:700; color:#0A6E5D; line-height:1.55; }
   .form-alert.show{ display:flex; }
+  /* 전송이 실패했을 때 — 손님이 직접 연락하실 수 있게 길을 열어 둡니다 */
+  .form-alert.bad{ background:#FDECF3; border-color:#F6D3DE; color:#9A1240; flex-direction:column; gap:8px; }
+  .form-alert.bad .ways{ display:flex; gap:8px; flex-wrap:wrap; margin-top:2px; }
+  .form-alert.bad .ways a{ display:inline-block; padding:7px 13px; border-radius:999px; background:#fff;
+    border:1.5px solid #F6D3DE; color:#9A1240; text-decoration:none; font-size:12.5px; font-weight:800; }
+  .form-alert.bad .ways a:hover{ border-color:#9A1240; }
 
   footer{ padding:24px clamp(20px,4vw,56px) 40px; }
   .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(20,16,61,0.28); max-width:1120px; margin:0 auto; }
@@ -289,6 +295,14 @@
         <div class="sub">예약 시 안내받은 예약번호가 있다면 함께 입력해 주세요.</div>
 
         <div class="form-alert" id="formAlert">입금 확인 요청이 접수됐어요. 확인 후 담당자가 안내드릴게요.</div>
+        <div class="form-alert bad" id="formFail">
+          <span><b>보내지 못했어요.</b> 잠시 뒤 다시 시도해 주시거나, 아래로 바로 알려 주시면 확인해 드릴게요.<br>
+          적어 주신 내용은 그대로 남아 있습니다.</span>
+          <span class="ways">
+            <a href="mailto:euforia@euforiatour.com">이메일로 보내기</a>
+            <a href="tel:+34611209095">전화하기</a>
+          </span>
+        </div>
 
         <form id="depositForm">
           <div class="field-grid">
@@ -395,15 +409,33 @@ document.getElementById('depositForm').addEventListener('submit', function(e){
     note: document.getElementById('note').value
   };
 
+  /* 결과를 실제로 확인하고 알려 드립니다 (예전에는 실패해도 "접수됐어요" 가 떴습니다) */
+  var okBox = document.getElementById('formAlert');
+  var failBox = document.getElementById('formFail');
+  okBox.classList.remove('show');
+  failBox.classList.remove('show');
+
   fetch('/.netlify/functions/send-deposit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
-  .catch(function(err){ console.error('카카오 전송 실패:', err); })
-  .finally(function(){
-    document.getElementById('formAlert').classList.add('show');
-    form.reset();
+  .then(function(res){
+    return res.json().catch(function(){ return null; }).then(function(data){
+      return { ok: res.ok && (!data || data.ok !== false) };
+    });
+  })
+  .catch(function(err){
+    console.error('입금확인 전송 실패:', err);
+    return { ok: false };
+  })
+  .then(function(r){
+    if(r.ok){
+      okBox.classList.add('show');
+      form.reset();
+    } else {
+      failBox.classList.add('show');   /* 적으신 내용은 지우지 않습니다 */
+    }
     submitBtn.disabled = false;
     submitBtn.textContent = originalBtnText;
     window.scrollTo({ top: 0, behavior: 'smooth' });

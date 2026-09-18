@@ -1,7 +1,70 @@
-/* ============================================================
-   입금 확인 요청을 사장님 카카오톡("나에게 보내기")으로 전송하는 함수
-   - 카카오 인증은 send-inquiry.js와 동일한 환경변수를 재사용해요
-============================================================ */
+/*
+  ===========================================================
+  입금확인 요청 접수 (손님 → 저장소 + 사장님 카카오톡)
+  -----------------------------------------------------------
+  ★ 순서가 중요합니다 ★
+
+      1. 받은 내용을 Netlify 저장소에 먼저 남깁니다
+      2. 그다음에 카카오톡 "나에게 보내기" 를 시도합니다
+
+  예전에는 카카오만 썼습니다. 그래서 카카오 토큰이 만료되면
+  손님이 보낸 내용이 흔적도 없이 사라졌습니다.
+  (게다가 화면에는 "접수되었습니다" 가 떴습니다)
+
+  이제는 카카오가 막혀도 내용은 남습니다.
+  대쉬보드 "문의함" 에서 확인하실 수 있습니다.
+
+  -----------------------------------------------------------
+  돌려주는 값
+
+    ok        하나라도 성공했나 (손님에게 접수됐다고 말해도 되는가)
+    saved     저장소에 남았나
+    notified  카카오톡까지 갔나
+    reason    안 된 쪽의 이유
+
+  둘 다 실패했을 때만 500 을 돌려줍니다.
+  그때는 손님 화면에 "직접 연락 주세요" 안내가 뜹니다.
+  ===========================================================
+*/
+
+const { connectLambda, getStore } = require('@netlify/blobs');
+
+const STORE = 'euforia-inbox';
+const KIND  = 'deposit';
+const SITE  = 'https://toureplus.co.kr';
+
+/* 방문 통계와 같은 방식입니다. consistency 는 건드리지 않습니다 —
+   옛 방식 함수에서 strong 을 쓰면 읽기·쓰기가 전부 막힙니다. */
+function openStore(event) {
+  if (!process.env.NETLIFY_BLOBS_CONTEXT) {
+    try { connectLambda(event); } catch (e) { /* 지역에서 시험할 때 */ }
+  }
+  return getStore({ name: STORE });
+}
+
+function nowSeoul() {
+  try {
+    const f = new Intl.DateTimeFormat('sv-SE', {
+      timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', hour12: false,
+    });
+    return f.format(new Date()).replace(' ', 'T');   /* 2026-09-18T14:03 */
+  } catch (e) {
+    return new Date().toISOString().slice(0, 16);
+  }
+}
+
+/* 저장 열쇠: 종류/날짜/시각-무작위 — 날짜순으로 줄 세우기 좋습니다 */
+function makeKey(when) {
+  const rand = Math.random().toString(36).slice(2, 8);
+  return KIND + '/' + when.slice(0, 10) + '/' + when.slice(11).replace(':', '') +
+         '-' + Date.now().toString(36) + rand;
+}
+
+async function keep(store, key, row) {
+  await store.setJSON(key, row);
+}
+
 async function getAccessToken() {
   const res = await fetch('https://kauth.kakao.com/oauth/token', {
     method: 'POST',
@@ -10,63 +73,111 @@ async function getAccessToken() {
       grant_type: 'refresh_token',
       client_id: process.env.KAKAO_REST_API_KEY,
       client_secret: process.env.KAKAO_CLIENT_SECRET,
-      refresh_token: process.env.KAKAO_REFRESH_TOKEN
-    })
+      refresh_token: process.env.KAKAO_REFRESH_TOKEN,
+    }),
   });
   const data = await res.json();
-  if (!data.access_token) throw new Error('토큰 갱신 실패: ' + JSON.stringify(data));
+  if (!data.access_token) {
+    /* KOE322 = 리프레시 토큰 만료. 60일마다 다시 연결해야 합니다 */
+    const code = (data && data.error_code) ? ' [' + data.error_code + ']' : '';
+    throw new Error('카카오 토큰 갱신 실패' + code + ': ' + (data.error_description || data.error || ''));
+  }
   return data.access_token;
 }
 
-exports.handler = async (event) => {
+async function sendKakao(text) {
+  const accessToken = await getAccessToken();
+  const res = await fetch('https://kapi.kakao.com/v2/api/talk/memo/default/send', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+    },
+    body: new URLSearchParams({
+      template_object: JSON.stringify({
+        object_type: 'text',
+        text: String(text).slice(0, 190),
+        link: { web_url: SITE, mobile_web_url: SITE },
+      }),
+    }),
+  });
+  const data = await res.json();
+  if (data.result_code !== 0) {
+    throw new Error('카카오 전송 실패: ' + JSON.stringify(data));
+  }
+}
+
+function json(status, body) {
+  return {
+    statusCode: status,
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
+    body: JSON.stringify(body),
+  };
+}
+
+exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  let b;
+  try { b = JSON.parse(event.body || '{}'); } catch (e) { b = {}; }
+
+  const 내용 = {
+    입금자명: b.depositor || '', 예약번호: b.refNo || '',
+    금액: b.amount || '', 입금일: b.depositDate || '',
+    연락처: b.contactPhone || '', 남긴말: b.note || '',
+  };
+  const 요약 = (내용.입금자명 || '이름 없음') + ' · ' + (내용.금액 || '금액 미기재');
+
+  const 문자 = [
+    '💰 새 입금확인 요청이 도착했어요',
+    '',
+    '입금자명: ' + (내용.입금자명 || '-'),
+    '예약번호: ' + (내용.예약번호 || '-'),
+    '금액: ' + (내용.금액 || '-'),
+    '입금일: ' + (내용.입금일 || '-'),
+    '연락처: ' + (내용.연락처 || '-'),
+    '남긴 말: ' + (내용.남긴말 || '-'),
+  ].join('\n');
+
+  const when = nowSeoul();
+  const row = { kind: KIND, at: when, sent: false, 요약: 요약, 내용: 내용 };
+
+  /* ---------- 1. 먼저 남깁니다 ---------- */
+  let saved = false, savedWhy = '', store = null, key = '';
   try {
-    const payload = JSON.parse(event.body || '{}');
-    const { depositor, refNo, amount, depositDate, contactPhone, note } = payload;
-
-    const text = [
-      '💰 새 입금확인 요청이 도착했어요',
-      '',
-      `입금자명: ${depositor || '-'}`,
-      `예약번호: ${refNo || '-'}`,
-      `입금액: ${amount || '-'}`,
-      `입금일: ${depositDate || '-'}`,
-      `연락처: ${contactPhone || '-'}`,
-      `메모: ${note || '-'}`
-    ].join('\n');
-
-    const accessToken = await getAccessToken();
-
-    const sendRes = await fetch('https://kapi.kakao.com/v2/api/talk/memo/default/send', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-      },
-      body: new URLSearchParams({
-        template_object: JSON.stringify({
-          object_type: 'text',
-          text: text,
-          link: {
-            web_url: 'https://ornate-chebakia-a4180f.netlify.app',
-            mobile_web_url: 'https://ornate-chebakia-a4180f.netlify.app'
-          }
-        })
-      })
-    });
-
-    const sendData = await sendRes.json();
-    if (sendData.result_code !== 0) {
-      console.error('Kakao send failed', sendData);
-      return { statusCode: 500, body: JSON.stringify({ ok: false, error: sendData }) };
-    }
-
-    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
-  } catch (err) {
-    console.error(err);
-    return { statusCode: 500, body: JSON.stringify({ ok: false, error: err.message }) };
+    store = openStore(event);
+    key = makeKey(when);
+    await keep(store, key, row);
+    saved = true;
+  } catch (e) {
+    savedWhy = (e && e.message) || String(e);
+    console.error('[deposit] 저장 실패:', savedWhy);
   }
+
+  /* ---------- 2. 그다음 카카오 ---------- */
+  let notified = false, kakaoWhy = '';
+  try {
+    await sendKakao(문자);
+    notified = true;
+  } catch (e) {
+    kakaoWhy = (e && e.message) || String(e);
+    console.error('[deposit] 카카오 실패:', kakaoWhy);
+  }
+
+  /* 카카오까지 갔으면 그 사실도 적어 둡니다 (대쉬보드에서 구분해 보시라고) */
+  if (saved && notified) {
+    try { row.sent = true; await keep(store, key, row); } catch (e) { /* 표시만 못 한 것이라 넘어갑니다 */ }
+  }
+
+  if (!saved && !notified) {
+    return json(500, { ok: false, saved: false, notified: false,
+                       reason: savedWhy || kakaoWhy });
+  }
+
+  return json(200, {
+    ok: true, saved: saved, notified: notified,
+    reason: notified ? '' : kakaoWhy,
+  });
 };

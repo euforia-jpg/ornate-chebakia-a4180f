@@ -73,6 +73,12 @@
 
   .form-alert{ display:none; align-items:flex-start; gap:10px; background:#E7F9F5; border:2px solid #B7ECDE; border-radius:12px; padding:12px 16px; margin-bottom:18px; font-size:12.5px; font-weight:700; color:#0A6E5D; line-height:1.55; }
   .form-alert.show{ display:flex; }
+  /* 전송이 실패했을 때 — 손님이 직접 연락하실 수 있게 길을 열어 둡니다 */
+  .form-alert.bad{ background:#FDECF3; border-color:#F6D3DE; color:#9A1240; flex-direction:column; gap:8px; }
+  .form-alert.bad .ways{ display:flex; gap:8px; flex-wrap:wrap; margin-top:2px; }
+  .form-alert.bad .ways a{ display:inline-block; padding:7px 13px; border-radius:999px; background:#fff;
+    border:1.5px solid #F6D3DE; color:#9A1240; text-decoration:none; font-size:12.5px; font-weight:800; }
+  .form-alert.bad .ways a:hover{ border-color:#9A1240; }
 
   .side-card{ background:var(--navy); color:#fff; border-radius:var(--radius); padding:24px; margin-bottom:16px; }
   .side-card h3{ margin:0 0 8px; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; }
@@ -243,6 +249,14 @@
         <div class="sub">필수 항목만 입력해 주셔도 괜찮아요. 나머지는 상담 시 확인할게요.</div>
 
         <div class="form-alert" id="formAlert">문의가 접수됐어요. 영업일 기준 1~2일 내 이메일 또는 카카오톡으로 답변드릴게요.</div>
+        <div class="form-alert bad" id="formFail">
+          <span><b>보내지 못했어요.</b> 잠시 뒤 다시 시도해 주시거나, 아래로 바로 연락 주시면 빠르게 도와드릴게요.<br>
+          적어 주신 내용은 그대로 남아 있으니 다시 쓰지 않으셔도 됩니다.</span>
+          <span class="ways">
+            <a href="mailto:euforia@euforiatour.com">이메일로 보내기</a>
+            <a href="tel:+34611209095">전화하기</a>
+          </span>
+        </div>
 
         <form id="inquiryForm">
           <div class="field-grid">
@@ -385,15 +399,41 @@ document.getElementById('inquiryForm').addEventListener('submit', function(e){
     message: document.getElementById('message').value
   };
 
+  /*
+     예전에는 결과를 보지 않고 무조건 "접수됐어요" 를 띄웠습니다.
+     그래서 서버가 실패해도 손님은 접수된 줄 아셨고, 문의는 사라졌습니다.
+     이제는 실제 결과를 보고 알려 드립니다.
+
+     접수 성공의 기준은 "저장됐는가" 입니다.
+     카카오톡 알림이 늦거나 막혀도 문의 자체는 남으므로 접수된 것이 맞습니다.
+  */
+  var okBox = document.getElementById('formAlert');
+  var failBox = document.getElementById('formFail');
+  okBox.classList.remove('show');
+  failBox.classList.remove('show');
+
   fetch('/.netlify/functions/send-inquiry', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
-  .catch(function(err){ console.error('카카오 전송 실패:', err); })
-  .finally(function(){
-    document.getElementById('formAlert').classList.add('show');
-    form.reset();
+  .then(function(res){
+    return res.json().catch(function(){ return null; }).then(function(data){
+      return { ok: res.ok && (!data || data.ok !== false), data: data };
+    });
+  })
+  .catch(function(err){
+    console.error('문의 전송 실패:', err);
+    return { ok: false, data: null };
+  })
+  .then(function(r){
+    if(r.ok){
+      okBox.classList.add('show');
+      form.reset();
+    } else {
+      /* 실패했을 때는 적으신 내용을 지우지 않습니다 */
+      failBox.classList.add('show');
+    }
     submitBtn.disabled = false;
     submitBtn.textContent = originalBtnText;
     window.scrollTo({ top: 0, behavior: 'smooth' });

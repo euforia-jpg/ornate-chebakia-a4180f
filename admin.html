@@ -268,6 +268,43 @@
   .pg-log.bad{ background:#FDECF3; border-color:#F6D3DE; color:#9A1240; }
   .pg-log.good{ background:#E7F9F5; border-color:#B7ECDE; color:#0A6E5D; }
 
+  /* ---------- 문의함 ---------- */
+  .ib-top{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px; }
+  .ib-top select{ padding:9px 12px; border:2px solid var(--line); border-radius:10px;
+    font-family:inherit; font-size:13px; font-weight:700; color:var(--ink); background:#fff; }
+  .ib-top select:focus{ border-color:var(--violet); outline:none; }
+  .ib-when{ font-size:12px; font-weight:700; color:var(--muted); }
+
+  .ib-item{ border:1.5px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:10px;
+    background:#fff; }
+  .ib-item.unsent{ border-color:#FBDCBC; background:#FFFCF7; }
+  .ib-head{ display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; margin-bottom:10px; }
+  .ib-kind{ font-size:11px; font-weight:800; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .ib-kind.inquiry{ background:#EFEAFD; color:#4B21B5; }
+  .ib-kind.deposit{ background:#E7F9F5; color:#0A6E5D; }
+  .ib-kind.matchday{ background:#FFF0E4; color:#8A4A06; }
+  .ib-sum{ font-size:15px; font-weight:800; color:var(--navy); }
+  .ib-at{ margin-left:auto; font-size:12px; font-weight:700; color:var(--muted);
+    font-variant-numeric:tabular-nums; }
+  .ib-flag{ font-size:11px; font-weight:800; padding:3px 9px; border-radius:999px;
+    background:#FFF0E4; color:#8A4A06; }
+  .ib-rows{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:4px 20px; }
+  .ib-row{ display:flex; gap:8px; font-size:13px; line-height:1.7; }
+  .ib-row b{ flex:0 0 74px; color:var(--muted); font-weight:700; font-size:12.5px; }
+  .ib-row span{ flex:1; color:var(--ink); font-weight:600; word-break:break-word; }
+  .ib-row.long{ grid-column:1/-1; }
+
+  .ib-kakao{ display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap;
+    border:1.5px solid var(--line); border-radius:14px; padding:15px 18px; margin-bottom:16px;
+    background:#FAF9FE; }
+  .ib-kakao.bad{ background:#FFF6EC; border-color:#FBDCBC; }
+  .ib-kakao.good{ background:#E7F9F5; border-color:#B7ECDE; }
+  .ib-kakao .dot{ width:10px; height:10px; border-radius:50%; margin-top:6px; flex:none;
+    background:var(--line); }
+  .ib-kakao.good .dot{ background:#0E9E8B; } .ib-kakao.bad .dot{ background:var(--orange); }
+  .ib-kakao .txt{ flex:1; min-width:220px; font-size:13px; font-weight:600; line-height:1.7; color:var(--muted); }
+  .ib-kakao .txt b{ color:var(--navy); font-weight:800; }
+
   /* ---------- 방문 통계 ----------
      그래프 색은 두 가지뿐입니다.
        조회 = 보라(#6C3CE9)   방문 = 진한 청록(#0E9E8B)
@@ -359,6 +396,7 @@
     <button type="button" data-tab="costsheets">원가표 · 마진</button>
     <button type="button" data-tab="threads">쓰레드 광고</button>
     <button type="button" data-tab="pages">페이지 갱신</button>
+    <button type="button" data-tab="inbox">문의함</button>
     <button type="button" data-tab="stats">방문 통계</button>
     <button type="button" data-tab="deploy">배포 · 이력</button>
   </div>
@@ -695,6 +733,33 @@
       </div>
     </div>
 
+    <!-- ---------- 문의함 ---------- -->
+    <div class="panel" id="p-inbox">
+      <div class="card">
+        <h2>들어온 문의</h2>
+        <div class="sub">
+          예약문의 · 입금확인 · 경기예약이 들어오는 대로 쌓입니다.
+          카카오톡 알림이 막혀 있어도 여기에는 남기 때문에, 놓치는 문의가 없습니다.
+        </div>
+
+        <div id="ibKakao"></div>
+
+        <div class="ib-top">
+          <label for="ibKind" style="font-size:12.5px;font-weight:800;color:var(--muted);">종류</label>
+          <select id="ibKind">
+            <option value="">전체</option>
+            <option value="inquiry">예약문의</option>
+            <option value="deposit">입금확인</option>
+            <option value="matchday">경기예약</option>
+          </select>
+          <button type="button" class="btn sm" id="ibReload">새로고침</button>
+          <span class="ib-when" id="ibWhen"></span>
+        </div>
+
+        <div id="ibBody"><div class="empty">불러오는 중…</div></div>
+      </div>
+    </div>
+
     <!-- ---------- 방문 통계 ---------- -->
     <div class="panel" id="p-stats">
 
@@ -907,6 +972,7 @@
     if(name === 'costsheets') renderCost();
     if(name === 'threads') renderThreads();
     if(name === 'pages') renderPages();
+    if(name === 'inbox') renderInbox();
     if(name === 'stats') renderStats();
   }
 
@@ -1779,6 +1845,123 @@
     pgCheckMatches();
   }
 
+  /* ---------------------------------------------------- 문의함 */
+  /*
+    손님이 보낸 내용이 그대로 들어 있는 곳입니다.
+    이름·연락처가 담겨 있으니 화면에 그릴 때 반드시 빠져나가지 않게(esc) 처리합니다.
+  */
+  var ibCache = null;
+  var ibLoading = false;
+
+  var IB_KIND = {
+    inquiry:  { 이름:'예약문의', 순서:['이름','연락처','이메일','관심상품','인원','희망일','메시지'] },
+    deposit:  { 이름:'입금확인', 순서:['입금자명','예약번호','금액','입금일','연락처','남긴말'] },
+    matchday: { 이름:'경기예약', 순서:['예약번호','경기','일시','경기장','구역','인원','총금액','수령방식','여행자'] }
+  };
+
+  function ibCall(payload){
+    return fetch('/.netlify/functions/inbox', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(Object.assign({ token: token }, payload || {}))
+    }).then(function(r){
+      if(r.status === 401){ logout(true); throw new Error('로그인이 필요합니다'); }
+      return r.json();
+    });
+  }
+
+  function ibRenderKakao(k){
+    var box = $('ibKakao');
+    if(!k){ box.innerHTML = ''; return; }
+    var good = !!k.ok;
+    var 안내 = k.안내 || '';
+    var 더 = '';
+    if(!good){
+      더 = '<br><span style="font-size:12.5px;">알림만 멈춘 것이고, <b>문의 자체는 아래에 그대로 쌓입니다.</b> ' +
+           '설치안내의 “카카오 다시 연결하기” 를 보고 한 번만 다시 이어 주시면 됩니다.</span>';
+    }
+    box.className = 'ib-kakao ' + (good ? 'good' : 'bad');
+    box.innerHTML = '<span class="dot"></span><span class="txt"><b>카카오톡 알림 — ' +
+      esc(k.상태 || (good ? '정상' : '확인 안 됨')) + '</b>' +
+      (안내 ? '<br>' + esc(안내) : '') + 더 + '</span>';
+  }
+
+  function ibRow(라벨, 값, 김){
+    if(!값) return '';
+    return '<div class="ib-row' + (김 ? ' long' : '') + '"><b>' + esc(라벨) +
+           '</b><span>' + esc(값).replace(/\n/g, '<br>') + '</span></div>';
+  }
+
+  function ibItem(r){
+    var kind = IB_KIND[r.kind] || { 이름: r.kind || '기타', 순서: [] };
+    var 내용 = r.내용 || {};
+    var 순서 = kind.순서.length ? kind.순서 : Object.keys(내용);
+    var rows = 순서.map(function(k){
+      return ibRow(k, 내용[k], k === '메시지' || k === '여행자' || k === '남긴말');
+    }).join('');
+
+    return '<div class="ib-item' + (r.sent ? '' : ' unsent') + '">' +
+      '<div class="ib-head">' +
+        '<span class="ib-kind ' + esc(r.kind || '') + '">' + esc(kind.이름) + '</span>' +
+        '<span class="ib-sum">' + esc(r.요약 || '') + '</span>' +
+        (r.sent ? '' : '<span class="ib-flag">카톡 못 감</span>') +
+        '<span class="ib-at">' + esc(String(r.at || '').replace('T', ' ')) + '</span>' +
+      '</div>' +
+      '<div class="ib-rows">' + (rows || '<div class="ib-row"><span>내용이 비어 있습니다.</span></div>') + '</div>' +
+    '</div>';
+  }
+
+  function ibRender(j){
+    var box = $('ibBody');
+    if(!j || j.ready === false){
+      box.innerHTML = '<div class="st-note warn"><b>문의함을 열지 못했습니다.</b><br>' +
+        esc(j && j.reason || '') + (j && j.detail ? '<br><code>' + esc(j.detail) + '</code>' : '') + '</div>';
+      return;
+    }
+    var list = j.목록 || [];
+    if(!list.length){
+      box.innerHTML = '<div class="st-note"><b>아직 들어온 문의가 없습니다.</b><br>' +
+        '손님이 예약문의·입금확인·경기예약 폼을 보내면 여기에 쌓입니다. ' +
+        '이 기능을 올리기 전에 들어온 문의는 남아 있지 않습니다.</div>';
+      return;
+    }
+    var 머리 = '<div class="st-nums" style="margin-bottom:18px;">' +
+      '<div class="st-num"><b>' + stNum(j.전체) + '</b><span>전체 접수</span></div>' +
+      '<div class="st-num"><b>' + stNum(j.카톡미전달) + '</b><span>카톡이 못 간 건</span>' +
+        (j.카톡미전달 ? '<em class="down">먼저 확인해 주세요</em>' : '<em class="up">모두 전달됨</em>') +
+      '</div></div>';
+    box.innerHTML = 머리 + list.map(ibItem).join('');
+  }
+
+  function ibLoad(){
+    if(ibLoading) return;
+    ibLoading = true;
+    var btn = $('ibReload');
+    if(btn) btn.disabled = true;
+    $('ibBody').style.opacity = '.45';
+
+    Promise.all([
+      ibCall({ kind: $('ibKind').value, limit: 60 })
+        .catch(function(e){ return { ready:false, reason:'문의함을 읽지 못했습니다', detail:e.message }; }),
+      ibCall({ action:'kakao' }).catch(function(){ return null; })
+    ]).then(function(out){
+      ibCache = out;
+      ibRender(out[0]);
+      ibRenderKakao(out[1]);
+      var t = new Date();
+      $('ibWhen').textContent = '기준 ' +
+        String(t.getHours()).padStart(2,'0') + ':' + String(t.getMinutes()).padStart(2,'0');
+    }).finally(function(){
+      ibLoading = false;
+      if(btn) btn.disabled = false;
+      $('ibBody').style.opacity = '';
+    });
+  }
+
+  function renderInbox(){
+    if(ibCache){ ibRender(ibCache[0]); ibRenderKakao(ibCache[1]); }
+    ibLoad();
+  }
+
   /* ---------------------------------------------------- 방문 통계 */
   /*
     그래프 색은 딱 두 가지입니다.
@@ -2319,6 +2502,8 @@
     b.addEventListener('click', function(){ switchTab(b.dataset.tab); });
   });
 
+  $('ibKind').addEventListener('change', ibLoad);
+  $('ibReload').addEventListener('click', ibLoad);
   $('stDays').addEventListener('change', stLoad);
   $('stReload').addEventListener('click', stLoad);
 

@@ -998,6 +998,15 @@
           <p id="doneSub">예약번호와 영문 성만 있으면 언제든 다시 조회할 수 있어요. 경기장에는 예약에 등록한 여권을 꼭 가져가세요.</p>
         </div>
 
+        <div class="dn-fail" id="dnFail">
+          <b>신청 내용이 담당자에게 전달되지 않았어요.</b><br>
+          아래 예약번호를 알려 주시면서 직접 연락해 주시면 바로 처리해 드릴게요. 화면은 닫지 마시고 예약번호를 먼저 적어 두세요.
+          <span class="ways">
+            <a href="mailto:euforia@euforiatour.com">이메일로 알리기</a>
+            <a href="tel:+34611209095">전화하기</a>
+          </span>
+        </div>
+
         <div class="stub">
           <div class="stub-l">
             <div class="ref-label">예약번호</div>
@@ -1176,117 +1185,121 @@ const VENUES = {
 };
 
 const MATCHES = [
-  { id:'m01', date:'2026-09-17', time:'19:00', round:'6라운드', venue:'villamarin',
+  { id:'m01', date:'2026-09-16', time:'19:00', round:'6라운드', venue:'metropolitano',
+    home:'아틀레티코 마드리드', away:'오사수나', from:0, seats:'ok' },
+  { id:'m02', date:'2026-09-16', time:'21:30', round:'6라운드', venue:'campnou',
+    home:'FC 바르셀로나', away:'라싱 산탄데르', from:0, seats:'ok' },
+  { id:'m03', date:'2026-09-17', time:'19:00', round:'6라운드', venue:'villamarin',
     home:'레알 베티스', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m02', date:'2026-09-18', time:'21:00', round:'7라운드', venue:'rcde',
+  { id:'m04', date:'2026-09-18', time:'21:00', round:'7라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'엘체 CF', from:0, seats:'ok' },
-  { id:'m03', date:'2026-09-19', time:'16:15', round:'7라운드', venue:'sanmames',
+  { id:'m05', date:'2026-09-19', time:'16:15', round:'7라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m04', date:'2026-09-19', time:'21:00', round:'7라운드', venue:'pizjuan',
+  { id:'m06', date:'2026-09-19', time:'21:00', round:'7라운드', venue:'pizjuan',
     home:'세비야 FC', away:'FC 바르셀로나', from:0, seats:'ok' },
-  { id:'m05', date:'2026-09-20', time:'16:15', round:'7라운드', venue:'metropolitano',
+  { id:'m07', date:'2026-09-20', time:'16:15', round:'7라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'레알 마드리드', from:0, seats:'ok' },
-  { id:'m06', date:'2026-09-20', time:'18:30', round:'7라운드', venue:'ceramica',
+  { id:'m08', date:'2026-09-20', time:'18:30', round:'7라운드', venue:'ceramica',
     home:'비야레알 CF', away:'레반테 UD', from:0, seats:'ok' },
-  { id:'m07', date:'2026-09-20', time:'21:00', round:'7라운드', venue:'mestalla',
+  { id:'m09', date:'2026-09-20', time:'21:00', round:'7라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'레알 소시에다드', from:0, seats:'ok' },
-  { id:'m08', date:'2026-10-10', time:'18:30', round:'8라운드', venue:'campnou',
+  { id:'m10', date:'2026-10-10', time:'18:30', round:'8라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m09', date:'2026-10-10', time:'21:00', round:'8라운드', venue:'bernabeu',
+  { id:'m11', date:'2026-10-10', time:'21:00', round:'8라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'비야레알 CF', from:0, seats:'ok' },
-  { id:'m10', date:'2026-10-11', time:'16:15', round:'8라운드', venue:'realearena',
+  { id:'m12', date:'2026-10-11', time:'16:15', round:'8라운드', venue:'realearena',
     home:'레알 소시에다드', away:'데포르티보 라코루냐', from:0, seats:'ok' },
-  { id:'m11', date:'2026-10-11', time:'18:30', round:'8라운드', venue:'villamarin',
+  { id:'m13', date:'2026-10-11', time:'18:30', round:'8라운드', venue:'villamarin',
     home:'레알 베티스', away:'오사수나', from:0, seats:'ok' },
-  { id:'m12', date:'2026-10-17', time:'14:00', round:'9라운드', venue:'rcde',
-    home:'RCD 에스파뇰', away:'아틀레티코 마드리드', from:0, seats:'ok' },
-  { id:'m13', date:'2026-10-17', time:'16:15', round:'9라운드', venue:'ceramica',
+  { id:'m14', date:'2026-10-18', time:'미정', round:'9라운드', venue:'ceramica',
     home:'비야레알 CF', away:'엘체 CF', from:0, seats:'ok' },
-  { id:'m14', date:'2026-10-17', time:'18:30', round:'9라운드', venue:'villamarin',
-    home:'레알 베티스', away:'FC 바르셀로나', from:0, seats:'ok' },
-  { id:'m15', date:'2026-10-17', time:'21:00', round:'9라운드', venue:'mestalla',
-    home:'발렌시아 CF', away:'아틀레틱 클루브', from:0, seats:'ok' },
-  { id:'m16', date:'2026-10-18', time:'21:00', round:'9라운드', venue:'bernabeu',
+  { id:'m15', date:'2026-10-18', time:'미정', round:'9라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'세비야 FC', from:0, seats:'ok' },
-  { id:'m17', date:'2026-10-25', time:'미정', round:'10라운드', venue:'sanmames',
+  { id:'m16', date:'2026-10-18', time:'미정', round:'9라운드', venue:'rcde',
+    home:'RCD 에스파뇰', away:'아틀레티코 마드리드', from:0, seats:'ok' },
+  { id:'m17', date:'2026-10-18', time:'미정', round:'9라운드', venue:'mestalla',
+    home:'발렌시아 CF', away:'아틀레틱 클루브', from:0, seats:'ok' },
+  { id:'m18', date:'2026-10-18', time:'미정', round:'9라운드', venue:'villamarin',
+    home:'레알 베티스', away:'FC 바르셀로나', from:0, seats:'ok' },
+  { id:'m19', date:'2026-10-25', time:'미정', round:'10라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m18', date:'2026-10-25', time:'미정', round:'10라운드', venue:'pizjuan',
+  { id:'m20', date:'2026-10-25', time:'미정', round:'10라운드', venue:'pizjuan',
     home:'세비야 FC', away:'오사수나', from:0, seats:'ok' },
-  { id:'m19', date:'2026-10-25', time:'미정', round:'10라운드', venue:'mestalla',
+  { id:'m21', date:'2026-10-25', time:'미정', round:'10라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'비야레알 CF', from:0, seats:'ok' },
-  { id:'m20', date:'2026-10-25', time:'미정', round:'10라운드', venue:'campnou',
+  { id:'m22', date:'2026-10-25', time:'미정', round:'10라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'레알 마드리드', from:0, seats:'ok' },
-  { id:'m21', date:'2026-10-25', time:'미정', round:'10라운드', venue:'metropolitano',
+  { id:'m23', date:'2026-10-25', time:'미정', round:'10라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'데포르티보 라코루냐', from:0, seats:'ok' },
-  { id:'m22', date:'2026-10-25', time:'미정', round:'10라운드', venue:'realearena',
+  { id:'m24', date:'2026-10-25', time:'미정', round:'10라운드', venue:'realearena',
     home:'레알 소시에다드', away:'레반테 UD', from:0, seats:'ok' },
-  { id:'m23', date:'2026-11-01', time:'미정', round:'11라운드', venue:'villamarin',
+  { id:'m25', date:'2026-11-01', time:'미정', round:'11라운드', venue:'villamarin',
     home:'레알 베티스', away:'말라가 CF', from:0, seats:'ok' },
-  { id:'m24', date:'2026-11-01', time:'미정', round:'11라운드', venue:'ceramica',
+  { id:'m26', date:'2026-11-01', time:'미정', round:'11라운드', venue:'ceramica',
     home:'비야레알 CF', away:'RCD 에스파뇰', from:0, seats:'ok' },
-  { id:'m25', date:'2026-11-01', time:'미정', round:'11라운드', venue:'sanmames',
+  { id:'m27', date:'2026-11-01', time:'미정', round:'11라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'레알 소시에다드', from:0, seats:'ok' },
-  { id:'m26', date:'2026-11-01', time:'미정', round:'11라운드', venue:'campnou',
+  { id:'m28', date:'2026-11-01', time:'미정', round:'11라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m27', date:'2026-11-08', time:'미정', round:'12라운드', venue:'pizjuan',
+  { id:'m29', date:'2026-11-08', time:'미정', round:'12라운드', venue:'pizjuan',
     home:'세비야 FC', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m28', date:'2026-11-08', time:'미정', round:'12라운드', venue:'mestalla',
+  { id:'m30', date:'2026-11-08', time:'미정', round:'12라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'레알 마드리드', from:0, seats:'ok' },
-  { id:'m29', date:'2026-11-08', time:'미정', round:'12라운드', venue:'realearena',
+  { id:'m31', date:'2026-11-08', time:'미정', round:'12라운드', venue:'realearena',
     home:'레알 소시에다드', away:'라요 바예카노', from:0, seats:'ok' },
-  { id:'m30', date:'2026-11-08', time:'미정', round:'12라운드', venue:'rcde',
+  { id:'m32', date:'2026-11-08', time:'미정', round:'12라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'데포르티보 라코루냐', from:0, seats:'ok' },
-  { id:'m31', date:'2026-11-08', time:'미정', round:'12라운드', venue:'metropolitano',
+  { id:'m33', date:'2026-11-08', time:'미정', round:'12라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'FC 바르셀로나', from:0, seats:'ok' },
-  { id:'m32', date:'2026-11-08', time:'미정', round:'12라운드', venue:'ceramica',
+  { id:'m34', date:'2026-11-08', time:'미정', round:'12라운드', venue:'ceramica',
     home:'비야레알 CF', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m33', date:'2026-11-22', time:'미정', round:'13라운드', venue:'sanmames',
+  { id:'m35', date:'2026-11-22', time:'미정', round:'13라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'RCD 에스파뇰', from:0, seats:'ok' },
-  { id:'m34', date:'2026-11-22', time:'미정', round:'13라운드', venue:'campnou',
+  { id:'m36', date:'2026-11-22', time:'미정', round:'13라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'비야레알 CF', from:0, seats:'ok' },
-  { id:'m35', date:'2026-11-22', time:'미정', round:'13라운드', venue:'bernabeu',
+  { id:'m37', date:'2026-11-22', time:'미정', round:'13라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'셀타 비고', from:0, seats:'ok' },
-  { id:'m36', date:'2026-11-22', time:'미정', round:'13라운드', venue:'pizjuan',
+  { id:'m38', date:'2026-11-22', time:'미정', round:'13라운드', venue:'pizjuan',
     home:'세비야 FC', away:'레알 베티스', from:0, seats:'ok' },
-  { id:'m37', date:'2026-11-29', time:'미정', round:'14라운드', venue:'villamarin',
+  { id:'m39', date:'2026-11-29', time:'미정', round:'14라운드', venue:'villamarin',
     home:'레알 베티스', away:'라요 바예카노', from:0, seats:'ok' },
-  { id:'m38', date:'2026-11-29', time:'미정', round:'14라운드', venue:'mestalla',
+  { id:'m40', date:'2026-11-29', time:'미정', round:'14라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'오사수나', from:0, seats:'ok' },
-  { id:'m39', date:'2026-11-29', time:'미정', round:'14라운드', venue:'bernabeu',
+  { id:'m41', date:'2026-11-29', time:'미정', round:'14라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m40', date:'2026-11-29', time:'미정', round:'14라운드', venue:'rcde',
+  { id:'m42', date:'2026-11-29', time:'미정', round:'14라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m41', date:'2026-11-29', time:'미정', round:'14라운드', venue:'realearena',
+  { id:'m43', date:'2026-11-29', time:'미정', round:'14라운드', venue:'realearena',
     home:'레알 소시에다드', away:'세비야 FC', from:0, seats:'ok' },
-  { id:'m42', date:'2026-12-06', time:'미정', round:'15라운드', venue:'pizjuan',
+  { id:'m44', date:'2026-12-06', time:'미정', round:'15라운드', venue:'pizjuan',
     home:'세비야 FC', away:'말라가 CF', from:0, seats:'ok' },
-  { id:'m43', date:'2026-12-06', time:'미정', round:'15라운드', venue:'metropolitano',
+  { id:'m45', date:'2026-12-06', time:'미정', round:'15라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'레알 베티스', from:0, seats:'ok' },
-  { id:'m44', date:'2026-12-06', time:'미정', round:'15라운드', venue:'campnou',
+  { id:'m46', date:'2026-12-06', time:'미정', round:'15라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'셀타 비고', from:0, seats:'ok' },
-  { id:'m45', date:'2026-12-06', time:'미정', round:'15라운드', venue:'sanmames',
+  { id:'m47', date:'2026-12-06', time:'미정', round:'15라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'레알 마드리드', from:0, seats:'ok' },
-  { id:'m46', date:'2026-12-06', time:'미정', round:'15라운드', venue:'ceramica',
+  { id:'m48', date:'2026-12-06', time:'미정', round:'15라운드', venue:'ceramica',
     home:'비야레알 CF', away:'레알 소시에다드', from:0, seats:'ok' },
-  { id:'m47', date:'2026-12-13', time:'미정', round:'16라운드', venue:'rcde',
+  { id:'m49', date:'2026-12-13', time:'미정', round:'16라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'셀타 비고', from:0, seats:'ok' },
-  { id:'m48', date:'2026-12-13', time:'미정', round:'16라운드', venue:'bernabeu',
+  { id:'m50', date:'2026-12-13', time:'미정', round:'16라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'오사수나', from:0, seats:'ok' },
-  { id:'m49', date:'2026-12-13', time:'미정', round:'16라운드', venue:'ceramica',
+  { id:'m51', date:'2026-12-13', time:'미정', round:'16라운드', venue:'ceramica',
     home:'비야레알 CF', away:'라요 바예카노', from:0, seats:'ok' },
-  { id:'m50', date:'2026-12-13', time:'미정', round:'16라운드', venue:'villamarin',
+  { id:'m52', date:'2026-12-13', time:'미정', round:'16라운드', venue:'villamarin',
     home:'레알 베티스', away:'라싱 산탄데르', from:0, seats:'ok' },
-  { id:'m51', date:'2026-12-13', time:'미정', round:'16라운드', venue:'realearena',
+  { id:'m53', date:'2026-12-13', time:'미정', round:'16라운드', venue:'realearena',
     home:'레알 소시에다드', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m52', date:'2026-12-13', time:'미정', round:'16라운드', venue:'metropolitano',
+  { id:'m54', date:'2026-12-13', time:'미정', round:'16라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'발렌시아 CF', from:0, seats:'ok' },
-  { id:'m53', date:'2026-12-20', time:'미정', round:'17라운드', venue:'sanmames',
+  { id:'m55', date:'2026-12-20', time:'미정', round:'17라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'레알 베티스', from:0, seats:'ok' },
-  { id:'m54', date:'2026-12-20', time:'미정', round:'17라운드', venue:'mestalla',
+  { id:'m56', date:'2026-12-20', time:'미정', round:'17라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'RCD 에스파뇰', from:0, seats:'ok' },
-  { id:'m55', date:'2026-12-20', time:'미정', round:'17라운드', venue:'campnou',
+  { id:'m57', date:'2026-12-20', time:'미정', round:'17라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'레알 소시에다드', from:0, seats:'ok' },
-  { id:'m56', date:'2026-12-20', time:'미정', round:'17라운드', venue:'pizjuan',
+  { id:'m58', date:'2026-12-20', time:'미정', round:'17라운드', venue:'pizjuan',
     home:'세비야 FC', away:'라싱 산탄데르', from:0, seats:'ok' },
 ];
 
@@ -2073,11 +2086,31 @@ async function submitBooking(){
     travelers: state.travelers,
   };
 
+  /*
+     보내 놓고 결과를 보지 않던 부분입니다.
+     서버가 실패해도 "접수됐어요" 화면이 그대로 떠서, 손님은 신청된 줄 아셨습니다.
+     이제는 실패하면 완료 화면 위에 띠를 띄워 직접 연락하실 길을 알려 드립니다.
+  */
+  var failBand = $('dnFail');
+  if (failBand) failBand.classList.remove('show');
+
   fetch('/.netlify/functions/send-matchday-booking', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(booking)
-  }).catch(function(err){ console.error('카카오 전송 실패:', err); });
+  })
+  .then(function(res){
+    return res.json().catch(function(){ return null; }).then(function(data){
+      return res.ok && (!data || data.ok !== false);
+    });
+  })
+  .catch(function(err){
+    console.error('예약 신청 전송 실패:', err);
+    return false;
+  })
+  .then(function(ok){
+    if (!ok && failBand) failBand.classList.add('show');
+  });
 
   stopHold();
   state.booking = booking;
@@ -2334,6 +2367,16 @@ render();
   }
   </script> 
 <style>
+/* 예약 신청이 서버까지 못 갔을 때 알리는 띠 */
+.dn-fail{ display:none; margin:0 0 18px; padding:14px 18px; border-radius:12px;
+  background:#FDECF3; border:2px solid #F6D3DE; color:#9A1240;
+  font-size:13px; font-weight:700; line-height:1.6; text-align:left; }
+.dn-fail.show{ display:block; }
+.dn-fail b{ color:#7A0E32; }
+.dn-fail .ways{ display:flex; gap:8px; flex-wrap:wrap; margin-top:9px; }
+.dn-fail .ways a{ display:inline-block; padding:7px 13px; border-radius:999px; background:#fff;
+  border:1.5px solid #F6D3DE; color:#9A1240; text-decoration:none; font-size:12.5px; font-weight:800; }
+
 /* ===== 팝업 배너의 골 장면 (그림 파일 없이 이모지 + CSS 로만 움직입니다) ===== */
 .goal-scene{ position:relative; height:70px; margin:-4px 0 10px; }
 .goal-scene span{ position:absolute; line-height:1; filter:drop-shadow(0 2px 5px rgba(0,0,0,.45)); }
