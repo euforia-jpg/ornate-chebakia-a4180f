@@ -27,6 +27,15 @@
   통계 같은 다른 자료까지 지워질 수 있습니다.
 
   -----------------------------------------------------------
+  새 문의 알림
+
+  action:'count' 는 목록을 다 읽지 않고 열쇠만 세어 봅니다.
+  대쉬보드가 1~2분마다 물어보기 때문에 가볍게 만들었습니다.
+
+  since 에 "마지막으로 본 열쇠" 를 주시면 그보다 새것만
+  골라서 몇 건인지, 무슨 내용인지(최대 5건) 돌려줍니다.
+
+  -----------------------------------------------------------
   덤으로 카카오 상태도 봐 드립니다
 
   action:'kakao' 로 부르면 실제로 토큰을 갱신해 보고
@@ -115,6 +124,27 @@ async function kakaoHealth() {
 */
 const KEY_RE = /^(inquiry|deposit|matchday)\/\d{4}-\d{2}-\d{2}\/[A-Za-z0-9_-]{1,60}$/;
 
+/*
+  열쇠는 "종류/날짜/시각-무작위" 입니다.
+  그냥 글자순으로 세우면 종류 이름부터 비교해 버려서
+  deposit → inquiry → matchday 순이 되고 시간이 뒤섞입니다.
+  그래서 앞의 종류를 떼고 "날짜/시각" 만 가지고 줄을 세웁니다.
+*/
+function ord(key) {
+  const p = String(key).split('/');
+  return p.length >= 3 ? p[1] + '/' + p[2] : String(key);
+}
+
+/* 메일 알림이 켜져 있는지만 봅니다 (실제로 보내 보지는 않습니다) */
+function mailConfig() {
+  const on = !!process.env.RESEND_API_KEY;
+  return {
+    설정됨: on,
+    받는곳: process.env.NOTIFY_EMAIL || 'euforia@euforiatour.com',
+    안내: on ? '' : '메일 알림은 아직 꺼져 있습니다. 설치안내의 “메일로 알림 받기” 를 보고 한 번만 켜 두시면 카카오가 막혀도 메일이 옵니다.',
+  };
+}
+
 exports.handler = async function (event) {
   event = event || {};
 
@@ -129,7 +159,9 @@ exports.handler = async function (event) {
   const action = String(body.action || q.action || 'list');
 
   if (action === 'kakao') {
-    return json(200, await kakaoHealth());
+    const k = await kakaoHealth();
+    k.메일 = mailConfig();
+    return json(200, k);
   }
 
   let store;
@@ -137,6 +169,45 @@ exports.handler = async function (event) {
     store = openStore(event);
   } catch (e) {
     return json(200, { ready: false, reason: '문의함 저장소를 열지 못했습니다', detail: e.message });
+  }
+
+  /* ---------- 건수만 세기 (알림용) ---------- */
+  if (action === 'count') {
+    let keys = [];
+    try {
+      const res = await store.list();
+      keys = (res && res.blobs ? res.blobs : []).map(function (b) { return b.key; })
+             .filter(function (k) { return KEY_RE.test(k); });
+    } catch (e) {
+      return json(200, { ok: false, reason: '문의함을 읽지 못했습니다', detail: e.message });
+    }
+    keys.sort(function (a, b) { return ord(a) < ord(b) ? 1 : ord(a) > ord(b) ? -1 : 0; });
+
+    const since = String(body.since || q.since || '');
+    const 기준 = since ? ord(since) : '';
+    const 새열쇠 = 기준 ? keys.filter(function (k) { return ord(k) > 기준; }) : [];
+
+    /* 알림에 무슨 내용인지 적어 드리려고, 새로 온 것만 최대 5건 읽습니다 */
+    const 볼것 = 새열쇠.slice(0, 5);
+    const 새목록 = [];
+    await Promise.all(볼것.map(async function (k) {
+      try {
+        const v = await store.get(k, { type: 'json' });
+        if (v && typeof v === 'object') {
+          새목록.push({ key: k, kind: v.kind || '', 요약: v.요약 || '', at: v.at || '' });
+        }
+      } catch (e) { /* 한 건 못 읽어도 세는 데는 지장 없습니다 */ }
+    }));
+    새목록.sort(function (a, b) { return ord(a.key) < ord(b.key) ? 1 : -1; });
+
+    return json(200, {
+      ok: true,
+      전체: keys.length,
+      최신열쇠: keys[0] || '',
+      새건수: 기준 ? 새열쇠.length : 0,
+      새목록: 새목록,
+      처음: !since,          /* 기준이 없으면 "지금부터" 로 잡으시라는 뜻입니다 */
+    });
   }
 
   /* ---------- 지우기 ---------- */
@@ -171,10 +242,15 @@ exports.handler = async function (event) {
     return json(200, { ready: false, reason: '문의함을 읽지 못했습니다', detail: e.message });
   }
 
-  /* 열쇠에 날짜가 들어 있어서 이름만으로 최신순 정렬이 됩니다 */
+  keys = keys.filter(function (k) { return KEY_RE.test(k); });
+  /* 종류가 섞여 있어도 시간순이 되도록 ord() 로 줄 세웁니다 */
+  keys.sort(function (a, b) { return ord(a) < ord(b) ? 1 : ord(a) > ord(b) ? -1 : 0; });
+
+  /* 종류를 골라 보시더라도 "읽음" 기준은 전체 기준이어야 하므로 먼저 챙겨 둡니다 */
+  const 최신열쇠 = keys[0] || '';
+
   const kind = String(body.kind || q.kind || '');
   if (kind) keys = keys.filter(function (k) { return k.indexOf(kind + '/') === 0; });
-  keys.sort().reverse();
 
   const total = keys.length;
   let limit = Number(body.limit || q.limit || 50);
@@ -196,11 +272,13 @@ exports.handler = async function (event) {
     got.forEach(function (g) { if (g) rows.push(g); });
   }
 
-  const 미전달 = rows.filter(function (r) { return !r.sent; }).length;
+  /* 카카오도 메일도 못 간 것만 셉니다. 둘 중 하나라도 갔으면 놓친 게 아닙니다 */
+  const 미전달 = rows.filter(function (r) { return !(r.sent || r.mail); }).length;
 
   return json(200, {
     ready: true,
     전체: total,
+    최신열쇠: 최신열쇠,
     보여준수: rows.length,
     카톡미전달: 미전달,
     목록: rows,
