@@ -68,9 +68,19 @@ function checkToken(token) {
 }
 
 function openStore(event) {
-  if (!process.env.NETLIFY_BLOBS_CONTEXT) {
-    try { connectLambda(event); } catch (e) { /* 지역 시험용 */ }
-  }
+  /*
+    event.blobs 안에는 "이번 요청에만 쓰는 열쇠" 가 들어 있습니다.
+
+    예전에는 process.env.NETLIFY_BLOBS_CONTEXT 가 이미 차 있으면 건너뛰었습니다.
+    그런데 함수가 살아 있는 채로 다음 손님을 받으면(웜 스타트)
+    지난 요청의 열쇠가 그대로 남아 있습니다. 그 열쇠는 곧 만료되고,
+    그때부터 "Failed to decode token: Token expired" 가 납니다.
+
+    그래서 요청마다 새 열쇠로 갈아 끼웁니다.
+  */
+  try {
+    if (event && event.blobs) connectLambda(event);
+  } catch (e) { /* 새 방식 함수나 지역 시험에는 event.blobs 가 없습니다 */ }
   return getStore({ name: STORE });
 }
 
