@@ -288,6 +288,25 @@
     font-variant-numeric:tabular-nums; }
   .ib-flag{ font-size:11px; font-weight:800; padding:3px 9px; border-radius:999px;
     background:#FFF0E4; color:#8A4A06; }
+  .ib-flag.ok{ background:#E7F9F5; color:#0A6E5D; }
+
+  /* 새 문의 알림 */
+  .tab-badge{ display:inline-block; margin-left:7px; min-width:19px; padding:0 6px;
+    border-radius:999px; background:var(--danger); color:#fff; font-size:10.5px; font-weight:900;
+    line-height:17px; text-align:center; vertical-align:middle; font-variant-numeric:tabular-nums; }
+  .tab-badge[hidden]{ display:none; }
+  .ib-new{ font-size:10.5px; font-weight:900; padding:3px 8px; border-radius:999px;
+    background:var(--danger); color:#fff; letter-spacing:.04em; }
+  .ib-item.fresh{ border-color:#C9BDF7; box-shadow:0 0 0 3px rgba(108,60,233,.10); }
+  .ib-alert{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:14px;
+    padding:12px 16px; border-radius:12px; border:1.5px solid var(--line); background:#FAFAFE; }
+  .ib-alert.on{ background:#E7F9F5; border-color:#B7ECDE; }
+  .ib-alert.off{ background:#F5F2FE; border-color:#DED3FB; }
+  .ib-alert .txt{ flex:1; min-width:220px; font-size:13px; font-weight:600; line-height:1.7; color:var(--muted); }
+  .ib-alert .txt b{ color:var(--navy); font-weight:800; }
+  .ib-snd{ display:flex; gap:6px; align-items:center; cursor:pointer;
+    font-size:12.5px; font-weight:800; color:var(--muted); }
+  .ib-snd input{ width:15px; height:15px; accent-color:var(--violet); cursor:pointer; }
   .ib-act{ margin-left:8px; }
   .ib-act .btn{ padding:5px 11px; font-size:11.5px; }
   .ib-del{ all:unset; cursor:pointer; padding:5px 11px; border-radius:8px; font-size:11.5px;
@@ -414,7 +433,7 @@
     <button type="button" data-tab="costsheets">원가표 · 마진</button>
     <button type="button" data-tab="threads">쓰레드 광고</button>
     <button type="button" data-tab="pages">페이지 갱신</button>
-    <button type="button" data-tab="inbox">문의함</button>
+    <button type="button" data-tab="inbox">문의함<span class="tab-badge" id="ibBadge" hidden>0</span></button>
     <button type="button" data-tab="stats">방문 통계</button>
     <button type="button" data-tab="deploy">배포 · 이력</button>
   </div>
@@ -760,6 +779,7 @@
           카카오톡 알림이 막혀 있어도 여기에는 남기 때문에, 놓치는 문의가 없습니다.
         </div>
 
+        <div id="ibAlert" class="ib-alert"></div>
         <div id="ibKakao"></div>
 
         <div class="ib-top">
@@ -939,6 +959,7 @@
 
   function logout(expired){
     token = '';
+    ntStop();
     sessionStorage.removeItem('euf_admin_token');
     $('app').hidden = true;
     $('login').style.display = 'flex';
@@ -950,6 +971,7 @@
     $('login').style.display = 'none';
     $('app').hidden = false;
     loadTab('products');
+    ntStart();          /* 새 문의 지켜보기 시작 */
   }
 
   /* ---------------------------------------------------- 탭 */
@@ -964,6 +986,7 @@
       p.classList.toggle('on', p.id === 'p-' + name);
     });
     refreshSaveBar();
+    if(name !== 'inbox') ntNewKeys = {};   /* 문의함을 떠나면 NEW 표시는 걷습니다 */
     if(name !== 'deploy') loadTab(name);
   }
 
@@ -1898,10 +1921,18 @@
       더 = '<br><span style="font-size:12.5px;">알림만 멈춘 것이고, <b>문의 자체는 아래에 그대로 쌓입니다.</b> ' +
            '설치안내의 “카카오 다시 연결하기” 를 보고 한 번만 다시 이어 주시면 됩니다.</span>';
     }
+    var m = k.메일 || null;
+    var 메일줄 = '';
+    if(m){
+      메일줄 = '<br><br><b>메일 알림 — ' + (m.설정됨 ? '켜짐' : '꺼짐') + '</b>' +
+        (m.설정됨 ? '<br><span style="font-size:12.5px;">새 문의가 오면 <b>' + esc(m.받는곳) +
+                    '</b> 으로 한 통씩 갑니다.</span>'
+                  : '<br><span style="font-size:12.5px;">' + esc(m.안내 || '') + '</span>');
+    }
     box.className = 'ib-kakao ' + (good ? 'good' : 'bad');
     box.innerHTML = '<span class="dot"></span><span class="txt"><b>카카오톡 알림 — ' +
       esc(k.상태 || (good ? '정상' : '확인 안 됨')) + '</b>' +
-      (안내 ? '<br>' + esc(안내) : '') + 더 + '</span>';
+      (안내 ? '<br>' + esc(안내) : '') + 더 + 메일줄 + '</span>';
   }
 
   function ibRow(라벨, 값, 김){
@@ -1918,11 +1949,17 @@
       return ibRow(k, 내용[k], k === '메시지' || k === '여행자' || k === '남긴말');
     }).join('');
 
-    return '<div class="ib-item' + (r.sent ? '' : ' unsent') + '">' +
+    /* 카카오든 메일이든 하나라도 갔으면 놓친 게 아닙니다 */
+    var 알림갔나 = !!(r.sent || r.mail);
+    var 새것 = !!ntNewKeys[r.key];
+
+    return '<div class="ib-item' + (알림갔나 ? '' : ' unsent') + (새것 ? ' fresh' : '') + '">' +
       '<div class="ib-head">' +
+        (새것 ? '<span class="ib-new">NEW</span>' : '') +
         '<span class="ib-kind ' + esc(r.kind || '') + '">' + esc(kind.이름) + '</span>' +
         '<span class="ib-sum">' + esc(r.요약 || '') + '</span>' +
-        (r.sent ? '' : '<span class="ib-flag">카톡 못 감</span>') +
+        (알림갔나 ? '' : '<span class="ib-flag">알림 못 감</span>') +
+        (!r.sent && r.mail ? '<span class="ib-flag ok">메일로 감</span>' : '') +
         '<span class="ib-at">' + esc(String(r.at || '').replace('T', ' ')) + '</span>' +
         '<span class="ib-act"><button type="button" class="ib-del" data-del="' +
           esc(r.key || '') + '">지우기</button></span>' +
@@ -2017,7 +2054,7 @@
     }
     var 머리 = '<div class="st-nums" style="margin-bottom:18px;">' +
       '<div class="st-num"><b>' + stNum(j.전체) + '</b><span>전체 접수</span></div>' +
-      '<div class="st-num"><b>' + stNum(j.카톡미전달) + '</b><span>카톡이 못 간 건</span>' +
+      '<div class="st-num"><b>' + stNum(j.카톡미전달) + '</b><span>알림이 못 간 건</span>' +
         (j.카톡미전달 ? '<em class="down">먼저 확인해 주세요</em>' : '<em class="up">모두 전달됨</em>') +
       '</div></div>';
     box.innerHTML = 머리 + list.map(ibItem).join('');
@@ -2036,6 +2073,9 @@
       ibCall({ action:'kakao' }).catch(function(){ return null; })
     ]).then(function(out){
       ibCache = out;
+      /* 이 탭을 열어 보신 것이므로 여기까지는 읽은 것으로 칩니다 */
+      if(out[0] && out[0].최신열쇠) ntSaveSeen(out[0].최신열쇠);
+      ntCount = 0; ntPaint();
       ibRender(out[0]);
       ibRenderKakao(out[1]);
       var t = new Date();
@@ -2049,9 +2089,198 @@
   }
 
   function renderInbox(){
+    ntPaintAlert();
     if(ibCache){ ibRender(ibCache[0]); ibRenderKakao(ibCache[1]); }
     ibLoad();
   }
+
+
+  /* ---------------------------------------------------- 새 문의 알림 */
+  /*
+    새 문의가 들어오면 세 가지로 알려 드립니다.
+
+      · 문의함 탭에 빨간 숫자
+      · 브라우저 창 제목 앞에 (3)  — 다른 탭을 보고 계셔도 눈에 띕니다
+      · 컴퓨터 알림창 + 짧은 알림음  (한 번 허용해 주셨을 때만)
+
+    1~2분마다 "몇 건이나 늘었는지" 만 물어봅니다.
+    내용 전체를 읽지 않기 때문에 열어 두셔도 부담이 없습니다.
+
+    "어디까지 봤는지" 는 이 컴퓨터에만 적힙니다.
+    사무실 컴퓨터와 집 컴퓨터가 따로 셉니다 — 그게 오히려 편하실 겁니다.
+
+    ※ 대쉬보드를 완전히 닫으면 알림창은 뜨지 않습니다.
+       닫아 두셔도 받으시려면 카카오톡이나 메일 알림을 쓰셔야 합니다.
+  */
+  var NT_SEEN  = 'euf_ib_seen';      /* 마지막으로 본 문의 열쇠 */
+  var NT_SOUND = 'euf_ib_sound';     /* 알림음 켜짐 여부 */
+  var ntSeen    = '';
+  var ntCount   = 0;
+  var ntTimer   = null;
+  var ntShown   = {};                /* 이미 알림창을 띄운 열쇠 (같은 걸 두 번 안 띄우려고) */
+  var ntNewKeys = {};                /* 목록에 NEW 를 붙일 열쇠 */
+  var ntTitle   = document.title;
+
+  function ntCan(){ try { return typeof Notification !== 'undefined'; } catch(e){ return false; } }
+  function ntAllowed(){ return ntCan() && Notification.permission === 'granted'; }
+  function ntSoundOn(){ try { return localStorage.getItem(NT_SOUND) !== '0'; } catch(e){ return false; } }
+
+  function ntSaveSeen(key){
+    if(!key) return;
+    ntSeen = key;
+    try { localStorage.setItem(NT_SEEN, key); } catch(e){ /* 사생활 보호 모드 등 */ }
+  }
+
+  function ntPaint(){
+    var b = $('ibBadge');
+    if(b){
+      b.textContent = ntCount > 99 ? '99+' : String(ntCount);
+      b.hidden = ntCount < 1;
+    }
+    document.title = ntCount > 0 ? '(' + ntCount + ') ' + ntTitle : ntTitle;
+  }
+
+  /* 짧은 두 음짜리 알림음 — 파일을 받아오지 않고 그 자리에서 만듭니다 */
+  function ntBeep(){
+    if(!ntSoundOn()) return;
+    try{
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return;
+      var c = new AC();
+      [880, 1174.7].forEach(function(hz, i){
+        var t = c.currentTime + i * 0.14;
+        var o = c.createOscillator(), g = c.createGain();
+        o.type = 'sine'; o.frequency.value = hz;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.16, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.24);
+        o.connect(g); g.connect(c.destination);
+        o.start(t); o.stop(t + 0.26);
+      });
+      setTimeout(function(){ try{ c.close(); }catch(e){} }, 1000);
+    }catch(e){ /* 소리가 안 나도 알림 자체는 뜹니다 */ }
+  }
+
+  function ntPaintAlert(){
+    var box = $('ibAlert');
+    if(!box) return;
+
+    if(!ntCan()){
+      box.className = 'ib-alert';
+      box.innerHTML = '<span class="txt">이 브라우저는 알림창을 띄우지 못합니다. ' +
+        '위쪽 <b>문의함</b> 탭에 빨간 숫자로 알려 드립니다.</span>';
+      return;
+    }
+
+    if(Notification.permission === 'granted'){
+      box.className = 'ib-alert on';
+      box.innerHTML = '<span class="txt"><b>알림 켜짐</b> — 이 대쉬보드를 열어 두시면 ' +
+        '새 문의가 들어오는 대로 알림창이 뜹니다. (1~2분 안에)</span>' +
+        '<label class="ib-snd"><input type="checkbox" id="ntSound"' +
+        (ntSoundOn() ? ' checked' : '') + '> 알림음</label>';
+      $('ntSound').addEventListener('change', function(){
+        try { localStorage.setItem(NT_SOUND, this.checked ? '1' : '0'); } catch(e){}
+        if(this.checked) ntBeep();
+      });
+      return;
+    }
+
+    if(Notification.permission === 'denied'){
+      box.className = 'ib-alert off';
+      box.innerHTML = '<span class="txt"><b>알림창이 막혀 있습니다.</b> ' +
+        '주소창 왼쪽 자물쇠를 누르고 “알림”을 <b>허용</b>으로 바꿔 주시면 됩니다. ' +
+        '그동안에도 문의함 탭의 빨간 숫자는 그대로 뜹니다.</span>';
+      return;
+    }
+
+    box.className = 'ib-alert off';
+    box.innerHTML = '<span class="txt"><b>새 문의가 오면 바로 알려 드릴까요?</b> ' +
+      '한 번만 허용해 주시면, 이 대쉬보드를 열어 두시는 동안 알림창이 뜹니다.</span>' +
+      '<button type="button" class="btn sm" id="ntAsk">알림 켜기</button>';
+    $('ntAsk').addEventListener('click', function(){
+      try{
+        var r = Notification.requestPermission(function(){ ntPaintAlert(); });
+        if(r && r.then) r.then(function(){ ntPaintAlert(); ntBeep(); });
+      }catch(e){ toast('알림을 켜지 못했습니다.', true); }
+    });
+  }
+
+  function ntPopup(목록){
+    if(!ntAllowed() || !목록 || !목록.length) return;
+    var 처음보는것 = 목록.filter(function(x){ return !ntShown[x.key]; });
+    if(!처음보는것.length) return;
+    처음보는것.forEach(function(x){ ntShown[x.key] = 1; });
+
+    var 첫 = 처음보는것[0];
+    var 이름 = (IB_KIND[첫.kind] || {}).이름 || '문의';
+    var 제목 = 처음보는것.length > 1 ? '새 문의 ' + 처음보는것.length + '건' : '새 ' + 이름;
+    var 본문 = (첫.요약 || 이름) +
+      (처음보는것.length > 1 ? ' 외 ' + (처음보는것.length - 1) + '건' : '');
+    try{
+      var n = new Notification(제목, { body: 본문, tag: 'euf-inbox' });
+      n.onclick = function(){
+        try{ window.focus(); }catch(e){}
+        switchTab('inbox');
+        try{ n.close(); }catch(e){}
+      };
+      setTimeout(function(){ try{ n.close(); }catch(e){} }, 15000);
+    }catch(e){ /* 알림창이 안 떠도 뱃지는 그대로 있습니다 */ }
+    ntBeep();
+  }
+
+  function ntCheck(){
+    if(!token) return;
+    ibCall({ action:'count', since: ntSeen })
+      .then(function(j){
+        if(!j || j.ok !== true) return;
+
+        /* 처음 켜신 날 — 그동안 쌓여 있던 걸 몽땅 알리지는 않습니다 */
+        if(j.처음){
+          ntSaveSeen(j.최신열쇠 || '');
+          ntCount = 0; ntPaint();
+          return;
+        }
+
+        (j.새목록 || []).forEach(function(x){ ntNewKeys[x.key] = 1; });
+        ntCount = j.새건수 || 0;
+        ntPaint();
+
+        if(ntCount > 0){
+          ntPopup(j.새목록 || []);
+          /* 문의함을 보고 계시면 알아서 새로고침해 드립니다 */
+          if(tab === 'inbox') ibLoad();
+        }
+      })
+      .catch(function(){ /* 잠깐 안 되는 것은 조용히 넘어갑니다 */ });
+  }
+
+  function ntSchedule(){
+    if(ntTimer) clearTimeout(ntTimer);
+    /* 화면을 보고 계실 땐 1분, 다른 일 하고 계실 땐 2분마다 봅니다 */
+    var 간격 = document.hidden ? 120000 : 60000;
+    ntTimer = setTimeout(function(){ ntCheck(); ntSchedule(); }, 간격);
+  }
+
+  function ntStart(){
+    try { ntSeen = localStorage.getItem(NT_SEEN) || ''; } catch(e){ ntSeen = ''; }
+    ntShown = {}; ntNewKeys = {}; ntCount = 0;
+    ntPaint(); ntPaintAlert();
+    ntCheck();
+    ntSchedule();
+  }
+
+  function ntStop(){
+    if(ntTimer) clearTimeout(ntTimer);
+    ntTimer = null;
+    ntCount = 0; ntNewKeys = {}; ntShown = {};
+    ntPaint();
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if(!token) return;
+    if(!document.hidden) ntCheck();
+    ntSchedule();
+  });
 
   /* ---------------------------------------------------- 방문 통계 */
   /*
