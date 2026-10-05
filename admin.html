@@ -184,6 +184,84 @@
     .row .m.hide-s{ display:none; }
   }
 
+
+  /* ---------- 일정 만들기 품목 ---------- */
+  .bd-warn{ display:flex; gap:12px; align-items:flex-start; padding:14px 18px; margin-bottom:18px;
+    border:1.5px solid #FBDCBC; background:#FFF6EC; border-radius:12px; }
+  .bd-warn .txt{ font-size:13px; font-weight:600; line-height:1.75; color:var(--muted); }
+  .bd-warn .txt b{ color:#8A4A06; font-weight:800; }
+  .bd-set{ display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:14px 18px; margin-bottom:18px; }
+  .bd-set .f{ display:flex; flex-direction:column; gap:6px; }
+  .bd-set label{ font-size:12px; font-weight:800; color:var(--muted); }
+  .bd-set input[type=number], .bd-set input[type=text]{ padding:9px 12px; border:2px solid var(--line);
+    border-radius:10px; font:inherit; font-size:13.5px; font-weight:700; color:var(--ink); background:#fff; }
+  .bd-set input:focus{ border-color:var(--violet); outline:none; }
+  .bd-note{ width:100%; min-height:62px; padding:10px 12px; border:2px solid var(--line); border-radius:10px;
+    font:inherit; font-size:13px; font-weight:600; line-height:1.7; color:var(--ink); resize:vertical; }
+  .bd-note:focus{ border-color:var(--violet); outline:none; }
+  .bd-sw{ display:flex; gap:9px; align-items:center; cursor:pointer; padding:11px 14px;
+    border:1.5px solid var(--line); border-radius:12px; background:#FAFAFE; }
+  .bd-sw.on{ border-color:#B7ECDE; background:#E7F9F5; }
+  .bd-sw input{ width:16px; height:16px; accent-color:var(--violet); cursor:pointer; flex:none; }
+  .bd-sw span{ font-size:12.5px; font-weight:800; color:var(--navy); line-height:1.5; }
+  .bd-sw em{ display:block; font-style:normal; font-size:11.5px; font-weight:600; color:var(--muted); }
+
+
+  .bd-via{ display:flex; gap:9px; align-items:center; flex-wrap:wrap; padding:10px 12px; margin-bottom:8px;
+    border:1.5px solid var(--line); border-radius:12px; background:#fff; }
+  .bd-via select, .bd-via input{ padding:8px 11px; border:2px solid var(--line); border-radius:9px;
+    font:inherit; font-size:13px; font-weight:700; color:var(--ink); background:#fff; min-width:0; }
+  .bd-via select{ flex:0 0 130px; }
+  .bd-via input.spot{ flex:1 1 150px; }
+  .bd-via select:focus, .bd-via input:focus{ border-color:var(--violet); outline:none; }
+  .bd-via i{ font-style:normal; font-weight:800; color:var(--muted); }
+  .bd-via .mid{ font-size:12px; font-weight:800; color:var(--muted); }
+  .bd-via .rm{ all:unset; cursor:pointer; margin-left:auto; padding:6px 11px; border-radius:8px;
+    font-size:11.5px; font-weight:800; color:var(--muted); border:1.5px solid var(--line); }
+  .bd-via .rm:hover{ color:var(--danger); border-color:#F6D3DE; }
+  .bd-cities{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:22px; }
+  .bd-chip{ display:inline-flex; gap:7px; align-items:center; padding:6px 10px 6px 13px; border-radius:999px;
+    background:#EFEAFD; color:#4B21B5; font-size:12.5px; font-weight:800; }
+  .bd-chip button{ all:unset; cursor:pointer; width:16px; height:16px; line-height:15px; text-align:center;
+    border-radius:50%; background:rgba(75,33,181,.16); font-size:12px; }
+  .bd-cities input{ width:120px; padding:7px 11px; border:2px solid var(--line); border-radius:999px;
+    font:inherit; font-size:12.5px; font-weight:700; }
+  .bd-cities input:focus{ border-color:var(--violet); outline:none; }
+
+  .bd-sec{ margin-top:26px; }
+  .bd-sec h3{ margin:0 0 4px; font-size:15px; font-weight:800; color:var(--navy); }
+  .bd-sec .how{ margin:0 0 12px; font-size:12.5px; font-weight:600; color:var(--muted); line-height:1.7; }
+  .bd-sec .how code{ background:#F3F1FB; padding:1px 6px; border-radius:5px; font-size:11.5px; }
+  .bd-row{ display:flex; gap:9px; align-items:center; flex-wrap:wrap; padding:10px 12px; margin-bottom:8px;
+    border:1.5px solid var(--line); border-radius:12px; background:#fff; }
+  .bd-row.off{ opacity:.55; background:#FAFAFC; }
+  .bd-row input[type=text], .bd-row input[type=number], .bd-row select{ padding:8px 11px; border:2px solid var(--line);
+    border-radius:9px; font:inherit; font-size:13px; font-weight:700; color:var(--ink); background:#fff; min-width:0; }
+  .bd-row input:focus, .bd-row select:focus{ border-color:var(--violet); outline:none; }
+  .bd-row .nm{ flex:2 1 170px; }
+  .bd-row .ct{ flex:0 0 125px; }
+  .bd-row .ds{ flex:3 1 200px; font-weight:600; }
+  .bd-money{ display:flex; align-items:center; gap:0; flex:0 0 118px; }
+  .bd-money b{ padding:8px 9px; border:2px solid var(--line); border-right:none; border-radius:9px 0 0 9px;
+    background:#F6F5FC; font-size:12.5px; color:var(--muted); }
+  .bd-money input{ width:100%; border-radius:0 9px 9px 0 !important; text-align:right;
+    font-variant-numeric:tabular-nums; }
+  .bd-unit{ flex:0 0 auto; font-size:11.5px; font-weight:800; color:var(--muted); white-space:nowrap; }
+  .bd-row .on{ display:flex; gap:5px; align-items:center; font-size:11.5px; font-weight:800; color:var(--muted); cursor:pointer; }
+  .bd-row .on input{ width:15px; height:15px; accent-color:var(--violet); cursor:pointer; }
+  .bd-row .rm{ all:unset; cursor:pointer; margin-left:auto; padding:6px 11px; border-radius:8px; font-size:11.5px;
+    font-weight:800; color:var(--muted); border:1.5px solid var(--line); }
+  .bd-row .rm:hover{ color:var(--danger); border-color:#F6D3DE; }
+  .bd-add{ all:unset; cursor:pointer; padding:8px 14px; border-radius:10px; font-size:12.5px; font-weight:800;
+    color:var(--violet); border:1.5px dashed #C9BDF7; background:#FBFAFF; }
+  .bd-add:hover{ background:#F3EFFE; }
+  .bd-none{ padding:14px 16px; border:1.5px dashed var(--line); border-radius:12px; margin-bottom:8px;
+    font-size:12.5px; font-weight:600; color:var(--muted); }
+  @media (max-width:620px){
+    .bd-row .ct, .bd-money{ flex:1 1 46%; }
+    .bd-row .rm{ margin-left:0; }
+  }
+
   /* ---------- 쓰레드 광고 ---------- */
   .th-status{ display:flex; align-items:center; gap:14px; flex-wrap:wrap;
     padding:16px 18px; border-radius:14px; border:1.5px solid var(--line); background:#FAF9FE; }
@@ -431,6 +509,7 @@
     <button type="button" data-tab="concerts">공연 일정</button>
     <button type="button" data-tab="fares">교통 요금</button>
     <button type="button" data-tab="costsheets">원가표 · 마진</button>
+    <button type="button" data-tab="builder">일정 품목</button>
     <button type="button" data-tab="threads">쓰레드 광고</button>
     <button type="button" data-tab="pages">페이지 갱신</button>
     <button type="button" data-tab="inbox">문의함<span class="tab-badge" id="ibBadge" hidden>0</span></button>
@@ -629,6 +708,26 @@
     </div>
 
     <!-- ---------- 쓰레드 광고 ---------- -->
+    <!-- ---------- 일정 만들기 품목 ---------- -->
+    <div class="panel" id="p-builder">
+      <div class="card">
+        <h2>일정 만들기 품목</h2>
+        <div class="sub">
+          홈페이지 “일정 만들기”에서 손님이 고를 수 있는 항목과 금액입니다.
+          여기에 넣은 것만 손님 화면에 나타납니다.
+        </div>
+
+        <div class="bd-warn">
+          <span class="txt"><b>여기 적는 금액에 아래 “회사 몫 — 마진 (%)” 를 얹은 금액이 손님에게 보입니다.</b><br>
+          마진을 한 곳에서 관리하시려면 여기엔 <b>수배가(원가)</b> 를 넣고 마진 칸에서 얹으시고,
+          항목마다 따로 얹으시려면 마진을 <b>0</b> 으로 두세요. 두 번 얹히지 않게 한쪽만 쓰시면 됩니다.<br>
+          손님 화면에는 합계 한 줄만 뜨지만, 여러 번 골라 보면 항목별 금액을 되짚을 수 있습니다.</span>
+        </div>
+
+        <div id="bdBody"><div class="empty">불러오는 중…</div></div>
+      </div>
+    </div>
+
     <div class="panel" id="p-threads">
       <div class="card">
         <h2>쓰레드 연결</h2>
@@ -885,7 +984,8 @@
     products: { data:null, orig:null, sha:null, loaded:false },
     concerts: { data:null, orig:null, sha:null, loaded:false },
     fares:    { data:null, orig:null, sha:null, loaded:false },
-    costsheets:{ data:null, orig:null, sha:null, loaded:false }
+    costsheets:{ data:null, orig:null, sha:null, loaded:false },
+    builder:  { data:null, orig:null, sha:null, loaded:false }
   };
   var editingIndex = -1;
 
@@ -930,7 +1030,8 @@
     var on = changed();
     $('savebar').hidden = !on;
     if(on){
-      var n = { products:'상품', concerts:'공연', fares:'요금 구간', costsheets:'원가표' }[tab];
+      var n = { products:'상품', concerts:'공연', fares:'요금 구간', costsheets:'원가표',
+                builder:'일정 품목' }[tab];
       $('saveNote').innerHTML = '<b>저장하지 않은 변경</b>이 있습니다 · ' + n;
     }
   }
@@ -1012,6 +1113,7 @@
     if(name === 'concerts') renderConcerts();
     if(name === 'fares') renderFares();
     if(name === 'costsheets') renderCost();
+    if(name === 'builder') renderBuilder();
     if(name === 'threads') renderThreads();
     if(name === 'pages') renderPages();
     if(name === 'inbox') renderInbox();
@@ -1887,6 +1989,345 @@
     pgCheckMatches();
   }
 
+
+  /* ---------------------------------------------------- 일정 만들기 품목 */
+  /*
+    손님이 홈페이지에서 고를 수 있는 항목들입니다.
+    종류마다 "금액을 세는 방법(단위)" 이 정해져 있어서 따로 고르실 필요가 없습니다.
+
+      입장지  1인당       — 한 사람이 한 번
+      숙박    1인 1박
+      식사    1인 1회
+      차량    1일 그룹당  — 하루치 전체 금액 (인원수로 나눠 1인당에 반영)
+      가이드  1일 그룹당
+
+    고치면 바로 위쪽 "저장하고 배포" 띠가 뜹니다. 저장해야 손님 화면에 반영됩니다.
+  */
+  var BD_KINDS = [
+    { k:'입장지', 단위:'1인당',      도시:true,
+      how:'손님이 날짜마다 골라 담습니다. 도시를 정해 두면 그 날 고른 도시의 입장지만 보입니다.' },
+    { k:'숙박',   단위:'1인 1박',    도시:false,
+      how:'손님은 등급 하나만 고릅니다. 2인 1실 기준 1박 금액을 넣어 주세요. 숙박 수는 (여행일수 − 1)로 셉니다.' },
+    { k:'식사',   단위:'1인 1회',    도시:false,
+      how:'손님이 날짜마다 끼니를 골라 담습니다. 한 사람 한 끼 금액을 넣어 주세요.' },
+    { k:'차량',   단위:'1일 그룹당', 도시:false,
+      how:'하루치 차량 전체 금액입니다. 인원수로 나눠 1인당에 반영됩니다. 손님이 “종일 자유시간” 으로 둔 날은 빠집니다.' },
+    { k:'가이드', 단위:'1일 그룹당', 도시:false,
+      how:'하루치 가이드 전체 금액입니다. 인원수로 나눠 반영됩니다. 손님이 “종일 자유시간” 으로 둔 날은 빠집니다.' },
+    { k:'기차',   단위:'1인당 · 구간',  도시:false,
+      how:'도시 사이를 옮기는 고속철도(AVE 등) 구간입니다. 이름은 “마드리드 → 바르셀로나” 처럼 적어 주세요.' },
+    { k:'항공',   단위:'1인당 · 구간',  도시:false,
+      how:'기차로 가기 먼 구간의 비행기 삯입니다. 이름은 “바르셀로나 → 리스본” 처럼 적어 주세요.' }
+  ];
+
+  /* 불러온 내용이 비었거나 모양이 달라도 화면이 깨지지 않게 손봐 둡니다 */
+  function bdData(){
+    var st = store.builder;
+    if(!st.data || typeof st.data !== 'object' || Array.isArray(st.data)) st.data = {};
+    var d = st.data;
+    if(!d.설정 || typeof d.설정 !== 'object' || Array.isArray(d.설정)) d.설정 = {};
+    var g = d.설정;
+    if(typeof g.공개 !== 'boolean') g.공개 = false;
+    if(typeof g.항목금액보이기 !== 'boolean') g.항목금액보이기 = false;
+    if(typeof g.공차하루추가 !== 'boolean') g.공차하루추가 = true;
+    if(!g.기호) g.기호 = '€';
+    [['기본인원',20],['최소인원',4],['최대인원',45],['기본일수',7],['최대일수',20],
+     ['싱글차지비율',80],['로컬가이드인원',7]].forEach(function(x){
+      if(!(Number(g[x[0]]) > 0)) g[x[0]] = x[1];
+    });
+    /* 0 을 넣으실 수도 있어서 따로 봅니다 */
+    if(!(Number(g.마진비율) >= 0)) g.마진비율 = 5;
+    if(!(Number(g.로컬가이드요금) >= 0)) g.로컬가이드요금 = 580;
+    if(!(Number(g.미팅가이드요금) >= 0)) g.미팅가이드요금 = 250;
+    if(!(Number(g.미팅차량요금) >= 0)) g.미팅차량요금 = 300;
+    if(typeof g.숙박조건 !== 'string') g.숙박조건 = '시내에서 20km 이내 호텔로 잡아 드립니다.';
+    if(typeof g.안내문 !== 'string' || !g.안내문){
+      g.안내문 = '예상 금액입니다. 호텔 상황과 환율, 출발일에 따라 달라질 수 있어 최종 금액은 확인 후 안내드립니다.';
+    }
+    if(!Array.isArray(d.도시)) d.도시 = [];
+    if(!Array.isArray(d.품목)) d.품목 = [];
+    if(!Array.isArray(d.경유)) d.경유 = [];
+    d.품목.forEach(function(it){
+      if(!it.id) it.id = bdNewId();
+      if(typeof it.공개 !== 'boolean') it.공개 = true;
+    });
+    return d;
+  }
+
+  function bdNewId(){
+    return 'b' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  }
+
+  function bdKind(k){
+    for(var i=0;i<BD_KINDS.length;i++) if(BD_KINDS[i].k === k) return BD_KINDS[i];
+    return BD_KINDS[0];
+  }
+
+  function bdSetBox(){
+    var g = bdData().설정;
+    return '' +
+      '<div class="bd-set">' +
+        '<label class="bd-sw' + (g.공개 ? ' on' : '') + '">' +
+          '<input type="checkbox" data-g="공개"' + (g.공개 ? ' checked' : '') + '>' +
+          '<span>손님 화면 공개<em>' + (g.공개 ? '열려 있습니다' : '꺼 두면 “준비 중” 으로 보입니다') + '</em></span>' +
+        '</label>' +
+        '<label class="bd-sw' + (g.항목금액보이기 ? ' on' : '') + '">' +
+          '<input type="checkbox" data-g="항목금액보이기"' + (g.항목금액보이기 ? ' checked' : '') + '>' +
+          '<span>항목별 금액 보이기<em>' + (g.항목금액보이기 ? '항목 옆에 금액이 뜹니다' : '합계 한 줄만 보입니다') + '</em></span>' +
+        '</label>' +
+        '<label class="bd-sw' + (g.공차하루추가 ? ' on' : '') + '">' +
+          '<input type="checkbox" data-g="공차하루추가"' + (g.공차하루추가 ? ' checked' : '') + '>' +
+          '<span>공차 하루 더하기<em>' +
+          (g.공차하루추가 ? '출발지·도착지가 다르면 차량 1일 추가' : '안 더합니다') + '</em></span>' +
+        '</label>' +
+        '<div class="f"><label>기본 인원</label>' +
+          '<input type="number" min="1" data-g="기본인원" value="' + Number(g.기본인원) + '"></div>' +
+        '<div class="f"><label>최대 인원</label>' +
+          '<input type="number" min="1" data-g="최대인원" value="' + Number(g.최대인원) + '"></div>' +
+        '<div class="f"><label>기본 여행일수</label>' +
+          '<input type="number" min="1" data-g="기본일수" value="' + Number(g.기본일수) + '"></div>' +
+        '<div class="f"><label>최대 여행일수</label>' +
+          '<input type="number" min="1" data-g="최대일수" value="' + Number(g.최대일수) + '"></div>' +
+        '<div class="f"><label>싱글룸 추가요금 (%)</label>' +
+          '<input type="number" min="0" max="200" data-g="싱글차지비율" value="' +
+            Number(g.싱글차지비율) + '"></div>' +
+        '<div class="f"><label>회사 몫 — 마진 (%)</label>' +
+          '<input type="number" min="0" max="100" step="0.5" data-g="마진비율" value="' +
+            Number(g.마진비율) + '"></div>' +
+        '<div class="f"><label>현지 가이드 — 이 인원부터</label>' +
+          '<input type="number" min="1" data-g="로컬가이드인원" value="' +
+            Number(g.로컬가이드인원) + '"></div>' +
+        '<div class="f"><label>현지 가이드 요금 (단체당 1회)</label>' +
+          '<input type="number" min="0" data-g="로컬가이드요금" value="' +
+            Number(g.로컬가이드요금) + '"></div>' +
+        '<div class="f"><label>공항 가이드 미팅 (1회)</label>' +
+          '<input type="number" min="0" data-g="미팅가이드요금" value="' +
+            Number(g.미팅가이드요금) + '"></div>' +
+        '<div class="f"><label>공항 이동 차량 (1회)</label>' +
+          '<input type="number" min="0" data-g="미팅차량요금" value="' +
+            Number(g.미팅차량요금) + '"></div>' +
+      '</div>' +
+      '<div class="f" style="margin-bottom:18px;">' +
+        '<label style="font-size:12px;font-weight:800;color:var(--muted);display:block;margin-bottom:6px;">' +
+          '숙박 조건 — 손님 화면 숙박 설명에 붙습니다</label>' +
+        '<input type="text" data-g="숙박조건" value="' + esc(g.숙박조건) + '" ' +
+          'style="width:100%;padding:10px 13px;border:2px solid var(--line);border-radius:10px;' +
+          'font:inherit;font-size:13.5px;font-weight:600;color:var(--ink);"></div>' +
+      '<div class="f" style="margin-bottom:22px;">' +
+        '<label style="font-size:12px;font-weight:800;color:var(--muted);display:block;margin-bottom:6px;">' +
+          '합계 밑에 적을 안내문</label>' +
+        '<textarea class="bd-note" data-g="안내문">' + esc(g.안내문) + '</textarea>' +
+      '</div>';
+  }
+
+  function bdCityBox(){
+    var d = bdData();
+    var chips = d.도시.map(function(c, i){
+      return '<span class="bd-chip">' + esc(c) +
+             '<button type="button" data-city-del="' + i + '" title="지우기">&times;</button></span>';
+    }).join('');
+    return '<div class="f" style="margin-bottom:6px;">' +
+             '<label style="font-size:12px;font-weight:800;color:var(--muted);">도시 — 입장지를 묶는 데 씁니다</label>' +
+           '</div>' +
+           '<div class="bd-cities">' + chips +
+             '<input type="text" id="bdCityNew" placeholder="도시 이름" maxlength="20">' +
+             '<button type="button" class="bd-add" data-city-add>추가</button>' +
+           '</div>';
+  }
+
+  /*
+    가는 길에 들르는 곳 — 두 도시를 오갈 때 사이에 끼워 보여 줄 곳입니다.
+    손님 화면에는 "세비야 → 그라나다 가는 길에 론다 들렀다 가기" 로 뜨고,
+    따로 비용이 붙지는 않습니다 (지나는 길이라서요).
+  */
+  function bdViaBox(){
+    var d = bdData();
+    var 고르기 = function(값, f, i){
+      return '<select data-via="' + i + '" data-vf="' + f + '">' +
+        '<option value="">도시</option>' +
+        d.도시.map(function(c){
+          return '<option value="' + esc(c) + '"' + (값 === c ? ' selected' : '') + '>' + esc(c) + '</option>';
+        }).join('') + '</select>';
+    };
+    var 줄 = d.경유.map(function(v, i){
+      return '<div class="bd-via">' +
+        고르기(v.a, 'a', i) + '<i>↔</i>' + 고르기(v.b, 'b', i) +
+        '<span class="mid">사이에</span>' +
+        '<input type="text" class="spot" data-via="' + i + '" data-vf="via" placeholder="들를 곳" value="' +
+          esc(v.via || '') + '">' +
+        '<button type="button" class="rm" data-via-rm="' + i + '">지우기</button>' +
+      '</div>';
+    }).join('');
+    return '<div class="bd-sec">' +
+      '<h3>가는 길에 들르는 곳</h3>' +
+      '<p class="how">두 도시를 오갈 때 사이에 끼워 보여 줍니다. 손님 화면에 ' +
+      '“세비야 → 그라나다 가는 길에 <b>론다</b> 들렀다 가기” 로 뜨고, 손님이 끄고 켤 수 있습니다. ' +
+      '<b>따로 비용이 붙지는 않습니다.</b> 들를 곳 이름이 지도에 있는 이름과 같으면 지도에도 찍힙니다.</p>' +
+      (줄 || '<div class="bd-none">아직 없습니다. 아래 단추로 하나 넣어 보세요.</div>') +
+      '<button type="button" class="bd-add" data-via-add>+ 가는 길 추가</button>' +
+    '</div>';
+  }
+
+  function bdRow(it, kind, cities){
+    var city = '';
+    if(kind.도시){
+      var opts = '<option value="">도시 없음</option>' + cities.map(function(c){
+        return '<option value="' + esc(c) + '"' + (it.도시 === c ? ' selected' : '') + '>' + esc(c) + '</option>';
+      }).join('');
+      city = '<select class="ct" data-f="도시">' + opts + '</select>';
+    }
+    return '<div class="bd-row' + (it.공개 ? '' : ' off') + '" data-id="' + esc(it.id) + '">' +
+      '<input type="text" class="nm" data-f="이름" placeholder="항목 이름" value="' + esc(it.이름 || '') + '">' +
+      city +
+      '<div class="bd-money"><b>' + esc(bdData().설정.기호) + '</b>' +
+        '<input type="number" min="0" step="0.01" data-f="금액" value="' +
+        (Number(it.금액) > 0 ? Number(it.금액) : '') + '" placeholder="0"></div>' +
+      '<span class="bd-unit">' + esc(kind.단위) + '</span>' +
+      '<input type="text" class="ds" data-f="설명" placeholder="손님에게 보일 한 줄 설명 (안 쓰셔도 됩니다)" value="' +
+        esc(it.설명 || '') + '">' +
+      '<label class="on"><input type="checkbox" data-f="공개"' + (it.공개 ? ' checked' : '') + '>공개</label>' +
+      '<button type="button" class="rm" data-rm>지우기</button>' +
+    '</div>';
+  }
+
+  function renderBuilder(){
+    var box = $('bdBody');
+    if(!box) return;
+    if(!store.builder.loaded){ box.innerHTML = '<div class="empty">불러오는 중…</div>'; return; }
+
+    var d = bdData();
+    var html = bdSetBox() + bdCityBox();
+
+    BD_KINDS.forEach(function(kind){
+      var list = d.품목.filter(function(x){ return x.종류 === kind.k; });
+      html += '<div class="bd-sec">' +
+        '<h3>' + esc(kind.k) + ' <span style="font-size:11.5px;color:var(--muted);font-weight:700;">· ' +
+          esc(kind.단위) + '</span></h3>' +
+        '<p class="how">' + kind.how + '</p>' +
+        (list.length ? list.map(function(it){ return bdRow(it, kind, d.도시); }).join('')
+                     : '<div class="bd-none">아직 없습니다. 아래 단추로 하나 넣어 보세요.</div>') +
+        '<button type="button" class="bd-add" data-add="' + esc(kind.k) + '">+ ' + esc(kind.k) + ' 추가</button>' +
+      '</div>';
+    });
+
+    html += bdViaBox();
+
+    box.innerHTML = html;
+  }
+
+  /* 입력이 바뀔 때마다 그 자리에서 자료에 옮겨 적습니다 (화면은 다시 그리지 않습니다) */
+  function bdOnEdit(e){
+    var t = e.target;
+    var d = bdData();
+
+    /* 위쪽 설정 */
+    if(t.dataset && t.dataset.g){
+      var key = t.dataset.g;
+      if(t.type === 'checkbox'){
+        d.설정[key] = t.checked;
+        var sw = t.closest('.bd-sw');
+        if(sw) sw.classList.toggle('on', t.checked);
+        var em = sw && sw.querySelector('em');
+        if(em){
+          em.textContent =
+            key === '공개'       ? (t.checked ? '열려 있습니다' : '꺼 두면 “준비 중” 으로 보입니다') :
+            key === '공차하루추가' ? (t.checked ? '출발지·도착지가 다르면 차량 1일 추가' : '안 더합니다') :
+                                   (t.checked ? '항목 옆에 금액이 뜹니다' : '합계 한 줄만 보입니다');
+        }
+      } else if(t.type === 'number'){
+        var n = Number(t.value);
+        d.설정[key] = n > 0 ? n : 1;
+      } else {
+        d.설정[key] = t.value;
+      }
+      refreshSaveBar();
+      return;
+    }
+
+    /* 가는 길에 들르는 곳 */
+    if(t.dataset && t.dataset.via !== undefined && t.dataset.vf){
+      var v = d.경유[Number(t.dataset.via)];
+      if(v){ v[t.dataset.vf] = t.value; refreshSaveBar(); }
+      return;
+    }
+
+    /* 품목 한 줄 */
+    var row = t.closest ? t.closest('.bd-row') : null;
+    if(!row || !t.dataset || !t.dataset.f) return;
+    var it = d.품목.filter(function(x){ return x.id === row.dataset.id; })[0];
+    if(!it) return;
+    var f = t.dataset.f;
+    if(f === '공개'){
+      it.공개 = t.checked;
+      row.classList.toggle('off', !t.checked);
+    } else if(f === '금액'){
+      var v = Number(t.value);
+      it.금액 = v > 0 ? v : 0;
+    } else {
+      it[f] = t.value;
+    }
+    refreshSaveBar();
+  }
+
+  function bdOnClick(e){
+    var t = e.target;
+    var d = bdData();
+
+    /* 도시 추가 */
+    if(t.hasAttribute && t.hasAttribute('data-city-add')){
+      var inp = $('bdCityNew');
+      var name = (inp.value || '').trim();
+      if(!name){ inp.focus(); return; }
+      if(d.도시.indexOf(name) !== -1){ toast('이미 있는 도시입니다.', true); return; }
+      d.도시.push(name);
+      renderBuilder(); refreshSaveBar();
+      return;
+    }
+    /* 도시 지우기 */
+    if(t.dataset && t.dataset.cityDel !== undefined){
+      var i = Number(t.dataset.cityDel);
+      var 도시 = d.도시[i];
+      var 쓰는것 = d.품목.filter(function(x){ return x.도시 === 도시; }).length;
+      if(쓰는것 && !confirm('“' + 도시 + '” 를 쓰는 입장지가 ' + 쓰는것 + '개 있습니다.\n그 항목들의 도시는 비워집니다. 지울까요?')) return;
+      d.품목.forEach(function(x){ if(x.도시 === 도시) x.도시 = ''; });
+      d.도시.splice(i, 1);
+      renderBuilder(); refreshSaveBar();
+      return;
+    }
+    /* 가는 길 추가 · 지우기 */
+    if(t.hasAttribute && t.hasAttribute('data-via-add')){
+      d.경유.push({ a:'', b:'', via:'' });
+      renderBuilder(); refreshSaveBar();
+      return;
+    }
+    if(t.dataset && t.dataset.viaRm !== undefined){
+      d.경유.splice(Number(t.dataset.viaRm), 1);
+      renderBuilder(); refreshSaveBar();
+      return;
+    }
+
+    /* 품목 추가 */
+    if(t.dataset && t.dataset.add){
+      d.품목.push({ id: bdNewId(), 종류: t.dataset.add, 이름: '', 도시: '', 금액: 0, 설명: '', 공개: true });
+      renderBuilder(); refreshSaveBar();
+      var rows = document.querySelectorAll('#bdBody .bd-row');
+      if(rows.length){ var last = rows[rows.length - 1]; }
+      return;
+    }
+    /* 품목 지우기 */
+    if(t.hasAttribute && t.hasAttribute('data-rm')){
+      var row = t.closest('.bd-row');
+      if(!row) return;
+      var k = row.dataset.id;
+      var idx = -1;
+      d.품목.forEach(function(x, j){ if(x.id === k) idx = j; });
+      if(idx === -1) return;
+      d.품목.splice(idx, 1);
+      renderBuilder(); refreshSaveBar();
+      toast('지웠습니다. 저장하기 전이면 위 “되돌리기” 로 살릴 수 있습니다.');
+    }
+  }
+
   /* ---------------------------------------------------- 문의함 */
   /*
     손님이 보낸 내용이 그대로 들어 있는 곳입니다.
@@ -2087,6 +2528,21 @@
       $('ibBody').style.opacity = '';
     });
   }
+
+  (function bdBind(){
+    var box = document.getElementById('p-builder');
+    if(!box) return;
+    box.addEventListener('input', bdOnEdit);
+    box.addEventListener('change', bdOnEdit);
+    box.addEventListener('click', bdOnClick);
+    box.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' && e.target.id === 'bdCityNew'){
+        e.preventDefault();
+        var b = box.querySelector('[data-city-add]');
+        if(b) b.click();
+      }
+    });
+  })();
 
   function renderInbox(){
     ntPaintAlert();

@@ -1,0 +1,12 @@
+올리실 파일 (모두 덮어쓰기)
+
+  builder.html                     ← 저장소 맨 바깥
+  index.html                       ← 저장소 맨 바깥 (들어오는 카드·단추)
+  tours.html                       ← 저장소 맨 바깥 (들어오는 단추)
+  admin.html                       ← 저장소 맨 바깥
+  data/builder.json                ← data 폴더 안
+  netlify/functions/admin-api.js   ← netlify/functions 폴더 안  ★ 반드시 이 폴더 안에서 올려 주세요
+
+메뉴에는 넣지 않았습니다.
+품목을 다 채우시고 관리자 "일정 품목" 탭에서 "손님 화면 공개" 를 켜 주세요.
+켜기 전까지 손님에게는 "준비 중입니다" 로만 보입니다.

@@ -32,7 +32,33 @@ const FILES = {
   fares:      'data/fares.json',
   costsheets: 'data/costsheets.json',
   threadsauto: 'data/threads-auto.json',   /* 쓰레드 요일별 자동 발행 설정 */
+  builder:    'data/builder.json',         /* 손님용 일정 만들기 — 고를 수 있는 품목과 금액 */
 };
+
+/*
+  대부분의 파일은 목록(배열)이지만, 아래 둘은 설정 덩어리(객체)입니다.
+  저장할 때 "배열이 아니다" 고 퇴짜 놓지 않도록 따로 적어 둡니다.
+*/
+const 덩어리파일 = ['threadsauto', 'builder'];
+
+/* 아직 파일이 없을 때 돌려줄 빈 모양 */
+const 빈모양 = {
+  threadsauto: null,
+  builder: {
+    설정: {
+      공개: false, 기호: '€',
+      기본인원: 20, 최소인원: 4, 최대인원: 45,
+      기본일수: 7, 최대일수: 20,
+      항목금액보이기: false,
+      안내문: '예상 금액입니다. 호텔 상황과 환율, 출발일에 따라 달라질 수 있어 최종 금액은 확인 후 안내드립니다.',
+    },
+    도시: [],
+    품목: [],
+  },
+};
+function 빈것(file) {
+  return Object.prototype.hasOwnProperty.call(빈모양, file) ? 빈모양[file] : [];
+}
 
 /* 쓰레드 광고 이미지가 들어갈 폴더 — 이 아래로만 올릴 수 있게 막아요 */
 const IMG_DIR = 'images/threads/';
@@ -243,7 +269,7 @@ exports.handler = async function (event) {
       } catch (e) {
         // 아직 없는 파일(공연·요금)은 빈 목록으로 시작합니다
         if (e.status === 404) {
-          return json(200, { items: req.file === 'threadsauto' ? null : [], sha: null, isNew: true });
+          return json(200, { items: 빈것(req.file), sha: null, isNew: true });
         }
         throw e;
       }
@@ -251,7 +277,7 @@ exports.handler = async function (event) {
       if (req.file === 'products') {
         return json(200, { items: parseProducts(file.content), sha: file.sha });
       }
-      const fallback = req.file === 'threadsauto' ? 'null' : '[]';
+      const fallback = JSON.stringify(빈것(req.file));
       return json(200, { items: JSON.parse(file.content || fallback), sha: file.sha });
     }
 
@@ -315,7 +341,7 @@ exports.handler = async function (event) {
         대부분의 파일은 목록(배열)이지만, 쓰레드 자동 발행 설정만은
         켜짐·요일·시각을 담은 덩어리(객체)라서 따로 받아 줍니다.
       */
-      const wantsObject = req.file === 'threadsauto';
+      const wantsObject = 덩어리파일.indexOf(req.file) !== -1;
       if (wantsObject) {
         if (!req.items || typeof req.items !== 'object' || Array.isArray(req.items)) {
           return json(400, { error: '저장할 설정이 올바르지 않습니다' });
@@ -349,7 +375,8 @@ exports.handler = async function (event) {
       }
 
       const label = { products: '여행상품', concerts: '공연 일정', fares: '교통 요금표',
-                      costsheets: '원가표', threadsauto: '쓰레드 자동 발행 설정' }[req.file];
+                      costsheets: '원가표', threadsauto: '쓰레드 자동 발행 설정',
+                      builder: '일정 만들기 품목' }[req.file];
       const msg = `[관리자] ${label} 수정${note ? ' — ' + note : ''}`;
       const res = await writeFile(path, content, msg, sha);
 

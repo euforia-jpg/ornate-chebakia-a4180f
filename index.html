@@ -315,6 +315,51 @@ button.price-chip:hover{ opacity:.92; }
     border:1.5px solid rgba(255,255,255,.2); font-size:12.5px; font-weight:700; line-height:1.4; }
   @media (max-width:860px){ .mv-wide{ grid-template-columns:1fr; gap:22px; padding:26px 20px; }
     .mv-wide p{ margin-bottom:16px; } }
+
+  /* 일정 만들기 — 눈에 띄게 깜빡입니다 */
+  .cta.flash{ position:relative; background:linear-gradient(90deg,#6C3CE9,#8E6BFF);
+    border:none !important; color:#fff !important;
+    animation:eufFlash 1.9s ease-in-out infinite; }
+  .cta.flash .nu{ display:inline-block; margin-left:7px; padding:2px 7px; border-radius:999px;
+    background:rgba(255,255,255,.24); font-size:10.5px; font-weight:900; letter-spacing:.04em; }
+  @keyframes eufFlash{
+    0%,100%{ box-shadow:0 0 0 0 rgba(108,60,233,.55); filter:brightness(1); }
+    55%    { box-shadow:0 0 0 14px rgba(108,60,233,0); filter:brightness(1.13); }
+  }
+  @media (prefers-reduced-motion: reduce){ .cta.flash{ animation:none; } }
+
+  /* 첫 화면 일정 만들기 카드 */
+  .plan-card{ position:relative; overflow:hidden; border:none !important;
+    background:linear-gradient(145deg,#241662 0%,#6C3CE9 56%,#9150D6 100%);
+    color:#fff; padding:26px 26px 22px !important;
+    box-shadow:0 26px 54px -22px rgba(76,40,180,.62) !important; }
+  .plan-card::after{ content:''; position:absolute; right:-80px; top:-80px; width:240px; height:240px;
+    border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.20),transparent 70%);
+    pointer-events:none; }
+  .plan-card > *{ position:relative; z-index:1; }
+  .plan-card .pc-new{ display:inline-block; padding:4px 12px; border-radius:999px;
+    background:var(--teal); color:#06231F; font-size:11px; font-weight:900; letter-spacing:.06em; }
+  .plan-card h3{ margin:13px 0 7px; font-size:23px; font-weight:800; line-height:1.32;
+    letter-spacing:-.02em; color:#fff; }
+  .plan-card h3 em{ font-style:normal; color:#FFD9A8; }
+  .plan-card .pc-sub{ margin:0 0 17px; font-size:13.5px; font-weight:600; line-height:1.75;
+    color:rgba(255,255,255,.80); }
+  .plan-card .pc-chips{ display:flex; gap:7px; flex-wrap:wrap; margin-bottom:19px; }
+  .plan-card .pc-chips span{ padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:700;
+    background:rgba(255,255,255,.15); color:#fff; }
+  .plan-card .pc-go{ all:unset; display:block; box-sizing:border-box; text-align:center; cursor:pointer;
+    padding:15px 20px; border-radius:14px; background:#fff; color:#241662;
+    font-size:15px; font-weight:800; animation:pcPulse 2.3s ease-in-out infinite; }
+  .plan-card .pc-go:hover{ background:#F3EFFF; }
+  @keyframes pcPulse{
+    0%,100%{ box-shadow:0 0 0 0 rgba(255,255,255,.55); }
+    55%    { box-shadow:0 0 0 14px rgba(255,255,255,0); }
+  }
+  .plan-card .pc-foot{ margin-top:17px; padding-top:14px; border-top:1px solid rgba(255,255,255,.18);
+    display:flex; gap:10px; justify-content:space-between; flex-wrap:wrap;
+    font-size:12px; font-weight:600; color:rgba(255,255,255,.66); }
+  .plan-card .pc-foot b{ color:#fff; font-weight:800; }
+  @media (prefers-reduced-motion: reduce){ .plan-card .pc-go{ animation:none; } }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -384,14 +429,23 @@ button.price-chip:hover{ opacity:.92; }
         <a class="cta" href="tours.html">여행상품 보러가기</a>
         <a class="cta outline" href="contact.html">예약문의 하기</a>
         <a class="cta outline" href="plan.html">✨ AI 일정짜기</a>
+        <a class="cta flash" href="builder.html">일정 만들고 금액 보기<span class="nu">NEW</span></a>
       </div>
       <a class="app-badge" href="https://euforia-tour-restaurants.netlify.app/" target="_blank" rel="noopener">🍽️ 스페인·포르투갈 맛집 앱 보러가기</a>
     </div>
-    <div class="hero-card">
-      <div class="row"><span class="k">대표 여행 지역</span><span class="v">스페인 · 포르투갈 · 모로코</span></div>
-      <div class="row"><span class="k">여행상품 종류</span><span class="v" id="statProducts">0가지</span></div>
-      <div class="row"><span class="k">예약 방식</span><span class="v">문의 → 맞춤 견적 → 입금확인</span></div>
-      <div class="row"><span class="k">부가 서비스</span><span class="v">교통 예약 · 라리가 직관 · 공연</span></div>
+    <div class="hero-card plan-card">
+      <span class="pc-new">NEW</span>
+      <h3>원하는 일정을<br><em>직접 짜 보세요</em></h3>
+      <p class="pc-sub">가고 싶은 곳과 숙박 · 차량 · 가이드를 고르면<br>예상 금액이 그 자리에서 바로 나옵니다.</p>
+      <div class="pc-chips">
+        <span>입장지</span><span>숙박</span><span>차량</span><span>가이드</span>
+        <span>식사</span><span>기차 · 항공</span>
+      </div>
+      <a class="pc-go" href="builder.html">일정 만들고 금액 보기 →</a>
+      <div class="pc-foot">
+        <span>여행상품 <b id="statProducts">0가지</b></span>
+        <span>스페인 · 포르투갈 · 모로코</span>
+      </div>
     </div>
   </div>
   <div class="section">
