@@ -2030,6 +2030,7 @@
     if(typeof g.공개 !== 'boolean') g.공개 = false;
     if(typeof g.항목금액보이기 !== 'boolean') g.항목금액보이기 = false;
     if(typeof g.공차하루추가 !== 'boolean') g.공차하루추가 = true;
+    if(typeof g.AI추천 !== 'boolean') g.AI추천 = true;
     if(!g.기호) g.기호 = '€';
     [['기본인원',20],['최소인원',4],['최대인원',45],['기본일수',7],['최대일수',20],
      ['싱글차지비율',80],['로컬가이드인원',7]].forEach(function(x){
@@ -2079,6 +2080,11 @@
           '<input type="checkbox" data-g="공차하루추가"' + (g.공차하루추가 ? ' checked' : '') + '>' +
           '<span>공차 하루 더하기<em>' +
           (g.공차하루추가 ? '출발지·도착지가 다르면 차량 1일 추가' : '안 더합니다') + '</em></span>' +
+        '</label>' +
+        '<label class="bd-sw' + (g.AI추천 ? ' on' : '') + '">' +
+          '<input type="checkbox" data-g="AI추천"' + (g.AI추천 ? ' checked' : '') + '>' +
+          '<span>AI 코멘트 · 추천<em>' +
+          (g.AI추천 ? '손님이 단추를 누르면 날마다 코멘트가 붙습니다' : '단추를 숨깁니다') + '</em></span>' +
         '</label>' +
         '<div class="f"><label>기본 인원</label>' +
           '<input type="number" min="1" data-g="기본인원" value="' + Number(g.기본인원) + '"></div>' +
@@ -2232,6 +2238,7 @@
           em.textContent =
             key === '공개'       ? (t.checked ? '열려 있습니다' : '꺼 두면 “준비 중” 으로 보입니다') :
             key === '공차하루추가' ? (t.checked ? '출발지·도착지가 다르면 차량 1일 추가' : '안 더합니다') :
+            key === 'AI추천'      ? (t.checked ? '손님이 단추를 누르면 날마다 코멘트가 붙습니다' : '단추를 숨깁니다') :
                                    (t.checked ? '항목 옆에 금액이 뜹니다' : '합계 한 줄만 보입니다');
         }
       } else if(t.type === 'number'){

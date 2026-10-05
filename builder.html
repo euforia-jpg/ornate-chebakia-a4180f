@@ -252,6 +252,58 @@
 
 
 
+
+  /* PDF 단추 */
+  .bx-pdf{ all:unset; cursor:pointer; flex:none; padding:12px 18px; border-radius:999px;
+    border:1.5px solid rgba(255,255,255,.34); color:#fff; font-size:13.5px; font-weight:800;
+    white-space:nowrap; }
+  .bx-pdf:hover{ background:rgba(255,255,255,.12); }
+
+  /* 인쇄용 문서 — 화면에서는 숨어 있습니다 */
+  #bxDoc{ display:none; }
+
+  @media print{
+    @page{ size:A4; margin:14mm 12mm; }
+    html, body{ background:#fff !important; }
+    body::before, body::after{ display:none !important; content:none !important; }
+    body > *{ display:none !important; }
+    #bxDoc{ display:block !important; }
+    .doc{ font-family:'Work Sans','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
+      color:#171235; font-size:10.5pt; line-height:1.6; }
+    .doc-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+      padding-bottom:10px; border-bottom:2px solid #14103D; }
+    .doc-brand{ font-family:'Kanit',sans-serif; font-style:italic; font-weight:800; font-size:19pt;
+      color:#14103D; letter-spacing:-.02em; }
+    .doc-sub{ font-size:8.5pt; font-weight:700; color:#6E6A93; margin-top:2px; }
+    .doc-co{ font-size:7.8pt; line-height:1.55; color:#6E6A93; text-align:right; }
+    .doc-title{ margin:16px 0 2px; font-size:16pt; font-weight:800; letter-spacing:-.02em; color:#14103D; }
+    .doc-when{ font-size:8.5pt; font-weight:700; color:#6E6A93; margin-bottom:12px; }
+    .doc-sum{ width:100%; border-collapse:collapse; margin-bottom:12px; }
+    .doc-sum th{ width:70px; text-align:left; font-size:8.5pt; font-weight:800; color:#6E6A93;
+      padding:5px 8px 5px 0; border-bottom:1px solid #EAE7F7; vertical-align:top; }
+    .doc-sum td{ font-size:10pt; font-weight:700; padding:5px 16px 5px 0;
+      border-bottom:1px solid #EAE7F7; }
+    .doc-price{ display:flex; justify-content:space-between; align-items:baseline;
+      padding:11px 14px; border:1.5px solid #14103D; border-radius:7px; margin-bottom:18px; }
+    .doc-price .l{ font-size:9pt; font-weight:800; color:#6E6A93; }
+    .doc-price .v{ font-size:14pt; font-weight:800; color:#14103D; }
+    .doc-price .v em{ font-style:normal; font-size:10.5pt; font-weight:700; color:#6E6A93; }
+    .doc-h2{ margin:16px 0 7px; font-size:10.5pt; font-weight:800; color:#14103D;
+      padding-bottom:4px; border-bottom:1px solid #14103D; }
+    .doc-tb{ width:100%; border-collapse:collapse; }
+    .doc-tb td{ font-size:9.2pt; padding:5px 8px 5px 0; border-bottom:1px solid #EAE7F7;
+      vertical-align:top; }
+    .doc-tb td.d{ width:58px; font-weight:800; color:#6C3CE9; white-space:nowrap; }
+    .doc-tb td.c{ width:110px; font-weight:800; white-space:nowrap; }
+    .doc-tb td.n{ width:76px; text-align:right; font-weight:700; color:#6E6A93; white-space:nowrap; }
+    .doc-tb tr{ page-break-inside:avoid; }
+    .doc-note{ margin-top:16px; padding:10px 12px; background:#F6F5FC; border-radius:6px;
+      font-size:8.5pt; line-height:1.65; color:#6E6A93; }
+    .doc-note b{ color:#14103D; }
+    .doc-foot{ margin-top:14px; padding-top:8px; border-top:1px solid #EAE7F7;
+      font-size:7.8pt; color:#9A95BC; text-align:center; }
+  }
+
   /* 구간별 거리 · 시간 */
   .bx-legs{ margin-top:16px; border-top:1.5px dashed var(--line); padding-top:14px; }
   .bx-legs .leg{ display:flex; gap:10px; align-items:center; flex-wrap:wrap;
@@ -311,6 +363,39 @@
   .bx-maplist span.via{ background:#fff; border:1.5px solid #C9BDF7; color:var(--violet);
     font-weight:700; padding:4px 10px; }
 
+
+  /* AI 코멘트 · 추천 */
+  .bx-ai{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin:0 0 16px;
+    padding:14px 16px; border-radius:14px; border:1.5px solid #DED3FB; background:#F7F4FE; }
+  .bx-ai .wd{ flex:1 1 240px; min-width:0; font-size:12.5px; font-weight:600;
+    color:var(--muted); line-height:1.7; }
+  .bx-ai .wd b{ color:var(--navy); font-weight:800; }
+  .bx-aibtn{ all:unset; flex:none; cursor:pointer; padding:11px 20px; border-radius:999px;
+    background:var(--navy); color:#fff; font-size:13px; font-weight:800; white-space:nowrap; }
+  .bx-aibtn:hover{ filter:brightness(1.15); }
+  .bx-aibtn[disabled]{ opacity:.5; cursor:progress; }
+  .bx-aimsg{ flex:1 1 100%; font-size:12.5px; font-weight:700; line-height:1.7; }
+  .bx-aimsg.bad{ color:#9A1240; }
+  .bx-aitop{ margin:0 0 16px; padding:14px 16px; border-radius:14px;
+    border:1.5px solid #B7ECDE; background:#E7F8F5; font-size:13px; font-weight:600;
+    color:#0A6E5D; line-height:1.8; }
+  .bx-aitop b{ font-weight:800; }
+
+  .bx-aibox{ margin-top:14px; padding:13px 15px; border-radius:12px; background:#F7F4FE;
+    border:1.5px solid #E3DEF7; }
+  .bx-aibox .say{ font-size:12.5px; font-weight:700; color:var(--navy); line-height:1.75; }
+  .bx-aibox .say i{ font-style:normal; color:var(--violet); font-weight:800; margin-right:6px; }
+  .bx-aibox .tip{ margin-top:7px; font-size:12px; font-weight:600; color:var(--muted); line-height:1.75; }
+  .bx-aibox .tip i{ font-style:normal; font-weight:800; color:#B07A1E; margin-right:6px; }
+  .bx-aipicks{ display:flex; gap:8px; flex-wrap:wrap; margin-top:11px; }
+  .bx-aipick{ display:inline-flex; gap:10px; align-items:center; padding:7px 7px 7px 13px;
+    border:1.5px solid #DED3FB; border-radius:999px; background:#fff; max-width:100%; }
+  .bx-aipick .tx{ min-width:0; }
+  .bx-aipick .t{ display:block; font-size:12.5px; font-weight:800; color:var(--ink); }
+  .bx-aipick .r{ display:block; font-size:11.5px; font-weight:600; color:var(--muted); }
+  .bx-aiadd{ all:unset; flex:none; cursor:pointer; padding:7px 14px; border-radius:999px;
+    background:var(--violet); color:#fff; font-size:12px; font-weight:800; white-space:nowrap; }
+  .bx-aiadd:hover{ filter:brightness(1.1); }
 
   /* 날짜 종류 — 관광 · 공항 이동 · 종일 자유 */
   .bx-kind{ display:inline-flex; margin-left:auto; border:1.5px solid var(--line); border-radius:999px;
@@ -389,7 +474,10 @@
 
   @media (max-width:560px){
     .bx-sum .big{ font-size:17px; }
-    .bx-go{ width:100%; text-align:center; padding:13px 0; }
+    .bx-barin{ gap:9px; }
+    .bx-sum{ flex:1 1 100%; }
+    .bx-pdf{ flex:1 1 0; text-align:center; padding:13px 0; }
+    .bx-go{ flex:1.6 1 0; text-align:center; padding:13px 0; }
   }
 </style>
   <link rel="manifest" href="/manifest.json">
@@ -441,12 +529,15 @@
     </div>
   </div>
 
+  <div id="bxDoc" aria-hidden="true"></div>
+
   <div class="bx-bar" id="bxBar" hidden>
     <div class="bx-barin">
       <div class="bx-sum">
         <div class="big" id="bxBig">1인당 € 0 <em>· 총 € 0</em></div>
         <div class="small" id="bxSmall"></div>
       </div>
+      <button type="button" class="bx-pdf" id="bxPdf">PDF로 저장</button>
       <button type="button" class="bx-go" id="bxGo">이 일정으로 문의하기</button>
     </div>
   </div>
@@ -524,6 +615,8 @@
   var CFG = null, ITEMS = [], CITIES = [], VIA = [], 기호 = '€';
   var S = { 인원: 20, 일수: 7, 출발일: '', 일정: [],
             숙박: '', 차량: '', 가이드: '', 싱글: 0, 기차: [], 항공: [] };
+  var 조언 = null;        /* AI 가 달아 준 코멘트 — 단추를 누르셔야 생깁니다 */
+  var 조언중 = false;
 
   /*
     지도 — 그림 파일을 받아오지 않고 좌표로 직접 그립니다.
@@ -947,6 +1040,15 @@
           '<h2>날짜별로 담기</h2>' +
           '<div class="sub">하루씩 도시를 고르고, 그 날 가실 곳과 드실 끼니를 골라 주세요. 안 고르셔도 됩니다.<br>' +
           '<b>종일 자유시간</b>으로 두신 날은 차량과 가이드 비용이 붙지 않습니다.</div>' +
+          (CFG.AI추천 !== false
+            ? '<div class="bx-ai">' +
+                '<span class="wd"><b>어디를 넣을지 고민되시나요?</b> 지금까지 고르신 일정을 보고 ' +
+                '날마다 한 줄 코멘트와 더 넣으면 좋을 곳을 골라 드립니다.</span>' +
+                '<button type="button" class="bx-aibtn" id="bxAi">✨ AI 추천 받기</button>' +
+                '<span class="bx-aimsg" id="bxAiMsg" hidden></span>' +
+              '</div>' +
+              '<div class="bx-aitop" id="bxAiTop" hidden></div>'
+            : '') +
           '<div id="bxDays"></div>' +
         '</div>';
     }
@@ -1062,6 +1164,17 @@
       $('bxSingleBtn').classList.toggle('on', S.싱글 > 0);
     }
     $('bxRoot').addEventListener('change', 골랐을때);
+    var ai = $('bxAi');
+    if(ai) ai.addEventListener('click', AI추천받기);
+    /* AI 가 권한 곳을 그 날 일정에 담습니다 */
+    $('bxRoot').addEventListener('click', function(e){
+      var t = e.target && e.target.closest ? e.target.closest('[data-add]') : null;
+      if(!t) return;
+      var 그날 = S.일정[Number(t.dataset.add)];
+      var 통 = 그날[t.dataset.kind];
+      if(통 && 통.indexOf(t.dataset.id) === -1) 통.push(t.dataset.id);
+      날짜그리기(); 계산();
+    });
     /* 날짜 종류는 단추라 눌림(click)으로 받습니다 */
     $('bxRoot').addEventListener('click', function(e){
       var t = e.target && e.target.closest ? e.target.closest('[data-daytype]') : null;
@@ -1075,6 +1188,9 @@
       날짜그리기(); 지도그리기(); 계산();
     });
     $('bxGo').addEventListener('click', 문의열기);
+    $('bxPdf').addEventListener('click', PDF저장);
+    /* 손님이 Ctrl+P 로 바로 인쇄하셔도 빈 종이가 나오지 않게 해 둡니다 */
+    window.addEventListener('beforeprint', function(){ try{ 문서만들기(); }catch(e){} });
     var send = $('bxSend');
     if(send) send.addEventListener('click', 보내기);
   }
@@ -1110,6 +1226,108 @@
         (켬 ? ' checked' : '') + (잠김 ? ' disabled' : '') + '>' +
       '<span class="tx"><span class="t">' + esc(it.이름) + '</span>' +
       (밑 ? '<span class="d">' + esc(밑) + '</span>' : '') + '</span>' + 금액 + '</label>';
+  }
+
+  /* ---------------- AI 코멘트 · 추천 ---------------- */
+  /*
+    손님이 단추를 누르셨을 때만 한 번 돌아갑니다.
+    추천은 사장님이 넣어 두신 품목 안에서만 나오게 해 두었고,
+    혹시 AI 가 없는 것을 지어내면 함수 쪽에서 걸러 버립니다.
+  */
+  function 조언칸(i){
+    if(!조언 || !조언.날 || !조언.날[i]) return '';
+    var d = 조언.날[i];
+    if(!d.코멘트 && !d.팁 && !(d.추천 && d.추천.length)) return '';
+
+    var 고른것 = S.일정[i];
+    var 추천 = (d.추천 || []).filter(function(r){
+      /* 그 사이에 손님이 직접 담으셨으면 추천에서 빼 드립니다 */
+      if(고른것[r.종류] && 고른것[r.종류].indexOf(r.id) !== -1) return false;
+      /* 다른 날에 이미 담으신 입장지도 뺍니다 */
+      if(r.종류 === '입장지'){
+        for(var k = 0; k < S.일정.length; k++){
+          if(S.일정[k].입장지.indexOf(r.id) !== -1) return false;
+        }
+      }
+      return !!찾기(r.id);
+    });
+    if(!d.코멘트 && !d.팁 && !추천.length) return '';
+
+    return '<div class="bx-aibox">' +
+      (d.코멘트 ? '<div class="say"><i>AI</i>' + esc(d.코멘트) + '</div>' : '') +
+      (d.팁 ? '<div class="tip"><i>팁</i>' + esc(d.팁) + '</div>' : '') +
+      (추천.length
+        ? '<div class="bx-aipicks">' + 추천.map(function(r){
+            return '<span class="bx-aipick">' +
+              '<span class="tx"><span class="t">' + esc(r.이름) + '</span>' +
+              (r.이유 ? '<span class="r">' + esc(r.이유) + '</span>' : '') + '</span>' +
+              '<button type="button" class="bx-aiadd" data-add="' + i + '" ' +
+                'data-id="' + esc(r.id) + '" data-kind="' + esc(r.종류) + '">담기</button>' +
+            '</span>';
+          }).join('') + '</div>'
+        : '') +
+    '</div>';
+  }
+
+  function 조언말(글, 나쁨){
+    var 칸 = $('bxAiMsg');
+    if(!칸) return;
+    칸.hidden = !글;
+    칸.textContent = 글 || '';
+    칸.classList.toggle('bad', !!나쁨);
+  }
+
+  function AI추천받기(){
+    if(조언중) return;
+    var 단추 = $('bxAi');
+    조언중 = true;
+    if(단추){ 단추.disabled = true; 단추.textContent = '읽어 보는 중…'; }
+    조언말('지금까지 고르신 일정을 살펴보고 있습니다. 10초쯤 걸립니다.');
+
+    var 보낼것 = {
+      인원: S.인원,
+      일수: S.일수,
+      일정: S.일정.map(function(d, i){
+        return { 일차: i + 1, 도시: d.도시 || '', 종류: d.종류 || '관광',
+                 담은곳: d.입장지.map(이름).filter(Boolean),
+                 담은식사: d.식사.map(이름).filter(Boolean),
+                 담은id: d.입장지.slice(), 담은식사id: d.식사.slice() };
+      }),
+      입장지: 종류('입장지').map(function(x){
+        return { id: x.id, 이름: x.이름, 도시: x.도시 || '', 설명: x.설명 || '' };
+      }),
+      식사: 종류('식사').map(function(x){
+        return { id: x.id, 이름: x.이름, 설명: x.설명 || '' };
+      })
+    };
+
+    fetch('/.netlify/functions/builder-advice', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(보낼것)
+    })
+      .then(function(r){ return r.json().catch(function(){ return null; }); })
+      .then(function(j){
+        if(!j || !j.ok){
+          조언말((j && j.error) || 'AI 추천을 불러오지 못했습니다. 잠시 뒤 다시 눌러 주세요.', true);
+          return;
+        }
+        조언 = j;
+        var 위 = $('bxAiTop');
+        if(위){
+          위.hidden = !j.동선조언;
+          위.innerHTML = j.동선조언 ? '<b>동선 조언</b> · ' + esc(j.동선조언) : '';
+        }
+        조언말('날짜마다 코멘트를 달아 드렸습니다. 마음에 드는 곳은 “담기” 를 눌러 주세요.');
+        날짜그리기();
+      })
+      .catch(function(){
+        조언말('연결이 끊겼습니다. 잠시 뒤 다시 눌러 주세요.', true);
+      })
+      .finally(function(){
+        조언중 = false;
+        if(단추){ 단추.disabled = false; 단추.textContent = '✨ 다시 추천 받기'; }
+      });
   }
 
   function 날짜그리기(){
@@ -1183,6 +1401,7 @@
             return 여럿옵션(i, '식사', it, day.식사.indexOf(it.id) !== -1);
           }).join('') + '</div></div>';
       }
+      안 += 조언칸(i);
       return '<div class="bx-day' + (day.종류 === '자유' ? ' free' : day.종류 === '이동' ? ' move' : '') +
              '">' + 안 + '</div>';
     });
@@ -1236,6 +1455,8 @@
       S.일정[di].도시 = t.value;
       /* 도시가 바뀌면 그 날 고른 입장지는 비웁니다 (다른 도시 것이 남지 않도록) */
       S.일정[di].입장지 = [];
+      /* 전에 받은 AI 코멘트는 그 날에 한해 더는 맞지 않으니 치웁니다 */
+      if(조언 && 조언.날 && 조언.날[di]) 조언.날[di] = null;
       날짜그리기(); 지도그리기(); 계산();
       return;
     }
@@ -1437,6 +1658,127 @@
     if(S.기차.length) 줄.push('기차 구간: ' + S.기차.map(이름).join(' / '));
     if(S.항공.length) 줄.push('항공 구간: ' + S.항공.map(이름).join(' / '));
     return 줄.join('\n');
+  }
+
+  /* ---------------- PDF 로 저장 ---------------- */
+  /*
+    따로 PDF 를 만들어 내지 않고, 브라우저 인쇄 기능을 씁니다.
+    그래야 한글이 안 깨지고, 글자도 복사되고, 파일도 가볍습니다.
+    "대상"에서 "PDF로 저장"을 고르시면 됩니다.
+  */
+  function 오늘(){
+    var d = new Date();
+    return d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+  }
+
+  function 문서만들기(){
+    /* 인쇄할 때는 이 문서만 남기고 나머지를 숨깁니다.
+       그러려면 문서가 <body> 바로 밑에 있어야 합니다. */
+    var 칸 = $('bxDoc');
+    if(칸 && 칸.parentNode !== document.body) document.body.appendChild(칸);
+
+    var m = 계산();
+    var 구간 = 구간목록();
+    var 총km = 0, 총분 = 0;
+    구간.forEach(function(g){ 총km += g.km; 총분 += g.분; });
+
+    var 일자 = S.일정.map(function(day, i){
+      var 안 = [];
+      if(day.종류 === '자유') 안.push('종일 자유시간');
+      if(day.종류 === '이동'){
+        var 필요 = [];
+        if(day.미팅가이드 !== false) 필요.push('가이드 미팅');
+        if(day.미팅차량 !== false) 필요.push('차량');
+        안.push('공항 이동' + (필요.length ? ' (' + 필요.join(' · ') + ')' : ''));
+      }
+      if(day.입장지.length) 안.push(day.입장지.map(이름).join(', '));
+      if(day.식사.length) 안.push('식사 — ' + day.식사.map(이름).join(', '));
+      var 다음 = (i < S.일정.length - 1) ? S.일정[i + 1].도시 : '';
+      var 들를곳 = (day.경유 !== false && 다음 && 이동수단(day.도시, 다음) === '차량')
+        ? 경유찾기(day.도시, 다음) : '';
+      if(들를곳) 안.push('가는 길에 ' + 들를곳 + ' 들름');
+      return '<tr><td class="d">' + (i + 1) + '일차</td><td class="c">' + esc(day.도시 || '—') +
+             '</td><td>' + (안.length ? esc(안.join(' / ')) : '—') + '</td></tr>';
+    }).join('');
+
+    var 이동줄 = 구간.map(function(g){
+      return '<tr><td class="c">' + esc(g.a) + ' → ' + esc(g.b) + '</td>' +
+             '<td class="d">' + g.수단 + '</td>' +
+             '<td class="n">' + (g.km ? 돈(g.km) + 'km' : '—') + '</td>' +
+             '<td class="n">' + (g.분 ? '약 ' + 시간글(g.분) : '—') + '</td>' +
+             '<td>' + (g.들를곳 ? esc(g.들를곳) + ' 경유' : '') + '</td></tr>';
+    }).join('');
+
+    var 포함 = [];
+    if(S.숙박){
+      var 비 = Number(CFG.싱글차지비율) > 0 ? Number(CFG.싱글차지비율) : 80;
+      포함.push(['숙박', 이름(S.숙박) + (CFG.숙박조건 ? ' · ' + CFG.숙박조건 : '') +
+                 (m.싱글 ? ' · 싱글룸 ' + m.싱글 + '명 (방값의 ' + 비 + '% 추가)' : '')]);
+    }
+    if(S.차량){
+      var ㅊ = [];
+      if(m.공차) ㅊ.push('공차 1일 추가 (' + m.첫도시 + ' 출발 · ' + m.끝도시 + ' 종료)');
+      if(m.미팅차수) ㅊ.push('공항 이동 차량 ' + m.미팅차수 + '회');
+      포함.push(['차량', 이름(S.차량) + (ㅊ.length ? ' · ' + ㅊ.join(' · ') : '')]);
+    }
+    if(S.가이드){
+      var ㄱ = [];
+      if(m.로컬) ㄱ.push('현지 가이드 동행');
+      if(m.미팅가수) ㄱ.push('공항 미팅 ' + m.미팅가수 + '회');
+      포함.push(['가이드', 이름(S.가이드) + (ㄱ.length ? ' · ' + ㄱ.join(' · ') : '')]);
+    }
+    if(S.기차.length) 포함.push(['기차', S.기차.map(이름).join(' / ')]);
+    if(S.항공.length) 포함.push(['항공', S.항공.map(이름).join(' / ')]);
+
+    $('bxDoc').innerHTML =
+      '<div class="doc">' +
+        '<div class="doc-head">' +
+          '<div><div class="doc-brand">EUFORIA TOUR</div>' +
+            '<div class="doc-sub">스페인 · 포르투갈 · 모로코 단체여행</div></div>' +
+          '<div class="doc-co">Euforia Das Nuvens, S.L.<br>' +
+            'Calle Gran Via 69, 810, 28013 Madrid<br>' +
+            'NIF B44605574 · CICMA No.4443<br>' +
+            '+34 611 209 095 · euforia@euforiatour.com<br>www.toureplus.co.kr</div>' +
+        '</div>' +
+
+        '<h1 class="doc-title">여행 일정 · 예상 견적</h1>' +
+        '<div class="doc-when">' + 오늘() + ' 기준</div>' +
+
+        '<table class="doc-sum"><tbody>' +
+          '<tr><th>인원</th><td>' + S.인원 + '명</td>' +
+              '<th>기간</th><td>' + S.일수 + '일' + (m.박 ? ' (' + m.박 + '박)' : '') + '</td></tr>' +
+          '<tr><th>출발 희망일</th><td>' + (S.출발일 ? esc(S.출발일) : '미정') + '</td>' +
+              '<th>총 이동</th><td>' + (총km ? 돈(총km) + 'km · 약 ' + 시간글(총분) : '—') + '</td></tr>' +
+        '</tbody></table>' +
+
+        '<div class="doc-price">' +
+          '<span class="l">예상 금액</span>' +
+          '<span class="v">1인당 ' + 기호 + ' ' + 돈(m.인당) +
+            '<em> · 총 ' + 기호 + ' ' + 돈(Math.round(m.총액)) + '</em></span>' +
+        '</div>' +
+
+        '<h2 class="doc-h2">일자별 일정</h2>' +
+        '<table class="doc-tb"><tbody>' + 일자 + '</tbody></table>' +
+
+        (이동줄 ? '<h2 class="doc-h2">구간별 이동</h2>' +
+          '<table class="doc-tb"><tbody>' + 이동줄 + '</tbody></table>' : '') +
+
+        (포함.length ? '<h2 class="doc-h2">포함 사항</h2>' +
+          '<table class="doc-tb"><tbody>' + 포함.map(function(x){
+            return '<tr><td class="d">' + x[0] + '</td><td colspan="2">' + esc(x[1]) + '</td></tr>';
+          }).join('') + '</tbody></table>' : '') +
+
+        '<div class="doc-note">' + esc(CFG.안내문 || '') +
+          '<br>이 문서는 손님이 고르신 내용으로 자동 계산한 <b>예상 금액</b>이며, 확정 견적이 아닙니다. ' +
+          '최종 금액과 예약 가능 여부는 담당자가 확인 후 안내드립니다.</div>' +
+
+        '<div class="doc-foot">Euforia Tour · www.toureplus.co.kr · euforia@euforiatour.com · +34 611 209 095</div>' +
+      '</div>';
+  }
+
+  function PDF저장(){
+    문서만들기();
+    window.print();
   }
 
   function 문의열기(){
