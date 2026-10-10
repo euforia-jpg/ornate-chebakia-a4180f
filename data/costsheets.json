@@ -1,5 +1,106 @@
 [
   {
+    "name": "Sp.1",
+    "productId": "portugal-10days",
+    "pax": 4,
+    "days": 10,
+    "nights": 9,
+    "commission": 20,
+    "rows": [
+      {
+        "name": "차량",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "700",
+        "qty": 10,
+        "auto": true
+      },
+      {
+        "name": "기사",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "400",
+        "qty": 10,
+        "auto": true
+      },
+      {
+        "name": "가이드",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "160",
+        "qty": 10,
+        "auto": true
+      },
+      {
+        "name": "로컬가이드",
+        "unit": "team",
+        "qtyFrom": "",
+        "price": "",
+        "qty": "",
+        "auto": true
+      },
+      {
+        "name": "식사",
+        "unit": "pax",
+        "qtyFrom": "",
+        "price": "20",
+        "qty": "18",
+        "auto": false
+      },
+      {
+        "name": "입장료",
+        "unit": "pax",
+        "qtyFrom": "",
+        "price": "100",
+        "qty": "",
+        "auto": true
+      },
+      {
+        "name": "호텔",
+        "unit": "pax",
+        "qtyFrom": "nights",
+        "price": "70",
+        "qty": 9,
+        "auto": true
+      },
+      {
+        "name": "기사숙식",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "80",
+        "qty": 10,
+        "auto": true
+      },
+      {
+        "name": "가이드숙식",
+        "unit": "team",
+        "qtyFrom": "days",
+        "price": "80",
+        "qty": 10,
+        "auto": true
+      },
+      {
+        "name": "시티택스",
+        "unit": "pax",
+        "qtyFrom": "nights",
+        "price": "8",
+        "qty": 9,
+        "auto": true
+      },
+      {
+        "name": "가이드교통비",
+        "unit": "team",
+        "qtyFrom": "",
+        "price": "300",
+        "qty": "",
+        "auto": true
+      }
+    ],
+    "perPax": 4612,
+    "teamTotal": 18448,
+    "savedAt": "2026-10-10"
+  },
+  {
     "name": "SL-01C",
     "productId": "car-sevilla-benagil-lisbon",
     "pax": 4,
