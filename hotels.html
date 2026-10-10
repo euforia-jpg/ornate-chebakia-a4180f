@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>취소·환불 규정 — Euforia Tour</title>
+<title>기준호텔 지도 — Euforia Tour</title>
+<meta name="description" content="유포리아투어 스페인·포르투갈 도시별 기준호텔 — 단체 이용 4성급 호텔과 시내 10km 이내 3성급 호텔을 지도로 확인하세요.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -19,13 +20,22 @@
     background: repeating-linear-gradient(115deg, var(--wash-violet) 0 220px, var(--wash-pink) 220px 400px, var(--wash-orange) 400px 560px, var(--wash-teal) 560px 760px);
     background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
   }
-  body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(20,16,61,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
+  body::before{
+    content:''; position:fixed; inset:0;
+    background-image: radial-gradient(rgba(20,16,61,0.055) 1.3px, transparent 1.3px);
+    background-size:13px 13px; pointer-events:none;
+  }
   a{ color:inherit; }
   .wrap{ position:relative; z-index:1; }
 
+  /* ---- topbar / logo / nav (index.html과 동일) ---- */
   .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding: 22px clamp(20px,4vw,56px) 14px; }
   .logo{ display:flex; align-items:center; gap:16px; text-decoration:none; }
-  .logo .badge{ width:68px;height:68px;border-radius:16px; background:var(--navy); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:30px; border:3px solid #fff; box-shadow: 0 10px 22px -10px rgba(20,16,61,0.5); flex:0 0 auto; }
+  .logo .badge{
+    width:68px;height:68px;border-radius:16px; background:var(--navy); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:30px; border:3px solid #fff;
+    box-shadow: 0 10px 22px -10px rgba(20,16,61,0.5); flex:0 0 auto;
+  }
   .logo .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:32px; color:var(--navy); line-height:1; }
   .logo small{ display:block; font-family:'Work Sans'; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
   .logo-img{ height:76px; width:auto; display:block; flex:0 0 auto; }
@@ -41,50 +51,46 @@
   .site-nav a:hover{ color:var(--violet); background:rgba(108,60,233,0.08); }
   .site-nav a.active{ color:#fff; background:var(--navy); }
 
+  /* ---- page hero ---- */
   .page-hero{ padding:36px clamp(20px,4vw,56px) 8px; }
   .eyebrow{ display:inline-flex; align-items:center; gap:8px; color:#fff; background:var(--navy); font-size:12px; letter-spacing:1px; font-weight:800; margin-bottom:16px; padding:7px 16px; border-radius:999px; }
   .page-hero h1{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); }
   .page-hero h1 .hl{ color:#fff; background:var(--violet); padding:0 10px; }
   .page-hero p{ color:var(--muted); font-size:15.5px; line-height:1.75; max-width:640px; margin:0; font-weight:600; }
+  .reg-badge{ display:inline-flex; align-items:center; gap:8px; margin-top:18px; padding:10px 18px; background:#fff; border:1.5px solid var(--line); border-radius:12px; font-size:12.5px; font-weight:800; color:var(--navy); box-shadow:0 10px 22px -16px rgba(20,16,61,0.3); }
 
   .section{ padding:8px clamp(20px,4vw,56px) 24px; }
-  .section-inner{ background:var(--paper); border-radius:26px; padding:36px clamp(18px,3vw,40px); box-shadow:0 18px 44px -24px rgba(20,16,61,0.32); border:1.5px solid var(--line); max-width:820px; margin:0 auto; }
-  .section-head{ margin-bottom:24px; }
-  .section-head h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:23px; margin:0 0 6px; color:var(--navy); }
+  .section-inner{ background:var(--paper); border-radius:26px; padding:36px clamp(18px,3vw,40px); box-shadow:0 18px 44px -24px rgba(20,16,61,0.32); border:1.5px solid var(--line); }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+  .section-head h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:23px; margin:0; color:var(--navy); }
   .section-head .sub{ color:var(--muted); font-size:13px; font-weight:600; }
 
-  .faq-cat{ font-size:12px; font-weight:800; color:var(--violet); text-transform:uppercase; letter-spacing:.6px; margin:26px 0 12px; }
-  .faq-cat:first-of-type{ margin-top:0; }
-  details.faq-item{ border:2px solid var(--line); border-radius:14px; margin-bottom:10px; overflow:hidden; background:#fff; }
-  details.faq-item summary{ list-style:none; cursor:pointer; padding:16px 18px; font-weight:800; font-size:14px; color:var(--navy); display:flex; justify-content:space-between; align-items:center; gap:12px; }
-  details.faq-item summary::-webkit-details-marker{ display:none; }
-  details.faq-item summary::after{ content:'+'; font-size:20px; font-weight:700; color:var(--violet); flex:0 0 auto; transition: transform .15s ease; }
-  details.faq-item[open] summary::after{ transform: rotate(45deg); }
-  details.faq-item[open]{ border-color: var(--violet); }
-  .faq-a{ padding:0 18px 18px; font-size:13.5px; color:var(--muted); font-weight:600; line-height:1.75; }
+  .value-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+  .check-list{ display:flex; flex-direction:column; gap:12px; }
+  .check-row{ display:flex; gap:12px; align-items:flex-start; }
+  .check-row .ck{ flex:0 0 auto; width:22px; height:22px; border-radius:7px; background:var(--wash-orange); color:var(--orange); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; margin-top:1px; }
+  .check-row p{ margin:0; font-size:13.5px; color:var(--ink); font-weight:600; line-height:1.75; }
+  .value-card{ border:2px solid var(--line); border-radius:var(--radius); padding:22px; background:#fff; }
+  .value-card .ico{ width:42px;height:42px;border-radius:12px; background:var(--wash-violet); color:var(--violet); display:flex; align-items:center; justify-content:center; font-size:19px; margin-bottom:14px; font-weight:800; }
+  .value-card h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; margin:0 0 8px; color:var(--navy); }
+  .value-card p{ margin:0; font-size:13px; color:var(--muted); font-weight:600; line-height:1.7; }
 
-  .cta-band{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; background:var(--navy); border-radius:24px; padding:30px 34px; color:#fff; max-width:820px; margin:24px auto 0; }
-  .cta-band h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:19px; margin:0 0 6px; }
+  .service-list{ display:flex; flex-direction:column; gap:14px; }
+  .service-row{ display:flex; gap:18px; align-items:flex-start; border:2px solid var(--line); border-radius:var(--radius); padding:18px 20px; background:#fff; }
+  .service-row .num{ font-family:'Space Mono'; font-weight:700; color:var(--violet); font-size:14px; flex:0 0 auto; background:var(--wash-violet); width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; }
+  .service-row h4{ margin:0 0 5px; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:15.5px; color:var(--navy); }
+  .service-row p{ margin:0; font-size:13px; color:var(--muted); font-weight:600; line-height:1.7; }
+
+  .promise-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .promise{ display:flex; gap:12px; align-items:flex-start; background:var(--wash-teal); border-radius:14px; padding:16px 18px; }
+  .promise .dot{ width:8px;height:8px;border-radius:50%; background:var(--teal); margin-top:7px; flex:0 0 auto; }
+  .promise p{ margin:0; font-size:13px; font-weight:700; color:var(--ink); line-height:1.6; }
+
+  .cta-band{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; background:var(--navy); border-radius:24px; padding:30px 34px; color:#fff; }
+  .cta-band h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:20px; margin:0 0 6px; }
   .cta-band p{ margin:0; font-size:13px; color:rgba(255,255,255,0.7); font-weight:600; }
   .cta{ all:unset; display:inline-block; text-align:center; padding:14px 26px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; border-radius:12px; cursor:pointer; font-size:14px; }
   .cta:hover{ filter:brightness(1.06); }
-
-  .policy-note{ display:inline-flex; align-items:center; gap:8px; color:#fff; background:var(--navy); font-size:12px; letter-spacing:.3px; font-weight:800; margin-bottom:18px; padding:9px 16px; border-radius:14px; }
-  .notice-list{ display:flex; flex-direction:column; gap:14px; margin:0 0 30px; }
-  .notice-item{ display:flex; gap:14px; padding:16px 18px; border:2px solid var(--line); border-radius:14px; background:#fff; }
-  .notice-item .num{ flex:0 0 auto; width:30px; height:30px; border-radius:9px; background:var(--wash-violet); color:var(--violet); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; }
-  .notice-item .txt strong{ display:block; font-size:14px; color:var(--navy); font-weight:800; margin-bottom:4px; }
-  .notice-item .txt span{ display:block; font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.65; }
-
-  .policy-table-wrap{ overflow-x:auto; border:1.5px solid var(--line); border-radius:16px; }
-  table.policy-table{ width:100%; border-collapse:collapse; min-width:520px; }
-  table.policy-table th{ background:var(--navy); color:#fff; font-size:12.5px; font-weight:800; padding:14px 16px; text-align:left; white-space:nowrap; }
-  table.policy-table td{ padding:13px 16px; font-size:13px; color:var(--ink); font-weight:600; border-top:1px solid var(--line); white-space:nowrap; }
-  table.policy-table tr:last-child td{ color:var(--pink); font-weight:800; }
-  table.policy-table tr:nth-child(even) td{ background:var(--wash-violet); }
-  .policy-caption{ font-size:12px; font-weight:800; color:var(--violet); text-transform:uppercase; letter-spacing:.6px; margin:30px 0 12px; }
-  .policy-caption:first-of-type{ margin-top:0; }
-  .policy-foot{ margin:14px 2px 0; font-size:12px; color:var(--muted); font-weight:600; line-height:1.7; }
 
   footer{ padding:8px clamp(20px,4vw,56px) 40px; }
   .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(20,16,61,0.28); }
@@ -108,6 +114,8 @@
   .footer-legal{ margin:12px 0 0; }
   .footer-legal p{ margin:0 0 4px; font-size:11.5px; color:var(--muted); font-weight:600; line-height:1.6; }
 
+  @media (max-width:900px){ .value-grid{ grid-template-columns:repeat(3,1fr); } .promise-grid{ grid-template-columns:1fr; } }
+  @media (max-width:600px){ .value-grid{ grid-template-columns:1fr 1fr; } }
   @media (max-width:780px){ .footer-inner{ grid-template-columns:1fr; } }
 
   .nav-toggle{ display:none; }
@@ -175,6 +183,78 @@
   @media (max-width:620px){ .euf-footer .ef-inner{ grid-template-columns:1fr; padding:26px 18px 24px; border-radius:18px; }
     .euf-footer .ef-bottom{ flex-direction:column; align-items:flex-start; }
     footer.euf-footer{ padding:6px 16px 28px; } }
+
+  /* ---- 기준호텔 지도 ---- */
+  .site-nav a.active{ color:#fff; background:var(--navy); }
+  .hm-filters{ display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
+  .hm-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .hm-chips button,.hm-grade button{ all:unset; cursor:pointer; padding:8px 15px; border-radius:999px; font-size:13px; font-weight:800; color:var(--navy); background:#fff; border:1.5px solid var(--line); display:inline-flex; align-items:center; gap:7px; }
+  .hm-chips button[aria-pressed="true"],.hm-grade button[aria-pressed="true"]{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .hm-chips button:focus-visible,.hm-grade button:focus-visible,.hm-list button:focus-visible{ outline:2px solid var(--violet); outline-offset:2px; }
+  .hm-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .hm-grade{ display:flex; gap:6px; }
+  #hmSearch{ flex:1; min-width:180px; font:inherit; font-size:14px; padding:10px 14px; border-radius:12px; border:1.5px solid var(--line); background:#fff; color:var(--ink); }
+  .hm-count{ font-size:13px; font-weight:700; color:var(--muted); }
+  .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .d4{ background:var(--violet); } .d3{ background:var(--orange); }
+
+  .hm-shell{ display:grid; grid-template-columns:330px 1fr; gap:14px; height:min(78vh,720px); }
+  .hm-list{ background:#fff; border:1.5px solid var(--line); border-radius:var(--radius); overflow-y:auto; min-width:0; }
+  .hm-city{ position:sticky; top:0; background:#fff; padding:12px 16px 8px; font-family:'Kanit'; font-style:italic; font-weight:800; color:var(--navy); font-size:16px; border-bottom:1px solid var(--line); z-index:1; }
+  .hm-item{ all:unset; box-sizing:border-box; cursor:pointer; display:grid; grid-template-columns:auto 1fr; gap:3px 10px; width:100%; padding:11px 16px; border-bottom:1px solid var(--line); }
+  .hm-item:hover{ background:var(--wash-violet); }
+  .hm-item.on{ background:var(--wash-violet); box-shadow:inset 3px 0 0 var(--violet); }
+  .hm-item .badge{ grid-row:1/3; align-self:center; font-size:11px; font-weight:800; color:#fff; border-radius:7px; padding:4px 7px; }
+  .b4{ background:var(--violet); } .b3{ background:var(--orange); }
+  .hm-item b{ font-size:14px; color:var(--ink); overflow-wrap:anywhere; }
+  .hm-item small{ font-size:12px; color:var(--muted); }
+
+  .hm-mapwrap{ position:relative; border-radius:var(--radius); overflow:hidden; border:1.5px solid var(--line); min-width:0; background:#e9eef3; }
+  .hm-map{ position:absolute; inset:0; }
+  .hm-pin{ display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:28px; padding:0 8px; border-radius:9px; font:800 12px/1 'Work Sans',sans-serif; color:#fff; border:2px solid #fff; box-shadow:0 2px 8px rgba(20,16,61,.28); white-space:nowrap; transform:translate(-50%,-50%); }
+  .hm-pin.p4{ background:var(--violet); } .hm-pin.p3{ background:var(--orange); }
+  .hm-pin.sel{ background:var(--navy); transform:translate(-50%,-50%) scale(1.15); z-index:5; }
+  .leaflet-div-icon{ background:none !important; border:0 !important; }
+
+  .hm-card{ position:absolute; top:14px; right:14px; width:min(370px,calc(100% - 28px)); max-height:calc(100% - 28px); background:#fff; border-radius:16px; box-shadow:0 12px 40px rgba(20,16,61,.25); display:flex; flex-direction:column; overflow:hidden; z-index:1000; }
+  .hm-photo{ position:relative; height:190px; flex:none; background:linear-gradient(135deg,var(--violet),var(--pink)); }
+  .hm-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hm-ph-empty{ position:absolute; inset:0; display:flex; align-items:flex-end; padding:16px; color:#fff; font-family:'Kanit'; font-style:italic; font-weight:800; font-size:26px; }
+  .hm-x{ all:unset; cursor:pointer; position:absolute; top:12px; right:12px; width:38px; height:38px; border-radius:10px; background:rgba(20,16,61,.75); color:#fff; font-size:24px; display:flex; align-items:center; justify-content:center; }
+  .hm-dots{ position:absolute; bottom:10px; left:0; right:0; display:flex; justify-content:center; gap:6px; }
+  .hm-dots button{ all:unset; cursor:pointer; width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.55); }
+  .hm-dots button.on{ background:#fff; }
+  .hm-attr{ position:absolute; left:8px; bottom:6px; font-size:10px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6); max-width:60%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+  .hm-attr a{ color:#fff; }
+  .hm-body{ padding:16px 18px 8px; overflow-y:auto; }
+  .hm-body h3{ margin:0 0 4px; font-size:19px; color:var(--ink); }
+  .hm-meta{ font-size:13.5px; color:var(--muted); display:flex; flex-wrap:wrap; gap:4px 8px; align-items:center; }
+  .hm-meta .star{ color:#F5A623; }
+  .hm-actions{ display:flex; gap:8px; margin:14px 0; }
+  .hm-go{ all:unset; cursor:pointer; padding:10px 20px; border-radius:12px; background:var(--navy); color:#fff; font-weight:800; font-size:14px; }
+  .hm-ic{ all:unset; cursor:pointer; width:42px; height:42px; border-radius:12px; border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; }
+  .hm-ic svg{ width:19px; height:19px; fill:none; stroke:var(--navy); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .hm-memo{ display:grid; gap:3px; padding:10px 0; border-top:1px solid var(--line); }
+  .hm-memo span{ font-size:12px; color:var(--muted); font-weight:700; }
+  .hm-memo strong{ font-size:14px; color:var(--ink); }
+  .hm-info{ list-style:none; margin:0; padding:4px 0 8px; display:grid; gap:8px; font-size:13.5px; color:var(--ink); }
+  .hm-info li{ display:flex; gap:8px; overflow-wrap:anywhere; }
+  .hm-info a{ color:var(--violet); }
+  .hm-nav{ flex:none; display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-top:1px solid var(--line); background:#faf9ff; }
+  .hm-nav button{ all:unset; cursor:pointer; width:40px; height:40px; border-radius:10px; background:var(--navy); color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center; }
+  .hm-nav span{ font-size:13px; font-weight:700; color:var(--muted); }
+  .hm-note{ margin:14px 2px 0; font-size:13px; color:var(--muted); }
+  .hm-card [hidden], .hm-card[hidden]{ display:none !important; }
+  .hm-g-attr{ font-size:11px; color:var(--muted); padding:0 18px 10px; }
+
+  @media (max-width: 860px){
+    .hm-shell{ grid-template-columns:1fr; height:auto; }
+    .hm-mapwrap{ height:62vh; order:-1; }
+    .hm-list{ max-height:50vh; }
+    .hm-card{ top:auto; bottom:10px; right:10px; left:10px; width:auto; max-height:72%; }
+    .hm-photo{ height:110px; }
+    .hm-ph-empty{ font-size:20px; padding:12px; }
+  }
 </style>
 </head>
 <body>
@@ -206,78 +286,73 @@
   <nav class="site-nav">
     <a href="about.html">회사소개</a>
     <a href="tours.html">여행상품</a>
-    <a href="hotels.html">기준호텔</a>
+    <a href="hotels.html" class="active">기준호텔</a>
     <a href="move.html">교통 예약</a>
     <a href="matchday.html">경기 일정</a>
     <a href="faq.html">자주하는 질문</a>
     <a href="contact.html">예약문의</a>
     <a href="deposit.html">입금확인</a>
-    <a href="cancel.html" class="active">취소·환불 규정</a>
+      <a href="cancel.html">취소&middot;환불 규정</a>
   </nav>
 
   <div class="page-hero">
-    <div class="eyebrow">CANCELLATION &amp; REFUND</div>
-    <h1>취소 · <span class="hl">환불</span> 규정</h1>
-    <p>본 상품은 해외여행 특별약관이 적용돼요. 취소 가능일과 위약금 기준을 예약 전에 꼭 확인해 주세요.</p>
+    <div class="eyebrow">기준호텔</div>
+    <h1>스페인·포르투갈<br><span class="hl">도시별 기준호텔</span></h1>
+    <p>유포리아투어 단체가 실제로 이용하는 4성급 호텔과, 시내 중심 10km 이내의 3성급 호텔을 지도에서 확인해 보세요. 호텔을 누르면 사진과 구글 평점, 길찾기를 볼 수 있어요.</p>
   </div>
 
   <div class="section">
     <div class="section-inner">
-      <div class="section-head">
-        <div class="policy-note">본 상품은 해외여행 특별약관이 적용됩니다</div>
-        <h2>취소 가능일 안내</h2>
-        <div class="sub">아래 기준에 따라 취소 가능일과 수수료가 정해져요</div>
-      </div>
-
-      <div class="notice-list">
-        <div class="notice-item">
-          <div class="num">1</div>
-          <div class="txt">
-            <strong>영업일 기준으로 취소일이 계산돼요</strong>
-            <span>주말(토·일요일)과 공휴일은 취소 가능일 계산에서 제외돼요. 취소가능일은 영업일 기준으로 산정돼요.</span>
+      <div class="hm-filters">
+        <div class="hm-chips" id="hmCities" role="group" aria-label="도시 선택"></div>
+        <div class="hm-row">
+          <div class="hm-grade" role="group" aria-label="등급">
+            <button type="button" data-g="all" aria-pressed="true">전체</button>
+            <button type="button" data-g="4" aria-pressed="false"><i class="dot d4"></i>4성급</button>
+            <button type="button" data-g="3" aria-pressed="false"><i class="dot d3"></i>3성급</button>
           </div>
-        </div>
-        <div class="notice-item">
-          <div class="num">2</div>
-          <div class="txt">
-            <strong>영업일 17시 이후 취소는 다음 영업일 기준으로 처리돼요</strong>
-            <span>영업일 기준 17시 이후, 주말·공휴일에 접수된 취소는 다음 정상영업일 취소 규정이 적용돼요.</span>
-          </div>
-        </div>
-        <div class="notice-item">
-          <div class="num">3</div>
-          <div class="txt">
-            <strong>취소 수수료는 총 결제금액 기준이에요</strong>
-            <span>취소 수수료는 총 결제금액 기준으로 책정돼요. 단, 즉시할인 상품의 경우 할인 적용 전 금액으로 책정돼요.</span>
-          </div>
+          <input type="search" id="hmSearch" placeholder="호텔명·지역 검색" aria-label="호텔 검색">
+          <span class="hm-count" id="hmCount"></span>
         </div>
       </div>
 
-      <div class="policy-caption">소비자 분쟁 해결기준 (공정거래위원회고시 제2021-7호)</div>
-      <div class="policy-table-wrap">
-        <table class="policy-table">
-          <thead>
-            <tr><th>여행 개시일 기준</th><th>취소 통보 시점</th><th>취소 수수료</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>여행개시 30일 전까지</td><td>여행개시 30일 전 ~ 30일</td><td>계약금 환급</td></tr>
-            <tr><td>여행개시 20일 전까지</td><td>여행개시 29일 전 ~ 20일</td><td>여행요금의 10% 배상</td></tr>
-            <tr><td>여행개시 10일 전까지</td><td>여행개시 19일 전 ~ 10일</td><td>여행요금의 15% 배상</td></tr>
-            <tr><td>여행개시 8일 전까지</td><td>여행개시 9일 전 ~ 8일</td><td>여행요금의 20% 배상</td></tr>
-            <tr><td>여행개시 1일 전까지</td><td>여행개시 7일 전 ~ 1일</td><td>여행요금의 30% 배상</td></tr>
-            <tr><td>여행 당일 취소</td><td>여행개시 당일</td><td>여행요금의 50% 배상</td></tr>
-          </tbody>
-        </table>
+      <div class="hm-shell">
+        <aside class="hm-list" id="hmList" aria-label="호텔 목록"></aside>
+        <div class="hm-mapwrap">
+          <div id="hmMap" class="hm-map" aria-label="호텔 지도"></div>
+          <article class="hm-card" id="hmCard" hidden aria-live="polite">
+            <div class="hm-photo" id="hmPhoto">
+              <div class="hm-ph-empty" id="hmPhEmpty"></div>
+              <img id="hmImg" alt="" hidden>
+              <div class="hm-dots" id="hmDots"></div>
+              <button type="button" class="hm-x" id="hmClose" aria-label="닫기">&times;</button>
+              <span class="hm-attr" id="hmAttr"></span>
+            </div>
+            <div class="hm-body">
+              <h3 id="hmName"></h3>
+              <div class="hm-meta" id="hmMeta"></div>
+              <div class="hm-actions">
+                <a class="hm-go" id="hmDir" target="_blank" rel="noopener">길찾기</a>
+                <a class="hm-ic" id="hmTel" aria-label="전화" hidden><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+                <a class="hm-ic" id="hmWeb" target="_blank" rel="noopener" aria-label="웹사이트" hidden><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></a>
+                <a class="hm-ic" id="hmG" target="_blank" rel="noopener" aria-label="구글 지도에서 보기"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></a>
+              </div>
+              <div class="hm-memo">
+                <span>유포리아 메모</span>
+                <strong id="hmMemo"></strong>
+              </div>
+              <ul class="hm-info" id="hmInfo"></ul>
+            </div>
+            <div class="hm-nav">
+              <button type="button" id="hmPrev" aria-label="이전 호텔">&larr;</button>
+              <span id="hmPos"></span>
+              <button type="button" id="hmNext" aria-label="다음 호텔">&rarr;</button>
+            </div>
+          </article>
+        </div>
       </div>
-      <p class="policy-foot">※ 상기 기준은 공정거래위원회 고시 소비자 분쟁 해결기준에 의거하며, 업체별·상품별 세부 약관이 상이할 수 있어요.</p>
-    </div>
 
-    <div class="cta-band">
-      <div>
-        <h3>취소·환불 관련 문의가 있으신가요?</h3>
-        <p>예약문의를 남겨 주시면 담당자가 정확한 위약금 안내를 도와드려요.</p>
-      </div>
-      <a class="cta" href="contact.html">예약문의 하러 가기</a>
+      <p class="hm-note">기준호텔은 예약 상황에 따라 동급 호텔로 변경될 수 있으며, 최종 호텔은 출발 전 확정서로 안내드립니다. 모든 호텔은 조식이 포함됩니다.</p>
     </div>
   </div>
 
@@ -357,5 +432,164 @@
   </script>
 
 </div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* 구글 지도 API 키를 넣으면 구글 지도 + 호텔 사진·구글 평점·전화·웹사이트가 표시됩니다.
+   비워 두면 무료 지도(OpenStreetMap)로 표시하고, 사진·평점은 구글 지도 링크로 연결합니다. */
+var GMAPS_KEY = '';
+
+(function(){
+var HOTELS = [{"c":"MAD","g":4,"n":"LCB Hotel Fuenlabrada","a":"푸엔라브라다 · 기차역과 쇼핑몰 바로 위","id":"ChIJB_P4eAyLQQ0RWLldElElJ-c","lat":40.282351,"lng":-3.801354},{"c":"MAD","g":4,"n":"Hotel Ciudad de Móstoles","a":"모스톨레스 · 마드리드 남서쪽","id":"ChIJH3O4aQ2OQQ0R1T7DgiR6DaQ","lat":40.334693,"lng":-3.887401},{"c":"MAD","g":4,"n":"Eurostars Madrid Congress","a":"알코벤다스 · 마드리드 북쪽","id":"ChIJz67YKKstQg0Rext_Xgyy7_w","lat":40.534478,"lng":-3.621435},{"c":"MAD","g":4,"n":"Hotel Villa Odón","a":"비야비시오사 데 오돈 · 마드리드 서쪽","id":"ChIJ_cI1uVOPQQ0RcazsRb1hPj8","lat":40.350782,"lng":-3.894658},{"c":"MAD","g":4,"n":"PCM Forum Alcalá","a":"알칼라 데 에나레스 · 구시가지 인근","id":"ChIJ_ffsqwtJQg0R2jodVel8w6A","lat":40.481068,"lng":-3.376457},{"c":"MAD","g":4,"n":"Eurostars Gran Madrid","a":"알코벤다스 · 지하철 10호선 인근","id":"ChIJ79M9rFksQg0RG6OyBcPZm2Q","lat":40.534372,"lng":-3.634174},{"c":"MAD","g":4,"n":"Hotel Hidalgo","a":"에스키비아스 · 마드리드와 톨레도 사이","id":"ChIJFxSQlez3QQ0RN59fU96wXBA","lat":40.098589,"lng":-3.762384},{"c":"BCN","g":4,"n":"Alexandre Hotel Fira Congress","a":"오스피탈레트 · 피라 전시장, 지하철 도보권","id":"ChIJd2SSEMiYpBIRTcQz0qck1tQ","lat":41.352351,"lng":2.127286},{"c":"BCN","g":4,"n":"Catalonia Gran Hotel Verdi","a":"사바델 · 바르셀로나 북쪽","id":"ChIJH228vOWUpBIRXb1Ok8Ds6sw","lat":41.555634,"lng":2.097828},{"c":"BCN","g":4,"n":"Hotel Catalonia Sabadell","a":"사바델 시내 · 공원 인근","id":"ChIJUW8c-vqUpBIRpEafVSyesO0","lat":41.550046,"lng":2.09756},{"c":"BCN","g":4,"n":"Hotel Acta Sant Just","a":"산트 후스트 데스베른 · 수영장","id":"ChIJbVAT5s-bpBIRyXRY9QSufds","lat":41.380098,"lng":2.056984},{"c":"ZAZ","g":4,"n":"Hotel Diagonal Plaza","a":"사라고사 · 공항·고속도로 인근","id":"ChIJHbkvG3FpWQ0RMd-mbNKiMi8","lat":41.642771,"lng":-0.992993},{"c":"ZAZ","g":4,"n":"Zentral Ave Zaragoza","a":"사라고사 · 델리시아스 기차역 앞","id":"ChIJ_x34o0xrWQ0RhIF_XOeu4d0","lat":41.661272,"lng":-0.906941},{"c":"ZAZ","g":4,"n":"NH Lleida Pirineos","a":"레이다 · 사라고사와 바르셀로나 중간","id":"ChIJFRht_hbgphIR6nRRRvb8lrY","lat":41.61675,"lng":0.61339},{"c":"ZAZ","g":4,"n":"Eurostars Rey Fernando","a":"사라고사 · 플라사 단지","id":"ChIJ07wwHGJpWQ0RP82k57WTZ-Q","lat":41.651917,"lng":-0.98256},{"c":"ZAZ","g":4,"n":"Hotel Exe Boston","a":"사라고사 시내 · 구시가지 인근","id":"ChIJdSpa1_oUWQ0Rse5Hi6yIfvE","lat":41.645619,"lng":-0.876694},{"c":"ZAZ","g":4,"n":"Eurostars Zaragoza","a":"사라고사 · 델리시아스 기차역 연결","id":"ChIJ8_5mrElrWQ0RJb5FvNn26aU","lat":41.659498,"lng":-0.912681},{"c":"VLC","g":4,"n":"Sercotel Hotel Ciutat d'Alcoi","a":"알코이 · 발렌시아주 남부","id":"ChIJd6lnP1KGYQ0R2EmOsmDgvYc","lat":38.698056,"lng":-0.480556},{"c":"VLC","g":4,"n":"Exe Rey Don Jaime","a":"발렌시아 · 예술과학도시 인근","id":"ChIJFfeXQ8BIYA0RoGACNWZQPI8","lat":39.463379,"lng":-0.356603},{"c":"VLC","g":4,"n":"Eurostars Acteón","a":"발렌시아 · 시내와 해변 사이","id":"ChIJjaBVau1IYA0RfWZMfiKnA0o","lat":39.463889,"lng":-0.347778},{"c":"VLC","g":4,"n":"Hotel Eurostars Gran Valencia","a":"발렌시아 · 베니칼랍 지구","id":"ChIJg-AVXI5FYA0RRgRb-IsmaGs","lat":39.491571,"lng":-0.398184},{"c":"VLC","g":4,"n":"Hotel Luz Castellón","a":"카스테욘 · 기차역 도보권","id":"ChIJBz6ThiT-Xw0RpuwafIEwx6E","lat":39.988983,"lng":-0.050914},{"c":"VLC","g":4,"n":"Cullera Holiday Hotel","a":"쿨레라 · 해변 도보 5분","id":"ChIJC0EhFsHIYQ0RLbmMQR67F8w","lat":39.177021,"lng":-0.241711},{"c":"VLC","g":4,"n":"Olympia Hotel, Events & Spa","a":"알보라야 · 지하철역 인근","id":"ChIJr93TOyNGYA0RzZNIJD6JAFA","lat":39.495627,"lng":-0.353217},{"c":"GRX","g":4,"n":"Hotel Macià Real de la Alhambra","a":"그라나다 · 알함브라 방향 언덕","id":"ChIJE0e991njcQ0RA6p1te-mTKw","lat":37.163407,"lng":-3.570419},{"c":"GRX","g":4,"n":"Hotel Turia Granada","a":"그라나다 · 기차역 인근, 시내버스 정류장 앞","id":"ChIJxS4bxi39cQ0RH_V2u0GRyJw","lat":37.185074,"lng":-3.60707},{"c":"GRX","g":4,"n":"Barceló Granada Congress","a":"그라나다 시내 · 루프탑·스파","id":"ChIJoXUuc5r8cQ0Rq9VpU_aScBY","lat":37.167028,"lng":-3.607992},{"c":"GRX","g":4,"n":"Gran Hotel Luna de Granada","a":"그라나다 시내 · 수영장·스파","id":"ChIJQT8RaY38cQ0R2ncveM7lSN4","lat":37.176552,"lng":-3.612778},{"c":"GRX","g":4,"n":"Hotel Abades Nevada Palace","a":"그라나다 남동쪽 · 수영장","id":"ChIJWesL7Vn7cQ0Rx0a8sxpeS6U","lat":37.152151,"lng":-3.591543},{"c":"GRX","g":4,"n":"DWO Urban Granada","a":"그라나다 시내 · 지하철역 앞","id":"ChIJ39RE5ZL8cQ0RXc1WkSP8J1k","lat":37.176146,"lng":-3.609869},{"c":"SVQ","g":4,"n":"Eurostars Al-Ándalus","a":"세비야 · 헬리오폴리스 지구, 야외 수영장","id":"ChIJOTuPJXluEg0RN3FGSJW_eXs","lat":37.354077,"lng":-5.980214},{"c":"SVQ","g":4,"n":"AC Hotel Sevilla Forum","a":"세비야 동쪽 · 공항 10분","id":"ChIJR0QM29RuEg0R6gD2O3M9wAk","lat":37.408226,"lng":-5.945831},{"c":"SVQ","g":4,"n":"Ilunion Alcora Sevilla","a":"산 후안 데 아스날파라체 · 세비야 서쪽, 수영장","id":"ChIJq5od-vBsEg0RyZppZsLPekA","lat":37.370149,"lng":-6.033135},{"c":"SVQ","g":4,"n":"Hotel Porcel Torneo","a":"세비야 북쪽 · 구시가지 도보 30분","id":"ChIJ14M9-vxrEg0RCY9lBl9QRFc","lat":37.41295,"lng":-5.984057},{"c":"SVQ","g":4,"n":"Hotel M.A. Sevilla Congresos","a":"세비야 동쪽 · 컨벤션센터 옆","id":"ChIJY7brsdJoEg0RJmcsZVd0KS4","lat":37.40557,"lng":-5.930085},{"c":"SVQ","g":4,"n":"Exe Gran Hotel Solúcar","a":"산루카르 라 마요르 · 세비야 서쪽 20km","id":"ChIJFT9VJSkREg0RNzrR6kmv6xU","lat":37.384319,"lng":-6.190075},{"c":"SVQ","g":4,"n":"Exe Sevilla Macarena","a":"세비야 북쪽 · 루프탑 수영장","id":"ChIJQSRFQP9rEg0Ra3pXES49w3A","lat":37.403347,"lng":-5.987254},{"c":"LIS","g":4,"n":"Mercure Lisboa Almada","a":"알마다 · 테주강 남쪽, 공원 앞","id":"ChIJXYulEN80GQ0Rpg8i0UGw6oU","lat":38.670849,"lng":-9.170916},{"c":"LIS","g":4,"n":"Hotel Lagoas Park","a":"오에이라스 · 리스본 서쪽","id":"ChIJ71OAYsTOHg0Rtcb6uqoj_JU","lat":38.715219,"lng":-9.309443},{"c":"LIS","g":4,"n":"Crowne Plaza Caparica Lisbon","a":"카파리카 · 해변 인근, 수영장","id":"ChIJf2Ss8UvLHg0RgoRbFpavlo8","lat":38.648175,"lng":-9.22489},{"c":"LIS","g":4,"n":"HF Fénix Urban","a":"리스본 시내 · 에두아르두 7세 공원 인근","id":"ChIJO_Xjrx4zGQ0Rz6qmS9VTkjY","lat":38.728681,"lng":-9.14888},{"c":"OPO","g":4,"n":"Eurostars Oporto","a":"포르투 북쪽 · 지하철역 인근","id":"ChIJ8X7VgTlkJA0R0lsL1zF4byw","lat":41.184972,"lng":-8.603102},{"c":"OPO","g":4,"n":"Sea Porto Hotel","a":"마토지뉴스 · 해안 지역","id":"ChIJCZzfBjdvJA0R_dKd-mLCSr0","lat":41.18579,"lng":-8.685106},{"c":"OPO","g":4,"n":"TRYP Porto Expo Hotel","a":"레사 다 팔메이라 · 공항 10분, 수영장","id":"ChIJD-75_s9oJA0RwAmiVIs93W4","lat":41.202585,"lng":-8.693011},{"c":"OPO","g":4,"n":"Oporto Airport & Business Hotel","a":"마이아 · 포르투 공항 인근","id":"ChIJH-mH-9VnJA0RdLO9RChvqto","lat":41.240625,"lng":-8.659388},{"c":"OPO","g":4,"n":"Axis Porto Business & Spa","a":"포르투 북쪽 · 스파","id":"ChIJL4SeTzxkJA0RCyuTH9iBK5k","lat":41.187784,"lng":-8.597477},{"c":"OPO","g":4,"n":"Dorma Praia Golfe (구 Exe Praia Golfe)","a":"에스피뉴 · 바다 전망","id":"ChIJHV6KSMR5JA0RX65M9DeiG_c","lat":41.009626,"lng":-8.645013},{"c":"FTM","g":4,"n":"Aurea Fátima Hotel Congress & Spa","a":"파티마 · 성지 도보 10분","id":"ChIJm5IhJC6dGA0R3Hrxk_pBw0s","lat":39.631859,"lng":-8.681068},{"c":"FTM","g":4,"n":"Hotel Estrela de Fátima","a":"파티마 성지 바로 앞","id":"ChIJFSVGNFFYJA0RWAlhlbaq4y8","lat":39.629198,"lng":-8.67355},{"c":"FTM","g":4,"n":"Hotel Regina","a":"파티마 · 성지 도보 3분","id":"ChIJnc4ei1NhJA0RHNpdcRbwX3c","lat":39.628355,"lng":-8.674669},{"c":"FTM","g":4,"n":"Steyler Fátima Hotel","a":"파티마 · 성지 도보권","id":"ChIJpRXTa5szGQ0ROahEOgVlha4","lat":39.63156,"lng":-8.67727},{"c":"FTM","g":4,"n":"Essence Inn Marianos","a":"파티마 · 성지 도보권","id":"ChIJYciXlzGdGA0RsgRaDB_aTLA","lat":39.630943,"lng":-8.677407},{"c":"ETC","g":4,"n":"Hotel Coimbra Aeminium","a":"코임브라 · 첼라스 지구","id":"ChIJpUfmFnL5Ig0R11w78f4DDPg","lat":40.215938,"lng":-8.413747},{"c":"ETC","g":4,"n":"Vila Galé Coimbra","a":"코임브라 · 몬데구강 전망","id":"ChIJCW3HMQP5Ig0RgNQzIzmb5Ow","lat":40.214048,"lng":-8.435853},{"c":"ETC","g":4,"n":"NH Coimbra Dona Inês","a":"코임브라 · 강변","id":"ChIJHVAPOAP5Ig0RXLF7xIXU2x8","lat":40.214398,"lng":-8.43618},{"c":"ETC","g":4,"n":"Hotel Maestranza","a":"론다 · 누에보 다리 도보 5분","id":"ChIJD6BEAzkxDQ0Rv41EJIXjJ4k","lat":36.74307,"lng":-5.16679},{"c":"ETC","g":4,"n":"Eurostars Toledo","a":"톨레도 · 구시가지 전망","id":"ChIJqxEAaFMKag0RooRuyjeu4YM","lat":39.872386,"lng":-4.023917},{"c":"ETC","g":4,"n":"Salamanca Forum – Hotel Doña Brígida","a":"비야마요르 · 살라망카 시내 10분","id":"ChIJI9iZkREoPw0R2_SOI1zpxM8","lat":40.983332,"lng":-5.711584},{"c":"MAD","g":3,"n":"Hotel Porcel Ganivet","a":"센트로 · 라티나 지구","km":1.1,"id":"ChIJZz4BJ9cnQg0RaitkNuR-WYY","lat":40.40822,"lng":-3.71077},{"c":"MAD","g":3,"n":"NH Madrid Atocha","a":"레티로 · 아토차역 맞은편","km":1.6,"id":"ChIJb2V2OyQmQg0RFS5Xixm_2RA","lat":40.40769,"lng":-3.68946},{"c":"MAD","g":3,"n":"Hotel Acta Madfor","a":"몽클로아 · 프린시페 피오역 앞","km":1.6,"id":"ChIJQVI5lHIoQg0Rz2QoD8pqCQE","lat":40.42145,"lng":-3.72171},{"c":"MAD","g":3,"n":"Hotel Eco Vía Lusitana","a":"카라반첼 · 마드리드 남서쪽","km":5.9,"id":"ChIJh7H6eIAnQg0RpDuc7tFxZvI","lat":40.37274,"lng":-3.74215},{"c":"MAD","g":3,"n":"B&B HOTEL Madrid San Fermín","a":"우세라 · 지하철 직통","km":5.6,"id":"ChIJEzW0BPomQg0RAKSftUltkjs","lat":40.36698,"lng":-3.69337},{"c":"MAD","g":3,"n":"B&B HOTEL Madrid Vallecas La Gavia","a":"바예카스 · 마드리드 남동쪽","km":7.8,"id":"ChIJsZAslGYlQg0RFRhlA9d9NaI","lat":40.37064,"lng":-3.63418},{"c":"BCN","g":3,"n":"Hotel Occidental Barcelona 1929","a":"산츠 · 에스파냐 광장 인근","km":2.3,"id":"ChIJeS6NoHiipBIRp5yzwayfhNg","lat":41.37537,"lng":2.14763},{"c":"BCN","g":3,"n":"Catalonia Roma","a":"에이샴플레 · 산츠역 인근, 수영장","km":2.1,"id":"ChIJo-3ZEYCipBIROTMhZlQP3WA","lat":41.38192,"lng":2.14583},{"c":"BCN","g":3,"n":"Hotel Acta Azul","a":"산츠 · 아레나스 쇼핑몰 인근","km":2.5,"id":"ChIJYxUs6ICYpBIR8GY7p4XK1rc","lat":41.37303,"lng":2.14597},{"c":"BCN","g":3,"n":"NH Barcelona Les Corts","a":"레스 코르츠 · 캄프 누 방향","km":2.8,"id":"ChIJc91IQHuYpBIR1REEr-HL6OE","lat":41.38745,"lng":2.13671},{"c":"BCN","g":3,"n":"Arya Stadium Hotel","a":"산츠 · 지하철 2개 노선 인근","km":4.0,"id":"ChIJoZ1gSPOYpBIRqSWwpmoD1gQ","lat":41.37551,"lng":2.12475},{"c":"BCN","g":3,"n":"Hotel Onix Fira","a":"에이샴플레 · 에스파냐 광장 인근","km":2.0,"id":"ChIJy8EnpH6ipBIRaedIK08x3yo","lat":41.37698,"lng":2.14974},{"c":"ZAZ","g":3,"n":"Exe Plaza Delicias","a":"델리시아스 · 기차역 인근","km":3.0,"id":"ChIJN6Zp-TdrWQ0RRgTcvhu-zmE","lat":41.6566,"lng":-0.91497},{"c":"ZAZ","g":3,"n":"iStay by NH Zaragoza Sport","a":"델리시아스 · 트램 정류장 앞","km":1.6,"id":"ChIJdZFxBckUWQ0Rv_ZFyNQQBWQ","lat":41.64984,"lng":-0.89542},{"c":"ZAZ","g":3,"n":"Hotel Gran Vía","a":"센트로 · 그란 비아 대로","km":1.6,"id":"ChIJdyRii9wUWQ0RC5dEOB7VlfA","lat":41.6456,"lng":-0.89037},{"c":"ZAZ","g":3,"n":"Hotel Hesperia Zaragoza Centro","a":"구시가지 · 도보 관광 가능","km":0.7,"id":"ChIJi0Rzy8EUWQ0RtOTwqurPVRc","lat":41.65518,"lng":-0.88765},{"c":"ZAZ","g":3,"n":"Hotel YIT Ciudad de Zaragoza","a":"사라고사 북쪽 · 지하 주차장","km":2.5,"id":"ChIJC01s438TWQ0RiNiQpNNlpto","lat":41.67725,"lng":-0.86805},{"c":"ZAZ","g":3,"n":"B&B HOTEL Zaragoza Royal","a":"센트로 · 주차장","km":1.4,"id":"ChIJ6_JhbN0UWQ0RypH-01kU0bU","lat":41.64561,"lng":-0.88789},{"c":"VLC","g":3,"n":"Hotel Malcom and Barret","a":"콰트레 카레레스 · 예술과학도시 인근","km":2.2,"id":"ChIJTyMuFclJYA0RmXfypJb-7Tg","lat":39.45073,"lng":-0.37091},{"c":"VLC","g":3,"n":"Arena Zone Hotel","a":"콰트레 카레레스 · 로이그 아레나 옆","km":2.6,"id":"ChIJAQAfe9lIYA0R43W-Vu7cqcU","lat":39.44923,"lng":-0.36267},{"c":"VLC","g":3,"n":"B&B HOTEL Valencia Ciudad de las Ciencias","a":"콰트레 카레레스 · 예술과학도시 도보권","km":2.8,"id":"ChIJEw2tT9ZIYA0RpyKL6MlJEUI","lat":39.44568,"lng":-0.36824},{"c":"VLC","g":3,"n":"Ilunion Aqua 3","a":"카민스 알 그라우 · 쇼핑몰 연결","km":3.0,"id":"ChIJiWifO_BIYA0RdERDCqS31_E","lat":39.45595,"lng":-0.34578},{"c":"VLC","g":3,"n":"Ilunion Valencia 3","a":"베니칼랍 · 트램역 도보 5분","km":3.1,"id":"ChIJk8gkHYxFYA0Rx5kXq00bnjs","lat":39.49164,"lng":-0.39824},{"c":"VLC","g":3,"n":"Sweet Hotel Renasa","a":"엘 플라 델 레알 · 대학가","km":2.0,"id":"ChIJtU-KYphIYA0Rzhxb3w05Qpg","lat":39.47806,"lng":-0.35535},{"c":"GRX","g":3,"n":"Hotel Granada Five Senses","a":"센트로 · 그란 비아, 루프탑 수영장","km":0.2,"id":"ChIJV1XffsD8cQ0RS_huXZfMCag","lat":37.1786,"lng":-3.59948},{"c":"GRX","g":3,"n":"Crisol Guadalupe","a":"알함브라 입구 도보 2분","km":1.4,"id":"ChIJJ6osg7P8cQ0RX6aUvKUYFrg","lat":37.17335,"lng":-3.58413},{"c":"GRX","g":3,"n":"Hotel Anacapri","a":"센트로 · 대성당 인근","km":0.2,"id":"ChIJMYHHJL_8cQ0R1qZghbFM73g","lat":37.17653,"lng":-3.59737},{"c":"GRX","g":3,"n":"Hotel Comfort Dauro 2","a":"센트로 · 누에바 광장 인근","km":0.4,"id":"ChIJ33v8HLz8cQ0RVCps7MF5Ihs","lat":37.1731,"lng":-3.59719},{"c":"GRX","g":3,"n":"Hotel Mercader de Sedas","a":"센트로 · 대성당 도보권","km":0.3,"id":"ChIJ6Uz2v778cQ0RPOkU9GxSbYE","lat":37.17453,"lng":-3.59767},{"c":"GRX","g":3,"n":"Khü Hotel","a":"센트로 · 비브 람블라 광장","km":0.2,"id":"ChIJV-auW778cQ0RrU5i3WlVtnI","lat":37.17501,"lng":-3.59929},{"c":"SVQ","g":3,"n":"ibis Styles Sevilla City Santa Justa","a":"네르비온 · 루프탑 수영장","km":1.2,"id":"ChIJ26vFh_tvEg0RWWsC2S9hH0g","lat":37.38681,"lng":-5.97851},{"c":"SVQ","g":3,"n":"Hotel Alcázar Sevilla","a":"구시가지 · 알카사르 정원 맞은편","km":0.6,"id":"ChIJA-oEIB9sEg0R1RO0Eij_7Yg","lat":37.38337,"lng":-5.98687},{"c":"SVQ","g":3,"n":"Hotel Monteolivos AACR","a":"산타 후스타역 인근, 수영장","km":2.0,"id":"ChIJ983umrpuEg0RWkWugNlr3i8","lat":37.39164,"lng":-5.97059},{"c":"SVQ","g":3,"n":"Sercotel Doña Carmela","a":"벨라비스타 · 세비야 남쪽","km":7.0,"id":"ChIJm8E2jBluEg0RrMA0xWuaioA","lat":37.32696,"lng":-5.96654},{"c":"SVQ","g":3,"n":"Hotel San Pablo Sevilla","a":"세비야 동쪽 · 공항 방향","km":6.1,"id":"ChIJV-g51MxoEg0RUz3cwWq1Mdk","lat":37.40537,"lng":-5.92756},{"c":"SVQ","g":3,"n":"Catalonia Hispalis","a":"세로 아마테 · 수영장","km":4.4,"id":"ChIJUZR9Et9uEg0RRH1JiXtWR4o","lat":37.38602,"lng":-5.94266},{"c":"LIS","g":3,"n":"HF Fénix Music","a":"에두아르두 7세 공원 · 루프탑 수영장","km":1.6,"id":"ChIJn08f2nAzGQ0RWtiFRHKDE6c","lat":38.72501,"lng":-9.15186},{"c":"LIS","g":3,"n":"HF Fénix Garden","a":"에두아르두 7세 공원 앞","km":1.6,"id":"ChIJPRIAdA0zGQ0R8CJ7fJFBVAs","lat":38.72503,"lng":-9.15169},{"c":"LIS","g":3,"n":"Dorma Saldanha","a":"살다냐 · 지하철역 인근","km":2.2,"id":"ChIJt_BQ3XwzGQ0RK0p-UgLpW78","lat":38.73339,"lng":-9.14318},{"c":"LIS","g":3,"n":"SANA Reno","a":"아베니다스 노바스 · 야외 수영장","km":2.5,"id":"ChIJ1Rf7YwszGQ0RmP1DFaF7TFo","lat":38.73488,"lng":-9.15084},{"c":"LIS","g":3,"n":"Masa 5 de Outubro","a":"아베니다스 노바스 · 굴벤키안 미술관 인근","km":2.7,"id":"ChIJc6nmNQozGQ0RDWW1qxyv7BM","lat":38.73741,"lng":-9.14806},{"c":"LIS","g":3,"n":"Hotel do Chile","a":"아로이우스 · 지하철 인근","km":2.0,"id":"ChIJozP90ZkzGQ0RUXfgX6KpFrI","lat":38.73153,"lng":-9.13525},{"c":"OPO","g":3,"n":"HF Tuela Porto","a":"보아비스타 · 지하철역 인근","km":1.8,"id":"ChIJSRobEAllJA0RSFt6b9B9fe4","lat":41.15457,"lng":-8.63055},{"c":"OPO","g":3,"n":"B&B HOTEL Porto Centro Massarelos","a":"마사렐루스 · 신축","km":1.4,"id":"ChIJz7NcHgBlJA0RHDZCQ_nQZM4","lat":41.15498,"lng":-8.62583},{"c":"OPO","g":3,"n":"Holiday Inn Express Porto Boavista","a":"보아비스타 · 카사 다 무지카역 인근","km":2.5,"id":"ChIJZydH7qNlJA0RfbL9Q62H4Go","lat":41.16333,"lng":-8.63336},{"c":"OPO","g":3,"n":"TRYP Porto Centro","a":"봉핑 · 지하철역 도보 7분","km":1.2,"id":"ChIJWV_o_vZkJA0R2I1Becx3Jvw","lat":41.15713,"lng":-8.60212},{"c":"OPO","g":3,"n":"Stay Hotel Porto Centro Trindade","a":"트린다드 · 구시가지 도보권","km":0.6,"id":"ChIJRUFfOPpkJA0RGW5ZMb_AMqw","lat":41.15335,"lng":-8.60697},{"c":"OPO","g":3,"n":"Star Inn Porto","a":"하말드 · 시내버스 직통","km":3.6,"id":"ChIJMUx5tcllJA0R0bMzvGClORk","lat":41.17939,"lng":-8.62428},{"c":"FTM","g":3,"n":"Hotel Casa São Nuno","a":"성지 뒤편 정원과 연결","km":0.5,"id":"ChIJk5pikjedGA0RuX4-L56I8pA","lat":39.63533,"lng":-8.67011},{"c":"FTM","g":3,"n":"Hotel Aleluia","a":"성지 정면","km":0.5,"id":"ChIJSWkpLjydGA0R9wM5OyXlED0","lat":39.62986,"lng":-8.67747},{"c":"FTM","g":3,"n":"Coração de Fátima Boutique Hotel","a":"성지 도보 3분","km":0.4,"id":"ChIJFSVGNFFYJA0RtbrXxA7N3sk","lat":39.62853,"lng":-8.67445},{"c":"FTM","g":3,"n":"Hotel Santo António de Fátima","a":"발현 예배당 도보 3분","km":0.3,"id":"ChIJ_3sOTDmdGA0R-61YNucub20","lat":39.63251,"lng":-8.67637},{"c":"FTM","g":3,"n":"Hotel Azinheira","a":"성지 도보권 · 주차장","km":0.5,"id":"ChIJg7e-Yz-dGA0RwmK3prklGyQ","lat":39.6331,"lng":-8.66703},{"c":"FTM","g":3,"n":"Imperhotel","a":"성지 도보 12분","km":0.5,"id":"ChIJteuqWBWdGA0Ragxfrx9TMa0","lat":39.6321,"lng":-8.66672}];
+var CITY = {MAD:'마드리드',BCN:'바르셀로나',ZAZ:'사라고사',VLC:'발렌시아',GRX:'그라나다',SVQ:'세비야',LIS:'리스본',OPO:'포르투',FTM:'파티마',ETC:'그 밖의 도시'};
+var ORDER = ['MAD','BCN','ZAZ','VLC','GRX','SVQ','LIS','OPO','FTM','ETC'];
+var state = { city:'ALL', grade:'all', q:'', vis:[], cur:-1 };
+var $ = function(id){ return document.getElementById(id); };
+var esc = function(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); };
+var gUrl = function(h){ return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(h.n)+'&query_place_id='+h.id; };
+var dirUrl = function(h){ return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(h.n)+'&destination_place_id='+h.id; };
+HOTELS.forEach(function(h,i){ h.i=i; });
+
+/* ---------- 지도 어댑터 ---------- */
+var M = { ready:false, markers:{} };
+function pinHtml(h,sel){ return '<span class="hm-pin p'+h.g+(sel?' sel':'')+'">'+h.g+'★</span>'; }
+
+function initLeaflet(){
+  var map = L.map('hmMap',{zoomControl:true,attributionControl:true}).setView([40.0,-4.5],6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
+    maxZoom:19, subdomains:'abcd',
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  }).addTo(map);
+  M.kind='leaflet'; M.map=map;
+  M.add=function(h){ var m=L.marker([h.lat,h.lng],{icon:L.divIcon({html:pinHtml(h,false),className:'',iconSize:null}),title:h.n}).on('click',function(){ select(h.i,true); }); M.markers[h.i]=m; };
+  M.show=function(h,on){ var m=M.markers[h.i]; if(on){ if(!map.hasLayer(m)) m.addTo(map);} else if(map.hasLayer(m)) map.removeLayer(m); };
+  M.mark=function(h,sel){ M.markers[h.i].setIcon(L.divIcon({html:pinHtml(h,sel),className:'',iconSize:null})); if(sel) M.markers[h.i].setZIndexOffset(1000); else M.markers[h.i].setZIndexOffset(0); };
+  M.fit=function(list){ if(!list.length) return; var b=L.latLngBounds(list.map(function(h){return [h.lat,h.lng];})); map.fitBounds(b,{padding:[40,40],maxZoom:14}); };
+  M.focus=function(h){ map.setView([h.lat,h.lng],Math.max(map.getZoom(),13),{animate:true}); };
+  M.ready=true; boot();
+}
+
+function initGoogle(){
+  window.__hmGoogleReady = function(){
+    var map = new google.maps.Map($('hmMap'),{center:{lat:40,lng:-4.5},zoom:6,mapTypeControl:false,streetViewControl:false,fullscreenControl:true,clickableIcons:false});
+    M.kind='google'; M.map=map;
+    var icon=function(h,sel){ var c=sel?'#14103D':(h.g==4?'#6C3CE9':'#FF7A1A');
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="40" height="30"><rect x="1.5" y="1.5" width="37" height="27" rx="8" fill="'+c+'" stroke="#fff" stroke-width="2.5"/></svg>';
+      return {url:'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),scaledSize:new google.maps.Size(40,30),anchor:new google.maps.Point(20,15),labelOrigin:new google.maps.Point(20,15)}; };
+    M.add=function(h){ var m=new google.maps.Marker({position:{lat:h.lat,lng:h.lng},title:h.n,icon:icon(h,false),label:{text:h.g+'★',color:'#fff',fontWeight:'800',fontSize:'12px'}}); m.addListener('click',function(){ select(h.i,true); }); M.markers[h.i]=m; };
+    M.show=function(h,on){ M.markers[h.i].setMap(on?map:null); };
+    M.mark=function(h,sel){ M.markers[h.i].setIcon(icon(h,sel)); M.markers[h.i].setZIndex(sel?999:1); };
+    M.fit=function(list){ if(!list.length) return; var b=new google.maps.LatLngBounds(); list.forEach(function(h){ b.extend({lat:h.lat,lng:h.lng}); }); map.fitBounds(b,60); if(list.length===1) map.setZoom(14); };
+    M.focus=function(h){ map.panTo({lat:h.lat,lng:h.lng}); if(map.getZoom()<13) map.setZoom(13); };
+    M.ready=true; boot();
+  };
+  var s=document.createElement('script');
+  s.src='https://maps.googleapis.com/maps/api/js?key='+encodeURIComponent(GMAPS_KEY)+'&v=weekly&language=ko&region=ES&callback=__hmGoogleReady';
+  s.async=true; s.onerror=function(){ initLeaflet(); };
+  document.head.appendChild(s);
+}
+
+/* ---------- 필터 / 목록 ---------- */
+function chips(){
+  var html=['<button type="button" data-c="ALL" aria-pressed="'+(state.city==='ALL')+'">전체</button>'];
+  ORDER.forEach(function(c){ html.push('<button type="button" data-c="'+c+'" aria-pressed="'+(state.city===c)+'">'+CITY[c]+'</button>'); });
+  $('hmCities').innerHTML=html.join('');
+}
+function filter(){
+  var q=state.q.toLowerCase();
+  state.vis=HOTELS.filter(function(h){
+    return (state.city==='ALL'||h.c===state.city) && (state.grade==='all'||String(h.g)===state.grade) && (!q||(h.n+' '+h.a+' '+CITY[h.c]).toLowerCase().indexOf(q)>-1);
+  }).sort(function(a,b){ return ORDER.indexOf(a.c)-ORDER.indexOf(b.c) || b.g-a.g; });
+}
+function renderList(){
+  var out=[], last=null;
+  state.vis.forEach(function(h,k){
+    if(h.c!==last){ out.push('<div class="hm-city">'+CITY[h.c]+'</div>'); last=h.c; }
+    var sub=h.a+(h.km!=null?' · 시내 중심 '+h.km+'km':'');
+    out.push('<button type="button" class="hm-item'+(k===state.cur?' on':'')+'" data-k="'+k+'"><span class="badge b'+h.g+'">'+h.g+'성</span><b>'+esc(h.n)+'</b><small>'+esc(sub)+'</small></button>');
+  });
+  $('hmList').innerHTML=out.join('')||'<p style="padding:16px;color:var(--muted)">조건에 맞는 호텔이 없어요.</p>';
+  $('hmCount').textContent='4성급 '+state.vis.filter(function(h){return h.g==4;}).length+'곳 · 3성급 '+state.vis.filter(function(h){return h.g==3;}).length+'곳';
+}
+function apply(fit){
+  var prev = state.cur>-1 ? state.vis[state.cur] : null;
+  filter();
+  state.cur = prev ? state.vis.indexOf(prev) : -1;
+  if(state.cur<0) closeCard();
+  if(M.ready){
+    var on={}; state.vis.forEach(function(h){ on[h.i]=1; });
+    HOTELS.forEach(function(h){ M.show(h,!!on[h.i]); });
+    if(fit) M.fit(state.vis);
+  }
+  renderList();
+}
+
+/* ---------- 상세 카드 ---------- */
+var token=0, photos=[], pIdx=0;
+function closeCard(){ if(state.cur>-1&&M.ready){ M.mark(state.vis[state.cur],false); } $('hmCard').hidden=true; }
+function setPhoto(i){
+  pIdx=i; var p=photos[i];
+  $('hmImg').hidden=!p; $('hmPhEmpty').hidden=!!p;
+  if(p){ $('hmImg').src=p.url; $('hmAttr').innerHTML=p.attr; } else { $('hmAttr').innerHTML=''; }
+  $('hmDots').innerHTML=photos.length>1?photos.map(function(_,k){return '<button type="button" aria-label="사진 '+(k+1)+'" class="'+(k===i?'on':'')+'" data-p="'+k+'"></button>';}).join(''):'';
+}
+function select(i,fromMap){
+  var k=state.vis.findIndex(function(h){return h.i===i;}); if(k<0) return;
+  if(M.ready&&state.cur>-1&&state.vis[state.cur]) M.mark(state.vis[state.cur],false);
+  state.cur=k; var h=state.vis[k];
+  if(M.ready){ M.mark(h,true); M.focus(h); }
+  renderList();
+  var el=$('hmList').querySelector('[data-k="'+k+'"]'); if(el) el.scrollIntoView({block:'nearest'});
+  $('hmCard').hidden=false;
+  $('hmName').textContent=h.n;
+  $('hmMemo').textContent=h.g+'성 · '+(h.c==='ETC'?h.a.split(' · ')[0]:CITY[h.c]+(h.g==3?' 시내':(/외곽|남쪽|북쪽|서쪽|동쪽|인근/.test(h.a)?' 외곽':'')));
+  $('hmMeta').innerHTML='<span>'+h.g+'성급 호텔</span><span>·</span><span>'+esc(CITY[h.c])+'</span>';
+  var info=['<li>📍 '+esc(h.a)+'</li>'];
+  if(h.km!=null) info.push('<li>🚶 시내 중심에서 '+h.km+'km</li>');
+  $('hmInfo').innerHTML=info.join('');
+  $('hmDir').href=dirUrl(h); $('hmG').href=gUrl(h);
+  $('hmTel').hidden=true; $('hmWeb').hidden=true;
+  $('hmPhEmpty').textContent=CITY[h.c];
+  photos=[]; setPhoto(0);
+  $('hmPos').textContent=state.vis.length+'개 중 '+(k+1)+'개';
+  if(M.kind==='google') loadPlace(h,++token);
+  else $('hmInfo').insertAdjacentHTML('beforeend','<li>⭐ <a href="'+gUrl(h)+'" target="_blank" rel="noopener">구글 지도에서 사진·평점 보기</a></li>');
+}
+function loadPlace(h,t){
+  google.maps.importLibrary('places').then(function(lib){
+    var p=new lib.Place({id:h.id,requestedLanguage:'ko'});
+    return p.fetchFields({fields:['rating','userRatingCount','photos','nationalPhoneNumber','internationalPhoneNumber','websiteURI','googleMapsURI']}).then(function(){
+      if(t!==token) return;
+      if(p.rating){ $('hmMeta').innerHTML='<span>'+p.rating.toFixed(1)+' <span class="star">★</span> ('+(p.userRatingCount||0).toLocaleString()+')</span><span>·</span><span>'+h.g+'성급 호텔</span>'; }
+      var tel=p.internationalPhoneNumber||p.nationalPhoneNumber;
+      if(tel){ $('hmTel').hidden=false; $('hmTel').href='tel:'+tel.replace(/\s/g,''); $('hmInfo').insertAdjacentHTML('beforeend','<li>📞 '+esc(tel)+'</li>'); }
+      if(p.websiteURI){ $('hmWeb').hidden=false; $('hmWeb').href=p.websiteURI; $('hmInfo').insertAdjacentHTML('beforeend','<li>🌐 <a href="'+esc(p.websiteURI)+'" target="_blank" rel="noopener">'+esc(p.websiteURI.replace(/^https?:\/\//,'').replace(/\/$/,''))+'</a></li>'); }
+      if(p.googleMapsURI) $('hmG').href=p.googleMapsURI;
+      photos=(p.photos||[]).slice(0,5).map(function(ph){
+        var a=(ph.authorAttributions||[]).map(function(x){return '<a href="'+esc(x.uri)+'" target="_blank" rel="noopener">'+esc(x.displayName)+'</a>';}).join(', ');
+        return {url:ph.getURI({maxWidth:720,maxHeight:400}),attr:a?'사진: '+a:''};
+      });
+      setPhoto(0);
+    });
+  }).catch(function(){ if(t===token) $('hmInfo').insertAdjacentHTML('beforeend','<li>⭐ <a href="'+gUrl(h)+'" target="_blank" rel="noopener">구글 지도에서 사진·평점 보기</a></li>'); });
+}
+
+/* ---------- 이벤트 ---------- */
+$('hmCities').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; state.city=b.dataset.c; chips(); apply(true); });
+document.querySelector('.hm-grade').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; state.grade=b.dataset.g; document.querySelectorAll('.hm-grade button').forEach(function(x){x.setAttribute('aria-pressed',x===b);}); apply(true); });
+$('hmSearch').addEventListener('input',function(){ state.q=this.value.trim(); apply(true); });
+$('hmList').addEventListener('click',function(e){ var b=e.target.closest('.hm-item'); if(!b) return; select(state.vis[+b.dataset.k].i,false); });
+$('hmClose').addEventListener('click',function(){ closeCard(); state.cur=-1; renderList(); });
+$('hmPrev').addEventListener('click',function(){ if(!state.vis.length) return; select(state.vis[(state.cur-1+state.vis.length)%state.vis.length].i,false); });
+$('hmNext').addEventListener('click',function(){ if(!state.vis.length) return; select(state.vis[(state.cur+1)%state.vis.length].i,false); });
+$('hmDots').addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) setPhoto(+b.dataset.p); });
+
+function boot(){ HOTELS.forEach(function(h){ M.add(h); }); apply(true); }
+chips(); filter(); renderList();
+if(GMAPS_KEY) initGoogle(); else initLeaflet();
+})();
+</script>
+
 </body>
 </html>
