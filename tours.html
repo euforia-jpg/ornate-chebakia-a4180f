@@ -63,6 +63,13 @@
   .tour-card{ background:var(--paper); border-radius:var(--radius); border:2px solid var(--line); overflow:hidden; transition: transform .15s ease, box-shadow .15s ease, border-color .15s; display:block; text-decoration:none; color:inherit; }
   .tour-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px -12px rgba(20,16,61,0.3); border-color: var(--violet); }
  .tour-card{ position:relative; }
+  /* 카드마다 제목·설명 길이가 달라도 가격 뱃지가 같은 높이에 오도록,
+     카드를 세로 flex 로 만들고 가격칸부터 아래로 밀어 둡니다. */
+  .tour-card{ display:flex; flex-direction:column; }
+  .tour-body{ display:flex; flex-direction:column; flex:1 1 auto; }
+  .tour-body > .tour-price{ margin-top:auto; min-height:49px; }
+  /* 금액이 한 줄인 상품도 두 줄짜리와 같은 높이가 되도록 가운데에 둡니다 */
+  .tour-body > .tour-price > .price-chip{ display:flex; flex-direction:column; justify-content:center; }
 .badge-group{ position:absolute; top:12px; right:12px; z-index:5; display:flex; gap:6px; }
 .card-badge{ padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.5px; color:#fff; box-shadow:0 6px 14px -6px rgba(20,16,61,0.4); }
 .card-badge.new-badge{ background:linear-gradient(90deg,var(--teal),#0E9E8B); }
