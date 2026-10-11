@@ -69,14 +69,16 @@
 .card-badge.best-badge{ background:linear-gradient(90deg,var(--orange),#FFB84D); opacity:0; pointer-events:none; animation:none; }
 .card-badge.best-badge.show{ opacity:1; animation:badgeFlash 1s ease-in-out 2; }
 @keyframes badgeFlash{ 0%,100%{ opacity:1; } 50%{ opacity:0.35; } }
-  .tour-price{ display:inline-flex; align-items:stretch; max-width:100%; margin:0 0 14px; border-radius:11px; overflow:hidden; box-shadow:0 8px 16px -9px rgba(230,49,123,0.55); }
+  .tour-price{ display:inline-flex; align-items:stretch; max-width:100%; margin:0 0 14px; border-radius:11px; overflow:hidden; box-shadow:0 8px 16px -10px rgba(20,16,61,0.30); }
   .tour-price .yt-btn{ display:flex; align-items:center; justify-content:center; padding:0 16px; min-width:48px; margin:0; border:none; background:#CC0000; color:#fff; flex-shrink:0; text-decoration:none; cursor:pointer; font:inherit; transition: background .15s ease; }
 .tour-price .yt-btn:hover{ background:#e52d27; }
- .tour-price .price-chip{ display:block; box-sizing:border-box; flex:0 1 auto; padding:7px 13px; font-family:'Space Mono'; font-size:12.5px; font-weight:800; color:#fff; background:linear-gradient(90deg,var(--pink),var(--orange)); line-height:1.4; white-space:normal; word-break:keep-all; }
-  .tour-price .price-sub{ display:block; font-size:0.78em; font-weight:700; opacity:0.9; margin-top:2px; }
-button.price-chip{ border:none; cursor:pointer; text-align:left; font:inherit; }
-button.price-chip:hover{ opacity:.92; }
-.price-cta-label{ display:block; font-size:0.78em; font-weight:700; opacity:0.9; margin-top:2px; text-decoration:underline; }
+ .tour-price .price-chip{ display:block; box-sizing:border-box; flex:0 1 auto; padding:7px 13px 7px 11px; font-family:'Space Mono'; font-size:12.5px; font-weight:800; background:#fff; color:var(--navy); border:1.5px solid var(--line); border-left:4px solid var(--violet); line-height:1.4; white-space:normal; word-break:keep-all; }
+  .tour-price .price-sub{ display:block; font-size:0.78em; font-weight:700; color:var(--muted); margin-top:2px; }
+button.price-chip{ border:1.5px solid var(--line); border-left:4px solid var(--violet); cursor:pointer; text-align:left; font:inherit; }
+/* 오른쪽에 유튜브·헤드폰 단추가 붙을 때만 오른쪽 선을 뗍니다 */
+.tour-price .price-chip:not(:last-child){ border-right:none; }
+button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; border-left-color:var(--violet); }
+.price-cta-label{ display:block; font-size:0.78em; font-weight:700; color:var(--violet); margin-top:2px; text-decoration:underline; }
 .tour-top{ padding:14px 18px; color:var(--navy); display:flex; flex-wrap:wrap; gap:4px 12px; justify-content:space-between; align-items:center; }
   .tour-top .region{ min-width:0; overflow-wrap:break-word; }
   .tour-top .days{ flex:0 0 auto; white-space:nowrap; }
@@ -202,7 +204,6 @@ button.price-chip:hover{ opacity:.92; }
   <nav class="site-nav">
     <a href="about.html">회사소개</a>
     <a href="tours.html" class="active">여행상품</a>
-    <a href="hotels.html">기준호텔</a>
     <a href="move.html">교통 예약</a>
     <a href="matchday.html">경기 일정</a>
     <a href="https://euforia-showtime.netlify.app/" target="_blank" rel="noopener">공연 일정</a>
