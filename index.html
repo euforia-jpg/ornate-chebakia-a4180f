@@ -427,9 +427,37 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .xmas-cta .sub{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
   .xmas-cta .sub:hover{ border-color:var(--violet); color:var(--violet); }
 
+  /* ---- 휴대폰: 팝업이 화면을 넘지 않도록 줄입니다 ---- */
   @media (max-width:520px){
-    .xmas-two{ grid-template-columns:1fr; }
-    .xmas-cta a{ flex:1 1 100%; }
+    .feature-overlay{ padding:12px; }
+    .xmas-box{ max-width:100%; border-radius:18px;
+      max-height:calc(100vh - 24px); max-height:calc(100dvh - 24px);
+      display:flex; flex-direction:column; }
+    .xmas-art{ flex:0 0 auto; }
+    .xmas-body{ padding:15px 16px 18px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+    .xmas-box .feature-close{ top:10px; right:10px; width:30px; height:30px; font-size:14px; }
+    .xmas-eyebrow{ padding:5px 11px; font-size:10.5px; }
+    .xmas-box h3{ margin:9px 0 7px; font-size:19px; line-height:1.28; }
+    .xmas-lead{ margin:0 0 13px; font-size:12.5px; line-height:1.7; }
+    .xmas-two{ grid-template-columns:1fr; gap:8px; margin-bottom:13px; }
+    .xmas-city{ padding:10px 12px; border-radius:12px; }
+    .xmas-city b{ font-size:12.5px; margin-bottom:3px; }
+    .xmas-city span{ font-size:11px; line-height:1.6; }
+    .xmas-city i{ margin-top:4px; font-size:10.5px; }
+    .xmas-when{ margin:0 0 13px; padding:9px 11px; gap:7px; font-size:11.5px; line-height:1.6; }
+    .xmas-cta{ gap:8px; }
+    .xmas-cta a{ flex:1 1 100%; min-width:0; padding:12px 14px; font-size:13px; }
+  }
+  @media (max-width:400px){
+    .xmas-art{ height:102px; }
+    .xmas-body{ padding:13px 14px 16px; }
+    .xmas-box h3{ font-size:17.5px; margin:8px 0 6px; }
+    .xmas-lead{ font-size:12px; line-height:1.6; margin-bottom:11px; }
+    .xmas-two{ gap:7px; margin-bottom:11px; }
+    .xmas-city{ padding:9px 11px; }
+    .xmas-city span{ line-height:1.55; }
+    .xmas-when{ margin-bottom:11px; padding:8px 10px; line-height:1.55; }
+    .xmas-cta a{ padding:11px 12px; }
   }
 </style>
 <link rel="manifest" href="/manifest.json">
@@ -937,7 +965,7 @@ window.toggleAudioGuide = function(btn){
   <div class="feature-box xmas-box">
     <button class="feature-close" id="featureClose" aria-label="닫기">✕</button>
 
-    <svg class="xmas-art" viewBox="0 0 560 206" role="img"
+    <svg class="xmas-art" viewBox="0 0 560 206" preserveAspectRatio="xMidYMid slice" role="img"
          aria-label="밤하늘 아래 마드리드와 바르셀로나의 크리스마스 마켓 그림">
       <defs>
         <linearGradient id="xhanul" x1="0" y1="0" x2="0" y2="1">
