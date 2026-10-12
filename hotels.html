@@ -366,6 +366,26 @@
     .hm-ph-empty{ font-size:20px; padding:12px; }
   }
 </style>
+
+<!-- 검색·공유 (대표주소 / 카톡·페북 미리보기 / 아이콘) -->
+<link rel="canonical" href="https://toureplus.co.kr/hotels.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Euforia Tour 유포리아투어">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="기준호텔 지도 — Euforia Tour">
+<meta property="og:description" content="유포리아투어 스페인·포르투갈 도시별 기준호텔 — 단체 이용 4성급 호텔과 시내 10km 이내 3성급 호텔을 지도로 확인하세요.">
+<meta property="og:url" content="https://toureplus.co.kr/hotels.html">
+<meta property="og:image" content="https://toureplus.co.kr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="유포리아투어 — 스페인·포르투갈·모로코 전문 여행사">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="기준호텔 지도 — Euforia Tour">
+<meta name="twitter:description" content="유포리아투어 스페인·포르투갈 도시별 기준호텔 — 단체 이용 4성급 호텔과 시내 10km 이내 3성급 호텔을 지도로 확인하세요.">
+<meta name="twitter:image" content="https://toureplus.co.kr/og-image.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 </head>
 <body>
 <div class="wrap">
@@ -772,7 +792,8 @@ function closeCard(){ if(state.cur>-1&&M.ready){ M.mark(state.vis[state.cur],fal
 function setPhoto(i){
   pIdx=i; var p=photos[i];
   $('hmImg').hidden=!p; $('hmPhEmpty').hidden=!!p;
-  if(p){ $('hmImg').src=p.url; $('hmAttr').innerHTML=p.attr; } else { $('hmAttr').innerHTML=''; }
+  if(p){ $('hmImg').src=p.url; $('hmImg').alt=(($('hmName')||{}).textContent||'호텔')+' 사진'; $('hmAttr').innerHTML=p.attr; }
+  else { $('hmImg').alt=''; $('hmAttr').innerHTML=''; }
   $('hmDots').innerHTML=photos.length>1?photos.map(function(_,k){return '<button type="button" aria-label="사진 '+(k+1)+'" class="'+(k===i?'on':'')+'" data-p="'+k+'"></button>';}).join(''):'';
 }
 function select(i,fromMap){

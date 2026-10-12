@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ornate-chebakia-a4180f.netlify.app/sitemap.xml
+# 손님에게 보여 줄 쪽이 아닙니다 (검색 결과에서 빼 달라는 요청)
+Disallow: /admin.html
+Disallow: /audio-admin.html
+Disallow: /data/
+Disallow: /move-hero-preview.html
+Disallow: /미리보기.html
+Disallow: /크리스마스-팝업.html
+
+Sitemap: https://toureplus.co.kr/sitemap.xml

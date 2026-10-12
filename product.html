@@ -281,7 +281,26 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- 검색·공유 (대표주소 / 카톡·페북 미리보기 / 아이콘) -->
+<link rel="canonical" href="https://toureplus.co.kr/product.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Euforia Tour 유포리아투어">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="상품 보기 — Euforia Tour">
+<meta property="og:description" content="유포리아투어 여행상품 상세정보 — 일정, 포함사항, 가격을 확인하고 바로 예약문의하세요.">
+<meta property="og:url" content="https://toureplus.co.kr/product.html">
+<meta property="og:image" content="https://toureplus.co.kr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="유포리아투어 — 스페인·포르투갈·모로코 전문 여행사">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="상품 보기 — Euforia Tour">
+<meta name="twitter:description" content="유포리아투어 여행상품 상세정보 — 일정, 포함사항, 가격을 확인하고 바로 예약문의하세요.">
+<meta name="twitter:image" content="https://toureplus.co.kr/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 </head>
 <body>
 <div class="wrap">
@@ -392,7 +411,7 @@ function render(){
     el.innerHTML = `
       <div class="layout" style="grid-template-columns:1fr;">
         <div class="section-inner not-found">
-          <h2>상품을 찾을 수 없어요</h2>
+          <h1>상품을 찾을 수 없어요</h1>
           <p>링크가 잘못되었거나 삭제된 상품이에요. 전체 여행상품 목록에서 다시 확인해 주세요.</p>
           <a class="cta" style="display:inline-block; width:auto; padding:13px 26px;" href="tours.html">여행상품 목록으로</a>
         </div>
