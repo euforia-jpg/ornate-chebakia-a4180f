@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>찾으시는 쪽이 없어요 — Euforia Tour</title>
+<meta name="description" content="주소가 바뀌었거나 없는 쪽입니다. 유포리아투어 주요 메뉴로 이동해 주세요.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,800&family=Work+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<meta name="theme-color" content="#14103D">
+<style>
+  :root{
+    --violet:#6C3CE9; --pink:#E6317B; --navy:#14103D; --ink:#201B4A;
+    --muted:#6E6A93; --line:#EAE7F7; --bg:#FBFAFF;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; min-height:100%; }
+  body{
+    background:
+      repeating-linear-gradient(115deg,
+        rgba(239,235,253,.55) 0 90px, rgba(253,236,243,.55) 90px 180px,
+        rgba(255,242,230,.55) 180px 270px, rgba(231,248,245,.55) 270px 360px),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans','Pretendard','Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
+    display:flex; align-items:center; justify-content:center; padding:28px 18px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .box{
+    background:#fff; border:1.5px solid var(--line); border-radius:26px;
+    box-shadow:0 22px 56px -28px rgba(20,16,61,.34);
+    max-width:620px; width:100%; padding:44px clamp(22px,5vw,46px) 38px; text-align:center;
+  }
+  .mark{
+    width:62px; height:62px; border-radius:16px; margin:0 auto 20px;
+    background:var(--navy); position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .mark::before{
+    content:''; position:absolute; left:-12%; top:46%; width:124%; height:17%;
+    background:var(--pink); transform:rotate(-38deg);
+  }
+  .mark span{
+    position:relative; color:#fff; font-family:'Kanit',serif; font-style:italic;
+    font-weight:800; font-size:34px; line-height:1;
+  }
+  .code{
+    display:inline-block; font-size:12px; font-weight:800; letter-spacing:.14em;
+    color:var(--violet); background:#EFEBFD; padding:6px 14px; border-radius:999px; margin-bottom:14px;
+  }
+  h1{
+    font-family:'Kanit',sans-serif; font-style:italic; font-weight:800;
+    font-size:clamp(23px,4.4vw,31px); line-height:1.3; color:var(--navy); margin:0 0 12px;
+  }
+  p{ margin:0 0 26px; color:var(--muted); font-size:14.5px; font-weight:600; line-height:1.8; }
+  .links{ display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin-bottom:26px; }
+  .links a{
+    text-decoration:none; font-size:13px; font-weight:800; color:var(--navy);
+    border:1.5px solid var(--line); background:#fff; padding:10px 16px; border-radius:999px;
+    transition:border-color .15s, color .15s;
+  }
+  .links a:hover{ border-color:var(--violet); color:var(--violet); }
+  .home{
+    display:inline-block; text-decoration:none; font-size:14px; font-weight:800; color:#fff;
+    background:linear-gradient(135deg,var(--violet),#8B5CF6); padding:14px 30px; border-radius:999px;
+    box-shadow:0 14px 28px -14px rgba(108,60,233,.6);
+  }
+  .home:hover{ filter:brightness(1.07); }
+  .foot{ margin:24px 0 0; font-size:12px; color:var(--muted); font-weight:600; }
+  .foot a{ color:var(--violet); text-decoration:none; font-weight:800; }
+</style>
+</head>
+<body>
+  <main class="box">
+    <div class="mark" aria-hidden="true"><span>e</span></div>
+    <div class="code">404</div>
+    <h1>찾으시는 쪽이 없어요</h1>
+    <p>주소가 바뀌었거나, 지금은 열려 있지 않은 쪽입니다.<br>아래에서 원하시는 곳으로 바로 가실 수 있어요.</p>
+
+    <nav class="links" aria-label="주요 메뉴">
+      <a href="/tours.html">여행상품</a>
+      <a href="/builder.html">일정 만들기</a>
+      <a href="/hotels">기준호텔</a>
+      <a href="/matchday.html">경기 일정</a>
+      <a href="/concert.html">공연 일정</a>
+      <a href="/faq.html">자주하는 질문</a>
+    </nav>
+
+    <a class="home" href="/">첫 화면으로 가기 →</a>
+
+    <p class="foot">
+      찾으시던 내용이 있으셨다면 <a href="/contact.html">예약문의</a>로 알려 주세요.<br>
+      Euforia Tour · www.toureplus.co.kr
+    </p>
+  </main>
+</body>
+</html>

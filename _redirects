@@ -1,3 +1,33 @@
-/threads-connect    /.netlify/functions/threads-connect   200
-/threads-uninstall  /.netlify/functions/threads-callback  200
-/threads-delete     /.netlify/functions/threads-callback  200
+
+# ─────────────────────────────────────────────────────────────
+# 손님에게 열어 줄 파일이 아닙니다 — 주소로 열면 404 로 막습니다.
+#   · data/costsheets.json  원가표(차량·기사·가이드 단가와 커미션)
+#   · 설치안내.md 등         관리자 구조 설명서
+#   · zip / .jason / 미리보기  작업하다 남은 파일
+# 끝의 느낌표(!)는 "파일이 실제로 있어도 막으라"는 뜻입니다.
+# 관리자 대쉬보드는 이 주소를 쓰지 않고 깃허브에서 직접 읽으므로 영향이 없습니다.
+# ─────────────────────────────────────────────────────────────
+/data/costsheets.json                          /404.html  404!
+/data/Admin%20api%20.jason                     /404.html  404!
+/data/Matches%20now.jason                      /404.html  404!
+/data/Threads%20api.jason                      /404.html  404!
+/%EC%84%A4%EC%B9%98%EC%95%88%EB%82%B4.md       /404.html  404!
+/설치안내.md                                       /404.html  404!
+/%E9%9D%B9%E3%82%8C%E7%AE%BB%E9%9E%8E%E5%A0%A7%E5%81%9E.md  /404.html  404!
+/靹れ箻鞎堧偞.md                                     /404.html  404!
+/%EC%9D%BD%EC%96%B4%EC%A3%BC%EC%84%B8%EC%9A%94.txt  /404.html  404!
+/읽어주세요.txt                                     /404.html  404!
+/files.zip                                     /404.html  404!
+/threads-%EC%97%B0%EA%B2%B0.zip                /404.html  404!
+/threads-연결.zip                                /404.html  404!
+/euforia-admin-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%EB%A7%8C_1.zip  /404.html  404!
+/euforia-admin-업데이트만_1.zip                     /404.html  404!
+/inbox.js                                      /404.html  404!
+/send-inquiry.js                               /404.html  404!
+/send-deposit.js                               /404.html  404!
+/send-matchday-booking.js                      /404.html  404!
+/move-hero-preview.html                        /404.html  404!
+/%EB%AF%B8%EB%A6%AC%EB%B3%B4%EA%B8%B0.html     /404.html  404!
+/미리보기.html                                     /404.html  404!
+/%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4-%ED%8C%9D%EC%97%85.html  /404.html  404!
+/크리스마스-팝업.html                                 /404.html  404!
