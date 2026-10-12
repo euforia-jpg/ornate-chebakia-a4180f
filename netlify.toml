@@ -4,6 +4,12 @@
 [functions."update-matches"]
   schedule = "@weekly"
 
+# 공연 일정을 주 1회 받아 옵니다
+# 제미나이가 구글 검색으로 정해둔 공연장의 다음 일정을 모아
+# data/concerts.json 에 저장합니다. 요금은 올리지 않습니다.
+[functions."update-concerts"]
+  schedule = "@weekly"
+
 # 쓰레드 요일별 자동 광고
 # 매시 정각에 깨어나되, 실제로 올릴지는 대쉬보드에서 정한
 # 요일·시각(스페인 현지)을 함수가 직접 따져서 결정합니다.
