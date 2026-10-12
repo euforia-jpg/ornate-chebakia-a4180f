@@ -369,6 +369,66 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
     font-size:12px; font-weight:600; color:rgba(255,255,255,.66); }
   .plan-card .pc-foot b{ color:#fff; font-weight:800; }
   @media (prefers-reduced-motion: reduce){ .plan-card .pc-go{ animation:none; } }
+
+  /* ---- 크리스마스 마켓 팝업 ---- */
+  .xmas-box{ max-width:560px; padding:0 !important; overflow:hidden; border-radius:22px; }
+  .xmas-art{ position:relative; display:block; width:100%; height:auto; }
+  /* 닫기(✕) 단추가 밤하늘 위에서도 잘 보이게 — 이 팝업에서만 바뀝니다 */
+  .xmas-box .feature-close{ color:#fff; background:rgba(11,8,37,.45); }
+  .xmas-box .feature-close:hover{ background:rgba(11,8,37,.75); }
+  .xmas-body{ padding:22px clamp(20px,4vw,30px) 26px; }
+
+  /* 트리 꼭대기 별 반짝임 */
+  .xmas-tip, .xmas-glow{ transform-box:fill-box; transform-origin:center; }
+  .xmas-tip{ animation:xmasTwinkle 2.6s ease-in-out infinite; }
+  .xmas-glow{ animation:xmasGlow 2.6s ease-in-out infinite; }
+  @keyframes xmasTwinkle{
+    0%, 100%{ opacity:1;   transform:scale(1); }
+    45%     { opacity:.55; transform:scale(.84); }
+  }
+  @keyframes xmasGlow{
+    0%, 100%{ opacity:.9;  transform:scale(1); }
+    45%     { opacity:.25; transform:scale(.62); }
+  }
+  /* 화면 움직임 줄이기를 켜 두신 분께는 멈춰 둡니다 */
+  @media (prefers-reduced-motion: reduce){
+    .xmas-tip, .xmas-glow{ animation:none; opacity:1; }
+  }
+  .xmas-eyebrow{ display:inline-flex; align-items:center; gap:6px; padding:6px 14px;
+    border-radius:999px; background:#FFF2E6; color:#8A4A06;
+    font-size:11.5px; font-weight:800; letter-spacing:.04em; }
+  .xmas-box h3{ margin:12px 0 10px; font-family:'Kanit',sans-serif; font-style:italic;
+    font-weight:800; font-size:clamp(20px,3.4vw,25px); line-height:1.3; color:var(--navy);
+    letter-spacing:-.02em; }
+  .xmas-box h3 em{ font-style:italic; color:var(--violet); }
+  .xmas-lead{ margin:0 0 18px; font-size:13.5px; font-weight:600; line-height:1.85; color:var(--muted); }
+  .xmas-lead b{ color:var(--navy); font-weight:800; }
+
+  .xmas-two{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
+  .xmas-city{ border:1.5px solid var(--line); border-radius:14px; padding:13px 14px; background:#FCFBFF; }
+  .xmas-city b{ display:block; font-size:13px; font-weight:800; color:var(--navy); margin-bottom:4px; }
+  .xmas-city span{ display:block; font-size:11.5px; font-weight:600; color:var(--muted); line-height:1.7; }
+  .xmas-city i{ font-style:normal; display:block; margin-top:6px; font-size:11px; font-weight:800;
+    color:#8A4A06; }
+
+  .xmas-when{ display:flex; gap:9px; align-items:flex-start; margin:0 0 18px; padding:11px 14px;
+    border-radius:12px; background:#F5F2FE; border:1.5px solid #DED3FB;
+    font-size:12px; font-weight:600; color:var(--muted); line-height:1.7; }
+  .xmas-when b{ color:var(--navy); font-weight:800; }
+
+  .xmas-cta{ display:flex; gap:9px; flex-wrap:wrap; }
+  .xmas-cta a{ flex:1 1 0; min-width:150px; text-align:center; text-decoration:none;
+    padding:14px 16px; border-radius:12px; font-size:13.5px; font-weight:800; }
+  .xmas-cta .go{ background:linear-gradient(90deg,#B4123F,#E6317B); color:#fff;
+    box-shadow:0 10px 20px -10px rgba(180,18,63,.6); }
+  .xmas-cta .go:hover{ filter:brightness(1.08); }
+  .xmas-cta .sub{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
+  .xmas-cta .sub:hover{ border-color:var(--violet); color:var(--violet); }
+
+  @media (max-width:520px){
+    .xmas-two{ grid-template-columns:1fr; }
+    .xmas-cta a{ flex:1 1 100%; }
+  }
 </style>
 <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -872,24 +932,160 @@ window.toggleAudioGuide = function(btn){
 })();
 </script>
 <div class="feature-overlay" id="featureOverlay">
-  <div class="feature-box">
+  <div class="feature-box xmas-box">
     <button class="feature-close" id="featureClose" aria-label="닫기">✕</button>
-    <div class="feature-head">
-      <span class="eyebrow">✨ EUFORIA ONLY</span>
-      <h3>여행이 <em>더 특별해지는</em><br>두 가지 방법</h3>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-card audio">
-        <div class="ico">🎧</div>
-        <h4>무료 오디오 가이드</h4>
-        <p>톨레도 대성당부터 알함브라 궁전까지, <strong>밝고 친근한 목소리</strong>로 들려드려요.</p>
-        <a class="go" href="audio-guide.html">들으러 가기 →</a>
+
+    <svg class="xmas-art" viewBox="0 0 560 206" role="img"
+         aria-label="밤하늘 아래 마드리드와 바르셀로나의 크리스마스 마켓 그림">
+      <defs>
+        <linearGradient id="xhanul" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0B0825"/><stop offset="55%" stop-color="#1E1550"/>
+          <stop offset="100%" stop-color="#3A1E63"/>
+        </linearGradient>
+        <radialGradient id="xbul" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFD98A" stop-opacity=".95"/>
+          <stop offset="100%" stop-color="#FFD98A" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="xnun" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F3EFFF"/><stop offset="100%" stop-color="#D9D0F2"/>
+        </linearGradient>
+      </defs>
+
+      <rect width="560" height="206" fill="url(#xhanul)"/>
+
+      <!-- 별 -->
+      <g fill="#fff">
+        <circle cx="46" cy="30" r="1.3" opacity=".8"/><circle cx="120" cy="18" r="1" opacity=".6"/>
+        <circle cx="190" cy="38" r="1.5" opacity=".9"/><circle cx="265" cy="22" r="1" opacity=".5"/>
+        <circle cx="330" cy="34" r="1.2" opacity=".75"/><circle cx="412" cy="20" r="1.4" opacity=".85"/>
+        <circle cx="486" cy="40" r="1" opacity=".6"/><circle cx="525" cy="26" r="1.3" opacity=".8"/>
+        <circle cx="84" cy="56" r="1" opacity=".5"/><circle cx="360" cy="58" r="1" opacity=".5"/>
+      </g>
+
+      <!-- 왼쪽: 마드리드 플라자 마요르 (아케이드 + 쌍탑) -->
+      <g fill="#241A5C">
+        <rect x="18" y="96" width="196" height="76"/>
+        <rect x="54" y="66" width="22" height="34"/><polygon points="65,50 54,68 76,68"/>
+        <rect x="156" y="66" width="22" height="34"/><polygon points="167,50 156,68 178,68"/>
+        <rect x="100" y="78" width="34" height="22"/><polygon points="117,62 98,80 136,80"/>
+      </g>
+      <g fill="#FFC861" opacity=".9">
+        <rect x="30" y="112" width="9" height="13" rx="1"/><rect x="50" y="112" width="9" height="13" rx="1"/>
+        <rect x="70" y="112" width="9" height="13" rx="1"/><rect x="90" y="112" width="9" height="13" rx="1"/>
+        <rect x="110" y="112" width="9" height="13" rx="1"/><rect x="130" y="112" width="9" height="13" rx="1"/>
+        <rect x="150" y="112" width="9" height="13" rx="1"/><rect x="170" y="112" width="9" height="13" rx="1"/>
+        <rect x="190" y="112" width="9" height="13" rx="1"/>
+      </g>
+      <g fill="#0B0825">
+        <path d="M26 172v-22a10 10 0 0 1 20 0v22z"/><path d="M56 172v-22a10 10 0 0 1 20 0v22z"/>
+        <path d="M86 172v-22a10 10 0 0 1 20 0v22z"/><path d="M116 172v-22a10 10 0 0 1 20 0v22z"/>
+        <path d="M146 172v-22a10 10 0 0 1 20 0v22z"/><path d="M176 172v-22a10 10 0 0 1 20 0v22z"/>
+      </g>
+
+      <!-- 오른쪽: 바르셀로나 사그라다 파밀리아 (첨탑) -->
+      <g fill="#241A5C">
+        <polygon points="372,172 372,96 384,54 396,96 396,172"/>
+        <polygon points="402,172 402,86 416,36 430,86 430,172"/>
+        <polygon points="436,172 436,96 448,54 460,96 460,172"/>
+        <polygon points="466,172 466,106 476,70 486,106 486,172"/>
+        <rect x="368" y="138" width="124" height="34"/>
+      </g>
+      <g fill="#FFC861" opacity=".85">
+        <circle cx="384" cy="70" r="2.4"/><circle cx="416" cy="52" r="2.8"/>
+        <circle cx="448" cy="70" r="2.4"/><circle cx="476" cy="84" r="2"/>
+        <rect x="378" y="148" width="7" height="11" rx="1"/><rect x="398" y="148" width="7" height="11" rx="1"/>
+        <rect x="418" y="148" width="7" height="11" rx="1"/><rect x="438" y="148" width="7" height="11" rx="1"/>
+        <rect x="458" y="148" width="7" height="11" rx="1"/><rect x="478" y="148" width="7" height="11" rx="1"/>
+      </g>
+
+      <!-- 가운데 크리스마스 트리 -->
+      <g>
+        <polygon points="280,58 258,104 302,104" fill="#0E7A52"/>
+        <polygon points="280,86 252,134 308,134" fill="#12945F"/>
+        <polygon points="280,116 246,166 314,166" fill="#0E7A52"/>
+        <rect x="274" y="166" width="12" height="12" fill="#4A2F17"/>
+        <g class="xmas-star">
+          <circle class="xmas-glow" cx="280" cy="56" r="20" fill="url(#xbul)"/>
+          <polygon class="xmas-tip" points="280,40 284,52 296,52 286,60 290,72 280,64 270,72 274,60 264,52 276,52" fill="#FFD98A"/>
+        </g>
+        <g fill="#FFC861"><circle cx="268" cy="98" r="2.6"/><circle cx="292" cy="98" r="2.6"/>
+          <circle cx="262" cy="126" r="2.6"/><circle cx="298" cy="126" r="2.6"/><circle cx="280" cy="112" r="2.6"/>
+          <circle cx="256" cy="156" r="2.6"/><circle cx="304" cy="156" r="2.6"/><circle cx="280" cy="146" r="2.6"/></g>
+      </g>
+
+      <!-- 전구 줄 -->
+      <path d="M0 44 Q140 86 280 44 Q420 2 560 44" fill="none" stroke="#6E6A93" stroke-width="1.2" opacity=".55"/>
+      <g>
+        <circle cx="70" cy="64" r="3.4" fill="#FFD98A"/><circle cx="140" cy="70" r="3.4" fill="#FF9A3D"/>
+        <circle cx="210" cy="62" r="3.4" fill="#FFD98A"/><circle cx="350" cy="24" r="3.4" fill="#FF9A3D"/>
+        <circle cx="420" cy="18" r="3.4" fill="#FFD98A"/><circle cx="490" cy="28" r="3.4" fill="#FF9A3D"/>
+      </g>
+
+      <!-- 마켓 가판대 -->
+      <g>
+        <g transform="translate(96,150)">
+          <polygon points="0,10 30,10 36,0 -6,0" fill="#C8305A"/>
+          <rect x="0" y="10" width="30" height="24" fill="#F3EFFF"/>
+          <rect x="6" y="16" width="18" height="12" fill="#FFC861"/>
+        </g>
+        <g transform="translate(196,154)">
+          <polygon points="0,10 30,10 36,0 -6,0" fill="#0E7A52"/>
+          <rect x="0" y="10" width="30" height="20" fill="#F3EFFF"/>
+          <rect x="6" y="15" width="18" height="10" fill="#FFC861"/>
+        </g>
+        <g transform="translate(304,150)">
+          <polygon points="0,10 30,10 36,0 -6,0" fill="#C8305A"/>
+          <rect x="0" y="10" width="30" height="24" fill="#F3EFFF"/>
+          <rect x="6" y="16" width="18" height="12" fill="#FFC861"/>
+        </g>
+        <g transform="translate(404,154)">
+          <polygon points="0,10 30,10 36,0 -6,0" fill="#0E7A52"/>
+          <rect x="0" y="10" width="30" height="20" fill="#F3EFFF"/>
+          <rect x="6" y="15" width="18" height="10" fill="#FFC861"/>
+        </g>
+      </g>
+      <ellipse cx="111" cy="186" rx="86" ry="24" fill="url(#xbul)"/>
+      <ellipse cx="319" cy="186" rx="86" ry="24" fill="url(#xbul)"/>
+
+      <!-- 눈 쌓인 바닥 -->
+      <path d="M0 182 Q140 170 280 180 Q420 190 560 176 L560 206 L0 206 Z" fill="url(#xnun)"/>
+      <g fill="#fff" opacity=".9">
+        <circle cx="40" cy="92" r="1.6"/><circle cx="150" cy="120" r="1.4"/><circle cx="238" cy="76" r="1.5"/>
+        <circle cx="330" cy="112" r="1.6"/><circle cx="470" cy="118" r="1.4"/><circle cx="520" cy="86" r="1.5"/>
+        <circle cx="92" cy="140" r="1.3"/><circle cx="364" cy="136" r="1.3"/>
+      </g>
+    </svg>
+
+    <div class="xmas-body">
+      <span class="xmas-eyebrow">🎄 겨울에만 열리는 스페인</span>
+      <h3>마드리드와 바르셀로나가<br><em>가장 반짝이는</em> 한 달</h3>
+      <p class="xmas-lead">
+        광장에 불이 켜지고 추로스 냄새가 나기 시작하면, 스페인의 겨울이 시작됩니다.
+        <b>두 도시의 크리스마스 마켓을 한 일정에</b> 담아 드립니다.
+      </p>
+
+      <div class="xmas-two">
+        <div class="xmas-city">
+          <b>마드리드 · 플라자 마요르</b>
+          <span>400년 된 광장을 가득 채우는 구유 장식과 손수 만든 공예품</span>
+          <i>도심 한복판 · 걸어서 이동</i>
+        </div>
+        <div class="xmas-city">
+          <b>바르셀로나 · 산타 루시아</b>
+          <span>대성당 앞에서 열리는 카탈루냐 최고(最古)의 크리스마스 장</span>
+          <i>카가 티오 · 전통 장식</i>
+        </div>
       </div>
-      <div class="feature-card ai">
-        <div class="ico">🗺️</div>
-        <h4>AI 일정 만들기</h4>
-        <p>가고 싶은 도시만 알려주시면, <strong>30초 만에</strong> 나만의 일정이 완성돼요.</p>
-        <a class="go" href="plan.html">만들어보기 →</a>
+
+      <div class="xmas-when">
+        <span>🗓️</span>
+        <span><b>11월 말 ~ 12월 말</b>에 열립니다. 해마다 기간이 조금씩 달라지니,
+          가시려는 날짜를 알려 주시면 그 해 운영 일정에 맞춰 잡아 드립니다.</span>
+      </div>
+
+      <div class="xmas-cta">
+        <a class="go" href="builder.html">크리스마스 일정 만들기 →</a>
+        <a class="sub" href="contact.html">바로 문의하기</a>
       </div>
     </div>
   </div>
