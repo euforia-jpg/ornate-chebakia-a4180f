@@ -327,61 +327,86 @@
   #bxDoc{ display:none; }
 
   @media print{
-    @page{ size:A4; margin:14mm 12mm; }
+    @page{ size:A4; margin:16mm 15mm; }
     html, body{ background:#fff !important; }
     body::before, body::after{ display:none !important; content:none !important; }
     body > *{ display:none !important; }
     #bxDoc{ display:block !important; }
+
+    /* ── 포르투갈 일정표와 같은 짜임 ── */
     .doc{ font-family:'Work Sans','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
-      color:#171235; font-size:10.5pt; line-height:1.6; }
-    .doc-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
-      padding-bottom:10px; border-bottom:2px solid #14103D; }
-    .doc-brand{ font-family:'Kanit',sans-serif; font-style:italic; font-weight:800; font-size:19pt;
-      color:#14103D; letter-spacing:-.02em; }
-    .doc-sub{ font-size:8.5pt; font-weight:700; color:#6E6A93; margin-top:2px; }
-    .doc-co{ font-size:7.8pt; line-height:1.55; color:#6E6A93; text-align:right; }
-    .doc-title{ margin:16px 0 2px; font-size:16pt; font-weight:800; letter-spacing:-.02em; color:#14103D; }
-    .doc-when{ font-size:8.5pt; font-weight:700; color:#6E6A93; margin-bottom:12px; }
-    .doc-sum{ width:100%; border-collapse:collapse; margin-bottom:12px; }
-    .doc-sum th{ width:70px; text-align:left; font-size:8.5pt; font-weight:800; color:#6E6A93;
-      padding:5px 8px 5px 0; border-bottom:1px solid #EAE7F7; vertical-align:top; }
-    .doc-sum td{ font-size:10pt; font-weight:700; padding:5px 16px 5px 0;
-      border-bottom:1px solid #EAE7F7; }
-    .doc-price{ display:flex; justify-content:space-between; align-items:baseline;
-      padding:11px 14px; border:1.5px solid #14103D; border-radius:7px; margin-bottom:18px; }
-    .doc-price .l{ font-size:9pt; font-weight:800; color:#6E6A93; }
-    .doc-price .v{ font-size:14pt; font-weight:800; color:#14103D; }
-    .doc-price .v em{ font-style:normal; font-size:10.5pt; font-weight:700; color:#6E6A93; }
-    .doc-h2{ margin:16px 0 7px; font-size:10.5pt; font-weight:800; color:#14103D;
-      padding-bottom:4px; border-bottom:1px solid #14103D; }
-    .doc-tb{ width:100%; border-collapse:collapse; }
-    .doc-tb td{ font-size:9.2pt; padding:5px 8px 5px 0; border-bottom:1px solid #EAE7F7;
-      vertical-align:top; }
-    .doc-tb td.d{ width:58px; font-weight:800; color:#6C3CE9; white-space:nowrap; }
-    .doc-tb td.c{ width:110px; font-weight:800; white-space:nowrap; }
-    .doc-tb td.n{ width:76px; text-align:right; font-weight:700; color:#6E6A93; white-space:nowrap; }
-    .doc-tb tr{ page-break-inside:avoid; }
-    /* 일자별 일정 — 여행사 일정표처럼 한 줄에 한 가지만 */
-    .doc-day td{ padding:8px 10px 9px 0; }
-    .doc-day td.d{ color:#14103D; }
-    .doc-day .ln{ position:relative; padding-left:10px; }
-    .doc-day .ln + .ln{ margin-top:1px; }
-    .doc-day .ln::before{ content:'·'; position:absolute; left:2px; top:-.5px;
-      color:#6C3CE9; font-weight:800; }
-    .doc-day .ln em{ font-style:normal; color:#6E6A93; }
-    .doc-day .ml{ margin-top:5px; font-size:8.8pt; color:#3C3663; }
-    .doc-day .ml span + span{ margin-left:16px; }
-    .doc-day .ht{ margin-top:3px; font-size:8.8pt; font-weight:700; color:#14103D; }
-    .doc-day .ml b{ display:inline-block; min-width:26px; margin-right:5px;
-      font-size:7.6pt; font-weight:800; color:#6E6A93; }
-    .doc-day .ht b{ display:inline-block; min-width:48px; margin-right:5px;
-      font-size:7.6pt; font-weight:800; color:#6E6A93; }
-    .doc-day .ml i, .doc-day .ht i{ font-style:normal; font-weight:700; color:#6E6A93; }
-    .doc-note{ margin-top:16px; padding:10px 12px; background:#F6F5FC; border-radius:6px;
-      font-size:8.5pt; line-height:1.65; color:#6E6A93; }
-    .doc-note b{ color:#14103D; }
-    .doc-foot{ margin-top:14px; padding-top:8px; border-top:1px solid #EAE7F7;
-      font-size:7.8pt; color:#9A95BC; text-align:center; }
+      color:#1A1A1A; font-size:9.3pt; line-height:1.75; }
+    .doc p{ margin:0 0 7px; }
+    .doc b{ font-weight:700; }
+
+    .dc-eyebrow{ font-size:7.6pt; font-weight:700; letter-spacing:.34em; color:#8C8C8C;
+      text-transform:uppercase; }
+
+    /* 회사 로고 — 머리글 오른쪽 위 · 바탕 무늬는 오른쪽 아래 구석 */
+    .doc{ position:relative; padding-top:2mm; }
+    .doc > img.dc-logo{ position:absolute; right:0; top:0; height:15mm; width:auto;
+      margin:0; z-index:2; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .dc-eyebrow{ padding-right:30mm; }
+    /* 아래쪽 기준(bottom)으로 붙이면 크롬이 다음 장 맨 위에 조각을 흘립니다 — 위에서부터 잽니다 */
+    .dc-wm{ position:fixed; right:-8mm; top:186mm; width:88mm; height:auto;
+      opacity:.075; z-index:0;
+      -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .doc > *:not(.dc-wm):not(.dc-logo){ position:relative; z-index:1; }
+    .dc-end .dc-logo{ position:static; display:block; height:8.5mm; width:auto;
+      margin:0 0 9px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .dc-title{ margin:9px 0 4px; padding-right:30mm; font-size:19pt; font-weight:800;
+      letter-spacing:-.02em; color:#111; line-height:1.25; }
+    .dc-sub{ font-size:9.5pt; font-weight:600; color:#8C8C8C; margin-bottom:12px; }
+    .dc-lead{ font-size:9.3pt; color:#333; margin-bottom:16px; }
+
+    .dc-meta{ width:100%; border-collapse:collapse; margin-bottom:4px; }
+    .dc-meta th{ width:62px; text-align:left; vertical-align:top; font-size:8.6pt; font-weight:600;
+      color:#8C8C8C; padding:9px 10px 9px 0; border-top:1px solid #DCDCDC; }
+    .dc-meta td{ vertical-align:top; font-size:9.3pt; font-weight:600; color:#1A1A1A;
+      padding:9px 24px 9px 0; border-top:1px solid #DCDCDC; }
+    .dc-meta tr:last-child th, .dc-meta tr:last-child td{ border-bottom:1px solid #DCDCDC; }
+
+    .dc-h2{ margin:26px 0 0; padding-bottom:7px; font-size:12.5pt; font-weight:800; color:#111;
+      border-bottom:1.6px solid #1A1A1A; }
+    .dc-sub2{ margin:9px 0 14px; font-size:8.4pt; color:#9A9A9A; }
+
+    /* 일자 블록 — 왼쪽 도시, 오른쪽 내용 */
+    .dc-day{ display:flex; gap:22px; padding:15px 0 14px; border-bottom:1px solid #E4E4E4;
+      page-break-inside:avoid; }
+    .dc-day:last-of-type{ border-bottom:0; }
+    .dc-dl{ flex:0 0 118px; }
+    .dc-no{ font-size:14pt; font-weight:800; color:#111; letter-spacing:-.02em; }
+    .dc-no em{ font-style:normal; font-size:8.4pt; font-weight:600; color:#9A9A9A; margin-left:3px; }
+    .dc-city{ margin-top:7px; font-size:9.3pt; font-weight:700; color:#1A1A1A; line-height:1.45; }
+    .dc-city em{ display:block; font-style:normal; font-size:8pt; font-weight:500; color:#A6A6A6;
+      margin-bottom:5px; }
+    .dc-city span{ display:block; margin:-2px 0 1px; font-size:7.5pt; color:#C8C8C8; }
+    .dc-dr{ flex:1 1 auto; min-width:0; }
+    .dc-dt{ margin:0 0 7px; font-size:10.5pt; font-weight:800; color:#111; }
+    .dc-dr p{ color:#2B2B2B; }
+    .dc-mk{ display:flex; gap:9px; font-size:8.6pt; color:#555; line-height:1.7; }
+    .dc-mk span{ flex:0 0 32px; color:#9A9A9A; font-weight:600; letter-spacing:.14em; }
+    .dc-mk + .dc-mk{ margin-top:1px; }
+
+    /* 포함 · 불포함 — 두 칸 */
+    .dc-two{ display:flex; gap:34px; margin-top:16px; }
+    .dc-two > div{ flex:1 1 0; min-width:0; }
+    .dc-h4{ margin:0 0 11px; font-size:9.6pt; font-weight:800; color:#111; }
+    .dc-kv{ margin-bottom:10px; page-break-inside:avoid; }
+    .dc-kv b{ display:block; font-size:9pt; font-weight:700; color:#1A1A1A; }
+    .dc-kv span{ display:block; font-size:8.6pt; color:#8C8C8C; line-height:1.6; }
+
+    .dc-ol{ margin:14px 0 0; padding-left:19px; }
+    .dc-ol li{ font-size:8.8pt; color:#2B2B2B; line-height:1.75; padding-left:3px;
+      margin-bottom:5px; page-break-inside:avoid; }
+    .dc-ol li b{ color:#111; }
+
+    .dc-end{ margin-top:30px; padding-top:16px; border-top:1.6px solid #1A1A1A; }
+    .dc-end h3{ margin:0 0 7px; font-size:11pt; font-weight:800; color:#111; }
+    .dc-end p{ font-size:8.8pt; color:#555; }
+    .dc-co{ margin-top:12px; font-size:8.6pt; font-weight:700; color:#1A1A1A; }
+    .dc-co em{ display:block; font-style:normal; font-size:7.8pt; font-weight:500; color:#A6A6A6;
+      margin-top:3px; letter-spacing:.01em; }
   }
 
   /* 구간별 거리 · 시간 */
@@ -2318,11 +2343,54 @@
     그래야 한글이 안 깨지고, 글자도 복사되고, 파일도 가볍습니다.
     "대상"에서 "PDF로 저장"을 고르시면 됩니다.
   */
+  /* 회사 로고 — 인쇄 일정표 머리글과 바탕 무늬에 씁니다 (파일 따로 안 올리셔도 되게 글자로 박아 둡니다) */
+  var 로고그림 = 'data:image/png;base64,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';
+
+  /* 도시 로마자 — 일정표 왼쪽에 작게 적습니다 */
+  var 로마자 = {
+    '마드리드':'Madrid', '톨레도':'Toledo', '세고비아':'Segovia', '살라망카':'Salamanca',
+    '코르도바':'Córdoba', '세비야':'Sevilla', '론다':'Ronda', '그라나다':'Granada',
+    '말라가':'Málaga', '발렌시아':'Valencia', '사라고사':'Zaragoza', '바르셀로나':'Barcelona',
+    '리스본':'Lisboa', '코임브라':'Coimbra', '포르투':'Porto', '파티마':'Fátima',
+    '신트라':'Sintra', '오비두스':'Óbidos', '나자레':'Nazaré', '브라가':'Braga',
+    '기마랑이스':'Guimarães', '아베이루':'Aveiro', '몬세라트':'Montserrat',
+    '미하스':'Mijas', '지브롤터':'Gibraltar', '빌바오':'Bilbao', '산세바스티안':'San Sebastián'
+  };
+  function 로마(c){ return 로마자[c] || ''; }
+
+  var 포르투갈도시 = { '리스본':1, '코임브라':1, '포르투':1, '파티마':1, '신트라':1, '오비두스':1,
+                      '나자레':1, '브라가':1, '기마랑이스':1, '아베이루':1 };
+
+  /* 받침을 보고 조사를 고릅니다 — 「스페인 광장을」 「그란 비아를」 */
+  function 조사(말, 짝){
+    var 둘 = 짝.split('/');
+    var t = String(말 || '').replace(/[\s)\]》」'"]+$/, '');
+    var m = t.match(/[가-힣]$/);
+    if(!m) return 둘[1];                      /* 한글로 끝나지 않으면 받침 없는 쪽 */
+    var 받침 = (m[0].charCodeAt(0) - 0xAC00) % 28;
+    return 받침 ? 둘[0] : 둘[1];
+  }
+
+  var 셈말 = ['', '한', '두', '세', '네', '다섯', '여섯', '일곱', '여덟', '아홉', '열'];
+  function 셈(n){ return 셈말[n] || String(n); }
+
   function 오늘(){
     var d = new Date();
     return d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
   }
 
+  /* 그 날 묵는 곳이 그 도시에서 몇 박째인지 — 「마드리드 (1/3박)」 */
+  function 몇박째(i){
+    var d = S.일정[i];
+    if(!d || !d.도시 || i >= S.일정.length - 1) return null;
+    var 차례 = 0, 모두 = 0;
+    for(var k = 0; k < S.일정.length - 1; k++){
+      if(S.일정[k].도시 === d.도시){ 모두++; if(k <= i) 차례++; }
+    }
+    return { 차례: 차례, 모두: 모두 };
+  }
+
+  /* ---------------- 인쇄용 일정표 ---------------- */
   function 문서만들기(){
     /* 인쇄할 때는 이 문서만 남기고 나머지를 숨깁니다.
        그러려면 문서가 <body> 바로 밑에 있어야 합니다. */
@@ -2330,173 +2398,279 @@
     if(칸 && 칸.parentNode !== document.body) document.body.appendChild(칸);
 
     var m = 계산();
+    var 끝날 = S.일정.length - 1;
     var 구간 = 구간목록();
     var 총km = 0, 총분 = 0;
     구간.forEach(function(g){ 총km += g.km; 총분 += g.분; });
 
-    var 끝날 = S.일정.length - 1;
-    var 일자 = S.일정.map(function(day, i){
-      var 줄 = [];
-      var 도착일 = (i === 0 && day.종류 === '이동');
+    /* ── 머리글 ── */
+    var 첫도시 = (S.일정[0] && S.일정[0].도시) || '';
+    var 끝도시 = (S.일정[끝날] && S.일정[끝날].도시) || '';
+    var 들머리 = 첫도시 && 끝도시
+      ? (첫도시 === 끝도시 ? 첫도시 + ' IN/OUT' : 첫도시 + ' IN · ' + 끝도시 + ' OUT')
+      : '맞춤 일정';
+    var 묵은곳 = 숙박목록();
+    var 지역 = (function(){
+      var 스 = false, 포 = false;
+      S.일정.forEach(function(d){ if(!d.도시) return; if(포르투갈도시[d.도시]) 포 = true; else 스 = true; });
+      return 스 && 포 ? 'SPAIN · PORTUGAL' : 포 ? 'PORTUGAL' : 'SPAIN';
+    })();
+    var 거쳐간도시 = (function(){
+      var 본 = [], 봄 = {};
+      S.일정.forEach(function(d){ if(d.도시 && !봄[d.도시]){ 봄[d.도시] = 1; 본.push(d.도시); } });
+      return 본;
+    })();
+    var 소제목 = 거쳐간도시.map(function(c){ return 로마(c) || c; }).join(' · ') +
+                 ' · ' + S.일수 + '일' + (m.박 ? ' ' + m.박 + '박' : '');
+    var 머릿글 = (묵은곳.length
+      ? 묵은곳.map(function(x){ return x.도시 + ' ' + x.박 + '박'; }).join(' · ') +
+        ', 짐은 ' + 셈(묵은곳.length) + ' 번만 풀고 다니시는 '
+      : '') + S.일수 + '일 맞춤 일정입니다.' +
+      (m.자유일 ? ' 그 가운데 ' + m.자유일 + '일은 종일 자유시간입니다.' : '');
 
-      if(day.종류 === '이동'){
+    /* ── 일자별 ── */
+    var 일자 = S.일정.map(function(day, i){
+      var 도착일 = (i === 0 && day.종류 === '이동');
+      var 이전 = (i > 0) ? S.일정[i - 1] : null;
+      var 옮김 = !!(이전 && 이전.도시 && 이전.도시 !== day.도시);
+      var 들를곳 = 옮김 && 이전.경유 !== false && 이동수단(이전.도시, day.도시) === '차량'
+        ? 경유찾기(이전.도시, day.도시) : '';
+
+      /* 왼쪽 — 도시 */
+      var 도시들 = [];
+      if(옮김) 도시들.push(이전.도시);
+      if(들를곳) 도시들.push(들를곳);
+      if(day.도시) 도시들.push(day.도시);
+      var 왼 = '<div class="dc-no"><b>' + (i < 9 ? '0' : '') + (i + 1) + '</b><em>일차</em></div>' +
+        '<div class="dc-city">' + (도시들.length
+          ? 도시들.map(function(c, k){
+              return (k ? '<span>↓</span>' : '') + esc(c) +
+                     (로마(c) ? '<em>' + esc(로마(c)) + '</em>' : '<em></em>');
+            }).join('')
+          : '—') +
+        (!옮김 && day.종류 === '관광' && day.도시 ? '' : '') + '</div>';
+
+      /* 오른쪽 — 제목 */
+      var 제목;
+      if(도착일) 제목 = esc(day.도시 || '') + ' 도착';
+      else if(day.종류 === '자유') 제목 = '종일 자유시간';
+      else if(옮김) 제목 = esc(이전.도시) + ' → ' + esc(day.도시);
+      else if(i === 끝날) 제목 = esc(day.도시 || '') + ' · 일정 마무리';
+      else 제목 = esc(day.도시 || '') + ' 종일';
+
+      var 글 = [];
+      if(도착일){
         var 필요 = [];
         if(day.미팅가이드 !== false) 필요.push('가이드 미팅');
         if(day.미팅차량 !== false) 필요.push('차량');
-        줄.push('공항 도착 후 호텔로 이동' + (필요.length ? ' (' + 필요.join(' · ') + ')' : ''));
+        글.push('공항 도착 후 호텔로 이동합니다' +
+                (필요.length ? ' (' + 필요.join(' · ') + ')' : '') + '. 첫날은 이동과 휴식에 씁니다.');
       }
-      /* 앞 날과 도시가 다르면 그 이동을 이 날 맨 위에 적습니다 */
-      var 이전 = (i > 0) ? S.일정[i - 1] : null;
-      if(이전 && 이전.도시 && 이전.도시 !== day.도시){
-        var 들를곳 = (이전.경유 !== false && 이동수단(이전.도시, day.도시) === '차량')
-          ? 경유찾기(이전.도시, day.도시) : '';
-        줄.push(이전.도시 + ' → ' + day.도시 + ' 이동' +
-                (들를곳 ? ' (가는 길에 ' + 들를곳 + ' 들름)' : ''));
+      if(day.종류 === '자유'){
+        글.push('차량과 가이드 없이 종일 자유롭게 보내시는 날입니다.');
       }
-      if(day.종류 === '자유') 줄.push('종일 자유시간');
 
-      /* 입장하는 곳과 걸어서 둘러보는 곳을 나눠 적습니다 */
       var 그날 = (day.입장지 || []).map(찾기).filter(Boolean);
       그날.filter(function(x){ return !x.기본; }).forEach(function(x){
-        줄.push(x.이름 + (Number(x.금액) > 0 ? ' (입장)' : ''));
+        글.push('<b>' + esc(x.이름) + '</b>' + (x.설명 ? ' — ' + esc(x.설명) : '') +
+                (Number(x.금액) > 0 ? ' (입장)' : ''));
       });
       var 도보 = 그날.filter(function(x){ return x.기본; });
-      if(도보.length) 줄.push(도보.map(function(x){ return x.이름; }).join(' · ') + ' 둘러보기');
-      var 밖에서 = 외관보기(i);
-      if(밖에서.length) 줄.push(밖에서.map(function(x){ return x.이름; }).join(' · ') + ' 외관 관광');
-
-      /* 식사 — 중식 · 석식으로 나눕니다 */
-      var 중 = [], 석 = [], 그외 = [];
-      (day.식사 || []).forEach(function(id){
-        var n = 이름(id); if(!n) return;
-        if(n.indexOf('중식') >= 0) 중.push(n);
-        else if(n.indexOf('석식') >= 0) 석.push(n);
-        else 그외.push(n);
-      });
-      그외.forEach(function(n){ if(!중.length) 중.push(n); else 석.push(n); });
-      var 식줄 = 도착일 ? '' :
-        '<div class="ml">' +
-          '<span><b>중식</b>' + (중.length ? esc(중.join(' · ')) : '<i>불포함</i>') + '</span>' +
-          '<span><b>석식</b>' + (석.length ? esc(석.join(' · ')) : '<i>불포함</i>') + '</span>' +
-        '</div>';
-
-      /* 묵으실 곳 — 마지막 날은 묵지 않습니다 */
-      var 잠줄 = '';
-      if(i < 끝날){
-        var 호id = (S.숙박 && day.도시) ? (S.숙박[day.도시] || '') : '';
-        var 호 = 호id ? 찾기(호id) : null;
-        잠줄 = '<div class="ht"><b>예정 호텔</b>' + (호
-          ? esc(호.이름) + (호.등급 ? ' · ' + esc(호.등급) : '') + ' <i>또는 동급 호텔</i>'
-          : '<i>예정 호텔은 확인 후 안내드립니다 (또는 동급 호텔)</i>') + '</div>';
+      if(도보.length){
+        글.push(도보.map(function(x){ return '<b>' + esc(x.이름) + '</b>'; }).join(' · ') +
+                조사(도보[도보.length - 1].이름, '을/를') + ' 걸어서 둘러봅니다.');
+      }
+      var 밖 = 외관보기(i);
+      if(밖.length){
+        글.push(밖.map(function(x){ return '<b>' + esc(x.이름) + '</b>'; }).join(' · ') +
+                조사(밖[밖.length - 1].이름, '은/는') +
+                ' 안에 들어가지 않고 밖에서 보며 지나갑니다. 입장을 원하시면 말씀해 주세요.');
+      }
+      if(옮김){
+        var 정보 = 구간정보(이전.도시, day.도시, 이동수단(이전.도시, day.도시), 들를곳);
+        if(정보 && 정보.km){
+          글.push('약 ' + 돈(정보.km) + 'km, 주행 약 ' + 시간글(정보.분) + '입니다.' +
+                  (들를곳 ? ' 가는 길에 ' + esc(들를곳) + 조사(들를곳, '을/를') + ' 들릅니다.' : ''));
+        } else if(정보 && 정보.분){
+          글.push(이동수단(이전.도시, day.도시) + '으로 약 ' + 시간글(정보.분) + ' 걸립니다.');
+        }
       }
 
-      return '<tr><td class="d">' + (i + 1) + '일차</td>' +
-             '<td class="c">' + esc(day.도시 || '—') + '</td><td>' +
-             (줄.length ? 줄.map(function(t){ return '<div class="ln">' + esc(t) + '</div>'; }).join('')
-                        : '<div class="ln"><em>관광 일정 미정 — 상담 때 함께 정합니다</em></div>') +
-             식줄 + 잠줄 + '</td></tr>';
+      /* 식사 — 조식 · 중식 · 석식 */
+      var 식줄 = '';
+      if(!도착일){
+        var 중 = [], 석 = [], 그외 = [];
+        (day.식사 || []).forEach(function(id){
+          var n = 이름(id); if(!n) return;
+          if(n.indexOf('중식') >= 0) 중.push(n);
+          else if(n.indexOf('석식') >= 0) 석.push(n);
+          else 그외.push(n);
+        });
+        그외.forEach(function(n){ if(!중.length) 중.push(n); else 석.push(n); });
+        var 짧게 = function(a){
+          return a.map(function(n){ return n.replace('중식', '').replace('석식', '').trim() || n; }).join(' · ');
+        };
+        var 끼니 = [];
+        if(i > 0 && S.숙박 && 이전 && S.숙박[이전.도시]) 끼니.push('조식');
+        끼니.push('중식(' + (중.length ? 짧게(중) : '불포함') + ')');
+        끼니.push('석식(' + (석.length ? 짧게(석) : '불포함') + ')');
+        식줄 = '<div class="dc-mk"><span>식 사</span>' + esc(끼니.join(' · ')) + '</div>';
+      }
+
+      /* 숙박 */
+      var 잠줄 = '';
+      var 박 = 몇박째(i);
+      if(박){
+        var 호 = (S.숙박 && S.숙박[day.도시]) ? 찾기(S.숙박[day.도시]) : null;
+        잠줄 = '<div class="dc-mk"><span>숙 박</span>' +
+          esc(day.도시) + ' (' + 박.차례 + '/' + 박.모두 + '박)' +
+          (호 ? ' · ' + esc(호.이름) + (호.등급 ? ' ' + esc(호.등급) : '') + ' 또는 동급 호텔'
+              : ' · 호텔은 확정 시 안내드립니다 (또는 동급 호텔)') + '</div>';
+      }
+
+      return '<div class="dc-day"><div class="dc-dl">' + 왼 + '</div><div class="dc-dr">' +
+        '<h3 class="dc-dt">' + 제목 + '</h3>' +
+        (글.length ? 글.map(function(t){ return '<p>' + t + '</p>'; }).join('')
+                   : '<p>관광 일정은 상담 때 함께 정합니다.</p>') +
+        식줄 + 잠줄 + '</div></div>';
     }).join('');
 
-    var 이동줄 = 구간.map(function(g){
-      return '<tr><td class="c">' + esc(g.a) + ' → ' + esc(g.b) + '</td>' +
-             '<td class="d">' + g.수단 + '</td>' +
-             '<td class="n">' + (g.km ? 돈(g.km) + 'km' : '—') + '</td>' +
-             '<td class="n">' + (g.분 ? '약 ' + 시간글(g.분) : '—') + '</td>' +
-             '<td>' + (g.들를곳 ? esc(g.들를곳) + ' 경유' : '') + '</td></tr>';
-    }).join('');
-
-    var 포함 = [];
-    var 묵은곳2 = 숙박목록().filter(function(x){ return x.id; });
-    if(묵은곳2.length){
-      var 비 = Number(CFG.싱글차지비율) > 0 ? Number(CFG.싱글차지비율) : 80;
-      묵은곳2.forEach(function(x, k){
-        var 호2 = 찾기(x.id);
-        포함.push([k === 0 ? '숙박' : '',
-          x.도시 + ' ' + x.박 + '박 — ' + (호2 ? 호2.이름 : 이름(x.id)) +
-          (호2 && 호2.등급 ? ' · ' + 호2.등급 : '') + ' 또는 동급 호텔']);
-      });
-      if(m.싱글) 포함.push(['', '싱글룸 ' + m.싱글 + '명 (방값의 ' + 비 + '% 추가)']);
-      if(CFG.숙박조건) 포함.push(['', CFG.숙박조건]);
+    /* ── 포함 · 불포함 ── */
+    var 포함 = [], 불포함 = [];
+    var 묵은곳2 = 묵은곳.filter(function(x){ return x.id; });
+    if(묵은곳.length){
+      포함.push(['숙박',
+        묵은곳.map(function(x){
+          var h = x.id ? 찾기(x.id) : null;
+          return x.도시 + ' ' + x.박 + '박' + (h ? ' ' + h.이름 + (h.등급 ? ' ' + h.등급 : '') : '');
+        }).join(' · ') + ' — 2인 1실 · 조식 · 또는 동급 호텔' +
+        (m.싱글 ? ' (싱글룸 ' + m.싱글 + '명 — 방값의 ' +
+          (Number(CFG.싱글차지비율) > 0 ? Number(CFG.싱글차지비율) : 80) + '% 추가)' : '')]);
     }
     if(S.차량){
-      var ㅊ = [];
-      if(m.공차) ㅊ.push('공차 1일 추가 (' + m.첫도시 + ' 출발 · ' + m.끝도시 + ' 종료)');
-      if(m.미팅차수) ㅊ.push('공항 이동 차량 ' + m.미팅차수 + '회');
-      포함.push(['차량', 이름(S.차량) + (ㅊ.length ? ' · ' + ㅊ.join(' · ') : '')]);
+      var ㅊ = [이름(S.차량)];
+      if(m.공차) ㅊ.push('공차 1일 (' + m.첫도시 + ' 출발 · ' + m.끝도시 + ' 종료)');
+      if(m.미팅차수) ㅊ.push('공항 이동 ' + m.미팅차수 + '회');
+      포함.push(['차량', ㅊ.join(' · ') + (m.자유일 ? ' · 자유시간 ' + m.자유일 + '일 제외' : '')]);
     }
     if(S.가이드){
-      var ㄱ = [];
+      var ㄱ = [이름(S.가이드)];
       if(m.로컬) ㄱ.push('현지 가이드 동행');
       if(m.미팅가수) ㄱ.push('공항 미팅 ' + m.미팅가수 + '회');
-      포함.push(['가이드', 이름(S.가이드) + (ㄱ.length ? ' · ' + ㄱ.join(' · ') : '')]);
+      포함.push(['가이드', ㄱ.join(' · ') + (m.자유일 ? ' · 자유시간 ' + m.자유일 + '일 제외' : '')]);
     }
-    if(S.기차.length) 포함.push(['기차', S.기차.map(이름).join(' / ')]);
-    if(S.항공.length) 포함.push(['항공', S.항공.map(이름).join(' / ')]);
+    var 입장전부 = [];
+    S.일정.forEach(function(d){
+      (d.입장지 || []).map(찾기).forEach(function(x){
+        if(x && Number(x.금액) > 0 && 입장전부.indexOf(x.이름) === -1) 입장전부.push(x.이름);
+      });
+    });
+    if(입장전부.length) 포함.push(['입장료', '일정표에 적힌 입장료 전액 — ' + 입장전부.join(' · ')]);
+    var 식수 = { 중: 0, 석: 0 };
+    S.일정.forEach(function(d){
+      var ㅈ = 0;
+      (d.식사 || []).forEach(function(id){
+        var n = 이름(id);
+        if(n.indexOf('중식') >= 0) 식수.중++;
+        else if(n.indexOf('석식') >= 0) 식수.석++;
+        else { if(ㅈ === 0){ 식수.중++; ㅈ = 1; } else 식수.석++; }
+      });
+    });
+    if(식수.중 || 식수.석){
+      포함.push(['식사', (식수.중 ? '중식 ' + 식수.중 + '회' : '') +
+        (식수.중 && 식수.석 ? ' · ' : '') + (식수.석 ? '석식 ' + 식수.석 + '회' : '') +
+        (묵은곳2.length ? ' · 호텔 조식' : '')]);
+    } else if(묵은곳2.length){
+      포함.push(['식사', '호텔 조식']);
+    }
+    if(S.기차.length) 포함.push(['기차', S.기차.map(이름).join(' · ')]);
+    if(S.항공.length) 포함.push(['항공 (구간)', S.항공.map(이름).join(' · ')]);
+
+    불포함.push(['항공', '한국 출발 왕복 국제선 항공']);
+    불포함.push(['식사', '일정표에 「불포함」으로 적힌 끼니 — 자유식']);
+    불포함.push(['팁', '가이드 · 기사 팁']);
+    불포함.push(['관광세', '도시별 숙박세 (1인 1박, 현지 납부)']);
+    var 외관전부 = [];
+    S.일정.forEach(function(d, i){
+      외관보기(i).forEach(function(x){ if(외관전부.indexOf(x.이름) === -1) 외관전부.push(x.이름); });
+    });
+    if(외관전부.length) 불포함.push(['외관 관광', 외관전부.join(' · ') + ' 입장료']);
+    불포함.push(['개인 경비', '개인 경비 · 초과 수하물 요금']);
+
+    var 칸만들기 = function(목록){
+      return 목록.map(function(x){
+        return '<div class="dc-kv"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>';
+      }).join('');
+    };
+
+    /* ── 예약 전 확인 ── */
+    var 확인 = [];
+    확인.push('일정표에 적힌 호텔은 <b>예정 호텔</b>이며, 현지 사정에 따라 <b>동급 호텔</b>로 바뀔 수 있습니다.');
+    if(CFG.숙박조건) 확인.push(esc(CFG.숙박조건));
+    if(자유관광인가()){
+      확인.push('<b>' + 자유관광기준() + '명 미만 일정입니다.</b> ' + esc(해설가능) +
+        '을 뺀 나머지 관광지는 가이드가 밖에서 설명해 드린 뒤, 입장하셔서 자유관광으로 보시게 됩니다. ' +
+        '관광지 안에서 가이드가 함께 다니며 해설하는 것은 ' + 자유관광기준() + '명부터 가능합니다.');
+    }
+    확인.push('일정 만들기는 ' + 최소날() + '일 이상 일정에만 쓰실 수 있습니다.');
+    if((S.기차.length || S.항공.length) && CFG.구간안내문) 확인.push(esc(CFG.구간안내문));
+    if(CFG.안내문) 확인.push(esc(CFG.안내문));
+    확인.push('이 문서는 고르신 내용으로 자동 계산한 <b>예상 금액</b>이며, 확정 견적이 아닙니다. ' +
+      '담당자가 확인한 뒤 이메일로 보내 드리는 금액이 확정 금액이며, ' +
+      '<b>예약금(전체 요금의 30%)</b>이 입금되어야 예약이 확정됩니다.');
 
     $('bxDoc').innerHTML =
       '<div class="doc">' +
-        '<div class="doc-head">' +
-          '<div><div class="doc-brand">EUFORIA TOUR</div>' +
-            '<div class="doc-sub">스페인 · 포르투갈 · 모로코 단체여행</div></div>' +
-          '<div class="doc-co">Euforia Das Nuvens, S.L.<br>' +
-            'Calle Gran Via 69, 810, 28013 Madrid<br>' +
-            'NIF B44605574 · CICMA No.4443<br>' +
-            '+34 611 209 095 · euforia@euforiatour.com<br>www.toureplus.co.kr</div>' +
-        '</div>' +
+        '<img class="dc-wm" src="' + 로고그림 + '" alt="">' +
+        '<img class="dc-logo" src="' + 로고그림 + '" alt="Euforia Tour">' +
+        '<div class="dc-eyebrow">Spain · Portugal · Morocco</div>' +
+        '<h1 class="dc-title">[맞춤 일정] ' + esc(들머리) + ' ' +
+          (m.박 ? m.박 + '박' : '') + S.일수 + '일</h1>' +
+        '<div class="dc-sub">' + esc(소제목) + '</div>' +
+        '<p class="dc-lead">' + esc(머릿글) + '</p>' +
 
-        '<h1 class="doc-title">여행 일정 · 예상 견적</h1>' +
-        '<div class="doc-when">' + 오늘() + ' 기준</div>' +
-
-        '<table class="doc-sum"><tbody>' +
-          '<tr><th>인원</th><td>' + S.인원 + '명</td>' +
-              '<th>기간</th><td>' + S.일수 + '일' + (m.박 ? ' (' + m.박 + '박)' : '') + '</td></tr>' +
-          '<tr><th>출발 희망일</th><td>' + (S.출발일 ? esc(S.출발일) : '미정') + '</td>' +
-              '<th>총 이동</th><td>' + (총km ? 돈(총km) + 'km · 약 ' + 시간글(총분) : '—') + '</td></tr>' +
+        '<table class="dc-meta"><tbody>' +
+          '<tr><th>일정</th><td>' + (m.박 ? m.박 + '박' : '') + S.일수 + '일</td>' +
+              '<th>지역</th><td>' + 지역 + '</td></tr>' +
+          '<tr><th>조건</th><td>' + S.인원 + '명 · ' + esc(들머리) +
+              (m.자유일 ? ' · 자유시간 ' + m.자유일 + '일' : '') +
+              (S.출발일 ? ' · 출발 희망 ' + esc(S.출발일) : '') + '</td>' +
+              '<th>요금</th><td>1인당 ' + 기호 + ' ' + 돈(m.인당) +
+              ' · 총 ' + 기호 + ' ' + 돈(Math.round(m.총액)) + '</td></tr>' +
         '</tbody></table>' +
 
-        '<div class="doc-price">' +
-          '<span class="l">예상 금액</span>' +
-          '<span class="v">1인당 ' + 기호 + ' ' + 돈(m.인당) +
-            '<em> · 총 ' + 기호 + ' ' + 돈(Math.round(m.총액)) + '</em></span>' +
+        '<h2 class="dc-h2">일정</h2>' +
+        '<div class="dc-sub2">현지 사정과 기상, 교통 상황에 따라 방문 순서가 조정될 수 있습니다.' +
+          (총km ? ' 전 일정 이동 약 ' + 돈(총km) + 'km · 주행 약 ' + 시간글(총분) + '.' : '') + '</div>' +
+        일자 +
+
+        '<h2 class="dc-h2">포함 · 불포함</h2>' +
+        '<div class="dc-two">' +
+          '<div><div class="dc-h4">포함 사항</div>' + 칸만들기(포함) + '</div>' +
+          '<div><div class="dc-h4">불포함 사항</div>' + 칸만들기(불포함) + '</div>' +
         '</div>' +
 
-        '<h2 class="doc-h2">일자별 일정</h2>' +
-        '<table class="doc-tb doc-day"><tbody>' + 일자 + '</tbody></table>' +
+        '<h2 class="dc-h2">예약 전 확인해 주십시오</h2>' +
+        '<ol class="dc-ol">' + 확인.map(function(t){ return '<li>' + t + '</li>'; }).join('') + '</ol>' +
 
-        (이동줄 ? '<h2 class="doc-h2">구간별 이동</h2>' +
-          '<table class="doc-tb"><tbody>' + 이동줄 + '</tbody></table>' : '') +
+        '<h2 class="dc-h2">예약 순서</h2>' +
+        '<ol class="dc-ol">' + 예약단계.map(function(x){
+          return '<li><b>' + esc(x[0]) + '</b> — ' +
+                 esc(String(x[1]).replace(/<[^>]+>/g, '')) + '</li>';
+        }).join('') + '</ol>' +
 
-        (포함.length ? '<h2 class="doc-h2">포함 사항</h2>' +
-          '<table class="doc-tb"><tbody>' + 포함.map(function(x){
-            return '<tr><td class="d">' + x[0] + '</td><td colspan="2">' + esc(x[1]) + '</td></tr>';
-          }).join('') + '</tbody></table>' : '') +
-
-        '<h2 class="doc-h2">예약 순서</h2>' +
-        '<table class="doc-tb"><tbody>' + 예약단계.map(function(x, i){
-          return '<tr><td class="d">' + (i + 1) + '단계</td><td class="c">' + esc(x[0]) + '</td>' +
-                 '<td>' + esc(String(x[1]).replace(/<[^>]+>/g, '')) + '</td></tr>';
-        }).join('') + '</tbody></table>' +
-
-        '<div class="doc-note">' +
-          (자유관광인가()
-            ? '<b>' + 자유관광기준() + '명 미만 일정입니다.</b> ' + esc(해설가능) +
-              '을 뺀 나머지 관광지는 가이드가 밖에서 설명해 드린 뒤, 입장하셔서 자유관광으로 보시게 됩니다. ' +
-              '관광지 안에서 가이드가 함께 다니며 해설하는 것은 ' + 자유관광기준() + '명부터 가능합니다.<br>'
-            : '') +
-          '일정 만들기는 ' + 최소날() + '일 이상 일정에만 쓰실 수 있습니다.<br>' +
-          '일정표에 적힌 호텔은 <b>예정 호텔</b>이며, 현지 사정에 따라 <b>동급 호텔</b>로 바뀔 수 있습니다.<br>' +
-          esc(CFG.안내문 || '') +
-          ((S.기차.length || S.항공.length) && CFG.구간안내문
-            ? '<br>' + esc(CFG.구간안내문) : '') +
-          '<br>이 문서는 손님이 고르신 내용으로 자동 계산한 <b>예상 금액</b>이며, 확정 견적이 아닙니다. ' +
-          '문의를 보내신 것만으로는 예약이 잡히지 않습니다. ' +
-          '담당자가 확인한 뒤 이메일로 보내 드리는 금액이 확정 금액이며, ' +
-          '예약금(전체 요금의 30%)이 입금되어야 예약이 확정됩니다.</div>' +
-
-        '<div class="doc-foot">Euforia Tour · www.toureplus.co.kr · euforia@euforiatour.com · +34 611 209 095</div>' +
+        '<div class="dc-end">' +
+          '<img class="dc-logo" src="' + 로고그림 + '" alt="Euforia Tour">' +
+          '<h3>일정을 원하시는 대로 맞춰 드립니다</h3>' +
+          '<p>인원, 출발일, 호텔 등급, 식사 구성에 따라 맞춤 견적을 드립니다. ' +
+          '스페인 현지에서 직접 운영하므로 일정 변경과 긴급 상황에도 빠르게 대응합니다. ' +
+          '(' + 오늘() + ' 기준)</p>' +
+          '<div class="dc-co">Euforia Tour Spain · euforia@euforiatour.com · +34 611 209 095' +
+            '<em>EUFORIA DAS NUVENS S.L. · Calle Gran Via 69, 810, 28013 Madrid · ' +
+            'NIF B44605574 · CICMA No.4443 · www.toureplus.co.kr</em></div>' +
+        '</div>' +
       '</div>';
   }
-
   function PDF저장(){
     문서만들기();
     window.print();
