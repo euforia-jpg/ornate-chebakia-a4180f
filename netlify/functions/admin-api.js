@@ -62,6 +62,7 @@ function 빈것(file) {
 
 /* 쓰레드 광고 이미지가 들어갈 폴더 — 이 아래로만 올릴 수 있게 막아요 */
 const IMG_DIR = 'images/threads/';
+const DOC_DIR = 'docs/';          /* 상품 일정표 PDF 가 들어가는 곳 */
 
 /* ---------------------------------------------------------- 공통 */
 
@@ -441,6 +442,45 @@ exports.handler = async function (event) {
         path: path,
         replaced: !!sha,
         message: '사진을 올렸습니다. 1~2분 뒤부터 쓰레드에 쓸 수 있습니다.',
+      });
+    }
+
+    /* --- 일정표 PDF 올리기 --- */
+    /*
+      관리자 대쉬보드에서 상품 일정표(PDF)를 올리면 docs/ 폴더에 넣습니다.
+      상품의 「일정표 PDF」 칸에는 /docs/파일이름.pdf 로 적히게 됩니다.
+    */
+    if (action === 'upload-doc') {
+      const name = String(req.name || '').trim().toLowerCase();
+      const b64  = String(req.data || '');
+
+      if (!/^[a-z0-9][a-z0-9._-]{0,80}\.(pdf|docx)$/.test(name)) {
+        return json(400, {
+          error: '파일 이름이 올바르지 않습니다',
+          detail: '영문 소문자·숫자·하이픈만 쓰고 .pdf 또는 .docx 로 끝나야 합니다.',
+        });
+      }
+      if (!b64) return json(400, { error: '파일 내용이 비어 있습니다' });
+      /* base64 는 원본보다 약 1.37배 큽니다. 원본 4MB 까지 받습니다. */
+      if (b64.length > 5.6 * 1024 * 1024) {
+        return json(413, {
+          error: '파일이 너무 큽니다',
+          detail: '4MB 이하로 줄여서 올려 주세요. (PDF 는 보통 1MB 안팎입니다)',
+        });
+      }
+
+      const path = DOC_DIR + name;
+      let sha = null;
+      try { sha = (await readFile(path)).sha; }   /* 같은 이름이면 교체 */
+      catch (e) { if (e.status !== 404) throw e; }
+
+      await writeBinary(path, b64, '[관리자] 상품 일정표 ' + (sha ? '교체' : '추가') + ' — ' + name, sha);
+
+      return json(200, {
+        ok: true,
+        path: '/' + path,
+        replaced: !!sha,
+        message: '일정표를 올렸습니다. 1~2분 뒤부터 손님이 내려받을 수 있습니다.',
       });
     }
 
