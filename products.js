@@ -9,6 +9,66 @@
 */
 const PRODUCTS = [
   {
+    "id": "euforia-tour",
+    "cats": [
+      "spain",
+      "portugal"
+    ],
+    "topClass": "iberia",
+    "region": "맞춤 일정",
+    "days": "10박11일",
+    "price": "가격 문의",
+    "title": "[맞춤 일정] 마드리드 IN/OUT 10박11일",
+    "summary": "Madrid · Porto · Lisboa · Sevilla · Granada · Valencia · Barcelona · Zaragoza · 11일 10박 마드리드 2박 · 포르투 1박 · 리스본 1박 · 세비야 1박 · 그라나다 1박 · 발렌시아 1박 · 바르셀로나 2박 · 사라고사 1박, 짐은 여덟 번만 풀고 다니시는 11일 맞춤 일정입니다.",
+    "tags": [
+      "10박11일",
+      "전용차량",
+      "인솔자 동행",
+      "현지 가이드"
+    ],
+    "isNew": true,
+    "detail": {
+      "lead": "Madrid · Porto · Lisboa · Sevilla · Granada · Valencia · Barcelona · Zaragoza · 11일 10박 마드리드 2박 · 포르투 1박 · 리스본 1박 · 세비야 1박 · 그라나다 1박 · 발렌시아 1박 · 바르셀로나 2박 · 사라고사 1박, 짐은 여덟 번만 풀고 다니시는 11일 맞춤 일정입니다.",
+      "duration": "4명 · 마드리드 IN/OUT",
+      "highlights": [
+        "마드리드 도착",
+        "마드리드 종일",
+        "마드리드 → 포르투",
+        "포르투 → 리스본",
+        "리스본 → 세비야",
+        "세비야 → 그라나다",
+        "그라나다 → 발렌시아",
+        "발렌시아 → 바르셀로나",
+        "바르셀로나 종일",
+        "바르셀로나 → 사라고사",
+        "사라고사 → 마드리드 · 공항 이동"
+      ],
+      "includes": [
+        "숙박 — 전 일정 4성급 호텔 10박 — 일정표에 명시 (2인 1실 · 조식 · 또 는 동급 호텔)",
+        "차량 — 소형 밴 (9인승) · 공항 이동 1회",
+        "가이드 — 한국어 인솔 가이드",
+        "https://toureplus.co.kr/builder",
+        "26. 10. 13. 오후 9:12",
+        "입장료 — 일정표에 적힌 입장료 전액 — 프라도 미술관 · 렐루 서점 · 세비 야 대성당 · 히랄다 · 알함브라 궁전 · 사그라다 파밀리아 · 구엘 공원 · 마드리드 왕궁",
+        "식사 — 중식 9회 · 석식 9회 · 호텔 조식",
+        "팁 — 가이드 팁 · 기사 팁 — 요금에 들어 있어 따로 챙기지 않으셔도 됩니다"
+      ],
+      "excludes": [
+        "항공 — 한국 출발 왕복 국제선 항공 (일정 중 구간 항공은 포함 사항 참 고)",
+        "식사 — 일정표에 「불포함」으로 적힌 끼니 — 자유식",
+        "관광세 — 도시별 숙박세 (1인 1박, 현지 납부)",
+        "3/4",
+        "일정 만들기 — Euforia Tour",
+        "개인 경비 — 개인 경비 · 초과 수하물 요금"
+      ],
+      "description": "<div class=\"eu-auto\">\n<style>.eu-auto{color:#2B2B2B;line-height:1.75}.eu-auto p{margin:0 0 7px}.eu-auto .lead{font-size:1.04em;color:#1A1A1A;margin:0 0 20px}.eu-auto .day{display:flex;gap:18px;padding:16px 0;border-top:1px solid #E8E6F2}.eu-auto .day .n{flex:0 0 76px;font-weight:800;color:#6C3CE9;font-size:1.02em}.eu-auto .day .n em{display:block;font-style:normal;font-size:.76em;font-weight:600;color:#9A95BC;margin-top:3px;line-height:1.5}.eu-auto .day .b{flex:1 1 auto;min-width:0}.eu-auto .day h4{margin:0 0 8px;font-size:1.05em;font-weight:800;color:#14103D}.eu-auto .mk{font-size:.92em;color:#6E6A93;margin:0}.eu-auto .mk b{display:inline-block;min-width:46px;color:#9A95BC;font-weight:700}.eu-auto h3{margin:28px 0 10px;font-size:1.1em;font-weight:800;color:#14103D}.eu-auto ol{margin:0;padding-left:20px}.eu-auto ol li{margin-bottom:6px}</style>\n<p class=\"lead\">Madrid · Porto · Lisboa · Sevilla · Granada · Valencia · Barcelona · Zaragoza · 11일 10박 마드리드 2박 · 포르투 1박 · 리스본 1박 · 세비야 1박 · 그라나다 1박 · 발렌시아 1박 · 바르셀로나 2박 · 사라고사 1박, 짐은 여덟 번만 풀고 다니시는 11일 맞춤 일정입니다.</p>\n<div class=\"day\"><div class=\"n\">01<em>일차</em><em>마드리드 · Madrid</em></div>\n<div class=\"b\">\n<h4>마드리드 도착</h4>\n<p>공항 도착 후 호텔로 이동합니다 (차량). 첫날은 이동과 휴식에 씁니다.</p>\n<p class=\"mk\"><b>숙 박</b>마드리드 (1/2박) · Hotel Ciudad de Móstoles 4성 또는 동급 호텔</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">02<em>일차</em><em>마드리드 · Madrid</em></div>\n<div class=\"b\">\n<h4>마드리드 종일</h4>\n<p>프라도 미술관 — 상설전 일반 (입장)</p>\n<p>솔 광장 · 마요르 광장 · 그란 비아 · 산 미겔 시장 · 스페인 광장을 걸어서 둘러봅니다.</p>\n<p class=\"mk\"><b>식 사</b>조식 · 중식(현지식) · 석식(현지식)</p>\n<p class=\"mk\"><b>숙 박</b>마드리드 (2/2박) · Hotel Ciudad de Móstoles 4성 또는 동급 호텔</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">03<em>일차</em><em>마드리드 · Madrid · ↓ · 살라망카 · Salamanca · ↓ · 포르투 · Porto · https://toureplus.co.kr/builder · 26. 10. 13. 오후 9:12</em></div>\n<div class=\"b\">\n<h4>마드리드 → 포르투</h4>\n<p>렐루 서점 — 책 구입 시 금액 차감 (입장)</p>\n<p>히베이라 지구 · 동 루이스 1세 다리 · 볼량 시장을 걸어서 둘러봅니다.</p>\n<p>약 570km, 주행 약 6시간 40분입니다. 가는 길에 살라망카를 들릅니다.</p>\n<p>1/4일정 만들기 — Euforia Tour</p>\n<p class=\"mk\"><b>식 사</b>조식 · 중식(현지식) · 석식(현지식)</p>\n<p class=\"mk\"><b>숙 박</b>포르투 (1/1박) · 호텔은 확정 시 안내드립니다 (또는 동급 호텔)</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">04<em>일차</em><em>포르투 · Porto · ↓ · 파티마 · Fátima · ↓ · 리스본 · Lisboa</em></div>\n<div class=\"b\">\n<h4>포르투 → 리스본</h4>\n<p>코메르시우 광장 · 아우구스타 거리 · 알파마 지구 · 상 페드루 전망대를 걸어서 둘러봅니다.</p>\n<p>제로니무스 수도원 · 벨렝탑은 안에 들어가지 않고 밖에서 보며 지나갑니다. 입장을 원하시면 말씀해 주세요.</p>\n<p>약 330km, 주행 약 3시간 55분입니다. 가는 길에 파티마를 들릅니다.</p>\n<p class=\"mk\"><b>식 사</b>중식(현지식) · 석식(현지식)</p>\n<p class=\"mk\"><b>숙 박</b>리스본 (1/1박) · HF Fénix Urban 4성 또는 동급 호텔</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">05<em>일차</em><em>리스본 · Lisboa · ↓ · 오비두스 · Óbidos · ↓ · 세비야 · Sevilla</em></div>\n<div class=\"b\">\n<h4>리스본 → 세비야</h4>\n<p>세비야 대성당 · 히랄다 — 온라인 예매가 (입장)</p>\n<p>스페인 광장 · 과달키비르 강변 · 트리아나 다리를 걸어서 둘러봅니다.</p>\n<p>약 510km, 주행 약 6시간입니다. 가는 길에 오비두스를 들릅니다.</p>\n<p class=\"mk\"><b>식 사</b>조식 · 중식(현지식) · 석식(현지식)</p>\n<p class=\"mk\"><b>숙 박</b>세비야 (1/1박) · Exe Sevilla Macarena 4성 또는 동급 호텔</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">06<em>일차</em><em>세비야 · Sevilla · ↓ · 론다 · Ronda · ↓ · 그라나다 · Granada</em></div>\n<div class=\"b\">\n<h4>세비야 → 그라나다</h4>\n<p>알함브라 궁전 — 나스르 궁전 포함 · 예매 수수료 포함 (입장)</p>\n<p>알바이신 지구 · 산 니콜라스 전망대를 걸어서 둘러봅니다.</p>\n<p>약 320km, 주행 약 3시간 45분입니다. 가는 길에 론다를 들릅니다.</p>\n<p class=\"mk\"><b>식 사</b>조식 · 중식(현지식) · 석식(현지식)</p>\n<p class=\"mk\"><b>숙 박</b>그라나다 (1/1박) · 호텔은 확정 시 안내드립니다 (또는 동급 호텔)</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">07<em>일차</em><em>그라나다 · Granada · ↓ · 발렌시아 · Valencia · https://toureplus.co.kr/builder · 26. 10. 13. 오후 9:12</em></div>\n<div class=\"b\">\n<h4>그라나다 → 발렌시아</h4>\n<p>중앙시장 · 투리아 공원 · 예술과학도시 외부를 걸어서 둘러봅니다.</p>\n<p>약 500km, 주행 약 5시간 55분입니다.</p>\n<p>2/4일정 만들기 — Euforia Tour</p>\n<p class=\"mk\"><b>식 사</b>중식(현지식) · 석식(현지식)</p>\n<p class=\"mk\"><b>숙 박</b>발렌시아 (1/1박) · 호텔은 확정 시 안내드립니다 (또는 동급 호텔)</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">08<em>일차</em><em>발렌시아 · Valencia · ↓ · 바르셀로나 · Barcelona</em></div>\n<div class=\"b\">\n<h4>발렌시아 → 바르셀로나</h4>\n<p>람블라스 거리 · 보케리아 시장 · 고딕 지구 · 바르셀로네타 해변을 걸어서 둘러봅니다.</p>\n<p>카사 바트요 · 카사 밀라 (라 페드레라)는 안에 들어가지 않고 밖에서 보며 지나갑니다. 입장을 원하시면 말씀해 주세요.</p>\n<p>약 350km, 주행 약 4시간 5분입니다.</p>\n<p class=\"mk\"><b>식 사</b>중식(현지식) · 석식(현지식)</p>\n<p class=\"mk\"><b>숙 박</b>바르셀로나 (1/2박) · Alexandre Hotel Fira Congress 4성 또는 동급 호텔</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">09<em>일차</em><em>바르셀로나 · Barcelona</em></div>\n<div class=\"b\">\n<h4>바르셀로나 종일</h4>\n<p>사그라다 파밀리아 — 탑 제외 · 오디오가이드 포함 (입장)구엘 공원 — 모뉴멘탈 구역 (입장)</p>\n<p class=\"mk\"><b>식 사</b>조식 · 중식(불포함) · 석식(불포함)</p>\n<p class=\"mk\"><b>숙 박</b>바르셀로나 (2/2박) · Alexandre Hotel Fira Congress 4성 또는 동급 호텔</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">10<em>일차</em><em>바르셀로나 · Barcelona · ↓ · 사라고사 · Zaragoza</em></div>\n<div class=\"b\">\n<h4>바르셀로나 → 사라고사</h4>\n<p>필라르 성모 광장 · 에브로 강변을 걸어서 둘러봅니다.</p>\n<p>약 310km, 주행 약 3시간 40분입니다.</p>\n<p class=\"mk\"><b>식 사</b>조식 · 중식(현지식) · 석식(현지식)</p>\n<p class=\"mk\"><b>숙 박</b>사라고사 (1/1박) · Eurostars Zaragoza 4성 또는 동급 호텔</p>\n</div></div>\n<div class=\"day\"><div class=\"n\">11<em>일차</em><em>사라고사 · Zaragoza · ↓ · 마드리드 · Madrid</em></div>\n<div class=\"b\">\n<h4>사라고사 → 마드리드 · 공항 이동</h4>\n<p>마드리드 왕궁 — 자유 관람 (입장)</p>\n<p>약 320km, 주행 약 3시간 45분입니다.</p>\n<p>일정을 마친 뒤 공항으로 이동합니다. 탑승 수속 뒤 귀국편에 오르십니다.</p>\n<p class=\"mk\"><b>식 사</b>조식 · 중식(현지식) · 석식(현지식)</p>\n</div></div>\n<h3>예약 전 확인해 주십시오</h3><ol>\n<li>일정표에 적힌 호텔은 예정 호텔이며, 현지 사정에 따라 동급 호텔로 바뀔 수 있습니다.</li>\n<li>시내에서 20km 이내 호텔로 잡아 드립니다. 실제로 묵으실 호텔은 홈페이지 “기준호텔” 메뉴(www.toureplus.co.kr/hotels)에서 미리 보실 수 있습니다. 파라도르와 5성급 호텔은 따로 견적을 내 드리니 문의하실 때 말씀해 주세요.</li>\n<li>6명 미만 일정입니다. 프라도 미술관을 뺀 나머지 관광지는 가이드가 밖에서 설명해 드린 뒤, 입장하셔서 자유관광으로 보시게됩니다. 관광지 안에서 가이드가 함께 다니며 해설하는 것은 6명부터 가능합니다.</li>\n<li>일정 만들기는 3일 이상 일정에만 쓰실 수 있습니다.</li>\n<li>예상 금액입니다. 호텔 상황과 환율, 출발일에 따라 달라질 수 있어 최종 금액은 확인 후 안내드립니다.</li>\n<li>이 문서는 고르신 내용으로 자동 계산한 예상 금액이며, 확정 견적이 아닙니다. 담당자가 확인한 뒤 이메일로 보내 드리는 금액이 확정 금액이며, 예약금(전체 요금의 30%)이 입금되어야 예약이 확정됩니다.</li>\n<li>예약 순서</li>\n<li>일정 문의 — 이 화면에서 고르신 일정을 그대로 보내 주세요. 전체 일정을 한 번에 보내 주셔야 정확한 금액을 내 드릴 수 있습니다.</li>\n<li>유포리아에서 확인 후 이메일 발송 — 호텔 · 차량 · 가이드 · 입장권이 그 날짜에 실제로 잡히는지 확인한 뒤, 확정 일정과 금액을 이메일로 보내 드립니다. 영업일 기준 1~2일</li>\n<li>일정 확정 — 보내 드린 이메일을 확인하시고 회신해 주시면 일정이 확정됩니다. 바꾸고 싶은 곳이 있으면 이때 말씀해 주세요.</li>\n<li>예약금 입금 — 전체 요금의 30%를 입금해 주시면 예약이 최종 확정되고, 그때부터 현지 수배가 들어갑니다.</li>\n<li>수배 완료 · 서류 발송 — 호텔 · 차량 · 가이드 · 입장권을 모두 잡은 뒤 바우처와 최종 일정표를 보내 드립니다.</li>\n<li>잔금 입금 — 남은 70%는 출발 2주 전까지 입금해 주세요.</li>\n</ol>\n</div>"
+    },
+    "downloadUrl": "/docs/euforia-tour.pdf",
+    "link": "",
+    "ctaLabel": "",
+    "youtubeUrl": ""
+  },
+  {
     "id": "madrid-toledo-day",
     "cats": [
       "spain",
