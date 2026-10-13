@@ -240,6 +240,20 @@
     font-variant-numeric:tabular-nums; }
   .bx-empty{ font-size:12.5px; font-weight:600; color:var(--muted); padding:4px 0; }
   /* 입장료 없는 도보 관광지 묶음에 붙는 한 줄 설명 */
+  /* 이용 조건 안내 (최소 일수 · 인원에 따른 해설 방식) */
+  .bx-rule{ display:flex; gap:11px; align-items:flex-start; flex-wrap:wrap;
+    margin-top:14px; padding:11px 14px; border-radius:11px;
+    background:#F5F3FE; border:1.5px solid #E3DCFA;
+    font-size:12.5px; font-weight:600; color:var(--muted); line-height:1.75; }
+  .bx-rule .tag{ flex:none; font-size:10.5px; font-weight:800; letter-spacing:.3px;
+    padding:3px 9px; border-radius:999px; background:#E3DCFA; color:var(--violet); white-space:nowrap; }
+  .bx-rule .tx{ flex:1; min-width:220px; }
+  .bx-rule b{ color:var(--navy); font-weight:800; }
+  .bx-rule a{ color:var(--violet); font-weight:800; }
+  .bx-rule.warn{ background:#FFF4E5; border-color:#FFD9A8; color:#8A5200; }
+  .bx-rule.warn .tag{ background:#FFE2BC; color:#8A5200; }
+  .bx-rule.warn b{ color:#6B3F00; }
+
   /* 도시가 바뀌는 자리의 운전시간·이동수단 알림 */
   .bx-move{ display:flex; gap:11px; align-items:flex-start; flex-wrap:wrap;
     margin:0 0 12px; padding:12px 16px; border-radius:13px; border:1.5px solid;
@@ -1053,10 +1067,11 @@
 
     if(CFG.공개 !== true || !ITEMS.length){ 준비중(); return; }
 
-    S.인원 = Math.max(1, Number(CFG.기본인원) || 20);
-    S.일수 = Math.max(1, Number(CFG.기본일수) || 7);
+    S.인원 = Math.max(Number(CFG.최소인원) || 1, Number(CFG.기본인원) || 20);
+    S.일수 = Math.max(최소날(), Number(CFG.기본일수) || 7);
     맞추기();
     뼈대();
+    규칙그리기();
     날짜그리기();
     숙박그리기();
     지도그리기();
@@ -1076,6 +1091,7 @@
 
   /* 여행일수가 바뀌면 날짜 칸 수를 맞춥니다 (이미 고르신 건 그대로 둡니다) */
   function 맞추기(){
+    S.일수 = Math.max(최소날(), S.일수);
     while(S.일정.length < S.일수){
       /* 1일차는 도착하는 날이라 공항 → 호텔 이동만 두고 시작합니다 */
       S.일정.push({ 도시: CITIES[0] || '', 입장지: [], 식사: [],
@@ -1300,10 +1316,48 @@
     '</div>';
   }
 
+  /* ---------------- 이용 조건 안내 ---------------- */
+  /*
+    · 일정 만들기는 3일 이상부터 짜실 수 있습니다 (하루·이틀은 일일 투어로 받습니다)
+    · 인원이 적으면 관광지 안에서 가이드가 함께 들어갈 수 없는 곳이 있습니다.
+      프라도 미술관만 예외로 안에서 해설이 가능하고, 나머지는 밖에서 설명드린 뒤
+      입장하셔서 자유롭게 보시는 방식입니다.
+    두 기준 모두 대쉬보드 설정에 값이 있으면 그 값을 씁니다.
+  */
+  function 최소날(){ return Math.max(1, Number(CFG.최소일수) || 3); }
+  function 자유관광기준(){ return Math.max(0, Number(CFG.자유관광인원) === 0 ? 0 : (Number(CFG.자유관광인원) || 6)); }
+  var 해설가능 = '프라도 미술관';
+
+  function 자유관광인가(){ return S.인원 < 자유관광기준(); }
+
+  function 자유관광말(){
+    return 자유관광기준() + '명 미만으로 가시는 일정입니다. ' +
+      '<b>' + 해설가능 + '</b>을 뺀 나머지 관광지는 가이드가 <b>밖에서 설명해 드린 뒤</b>, ' +
+      '입장하셔서 <b>자유관광</b>으로 보시게 됩니다. ' +
+      '관광지 안에서 가이드가 함께 다니며 해설하는 것은 ' + 자유관광기준() + '명부터 가능합니다.';
+  }
+
+  function 규칙그리기(){
+    var box = $('bxRule');
+    if(!box) return;
+    var 줄 = '';
+    줄 += '<div class="bx-rule"><span class="tag">일정</span><span class="tx">' +
+          '일정 만들기는 <b>' + 최소날() + '일 이상</b>부터 짜실 수 있습니다. ' +
+          '하루 · 이틀 일정은 <a href="tours.html">여행상품</a>의 당일 차량투어로 받고 있습니다.' +
+          '</span></div>';
+    if(자유관광인가()){
+      줄 += '<div class="bx-rule warn"><span class="tag">' + S.인원 + '명</span>' +
+            '<span class="tx">' + 자유관광말() + '</span></div>';
+    }
+    box.innerHTML = 줄;
+  }
+
   /* ---------------- 화면 ---------------- */
   function 뼈대(){
     var 최대인원 = Math.max(1, Number(CFG.최대인원) || 45);
     var 최대일수 = Math.max(1, Number(CFG.최대일수) || 20);
+    var 최소인원 = Math.max(1, Number(CFG.최소인원) || 1);
+    var 최소일수 = 최소날();
     var 안내 = CFG.안내문 || '';
 
     var html =
@@ -1312,14 +1366,15 @@
         '<div class="sub">인원과 여행일수를 먼저 정해 주세요. 아래 금액이 이 기준으로 계산됩니다.</div>' +
         '<div class="bx-base">' +
           '<div class="bx-f"><label for="bxPeople">인원</label>' +
-            '<input type="number" id="bxPeople" min="1" max="' + 최대인원 + '" value="' + S.인원 + '">' +
-            '<span class="hint">최대 ' + 최대인원 + '명</span></div>' +
+            '<input type="number" id="bxPeople" min="' + 최소인원 + '" max="' + 최대인원 + '" value="' + S.인원 + '">' +
+            '<span class="hint">' + (최소인원 > 1 ? 최소인원 + '명부터 · ' : '') + '최대 ' + 최대인원 + '명</span></div>' +
           '<div class="bx-f"><label for="bxDaysN">여행일수</label>' +
-            '<input type="number" id="bxDaysN" min="1" max="' + 최대일수 + '" value="' + S.일수 + '">' +
+            '<input type="number" id="bxDaysN" min="' + 최소일수 + '" max="' + 최대일수 + '" value="' + S.일수 + '">' +
             '<span class="hint" id="bxNights"></span></div>' +
           '<div class="bx-f"><label for="bxStart">출발 희망일</label>' +
             '<input type="date" id="bxStart"><span class="hint">아직 안 정하셨어도 괜찮아요</span></div>' +
         '</div>' +
+        '<div id="bxRule"></div>' +
         (안내 ? '<div class="bx-recap" style="margin:18px 0 0;"><div>' + esc(안내) + '</div></div>' : '') +
       '</div>';
 
@@ -1446,13 +1501,18 @@
     $('bxRoot').innerHTML = html;
 
     $('bxPeople').addEventListener('input', function(){
-      S.인원 = Math.max(1, Math.min(최대인원, Number(this.value) || 1));
-      계산();
+      S.인원 = Math.max(최소인원, Math.min(최대인원, Number(this.value) || 최소인원));
+      계산(); 규칙그리기();
     });
     $('bxDaysN').addEventListener('input', function(){
-      S.일수 = Math.max(1, Math.min(최대일수, Number(this.value) || 1));
-      맞추기(); 날짜그리기(); 숙박그리기(); 지도그리기(); 계산();
+      S.일수 = Math.max(최소날(), Math.min(최대일수, Number(this.value) || 최소날()));
+      맞추기(); 날짜그리기(); 숙박그리기(); 지도그리기(); 계산(); 규칙그리기();
     });
+    /* 손님이 범위 밖 숫자를 넣으시면, 다 쓰고 칸을 벗어날 때 바로잡아 드립니다.
+       (글자를 치는 중에 고치면 "10" 을 치려다 "1" 에서 튀어 버립니다) */
+    $('bxPeople').addEventListener('change', function(){ this.value = S.인원; });
+    $('bxDaysN').addEventListener('change', function(){ this.value = S.일수; });
+
     $('bxStart').addEventListener('change', function(){ S.출발일 = this.value; });
 
     var 싱글온 = $('bxSingleOn'), 싱글수 = $('bxSingleN');
@@ -2139,6 +2199,11 @@
       }
     });
     줄.push('');
+    if(자유관광인가()){
+      줄.push('※ ' + 자유관광기준() + '명 미만 일정입니다. ' + 해설가능 +
+              '을 뺀 나머지 관광지는 가이드가 밖에서 설명한 뒤 입장하셔서 자유관광으로 진행됩니다.');
+      줄.push('');
+    }
     var 묵은곳 = 숙박목록().filter(function(x){ return x.id; });
     if(묵은곳.length){
       var 비 = Number(CFG.싱글차지비율) > 0 ? Number(CFG.싱글차지비율) : 80;
@@ -2300,7 +2365,14 @@
                  '<td>' + esc(String(x[1]).replace(/<[^>]+>/g, '')) + '</td></tr>';
         }).join('') + '</tbody></table>' +
 
-        '<div class="doc-note">' + esc(CFG.안내문 || '') +
+        '<div class="doc-note">' +
+          (자유관광인가()
+            ? '<b>' + 자유관광기준() + '명 미만 일정입니다.</b> ' + esc(해설가능) +
+              '을 뺀 나머지 관광지는 가이드가 밖에서 설명해 드린 뒤, 입장하셔서 자유관광으로 보시게 됩니다. ' +
+              '관광지 안에서 가이드가 함께 다니며 해설하는 것은 ' + 자유관광기준() + '명부터 가능합니다.<br>'
+            : '') +
+          '일정 만들기는 ' + 최소날() + '일 이상 일정에만 쓰실 수 있습니다.<br>' +
+          esc(CFG.안내문 || '') +
           ((S.기차.length || S.항공.length) && CFG.구간안내문
             ? '<br>' + esc(CFG.구간안내문) : '') +
           '<br>이 문서는 손님이 고르신 내용으로 자동 계산한 <b>예상 금액</b>이며, 확정 견적이 아닙니다. ' +
