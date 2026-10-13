@@ -115,6 +115,27 @@
   .chk input[type=checkbox], .chk input[type=radio]{ width:17px; height:17px; flex:0 0 17px;
     padding:0; margin:0; accent-color:var(--violet); }
 
+  /* 상품 추가 · 일정표 PDF */
+  .btn.warn{ border-color:#F2C9C9; color:#B4232A; }
+  .btn.warn:hover{ background:#FDECEC; border-color:#E79A9A; }
+  .ed-acts{ display:flex; gap:8px; flex-wrap:wrap; }
+  .pdfdrop{ margin:10px 0 2px; padding:16px 18px; border:2px dashed var(--line); border-radius:12px;
+    text-align:center; font-size:13px; font-weight:700; color:var(--muted); background:#FBFAFF; }
+  .pdfdrop.over{ border-color:var(--violet); background:#F2EDFF; color:var(--navy); }
+  .pdfbox{ margin:16px 0 4px; padding:15px 17px; border:1.5px solid var(--line); border-radius:12px;
+    background:#FBFAFF; }
+  .pdfbox-h{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .pdfbox-h b{ font-size:14px; font-weight:800; color:var(--navy); }
+  .pdfbox-h span{ font-size:12px; font-weight:700; color:var(--muted);
+    font-family:'Menlo',monospace; word-break:break-all; }
+  .pdfbox-s{ margin:7px 0 12px; font-size:12.5px; line-height:1.7; color:var(--muted); }
+  .pdfbox-s b{ color:var(--navy); }
+  .pdfbox-a{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .pdflog{ margin-top:12px; padding:11px 13px; border-radius:9px; background:#fff;
+    border:1.5px solid var(--line); font-size:12.5px; line-height:1.8; color:var(--navy); }
+  .pdflog.bad{ border-color:#F2C9C9; background:#FDECEC; color:#B4232A; }
+  .pdflog i{ color:var(--muted); font-style:normal; }
+
   .editor-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
     margin-bottom:18px; padding-bottom:16px; border-bottom:1.5px solid var(--line); }
   .editor-head h2{ margin:0; font-size:16px; }
@@ -525,10 +546,16 @@
         <h2>여행상품</h2>
         <div class="sub">수정할 상품을 누르세요. 저장하면 GitHub에 커밋되고 1~2분 뒤 사이트에 반영됩니다.</div>
         <div class="bar">
+          <button type="button" class="btn dark" id="addProd">+ 상품 추가</button>
+          <button type="button" class="btn" id="addProdPdf">PDF 일정표로 만들기</button>
           <input type="search" id="prodSearch" placeholder="상품명 · 지역 · 코드로 찾기">
           <select id="prodFilter"><option value="">전체 지역</option></select>
           <span class="count" id="prodCount"></span>
         </div>
+        <div class="pdfdrop" id="prodDrop">
+          여기에 <b>일정표 PDF</b> 를 끌어다 놓으시면 새 상품을 만들어 칸을 채워 드립니다
+        </div>
+        <input type="file" id="prodPdfFile" accept=".pdf,application/pdf" hidden>
         <div class="list" id="prodRows"><div class="empty">불러오는 중…</div></div>
       </div>
 
@@ -538,8 +565,26 @@
             <h2 id="edTitle">상품 수정</h2>
             <div class="id" id="edId"></div>
           </div>
-          <button type="button" class="btn" id="edBack">← 목록으로</button>
+          <div class="ed-acts">
+            <button type="button" class="btn" id="edDup">복제</button>
+            <button type="button" class="btn warn" id="edDel">삭제</button>
+            <button type="button" class="btn" id="edBack">← 목록으로</button>
+          </div>
         </div>
+
+        <div class="pdfbox">
+          <div class="pdfbox-h"><b>일정표 PDF</b><span id="edPdfNow"></span></div>
+          <div class="pdfbox-s">PDF 를 올리시면 <b>docs 폴더에 저장</b>되어 손님이 내려받을 수 있고,
+            글자를 읽어 <b>상품명 · 기간 · 요금 · 일자별 일정 · 포함/불포함</b> 칸을 자동으로 채운 뒤
+            스페인 · 포르투갈 · 순례길로 <b>분류</b>까지 해 드립니다.</div>
+          <div class="pdfbox-a">
+            <button type="button" class="btn dark" id="edPdfPick">PDF 올리고 자동으로 채우기</button>
+            <label class="chk"><input type="checkbox" id="edPdfOver"> 이미 적힌 칸도 덮어쓰기</label>
+            <input type="file" id="edPdfFile" accept=".pdf,application/pdf" hidden>
+          </div>
+          <div class="pdflog" id="edPdfLog" hidden></div>
+        </div>
+
         <div class="grid" id="edFields"></div>
       </div>
     </div>
@@ -1159,6 +1204,7 @@
 
   /* 편집 폼 정의 — [키, 라벨, 종류, 도움말] */
   var FIELDS = [
+    ['id',       '상품 코드',     'text', '주소에 쓰입니다 (예: portugal-8days). 이미 올린 상품은 바꾸지 마세요 — 링크가 끊어집니다'],
     ['title',    '상품명',        'text'],
     ['price',    '요금',          'text', '예: 1인 80유로 (4인 이상 출발 기준)'],
     ['days',     '기간',          'text', '예: 당일 (09:00~17:00)'],
@@ -1196,7 +1242,9 @@
     $('prodList').hidden = true;
     $('prodEditor').hidden = false;
     $('edTitle').textContent = p.title || '(제목 없음)';
-    $('edId').textContent = p.id;
+    $('edId').textContent = p.id || '(코드 없음 — 아래 「상품 코드」 칸에 적어 주세요)';
+    if($('edPdfNow')) $('edPdfNow').textContent = p.downloadUrl || '아직 올린 일정표가 없습니다';
+    if($('edPdfLog')) $('edPdfLog').hidden = true;
 
     var html = FIELDS.map(function(f){
       var key = f[0], label = f[1], kind = f[2], hint = f[3] || '';
@@ -1236,6 +1284,604 @@
       setv(p, k, v);
     });
     refreshSaveBar();
+  }
+
+
+  /* ====================================================================
+     상품 추가 · 일정표 PDF 자동 채우기
+     --------------------------------------------------------------------
+     · + 상품 추가      — 빈 상품을 하나 만들어 바로 편집기를 엽니다
+     · PDF 일정표       — docs 폴더에 올리고, 글자를 읽어 칸을 채웁니다
+     · 복제 · 삭제      — 목록에서 바로
+     읽어 들이는 PDF 는 저희가 만든 일정표 양식(머리글 · 요약표 · 일자별
+     두 칸 · 포함/불포함 · 예약 전 확인)을 기준으로 합니다. 다른 양식이면
+     읽히는 만큼만 채우고 나머지는 비워 둡니다.
+     ==================================================================== */
+
+  /* ---------- 새 상품 틀 ---------- */
+  function 새상품틀(){
+    return {
+      id: '', cats: ['spain'], topClass: 'spain', region: '', days: '',
+      price: '가격 문의', title: '', summary: '', tags: [], isNew: true,
+      detail: { lead:'', duration:'', highlights:[], includes:[], excludes:[], description:'' }
+    };
+  }
+  function 새아이디(){
+    var d = new Date(), p = function(n){ return (n < 10 ? '0' : '') + n; };
+    return 'new-' + d.getFullYear() + p(d.getMonth()+1) + p(d.getDate()) + '-' +
+           String(Date.now() % 1000);
+  }
+  function 상품넣기(p){
+    store.products.data.unshift(p);
+    renderProducts();
+    refreshSaveBar();
+    openProduct(0);
+  }
+
+  /* ---------- pdf.js 불러오기 (쓸 때만) ---------- */
+  var PDFJS대기 = null;
+  function pdfjs준비(){
+    if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    if(PDFJS대기) return PDFJS대기;
+    PDFJS대기 = new Promise(function(ok, no){
+      var s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+      s.onload = function(){
+        try{
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }catch(e){}
+        ok(window.pdfjsLib);
+      };
+      s.onerror = function(){
+        PDFJS대기 = null;
+        no(new Error('PDF 읽기 도구를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.'));
+      };
+      document.head.appendChild(s);
+    });
+    return PDFJS대기;
+  }
+
+  /* ---------- PDF 에서 줄 뽑기 ---------- */
+  /* 한 줄 = 같은 높이에 놓인 글자 조각들. 조각마다 x 를 들고 있어
+     나중에 「왼쪽 칸 / 오른쪽 칸」으로 다시 자를 수 있습니다. */
+  function 줄엮기(조각들){
+    var 정렬 = 조각들.slice().sort(function(a,b){ return (b.y - a.y) || (a.x - b.x); });
+    var 줄 = [];
+    정렬.forEach(function(it){
+      var 끝 = 줄[줄.length - 1];
+      if(끝 && Math.abs(끝.y - it.y) <= 4.5) 끝.조각.push(it);
+      else 줄.push({ y: it.y, 조각: [it] });
+    });
+    줄.forEach(function(l){
+      l.조각.sort(function(a,b){ return a.x - b.x; });
+      l.x = l.조각[0].x;
+      l.h = l.조각.reduce(function(m,i){ return Math.max(m, i.h); }, 0);
+      l.t = 조각글(l.조각);
+    });
+    return 줄.filter(function(l){ return l.t.trim(); });
+  }
+
+  /* 조각들을 글로 잇습니다. 사이가 벌어져 있으면 빈칸을 하나 넣습니다.
+     줄 끝의 빈칸은 일부러 남겨 둡니다 — 다음 줄과 이을 때 쓸 단서입니다. */
+  function 조각글(조각){
+    var 글 = '', 앞 = null;
+    조각.forEach(function(it){
+      if(앞 !== null && it.x - 앞 > 1.2 && !/\s$/.test(글) && !/^\s/.test(it.t)) 글 += ' ';
+      글 += it.t;
+      앞 = it.x + it.w;
+    });
+    return 글;
+  }
+  function 자르기(줄, x0, x1){
+    return 조각글(줄.조각.filter(function(i){
+      return i.x >= (x0 == null ? -1e9 : x0) && i.x < (x1 == null ? 1e9 : x1);
+    }));
+  }
+
+  function pdf줄읽기(file){
+    return pdfjs준비()
+      .then(function(){ return file.arrayBuffer(); })
+      .then(function(buf){ return window.pdfjsLib.getDocument({ data: buf }).promise; })
+      .then(function(doc){
+        var 쪽 = [], 차례 = Promise.resolve();
+        var 받기 = function(n){
+          return doc.getPage(n).then(function(page){
+            return page.getTextContent().then(function(tc){
+              var 조각 = [];
+              tc.items.forEach(function(it){
+                if(!it.str) return;
+                var tr = it.transform;
+                조각.push({ t: it.str, x: tr[4], y: tr[5],
+                            w: it.width || 0, h: Math.abs(tr[3]) || 10 });
+              });
+              쪽[n - 1] = 줄엮기(조각);
+            });
+          });
+        };
+        for(var n = 1; n <= doc.numPages; n++){
+          (function(n){ 차례 = 차례.then(function(){ return 받기(n); }); })(n);
+        }
+        return 차례.then(function(){
+          var 모두 = [];
+          쪽.forEach(function(줄들, i){
+            (줄들 || []).forEach(function(l){ l.쪽 = i; 모두.push(l); });
+          });
+          return 모두;
+        });
+      });
+  }
+
+  /* ---------- 두 칸으로 나뉜 자리 찾기 ---------- */
+  function 열경계찾기(줄들){
+    var 셈 = {};
+    줄들.forEach(function(l){
+      l.조각.forEach(function(it){
+        if(!it.t.trim()) return;
+        var k = Math.round(it.x / 5) * 5;
+        셈[k] = (셈[k] || 0) + 1;
+      });
+    });
+    var 키 = Object.keys(셈).map(Number).sort(function(a,b){ return a - b; });
+    if(!키.length) return 0;
+    var 왼 = 키[0];
+    var 최고 = 0, 오 = 0;
+    키.forEach(function(k){
+      if(k > 왼 + 60 && 셈[k] > 최고){ 최고 = 셈[k]; 오 = k; }
+    });
+    return 오 || (왼 + 150);
+  }
+
+  /* ---------- 문단 잇기 ---------- */
+  /* 줄 끝에 빈칸이 남아 있으면 빈칸을 넣어 잇고, 아니면 바로 붙입니다.
+     (한글은 단어 중간에서도 줄이 바뀌기 때문입니다) */
+  function 문단묶기(줄정보){
+    /*
+      줄정보 = [{ t: 글, h: 글자 크기, r: 줄이 끝난 가로 위치 }, …]
+      한 문단의 마지막 줄은 오른쪽이 남습니다. 그걸로 문단을 가릅니다.
+      (마침표가 없는 줄도 있어서 글자만 보고는 알 수 없습니다)
+    */
+    var 끝자리 = 0;
+    줄정보.forEach(function(x){ if(x.r > 끝자리) 끝자리 = x.r; });
+    var 문단 = [];
+    줄정보.forEach(function(x){
+      var 글 = String(x.t || '').replace(/\s+$/, '');
+      if(!글.trim()) return;
+      var 앞 = 문단[문단.length - 1];
+      var 크기바뀜 = 앞 && Math.abs((x.h || 0) - 앞.높이) > 1.6;
+      if(앞 && !크기바뀜 && !앞.끝남){
+        앞.글 += (앞.빈칸 ? ' ' : '') + 글.replace(/^\s+/, '');
+      } else {
+        문단.push({ 글: 글.trim(), 높이: x.h || 0 });
+        앞 = 문단[문단.length - 1];
+      }
+      앞.빈칸 = /\s$/.test(String(x.t || ''));
+      /* 줄 끝이 오른쪽 끝에 못 미치면 거기서 문단이 끝난 것입니다 */
+      앞.끝남 = (끝자리 - (x.r || 0)) > 14 || /[.!?…]$/.test(글.trim());
+    });
+    return 문단.map(function(x){ return x.글.replace(/\s+/g, ' ').trim(); }).filter(Boolean);
+  }
+
+  /* 줄의 어느 가로 자리에서 끝났는지 (해당 칸만) */
+  function 오른끝(줄, x0){
+    var 끝 = 0;
+    줄.조각.forEach(function(i){
+      if(x0 != null && i.x < x0) return;
+      if(!i.t.trim()) return;
+      if(i.x + i.w > 끝) 끝 = i.x + i.w;
+    });
+    return 끝;
+  }
+
+  /* ---------- 일정표 뜯어 읽기 ---------- */
+  function 일정표읽기(줄들){
+    var 결과 = { 제목:'', 소제목:'', 머릿글:'', 기간:'', 지역:'', 요금:'',
+                 조건:'', 날:[], 포함:[], 불포함:[], 확인:[] };
+    if(!줄들.length) return 결과;
+    var 경계 = 열경계찾기(줄들);
+
+    /* 1) 머리글 — 글자가 가장 큰 줄이 상품명입니다 */
+    var 첫쪽 = 줄들.filter(function(l){ return l.쪽 === 0; });
+    var 큰줄 = null;
+    첫쪽.slice(0, 14).forEach(function(l){
+      if(!큰줄 || l.h > 큰줄.h) 큰줄 = l;
+    });
+    if(큰줄) 결과.제목 = 큰줄.t.replace(/\s+/g, ' ').trim();
+    var 제목자리 = 첫쪽.indexOf(큰줄);
+
+    /* 2) 요약표 — 「일정 … 지역 …」 「조건 … 요금 …」 */
+    var 표끝 = 제목자리;
+    첫쪽.forEach(function(l, i){
+      if(i <= 제목자리) return;
+      var t = l.t.replace(/\s+/g, ' ');
+      var m1 = t.match(/일\s*정\s+(.+?)\s+지\s*역\s+(.+)$/);
+      if(m1){ 결과.기간 = m1[1].trim(); 결과.지역 = m1[2].trim(); 표끝 = Math.max(표끝, i); }
+      var m2 = t.match(/조\s*건\s+(.+?)\s+요\s*금\s+(.+)$/);
+      if(m2){ 결과.조건 = m2[1].trim(); 결과.요금 = m2[2].trim(); 표끝 = Math.max(표끝, i); }
+    });
+
+    /* 2-1) 조건 칸이 다음 줄로 넘어갔으면 이어 붙입니다 */
+    if(결과.조건){
+      for(var k = 표끝 + 1; k < Math.min(표끝 + 4, 첫쪽.length); k++){
+        var t2 = 첫쪽[k].t.replace(/\s+/g, ' ').trim();
+        if(!t2 || /^일\s*정$/.test(t2) || /현지 사정과/.test(t2)) break;
+        if(/^\d{1,2}$/.test(t2)) break;
+        결과.조건 += (/[(]/.test(결과.조건) && !/[)]$/.test(결과.조건) ? '' : ' ') + t2;
+        if(/[)]$/.test(t2)) break;
+      }
+      결과.조건 = 결과.조건.replace(/\s+/g, ' ').trim();
+    }
+
+    /* 3) 소제목과 머릿글 — 제목과 요약표 사이 */
+    var 사이 = [];
+    첫쪽.forEach(function(l, i){
+      if(i > 제목자리 && i < (표끝 > 제목자리 ? 표끝 : 제목자리 + 4)){
+        if(/일\s*정\s+.*지\s*역|조\s*건\s+.*요\s*금/.test(l.t)) return;
+        사이.push({ t: l.t, h: l.h, r: 오른끝(l, null) });
+      }
+    });
+    /* 제목 바로 아래 영문 한 줄(예: Portugal Grand Tour · 8일 7박)은 소제목입니다 */
+    if(사이.length){
+      var 첫줄 = 사이[0].t.replace(/\s+/g, ' ').trim();
+      if(첫줄.length < 60 && /[A-Za-z]{3,}/.test(첫줄) && !/[.!?]$/.test(첫줄)){
+        결과.소제목 = 첫줄;
+        사이.shift();
+      }
+    }
+    var 문단 = 문단묶기(사이);
+    if(문단.length) 결과.머릿글 = 문단.join(' ');
+
+    /* 4) 일자별 — 「01 일차」 로 시작하는 줄을 찾습니다.
+          일자 번호는 큰 글자라서, 줄 높이로 가려냅니다.
+          그 줄 안에서 가장 크게 벌어진 자리가 「왼쪽 칸 | 오른쪽 칸」 의 경계입니다. */
+    var 높이모음 = 줄들.map(function(l){ return l.h; }).sort(function(x,y){ return x - y; });
+    var 보통높이 = 높이모음[Math.floor(높이모음.length / 2)] || 10;
+    var 앵커 = [], 제목x = [];
+    줄들.forEach(function(l, i){
+      var 첫 = l.조각[0].t.replace(/\s/g, '');
+      if(!/^\d{1,2}$/.test(첫) || l.h < 보통높이 * 1.3) return;
+      /* 그 줄에서 가장 크게 벌어진 자리 = 오른쪽 칸이 시작하는 곳 */
+      var 벌림 = 0, 시작 = null;
+      for(var k = 1; k < l.조각.length; k++){
+        var 틈 = l.조각[k].x - (l.조각[k-1].x + l.조각[k-1].w);
+        if(틈 > 벌림){ 벌림 = 틈; 시작 = l.조각[k].x; }
+      }
+      앵커.push({ i: i, 번호: Number(첫), 시작: (벌림 > 20 ? 시작 : null) });
+      if(벌림 > 20) 제목x.push(시작);
+    });
+    if(제목x.length){
+      제목x.sort(function(x,y){ return x - y; });
+      경계 = 제목x[Math.floor(제목x.length / 2)];
+    }
+    /* 마지막 날이 뒤쪽(포함·불포함, 맺음말)까지 삼키지 않도록 끝을 잡아 둡니다 */
+    var 일정끝 = 줄들.length;
+    if(앵커.length){
+      for(var z = 앵커[앵커.length - 1].i + 1; z < 줄들.length; z++){
+        if(/포\s*함\s*[·.]\s*불\s*포\s*함|포\s*함\s*사\s*항|예\s*약\s*전\s*확인|일정을\s*원하시는/.test(줄들[z].t)){
+          일정끝 = z; break;
+        }
+      }
+    }
+    앵커.forEach(function(a, k){
+      var 끝 = (k + 1 < 앵커.length) ? 앵커[k + 1].i : 일정끝;
+      var 안 = 줄들.slice(a.i, 끝);
+      var 오른 = [], 왼쪽 = [], 식 = '', 숙 = '', 제목 = '';
+      안.forEach(function(l, 자리){
+        if(자리 === 0){ 제목 = 자르기(l, 경계 - 8, null).replace(/\s+/g, ' ').trim(); return; }
+        var r = 자르기(l, 경계 - 8, null);
+        var le = 자르기(l, null, 경계 - 8).replace(/\s+/g, ' ').trim();
+        if(le && !/^\d{1,2}$/.test(le) && !/^일\s*차$/.test(le) && !/^\d{1,2}\s*일\s*차$/.test(le)) 왼쪽.push(le);
+        if(!r.trim()) return;
+        var rt = r.replace(/\s+/g, ' ').trim();
+        if(/^식\s*사/.test(rt)){ 식 = rt.replace(/^식\s*사\s*/, ''); return; }
+        if(/^숙\s*박/.test(rt)){ 숙 = rt.replace(/^숙\s*박\s*/, ''); return; }
+        /* 다음 꼭지(포함·불포함 등)가 시작되면 멈춥니다 */
+        오른.push({ t: r, h: l.h, r: 오른끝(l, 경계 - 8) });
+      });
+      var 문 = 문단묶기(오른);
+      if(!제목) 제목 = (문.shift() || '').trim();
+      결과.날.push({
+        번호: a.번호,
+        제목: 제목,
+        글: 문,
+        메모: 왼쪽,
+        식사: 식,
+        숙박: 숙
+      });
+    });
+
+    /* 5) 포함 · 불포함 */
+    var 포함줄 = -1, 포함경계 = 0;
+    줄들.forEach(function(l, i){
+      if(포함줄 >= 0) return;
+      if(/포\s*함\s*사\s*항/.test(l.t) && /불\s*포\s*함\s*사\s*항/.test(l.t)){
+        포함줄 = i;
+        var 불 = l.조각.filter(function(it){ return /불/.test(it.t); })[0];
+        포함경계 = 불 ? 불.x - 10 : (l.x + 300);
+      }
+    });
+    if(포함줄 >= 0){
+      var 확인줄 = 줄들.length, 맺음줄 = 줄들.length;
+      줄들.forEach(function(l, i){
+        if(i <= 포함줄) return;
+        if(확인줄 === 줄들.length && /예\s*약\s*전\s*확인/.test(l.t)) 확인줄 = i;
+        if(맺음줄 === 줄들.length &&
+           /일정을\s*원하시는|맞춰\s*드립니다|맞춤\s*드립니다|EUFORIA DAS NUVENS|euforia@/i.test(l.t)) 맺음줄 = i;
+      });
+      /* 「예약 전 확인」 이 없는 일정표면 맺음말 앞까지만 포함 사항으로 봅니다 */
+      확인줄 = Math.min(확인줄, 맺음줄);
+      var 왼모음 = [], 오모음 = [];
+      줄들.slice(포함줄 + 1, 확인줄).forEach(function(l){
+        var a = 자르기(l, null, 포함경계).replace(/\s+/g, ' ').trim();
+        var b = 자르기(l, 포함경계, null).replace(/\s+/g, ' ').trim();
+        if(a) 왼모음.push({ 글: a, y: l.y, 쪽: l.쪽 });
+        if(b) 오모음.push({ 글: b, y: l.y, 쪽: l.쪽 });
+      });
+      결과.포함 = 짝짓기(왼모음);
+      결과.불포함 = 짝짓기(오모음);
+
+      /* 6) 예약 전 확인 */
+      var 끝줄 = 줄들.length;
+      줄들.forEach(function(l, i){
+        if(i > 확인줄 && 끝줄 === 줄들.length && /일정을\s*원하시는|맞춰\s*드립니다|맞춤\s*드립니다/.test(l.t)) 끝줄 = i;
+      });
+      결과.확인 = 문단묶기(줄들.slice(확인줄 + 1, 끝줄).map(function(l){
+          return { t: l.t, h: l.h, r: 오른끝(l, null) };
+        }))
+        .map(function(t){ return t.replace(/^\s*\d+\s*[.)]\s*/, ''); })
+        .filter(function(t){ return t.length > 4; });
+    }
+    return 결과;
+  }
+
+  /*
+     「숙박」 아래 한 줄이 그 설명입니다.
+     이름과 설명은 글자 크기가 같아서, 줄 사이가 벌어진 곳을 보고 묶음을 나눕니다.
+     (이름→설명 은 바짝 붙고, 설명→다음 이름 은 한 칸 더 벌어집니다)
+  */
+  function 짝짓기(모음){
+    if(!모음.length) return [];
+    var 간격 = [];
+    for(var i = 1; i < 모음.length; i++){
+      if(모음[i].쪽 === 모음[i-1].쪽) 간격.push(모음[i-1].y - 모음[i].y);
+    }
+    간격.sort(function(x,y){ return x - y; });
+    var 짚 = function(p){ return 간격.length ? 간격[Math.min(간격.length-1, Math.floor(간격.length*p))] : 20; };
+    var 좁 = 짚(0.25), 넓 = 짚(0.75), 가운데 = 짚(0.5);
+
+    /*
+      일정표 양식이 두 가지라서 나눠 봅니다.
+        · 「이름 / 설명」 두 줄짜리  — 줄 간격이 좁고·넓고가 번갈아 나옵니다
+        · 한 줄에 하나씩 적은 것   — 줄 간격이 고릅니다 (넘친 줄만 바짝 붙습니다)
+    */
+    var 두줄짜리 = 넓 > 좁 * 1.25;
+    var 기준 = 두줄짜리 ? (좁 + 넓) / 2 : 가운데 * 0.85;
+
+    var 짝 = [], 지금 = null;
+    모음.forEach(function(r, i){
+      var 앞 = 모음[i-1];
+      var 새묶음 = !앞 || 앞.쪽 !== r.쪽 ||
+                   (두줄짜리 ? (앞.y - r.y) > 기준 : (앞.y - r.y) >= 기준);
+      if(새묶음){
+        if(지금) 짝.push(지금);
+        지금 = { 이름: r.글, 값: [] };
+      } else if(지금){
+        지금.값.push(r.글);
+      }
+    });
+    if(지금) 짝.push(지금);
+
+    return 짝.map(function(x){
+      var v = x.값.join(' ').replace(/\s+/g, ' ').trim();
+      if(!두줄짜리){
+        /* 한 줄짜리는 넘친 줄을 그대로 이어 붙입니다 */
+        return (x.이름 + ' ' + v).replace(/\s+/g, ' ').trim();
+      }
+      return x.이름 + (v ? ' — ' + v : '');
+    }).filter(function(t){ return t.length > 1 && t.length < 220; });
+  }
+
+  /* ---------- 분류 ---------- */
+  function 분류하기(읽음){
+    var 글 = [읽음.제목, 읽음.지역, 읽음.머릿글,
+              읽음.날.map(function(d){ return d.제목 + ' ' + (d.메모 || []).join(' '); }).join(' ')
+             ].join(' ');
+    var 스 = /스페인|SPAIN|마드리드|바르셀로나|세비야|그라나다|발렌시아|사라고사|톨레도|말라가|론다|코르도바|산세바스티안|빌바오|아스투리아스|산탄데르|살라망카|세고비아/i.test(글);
+    var 포 = /포르투갈|PORTUGAL|리스본|포르투|파티마|신트라|코임브라|오비두스|나자레|브라가|기마랑이스|아베이루/i.test(글);
+    var 모 = /모로코|MOROCCO|마라케시|페스|샤프샤우엔|탕헤르/i.test(글);
+    var 순 = /순례길|까미노|카미노|CAMINO|산티아고 순례/i.test(글);
+    var 당일 = /당일|차량\s*&?\s*기사|전용\s*차량\s*투어|TRANSFER/i.test(글) &&
+               !/\d+\s*박/.test(읽음.기간 || '');
+    var 경기 = /매치데이|MATCHDAY|라리가|경기 관람/i.test(글);
+
+    var cats = [];
+    if(스) cats.push('spain');
+    if(포) cats.push('portugal');
+    if(순) cats.push('camino');
+    if(경기) cats.push('matchday');
+    if(당일) cats.push('transfer');
+    if(!cats.length) cats.push('spain');
+
+    var topClass = 경기 ? 'match' : 순 ? 'camino' : 모 ? 'morocco'
+                 : (스 && 포) ? 'iberia' : 포 ? 'portugal' : 'spain';
+
+    /* 지역 이름 — PDF 의 지역 칸이 한글이면 그대로, 영문이면 제목의 [대괄호] 를 씁니다 */
+    var 지역 = (읽음.지역 || '').trim();
+    var 묶음 = (읽음.제목 || '').match(/^\[([^\]]+)\]/);
+    if(!지역 || /^[A-Z·\s]+$/.test(지역)){
+      지역 = 묶음 ? 묶음[1].trim()
+           : (스 && 포) ? 'SPAIN · PORTUGAL' : 포 ? 'PORTUGAL' : 'SPAIN';
+    }
+    return { cats: cats, topClass: topClass, region: 지역 };
+  }
+
+  /* ---------- 상세 설명 HTML 만들기 ---------- */
+  function 설명만들기(읽음){
+    var h = [];
+    h.push('<div class="eu-auto">');
+    h.push('<style>' +
+      '.eu-auto{color:#2B2B2B;line-height:1.75}' +
+      '.eu-auto p{margin:0 0 7px}' +
+      '.eu-auto .lead{font-size:1.04em;color:#1A1A1A;margin:0 0 20px}' +
+      '.eu-auto .day{display:flex;gap:18px;padding:16px 0;border-top:1px solid #E8E6F2}' +
+      '.eu-auto .day .n{flex:0 0 76px;font-weight:800;color:#6C3CE9;font-size:1.02em}' +
+      '.eu-auto .day .n em{display:block;font-style:normal;font-size:.76em;font-weight:600;' +
+        'color:#9A95BC;margin-top:3px;line-height:1.5}' +
+      '.eu-auto .day .b{flex:1 1 auto;min-width:0}' +
+      '.eu-auto .day h4{margin:0 0 8px;font-size:1.05em;font-weight:800;color:#14103D}' +
+      '.eu-auto .mk{font-size:.92em;color:#6E6A93;margin:0}' +
+      '.eu-auto .mk b{display:inline-block;min-width:46px;color:#9A95BC;font-weight:700}' +
+      '.eu-auto h3{margin:28px 0 10px;font-size:1.1em;font-weight:800;color:#14103D}' +
+      '.eu-auto ol{margin:0;padding-left:20px}.eu-auto ol li{margin-bottom:6px}' +
+      '</style>');
+    if(읽음.머릿글) h.push('<p class="lead">' + esc(읽음.머릿글) + '</p>');
+    읽음.날.forEach(function(d){
+      h.push('<div class="day"><div class="n">' + (d.번호 < 10 ? '0' : '') + d.번호 + '<em>일차</em>' +
+             (d.메모 && d.메모.length ? '<em>' + esc(d.메모.join(' · ')) + '</em>' : '') + '</div>');
+      h.push('<div class="b">');
+      if(d.제목) h.push('<h4>' + esc(d.제목) + '</h4>');
+      d.글.forEach(function(t){ h.push('<p>' + esc(t) + '</p>'); });
+      if(d.식사) h.push('<p class="mk"><b>식 사</b>' + esc(d.식사) + '</p>');
+      if(d.숙박) h.push('<p class="mk"><b>숙 박</b>' + esc(d.숙박) + '</p>');
+      h.push('</div></div>');
+    });
+    if(읽음.확인.length){
+      h.push('<h3>예약 전 확인해 주십시오</h3><ol>');
+      읽음.확인.forEach(function(t){ h.push('<li>' + esc(t) + '</li>'); });
+      h.push('</ol>');
+    }
+    h.push('</div>');
+    return h.join('\n');
+  }
+
+  /* ---------- 읽은 내용을 상품에 채우기 ---------- */
+  function 채우기(p, 읽음, 덮기){
+    var 분 = 분류하기(읽음);
+    var 넣 = function(키, 값){
+      if(값 == null || 값 === '' || (Array.isArray(값) && !값.length)) return 0;
+      var 지금 = getv(p, 키);
+      var 빔 = 지금 == null || 지금 === '' || (Array.isArray(지금) && !지금.length);
+      if(!빔 && !덮기) return 0;
+      setv(p, 키, 값);
+      return 1;
+    };
+    var 수 = 0;
+    수 += 넣('title', 읽음.제목);
+    수 += 넣('days', (읽음.기간 || '').replace(/\s+/g, ' '));
+    수 += 넣('price', 읽음.요금);
+    수 += 넣('region', 분.region);
+    수 += 넣('summary', 읽음.머릿글);
+    수 += 넣('detail.lead', 읽음.머릿글);
+    수 += 넣('detail.duration', 읽음.조건 || 읽음.기간);
+    수 += 넣('detail.highlights', 읽음.날.map(function(d){ return d.제목; }).filter(Boolean));
+    수 += 넣('detail.includes', 읽음.포함);
+    수 += 넣('detail.excludes', 읽음.불포함);
+    if(읽음.날.length) 수 += 넣('detail.description', 설명만들기(읽음));
+
+    /* 태그 — 기간과 포함 사항에서 뽑습니다 */
+    var 태그 = [];
+    if(읽음.기간) 태그.push(읽음.기간.replace(/\s+/g, ' '));
+    var 포함글 = 읽음.포함.join(' ');
+    if(/전용\s*차량|전용\s*버스|차량/.test(포함글)) 태그.push('전용차량');
+    if(/인솔/.test(포함글)) 태그.push('인솔자 동행');
+    if(/가이드/.test(포함글)) 태그.push('현지 가이드');
+    if(/4성/.test(포함글)) 태그.push('4성급 호텔');
+    if(/5성|파라도르/.test(포함글)) 태그.push('파라도르');
+    수 += 넣('tags', 태그.slice(0, 4));
+
+    /* 분류는 언제나 다시 잡아 줍니다 (목록 색·필터에 쓰입니다) */
+    p.cats = 분.cats;
+    p.topClass = 분.topClass;
+    return 수;
+  }
+
+  /* ---------- PDF 받아서 올리고 채우기 ---------- */
+  function 파일이름정리(name){
+    return String(name || '').toLowerCase()
+      .replace(/[^a-z0-9._-]+/g, '-')
+      .replace(/-+/g, '-').replace(/^-|-$/g, '')
+      .replace(/(\.pdf)+$/, '.pdf');
+  }
+  function base64로(file){
+    return new Promise(function(ok, no){
+      var r = new FileReader();
+      r.onload = function(){ ok(String(r.result).split(',')[1] || ''); };
+      r.onerror = function(){ no(new Error('파일을 읽지 못했습니다')); };
+      r.readAsDataURL(file);
+    });
+  }
+  function pdf알림(글, 나쁨){
+    var 칸 = $('edPdfLog');
+    if(!칸) return;
+    칸.hidden = false;
+    칸.className = 'pdflog' + (나쁨 ? ' bad' : '');
+    칸.innerHTML = 글;
+  }
+
+  /*
+     하는 일 세 가지
+       ① docs 폴더에 PDF 올리기 → 「일정표 PDF」 칸에 주소 적기
+       ② 글자를 읽어 상품 칸 채우기
+       ③ 스페인 / 포르투갈 / 순례길 … 로 분류하기
+  */
+  function PDF받기(file, 새로){
+    if(!file) return;
+    if(!/\.pdf$/i.test(file.name)){ toast('PDF 파일만 올릴 수 있습니다.', true); return; }
+    if(file.size > 4 * 1024 * 1024){
+      toast('PDF 가 너무 큽니다 (4MB 이하). 용량을 줄여서 올려 주세요.', true); return;
+    }
+    var 이름 = 파일이름정리(file.name);
+    if(!/^[a-z0-9]/.test(이름)) 이름 = 'itinerary-' + 이름;
+
+    if(새로){
+      var 새 = 새상품틀();
+      새.id = 이름.replace(/\.pdf$/, '').replace(/-itinerary$/, '') || 새아이디();
+      상품넣기(새);
+    }
+    if(editingIndex < 0){ toast('먼저 상품을 여신 뒤에 올려 주세요.', true); return; }
+    var p = store.products.data[editingIndex];
+    var 덮기 = $('edPdfOver') && $('edPdfOver').checked;
+
+    pdf알림('<span class="spin"></span> PDF 를 올리고 읽는 중입니다…');
+    base64로(file)
+      .then(function(b64){
+        return api({ action:'upload-doc', name: 이름, data: b64 });
+      })
+      .then(function(j){
+        setv(p, 'downloadUrl', j.path);
+        return pdf줄읽기(file);
+      })
+      .then(function(줄들){
+        var 읽음 = 일정표읽기(줄들);
+        var 수 = 채우기(p, 읽음, 덮기);
+        var 분 = 분류하기(읽음);
+        openProduct(editingIndex);            /* 칸을 다시 그려 채운 값을 보여 줍니다 */
+        refreshSaveBar();
+        var 말 = [];
+        말.push('<b>' + esc(이름) + '</b> 을(를) docs 폴더에 올렸습니다.');
+        말.push('읽어 낸 것 — 상품명 ' + (읽음.제목 ? '○' : '×') +
+                ' · 기간 ' + (읽음.기간 ? '○' : '×') +
+                ' · 요금 ' + (읽음.요금 ? '○' : '×') +
+                ' · 일자별 ' + 읽음.날.length + '일' +
+                ' · 포함 ' + 읽음.포함.length + '개' +
+                ' · 불포함 ' + 읽음.불포함.length + '개' +
+                ' · 확인 사항 ' + 읽음.확인.length + '개');
+        말.push('분류 — <b>' + 분.cats.join(' · ') + '</b> (띠 색 ' + 분.topClass + ') · 지역 「' +
+                esc(분.region) + '」');
+        말.push(수 + '개 칸을 채웠습니다. ' +
+                (덮기 ? '' : '이미 적혀 있던 칸은 그대로 두었습니다. ') +
+                '내용을 확인하신 뒤 <b>저장하고 배포</b>를 눌러 주세요.');
+        if(!읽음.날.length){
+          말.push('<i>일자별 일정을 찾지 못했습니다. 저희 일정표 양식이 아닌 PDF 는 ' +
+                  '자동 채우기가 잘 안 될 수 있습니다.</i>');
+        }
+        pdf알림(말.join('<br>'));
+        toast('일정표를 올리고 ' + 수 + '개 칸을 채웠습니다.');
+      })
+      .catch(function(e){
+        pdf알림('올리지 못했습니다 — ' + esc(e.message || '알 수 없는 오류'), true);
+        toast(e.message || 'PDF 처리에 실패했습니다', true);
+      });
   }
 
   /* ---------------------------------------------------- 공연 일정 */
@@ -3379,6 +4025,63 @@
     renderProducts();
   });
   $('edFields').addEventListener('input', collectProduct);
+  $('edFields').addEventListener('change', collectProduct);
+
+  /* ---- 상품 추가 · 복제 · 삭제 ---- */
+  $('addProd').addEventListener('click', function(){
+    var 새 = 새상품틀();
+    새.id = 새아이디();
+    상품넣기(새);
+    toast('빈 상품을 하나 만들었습니다. 내용을 채우고 저장해 주세요.');
+  });
+  $('edDup').addEventListener('click', function(){
+    if(editingIndex < 0) return;
+    collectProduct();
+    var 본 = JSON.parse(JSON.stringify(store.products.data[editingIndex]));
+    본.id = (본.id || '상품') + '-copy';
+    본.title = (본.title || '') + ' (복제본)';
+    상품넣기(본);
+    toast('상품을 복제했습니다. 코드와 상품명을 고쳐 주세요.');
+  });
+  $('edDel').addEventListener('click', function(){
+    if(editingIndex < 0) return;
+    var p = store.products.data[editingIndex];
+    if(!confirm('「' + (p.title || p.id) + '」 상품을 목록에서 뺄까요?\n\n' +
+                '지금은 화면에서만 빠지고, 위쪽 「저장하고 배포」 를 눌러야 실제 사이트에 반영됩니다.')) return;
+    store.products.data.splice(editingIndex, 1);
+    editingIndex = -1;
+    $('prodEditor').hidden = true;
+    $('prodList').hidden = false;
+    renderProducts(); refreshSaveBar();
+    toast('목록에서 뺐습니다. 저장해야 사이트에 반영됩니다.');
+  });
+
+  /* ---- 일정표 PDF ---- */
+  $('edPdfPick').addEventListener('click', function(){ $('edPdfFile').click(); });
+  $('edPdfFile').addEventListener('change', function(){
+    if(this.files && this.files[0]) PDF받기(this.files[0], false);
+    this.value = '';
+  });
+  $('addProdPdf').addEventListener('click', function(){ $('prodPdfFile').click(); });
+  $('prodPdfFile').addEventListener('change', function(){
+    if(this.files && this.files[0]) PDF받기(this.files[0], true);
+    this.value = '';
+  });
+  (function(){
+    var 칸 = $('prodDrop');
+    if(!칸) return;
+    ['dragenter','dragover'].forEach(function(ev){
+      칸.addEventListener(ev, function(e){ e.preventDefault(); 칸.classList.add('over'); });
+    });
+    ['dragleave','drop'].forEach(function(ev){
+      칸.addEventListener(ev, function(e){ e.preventDefault(); 칸.classList.remove('over'); });
+    });
+    칸.addEventListener('drop', function(e){
+      var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if(f) PDF받기(f, true);
+    });
+    칸.addEventListener('click', function(){ $('prodPdfFile').click(); });
+  })();
 
   $('addConcert').addEventListener('click', function(){
     store.concerts.data.unshift({ date:'', time:'', city:'', venue:'', title:'', genre:'', price:'', link:'' });
