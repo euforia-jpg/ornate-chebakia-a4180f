@@ -79,8 +79,8 @@
 .badge-group{ position:absolute; top:12px; right:12px; z-index:5; display:flex; gap:6px; }
 .card-badge{ padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.5px; color:#fff; box-shadow:0 6px 14px -6px rgba(20,16,61,0.4); }
 .card-badge.new-badge{ background:linear-gradient(90deg,var(--teal),#0E9E8B); }
-.card-badge.best-badge{ background:linear-gradient(90deg,var(--orange),#FFB84D); opacity:0; pointer-events:none; animation:none; }
-.card-badge.best-badge.show{ opacity:1; animation:badgeFlash 1s ease-in-out 2; }
+.card-badge.best-badge{ background:linear-gradient(90deg,var(--orange),#FFB84D); display:none; }  /* 안 보일 때는 자리도 차지하지 않게 — 숨어 있던 BEST 자리가 기간 글자를 밀어내고 있었습니다 */
+.card-badge.best-badge.show{ display:inline-block; animation:badgeFlash 1s ease-in-out 2; }
 @keyframes badgeFlash{ 0%,100%{ opacity:1; } 50%{ opacity:0.35; } }
   .tour-price .yt-btn{ display:flex; align-items:center; justify-content:center; padding:0 16px; min-width:48px; margin:0; border:none; background:#CC0000; color:#fff; flex-shrink:0; text-decoration:none; cursor:pointer; font:inherit; transition: background .15s ease; }
 .tour-price .yt-btn:hover{ background:#e52d27; }
@@ -96,6 +96,13 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .tour-top .days{ flex:0 0 auto; white-space:nowrap; }
   .tour-top .region{ font-size:14px; letter-spacing:1px; text-transform:uppercase; font-weight:800; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(20,16,61,.12); }
   .tour-top .days{ font-family:'Space Mono'; font-size:12.5px; font-weight:700; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(20,16,61,.12); }
+  /* NEW·BEST 배지가 카드 오른쪽 위에 떠 있어 기간 글자를 덮고 있었습니다.
+     배지가 실제로 보이는 카드만 그만큼 자리를 비워 둡니다.
+     (영어·중국어는 기간 글자가 길어져서 더 심하게 가려집니다) */
+  .tour-card:has(.new-badge) .tour-top{ padding-right:70px; }
+  .tour-card:has(.best-badge.show) .tour-top{ padding-right:78px; }
+  .tour-card:has(.new-badge):has(.best-badge.show) .tour-top{ padding-right:132px; }
+
   .tour-top.spain{ background: linear-gradient(90deg, color-mix(in srgb, var(--violet) 32%, white), color-mix(in srgb, #8B5CF6 32%, white)); }
   .tour-top.camino{ background: linear-gradient(90deg, color-mix(in srgb, var(--teal) 32%, white), color-mix(in srgb, #0E9E8B 32%, white)); }
   .tour-top.portugal{ background: linear-gradient(90deg, color-mix(in srgb, var(--pink) 32%, white), color-mix(in srgb, #A5124B 32%, white)); }
