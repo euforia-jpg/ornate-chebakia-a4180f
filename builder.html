@@ -2289,16 +2289,16 @@
         (이동줄 ? '<h2 class="doc-h2">구간별 이동</h2>' +
           '<table class="doc-tb"><tbody>' + 이동줄 + '</tbody></table>' : '') +
 
+        (포함.length ? '<h2 class="doc-h2">포함 사항</h2>' +
+          '<table class="doc-tb"><tbody>' + 포함.map(function(x){
+            return '<tr><td class="d">' + x[0] + '</td><td colspan="2">' + esc(x[1]) + '</td></tr>';
+          }).join('') + '</tbody></table>' : '') +
+
         '<h2 class="doc-h2">예약 순서</h2>' +
         '<table class="doc-tb"><tbody>' + 예약단계.map(function(x, i){
           return '<tr><td class="d">' + (i + 1) + '단계</td><td class="c">' + esc(x[0]) + '</td>' +
                  '<td>' + esc(String(x[1]).replace(/<[^>]+>/g, '')) + '</td></tr>';
         }).join('') + '</tbody></table>' +
-
-        (포함.length ? '<h2 class="doc-h2">포함 사항</h2>' +
-          '<table class="doc-tb"><tbody>' + 포함.map(function(x){
-            return '<tr><td class="d">' + x[0] + '</td><td colspan="2">' + esc(x[1]) + '</td></tr>';
-          }).join('') + '</tbody></table>' : '') +
 
         '<div class="doc-note">' + esc(CFG.안내문 || '') +
           ((S.기차.length || S.항공.length) && CFG.구간안내문
