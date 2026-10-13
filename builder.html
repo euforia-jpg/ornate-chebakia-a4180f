@@ -240,6 +240,29 @@
     font-variant-numeric:tabular-nums; }
   .bx-empty{ font-size:12.5px; font-weight:600; color:var(--muted); padding:4px 0; }
   /* 입장료 없는 도보 관광지 묶음에 붙는 한 줄 설명 */
+  /* 도시가 바뀌는 자리의 운전시간·이동수단 알림 */
+  .bx-move{ display:flex; gap:11px; align-items:flex-start; flex-wrap:wrap;
+    margin:0 0 12px; padding:12px 16px; border-radius:13px; border:1.5px solid;
+    font-size:12.5px; font-weight:600; line-height:1.75; }
+  .bx-move .tag{ flex:none; font-size:10.5px; font-weight:800; letter-spacing:.3px;
+    padding:3px 9px; border-radius:999px; white-space:nowrap; }
+  .bx-move .tx{ flex:1; min-width:220px; }
+  .bx-move b{ font-weight:800; }
+  .bx-move.ok{   background:#F3F0FD; border-color:#DED3FB; color:var(--muted); }
+  .bx-move.ok .tag{ background:#E3DCFA; color:var(--violet); }
+  .bx-move.ok b{ color:var(--navy); }
+  .bx-move.warn{ background:#FFF4E5; border-color:#FFD9A8; color:#8A5200; }
+  .bx-move.warn .tag{ background:#FFE2BC; color:#8A5200; }
+  .bx-move.warn b{ color:#6B3F00; }
+  .bx-move.bad{  background:#FDECEF; border-color:#F7C2CD; color:#9B1B34; }
+  .bx-move.bad .tag{ background:#F9D3DB; color:#9B1B34; }
+  .bx-move.bad b{ color:#7A0F26; }
+  .bx-move .plan{ display:block; margin-top:5px; }
+  .bx-fix{ all:unset; cursor:pointer; display:inline-block; margin-top:9px;
+    font-size:12px; font-weight:800; color:#fff; background:var(--navy);
+    padding:9px 16px; border-radius:999px; }
+  .bx-fix:hover{ background:var(--violet); }
+
   /* 날짜 칸 아래 "묵는 곳" 고르는 바 */
   .bx-stayrow{ display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px;
     margin-top:14px; padding:11px 13px; border-radius:11px;
@@ -810,6 +833,44 @@
     return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
   }
 
+  /*
+    실제 고속도로 도로거리 (km). 직선거리 × 어림수로는 스페인 도로망을 제대로 못 맞춥니다.
+    (마드리드~바르셀로나는 직선 500km 지만 도로로는 620km, 어림식으로는 830km 가 나왔습니다)
+    여기에 없는 구간만 직선거리 × 1.2 로 어림잡습니다.
+    운전시간 판정의 근거가 되는 값이라 주요 구간은 실제 거리를 적어 둡니다.
+  */
+  var 도로거리 = {
+    '마드리드|바르셀로나':620, '마드리드|세비야':530, '마드리드|발렌시아':355,
+    '마드리드|그라나다':420,  '마드리드|말라가':530,  '마드리드|코르도바':400,
+    '마드리드|사라고사':315,  '마드리드|톨레도':75,   '마드리드|세고비아':95,
+    '마드리드|살라망카':215,  '마드리드|리스본':625,  '마드리드|포르투':565,
+    '마드리드|론다':570,      '마드리드|코임브라':480,
+    '바르셀로나|발렌시아':350,'바르셀로나|사라고사':310,'바르셀로나|세비야':1000,
+    '바르셀로나|그라나다':870,'바르셀로나|말라가':1000,'바르셀로나|살라망카':825,
+    '바르셀로나|리스본':1250, '바르셀로나|포르투':1130,'바르셀로나|톨레도':690,
+    '세비야|그라나다':250,    '세비야|코르도바':140,  '세비야|론다':130,
+    '세비야|말라가':220,      '세비야|리스본':465,    '세비야|발렌시아':660,
+    '세비야|톨레도':470,      '세비야|포르투':610,
+    '그라나다|말라가':125,    '그라나다|론다':190,    '그라나다|코르도바':200,
+    '그라나다|발렌시아':500,  '그라나다|톨레도':370,
+    '론다|말라가':100,        '론다|코르도바':170,
+    '발렌시아|사라고사':310,  '발렌시아|코르도바':525, '발렌시아|톨레도':370,
+    '리스본|포르투':315,      '리스본|코임브라':200,  '리스본|살라망카':455,
+    '코임브라|포르투':120,    '코임브라|살라망카':340,
+    '살라망카|포르투':350,    '살라망카|세고비아':115, '살라망카|코르도바':600,
+    '세고비아|톨레도':165,    '세고비아|사라고사':370, '톨레도|코르도바':325,
+    '사라고사|그라나다':740,  '사라고사|세비야':830,  '사라고사|살라망카':480
+  };
+
+  /* 차로 갈 때의 도로거리 (km). 적어 둔 값이 있으면 그것을, 없으면 직선거리로 어림잡습니다 */
+  function 차거리(a, b){
+    var v = 도로거리[a + '|' + b];
+    if(v === undefined) v = 도로거리[b + '|' + a];
+    if(v !== undefined) return v;
+    var 직선 = 거리km(a, b);
+    return 직선 ? Math.round(직선 * 1.2 / 10) * 10 : 0;
+  }
+
   /* 설명에 적힌 "약 2시간 30분" 같은 말에서 분을 읽어 냅니다 */
   function 시간읽기(글){
     var t = String(글 || '');
@@ -824,6 +885,89 @@
     if(!분) return '';
     var h = Math.floor(분 / 60), m = Math.round(분 % 60);
     return (h ? h + '시간' : '') + (m ? (h ? ' ' : '') + m + '분' : '');
+  }
+
+  /* ============================================================
+     유럽 운전시간(타코그래프) 규정 — 규정 (EC) 561/2006
+       · 하루 운전 9시간 (한 주에 두 번까지 10시간)
+       · 연속 4시간 30분 운전하면 45분 쉬어야 합니다
+       · 하루 휴식 11시간 (한 주 세 번까지 9시간)
+     여기서 보는 것은 "도시에서 도시로 가는 구간 주행시간" 입니다.
+     시내 관광 이동과 주차는 여기에 들어 있지 않으니 실제로는 더 걸립니다.
+     ============================================================ */
+  var 타코 = { 연속: 270, 하루: 540, 연장: 600 };   /* 4시간30분 · 9시간 · 10시간 (분) */
+
+  function 타코판정(분){
+    if(!분) return null;
+    if(분 > 타코.연장)  return { 급: '초과', 색: 'bad',
+      말: '하루 운전 한도를 넘습니다. 기사 한 명으로는 이 구간을 하루에 갈 수 없습니다.' };
+    if(분 > 타코.하루)  return { 급: '연장', 색: 'warn',
+      말: '하루 9시간을 넘습니다. 한 주에 두 번까지만 쓸 수 있는 10시간 연장에 걸립니다.' };
+    if(분 > 타코.연속)  return { 급: '휴식', 색: 'ok',
+      말: '중간에 45분 휴식이 들어갑니다. 도착 시각에 그만큼 더해 주세요.' };
+    return { 급: '여유', 색: 'ok', 말: '' };
+  }
+
+  /* 너무 먼 구간을 끊어 갈 만한 중간 도시를 찾습니다 (등록된 도시 중에서) */
+  function 중간도시(a, b){
+    var 바로 = 구간정보(a, b, '차량', '');
+    if(!바로) return null;
+    var 가장 = null;
+    CITIES.forEach(function(c){
+      if(c === a || c === b) return;
+      var 앞 = 구간정보(a, c, '차량', ''), 뒤 = 구간정보(c, b, '차량', '');
+      if(!앞 || !뒤) return;
+      if(앞.분 > 타코.하루 || 뒤.분 > 타코.하루) return;      /* 쪼개도 한도를 넘으면 소용없습니다 */
+      var 돌아감 = (앞.km + 뒤.km) - 바로.km;                 /* 얼마나 돌아가는지 */
+      if(!가장 || 돌아감 < 가장.돌아감) 가장 = { 도시: c, 앞: 앞, 뒤: 뒤, 돌아감: 돌아감 };
+    });
+    return 가장;
+  }
+
+  /* 등록해 두신 기차·항공 구간에서 이 두 도시에 맞는 것을 찾습니다 (고르셨든 아니든) */
+  function 등록구간(a, b, 수단){
+    var 답 = null;
+    종류(수단).forEach(function(it){
+      if(답) return;
+      var 쌍 = 구간쪼개기(it.이름);
+      if(!쌍) return;
+      if((쌍[0] === a && 쌍[1] === b) || (쌍[0] === b && 쌍[1] === a)) 답 = it;
+    });
+    return 답;
+  }
+
+  /*
+    기차가 나은지 비행기가 나은지 — 역·공항을 오가는 시간까지 넣어서 봅니다.
+    없는 노선의 소요시간을 지어내지 않도록, 대쉬보드에 등록해 두신 구간만 봅니다.
+    (마드리드~리스본처럼 고속철이 없는 구간을 "3시간" 이라고 잘못 말하지 않기 위해서입니다)
+  */
+  function 이동권고(a, b){
+    var 차 = 구간정보(a, b, '차량', '');
+    if(!차) return null;
+    /* 차로 4시간 30분 안쪽이면 그냥 차로 가시는 게 편합니다 */
+    if(차.분 < 타코.연속) return { 추천: '차량', 말: '', 차분: 차.분 };
+
+    var 기it = 등록구간(a, b, '기차'), 항it = 등록구간(a, b, '항공');
+    var 기분 = 기it ? 시간읽기(기it.설명) : 0;
+    var 항분 = 항it ? 시간읽기(항it.설명) : 0;
+    /* 역은 도심에 있어 앞뒤로 1시간, 공항은 수속과 왕복으로 3시간을 더 봅니다 */
+    var 기문전 = 기분 ? 기분 + 60 : 0;
+    var 항문전 = 항분 ? 항분 + 180 : 0;
+
+    if(!기문전 && !항문전){
+      return { 추천: '', 차분: 차.분,
+        말: '이 구간은 기차·항공편이 아직 등록되어 있지 않습니다. 담당자에게 문의해 주시면 알아봐 드립니다.' };
+    }
+    if(기문전 && (!항문전 || 기문전 <= 항문전)){
+      return { 추천: '기차', 차분: 차.분, 있음: !!기it,
+        말: '<b>기차를 권합니다</b> — 타는 시간 ' + 시간글(기분) +
+            ', 역이 도심에 있어 문에서 문까지 약 ' + 시간글(기문전) + '입니다.' +
+            (항문전 ? ' 비행기는 수속과 공항 왕복까지 약 ' + 시간글(항문전) + '이 듭니다.' : '') };
+    }
+    return { 추천: '항공', 차분: 차.분, 있음: !!항it,
+      말: '<b>비행기를 권합니다</b> — 뜨는 시간 ' + 시간글(항분) +
+          ', 수속과 공항 왕복을 넣어 문에서 문까지 약 ' + 시간글(항문전) + '입니다.' +
+          (기문전 ? ' 기차로는 약 ' + 시간글(기문전) + '이 걸립니다.' : '') };
   }
 
   /* 고르신 구간 중에서 이 두 도시에 맞는 것을 찾습니다 */
@@ -850,8 +994,11 @@
     if(!직선) return null;
 
     if(수단 === '차량'){
-      var km = Math.round(직선 * 1.25 / 10) * 10;
-      return { km: km, 분: Math.round(km / 80 * 60 / 5) * 5, 적힘: false };
+      /* 경유지를 들르면 두 구간을 더합니다 */
+      var km = 들를곳 ? (차거리(a, 들를곳) + 차거리(들를곳, b)) : 차거리(a, b);
+      km = Math.round(km / 10) * 10;
+      /* 고속도로 평균 85km/h — 순수 주행시간입니다. 45분 휴식은 따로 알려 드립니다 */
+      return { km: km, 분: Math.round(km / 85 * 60 / 5) * 5, 적힘: false };
     }
     var it = 구간항목(a, b, 수단);
     var 분 = it ? 시간읽기(it.설명) : 0;
@@ -1336,6 +1483,20 @@
       if(통 && 통.indexOf(t.dataset.id) === -1) 통.push(t.dataset.id);
       날짜그리기(); 계산();
     });
+    /* "○○에서 1박 넣기" — 너무 먼 구간을 하루 늘려 끊어 갑니다 */
+    $('bxRoot').addEventListener('click', function(e){
+      var t = e.target && e.target.closest ? e.target.closest('[data-split]') : null;
+      if(!t) return;
+      var i = Number(t.dataset.split);
+      var 최대 = Math.max(1, Number(CFG.최대일수) || 20);
+      if(S.일수 >= 최대){ return; }
+      S.일수 += 1;
+      var 칸 = $('bxDaysN'); if(칸) 칸.value = S.일수;
+      /* 그 다음 날 자리에 중간 도시를 하루 끼워 넣습니다 */
+      S.일정.splice(i + 1, 0, { 도시: t.dataset.tocity, 입장지: [], 식사: [], 종류: '관광' });
+      맞추기(); 날짜그리기(); 숙박그리기(); 지도그리기(); 계산();
+    });
+
     /* 날짜 종류는 단추라 눌림(click)으로 받습니다 */
     $('bxRoot').addEventListener('click', function(e){
       var t = e.target && e.target.closest ? e.target.closest('[data-daytype]') : null;
@@ -1697,12 +1858,61 @@
              '">' + 안 + '</div>';
     });
 
-    /* 날과 날 사이에 "가는 길에 들를 곳" 을 끼워 넣습니다 */
+    /*
+    도시가 바뀌는 자리에 붙는 알림.
+      · 차로 가기에 너무 먼 구간은 "타코가 갈린다" 고 알려 드리고
+        중간 도시에서 하룻밤 끊어 가는 길을 한 번 눌러 넣으실 수 있게 합니다.
+      · 기차가 나은지 비행기가 나은지도 같이 적어 둡니다.
+  */
+  function 이동알림(i, a, b){
+    if(!a || !b || a === b) return '';
+    var 수단 = 이동수단(a, b);
+    var 권 = 이동권고(a, b);
+    if(!권) return '';
+
+    /* 기차·비행기로 가시기로 한 구간은 운전시간을 따지지 않습니다 */
+    if(수단 !== '차량'){
+      return '<div class="bx-move ok"><span class="tag">' + esc(수단) + '</span>' +
+        '<span class="tx"><b>' + esc(a) + ' → ' + esc(b) + '</b> ' + esc(수단) + '으로 가십니다. ' +
+        '차량은 이 구간을 쉬고, 도착 도시에서 다시 함께합니다.</span></div>';
+    }
+
+    var 들를곳 = 경유찾기(a, b);
+    var 정보 = 구간정보(a, b, '차량', (들를곳 && S.일정[i].경유 !== false) ? 들를곳 : '');
+    var 판 = 타코판정(정보 ? 정보.분 : 0);
+    if(!판) return '';
+    if(판.급 === '여유' && !권.말) return '';            /* 가깝고 할 말도 없으면 조용히 */
+
+    var 안 = '<span class="tag">운전 ' + 시간글(정보.분) + '</span><span class="tx">' +
+             '<b>' + esc(a) + ' → ' + esc(b) + '</b> ';
+    if(판.말) 안 += 판.말 + ' ';
+    if(권.말) 안 += '<br>' + 권.말;
+
+    /* 하루에 못 가는 구간이면 끊어 갈 길을 제안합니다 */
+    if(판.급 === '초과' || 판.급 === '연장'){
+      var 중 = 중간도시(a, b);
+      if(중){
+        안 += '<br><span class="plan">다음 날 <b>' + esc(중.도시) + '</b>에서 하룻밤 끊어 가시면 ' +
+              esc(a) + ' → ' + esc(중.도시) + ' ' + 시간글(중.앞.분) + ', ' +
+              esc(중.도시) + ' → ' + esc(b) + ' ' + 시간글(중.뒤.분) + ' 로 나뉩니다.</span>' +
+              '<button type="button" class="bx-fix" data-split="' + i + '" ' +
+              'data-tocity="' + esc(중.도시) + '">' + esc(중.도시) + '에서 1박 넣기 (여행일수 +1)</button>';
+      }
+    }
+    안 += '</span>';
+    return '<div class="bx-move ' + 판.색 + '">' + 안 + '</div>';
+  }
+
+  /* 날과 날 사이에 "가는 길에 들를 곳" 을 끼워 넣습니다 */
     var 줄 = [];
     조각.forEach(function(한칸, i){
       줄.push(한칸);
       if(i >= S.일정.length - 1) return;
       var 이도시 = S.일정[i].도시, 다음도시 = S.일정[i + 1].도시;
+
+      /* 운전시간 · 이동수단 알림 — 도시가 바뀌는 자리마다 */
+      줄.push(이동알림(i, 이도시, 다음도시));
+
       if(이동수단(이도시, 다음도시) !== '차량') return;   /* 기차·비행기면 들를 수 없습니다 */
       var 들를곳 = 경유찾기(이도시, 다음도시);
       if(!들를곳) return;
