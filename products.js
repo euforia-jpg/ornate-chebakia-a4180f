@@ -9,51 +9,6 @@
 */
 const PRODUCTS = [
   {
-    "id": "euforia-tour",
-    "cats": [
-      "spain",
-      "portugal"
-    ],
-    "topClass": "iberia",
-    "region": "스페인,포루투갈",
-    "days": "10박11일",
-    "price": "가격 문의",
-    "title": "[기본일정] 마드리드 IN/OUT 10박11일",
-    "summary": "",
-    "tags": [
-      "10박11일",
-      "전용차량",
-      "현지 가이드"
-    ],
-    "isNew": true,
-    "detail": {
-      "lead": "마드리드 2박 · 포르투 1박 · 리스본 1박 · 세비야 1박 · 그라나다 1박 · 발렌시아 1박 · 바르셀로나 2박 · 사라고사 1박, 짐은 여덟 번만 풀고 다니시는 11일 맞춤 일정입니다.",
-      "duration": "",
-      "highlights": [],
-      "includes": [
-        "전 일정 4성급 호텔 10박",
-        "차량",
-        "가이드 — 한국어 인솔 가이드",
-        "입장료 — 일정표에 적힌 입장료 전액",
-        "식사 — 중식 9회 · 석식 9회 · 호텔 조식",
-        "팁 — 가이드 팁 · 기사 팁"
-      ],
-      "excludes": [
-        "한국 출발 왕복 국제선 항공 (일정 중 구간 항공은 포함 사항 참 고)",
-        "일정표에 「불포함」으로 적힌 끼니 — 자유식",
-        "도시별 숙박세 (1인 1박, 현지 납부)",
-        "개인 경비 — 개인 경비 · 초과 수하물 요금"
-      ],
-      "description": "<div class=\"eu-pdfdoc\">\n<style>.eu-pdfdoc{margin:4px 0 6px}.eu-pdfdoc .hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px;border:1.5px solid #E8E6F2;border-bottom:0;border-radius:12px 12px 0 0;background:#FBFAFF}.eu-pdfdoc .hd b{font-size:14px;font-weight:800;color:#14103D}.eu-pdfdoc .hd span{font-size:12px;font-weight:700;color:#9A95BC}.eu-pdfdoc .hd .sp{flex:1 1 auto}.eu-pdfdoc .hd a{display:inline-block;padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:800;text-decoration:none;border:1.5px solid #D9D4F0;color:#14103D;background:#fff}.eu-pdfdoc .hd a.go{background:#14103D;border-color:#14103D;color:#fff}.eu-pdfdoc .fr{position:relative;width:100%;height:min(88vh,1020px);border:1.5px solid #E8E6F2;border-radius:0 0 12px 12px;overflow:hidden;background:#F6F5FC}.eu-pdfdoc .fr iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.eu-pdfdoc .onlyphone{display:none}@media (max-width:760px){.eu-pdfdoc .fr{display:none}.eu-pdfdoc .hd{border-bottom:1.5px solid #E8E6F2;border-radius:12px}.eu-pdfdoc .onlyphone{display:block;margin-top:9px;font-size:12.5px;color:#6E6A93}}</style>\n<div class=\"hd\"><b>일정표</b><span>PDF</span><span class=\"sp\"></span><a class=\"go\" href=\"/docs/euforia-tour.pdf\" target=\"_blank\" rel=\"noopener\">크게 보기</a><a href=\"/docs/euforia-tour.pdf\" download>내려받기</a></div>\n<div class=\"fr\"><iframe src=\"/docs/euforia-tour.pdf#view=FitH\" title=\"일정표 PDF\" loading=\"lazy\"></iframe></div>\n<p class=\"onlyphone\">휴대폰에서는 위의 <b>크게 보기</b> 를 누르시면 일정표가 열립니다.</p>\n</div>"
-    },
-    "downloadUrl": "/docs/euforia-tour.pdf",
-    "minPeople": 4,
-    "maxPeople": 20,
-    "link": "",
-    "ctaLabel": "",
-    "youtubeUrl": ""
-  },
-  {
     "id": "madrid-toledo-day",
     "cats": [
       "spain",
