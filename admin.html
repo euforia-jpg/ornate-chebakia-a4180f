@@ -131,6 +131,11 @@
   .pdfbox-s{ margin:7px 0 12px; font-size:12.5px; line-height:1.7; color:var(--muted); }
   .pdfbox-s b{ color:var(--navy); }
   .pdfbox-a{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .pdfmode{ display:inline-flex; gap:7px; align-items:center;
+    font-size:12.5px; font-weight:700; color:var(--muted); }
+  .pdfhint{ font-size:12px; font-weight:600; color:var(--muted); }
+  .pdfmode select{ padding:7px 10px; border-radius:9px; border:1.5px solid var(--line);
+    background:#fff; font-size:12.5px; font-weight:700; color:var(--navy); }
   .pdflog{ margin-top:12px; padding:11px 13px; border-radius:9px; background:#fff;
     border:1.5px solid var(--line); font-size:12.5px; line-height:1.8; color:var(--navy); }
   .pdflog.bad{ border-color:#F2C9C9; background:#FDECEC; color:#B4232A; }
@@ -579,8 +584,19 @@
             스페인 · 포르투갈 · 순례길로 <b>분류</b>까지 해 드립니다.</div>
           <div class="pdfbox-a">
             <button type="button" class="btn dark" id="edPdfPick">PDF 올리고 자동으로 채우기</button>
+            <label class="pdfmode">상세 내용에는
+              <select id="edPdfMode">
+                <option value="pdf">PDF 를 그대로 띄우기</option>
+                <option value="both">PDF 를 띄우고 글도 아래에</option>
+                <option value="text">글로 바꿔서 넣기</option>
+              </select>
+            </label>
             <label class="chk"><input type="checkbox" id="edPdfOver"> 이미 적힌 칸도 덮어쓰기</label>
             <input type="file" id="edPdfFile" accept=".pdf,application/pdf" hidden>
+          </div>
+          <div class="pdfbox-a" style="margin-top:10px;">
+            <button type="button" class="btn" id="edPdfOnly">이미 올라간 PDF 를 상세 내용에 넣기</button>
+            <span class="pdfhint">새로 올리지 않고, 위에 적힌 일정표 PDF 만 상세 내용에 띄웁니다.</span>
           </div>
           <div class="pdflog" id="edPdfLog" hidden></div>
         </div>
@@ -1320,6 +1336,7 @@
 
   /* ---------- pdf.js 불러오기 (쓸 때만) ---------- */
   var PDFJS대기 = null;
+  var PDF쪽수 = 0;            /* 방금 읽은 일정표가 몇 쪽인지 */
   function pdfjs준비(){
     if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
     if(PDFJS대기) return PDFJS대기;
@@ -1399,6 +1416,7 @@
             });
           });
         };
+        PDF쪽수 = doc.numPages;
         for(var n = 1; n <= doc.numPages; n++){
           (function(n){ 차례 = 차례.then(function(){ return 받기(n); }); })(n);
         }
@@ -1716,6 +1734,47 @@
   }
 
   /* ---------- 상세 설명 HTML 만들기 ---------- */
+
+  /*
+     ① PDF 를 그대로 띄우는 상자.
+        컴퓨터에서는 창 안에서 바로 넘겨 보시고,
+        휴대폰은 PDF 를 창 안에 못 띄우는 기기가 많아 「크게 보기」 단추로 엽니다.
+  */
+  function PDF상자만들기(주소, 쪽수){
+    if(!주소) return '';
+    return [
+      '<div class="eu-pdfdoc">',
+      '<style>' +
+        '.eu-pdfdoc{margin:4px 0 6px}' +
+        '.eu-pdfdoc .hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;' +
+          'padding:12px 14px;border:1.5px solid #E8E6F2;border-bottom:0;' +
+          'border-radius:12px 12px 0 0;background:#FBFAFF}' +
+        '.eu-pdfdoc .hd b{font-size:14px;font-weight:800;color:#14103D}' +
+        '.eu-pdfdoc .hd span{font-size:12px;font-weight:700;color:#9A95BC}' +
+        '.eu-pdfdoc .hd .sp{flex:1 1 auto}' +
+        '.eu-pdfdoc .hd a{display:inline-block;padding:8px 14px;border-radius:999px;' +
+          'font-size:12.5px;font-weight:800;text-decoration:none;' +
+          'border:1.5px solid #D9D4F0;color:#14103D;background:#fff}' +
+        '.eu-pdfdoc .hd a.go{background:#14103D;border-color:#14103D;color:#fff}' +
+        '.eu-pdfdoc .fr{position:relative;width:100%;height:min(88vh,1020px);' +
+          'border:1.5px solid #E8E6F2;border-radius:0 0 12px 12px;overflow:hidden;background:#F6F5FC}' +
+        '.eu-pdfdoc .fr iframe{position:absolute;inset:0;width:100%;height:100%;border:0}' +
+        '.eu-pdfdoc .onlyphone{display:none}' +
+        '@media (max-width:760px){' +
+          '.eu-pdfdoc .fr{display:none}' +
+          '.eu-pdfdoc .hd{border-bottom:1.5px solid #E8E6F2;border-radius:12px}' +
+          '.eu-pdfdoc .onlyphone{display:block;margin-top:9px;font-size:12.5px;color:#6E6A93}}' +
+      '</style>',
+      '<div class="hd"><b>일정표</b>' +
+        '<span>PDF' + (쪽수 ? ' · ' + 쪽수 + '쪽' : '') + '</span><span class="sp"></span>' +
+        '<a class="go" href="' + esc(주소) + '" target="_blank" rel="noopener">크게 보기</a>' +
+        '<a href="' + esc(주소) + '" download>내려받기</a></div>',
+      '<div class="fr"><iframe src="' + esc(주소) + '#view=FitH" title="일정표 PDF" loading="lazy"></iframe></div>',
+      '<p class="onlyphone">휴대폰에서는 위의 <b>크게 보기</b> 를 누르시면 일정표가 열립니다.</p>',
+      '</div>'
+    ].join('\n');
+  }
+
   function 설명만들기(읽음){
     var h = [];
     h.push('<div class="eu-auto">');
@@ -1776,7 +1835,14 @@
     수 += 넣('detail.highlights', 읽음.날.map(function(d){ return d.제목; }).filter(Boolean));
     수 += 넣('detail.includes', 읽음.포함);
     수 += 넣('detail.excludes', 읽음.불포함);
-    if(읽음.날.length) 수 += 넣('detail.description', 설명만들기(읽음));
+    /* 상세 내용 — PDF 를 그대로 띄울지, 글로 바꿀지, 둘 다 넣을지 */
+    var 방식 = ($('edPdfMode') && $('edPdfMode').value) || 'pdf';
+    var 상자 = PDF상자만들기(getv(p, 'downloadUrl'), PDF쪽수);
+    var 글판 = 읽음.날.length ? 설명만들기(읽음) : '';
+    var 상세 = 방식 === 'text' ? 글판
+             : 방식 === 'both' ? (상자 + (글판 ? '\n' + 글판 : ''))
+             : (상자 || 글판);
+    if(상세) 수 += 넣('detail.description', 상세);
 
     /* 태그 — 기간과 포함 사항에서 뽑습니다 */
     var 태그 = [];
@@ -1793,6 +1859,35 @@
     p.cats = 분.cats;
     p.topClass = 분.topClass;
     return 수;
+  }
+
+  /* 이미 올라가 있는 PDF 를 상세 내용에만 넣습니다 (다시 올리지 않습니다) */
+  function PDF만넣기(){
+    if(editingIndex < 0) return;
+    var p = store.products.data[editingIndex];
+    var 주소 = getv(p, 'downloadUrl');
+    if(!주소){
+      pdf알림('이 상품에는 아직 올라간 일정표 PDF 가 없습니다. 위의 「PDF 올리고 자동으로 채우기」 를 먼저 눌러 주세요.', true);
+      return;
+    }
+    var 방식 = ($('edPdfMode') && $('edPdfMode').value) || 'pdf';
+    var 지금 = getv(p, 'detail.description') || '';
+    var 글판 = 지금.indexOf('eu-pdfdoc') >= 0
+      ? 지금.replace(/<div class="eu-pdfdoc">[\s\S]*?<\/div>\s*(?=<div class="eu-auto">|$)/, '').trim()
+      : 지금;
+    var 상자 = PDF상자만들기(주소, 0);
+    var 새글 = 방식 === 'text' ? 글판
+             : 방식 === 'both' ? (상자 + (글판 ? '\n' + 글판 : ''))
+             : 상자;
+    if(방식 !== 'text' && 글판 && 방식 === 'pdf' &&
+       !confirm('상세 내용에 적혀 있던 글을 PDF 상자로 바꿉니다.\n\n' +
+                '글을 그대로 두고 PDF 를 위에 얹으시려면 「PDF 를 띄우고 글도 아래에」 를 고르고 다시 눌러 주세요.\n\n계속할까요?')) return;
+    setv(p, 'detail.description', 새글);
+    openProduct(editingIndex);
+    refreshSaveBar();
+    pdf알림('상세 내용에 <b>' + esc(주소) + '</b> 을(를) 넣었습니다. ' +
+            '확인하신 뒤 <b>저장하고 배포</b> 를 눌러 주세요.');
+    toast('상세 내용에 일정표 PDF 를 넣었습니다.');
   }
 
   /* ---------- PDF 받아서 올리고 채우기 ---------- */
@@ -1868,6 +1963,9 @@
                 ' · 확인 사항 ' + 읽음.확인.length + '개');
         말.push('분류 — <b>' + 분.cats.join(' · ') + '</b> (띠 색 ' + 분.topClass + ') · 지역 「' +
                 esc(분.region) + '」');
+        var 방식말 = { pdf:'PDF 를 그대로 띄웁니다', both:'PDF 를 띄우고 그 아래에 글 일정표도 넣었습니다',
+                      text:'글로 바꿔서 넣었습니다' }[($('edPdfMode')||{}).value || 'pdf'];
+        말.push('상세 내용 — <b>' + 방식말 + '</b>');
         말.push(수 + '개 칸을 채웠습니다. ' +
                 (덮기 ? '' : '이미 적혀 있던 칸은 그대로 두었습니다. ') +
                 '내용을 확인하신 뒤 <b>저장하고 배포</b>를 눌러 주세요.');
@@ -4058,6 +4156,7 @@
 
   /* ---- 일정표 PDF ---- */
   $('edPdfPick').addEventListener('click', function(){ $('edPdfFile').click(); });
+  $('edPdfOnly').addEventListener('click', PDF만넣기);
   $('edPdfFile').addEventListener('change', function(){
     if(this.files && this.files[0]) PDF받기(this.files[0], false);
     this.value = '';
