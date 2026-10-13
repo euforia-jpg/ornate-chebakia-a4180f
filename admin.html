@@ -2054,9 +2054,12 @@
   */
   var BD_KINDS = [
     { k:'입장지', 단위:'1인당',      도시:true,
-      how:'손님이 날짜마다 골라 담습니다. 도시를 정해 두면 그 날 고른 도시의 입장지만 보입니다.' },
-    { k:'숙박',   단위:'1인 1박',    도시:false,
-      how:'손님은 등급 하나만 고릅니다. 2인 1실 기준 1박 금액을 넣어 주세요. 숙박 수는 (여행일수 − 1)로 셉니다.' },
+      how:'손님이 날짜마다 골라 담습니다. 도시를 정해 두면 그 날 고른 도시의 입장지만 보입니다. ' +
+          '“기본 포함” 을 켜면 금액 없이 그 날 일정에 자동으로 들어갑니다 — 솔 광장·람블라스 거리처럼 입장료가 없는 곳에 쓰세요.' },
+    { k:'숙박',   단위:'1인 1박',    도시:true,
+      how:'손님은 도시마다 호텔을 하나씩 고릅니다. 2인 1실 기준 1박 금액을 호텔마다 넣어 주세요. ' +
+          '도시를 비워 두면 “그 도시에 등록된 호텔이 없을 때” 쓰는 예비 항목이 됩니다. ' +
+          '밤 수는 손님이 그 도시에서 묵는 날만큼 셉니다.' },
     { k:'식사',   단위:'1인 1회',    도시:false,
       how:'손님이 날짜마다 끼니를 골라 담습니다. 한 사람 한 끼 금액을 넣어 주세요.' },
     { k:'차량',   단위:'1일 그룹당', 도시:false,
@@ -2248,6 +2251,10 @@
       '<span class="bd-unit">' + esc(kind.단위) + '</span>' +
       '<input type="text" class="ds" data-f="설명" placeholder="손님에게 보일 한 줄 설명 (안 쓰셔도 됩니다)" value="' +
         esc(it.설명 || '') + '">' +
+      (kind.k === '입장지'
+        ? '<label class="on" title="도시를 고르면 그 날 일정에 자동으로 들어갑니다 (입장료 없는 곳)">' +
+          '<input type="checkbox" data-f="기본"' + (it.기본 ? ' checked' : '') + '>기본 포함</label>'
+        : '') +
       '<label class="on"><input type="checkbox" data-f="공개"' + (it.공개 ? ' checked' : '') + '>공개</label>' +
       '<button type="button" class="rm" data-rm>지우기</button>' +
     '</div>';
@@ -2324,6 +2331,8 @@
     if(f === '공개'){
       it.공개 = t.checked;
       row.classList.toggle('off', !t.checked);
+    } else if(f === '기본'){
+      it.기본 = t.checked;
     } else if(f === '금액'){
       var v = Number(t.value);
       it.금액 = v > 0 ? v : 0;

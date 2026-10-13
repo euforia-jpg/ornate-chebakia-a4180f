@@ -239,6 +239,10 @@
   .bx-opt .p{ flex:none; font-size:12px; font-weight:800; color:var(--violet);
     font-variant-numeric:tabular-nums; }
   .bx-empty{ font-size:12.5px; font-weight:600; color:var(--muted); padding:4px 0; }
+  /* 입장료 없는 도보 관광지 묶음에 붙는 한 줄 설명 */
+  .bx-free{ display:block; margin:-2px 0 9px; padding:8px 12px; border:0; border-radius:9px;
+    background:#E7F8F5; font-size:11.8px; font-weight:600; color:#0A6E5D;
+    letter-spacing:0; text-transform:none; line-height:1.6; }
 
 
 
@@ -664,7 +668,8 @@
 
   var CFG = null, ITEMS = [], CITIES = [], VIA = [], 기호 = '€';
   var S = { 인원: 20, 일수: 7, 출발일: '', 일정: [],
-            숙박: '', 차량: '', 가이드: '', 싱글: 0, 기차: [], 항공: [] };
+            숙박: {}, 차량: '', 가이드: '', 싱글: 0, 기차: [], 항공: [] };
+  /* 숙박은 도시마다 따로 고릅니다 — { '마드리드': 'h101', '바르셀로나': 'h108' } */
   var 조언 = null;        /* AI 가 달아 준 코멘트 — 단추를 누르셔야 생깁니다 */
   var 조언중 = false;
 
@@ -870,7 +875,10 @@
     }) : [];
     기호 = CFG.기호 || '€';
     ITEMS = ((d && Array.isArray(d.품목)) ? d.품목 : []).filter(function(x){
-      return x && x.공개 !== false && String(x.이름 || '').trim() && Number(x.금액) > 0;
+      /* 금액이 비어 있는 항목은 입력을 빠뜨린 것으로 보고 거릅니다.
+         다만 "기본 포함" 으로 두신 도보 관광지는 원래 입장료가 없으니 통과시킵니다. */
+      return x && x.공개 !== false && String(x.이름 || '').trim() &&
+             (Number(x.금액) > 0 || x.기본 === true);
     });
 
     if(CFG.공개 !== true || !ITEMS.length){ 준비중(); return; }
@@ -880,6 +888,7 @@
     맞추기();
     뼈대();
     날짜그리기();
+    숙박그리기();
     지도그리기();
     $('bxBar').hidden = false;
     계산();
@@ -898,16 +907,29 @@
   /* 여행일수가 바뀌면 날짜 칸 수를 맞춥니다 (이미 고르신 건 그대로 둡니다) */
   function 맞추기(){
     while(S.일정.length < S.일수){
-      S.일정.push({ 도시: CITIES[0] || '', 입장지: [], 식사: [], 종류: '관광' });
+      /* 1일차는 도착하는 날이라 공항 → 호텔 이동만 두고 시작합니다 */
+      S.일정.push({ 도시: CITIES[0] || '', 입장지: [], 식사: [],
+                    종류: S.일정.length === 0 ? '이동' : '관광' });
     }
     /* 종류: 관광 · 이동(공항↔호텔) · 자유(종일 자유시간) */
     S.일정.forEach(function(d){
       if(d.종류 !== '관광' && d.종류 !== '이동' && d.종류 !== '자유') d.종류 = '관광';
       /* 공항 이동일에 무엇이 필요한지 — 처음엔 둘 다 켜 둡니다 */
-      if(typeof d.미팅가이드 !== 'boolean') d.미팅가이드 = true;
+      /* 차량은 공항 이동 그 자체라 켜 두고, 가이드 미팅은 덧붙이는 것이라 꺼 둡니다 */
+      if(typeof d.미팅가이드 !== 'boolean') d.미팅가이드 = false;
       if(typeof d.미팅차량 !== 'boolean') d.미팅차량 = true;
     });
     if(S.일정.length > S.일수) S.일정.length = S.일수;
+    /* 예전에 쓰시던 "등급 하나만 고르기" 를 도시별 고르기로 옮깁니다 */
+    if(!S.숙박 || typeof S.숙박 !== 'object') S.숙박 = {};
+    /* 도시마다 입장료 없는 도보 관광지를 넣어 둡니다 */
+    무료채우기();
+    /* 1일차를 공항 이동으로 두신 동안에는 입장지·식사를 담아 두지 않습니다.
+       화면에서 안 보이는데 금액만 붙는 일이 없게 하려는 것입니다. */
+    if(S.일정[0] && S.일정[0].종류 === '이동'){
+      S.일정[0].입장지 = [];
+      S.일정[0].식사 = [];
+    }
   }
 
 
@@ -1131,31 +1153,6 @@
         (안내 ? '<div class="bx-recap" style="margin:18px 0 0;"><div>' + esc(안내) + '</div></div>' : '') +
       '</div>';
 
-    if(종류('입장지').length || 종류('식사').length){
-      html +=
-        '<div class="bx-card">' +
-          '<h2>날짜별로 담기</h2>' +
-          '<div class="sub">하루씩 도시를 고르고, 그 날 가실 곳과 드실 끼니를 골라 주세요. 안 고르셔도 됩니다.<br>' +
-          '<b>종일 자유시간</b>으로 두신 날은 차량과 가이드 비용이 붙지 않습니다.</div>' +
-          (CFG.AI추천 !== false
-            ? '<div class="bx-ai">' +
-                '<span class="wd"><b>어디를 넣을지 고민되시나요?</b> 지금까지 고르신 일정을 보고 ' +
-                '날마다 한 줄 코멘트와 더 넣으면 좋을 곳을 골라 드립니다.</span>' +
-                '<button type="button" class="bx-aibtn" id="bxAi">✨ AI 추천 받기</button>' +
-                '<span class="bx-aimsg" id="bxAiMsg" hidden></span>' +
-              '</div>' +
-              '<div class="bx-aitop" id="bxAiTop" hidden></div>'
-            : '') +
-          '<div id="bxDays"></div>' +
-        '</div>';
-    }
-
-    html +=
-      '<div class="bx-card">' +
-        '<h2>고르신 길</h2>' +
-        '<div class="sub">날짜 순서대로 이어 봤습니다. 도시를 바꾸시면 지도도 같이 바뀝니다.</div>' +
-        '<div id="bxMap"></div>' +
-      '</div>';
 
     ['숙박','차량','가이드'].forEach(function(k){
       var list = 종류(k);
@@ -1181,6 +1178,18 @@
             '</span>' +
           '</div>';
       }
+      /* 숙박만 도시별로 따로 고릅니다 — 내용은 숙박그리기() 가 채웁니다 */
+      if(k === '숙박'){
+        html +=
+          '<div class="bx-card">' +
+            '<h2>숙박</h2>' +
+            '<div class="sub">도시마다 묵으실 호텔을 고르세요. 2인 1실 1박 요금입니다.' +
+              (CFG.숙박조건 ? ' ' + esc(CFG.숙박조건) : '') + '</div>' +
+            '<div id="bxStay"></div>' + 싱글칸 +
+          '</div>';
+        return;
+      }
+
       html +=
         '<div class="bx-card">' +
           '<h2>' + k + '</h2>' +
@@ -1188,11 +1197,37 @@
           '<div class="bx-opts" data-one="' + k + '">' +
             하나옵션(k, '', { 이름:'선택 안 함', 설명:'', 금액:0 }) +
             list.map(function(it){ return 하나옵션(k, it.id, it); }).join('') +
-          '</div>' + 싱글칸 +
+          '</div>' +
           (k === '차량' ? '<div id="bxDead"></div>' : '') +
           (k === '가이드' ? '<div id="bxLocal"></div>' : '') +
         '</div>';
     });
+
+    if(종류('입장지').length || 종류('식사').length){
+      html +=
+        '<div class="bx-card">' +
+          '<h2>날짜별로 담기</h2>' +
+          '<div class="sub">하루씩 도시를 고르고, 그 날 가실 곳과 드실 끼니를 골라 주세요. 안 고르셔도 됩니다.<br>' +
+          '<b>종일 자유시간</b>으로 두신 날은 차량과 가이드 비용이 붙지 않습니다.</div>' +
+          (CFG.AI추천 !== false
+            ? '<div class="bx-ai">' +
+                '<span class="wd"><b>어디를 넣을지 고민되시나요?</b> 지금까지 고르신 일정을 보고 ' +
+                '날마다 한 줄 코멘트와 더 넣으면 좋을 곳을 골라 드립니다.</span>' +
+                '<button type="button" class="bx-aibtn" id="bxAi">✨ AI 추천 받기</button>' +
+                '<span class="bx-aimsg" id="bxAiMsg" hidden></span>' +
+              '</div>' +
+              '<div class="bx-aitop" id="bxAiTop" hidden></div>'
+            : '') +
+          '<div id="bxDays"></div>' +
+        '</div>';
+    }
+
+    html +=
+      '<div class="bx-card">' +
+        '<h2>고르신 길</h2>' +
+        '<div class="sub">날짜 순서대로 이어 봤습니다. 도시를 바꾸시면 지도도 같이 바뀝니다.</div>' +
+        '<div id="bxMap"></div>' +
+      '</div>';
 
     /* 구간 이동 — 기차 · 항공 */
     if(종류('기차').length || 종류('항공').length){
@@ -1246,7 +1281,7 @@
     });
     $('bxDaysN').addEventListener('input', function(){
       S.일수 = Math.max(1, Math.min(최대일수, Number(this.value) || 1));
-      맞추기(); 날짜그리기(); 지도그리기(); 계산();
+      맞추기(); 날짜그리기(); 숙박그리기(); 지도그리기(); 계산();
     });
     $('bxStart').addEventListener('change', function(){ S.출발일 = this.value; });
 
@@ -1282,12 +1317,18 @@
     $('bxRoot').addEventListener('click', function(e){
       var t = e.target && e.target.closest ? e.target.closest('[data-daytype]') : null;
       if(!t) return;
-      var 그날 = S.일정[Number(t.dataset.daytype)];
+      var 날번호 = Number(t.dataset.daytype);
+      var 그날 = S.일정[날번호];
       그날.종류 = t.dataset.k;
       if(그날.종류 === '이동'){
-        if(typeof 그날.미팅가이드 !== 'boolean') 그날.미팅가이드 = true;
+        if(typeof 그날.미팅가이드 !== 'boolean') 그날.미팅가이드 = false;
         if(typeof 그날.미팅차량 !== 'boolean') 그날.미팅차량 = true;
+        /* 1일차를 공항 이동으로 바꾸시면 그 날 담아 두셨던 입장지·식사는 비웁니다 */
+        if(날번호 === 0){ 그날.입장지 = []; 그날.식사 = []; }
       }
+      /* 관광으로 되돌리시면 그 도시의 무료 관광지를 다시 넣어 드립니다 */
+      그날.채운도시 = '';
+      무료채우기();
       날짜그리기(); 지도그리기(); 계산();
     });
     $('bxGo').addEventListener('click', 문의열기);
@@ -1306,6 +1347,94 @@
       '<input type="radio" name="one-' + esc(k) + '" value="' + esc(id) + '"' + (켬 ? ' checked' : '') + '>' +
       '<span class="tx"><span class="t">' + esc(it.이름) + '</span>' +
       (it.설명 ? '<span class="d">' + esc(it.설명) + '</span>' : '') + '</span>' + 금액 + '</label>';
+  }
+
+  /* ---------------- 도시별 숙박 ---------------- */
+
+  /* 도시마다 몇 밤을 묵는지 셉니다. 마지막 날은 돌아가는 날이라 세지 않습니다 */
+  function 박세기(){
+    var 셈 = {}, 순서 = [];
+    for(var i = 0; i < S.일정.length - 1; i++){
+      var c = S.일정[i].도시;
+      if(!c) continue;
+      if(셈[c] === undefined){ 셈[c] = 0; 순서.push(c); }
+      셈[c]++;
+    }
+    return 순서.map(function(c){ return { 도시: c, 박: 셈[c] }; });
+  }
+
+  /* 그 도시의 기준호텔. 아직 등록된 호텔이 없는 도시는 등급만 있는 예비 호텔을 보여 드립니다 */
+  function 도시호텔(도시){
+    var 전부 = 종류('숙박');
+    var 그곳 = 전부.filter(function(h){ return h.도시 === 도시; });
+    return 그곳.length ? 그곳 : 전부.filter(function(h){ return !h.도시; });
+  }
+
+  function 숙박목록(){
+    return 박세기().map(function(x){
+      x.id = (S.숙박 && S.숙박[x.도시]) || '';
+      return x;
+    });
+  }
+
+  function 호텔옵션(도시, id, it){
+    var 켬 = ((S.숙박 && S.숙박[도시]) || '') === id;
+    var 금액 = (CFG.항목금액보이기 && Number(it.금액) > 0)
+      ? '<span class="p">' + 기호 + 돈(it.금액) + '</span>' : '';
+    return '<label class="bx-opt' + (켬 ? ' on' : '') + '">' +
+      '<input type="radio" name="stay-' + esc(도시) + '" data-stay-city="' + esc(도시) + '" ' +
+        'value="' + esc(id) + '"' + (켬 ? ' checked' : '') + '>' +
+      '<span class="tx"><span class="t">' + esc(it.이름) + '</span>' +
+      (it.설명 ? '<span class="d">' + esc(it.설명) + '</span>' : '') + '</span>' + 금액 + '</label>';
+  }
+
+  function 숙박그리기(){
+    var box = $('bxStay');
+    if(!box) return;
+    var 목록 = 숙박목록();
+    if(!목록.length){
+      box.innerHTML = '<div class="bx-empty">여행일수를 2일 이상으로 두시면 ' +
+        '날짜별로 고르신 도시마다 호텔이 여기에 나옵니다.</div>';
+      return;
+    }
+    box.innerHTML = 목록.map(function(x){
+      var 호텔 = 도시호텔(x.도시);
+      return '<div class="bx-grp"><b>' + esc(x.도시) + ' · ' + x.박 + '박</b>' +
+        '<div class="bx-opts" data-stay="' + esc(x.도시) + '">' +
+          호텔옵션(x.도시, '', { 이름: '선택 안 함', 설명: '', 금액: 0 }) +
+          호텔.map(function(h){ return 호텔옵션(x.도시, h.id, h); }).join('') +
+        '</div></div>';
+    }).join('');
+  }
+
+  /* ---------------- 입장료 없는 도보 관광지 ---------------- */
+
+  function 자동목록(도시){
+    if(!도시) return [];
+    return 종류('입장지').filter(function(x){ return x.기본 && x.도시 === 도시; });
+  }
+
+  /* 도시를 고르시면 그 도시의 무료 관광지를 그 날 일정에 넣어 둡니다.
+     같은 도시에 며칠 머무시면 첫날에만 넣고, 손님이 체크를 푸신 것은 되살리지 않습니다
+     (도시를 바꾸셨을 때만 다시 채웁니다). */
+  function 무료채우기(){
+    var 첫날 = {};
+    S.일정.forEach(function(d, i){
+      if(d.도시 && d.종류 !== '이동' && 첫날[d.도시] === undefined) 첫날[d.도시] = i;
+    });
+    S.일정.forEach(function(d, i){
+      if(d.채운도시 === d.도시) return;          /* 도시가 그대로면 손대지 않습니다 */
+      if(d.채운도시){
+        var 옛 = 자동목록(d.채운도시).map(function(x){ return x.id; });
+        d.입장지 = d.입장지.filter(function(id){ return 옛.indexOf(id) === -1; });
+      }
+      if(d.종류 !== '이동' && 첫날[d.도시] === i){
+        자동목록(d.도시).forEach(function(x){
+          if(d.입장지.indexOf(x.id) === -1) d.입장지.push(x.id);
+        });
+      }
+      d.채운도시 = d.도시;
+    });
   }
 
   function 구간옵션(kind, it){
@@ -1479,26 +1608,47 @@
             '<span class="tx"><span class="t">' + 이름글 + '</span>' +
             '<span class="d">' + 밑글 + '</span></span>' + 값 + '</label>';
         };
-        안 += '<div class="bx-movenote">공항에서 만나 호텔까지, 또는 호텔에서 공항까지만 모십니다. ' +
-              '<b>필요한 것만 골라 주세요.</b> 관광 일정은 넣지 않으셔도 됩니다.</div>' +
+        안 += '<div class="bx-movenote">' +
+              (i === 0
+                ? '도착하시는 날입니다. 공항에서 맞이해 호텔까지 모십니다. ' +
+                  '이 날은 관광과 식사를 넣지 않습니다 — 넣으시려면 위에서 <b>관광</b>으로 바꿔 주세요.'
+                : '공항에서 만나 호텔까지, 또는 호텔에서 공항까지만 모십니다. ' +
+                  '<b>필요한 것만 골라 주세요.</b> 관광 일정은 넣지 않으셔도 됩니다.') +
+              '</div>' +
               '<div class="bx-grp"><b>이 날 필요한 것</b><div class="bx-opts">' +
                 칸('미팅가이드', '가이드 미팅', '공항에서 맞이해 안내해 드립니다', 미팅가) +
                 칸('미팅차량', '차량', '공항 ↔ 호텔 이동', 미팅차) +
               '</div></div>';
       }
 
-      if(입장지.length){
+      /* 1일차를 공항 이동으로 두셨으면 입장지·식사 칸을 아예 내보내지 않습니다 */
+      var 도착일 = (i === 0 && day.종류 === '이동');
+
+      /* 입장료가 없는 도보 관광지는 따로 묶어서 위에 둡니다 */
+      var 칸만들기 = function(목록){
+        return 목록.map(function(it){
+          var 켬 = day.입장지.indexOf(it.id) !== -1;
+          var 잠긴날 = (!켬 && 담은곳[it.id] !== undefined) ? 담은곳[it.id] : null;
+          return 여럿옵션(i, '입장지', it, 켬, 잠긴날);
+        }).join('');
+      };
+
+      if(입장지.length && !도착일){
+        var 도보 = 그날입장지.filter(function(x){ return x.기본; });
+        var 유료 = 그날입장지.filter(function(x){ return !x.기본; });
+
+        if(도보.length){
+          안 += '<div class="bx-grp"><b>함께 둘러보는 곳</b>' +
+                '<span class="bx-free">입장료가 없는 곳이라 금액이 붙지 않습니다. ' +
+                '빼고 싶으시면 체크를 푸세요.</span>' +
+                '<div class="bx-opts">' + 칸만들기(도보) + '</div></div>';
+        }
         안 += '<div class="bx-grp"><b>가고 싶은 곳</b><div class="bx-opts">' +
-          (그날입장지.length
-            ? 그날입장지.map(function(it){
-                var 켬 = day.입장지.indexOf(it.id) !== -1;
-                var 잠긴날 = (!켬 && 담은곳[it.id] !== undefined) ? 담은곳[it.id] : null;
-                return 여럿옵션(i, '입장지', it, 켬, 잠긴날);
-              }).join('')
-            : '<span class="bx-empty">이 도시에 등록된 입장지가 아직 없습니다.</span>') +
+          (유료.length ? 칸만들기(유료)
+                       : '<span class="bx-empty">이 도시에 등록된 입장지가 아직 없습니다.</span>') +
           '</div></div>';
       }
-      if(식사.length){
+      if(식사.length && !도착일){
         안 += '<div class="bx-grp"><b>식사</b><div class="bx-opts">' +
           식사.map(function(it){
             return 여럿옵션(i, '식사', it, day.식사.indexOf(it.id) !== -1);
@@ -1558,13 +1708,28 @@
       S.일정[di].도시 = t.value;
       /* 도시가 바뀌면 그 날 고른 입장지는 비웁니다 (다른 도시 것이 남지 않도록) */
       S.일정[di].입장지 = [];
+      S.일정[di].채운도시 = '';          /* 새 도시의 무료 관광지를 다시 넣게 합니다 */
+      무료채우기();
       /* 전에 받은 AI 코멘트는 그 날에 한해 더는 맞지 않으니 치웁니다 */
       if(조언 && 조언.날 && 조언.날[di]) 조언.날[di] = null;
-      날짜그리기(); 지도그리기(); 계산();
+      날짜그리기(); 숙박그리기(); 지도그리기(); 계산();
       return;
     }
 
-    /* 숙박 · 차량 · 가이드 */
+    /* 도시별 숙박 */
+    if(t.type === 'radio' && t.dataset && t.dataset.stayCity){
+      if(!S.숙박 || typeof S.숙박 !== 'object') S.숙박 = {};
+      if(t.value) S.숙박[t.dataset.stayCity] = t.value;
+      else delete S.숙박[t.dataset.stayCity];
+      var 숙wrap = t.closest('.bx-opts');
+      if(숙wrap) Array.prototype.forEach.call(숙wrap.querySelectorAll('.bx-opt'), function(l){
+        l.classList.toggle('on', !!l.querySelector('input').checked);
+      });
+      계산();
+      return;
+    }
+
+    /* 차량 · 가이드 */
     if(t.type === 'radio' && t.name && t.name.indexOf('one-') === 0){
       var k = t.name.slice(4);
       S[k] = t.value;
@@ -1611,7 +1776,9 @@
     });
     S.기차.forEach(function(id){ 인당 += 값(id); });
     S.항공.forEach(function(id){ 인당 += 값(id); });
-    if(S.숙박) 인당 += 값(S.숙박) * 박;
+    /* 숙박은 도시마다 고르신 호텔 × 그 도시에서 묵는 밤 수로 셉니다 */
+    var 묵음 = 숙박목록();
+    묵음.forEach(function(x){ if(x.id) 인당 += 값(x.id) * x.박; });
     /*
       날마다 차량·가이드를 얼마나 세느냐
         관광      하루치
@@ -1655,7 +1822,9 @@
     /* 싱글룸 — 쓰시는 분 수만큼 방값의 몇 % 를 더합니다 */
     var 비율 = Number(CFG.싱글차지비율) > 0 ? Number(CFG.싱글차지비율) : 80;
     var 싱글수 = Math.max(0, Math.min(N, Number(S.싱글) || 0));
-    if(S.숙박 && 싱글수) 그룹 += 값(S.숙박) * (비율 / 100) * 박 * 싱글수;
+    if(싱글수) 묵음.forEach(function(x){
+      if(x.id) 그룹 += 값(x.id) * (비율 / 100) * x.박 * 싱글수;
+    });
 
     /*
       현지 법정 가이드 — 일정 인원이 넘으면 현지 가이드가 함께해야 합니다.
@@ -1725,10 +1894,13 @@
       }
     });
     줄.push('');
-    if(S.숙박){
+    var 묵은곳 = 숙박목록().filter(function(x){ return x.id; });
+    if(묵은곳.length){
       var 비 = Number(CFG.싱글차지비율) > 0 ? Number(CFG.싱글차지비율) : 80;
-      줄.push('숙박: ' + 이름(S.숙박) +
-        (m.싱글 ? ' · 싱글룸 ' + m.싱글 + '명 (방값의 ' + 비 + '% 추가)' : ''));
+      줄.push('숙박' + (m.싱글 ? ' (싱글룸 ' + m.싱글 + '명 · 방값의 ' + 비 + '% 추가)' : '') + ':');
+      묵은곳.forEach(function(x){
+        줄.push('  · ' + x.도시 + ' ' + x.박 + '박 — ' + 이름(x.id));
+      });
     }
     if(S.차량){
       var 꼬리 = [];
@@ -1816,10 +1988,13 @@
     }).join('');
 
     var 포함 = [];
-    if(S.숙박){
+    var 묵은곳2 = 숙박목록().filter(function(x){ return x.id; });
+    if(묵은곳2.length){
       var 비 = Number(CFG.싱글차지비율) > 0 ? Number(CFG.싱글차지비율) : 80;
-      포함.push(['숙박', 이름(S.숙박) + (CFG.숙박조건 ? ' · ' + CFG.숙박조건 : '') +
-                 (m.싱글 ? ' · 싱글룸 ' + m.싱글 + '명 (방값의 ' + 비 + '% 추가)' : '')]);
+      포함.push(['숙박',
+        묵은곳2.map(function(x){ return x.도시 + ' ' + x.박 + '박 ' + 이름(x.id); }).join(' · ') +
+        (CFG.숙박조건 ? ' · ' + CFG.숙박조건 : '') +
+        (m.싱글 ? ' · 싱글룸 ' + m.싱글 + '명 (방값의 ' + 비 + '% 추가)' : '')]);
     }
     if(S.차량){
       var ㅊ = [];
