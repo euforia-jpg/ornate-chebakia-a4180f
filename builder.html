@@ -361,6 +361,22 @@
     .doc-tb td.c{ width:110px; font-weight:800; white-space:nowrap; }
     .doc-tb td.n{ width:76px; text-align:right; font-weight:700; color:#6E6A93; white-space:nowrap; }
     .doc-tb tr{ page-break-inside:avoid; }
+    /* 일자별 일정 — 여행사 일정표처럼 한 줄에 한 가지만 */
+    .doc-day td{ padding:8px 10px 9px 0; }
+    .doc-day td.d{ color:#14103D; }
+    .doc-day .ln{ position:relative; padding-left:10px; }
+    .doc-day .ln + .ln{ margin-top:1px; }
+    .doc-day .ln::before{ content:'·'; position:absolute; left:2px; top:-.5px;
+      color:#6C3CE9; font-weight:800; }
+    .doc-day .ln em{ font-style:normal; color:#6E6A93; }
+    .doc-day .ml{ margin-top:5px; font-size:8.8pt; color:#3C3663; }
+    .doc-day .ml span + span{ margin-left:16px; }
+    .doc-day .ht{ margin-top:3px; font-size:8.8pt; font-weight:700; color:#14103D; }
+    .doc-day .ml b{ display:inline-block; min-width:26px; margin-right:5px;
+      font-size:7.6pt; font-weight:800; color:#6E6A93; }
+    .doc-day .ht b{ display:inline-block; min-width:48px; margin-right:5px;
+      font-size:7.6pt; font-weight:800; color:#6E6A93; }
+    .doc-day .ml i, .doc-day .ht i{ font-style:normal; font-weight:700; color:#6E6A93; }
     .doc-note{ margin-top:16px; padding:10px 12px; background:#F6F5FC; border-radius:6px;
       font-size:8.5pt; line-height:1.65; color:#6E6A93; }
     .doc-note b{ color:#14103D; }
@@ -520,6 +536,15 @@
   .bx-freenote{ margin-top:12px; padding:10px 13px; border-radius:10px; background:#E7F8F5;
     font-size:12.5px; font-weight:600; color:#0A6E5D; line-height:1.7; }
   .bx-freenote b{ font-weight:800; }
+
+  /* 외관 관광 — 고르지 않으셔도 밖에서 보고 지나가는 곳 */
+  .bx-outside{ margin-top:10px; padding:10px 13px; border-radius:10px;
+    background:#F6F5FC; border:1.5px dashed var(--line);
+    font-size:12.5px; font-weight:700; color:var(--navy); line-height:1.65; }
+  .bx-outside b{ display:inline-block; margin-right:8px; padding:3px 9px; border-radius:999px;
+    background:var(--navy); color:#fff; font-size:11px; font-weight:800; }
+  .bx-outside em{ display:block; margin-top:4px; font-style:normal;
+    font-size:11.5px; font-weight:600; color:var(--muted); }
 
   /* 싱글룸 */
   .bx-single{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:14px;
@@ -1695,6 +1720,35 @@
     });
   }
 
+  /* ---------------- 외관 관광 ----------------
+     입장권을 고르지 않으셔도, 밖에서 보고 지나가는 곳입니다.
+     (카사 바트요 · 카사 밀라처럼 「외관」으로 표시된 입장지)         */
+
+  function 외관목록(도시){
+    if(!도시) return [];
+    return 종류('입장지').filter(function(x){ return x.외관 && x.도시 === 도시; });
+  }
+
+  /* 어느 날에든 한 번이라도 고르셨으면 그 곳은 외관이 아니라 입장입니다 */
+  function 고른입장지(){
+    var 다 = {};
+    S.일정.forEach(function(d){
+      (d.입장지 || []).forEach(function(id){ 다[id] = true; });
+    });
+    return 다;
+  }
+
+  /* i 일차에 "외관으로만" 보고 지나가는 곳 — 그 도시 첫날에만 적습니다 */
+  function 외관보기(i){
+    var d = S.일정[i];
+    if(!d || !d.도시 || d.종류 === '이동') return [];
+    for(var k = 0; k < i; k++){
+      if(S.일정[k].도시 === d.도시 && S.일정[k].종류 !== '이동') return [];
+    }
+    var 고름 = 고른입장지();
+    return 외관목록(d.도시).filter(function(x){ return !고름[x.id]; });
+  }
+
   function 구간옵션(kind, it){
     var 켬 = S[kind].indexOf(it.id) !== -1;
     var 금액 = CFG.항목금액보이기 ? '<span class="p">' + 기호 + 돈(it.금액) + '</span>' : '';
@@ -1904,7 +1958,15 @@
         안 += '<div class="bx-grp"><b>가고 싶은 곳</b><div class="bx-opts">' +
           (유료.length ? 칸만들기(유료)
                        : '<span class="bx-empty">이 도시에 등록된 입장지가 아직 없습니다.</span>') +
-          '</div></div>';
+          '</div>';
+        var 외관 = 외관보기(i);
+        if(외관.length){
+          안 += '<div class="bx-outside"><b>외관 관광</b>' +
+                외관.map(function(x){ return esc(x.이름); }).join(' · ') +
+                '<em>안에 들어가지 않고 밖에서 보며 지나갑니다. ' +
+                '입장을 원하시면 위에서 골라 주세요.</em></div>';
+        }
+        안 += '</div>';
       }
       if(식사.length && !도착일){
         안 += '<div class="bx-grp"><b>식사</b><div class="bx-opts">' +
@@ -2190,6 +2252,8 @@
         안.push('공항 이동' + (필요.length ? ' (' + 필요.join(' · ') + ')' : ' (수배 없음)'));
       }
       if(day.입장지.length) 안.push('가는 곳: ' + day.입장지.map(이름).join(', '));
+      var 밖 = 외관보기(i);
+      if(밖.length) 안.push('외관 관광: ' + 밖.map(function(x){ return x.이름; }).join(', '));
       if(day.식사.length)  안.push('식사: ' + day.식사.map(이름).join(', '));
       줄.push((i + 1) + '일차' + (day.도시 ? ' ' + day.도시 : '') + (안.length ? ' — ' + 안.join(' / ') : ''));
       if(i < S.일정.length - 1 && day.경유 !== false){
@@ -2270,23 +2334,67 @@
     var 총km = 0, 총분 = 0;
     구간.forEach(function(g){ 총km += g.km; 총분 += g.분; });
 
+    var 끝날 = S.일정.length - 1;
     var 일자 = S.일정.map(function(day, i){
-      var 안 = [];
-      if(day.종류 === '자유') 안.push('종일 자유시간');
+      var 줄 = [];
+      var 도착일 = (i === 0 && day.종류 === '이동');
+
       if(day.종류 === '이동'){
         var 필요 = [];
         if(day.미팅가이드 !== false) 필요.push('가이드 미팅');
         if(day.미팅차량 !== false) 필요.push('차량');
-        안.push('공항 이동' + (필요.length ? ' (' + 필요.join(' · ') + ')' : ''));
+        줄.push('공항 도착 후 호텔로 이동' + (필요.length ? ' (' + 필요.join(' · ') + ')' : ''));
       }
-      if(day.입장지.length) 안.push(day.입장지.map(이름).join(', '));
-      if(day.식사.length) 안.push('식사 — ' + day.식사.map(이름).join(', '));
-      var 다음 = (i < S.일정.length - 1) ? S.일정[i + 1].도시 : '';
-      var 들를곳 = (day.경유 !== false && 다음 && 이동수단(day.도시, 다음) === '차량')
-        ? 경유찾기(day.도시, 다음) : '';
-      if(들를곳) 안.push('가는 길에 ' + 들를곳 + ' 들름');
-      return '<tr><td class="d">' + (i + 1) + '일차</td><td class="c">' + esc(day.도시 || '—') +
-             '</td><td>' + (안.length ? esc(안.join(' / ')) : '—') + '</td></tr>';
+      /* 앞 날과 도시가 다르면 그 이동을 이 날 맨 위에 적습니다 */
+      var 이전 = (i > 0) ? S.일정[i - 1] : null;
+      if(이전 && 이전.도시 && 이전.도시 !== day.도시){
+        var 들를곳 = (이전.경유 !== false && 이동수단(이전.도시, day.도시) === '차량')
+          ? 경유찾기(이전.도시, day.도시) : '';
+        줄.push(이전.도시 + ' → ' + day.도시 + ' 이동' +
+                (들를곳 ? ' (가는 길에 ' + 들를곳 + ' 들름)' : ''));
+      }
+      if(day.종류 === '자유') 줄.push('종일 자유시간');
+
+      /* 입장하는 곳과 걸어서 둘러보는 곳을 나눠 적습니다 */
+      var 그날 = (day.입장지 || []).map(찾기).filter(Boolean);
+      그날.filter(function(x){ return !x.기본; }).forEach(function(x){
+        줄.push(x.이름 + (Number(x.금액) > 0 ? ' (입장)' : ''));
+      });
+      var 도보 = 그날.filter(function(x){ return x.기본; });
+      if(도보.length) 줄.push(도보.map(function(x){ return x.이름; }).join(' · ') + ' 둘러보기');
+      var 밖에서 = 외관보기(i);
+      if(밖에서.length) 줄.push(밖에서.map(function(x){ return x.이름; }).join(' · ') + ' 외관 관광');
+
+      /* 식사 — 중식 · 석식으로 나눕니다 */
+      var 중 = [], 석 = [], 그외 = [];
+      (day.식사 || []).forEach(function(id){
+        var n = 이름(id); if(!n) return;
+        if(n.indexOf('중식') >= 0) 중.push(n);
+        else if(n.indexOf('석식') >= 0) 석.push(n);
+        else 그외.push(n);
+      });
+      그외.forEach(function(n){ if(!중.length) 중.push(n); else 석.push(n); });
+      var 식줄 = 도착일 ? '' :
+        '<div class="ml">' +
+          '<span><b>중식</b>' + (중.length ? esc(중.join(' · ')) : '<i>불포함</i>') + '</span>' +
+          '<span><b>석식</b>' + (석.length ? esc(석.join(' · ')) : '<i>불포함</i>') + '</span>' +
+        '</div>';
+
+      /* 묵으실 곳 — 마지막 날은 묵지 않습니다 */
+      var 잠줄 = '';
+      if(i < 끝날){
+        var 호id = (S.숙박 && day.도시) ? (S.숙박[day.도시] || '') : '';
+        var 호 = 호id ? 찾기(호id) : null;
+        잠줄 = '<div class="ht"><b>예정 호텔</b>' + (호
+          ? esc(호.이름) + (호.등급 ? ' · ' + esc(호.등급) : '') + ' <i>또는 동급 호텔</i>'
+          : '<i>예정 호텔은 확인 후 안내드립니다 (또는 동급 호텔)</i>') + '</div>';
+      }
+
+      return '<tr><td class="d">' + (i + 1) + '일차</td>' +
+             '<td class="c">' + esc(day.도시 || '—') + '</td><td>' +
+             (줄.length ? 줄.map(function(t){ return '<div class="ln">' + esc(t) + '</div>'; }).join('')
+                        : '<div class="ln"><em>관광 일정 미정 — 상담 때 함께 정합니다</em></div>') +
+             식줄 + 잠줄 + '</td></tr>';
     }).join('');
 
     var 이동줄 = 구간.map(function(g){
@@ -2301,10 +2409,14 @@
     var 묵은곳2 = 숙박목록().filter(function(x){ return x.id; });
     if(묵은곳2.length){
       var 비 = Number(CFG.싱글차지비율) > 0 ? Number(CFG.싱글차지비율) : 80;
-      포함.push(['숙박',
-        묵은곳2.map(function(x){ return x.도시 + ' ' + x.박 + '박 ' + 이름(x.id); }).join(' · ') +
-        (CFG.숙박조건 ? ' · ' + CFG.숙박조건 : '') +
-        (m.싱글 ? ' · 싱글룸 ' + m.싱글 + '명 (방값의 ' + 비 + '% 추가)' : '')]);
+      묵은곳2.forEach(function(x, k){
+        var 호2 = 찾기(x.id);
+        포함.push([k === 0 ? '숙박' : '',
+          x.도시 + ' ' + x.박 + '박 — ' + (호2 ? 호2.이름 : 이름(x.id)) +
+          (호2 && 호2.등급 ? ' · ' + 호2.등급 : '') + ' 또는 동급 호텔']);
+      });
+      if(m.싱글) 포함.push(['', '싱글룸 ' + m.싱글 + '명 (방값의 ' + 비 + '% 추가)']);
+      if(CFG.숙박조건) 포함.push(['', CFG.숙박조건]);
     }
     if(S.차량){
       var ㅊ = [];
@@ -2349,7 +2461,7 @@
         '</div>' +
 
         '<h2 class="doc-h2">일자별 일정</h2>' +
-        '<table class="doc-tb"><tbody>' + 일자 + '</tbody></table>' +
+        '<table class="doc-tb doc-day"><tbody>' + 일자 + '</tbody></table>' +
 
         (이동줄 ? '<h2 class="doc-h2">구간별 이동</h2>' +
           '<table class="doc-tb"><tbody>' + 이동줄 + '</tbody></table>' : '') +
@@ -2372,6 +2484,7 @@
               '관광지 안에서 가이드가 함께 다니며 해설하는 것은 ' + 자유관광기준() + '명부터 가능합니다.<br>'
             : '') +
           '일정 만들기는 ' + 최소날() + '일 이상 일정에만 쓰실 수 있습니다.<br>' +
+          '일정표에 적힌 호텔은 <b>예정 호텔</b>이며, 현지 사정에 따라 <b>동급 호텔</b>로 바뀔 수 있습니다.<br>' +
           esc(CFG.안내문 || '') +
           ((S.기차.length || S.항공.length) && CFG.구간안내문
             ? '<br>' + esc(CFG.구간안내문) : '') +

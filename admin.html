@@ -2055,7 +2055,8 @@
   var BD_KINDS = [
     { k:'입장지', 단위:'1인당',      도시:true,
       how:'손님이 날짜마다 골라 담습니다. 도시를 정해 두면 그 날 고른 도시의 입장지만 보입니다. ' +
-          '“기본 포함” 을 켜면 금액 없이 그 날 일정에 자동으로 들어갑니다 — 솔 광장·람블라스 거리처럼 입장료가 없는 곳에 쓰세요.' },
+          '“기본 포함” 을 켜면 금액 없이 그 날 일정에 자동으로 들어갑니다 — 솔 광장·람블라스 거리처럼 입장료가 없는 곳에 쓰세요. ' +
+          '“외관 관광” 을 켜면, 손님이 입장권을 고르지 않으셔도 그 날 일정에 「외관 관광」 으로 적힙니다 — 카사 바트요·카사 밀라처럼 밖에서만 보고 지나가도 되는 곳에 쓰세요.' },
     { k:'숙박',   단위:'1인 1박',    도시:true,
       how:'손님은 도시마다 호텔을 하나씩 고릅니다. 2인 1실 기준 1박 금액을 호텔마다 넣어 주세요. ' +
           '도시를 비워 두면 “그 도시에 등록된 호텔이 없을 때” 쓰는 예비 항목이 됩니다. ' +
@@ -2253,7 +2254,9 @@
         esc(it.설명 || '') + '">' +
       (kind.k === '입장지'
         ? '<label class="on" title="도시를 고르면 그 날 일정에 자동으로 들어갑니다 (입장료 없는 곳)">' +
-          '<input type="checkbox" data-f="기본"' + (it.기본 ? ' checked' : '') + '>기본 포함</label>'
+          '<input type="checkbox" data-f="기본"' + (it.기본 ? ' checked' : '') + '>기본 포함</label>' +
+          '<label class="on" title="입장권을 안 고르시면 「외관 관광」 으로 일정에 적힙니다">' +
+          '<input type="checkbox" data-f="외관"' + (it.외관 ? ' checked' : '') + '>외관 관광</label>'
         : '') +
       '<label class="on"><input type="checkbox" data-f="공개"' + (it.공개 ? ' checked' : '') + '>공개</label>' +
       '<button type="button" class="rm" data-rm>지우기</button>' +
@@ -2333,6 +2336,8 @@
       row.classList.toggle('off', !t.checked);
     } else if(f === '기본'){
       it.기본 = t.checked;
+    } else if(f === '외관'){
+      it.외관 = t.checked;
     } else if(f === '금액'){
       var v = Number(t.value);
       it.금액 = v > 0 ? v : 0;
