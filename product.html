@@ -70,6 +70,73 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
 
   .p-title{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(24px,3vw,32px); color:var(--navy); margin:0 0 10px; }
   .p-lead{ font-size:14.5px; color:var(--ink); font-weight:700; line-height:1.7; margin:0 0 18px; }
+  /* ---------- 일정 지도 ---------- */
+  .eu-route{ margin:4px 0 28px; padding:20px 22px 22px; border:1.5px solid var(--line);
+    border-radius:20px; background:linear-gradient(170deg,#FBFAFF,#F4F2FC); }
+  .eu-route-head{ display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .eu-route-head h3{ margin:0; font-size:15px; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .eu-replay{ all:unset; cursor:pointer; margin-left:auto; padding:6px 13px; border-radius:999px;
+    border:1.5px solid var(--line); background:#fff; font-size:11.5px; font-weight:800; color:var(--muted); }
+  .eu-replay:hover{ border-color:#C9BDF7; color:var(--violet); }
+
+  .eu-route-body{ display:flex; gap:22px; align-items:flex-start; }
+  .eu-map{ flex:0 0 clamp(210px, 30vw, 310px); }
+  .eu-map svg{ width:100%; height:auto; display:block; overflow:visible; }
+
+  .eu-land{ fill:#E6E2F4; stroke:#D6D0EC; stroke-width:1; }
+  .eu-land.eu-prt{ fill:#FFFFFF; stroke:#C9BDF7; stroke-width:1.4; }
+
+  .eu-line{ fill:none; stroke:var(--violet); stroke-width:3; stroke-linecap:round;
+    stroke-linejoin:round; opacity:.92; }
+  .eu-route.go .eu-line{ stroke-dasharray:2000; stroke-dashoffset:2000;
+    animation:euDraw 2.4s cubic-bezier(.45,.05,.2,1) forwards; }
+  .eu-route.go.still .eu-line{ animation:none; stroke-dasharray:none; stroke-dashoffset:0; }
+  @keyframes euDraw{ to{ stroke-dashoffset:0; } }
+
+  .eu-pin{ opacity:0; }
+  .eu-route.go .eu-pin{ animation:euPop .5s ease-out forwards; animation-delay:var(--d); }
+  .eu-route.go.still .eu-pin{ animation:none; opacity:1; }
+  @keyframes euPop{ from{ opacity:0; transform:scale(.4); } to{ opacity:1; transform:scale(1); } }
+  .eu-pin{ transform-box:fill-box; transform-origin:center; }
+  .eu-halo{ fill:var(--violet); opacity:0; transition:opacity .18s; }
+  .eu-dot{ fill:#fff; stroke:var(--violet); stroke-width:3; }
+  .eu-pin.stay .eu-dot{ fill:var(--violet); }
+  .eu-pin.on .eu-halo{ opacity:.18; }
+  .eu-tx{ font-family:inherit; font-size:16px; font-weight:800; fill:var(--navy);
+    paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
+
+  .eu-days{ flex:1 1 auto; min-width:0; }
+  .eu-sum{ display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .eu-sum span{ padding:7px 13px; border-radius:999px; background:#fff; border:1.5px solid var(--line);
+    font-size:12px; font-weight:700; color:var(--muted); }
+  .eu-sum b{ font-size:14px; font-weight:800; color:var(--violet); margin-right:3px; }
+
+  .eu-days ol{ list-style:none; margin:0; padding:0; }
+  .eu-days li{ display:flex; gap:11px; align-items:baseline; padding:9px 11px; border-radius:11px;
+    cursor:default; transition:background .15s; }
+  .eu-days li + li{ box-shadow:inset 0 1px 0 #EDEAF8; }
+  .eu-days li.on{ background:#fff; }
+  .eu-days li b{ flex:none; width:20px; font-size:12.5px; font-weight:800; color:var(--violet);
+    font-variant-numeric:tabular-nums; }
+  .eu-days li .t{ flex:1 1 auto; min-width:0; font-size:13px; font-weight:800; color:var(--navy); }
+  .eu-days li .c{ font-size:12px; font-weight:600; color:var(--muted); margin-left:auto;
+    text-align:right; max-width:52%; }
+  .eu-days li .c em{ font-style:normal; color:#A9A4C8; }
+
+  @media (max-width:760px){
+    .eu-route{ padding:16px 14px 18px; }
+    .eu-route-body{ flex-direction:column; gap:14px; }
+    .eu-map{ flex:none; width:100%; max-width:300px; margin:0 auto; }
+    .eu-days li{ flex-wrap:wrap; gap:6px 10px; }
+    .eu-days li .c{ margin-left:31px; text-align:left; max-width:none; width:100%; }
+  }
+  @media print{
+    .eu-replay{ display:none !important; }
+    .eu-route{ background:#fff; }
+    .eu-pin, .eu-line{ opacity:1 !important; animation:none !important;
+      stroke-dashoffset:0 !important; stroke-dasharray:none !important; }
+  }
+
   .p-desc{ font-size:13.5px; color:var(--muted); font-weight:600; line-height:1.85; margin:0 0 24px; }
 
   .p-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
@@ -402,13 +469,214 @@ function getParam(name){
   return new URLSearchParams(window.location.search).get(name);
 }
 
+/* =========================================================================
+   일정 지도 — 일자별 길이 그려지는 그림
+   -------------------------------------------------------------------------
+   상품에 `경로` 가 들어 있으면 상세 페이지 위쪽에 지도가 뜹니다.
+
+     경로: [
+       { 일:1, 제목:'인천 → 리스본', 들:['리스본'], 숙:'리스본' },
+       { 일:3, 제목:'대륙의 끝',     들:['신트라','까보 다 로카','카스카이스','리스본'], 숙:'리스본' },
+       …
+     ]
+
+   도시 이름만 적으면 아래 좌표표에서 위치를 찾아 그립니다.
+   좌표표에 없는 이름은 그냥 건너뛰므로 지도가 깨지지 않습니다.
+
+   글자는 그림이 아니라 SVG 글자라서, 영어·중국어로 바꿔도 같이 번역됩니다.
+   ========================================================================= */
+
+/* 지도 창 — 포르투갈이 꽉 차게 잡았습니다 */
+var EU_MAP = { W:420, H:760, 왼:-10.3, 오:-6.0, 아래:36.8, 위:42.3 };
+
+/* 도시 좌표 — [경도, 위도, 이름 붙일지, 글자 쪽(L/R)] */
+var EU_PLACES = {
+  /* 포르투갈 */
+  '리스본':      [-9.14, 38.72, 1, 'R'],
+  '신트라':      [-9.39, 38.80, 1, 'L'],
+  '까보 다 로카': [-9.50, 38.78, 0, 'L'],
+  '카스카이스':   [-9.42, 38.70, 0, 'L'],
+  '오비두스':     [-9.16, 39.36, 0, 'R'],
+  '나자레':      [-9.07, 39.60, 1, 'L'],
+  '알코바사':     [-8.98, 39.55, 0, 'R'],
+  '바탈랴':      [-8.83, 39.66, 0, 'R'],
+  '파티마':      [-8.67, 39.63, 1, 'R'],
+  '토마르':      [-8.42, 39.60, 0, 'R'],
+  '코임브라':     [-8.43, 40.21, 1, 'R'],
+  '아베이루':     [-8.65, 40.64, 1, 'R'],
+  '코스타 노바':  [-8.75, 40.61, 0, 'L'],
+  '포르투':      [-8.61, 41.15, 1, 'R'],
+  '브라가':      [-8.43, 41.55, 1, 'R'],
+  '기마랑이스':   [-8.29, 41.44, 0, 'R'],
+  '두루 밸리':    [-7.78, 41.16, 0, 'R'],
+  '에보라':      [-7.91, 38.57, 1, 'R'],
+  '라고스':      [-8.67, 37.10, 1, 'R'],
+  '파루':       [-7.93, 37.02, 0, 'R'],
+  '베나길':      [-8.42, 37.09, 0, 'R'],
+  /* 스페인 — 이베리아 상품에 쓰려고 함께 둡니다 */
+  '마드리드':     [-3.70, 40.42, 1, 'R'],
+  '바르셀로나':   [ 2.17, 41.39, 1, 'R'],
+  '세비야':      [-5.98, 37.39, 1, 'R'],
+  '그라나다':     [-3.60, 37.18, 1, 'R'],
+  '발렌시아':     [-0.38, 39.47, 1, 'R'],
+  '사라고사':     [-0.88, 41.65, 1, 'R'],
+  '톨레도':      [-4.03, 39.86, 0, 'L'],
+  '코르도바':     [-4.78, 37.89, 0, 'L'],
+  '살라망카':     [-5.66, 40.97, 1, 'L'],
+  '세고비아':     [-4.12, 40.95, 0, 'R'],
+  '메리다':      [-6.34, 38.92, 0, 'R'],
+  '산티아고':     [-8.54, 42.88, 1, 'L'],
+  '론다':       [-5.17, 36.74, 0, 'L'],
+  '말라가':      [-4.42, 36.72, 0, 'R'],
+  '빌바오':      [-2.93, 43.26, 1, 'R'],
+  '산세바스티안':  [-1.98, 43.32, 0, 'R']
+};
+
+/* 나라 외곽선 — 내려받은 지도 자료에서 뽑아 둔 것입니다 */
+var EU_LAND = { PRT:'M148.7 49.6 L157.9 40.3 L167.1 34.2 L172.1 31.9 L193.1 25.6 L198.7 22.5 L203.8 23.0 L204.7 26.0 L207.7 31.9 L211.0 35.9 L212.0 38.9 L203.8 51.5 L202.7 55.8 L206.9 64.0 L207.7 66.3 L209.8 67.4 L215.4 67.1 L225.5 61.9 L232.4 57.5 L234.8 59.3 L254.6 56.9 L259.4 58.9 L262.5 61.1 L272.3 64.1 L282.9 64.4 L296.1 60.2 L301.9 55.9 L303.0 51.2 L303.2 47.6 L304.9 45.4 L308.0 44.1 L312.6 46.4 L319.3 48.3 L335.5 49.0 L338.6 46.4 L344.1 47.2 L351.3 50.5 L359.6 49.4 L363.8 53.5 L365.5 58.8 L366.0 70.5 L365.4 82.3 L367.0 86.7 L372.7 87.8 L381.7 87.7 L389.9 90.9 L396.3 96.5 L398.3 102.2 L399.2 106.1 L396.1 108.3 L391.7 116.8 L380.6 127.8 L364.7 137.7 L352.6 150.0 L344.2 164.8 L333.8 171.0 L330.6 174.4 L329.3 178.4 L336.2 196.5 L338.4 210.4 L340.1 227.4 L338.9 232.3 L338.4 251.1 L336.8 256.6 L337.2 261.0 L339.7 265.8 L340.9 270.4 L336.1 276.3 L327.4 283.1 L320.9 289.0 L319.1 294.6 L319.6 298.1 L330.5 310.0 L332.5 314.8 L331.0 326.5 L324.7 345.7 L318.7 357.3 L317.7 358.5 L310.8 361.8 L278.0 361.9 L270.0 364.6 L271.1 366.9 L278.8 381.9 L286.9 389.9 L289.6 391.7 L292.5 409.3 L305.5 437.3 L318.1 441.2 L322.5 448.2 L321.7 458.0 L317.8 468.8 L310.1 479.9 L300.8 487.7 L294.8 495.4 L294.4 504.5 L292.4 515.9 L289.5 524.9 L288.8 531.0 L311.9 569.2 L324.8 567.3 L326.5 568.2 L324.2 577.3 L320.1 588.0 L315.2 590.0 L304.2 593.3 L293.8 607.1 L285.3 623.7 L279.0 631.7 L273.1 651.5 L273.9 660.0 L276.7 673.2 L282.7 707.6 L274.1 709.1 L240.9 731.6 L230.5 731.6 L211.3 721.7 L177.3 718.5 L166.3 715.6 L152.5 722.1 L141.8 721.9 L133.3 730.2 L127.2 727.9 L134.2 709.4 L145.1 672.8 L144.7 650.5 L147.3 631.1 L144.3 611.9 L138.8 599.9 L146.3 568.8 L145.4 552.8 L138.6 532.5 L159.4 535.5 L153.0 527.5 L146.6 522.6 L140.5 523.7 L135.3 523.4 L117.6 531.3 L108.7 533.6 L106.1 532.3 L107.1 519.7 L102.5 503.4 L109.6 499.1 L117.9 497.9 L124.9 491.0 L129.2 483.2 L126.9 469.4 L133.0 456.3 L147.3 445.2 L139.9 446.9 L131.4 453.8 L118.1 478.8 L113.7 491.5 L102.3 495.7 L92.1 497.7 L86.9 496.4 L80.7 493.2 L80.1 483.8 L80.6 476.3 L84.8 461.5 L86.5 440.5 L92.5 421.7 L92.1 416.7 L90.4 409.3 L95.8 402.0 L102.4 397.1 L112.5 381.0 L126.6 342.6 L142.8 301.8 L141.5 296.8 L138.1 293.0 L139.4 282.0 L149.2 234.1 L153.2 227.9 L157.8 213.8 L158.8 191.2 L160.6 175.6 L160.2 167.7 L158.8 158.3 L152.5 140.3 L146.0 102.3 L145.5 89.5 L150.9 83.1 L142.0 82.2 L138.0 74.0 L138.9 64.7 L148.7 49.6Z', ESP:'M820.0 -153.0 L820.0 -148.2 L820.0 -141.6 L820.0 -139.2 L820.0 -135.8 L820.0 -135.3 L820.0 -133.7 L820.0 -129.9 L820.0 -124.0 L820.0 -117.3 L820.0 -111.2 L820.0 -106.6 L820.0 -103.9 L820.0 -101.8 L820.0 -101.2 L820.0 -101.9 L820.0 -105.6 L820.0 -110.1 L820.0 -108.1 L820.0 -105.0 L820.0 -99.6 L820.0 -89.8 L820.0 -89.6 L820.0 -88.4 L820.0 -84.2 L820.0 -68.9 L820.0 -69.4 L820.0 -69.0 L820.0 -70.2 L820.0 -73.1 L820.0 -72.6 L820.0 -69.6 L820.0 -67.1 L820.0 -62.0 L820.0 -55.8 L820.0 -53.8 L820.0 -57.9 L820.0 -54.3 L820.0 -54.3 L820.0 -55.3 L820.0 -53.4 L820.0 -53.8 L820.0 -69.2 L820.0 -74.0 L820.0 -75.3 L820.0 -74.3 L820.0 -66.2 L820.0 -61.1 L820.0 -57.1 L820.0 -56.6 L820.0 -54.0 L820.0 -40.9 L820.0 -34.3 L820.0 -31.9 L820.0 -27.3 L820.0 -22.3 L820.0 -19.0 L820.0 -18.6 L820.0 -19.6 L820.0 -21.6 L820.0 -27.2 L820.0 -28.1 L820.0 -21.7 L820.0 -17.5 L820.0 -12.8 L820.0 -8.1 L820.0 -7.4 L820.0 -11.9 L820.0 -16.7 L820.0 -12.5 L820.0 -6.3 L820.0 -5.6 L820.0 -8.6 L820.0 -12.9 L820.0 -15.0 L820.0 -15.6 L820.0 -17.9 L820.0 -21.6 L820.0 -23.1 L820.0 -20.3 L820.0 -18.1 L820.0 -18.1 L820.0 -9.4 L820.0 -6.0 L820.0 1.5 L820.0 5.5 L820.0 6.0 L820.0 19.0 L820.0 22.7 L820.0 26.1 L820.0 30.1 L820.0 49.2 L820.0 60.7 L820.0 73.6 L820.0 115.2 L820.0 135.3 L820.0 139.9 L820.0 152.6 L820.0 166.2 L820.0 171.1 L820.0 194.6 L820.0 204.1 L820.0 206.7 L820.0 218.0 L820.0 223.0 L820.0 230.7 L820.0 233.1 L820.0 231.8 L820.0 232.9 L820.0 273.7 L820.0 303.1 L820.0 315.9 L820.0 335.0 L820.0 384.2 L820.0 398.4 L820.0 447.4 L820.0 460.2 L820.0 471.0 L820.0 480.2 L820.0 489.3 L820.0 497.9 L820.0 513.2 L820.0 534.0 L820.0 550.3 L820.0 566.1 L820.0 573.2 L820.0 595.3 L820.0 609.9 L820.0 614.9 L820.0 626.0 L820.0 634.0 L820.0 645.2 L820.0 650.0 L820.0 652.1 L820.0 653.4 L820.0 654.8 L820.0 678.9 L820.0 700.2 L816.6 739.8 L799.8 763.2 L792.4 767.5 L780.9 757.3 L766.5 755.7 L752.5 759.1 L745.2 767.2 L733.8 771.8 L722.6 767.9 L698.5 765.7 L687.7 766.1 L670.9 772.7 L656.5 768.3 L632.2 766.1 L579.5 771.3 L572.9 773.8 L566.3 783.6 L549.5 800.6 L524.0 801.2 L500.9 812.0 L495.2 818.9 L485.5 838.0 L482.4 851.9 L477.9 848.6 L474.3 849.7 L472.5 860.4 L463.8 865.2 L456.6 867.0 L438.7 858.3 L423.8 845.4 L416.0 844.5 L403.4 824.4 L397.9 811.6 L394.0 797.8 L394.8 792.5 L393.7 788.1 L382.5 782.5 L379.7 769.8 L387.9 753.3 L394.7 746.3 L398.8 744.3 L388.7 745.0 L381.3 755.6 L371.9 738.6 L333.6 705.5 L336.1 697.9 L335.6 693.8 L329.2 702.7 L324.8 704.9 L305.2 703.5 L282.7 707.6 L276.7 673.2 L273.9 660.0 L273.1 651.5 L279.0 631.7 L285.3 623.7 L293.8 607.1 L304.2 593.3 L315.2 590.0 L320.1 588.0 L324.2 577.3 L326.5 568.2 L311.9 569.2 L288.8 531.0 L289.5 524.9 L292.4 515.9 L294.4 504.5 L294.8 495.4 L300.8 487.7 L310.1 479.9 L317.8 468.8 L321.7 458.0 L322.5 448.2 L318.1 441.2 L305.5 437.3 L292.5 409.3 L289.6 391.7 L286.9 389.9 L278.8 381.9 L271.1 366.9 L270.0 364.6 L278.0 361.9 L310.8 361.8 L317.7 358.5 L324.7 345.7 L331.0 326.5 L332.5 314.8 L330.5 310.0 L319.6 298.1 L319.1 294.6 L320.9 289.0 L327.4 283.1 L336.1 276.3 L340.9 270.4 L339.7 265.8 L337.2 261.0 L336.8 256.6 L338.4 251.1 L338.9 232.3 L340.1 227.4 L338.4 210.4 L336.2 196.5 L329.3 178.4 L330.6 174.4 L333.8 171.0 L344.2 164.8 L352.6 150.0 L364.7 137.7 L380.6 127.8 L391.7 116.8 L396.1 108.3 L399.2 106.1 L398.3 102.2 L396.3 96.5 L389.9 90.9 L381.7 87.7 L372.7 87.8 L367.0 86.7 L365.4 82.3 L366.0 70.5 L365.5 58.8 L363.8 53.5 L359.6 49.4 L351.3 50.5 L344.1 47.2 L338.6 46.4 L335.5 49.0 L319.3 48.3 L312.6 46.4 L308.0 44.1 L304.9 45.4 L303.2 47.6 L303.0 51.2 L301.9 55.9 L296.1 60.2 L282.9 64.4 L272.3 64.1 L262.5 61.1 L259.4 58.9 L254.6 56.9 L234.8 59.3 L232.4 57.5 L225.5 61.9 L215.4 67.1 L209.8 67.4 L207.7 66.3 L206.9 64.0 L202.7 55.8 L203.8 51.5 L212.0 38.9 L211.0 35.9 L207.7 31.9 L204.7 26.0 L203.8 23.0 L198.7 22.5 L193.1 25.6 L172.1 31.9 L167.1 34.2 L157.9 40.3 L148.7 49.6 L141.4 51.6 L138.9 48.8 L138.0 26.9 L149.2 12.4 L157.2 3.6 L153.4 1.8 L145.0 2.0 L145.5 -4.8 L149.5 -8.0 L153.3 -15.4 L148.8 -18.6 L145.3 -23.5 L145.5 -36.3 L146.5 -41.4 L145.4 -47.0 L128.2 -39.5 L123.7 -40.6 L123.6 -50.1 L133.1 -64.5 L134.1 -68.9 L122.9 -71.0 L114.6 -78.1 L109.4 -84.4 L104.0 -93.5 L104.0 -101.7 L109.6 -120.8 L117.6 -126.3 L124.6 -129.7 L139.3 -142.9 L159.6 -140.5 L172.2 -143.3 L183.5 -150.0 L189.9 -151.6 L200.3 -157.4 L200.0 -165.4 L196.4 -171.3 L199.6 -176.9 L211.3 -183.7 L224.2 -192.7 L239.0 -194.4 L254.1 -202.4 L264.3 -197.2 L273.1 -199.0 L283.3 -192.9 L296.7 -178.9 L316.4 -173.3 L332.0 -177.7 L359.7 -178.6 L373.5 -176.7 L398.1 -180.2 L412.2 -178.9 L435.0 -185.9 L452.6 -177.2 L486.8 -173.2 L507.4 -166.1 L564.3 -154.2 L584.8 -154.0 L613.9 -160.7 L626.2 -165.7 L637.4 -162.8 L654.0 -168.5 L661.9 -167.3 L672.2 -159.1 L708.6 -148.1 L718.1 -157.5 L725.2 -159.5 L751.4 -153.8 L777.8 -142.1 L791.5 -141.2 L811.5 -144.4 L820.0 -152.1 L820.0 -153.0Z' };
+
+function euPt(이름){
+  var p = EU_PLACES[이름];
+  if(!p) return null;
+  var m = EU_MAP;
+  return {
+    이름: 이름,
+    x: (p[0] - m.왼) / (m.오 - m.왼) * m.W,
+    y: m.H - (p[1] - m.아래) / (m.위 - m.아래) * m.H,
+    표: p[2], 쪽: p[3] || 'R'
+  };
+}
+
+/* 상품의 경로를 하나로 이은 점 목록 (같은 곳이 이어지면 한 번만) */
+function euRoutePoints(경로){
+  var 점 = [];
+  경로.forEach(function(d, i){
+    (d.들 || []).forEach(function(이름){
+      var p = euPt(이름);
+      if(!p) return;
+      var 앞 = 점[점.length - 1];
+      if(앞 && 앞.이름 === 이름){ 앞.끝일 = d.일; return; }
+      p.일 = d.일; p.끝일 = d.일;
+      p.숙 = (d.숙 === 이름);
+      점.push(p);
+    });
+  });
+  return 점;
+}
+
+function euRouteMap(product){
+  var 경로 = product['경로'];
+  if(!경로 || !경로.length) return '';
+  var 점 = euRoutePoints(경로);
+  if(점.length < 2) return '';
+
+  var m = EU_MAP;
+  var d = 'M' + 점.map(function(p){ return p.x.toFixed(1) + ' ' + p.y.toFixed(1); }).join(' L');
+
+  /* 같은 도시를 여러 번 지나면 점은 한 번만 찍습니다 */
+  var 찍음 = {}, 핀 = [];
+  점.forEach(function(p){
+    if(찍음[p.이름]){ if(p.숙) 찍음[p.이름].숙 = true; return; }
+    찍음[p.이름] = p; 핀.push(p);
+  });
+
+  var 선 = '<path class="eu-line" d="' + d + '"/>';
+  var 동그라미 = 핀.map(function(p, i){
+    var 늦 = (i / Math.max(1, 핀.length - 1) * 2.1).toFixed(2);
+    var 글 = p.표
+      ? '<text class="eu-tx" x="' + (p.x + (p.쪽 === 'L' ? -13 : 13)).toFixed(1) + '" y="' +
+        (p.y + 4).toFixed(1) + '" text-anchor="' + (p.쪽 === 'L' ? 'end' : 'start') + '">' +
+        p.이름 + '</text>'
+      : '';
+    return '<g class="eu-pin' + (p.숙 ? ' stay' : '') + '" data-day="' + p.일 +
+           '" style="--d:' + 늦 + 's">' +
+      '<circle class="eu-halo" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="13"/>' +
+      '<circle class="eu-dot" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' +
+        (p.숙 ? 7 : 5) + '"/>' + 글 + '</g>';
+  }).join('');
+
+  var 날 = 경로.map(function(x){
+    var 들 = (x.들 || []).join(' · ');
+    return '<li data-day="' + x.일 + '"><b>' + x.일 + '</b>' +
+      '<span class="t">' + (x.제목 || 들) + '</span>' +
+      '<span class="c">' + 들 + (x.숙 ? ' <em>· ' + x.숙 + ' 숙박</em>' : '') + '</span></li>';
+  }).join('');
+
+  var 묵음 = {}, 박수 = 0;
+  경로.forEach(function(x){ if(x.숙){ 묵음[x.숙] = (묵음[x.숙] || 0) + 1; 박수++; } });
+  var 도시수 = Object.keys(찍음).length;
+
+  return '<div class="eu-route" data-route>' +
+    '<div class="eu-route-head">' +
+      '<h3>한눈에 보는 일정</h3>' +
+      '<button type="button" class="eu-replay" data-replay>다시 보기</button>' +
+    '</div>' +
+    '<div class="eu-route-body">' +
+      '<div class="eu-map">' +
+        '<svg viewBox="0 0 ' + m.W + ' ' + m.H + '" role="img" aria-label="일정 경로 지도" preserveAspectRatio="xMidYMid meet">' +
+          '<defs><clipPath id="euClip"><rect x="0" y="0" width="' + m.W + '" height="' + m.H + '"/></clipPath></defs>' +
+          '<g clip-path="url(#euClip)">' +
+            '<path class="eu-land eu-esp" d="' + EU_LAND.ESP + '"/>' +
+            '<path class="eu-land eu-prt" d="' + EU_LAND.PRT + '"/>' +
+          '</g>' +
+          선 + 동그라미 +
+        '</svg>' +
+      '</div>' +
+      '<div class="eu-days">' +
+        '<div class="eu-sum"><span><b>' + 경로.length + '</b>일</span>' +
+          '<span><b>' + 박수 + '</b>박</span>' +
+          '<span><b>' + 도시수 + '</b>곳</span></div>' +
+        '<ol>' + 날 + '</ol>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+/* 화면에 들어오면 한 번 그려 보여 줍니다 */
+function euRouteWatch(){
+  var box = document.querySelector('[data-route]');
+  if(!box) return;
+  var 켜기 = function(){ box.classList.remove('go'); void box.offsetWidth; box.classList.add('go'); };
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    box.classList.add('go', 'still');
+  } else if(window.IntersectionObserver){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ 켜기(); io.disconnect(); } });
+    }, { threshold: 0.2 });
+    io.observe(box);
+  } else { 켜기(); }
+
+  var 단추 = box.querySelector('[data-replay]');
+  if(단추) 단추.addEventListener('click', 켜기);
+
+  /* 일자에 손을 올리면 그 날 지점에 불이 들어옵니다 */
+  var 목록 = box.querySelector('.eu-days ol');
+  if(목록){
+    var 고름 = function(일){
+      box.querySelectorAll('.eu-pin').forEach(function(g){
+        g.classList.toggle('on', 일 != null && String(g.dataset.day) === String(일));
+      });
+      box.querySelectorAll('.eu-days li').forEach(function(li){
+        li.classList.toggle('on', 일 != null && String(li.dataset.day) === String(일));
+      });
+    };
+    목록.addEventListener('mouseover', function(e){
+      var li = e.target.closest('li'); if(li) 고름(li.dataset.day);
+    });
+    목록.addEventListener('mouseleave', function(){ 고름(null); });
+    목록.addEventListener('click', function(e){
+      var li = e.target.closest('li'); if(li) 고름(li.dataset.day);
+    });
+  }
+}
+
 function render(){
   const id = getParam('id');
   const product = PRODUCTS.find(p => p.id === id && p.detail);
   const el = document.getElementById('content');
 
   if(!product){
-    el.innerHTML = `
+  el.innerHTML = `
       <div class="layout" style="grid-template-columns:1fr;">
         <div class="section-inner not-found">
           <h1>상품을 찾을 수 없어요</h1>
@@ -433,6 +701,7 @@ function render(){
         </div>
         <h1 class="p-title">${product.title}</h1>
         <p class="p-lead">${d.lead}</p>
+        ${euRouteMap(product)}
         <p class="p-desc">${d.description}</p>
                <div class="p-tags">${product.tags.map(t=>`<span>${t}</span>`).join('')}</div>
 
@@ -514,6 +783,7 @@ function render(){
     </div>
   `;
 
+  euRouteWatch();
   placeItineraryDownload(product);
   initAvailCalendar(product);
 }
