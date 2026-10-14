@@ -170,6 +170,14 @@
   .commit .when{ font-size:11.5px; color:var(--muted); font-weight:600; white-space:nowrap; }
 
   /* ---------- 알림 ---------- */
+  /* 저장바와 같은 방식(sticky)으로 두어 서로 가리지 않게 합니다 */
+  .staleBar{ position:sticky; bottom:0; z-index:21;
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    padding:14px clamp(16px,3vw,28px); background:#FFF4E5; border-top:2px solid #F0B86E; }
+  .staleBar .note{ flex:1 1 320px; font-size:13px; font-weight:700; color:#7A4A05; line-height:1.6; }
+  .staleBar .note b{ color:#5C3703; }
+  .staleBar .note i{ font-style:normal; font-weight:600; opacity:.8; }
+
   .toast{ position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px); opacity:0;
     background:var(--navy); color:#fff; padding:13px 22px; border-radius:999px; font-size:13px; font-weight:700;
     box-shadow:0 16px 36px -18px rgba(20,16,61,.7); pointer-events:none; transition:opacity .2s, transform .2s;
@@ -1089,8 +1097,16 @@
 
   </div>
 
+  <!-- 저장소 파일이 그 사이 바뀌었을 때 뜨는 띠 (저장바 바로 위에 쌓입니다) -->
+  <div class="staleBar" id="staleBar" hidden>
+    <div class="note" id="staleNote"></div>
+    <button type="button" class="btn" id="staleKeep">그대로 두기</button>
+    <button type="button" class="btn primary" id="staleReload">저장소 것으로 다시 불러오기</button>
+  </div>
+
   <div class="savebar" id="savebar" hidden>
     <div class="note" id="saveNote"></div>
+    <button type="button" class="btn" id="refetchBtn">다시 불러오기</button>
     <button type="button" class="btn" id="revertBtn">되돌리기</button>
     <button type="button" class="btn primary" id="saveBtn">저장하고 배포</button>
   </div>
@@ -1221,7 +1237,7 @@
   function loadTab(name){
     var s = store[name];
     if(!s){ render(name); return; }   /* 쓰레드처럼 저장소를 안 쓰는 탭 */
-    if(s.loaded){ render(name); refreshSaveBar(); return; }
+    if(s.loaded){ render(name); refreshSaveBar(); 저장소확인(name); return; }
     api({ action:'load', file:name })
       .then(function(j){
         s.data = j.items || [];
@@ -1230,6 +1246,78 @@
         s.loaded = true;
         render(name);
         refreshSaveBar();
+      })
+      .catch(function(e){ toast(e.message, true); });
+  }
+
+  /* ====================================================================
+     저장소 파일이 그 사이 바뀌었는지 지켜보기
+     --------------------------------------------------------------------
+     admin 은 탭을 처음 열 때 한 번만 저장소에서 읽습니다. 그 뒤에
+     GitHub 에 파일을 올리시면 admin 은 옛 내용을 들고 있게 되고,
+     그대로 저장하면 올리신 내용이 통째로 되돌아갑니다.
+
+     그래서 ① 탭에 들어올 때 ② 저장을 누를 때, 파일 지문만 가볍게
+     확인해서 달라졌으면 멈추고 알려 드립니다.
+     ==================================================================== */
+
+  function 지문확인(name){
+    return api({ action:'stat', file:name }).then(function(j){ return j; });
+  }
+
+  /* 언제 바뀌었는지 사람이 읽는 말로 */
+  function 언제(iso){
+    if(!iso) return '';
+    var t = new Date(iso), 분 = Math.round((Date.now() - t.getTime()) / 60000);
+    if(분 < 1) return '방금';
+    if(분 < 60) return 분 + '분 전';
+    if(분 < 60 * 24) return Math.round(분 / 60) + '시간 전';
+    return t.getFullYear() + '-' + ('0'+(t.getMonth()+1)).slice(-2) + '-' + ('0'+t.getDate()).slice(-2);
+  }
+
+  var 바뀜 = null;      /* { 탭, sha, last } — 저장소가 앞서 있는 상태 */
+
+  function 띠숨김(){ 바뀜 = null; var b = $('staleBar'); if(b) b.hidden = true; }
+
+  function 띠보임(name, j){
+    바뀜 = { 탭:name, sha:j.sha, last:j.last };
+    var b = $('staleBar'); if(!b) return;
+    var 말 = (j.last ? '<i>' + esc(j.last.message) + ' · ' + 언제(j.last.date) + '</i><br>' : '');
+    var 안 = changed()
+      ? '화면에 <b>저장하지 않은 변경</b>이 있습니다. 다시 불러오면 그 변경은 사라집니다.'
+      : '지금 저장하면 그 내용이 되돌아갑니다.';
+    $('staleNote').innerHTML = '저장소의 파일이 이 화면을 연 뒤에 <b>바뀌었습니다</b>.<br>' + 말 + 안;
+    b.hidden = false;
+  }
+
+  /* 조용히 확인 — 바뀌었으면 띠를 띄웁니다 */
+  function 저장소확인(name){
+    var s = store[name];
+    if(!s || !s.loaded || !s.sha) return;
+    지문확인(name).then(function(j){
+      if(!j || !j.sha) return;
+      if(j.sha === s.sha){ 띠숨김(); return; }
+      if(tab !== name) return;
+      띠보임(name, j);
+    }).catch(function(){ /* 확인 못 해도 작업은 막지 않습니다 */ });
+  }
+
+  /* 저장소 것으로 다시 읽기 */
+  function 다시불러오기(name, 조용히){
+    var s = store[name];
+    if(!s) return Promise.resolve();
+    return api({ action:'load', file:name })
+      .then(function(j){
+        s.data = j.items || [];
+        s.orig = JSON.stringify(s.data);
+        s.sha = j.sha || null;
+        s.loaded = true;
+        editingIndex = -1;
+        if(name === 'products'){ $('prodEditor').hidden = true; $('prodList').hidden = false; }
+        띠숨김();
+        render(name);
+        refreshSaveBar();
+        if(!조용히) toast('저장소에서 다시 불러왔습니다.');
       })
       .catch(function(e){ toast(e.message, true); });
   }
@@ -4391,15 +4479,30 @@
     if(tab === 'products') collectProduct();
     var s = store[tab];
     if(!changed()){ toast('바뀐 내용이 없습니다.'); return; }
+    var 이탭 = tab;
     var btn = $('saveBtn');
     btn.disabled = true;
     btn.innerHTML = '<span class="spin"></span>저장 중';
-    api({ action:'save', file:tab, items:s.data, sha:s.sha })
+
+    /* 먼저 저장소가 그 사이 바뀌지 않았는지 확인합니다 */
+    지문확인(이탭)
+      .then(function(j){
+        if(j && j.sha && s.sha && j.sha !== s.sha){
+          띠보임(이탭, j);
+          var 오류 = new Error('저장소의 파일이 그 사이 바뀌었습니다. 아래 띠에서 고르신 뒤 다시 저장해 주세요.');
+          오류.멈춤 = true;
+          throw 오류;
+        }
+      })
+      .then(function(){
+        return api({ action:'save', file:이탭, items:s.data, sha:s.sha });
+      })
       .then(function(j){
         s.orig = JSON.stringify(s.data);
         s.sha = j.sha || s.sha;
+        띠숨김();
         refreshSaveBar();
-        if(tab === 'products') renderProducts();
+        if(이탭 === 'products') renderProducts();
         toast(j.message + (j.commit ? ' (' + j.commit + ')' : ''));
       })
       .catch(function(e){ toast(e.message, true); })
@@ -5162,6 +5265,33 @@
 
   $('saveBtn').addEventListener('click', save);
   $('revertBtn').addEventListener('click', revert);
+
+  /* ----- 저장소와 어긋났을 때 ----- */
+  $('refetchBtn').addEventListener('click', function(){
+    if(changed() && !confirm('저장소에서 다시 불러옵니다.\n\n' +
+       '화면에서 저장하지 않은 변경은 사라집니다. 계속할까요?')) return;
+    다시불러오기(tab);
+  });
+  $('staleReload').addEventListener('click', function(){
+    var t = (바뀜 && 바뀜.탭) || tab;
+    if(changed() && !confirm('저장소 것으로 다시 불러옵니다.\n\n' +
+       '화면에서 저장하지 않은 변경은 사라집니다. 계속할까요?')) return;
+    다시불러오기(t);
+  });
+  $('staleKeep').addEventListener('click', function(){
+    띠숨김();
+    toast('띠를 닫았습니다. 이대로 저장하면 저장소의 새 내용이 되돌아갑니다.', true);
+  });
+
+  /* 열어 둔 채로 파일을 올리시는 일이 잦아, 가끔 알아서 확인합니다 */
+  setInterval(function(){
+    if(document.hidden) return;
+    if(!store[tab] || !store[tab].loaded) return;
+    저장소확인(tab);
+  }, 90000);
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && store[tab] && store[tab].loaded) 저장소확인(tab);
+  });
   $('histBtn').addEventListener('click', history);
   $('pingBtn').addEventListener('click', ping);
   $('deployBtn').addEventListener('click', deploy);
