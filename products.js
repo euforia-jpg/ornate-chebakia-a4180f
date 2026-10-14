@@ -440,7 +440,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "바다와 산, 마을과 사람을 만나며 삶의 속도를 내려놓고 진짜 나를 만나는 시간 — 리스본 또는 포르투에서 투이까지 이동한 뒤, 콤포스텔라 인증 최소 거리 구간을 6일 동안 함께 걸어요.",
-      "description": "<div style=\"display:flex; gap:10px; margin-bottom:14px;\"\"><strong style=\"flex:0 0 auto;\">DAY1</strong><span>투이(Tui) → 오 포리뇨(O Porriño) 약 16km 도보.</span></div><div style=\"display:flex; gap:10px; margin-bottom:14px;\"><strong style=\"flex:0 0 auto;\">DAY2</strong><span>오 포리뇨 → 레돈델라(Redondela) 약 16km 도보.</span></div><div style=\"display:flex; gap:10px; margin-bottom:14px;\"><strong style=\"flex:0 0 auto;\">DAY3</strong><span>레돈델라 → 폰테베드라(Pontevedra) 약 21km 도보.</span></div><div style=\"display:flex; gap:10px; margin-bottom:14px;\"><strong style=\"flex:0 0 auto;\">DAY4</strong><span>폰테베드라 → 칼다스 데 레이스(Caldas de Reis) 약 22km 도보.</span></div><div style=\"display:flex; gap:10px; margin-bottom:14px;\"><strong style=\"flex:0 0 auto;\">DAY5</strong><span>칼다스 데 레이스 → 파드론(Padrón) 약 19km 도보.</span></div><div style=\"display:flex; gap:10px;\"><strong style=\"flex:0 0 auto;\">DAY6</strong><span>파드론 → 산티아고 데 콤포스텔라 대성당 약 25km 도보로 완주.</span></div>",
+      "description": "",
       "highlights": [
         "투이 → 오 포리뇨 → 레돈델라 → 폰테베드라 → 칼다스 데 레이스 → 파드론 → 산티아고 데 콤포스텔라",
         "하루 평균 20km 내외, 6일간 총 약 119km 도보",
@@ -515,7 +515,11 @@ const PRODUCTS = [
         ],
         "숙": ""
       }
-    ]
+    ],
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "isNew": false
   },
   {
     "id": "car-madrid-puertolapice-granada",
