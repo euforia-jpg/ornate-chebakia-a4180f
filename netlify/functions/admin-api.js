@@ -389,6 +389,48 @@ exports.handler = async function (event) {
       });
     }
 
+    /* --- 파일이 그 사이 바뀌었는지만 가볍게 확인 --- */
+    /*
+      파일 전체(상품은 400KB가 넘습니다)를 다시 받지 않고
+      그 파일의 마지막 커밋 하나만 봅니다. 1KB 남짓이라 저장을
+      누를 때마다 확인해도 부담이 없습니다.
+    */
+    if (action === 'stat') {
+      const path = FILES[req.file];
+      if (!path) return json(400, { error: '알 수 없는 파일입니다' });
+      /* 폴더 목록에는 파일마다 지문(sha)이 들어 있고 내용은 없습니다 */
+      const slash = path.lastIndexOf('/');
+      const dir = slash === -1 ? '' : path.slice(0, slash);
+      const base = slash === -1 ? path : path.slice(slash + 1);
+      let cur = null;
+      try {
+        const list = await gh(
+          `/repos/${REPO}/contents/${dir ? encodeURIComponent(dir) : ''}?ref=${encodeURIComponent(BR)}`
+        );
+        const hit = Array.isArray(list) && list.find(function (f) { return f.name === base; });
+        if (!hit) return json(200, { sha: null, exists: false });
+        cur = { sha: hit.sha };
+      } catch (e) {
+        if (e.status === 404) return json(200, { sha: null, exists: false });
+        throw e;
+      }
+      let last = null;
+      try {
+        const list = await gh(
+          `/repos/${REPO}/commits?sha=${encodeURIComponent(BR)}&per_page=1&path=${encodeURIComponent(path)}`
+        );
+        if (list && list[0]) {
+          last = {
+            sha: list[0].sha.slice(0, 7),
+            message: (list[0].commit.message || '').split('\n')[0],
+            author: (list[0].commit.author && list[0].commit.author.name) || '',
+            date: list[0].commit.author && list[0].commit.author.date,
+          };
+        }
+      } catch (e) { /* 이력을 못 읽어도 sha 만으로 충분합니다 */ }
+      return json(200, { sha: cur.sha, exists: true, last: last });
+    }
+
     /* --- 변경 이력 --- */
     if (action === 'history') {
       const path = FILES[req.file] || '';
