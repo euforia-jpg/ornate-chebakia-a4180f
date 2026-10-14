@@ -82,7 +82,8 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-route-body{ display:flex; gap:22px; align-items:flex-start; }
   .eu-map{ flex:0 0 clamp(210px, 30vw, 310px); }
   /* 가로로 넓은 지도는 위아래로 쌓아 크게 보여 줍니다 */
-  .eu-wide-box .eu-route-body{ flex-direction:column; gap:16px; }
+  /* 위아래로 쌓을 때는 폭을 꽉 채웁니다 (align-items:flex-start 면 글 너비만큼만 차지합니다) */
+  .eu-wide-box .eu-route-body{ flex-direction:column; gap:16px; align-items:stretch; }
   .eu-map.eu-wide{ flex:none; width:100%; max-width:none; }
   .eu-wide .eu-tx{ font-size:10.5px; stroke-width:2.3px; }
   .eu-wide .eu-line{ stroke-width:2; }
@@ -145,9 +146,16 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
 
   @media (max-width:760px){
     .eu-route{ padding:16px 14px 18px; }
-    .eu-route-body{ flex-direction:column; gap:14px; }
+    .eu-route-body{ flex-direction:column; gap:14px; align-items:stretch; }
     .eu-map{ flex:none; width:100%; max-width:300px; margin:0 auto; }
     .eu-map.eu-wide{ flex:none; width:100%; max-width:none; }
+    /* 휴대폰에서는 넓은 지도도 폭이 좁아져 글자가 작아집니다 — 키워 줍니다 */
+    .eu-wide .eu-tx{ font-size:16px; stroke-width:3.5px; }
+    .eu-wide .eu-line{ stroke-width:3; }
+    .eu-wide .eu-dot{ r:5; stroke-width:3; }
+    .eu-wide .eu-pin.stay .eu-dot{ r:7; }
+    .eu-wide .eu-halo{ r:13; }
+    .eu-wide .eu-lead{ stroke-width:1.2; }
     .eu-days li{ flex-wrap:wrap; gap:6px 10px; }
     .eu-days li .c{ margin-left:31px; text-align:left; max-width:none; width:100%; }
   }
@@ -555,8 +563,9 @@ function euWindowFor(경로, 당일){
   if(dx / dy < 최소비){
     var 새가 = 최소비 * dy / k, cx2 = (오 + 왼) / 2;
     왼 = cx2 - 새가 / 2; 오 = cx2 + 새가 / 2;
-  } else if(dx / dy > 3.0){
-    var 새세 = dx / 3.0, cy2 = (위 + 아래) / 2;
+  } else if(dx / dy > (당일 ? 2.2 : 3.0)){
+    var 최대비 = 당일 ? 2.2 : 3.0;
+    var 새세 = dx / 최대비, cy2 = (위 + 아래) / 2;
     아래 = cy2 - 새세 / 2; 위 = cy2 + 새세 / 2;
   }
 
@@ -817,7 +826,10 @@ function euRouteMap(product){
   /* 이름표 자리잡기 — 가장자리에서는 반대쪽으로 돌리고, 겹치면 살짝 비켜 줍니다
      (넓은 창은 화면에서 더 크게 보이므로 글자를 작게 씁니다 — CSS 와 같은 값) */
   var 넓음 = m.W > m.H * 0.92;
-  var 글크 = 넓음 ? 10.5 : 16;
+  /* 자리를 잡을 때는 늘 큰 쪽(16)으로 재 둡니다.
+     넓은 지도는 화면에서 글자가 작아지지만(10.5), 휴대폰에서는 다시 16 이 되므로
+     작은 쪽에 맞춰 두면 휴대폰에서 이름표가 지도 밖으로 나갑니다. */
+  var 글크 = 16;
   var 글높 = 글크 * 1.35, 띄움 = 글크 * 0.82, 놓임 = [];
   var 이름표 = 핀.map(function(p, i){
     /* 묵는 도시는 표시 여부와 상관없이 이름을 답니다 */
@@ -829,16 +841,32 @@ function euRouteMap(product){
 
     var 기준 = p.y + 글크 * 0.33;
     var x1 = (쪽 === 'L') ? p.x - 폭 : p.x + 띄움;
-    var 비켜 = [0, 글높, -글높, 글높 * 2, -글높 * 2, 글높 * 3];
-    var y = 기준;
+
+    /* 위아래로 한 칸씩 번갈아 비켜 보고, 겹치지 않는 첫 자리를 씁니다.
+       끝까지 겹치면 그중 가장 덜 겹치는 자리를 고릅니다 (아무 데나 두지 않습니다). */
+    var 비켜 = [0];
+    for(var k = 1; k <= 7; k++){ 비켜.push(글높 * k); 비켜.push(-글높 * k); }
+
+    var 겹넓이 = function(yy){
+      var 합 = 0;
+      for(var n = 0; n < 놓임.length; n++){
+        var b = 놓임[n];
+        var 가 = Math.min(x1 + 폭, b.x + b.w) - Math.max(x1, b.x);
+        var 세 = Math.min(yy + 글높 * 0.75, b.y + 글높 * 0.75) - Math.max(yy, b.y);
+        if(가 > 0 && 세 > 0) 합 += 가 * 세;
+      }
+      return 합;
+    };
+
+    var y = 기준, 최소 = Infinity, 고른y = null;
     for(var 번 = 0; 번 < 비켜.length; 번++){
-      y = 기준 + 비켜[번];
-      if(y < 글크 || y > m.H - 글크 * 0.4) continue;
-      var 침 = 놓임.some(function(b){
-        return !(x1 + 폭 < b.x || b.x + b.w < x1 || y + 글높 * 0.75 < b.y || b.y + 글높 * 0.75 < y);
-      });
-      if(!침) break;
+      var 후보 = 기준 + 비켜[번];
+      if(후보 < 글크 || 후보 > m.H - 글크 * 0.4) continue;
+      var 넓 = 겹넓이(후보);
+      if(넓 === 0){ 고른y = 후보; break; }
+      if(넓 < 최소){ 최소 = 넓; y = 후보; }
     }
+    y = (고른y !== null) ? 고른y : y;
     놓임.push({ x:x1, w:폭, y:y });
 
     /* 자리를 비켜 준 이름표는 가느다란 선으로 제 지점과 이어 줍니다 */
