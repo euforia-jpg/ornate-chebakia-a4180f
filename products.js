@@ -202,7 +202,7 @@ const PRODUCTS = [
     "region": "PORTUGAL",
     "youtubeUrl": "https://www.youtube.com/watch?v=Tgze0G4HF5w",
     "days": "5박 6일",
-    "price": "1인 1870 유로",
+    "price": "1인 1,870 유로",
     "title": "[포르투갈 완전일주] 리스본 2박 + 포르투 3박/ 5박 6일",
     "summary": "낭만과 감성이 공존하는 포르투갈, 리스본 2박과 포르투 3박으로 완전일주하는 5박 6일 패키지예요. 전 일정 4성급 호텔, 전용차량과 전문 가이드가 함께해요.",
     "tags": [
@@ -414,7 +414,12 @@ const PRODUCTS = [
         "여행자 보험"
       ],
       "duration": "5박 6일 (자유일정 옵션 가능)"
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "youtubeUrl": "",
+    "isNew": false
   },
   {
     "id": "camino-100",
