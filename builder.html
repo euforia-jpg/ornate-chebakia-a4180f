@@ -300,9 +300,12 @@
   .bx-staysum .p{ font-size:12.5px; font-weight:700; color:var(--muted); }
   .bx-staysum .r.none .h{ font-weight:600; color:var(--muted); }
 
-  .bx-free{ display:block; margin:-2px 0 9px; padding:8px 12px; border:0; border-radius:9px;
+  /* 묶음 아래에 붙는 한 줄 안내 (「입장료가 없는 곳이라…」)
+     — 좁은 화면에서 글이 잘리지 않도록 반드시 줄을 바꿔 주어야 합니다 */
+  .bx-grpnote{ display:block; margin:-2px 0 9px; padding:8px 12px; border:0; border-radius:9px;
     background:#E7F8F5; font-size:11.8px; font-weight:600; color:#0A6E5D;
-    letter-spacing:0; text-transform:none; line-height:1.6; }
+    letter-spacing:0; text-transform:none; line-height:1.6;
+    white-space:normal; word-break:keep-all; overflow-wrap:anywhere; }
 
 
 
@@ -464,7 +467,9 @@
   .bx-via span{ font-size:12.5px; font-weight:600; color:var(--muted); line-height:1.6; }
   .bx-via b{ color:var(--navy); font-weight:800; }
   .bx-via b.spot{ color:var(--violet); }
-  .bx-via em{ font-style:normal; font-size:11.5px; font-weight:600; color:#A9A4C8; white-space:nowrap; }
+  /* 긴 문장이라 좁은 화면·다른 말(영어·중국어)에서는 줄을 바꿔야 합니다 */
+  .bx-via em{ font-style:normal; font-size:11.5px; font-weight:600; color:#A9A4C8;
+    white-space:normal; word-break:keep-all; overflow-wrap:anywhere; }
   .bx-maplist span.via{ background:#fff; border:1.5px solid #C9BDF7; color:var(--violet);
     font-weight:700; padding:4px 10px; }
 
@@ -551,12 +556,6 @@
   }
 
   /* 종일 자유시간 */
-  .bx-free{ display:inline-flex; gap:7px; align-items:center; cursor:pointer; margin-left:auto;
-    padding:7px 13px; border:1.5px solid var(--line); border-radius:999px; background:#fff;
-    font-size:12.5px; font-weight:800; color:var(--muted); white-space:nowrap; }
-  .bx-free:hover{ border-color:#C9BDF7; }
-  .bx-free.on{ border-color:var(--teal); background:#E7F8F5; color:#0A6E5D; }
-  .bx-free input{ width:15px; height:15px; accent-color:var(--teal); cursor:pointer; flex:none; }
   .bx-day.free{ background:#FBFEFD; border-color:#B7ECDE; }
   .bx-freenote{ margin-top:12px; padding:10px 13px; border-radius:10px; background:#E7F8F5;
     font-size:12.5px; font-weight:600; color:#0A6E5D; line-height:1.7; }
@@ -591,7 +590,6 @@
   .bx-maplist.muted{ font-size:12.5px; font-weight:600; color:var(--muted); }
 
   @media (max-width:560px){
-    .bx-free{ margin-left:0; }
   }
 
   .bx-bar{ position:fixed; left:0; right:0; bottom:0; z-index:40; background:var(--navy); color:#fff;
@@ -1976,7 +1974,7 @@
 
         if(도보.length){
           안 += '<div class="bx-grp"><b>함께 둘러보는 곳</b>' +
-                '<span class="bx-free">입장료가 없는 곳이라 금액이 붙지 않습니다. ' +
+                '<span class="bx-grpnote">입장료가 없는 곳이라 금액이 붙지 않습니다. ' +
                 '빼고 싶으시면 체크를 푸세요.</span>' +
                 '<div class="bx-opts">' + 칸만들기(도보) + '</div></div>';
         }
