@@ -202,7 +202,7 @@ const PRODUCTS = [
     "region": "PORTUGAL",
     "youtubeUrl": "https://www.youtube.com/watch?v=Tgze0G4HF5w",
     "days": "5박 6일",
-    "price": "1인 1870 유로",
+    "price": "1인 1,870 유로",
     "title": "[포르투갈 완전일주] 리스본 2박 + 포르투 3박/ 5박 6일",
     "summary": "낭만과 감성이 공존하는 포르투갈, 리스본 2박과 포르투 3박으로 완전일주하는 5박 6일 패키지예요. 전 일정 4성급 호텔, 전용차량과 전문 가이드가 함께해요.",
     "tags": [
@@ -234,7 +234,11 @@ const PRODUCTS = [
         "여행자보험"
       ],
       "duration": "5박 6일 (2026년 출발, 최소 4인 기준 · 일정은 항공 및 현지 사정에 따라 변경될 수 있어요)"
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "isNew": false
   },
   {
     "id": "spain-round",
