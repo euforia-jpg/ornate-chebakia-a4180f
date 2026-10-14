@@ -394,6 +394,59 @@
     background:#FFF0E4; color:#8A4A06; }
   .ib-flag.ok{ background:#E7F9F5; color:#0A6E5D; }
 
+  /* 답변 상태 */
+  .ib-state{ font-size:11px; font-weight:800; padding:3px 9px; border-radius:999px;
+    background:#F1EFFA; color:#5B5580; }
+  .ib-state.s-미답변{ background:#FDECEC; color:#B4232A; }
+  .ib-state.s-답변중{ background:#FFF4E5; color:#8A5A06; }
+  .ib-state.s-답변완료{ background:#E7F9F5; color:#0A6E5D; }
+  .ib-state.s-예약확정{ background:#EFEAFD; color:#4B21B5; }
+  .ib-state.s-취소{ background:#F2F2F6; color:#6E6A93; }
+  .ib-item.ib-s-답변완료, .ib-item.ib-s-예약확정{ border-color:#CDEDE4; }
+  .ib-item.ib-s-취소{ opacity:.72; }
+
+  /* 연락 줄 · 메모 줄 */
+  .ib-contact, .ib-memo{ display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+    margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); }
+  .ib-memo{ border-top:0; padding-top:0; }
+  .ib-contact .l, .ib-memo .l{ flex:none; width:38px; font-size:11.5px; font-weight:800;
+    color:var(--muted); letter-spacing:.03em; }
+  .ib-btn{ all:unset; box-sizing:border-box; cursor:pointer; padding:7px 14px; border-radius:999px;
+    border:1.5px solid var(--line); background:#fff; font-size:12.5px; font-weight:800;
+    color:var(--navy); text-decoration:none; white-space:nowrap; }
+  .ib-btn:hover{ border-color:#C9BDF7; background:#FBFAFF; }
+  .ib-btn.mail{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .ib-btn.mail:hover{ background:var(--violet); border-color:var(--violet); }
+  .ib-btn.save{ border-color:#C9BDF7; color:var(--violet); }
+  .ib-btn[disabled]{ opacity:.55; cursor:default; }
+  .ib-none{ font-size:12px; font-weight:600; color:var(--muted); }
+  .ib-memo textarea{ flex:1 1 260px; min-width:0; min-height:38px; padding:9px 12px;
+    border:1.5px solid var(--line); border-radius:10px; background:#fff;
+    font-family:inherit; font-size:12.5px; line-height:1.6; color:var(--ink); resize:vertical; }
+  .ib-memo textarea:focus{ border-color:var(--violet); outline:none; }
+  .ib-memo select{ flex:none; padding:8px 11px; border:1.5px solid var(--line); border-radius:10px;
+    background:#fff; font-family:inherit; font-size:12.5px; font-weight:800; color:var(--navy); }
+
+  /* 메일 쓰는 칸 */
+  .ib-mailbox{ margin-top:12px; padding:14px 16px; border:1.5px solid #D9D4F0; border-radius:12px;
+    background:#FBFAFF; }
+  .ib-mailbox .mb-row{ display:flex; gap:10px; align-items:center; margin-bottom:9px; flex-wrap:wrap; }
+  .ib-mailbox .mb-row b{ flex:none; width:62px; font-size:11.5px; font-weight:800; color:var(--muted); }
+  .ib-mailbox .mb-row span{ font-size:13px; font-weight:700; color:var(--navy); }
+  .ib-mailbox input[type=text], .ib-mailbox select{ flex:1 1 220px; min-width:0; padding:9px 12px;
+    border:1.5px solid var(--line); border-radius:10px; background:#fff;
+    font-family:inherit; font-size:13px; font-weight:700; color:var(--ink); }
+  .ib-mailbox select{ flex:0 1 240px; }
+  .ib-mailbox textarea{ width:100%; box-sizing:border-box; padding:12px 14px; border-radius:10px;
+    border:1.5px solid var(--line); background:#fff; font-family:inherit; font-size:13px;
+    line-height:1.75; color:var(--ink); resize:vertical; }
+  .ib-mailbox input:focus, .ib-mailbox textarea:focus, .ib-mailbox select:focus{
+    border-color:var(--violet); outline:none; }
+  .mb-acts{ display:flex; gap:9px; align-items:center; flex-wrap:wrap; margin-top:11px; }
+  .mb-log{ margin-top:11px; padding:10px 12px; border-radius:9px; background:#fff;
+    border:1.5px solid var(--line); font-size:12.5px; line-height:1.7; color:var(--navy); }
+  .mb-log.bad{ border-color:#F2C9C9; background:#FDECEC; color:#B4232A; }
+
   /* 새 문의 알림 */
   .tab-badge{ display:inline-block; margin-left:7px; min-width:19px; padding:0 6px;
     border-radius:999px; background:var(--danger); color:#fff; font-size:10.5px; font-weight:900;
@@ -953,6 +1006,15 @@
             <option value="inquiry">예약문의</option>
             <option value="deposit">입금확인</option>
             <option value="matchday">경기예약</option>
+          </select>
+          <label for="ibState" style="font-size:12.5px;font-weight:800;color:var(--muted);">답변</label>
+          <select id="ibState">
+            <option value="">전체</option>
+            <option value="미답변">미답변만</option>
+            <option value="답변중">답변중</option>
+            <option value="답변완료">답변완료</option>
+            <option value="예약확정">예약확정</option>
+            <option value="취소">취소</option>
           </select>
           <button type="button" class="btn sm" id="ibReload">새로고침</button>
           <span class="ib-when" id="ibWhen"></span>
@@ -3204,6 +3266,300 @@
            '</b><span>' + esc(값).replace(/\n/g, '<br>') + '</span></div>';
   }
 
+
+  /* ====================================================================
+     문의함에서 바로 연락하기
+     --------------------------------------------------------------------
+     한 건마다 아래 줄이 붙습니다.
+       · 메일 쓰기   — 답변 서식을 고르면 제목·내용이 채워집니다
+       · 전화 · 문자 — 휴대폰에서 누르면 바로 걸리고, 컴퓨터에서는 번호가 복사됩니다
+       · 복사        — 메일 주소·연락처를 한 번에 복사
+       · 상태 · 메모 — 미답변 / 답변중 / 답변완료 / 예약확정 / 취소 와 담당자 메모
+
+     메일은 두 가지 길이 있습니다.
+       ① 메일 앱으로 열기 — 쓰시던 메일함(아웃룩·지메일)에서 보냅니다. 언제나 됩니다.
+       ② 사이트에서 바로 보내기 — 회사 도메인이 Resend 에 인증되어 있을 때만 뜹니다.
+     ==================================================================== */
+
+  var IB_STATES = ['미답변', '답변중', '답변완료', '예약확정', '취소'];
+  var ibSendable = false;      /* 사이트에서 바로 보낼 수 있는지 */
+  var ibFrom = '';
+
+  /* 문의 한 건에서 연락처를 찾아냅니다 (종류마다 칸 이름이 다릅니다) */
+  function ib연락처(r){
+    var c = r.내용 || {};
+    var 메일 = String(c.이메일 || c.메일 || '').trim();
+    var 전화 = String(c.연락처 || c.전화 || c.휴대폰 || '').trim();
+    var 이름 = String(c.이름 || c.입금자명 || c.예약자 || '').trim();
+    return {
+      이름: 이름,
+      메일: /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(메일) ? 메일 : '',
+      전화: 전화.replace(/[^\d+]/g, ''),
+      전화보임: 전화
+    };
+  }
+
+  /* 답변 서식 — 고르면 제목과 내용이 채워집니다 */
+  function ib서식(r){
+    var p = ib연락처(r);
+    var c = r.내용 || {};
+    var 님 = (p.이름 || '고객') + '님';
+    var 끝 = '\n\n감사합니다.\n유포리아투어 (Euforia Das Nuvens, S.L.)\n' +
+             'euforia@euforiatour.com · +34 611 209 095\nwww.toureplus.co.kr';
+
+    if(r.kind === 'deposit'){
+      return [
+        { 이름: '입금 확인 완료', 제목: '[유포리아투어] 입금 확인되었습니다',
+          본문: 님 + ', 안녕하세요. 유포리아투어입니다.\n\n' +
+                '보내 주신 입금을 확인했습니다' +
+                (c.금액 ? ' (' + c.금액 + ')' : '') + '. 예약이 확정되었습니다.\n' +
+                '확정 서류와 일정표를 곧 보내 드리겠습니다.' + 끝 },
+        { 이름: '입금 확인이 안 될 때', 제목: '[유포리아투어] 입금 확인 요청',
+          본문: 님 + ', 안녕하세요. 유포리아투어입니다.\n\n' +
+                '말씀해 주신 내용으로 입금을 찾아보았으나 아직 확인되지 않았습니다.\n' +
+                '입금하신 날짜와 입금자명을 다시 한번 알려 주시면 바로 확인해 드리겠습니다.' + 끝 }
+      ];
+    }
+    if(r.kind === 'matchday'){
+      return [
+        { 이름: '경기 예약 접수', 제목: '[유포리아투어] 경기 예약 문의 접수했습니다',
+          본문: 님 + ', 안녕하세요. 유포리아투어입니다.\n\n' +
+                '보내 주신 경기 예약 문의' + (c.경기 ? ' (' + c.경기 + ')' : '') + ' 를 접수했습니다.\n' +
+                '좌석과 요금을 확인한 뒤 영업일 기준 1~2일 안에 안내드리겠습니다.' + 끝 },
+        { 이름: '티켓 수령 안내', 제목: '[유포리아투어] 경기 티켓 안내',
+          본문: 님 + ', 안녕하세요. 유포리아투어입니다.\n\n' +
+                '예약하신 경기 티켓 안내드립니다.\n\n' +
+                '- 경기: ' + (c.경기 || '') + '\n- 일시: ' + (c.일시 || '') +
+                '\n- 경기장: ' + (c.경기장 || '') + '\n- 수령 방식: ' + (c.수령방식 || '') + 끝 }
+      ];
+    }
+    return [
+      { 이름: '문의 접수 안내', 제목: '[유포리아투어] 문의 주셔서 감사합니다',
+        본문: 님 + ', 안녕하세요. 유포리아투어입니다.\n\n' +
+              '보내 주신 문의' + (c.관심상품 ? ' (' + c.관심상품 + ')' : '') + ' 잘 받았습니다.\n' +
+              '담당자가 일정과 요금을 확인한 뒤 영업일 기준 1~2일 안에 견적을 보내 드리겠습니다.\n' +
+              '급하신 일정이면 이 메일로 회신해 주세요.' + 끝 },
+      { 이름: '견적 안내', 제목: '[유포리아투어] 요청하신 일정 견적 안내',
+        본문: 님 + ', 안녕하세요. 유포리아투어입니다.\n\n' +
+              '요청해 주신 일정으로 견적을 안내드립니다.\n\n' +
+              '- 일정: ' + (c.희망일 || '') + '\n- 인원: ' + (c.인원 || '') + '\n- 상품: ' + (c.관심상품 || '') +
+              '\n- 1인 요금: \n- 포함 사항: \n\n' +
+              '예약을 원하시면 회신해 주세요. 예약금(전체 요금의 30%)이 입금되면 예약이 확정됩니다.' + 끝 },
+      { 이름: '추가 확인 요청', 제목: '[유포리아투어] 몇 가지만 더 여쭙겠습니다',
+        본문: 님 + ', 안녕하세요. 유포리아투어입니다.\n\n' +
+              '정확한 견적을 위해 아래 내용을 알려 주시면 감사하겠습니다.\n\n' +
+              '1. 정확한 출발일과 귀국일\n2. 총 인원 (성인 · 아동)\n3. 원하시는 호텔 등급\n' +
+              '4. 꼭 가고 싶은 도시나 관광지' + 끝 },
+      { 이름: '빈 메일 (직접 작성)', 제목: '[유포리아투어] 문의 주신 건 안내드립니다',
+        본문: 님 + ', 안녕하세요. 유포리아투어입니다.\n\n' + 끝 }
+    ];
+  }
+
+  /* 연락 줄 + 메모 줄 */
+  function ib연락줄(r){
+    var p = ib연락처(r);
+    var 상태 = (r.메타 && r.메타.상태) || '미답변';
+    var 메모 = (r.메타 && r.메타.메모) || '';
+    var 키 = esc(r.key || '');
+
+    var 단추 = [];
+    if(p.메일){
+      단추.push('<button type="button" class="ib-btn mail" data-mail="' + 키 + '">메일 쓰기</button>');
+    }
+    if(p.전화){
+      단추.push('<a class="ib-btn" href="tel:' + esc(p.전화) + '">전화</a>');
+      단추.push('<a class="ib-btn" href="sms:' + esc(p.전화) + '">문자</a>');
+    }
+    if(p.메일 || p.전화){
+      단추.push('<button type="button" class="ib-btn" data-copy="' +
+        esc((p.메일 ? p.메일 : '') + (p.메일 && p.전화 ? ' / ' : '') + (p.전화보임 || '')) +
+        '">복사</button>');
+    }
+    if(!단추.length){
+      단추.push('<span class="ib-none">연락처가 적혀 있지 않습니다</span>');
+    }
+
+    return '<div class="ib-contact">' +
+        '<span class="l">연락</span>' + 단추.join('') +
+      '</div>' +
+      '<div class="ib-memo">' +
+        '<span class="l">메모</span>' +
+        '<textarea data-memo="' + 키 + '" rows="1" placeholder="담당자 메모 — 통화 내용, 다음 할 일 등">' +
+          esc(메모) + '</textarea>' +
+        '<select data-state="' + 키 + '">' +
+          IB_STATES.map(function(s){
+            return '<option value="' + s + '"' + (s === 상태 ? ' selected' : '') + '>' + s + '</option>';
+          }).join('') +
+        '</select>' +
+        '<button type="button" class="ib-btn save" data-save="' + 키 + '">저장</button>' +
+      '</div>' +
+      '<div class="ib-mailbox" data-box="' + 키 + '" hidden></div>';
+  }
+
+  /* 메일 쓰기 칸 열기 */
+  function ib메일열기(key){
+    var r = ib찾기(key);
+    if(!r) return;
+    var box = document.querySelector('[data-box="' + CSS.escape(key) + '"]');
+    if(!box) return;
+    if(!box.hidden){ box.hidden = true; box.innerHTML = ''; return; }
+
+    var p = ib연락처(r);
+    var 서식 = ib서식(r);
+    box.hidden = false;
+    box.innerHTML =
+      '<div class="mb-row"><b>받는 사람</b><span>' + esc(p.이름 ? p.이름 + ' · ' : '') + esc(p.메일) + '</span></div>' +
+      '<div class="mb-row"><b>서식</b><select data-tpl="' + esc(key) + '">' +
+        서식.map(function(t, i){ return '<option value="' + i + '">' + esc(t.이름) + '</option>'; }).join('') +
+      '</select></div>' +
+      '<div class="mb-row"><b>제목</b><input type="text" data-subject value="' + esc(서식[0].제목) + '"></div>' +
+      '<textarea data-body rows="12">' + esc(서식[0].본문) + '</textarea>' +
+      '<div class="mb-acts">' +
+        '<button type="button" class="btn dark" data-open="' + esc(key) + '">메일 앱으로 열기</button>' +
+        (ibSendable
+          ? '<button type="button" class="btn" data-send="' + esc(key) + '">사이트에서 바로 보내기</button>'
+          : '<span class="ib-none">사이트에서 바로 보내기는 회사 도메인 인증 후에 쓰실 수 있습니다</span>') +
+        '<button type="button" class="btn" data-close="' + esc(key) + '">닫기</button>' +
+      '</div>' +
+      '<div class="mb-log" hidden></div>';
+  }
+
+  function ib찾기(key){
+    var list = (ibCache && ibCache[0] && ibCache[0].목록) || [];
+    for(var i = 0; i < list.length; i++) if(list[i].key === key) return list[i];
+    return null;
+  }
+
+  function ib상자값(key){
+    var box = document.querySelector('[data-box="' + CSS.escape(key) + '"]');
+    if(!box) return null;
+    return {
+      box: box,
+      제목: (box.querySelector('[data-subject]') || {}).value || '',
+      본문: (box.querySelector('[data-body]') || {}).value || ''
+    };
+  }
+  function ib상자알림(box, 글, 나쁨){
+    var l = box.querySelector('.mb-log');
+    if(!l) return;
+    l.hidden = false;
+    l.className = 'mb-log' + (나쁨 ? ' bad' : '');
+    l.innerHTML = 글;
+  }
+
+  /* 메일 앱으로 열기 — 쓰시던 메일함에서 보내집니다 */
+  function ib메일앱(key){
+    var r = ib찾기(key); if(!r) return;
+    var v = ib상자값(key); if(!v) return;
+    var p = ib연락처(r);
+    var url = 'mailto:' + encodeURIComponent(p.메일) +
+      '?subject=' + encodeURIComponent(v.제목) +
+      '&body=' + encodeURIComponent(v.본문);
+    if(url.length > 1900){
+      ib상자알림(v.box, '내용이 길어 메일 앱으로 다 넘기지 못합니다. ' +
+        '내용을 복사해서 메일함에 붙여 넣어 주세요.', true);
+      return;
+    }
+    window.location.href = url;
+    ib상자알림(v.box, '메일 앱을 열었습니다. 보내신 뒤 아래 상태를 <b>답변완료</b> 로 바꿔 주세요.');
+  }
+
+  /* 사이트에서 바로 보내기 */
+  function ib바로보내기(key){
+    var r = ib찾기(key); if(!r) return;
+    var v = ib상자값(key); if(!v) return;
+    var p = ib연락처(r);
+    if(!v.제목.trim() || !v.본문.trim()){
+      ib상자알림(v.box, '제목과 내용을 적어 주세요.', true); return;
+    }
+    if(!confirm(p.메일 + ' 로 메일을 보냅니다.\n\n보낸 메일은 되돌릴 수 없습니다. 계속할까요?')) return;
+    var btn = v.box.querySelector('[data-send]');
+    if(btn){ btn.disabled = true; btn.textContent = '보내는 중…'; }
+    ib상자알림(v.box, '<span class="spin"></span> 보내는 중입니다…');
+    ibCall({ action:'reply', key:key, 받는곳:p.메일, 제목:v.제목, 본문:v.본문 })
+      .then(function(j){
+        if(!j.ok) throw new Error(j.error || '보내지 못했습니다');
+        ib상자알림(v.box, '<b>' + esc(p.메일) + '</b> 로 보냈습니다. 상태를 답변완료로 바꾸고 메모에 기록해 두었습니다.');
+        toast('답장을 보냈습니다.');
+        ibLoad();
+      })
+      .catch(function(e){
+        ib상자알림(v.box, '보내지 못했습니다 — ' + esc(e.message || ''), true);
+        if(btn){ btn.disabled = false; btn.textContent = '사이트에서 바로 보내기'; }
+      });
+  }
+
+  /* 상태 · 메모 저장 */
+  function ib메모저장(key, btn){
+    var ta = document.querySelector('[data-memo="' + CSS.escape(key) + '"]');
+    var sel = document.querySelector('[data-state="' + CSS.escape(key) + '"]');
+    if(!ta || !sel) return;
+    if(btn){ btn.disabled = true; btn.textContent = '저장 중…'; }
+    ibCall({ action:'meta', key:key, 상태:sel.value, 메모:ta.value })
+      .then(function(j){
+        if(!j.ok) throw new Error(j.error || '저장하지 못했습니다');
+        var r = ib찾기(key);
+        if(r) r.메타 = { 상태: sel.value, 메모: ta.value };
+        var item = ta.closest('.ib-item');
+        if(item){
+          item.className = item.className.replace(/\s*ib-s-\S+/g, '') + ' ib-s-' + sel.value;
+        }
+        toast('저장했습니다.');
+      })
+      .catch(function(e){ toast(e.message || '저장하지 못했습니다', true); })
+      .finally(function(){ if(btn){ btn.disabled = false; btn.textContent = '저장'; } });
+  }
+
+  function ib복사(글, btn){
+    var 끝 = function(){
+      if(!btn) return;
+      var 옛 = btn.textContent;
+      btn.textContent = '복사됨';
+      setTimeout(function(){ btn.textContent = 옛; }, 1400);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(글).then(끝, function(){ toast('복사하지 못했습니다', true); });
+    } else {
+      var t = document.createElement('textarea');
+      t.value = 글; document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); 끝(); } catch(e){ toast('복사하지 못했습니다', true); }
+      t.remove();
+    }
+  }
+
+  /* 문의함 안에서 일어나는 누르기·고르기를 한곳에서 받습니다 */
+  (function ibBind(){
+    var box = document.getElementById('ibBody');
+    if(!box) return;
+    box.addEventListener('click', function(e){
+      var t = e.target;
+      if(!t || !t.closest) return;
+      var m = t.closest('[data-mail]');   if(m){ ib메일열기(m.dataset.mail); return; }
+      var c = t.closest('[data-copy]');   if(c){ ib복사(c.dataset.copy, c); return; }
+      var s = t.closest('[data-save]');   if(s){ ib메모저장(s.dataset.save, s); return; }
+      var o = t.closest('[data-open]');   if(o){ ib메일앱(o.dataset.open); return; }
+      var d = t.closest('[data-send]');   if(d){ ib바로보내기(d.dataset.send); return; }
+      var x = t.closest('[data-close]');
+      if(x){
+        var b = document.querySelector('[data-box="' + CSS.escape(x.dataset.close) + '"]');
+        if(b){ b.hidden = true; b.innerHTML = ''; }
+      }
+    });
+    box.addEventListener('change', function(e){
+      var t = e.target;
+      if(!t || !t.dataset) return;
+      if(t.dataset.tpl !== undefined){
+        var r = ib찾기(t.dataset.tpl); if(!r) return;
+        var 고름 = ib서식(r)[Number(t.value) || 0];
+        var 상자 = t.closest('.ib-mailbox');
+        if(상자 && 고름){
+          상자.querySelector('[data-subject]').value = 고름.제목;
+          상자.querySelector('[data-body]').value = 고름.본문;
+        }
+      }
+    });
+  })();
+
   function ibItem(r){
     var kind = IB_KIND[r.kind] || { 이름: r.kind || '기타', 순서: [] };
     var 내용 = r.내용 || {};
@@ -3216,9 +3572,12 @@
     var 알림갔나 = !!(r.sent || r.mail);
     var 새것 = !!ntNewKeys[r.key];
 
-    return '<div class="ib-item' + (알림갔나 ? '' : ' unsent') + (새것 ? ' fresh' : '') + '">' +
+    var 상태 = (r.메타 && r.메타.상태) || '미답변';
+
+    return '<div class="ib-item ib-s-' + 상태 + (알림갔나 ? '' : ' unsent') + (새것 ? ' fresh' : '') + '">' +
       '<div class="ib-head">' +
         (새것 ? '<span class="ib-new">NEW</span>' : '') +
+        '<span class="ib-state s-' + 상태 + '">' + 상태 + '</span>' +
         '<span class="ib-kind ' + esc(r.kind || '') + '">' + esc(kind.이름) + '</span>' +
         '<span class="ib-sum">' + esc(r.요약 || '') + '</span>' +
         (알림갔나 ? '' : '<span class="ib-flag">알림 못 감</span>') +
@@ -3228,6 +3587,7 @@
           esc(r.key || '') + '">지우기</button></span>' +
       '</div>' +
       '<div class="ib-rows">' + (rows || '<div class="ib-row"><span>내용이 비어 있습니다.</span></div>') + '</div>' +
+      ib연락줄(r) +
     '</div>';
   }
 
@@ -3317,9 +3677,16 @@
     }
     var 머리 = '<div class="st-nums" style="margin-bottom:18px;">' +
       '<div class="st-num"><b>' + stNum(j.전체) + '</b><span>전체 접수</span></div>' +
+      '<div class="st-num"><b>' + stNum(j.미답변 || 0) + '</b><span>아직 답장 안 한 건</span>' +
+        (j.미답변 ? '<em class="down">연락이 필요합니다</em>' : '<em class="up">모두 답장함</em>') +
+      '</div>' +
       '<div class="st-num"><b>' + stNum(j.카톡미전달) + '</b><span>알림이 못 간 건</span>' +
         (j.카톡미전달 ? '<em class="down">먼저 확인해 주세요</em>' : '<em class="up">모두 전달됨</em>') +
       '</div></div>';
+
+    /* 답장 안 한 것만 보기 */
+    var 걸러 = ($('ibState') && $('ibState').value) || '';
+    if(걸러) list = list.filter(function(r){ return ((r.메타 && r.메타.상태) || '미답변') === 걸러; });
     box.innerHTML = 머리 + list.map(ibItem).join('');
   }
 
@@ -3336,6 +3703,10 @@
       ibCall({ action:'kakao' }).catch(function(){ return null; })
     ]).then(function(out){
       ibCache = out;
+      if(out[0]){
+        ibSendable = !!out[0].바로보내기;
+        ibFrom = out[0].보내는곳 || '';
+      }
       /* 이 탭을 열어 보신 것이므로 여기까지는 읽은 것으로 칩니다 */
       if(out[0] && out[0].최신열쇠) ntSaveSeen(out[0].최신열쇠);
       ntCount = 0; ntPaint();
@@ -4105,6 +4476,9 @@
     if(b) ibAskDelete(b);
   });
   $('ibKind').addEventListener('change', ibLoad);
+  $('ibState').addEventListener('change', function(){
+    if(ibCache) ibRender(ibCache[0]);     /* 거르기만 하면 되니 다시 불러올 것 없습니다 */
+  });
   $('ibReload').addEventListener('click', ibLoad);
   $('stDays').addEventListener('change', stLoad);
   $('stReload').addEventListener('click', stLoad);

@@ -68,9 +68,19 @@ function checkToken(token) {
 }
 
 function openStore(event) {
-  if (!process.env.NETLIFY_BLOBS_CONTEXT) {
-    try { connectLambda(event); } catch (e) { /* 지역 시험용 */ }
-  }
+  /*
+    event.blobs 안에는 "이번 요청에만 쓰는 열쇠" 가 들어 있습니다.
+
+    예전에는 process.env.NETLIFY_BLOBS_CONTEXT 가 이미 차 있으면 건너뛰었습니다.
+    그런데 함수가 살아 있는 채로 다음 손님을 받으면(웜 스타트)
+    지난 요청의 열쇠가 그대로 남아 있습니다. 그 열쇠는 곧 만료되고,
+    그때부터 "Failed to decode token: Token expired" 가 납니다.
+
+    그래서 요청마다 새 열쇠로 갈아 끼웁니다.
+  */
+  try {
+    if (event && event.blobs) connectLambda(event);
+  } catch (e) { /* 새 방식 함수나 지역 시험에는 event.blobs 가 없습니다 */ }
   return getStore({ name: STORE });
 }
 
@@ -123,6 +133,42 @@ async function kakaoHealth() {
   이 검사가 없으면 아무 이름이나 넣어 다른 자료를 지울 수 있습니다.
 */
 const KEY_RE = /^(inquiry|deposit|matchday)\/\d{4}-\d{2}-\d{2}\/[A-Za-z0-9_-]{1,60}$/;
+
+/*
+  -----------------------------------------------------------
+  답변 상태와 메모
+
+  손님이 보낸 내용은 건드리지 않고, 담당자가 적는 것만
+  "meta/열쇠" 라는 다른 칸에 따로 저장합니다.
+  문의 원본과 섞이지 않아, 메모를 고쳐도 접수 내용은 그대로입니다.
+  -----------------------------------------------------------
+*/
+const 상태들 = ['미답변', '답변중', '답변완료', '예약확정', '취소'];
+const META = 'meta/';
+
+/* 손님에게 보내는 답장 — Resend 로 나갑니다 */
+async function 답장보내기(받는곳, 제목, 본문) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error('RESEND_API_KEY 가 설정되지 않았습니다');
+  const from = process.env.NOTIFY_FROM || '';
+  if (!from || /resend\.dev/i.test(from)) {
+    throw new Error('보내는 주소(NOTIFY_FROM)가 회사 도메인으로 확인되지 않았습니다. ' +
+                    'Resend 에서 euforiatour.com 을 인증하신 뒤 NOTIFY_FROM 을 바꿔 주세요.');
+  }
+  const 답장받을곳 = process.env.NOTIFY_EMAIL || 'euforia@euforiatour.com';
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: from, to: [받는곳], subject: 제목, text: 본문, reply_to: 답장받을곳 }),
+  });
+  let data = {};
+  try { data = await res.json(); } catch (e) { data = {}; }
+  if (!res.ok || !data.id) {
+    const why = (data && (data.message || data.name)) || JSON.stringify(data);
+    throw new Error('메일 전송 실패 (' + res.status + '): ' + String(why).slice(0, 200));
+  }
+  return data.id;
+}
 
 /*
   열쇠는 "종류/날짜/시각-무작위" 입니다.
@@ -210,6 +256,46 @@ exports.handler = async function (event) {
     });
   }
 
+  /* ---------- 답변 상태 · 메모 저장 ---------- */
+  if (action === 'meta') {
+    const key = String(body.key || '');
+    if (!KEY_RE.test(key)) return json(400, { error: '알 수 없는 열쇠입니다' });
+    const 상태 = String(body.상태 || '미답변');
+    if (상태들.indexOf(상태) === -1) return json(400, { error: '알 수 없는 상태입니다' });
+    const 메모 = String(body.메모 || '').slice(0, 2000);
+    try {
+      await store.setJSON(META + key, { 상태: 상태, 메모: 메모, 고친때: new Date().toISOString() });
+      return json(200, { ok: true, 상태: 상태 });
+    } catch (e) {
+      return json(200, { ok: false, error: (e && e.message) || String(e) });
+    }
+  }
+
+  /* ---------- 손님에게 답장 보내기 ---------- */
+  if (action === 'reply') {
+    const key = String(body.key || '');
+    if (!KEY_RE.test(key)) return json(400, { error: '알 수 없는 열쇠입니다' });
+    const 받는곳 = String(body.받는곳 || '').trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(받는곳)) {
+      return json(400, { error: '받는 사람 메일 주소가 올바르지 않습니다' });
+    }
+    const 제목 = String(body.제목 || '').slice(0, 200);
+    const 본문 = String(body.본문 || '').slice(0, 8000);
+    if (!제목 || !본문) return json(400, { error: '제목과 내용을 적어 주세요' });
+    try {
+      const id = await 답장보내기(받는곳, 제목, 본문);
+      /* 보낸 기록을 메모에 남기고 상태를 답변완료로 올립니다 */
+      let 옛 = null;
+      try { 옛 = await store.get(META + key, { type: 'json' }); } catch (e) { 옛 = null; }
+      const 때 = new Date().toISOString().slice(0, 16).replace('T', ' ');
+      const 메모 = ((옛 && 옛.메모) ? 옛.메모 + '\n' : '') + '[' + 때 + '] ' + 받는곳 + ' 로 메일 보냄 — ' + 제목;
+      await store.setJSON(META + key, { 상태: '답변완료', 메모: 메모.slice(0, 2000), 고친때: new Date().toISOString() });
+      return json(200, { ok: true, 보낸id: id, 메모: 메모.slice(0, 2000) });
+    } catch (e) {
+      return json(200, { ok: false, error: (e && e.message) || String(e) });
+    }
+  }
+
   /* ---------- 지우기 ---------- */
   if (action === 'delete' || action === 'restore') {
     const key = String(body.key || q.key || '');
@@ -266,6 +352,11 @@ exports.handler = async function (event) {
         const v = await store.get(k, { type: 'json' });
         if (!v || typeof v !== 'object') return null;
         v.key = k;
+        try {
+          const m = await store.get(META + k, { type: 'json' });
+          if (m && typeof m === 'object') v.메타 = { 상태: m.상태 || '미답변', 메모: m.메모 || '' };
+        } catch (e2) { /* 메모가 없으면 그냥 미답변입니다 */ }
+        if (!v.메타) v.메타 = { 상태: '미답변', 메모: '' };
         return v;
       } catch (e) { return null; }
     }));
@@ -275,12 +366,23 @@ exports.handler = async function (event) {
   /* 카카오도 메일도 못 간 것만 셉니다. 둘 중 하나라도 갔으면 놓친 게 아닙니다 */
   const 미전달 = rows.filter(function (r) { return !(r.sent || r.mail); }).length;
 
+  const 미답변 = rows.filter(function (r) {
+    return !r.메타 || r.메타.상태 === '미답변';
+  }).length;
+
+  /* 사이트에서 손님에게 바로 메일을 보낼 수 있는 상태인지 */
+  const from = process.env.NOTIFY_FROM || '';
+  const 바로보내기 = !!process.env.RESEND_API_KEY && !!from && !/resend\.dev/i.test(from);
+
   return json(200, {
     ready: true,
     전체: total,
     최신열쇠: 최신열쇠,
     보여준수: rows.length,
     카톡미전달: 미전달,
+    미답변: 미답변,
+    바로보내기: 바로보내기,
+    보내는곳: 바로보내기 ? from : '',
     목록: rows,
   });
 };
