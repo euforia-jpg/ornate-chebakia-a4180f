@@ -584,18 +584,24 @@ function euRouteMap(product){
   });
 
   var 선 = '<path class="eu-line" d="' + d + '"/>';
+  var 늦기 = function(i){ return (i / Math.max(1, 핀.length - 1) * 2.1).toFixed(2); };
+
+  /* 동그라미를 먼저 다 찍고, 이름표는 그 위에 얹습니다
+     (가까운 두 지점이 겹쳐도 이름이 가려지지 않도록) */
   var 동그라미 = 핀.map(function(p, i){
-    var 늦 = (i / Math.max(1, 핀.length - 1) * 2.1).toFixed(2);
-    var 글 = p.표
-      ? '<text class="eu-tx" x="' + (p.x + (p.쪽 === 'L' ? -13 : 13)).toFixed(1) + '" y="' +
-        (p.y + 4).toFixed(1) + '" text-anchor="' + (p.쪽 === 'L' ? 'end' : 'start') + '">' +
-        p.이름 + '</text>'
-      : '';
     return '<g class="eu-pin' + (p.숙 ? ' stay' : '') + '" data-day="' + p.일 +
-           '" style="--d:' + 늦 + 's">' +
+           '" style="--d:' + 늦기(i) + 's">' +
       '<circle class="eu-halo" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="13"/>' +
       '<circle class="eu-dot" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' +
-        (p.숙 ? 7 : 5) + '"/>' + 글 + '</g>';
+        (p.숙 ? 7 : 5) + '"/></g>';
+  }).join('');
+
+  var 이름표 = 핀.map(function(p, i){
+    if(!p.표) return '';
+    return '<g class="eu-pin" data-day="' + p.일 + '" style="--d:' + 늦기(i) + 's">' +
+      '<text class="eu-tx" x="' + (p.x + (p.쪽 === 'L' ? -13 : 13)).toFixed(1) + '" y="' +
+      (p.y + 4).toFixed(1) + '" text-anchor="' + (p.쪽 === 'L' ? 'end' : 'start') + '">' +
+      p.이름 + '</text></g>';
   }).join('');
 
   var 날 = 경로.map(function(x){
@@ -622,7 +628,7 @@ function euRouteMap(product){
             '<path class="eu-land eu-esp" d="' + EU_LAND.ESP + '"/>' +
             '<path class="eu-land eu-prt" d="' + EU_LAND.PRT + '"/>' +
           '</g>' +
-          선 + 동그라미 +
+          선 + 동그라미 + 이름표 +
         '</svg>' +
       '</div>' +
       '<div class="eu-days">' +
