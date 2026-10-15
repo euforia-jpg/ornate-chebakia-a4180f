@@ -254,6 +254,11 @@
 .audio-badge.playing{ background:var(--pink); }
 .app-badge{ display:inline-flex; align-items:center; gap:6px; margin-top:16px; padding:10px 20px; border-radius:999px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; font-size:13.5px; text-decoration:none; box-shadow:0 8px 16px -9px rgba(230,49,123,0.55); }
 .app-badge:hover{ opacity:.9; }
+/* 앱 단추 두 개 — 맛집 옆에 골프를 나란히 둡니다. 메뉴에는 넣지 않았습니다. */
+.app-badges{ display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+.app-badges .app-badge{ margin-top:0; }
+.app-badge.golf{ background:linear-gradient(90deg,#1F7A4C,#12C9AE);
+                 box-shadow:0 8px 16px -9px rgba(31,122,76,0.6); }
 
   .feature-overlay{ position:fixed; inset:0; background:rgba(20,16,61,0.6); z-index:500; display:none; align-items:center; justify-content:center; padding:20px; }
 .feature-overlay.show{ display:flex; }
@@ -581,7 +586,10 @@
         <a class="cta outline" href="plan.html">✨ AI 일정짜기</a>
         <a class="cta flash" href="builder.html">일정 만들고 금액 보기<span class="nu">NEW</span></a>
       </div>
-      <a class="app-badge" href="https://euforia-tour-restaurants.netlify.app/" target="_blank" rel="noopener">🍽️ 스페인·포르투갈 맛집 앱 보러가기</a>
+      <div class="app-badges">
+        <a class="app-badge" href="https://euforia-tour-restaurants.netlify.app/" target="_blank" rel="noopener">🍽️ 스페인·포르투갈 맛집 앱 보러가기</a>
+        <a class="app-badge golf" href="/golf.html">⛳ 스페인·포르투갈 골프장 보러가기</a>
+      </div>
     </div>
     <div class="hero-card plan-card">
       <span class="pc-new">NEW</span>
