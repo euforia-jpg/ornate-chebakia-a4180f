@@ -773,6 +773,9 @@ function 빈말(){
 /* 참고 요금 — 부킹닷컴 조식 포함 2인 1실 1박 요금을 네 계절(봄·여름·가을·겨울)로 평균 낸 값입니다.
    파는 값이 아니라 손님이 가늠하실 수 있게 보여 드리는 참고 숫자입니다. */
 var 요금기준 = '부킹닷컴 조식 포함 2인 1실 1박 · 네 계절 평균 (2026년 10월 조회)';
+/* 손님 화면에 요금을 보일지 말지. false 로 두면 숫자는 자료에만 남고 화면에는 나오지 않습니다.
+   나중에 보이고 싶으시면 이 한 줄만 true 로 바꾸시면 됩니다. */
+var 요금보임 = false;
 function euHotelFare(h){
   if(!h || h['요금'] == null) return '';
   return '€' + Number(h['요금']).toLocaleString('en-US');
@@ -783,7 +786,7 @@ function renderList(){
     if(h.c!==last){ out.push('<div class="hm-city">'+CITY[h.c]+'</div>'); last=h.c; }
     var sub=h.a+(h.km!=null?' · 시내 중심 '+h.km+'km':'');
     var 이름=(h.p?'<em class="hm-par">파라도르</em>':'')+esc(h.n);
-    var 값=h['요금']?'<small>'+esc(sub)+' · 참고 <span class="hm-fare">'+euHotelFare(h)+'</span></small>':'<small>'+esc(sub)+'</small>';
+    var 값=(요금보임 && h['요금'])?'<small>'+esc(sub)+' · 참고 <span class="hm-fare">'+euHotelFare(h)+'</span></small>':'<small>'+esc(sub)+'</small>';
     out.push('<button type="button" class="hm-item'+(k===state.cur?' on':'')+'" data-k="'+k+'"><span class="badge b'+h.g+'">'+h.g+'성</span><b>'+이름+'</b>'+값+'</button>');
   });
   $('hmList').innerHTML=out.join('')||'<p style="padding:16px;color:var(--muted)">'+빈말()+'</p>';
@@ -826,7 +829,7 @@ function select(i,fromMap){
   var info=['<li>📍 '+esc(h.a)+'</li>'];
   if(h.km!=null) info.push('<li>🚶 시내 중심에서 '+h.km+'km</li>');
   if(h.p) info.push('<li>🏰 파라도르 — 스페인 국영 호텔. 성·수도원·궁전 같은 역사 건물을 호텔로 쓰고 있어요.</li>');
-  if(h['요금'] != null) info.push('<li>💶 <span class="hm-fare-box">참고 요금 <b class="hm-fare">'+euHotelFare(h)+'</b> · 2인 1실 1박, 조식 포함<br><small>'+요금기준+'. 날짜와 객실에 따라 달라지니 실제 요금은 예약 요청 때 안내해 드려요.</small></span></li>');
+  if(요금보임 && h['요금'] != null) info.push('<li>💶 <span class="hm-fare-box">참고 요금 <b class="hm-fare">'+euHotelFare(h)+'</b> · 2인 1실 1박, 조식 포함<br><small>'+요금기준+'. 날짜와 객실에 따라 달라지니 실제 요금은 예약 요청 때 안내해 드려요.</small></span></li>');
   $('hmInfo').innerHTML=info.join('');
   $('hmDir').href=dirUrl(h); $('hmG').href=gUrl(h);
   $('hmTel').hidden=true; $('hmWeb').hidden=true;

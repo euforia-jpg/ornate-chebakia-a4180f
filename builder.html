@@ -1655,11 +1655,15 @@
     return 순서.map(function(c){ return { 도시: c, 박: 셈[c] }; });
   }
 
-  /* 그 도시의 기준호텔. 아직 등록된 호텔이 없는 도시는 등급만 있는 예비 호텔을 보여 드립니다 */
+  /* 그 도시의 기준호텔 + 등급만 고르는 칸.
+     전에는 그 도시에 등록된 호텔이 있으면 등급 칸이 사라져서, 예를 들어 4성만 올라와 있는
+     도시에서는 3성을 고를 수가 없었습니다. 이제 도시 호텔을 먼저 보여 드리고
+     그 뒤에 등급 칸을 '항상' 붙입니다 — 어느 도시든 호텔을 고르실 수 있습니다. */
   function 도시호텔(도시){
     var 전부 = 종류('숙박');
     var 그곳 = 전부.filter(function(h){ return h.도시 === 도시; });
-    return 그곳.length ? 그곳 : 전부.filter(function(h){ return !h.도시; });
+    var 등급 = 전부.filter(function(h){ return !h.도시; });
+    return 그곳.concat(등급);
   }
 
   function 숙박목록(){
