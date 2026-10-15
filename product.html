@@ -70,6 +70,74 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
 
   .p-title{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(24px,3vw,32px); color:var(--navy); margin:0 0 10px; }
   .p-lead{ font-size:14.5px; color:var(--ink); font-weight:700; line-height:1.7; margin:0 0 18px; }
+  /* ---------- 요금 상자 ---------- */
+  .eu-fare{ margin:0 0 18px; font-family:inherit; color:var(--ink); word-break:keep-all; }
+  .eu-fare *{ box-sizing:border-box; }
+  .eu-fare .box{ border:1.5px solid var(--line); border-radius:18px; background:#fff; overflow:hidden; }
+
+  /* 아직 요금을 안 적은 상품 */
+  .eu-fare-soon{ padding:22px 24px; border:1.5px solid var(--line); border-radius:18px;
+    background:linear-gradient(170deg,#FBFAFF,#F4F2FC); }
+  .eu-fare-soon b{ display:block; font-size:16px; font-weight:800; color:var(--navy); margin-bottom:5px; }
+  .eu-fare-soon p{ margin:0 0 14px; font-size:13px; font-weight:600; color:var(--muted); line-height:1.7; }
+  .eu-fare-cta{ display:flex; gap:9px; flex-wrap:wrap; }
+  .eu-fare-cta a{ flex:1 1 150px; text-align:center; text-decoration:none; padding:12px 16px;
+    border-radius:12px; font-size:13.5px; font-weight:800; }
+  .eu-fare-cta .main{ background:var(--violet); color:#fff;
+    box-shadow:0 12px 26px -14px rgba(108,60,233,.9); }
+  .eu-fare-cta .sub{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
+
+  /* ① 한 줄 */
+  .eu-fare-1 .box{ padding:22px 24px; }
+  .eu-fare-1 .eyebrow{ font-size:11.5px; font-weight:800; color:var(--muted);
+    letter-spacing:.05em; margin-bottom:10px; }
+  .eu-fare-1 .row{ display:flex; align-items:flex-end; gap:11px; flex-wrap:wrap; }
+  .eu-fare-1 .eur{ font-size:34px; font-weight:800; color:var(--navy);
+    letter-spacing:-.025em; line-height:1; }
+  .eu-fare-1 .per{ font-size:14px; font-weight:700; color:var(--muted); padding-bottom:3px; }
+  .eu-fare-1 .krw{ margin-top:7px; font-size:14px; font-weight:700; color:var(--muted); }
+  .eu-fare-1 .krw em{ font-style:normal; font-size:11.5px; font-weight:600;
+    color:#A9A4C8; margin-left:6px; }
+  .eu-fare-1 .chips{ margin-top:13px; display:flex; gap:7px; flex-wrap:wrap; }
+  .eu-fare-1 .chips span{ font-size:11.5px; font-weight:700; color:var(--violet);
+    background:#F2EEFE; border:1px solid #E2DAFB; border-radius:999px; padding:5px 11px; }
+  .eu-fare-1 .note{ margin-top:15px; padding-top:14px; border-top:1.5px dashed #E6E2F4;
+    font-size:12.5px; font-weight:600; color:var(--muted); line-height:1.75; }
+
+  /* ② 계산기 */
+  .eu-fare-3 .top{ padding:18px 22px 16px; background:linear-gradient(170deg,#FBFAFF,#F4F2FC);
+    border-bottom:1.5px solid var(--line); }
+  .eu-fare-3 .top b{ display:block; font-size:14.5px; font-weight:800;
+    color:var(--navy); margin-bottom:11px; }
+  .eu-fare-3 .steps{ display:flex; gap:7px; flex-wrap:wrap; }
+  .eu-fare-3 .steps button{ all:unset; cursor:pointer; padding:9px 15px; border-radius:11px;
+    border:1.5px solid var(--line); background:#fff; font-size:13px; font-weight:800;
+    color:var(--muted); transition:.15s; }
+  .eu-fare-3 .steps button:hover{ border-color:#C9BDF7; color:var(--violet); }
+  .eu-fare-3 .steps button.on{ background:var(--violet); border-color:var(--violet); color:#fff;
+    box-shadow:0 10px 22px -12px rgba(108,60,233,.9); }
+  .eu-fare-3 .steps button[disabled]{ opacity:.4; cursor:default; }
+  .eu-fare-3 .mid{ padding:22px; display:flex; gap:26px; align-items:flex-end; flex-wrap:wrap; }
+  .eu-fare-3 .one u, .eu-fare-3 .tot u{ display:block; text-decoration:none; font-size:11.5px;
+    font-weight:800; color:var(--muted); letter-spacing:.05em; margin-bottom:6px; }
+  .eu-fare-3 .one .eur{ font-size:34px; font-weight:800; color:var(--navy);
+    letter-spacing:-.025em; line-height:1; }
+  .eu-fare-3 .one .krw{ margin-top:6px; font-size:13.5px; font-weight:700; color:var(--muted); }
+  .eu-fare-3 .tot{ margin-left:auto; text-align:right; }
+  .eu-fare-3 .tot .eur{ font-size:22px; font-weight:800; color:var(--violet); letter-spacing:-.02em; }
+  .eu-fare-3 .tot .krw{ margin-top:4px; font-size:12.5px; font-weight:700; color:var(--muted); }
+  .eu-fare-3 .car{ width:100%; font-size:12.5px; font-weight:700; color:var(--muted);
+    padding-top:14px; border-top:1.5px dashed #E6E2F4; }
+  .eu-fare-3 .car b{ color:var(--navy); font-weight:800; }
+  .eu-fare-3 .ft{ padding:13px 22px 15px; background:#FAFAFE; border-top:1.5px solid var(--line);
+    font-size:12px; font-weight:600; color:var(--muted); line-height:1.75; }
+  .eu-fare-3 .ft b{ color:var(--navy); font-weight:800; }
+  @media (max-width:560px){
+    .eu-fare-3 .mid{ gap:16px; }
+    .eu-fare-3 .tot{ margin-left:0; text-align:left; }
+  }
+  @media print{ .eu-fare-cta{ display:none !important; } }
+
   /* ---------- 일정 지도 ---------- */
   .eu-route{ margin:4px 0 28px; padding:20px 22px 22px; border:1.5px solid var(--line);
     border-radius:20px; background:linear-gradient(170deg,#FBFAFF,#F4F2FC); }
@@ -496,6 +564,141 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
 <script>
 function getParam(name){
   return new URLSearchParams(window.location.search).get(name);
+}
+
+/* =========================================================================
+   요금 상자
+   -------------------------------------------------------------------------
+   상품에 `요금` 이 들어 있으면 제목 아래에 요금 상자가 뜹니다.
+
+     당일 차량 상품 — 값이 하나
+       요금: { 꼴:'한줄', 값:180, 단위:'1인', 덧말:'4인 이상 출발',
+               칩:['전용 차량','한국인 기사'] }
+
+     여러 날 패키지 — 인원에 따라 달라짐
+       요금: { 꼴:'계산기', 최소:4,
+               구간:[ {인원:'4~6인', 수:4, 값:null, 차량:'9인승 밴'}, … ],
+               추가:[ {이름:'싱글 차지', 값:55, 단위:'1박'} ] }
+
+   값이 비어 있으면(null) 「요금 준비 중」 으로 나옵니다.
+   요금을 적어 넣으면 그때부터 숫자가 보입니다.
+   ========================================================================= */
+
+/*
+   원화 환산 — 한 곳에서만 고칩니다.
+   EURKRW 를 0 으로 두면 원화를 아예 보여 주지 않습니다 (환율을 정하기 전까지 안전).
+*/
+var EU_RATE = { EURKRW: 0, 기준일: '' };
+
+function euMoney(값){
+  if(값 == null || !isFinite(값)) return '';
+  return '€' + Number(값).toLocaleString('en-US');
+}
+function euWon(값){
+  if(값 == null || !isFinite(값) || !EU_RATE.EURKRW) return '';
+  return '약 ₩' + Math.round(값 * EU_RATE.EURKRW).toLocaleString('ko-KR');
+}
+function euRateNote(){
+  if(!EU_RATE.EURKRW) return '';
+  return (EU_RATE.기준일 ? EU_RATE.기준일 + ' ' : '') +
+         '환율 기준 참고용이며 결제는 유로입니다.';
+}
+
+/* 아직 요금을 안 적은 상품에 보여 줄 안내 */
+function euFareSoon(말){
+  return '<div class="eu-fare-soon">' +
+    '<b>' + (말 || '요금 준비 중입니다') + '</b>' +
+    '<p>인원과 날짜를 알려 주시면 요금을 안내해 드려요.</p>' +
+    '<div class="eu-fare-cta">' +
+      '<a class="main" href="/contact.html">예약문의 하기</a>' +
+      '<a class="sub" href="https://pf.kakao.com/_BSxggn/chat" target="_blank" rel="noopener">카카오톡 문의</a>' +
+    '</div></div>';
+}
+
+/* ---------- ① 한 줄 (당일 차량) ---------- */
+function euFareOne(f){
+  var 값 = f['값'];
+  if(값 == null) return '<div class="eu-fare eu-fare-1">' + euFareSoon() + '</div>';
+  var 원 = euWon(값);
+  var 칩 = (f['칩'] || []).map(function(t){ return '<span>' + t + '</span>'; }).join('');
+  return '<div class="eu-fare eu-fare-1"><div class="box">' +
+    (f['덧말'] ? '<div class="eyebrow">' + (f['단위'] || '1인') + ' 요금 · ' + f['덧말'] + '</div>' : '') +
+    '<div class="row"><span class="eur">' + euMoney(값) + '</span>' +
+      '<span class="per">/ ' + (f['단위'] || '1인') + '</span></div>' +
+    (원 ? '<div class="krw">' + 원 + ' <em>' + euRateNote() + '</em></div>' : '') +
+    (칩 ? '<div class="chips">' + 칩 + '</div>' : '') +
+    (f['안내'] ? '<div class="note">' + f['안내'] + '</div>' : '') +
+  '</div></div>';
+}
+
+/* ---------- ② 계산기 (여러 날 패키지) ---------- */
+function euFareCalc(f){
+  var 구간 = (f['구간'] || []).filter(function(g){ return g && g['인원']; });
+  if(!구간.length) return '';
+  var 있음 = 구간.some(function(g){ return g['값'] != null; });
+  if(!있음) return '<div class="eu-fare eu-fare-3">' + euFareSoon() + '</div>';
+
+  var 첫 = 구간.find(function(g){ return g['값'] != null; }) || 구간[0];
+  var 단추 = 구간.map(function(g, i){
+    var 꺼 = (g['값'] == null) ? ' disabled' : '';
+    return '<button type="button" data-i="' + i + '"' + (g === 첫 ? ' class="on"' : '') + 꺼 + '>' +
+      g['인원'] + '</button>';
+  }).join('');
+
+  /* 값도 설명도 아직 없는 항목은 아예 보여 주지 않습니다 */
+  var 추가 = (f['추가'] || []).filter(function(a){
+    return a && a['이름'] && (a['값'] != null || (a['말'] || '').trim());
+  }).map(function(a){
+    return '<b>' + a['이름'] + '</b> ' +
+      (a['값'] != null ? (a['단위'] ? a['단위'] + ' ' : '') + euMoney(a['값']) : a['말']);
+  }).join(' · ');
+
+  return '<div class="eu-fare eu-fare-3" data-fare=\'' +
+      JSON.stringify(구간).replace(/'/g, '&#39;') + '\'><div class="box">' +
+    '<div class="top"><b>몇 분이 가시나요?</b><div class="steps">' + 단추 + '</div></div>' +
+    '<div class="mid">' +
+      '<div class="one"><u>' + (f['단위'] || '1인') + ' 요금</u>' +
+        '<div class="eur" data-eur>' + euMoney(첫['값']) + '</div>' +
+        '<div class="krw" data-krw>' + euWon(첫['값']) + '</div></div>' +
+      '<div class="tot"><u data-tlab>' + (첫['수'] || '') + '인 기준 합계</u>' +
+        '<div class="eur" data-teur>' + euMoney(첫['값'] * (첫['수'] || 1)) + '</div>' +
+        '<div class="krw" data-tkrw>' + euWon(첫['값'] * (첫['수'] || 1)) + '</div></div>' +
+      (첫['차량'] ? '<div class="car">배정 차량 — <b data-car>' + 첫['차량'] + '</b></div>' : '') +
+    '</div>' +
+    '<div class="ft">' + (추가 ? 추가 + '<br>' : '') +
+      (f['최소'] ? '최소 출발 ' + f['최소'] + '인 · ' : '') + euRateNote() + '</div>' +
+  '</div></div>';
+}
+
+function euFare(product){
+  var f = product['요금'];
+  if(!f) return '';
+  if(f['꼴'] === '계산기') return euFareCalc(f);
+  return euFareOne(f);
+}
+
+/* 인원 단추를 누르면 값이 바뀝니다 */
+function euFareWatch(){
+  var box = document.querySelector('.eu-fare-3[data-fare]');
+  if(!box) return;
+  var 구간;
+  try { 구간 = JSON.parse(box.getAttribute('data-fare')); } catch(e){ return; }
+  box.querySelectorAll('.steps button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var g = 구간[+b.dataset.i];
+      if(!g || g['값'] == null) return;
+      box.querySelectorAll('.steps button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      var 수 = g['수'] || 1;
+      var 넣 = function(sel, 글){ var e = box.querySelector(sel); if(e) e.textContent = 글; };
+      넣('[data-eur]', euMoney(g['값']));
+      넣('[data-krw]', euWon(g['값']));
+      넣('[data-teur]', euMoney(g['값'] * 수));
+      넣('[data-tkrw]', euWon(g['값'] * 수));
+      넣('[data-tlab]', 수 + '인 기준 합계');
+      if(g['차량']) 넣('[data-car]', g['차량']);
+    });
+  });
 }
 
 /* =========================================================================
@@ -1011,13 +1214,14 @@ function render(){
   el.innerHTML = `
     <div class="layout">
       <div class="section-inner">
-    <div class="p-price">${formatPriceBadge(product.price)}${formatYoutubeBtn(product.youtubeUrl)}${formatAudioBadge(product.audioGuide)}</div>
+    <div class="p-price">${product['요금'] ? '' : formatPriceBadge(product.price)}${formatYoutubeBtn(product.youtubeUrl)}${formatAudioBadge(product.audioGuide)}</div>
         <div class="p-top ${product.topClass}">
           <span class="region">${product.region}</span>
           <span class="days">${product.days}</span>
         </div>
         <h1 class="p-title">${product.title}</h1>
         <p class="p-lead">${d.lead}</p>
+        ${euFare(product)}
         ${euRouteMap(product)}
         <p class="p-desc">${d.description}</p>
                <div class="p-tags">${product.tags.map(t=>`<span>${t}</span>`).join('')}</div>
@@ -1101,6 +1305,7 @@ function render(){
   `;
 
   euRouteWatch();
+  euFareWatch();
   placeItineraryDownload(product);
   initAvailCalendar(product);
 }
