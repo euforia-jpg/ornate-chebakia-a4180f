@@ -52,6 +52,12 @@
   "골프장": [
     {
       "id": "valderrama",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=fnK8lmRPD1E",
+        "제목": "Welcome home. Welcome to Real Club Valderrama."
+      },
+      "채널": "https://www.youtube.com/channel/UCdq-3ChqLhK64OW_BVIJ2yg",
       "위도": 36.28254,
       "경도": -5.32739,
       "이름": "Real Club Valderrama",
@@ -111,6 +117,12 @@
     },
     {
       "id": "rcg-sotogrande",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=_JVSj9IBIPs",
+        "제목": "RCG Sotogrande Promo Video"
+      },
+      "채널": "https://www.youtube.com/channel/UCrjJpj_UQMCfOtmwaO6oHjg",
       "위도": 36.28009,
       "경도": -5.29189,
       "이름": "Real Club de Golf Sotogrande",
@@ -146,6 +158,12 @@
     },
     {
       "id": "la-reserva",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=2pYQEVLhycs",
+        "제목": "Golf at the heart of a Mediterranean lifestyle"
+      },
+      "채널": "https://www.youtube.com/channel/UCC2410JWSnA-54JoO1sKyQg",
       "위도": 36.29411,
       "경도": -5.32005,
       "이름": "La Reserva Club Sotogrande",
@@ -174,6 +192,12 @@
     },
     {
       "id": "san-roque",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=qhiLG4TyvWo",
+        "제목": "The San Roque Club — A gate to gate experience"
+      },
+      "채널": "https://www.youtube.com/channel/UC-w1QrbTWJeY9pUh4LI7G5A",
       "위도": 36.26592,
       "경도": -5.33741,
       "이름": "The San Roque Club",
@@ -209,6 +233,12 @@
     },
     {
       "id": "la-hacienda",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=J4A4kUIDyrc",
+        "제목": "Links Course — 코스타 델 솔 유일의 링크스"
+      },
+      "채널": "https://www.youtube.com/channel/UCquG4mbqW6MGVN3w81BbuJQ",
       "위도": 36.24608,
       "경도": -5.31676,
       "이름": "La Hacienda Links Golf Resort",
@@ -250,6 +280,12 @@
     },
     {
       "id": "so-sotogrande",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=t5-r4t4lMOA",
+        "제목": "SO/ Sotogrande Spa & Golf Resort"
+      },
+      "채널": "https://www.youtube.com/channel/UCv6C8-H_gNMK8Md8yXL1JfA",
       "위도": 36.27528,
       "경도": -5.35199,
       "이름": "SO/ Sotogrande Spa & Golf Resort",
@@ -332,10 +368,18 @@
       "복장": [],
       "핸디캡": "",
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null,
+      "채널": ""
     },
     {
       "id": "villa-padierna",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=OlmJm3Iv7Ro",
+        "제목": "Villa Padierna Golf Club"
+      },
+      "채널": "https://www.youtube.com/channel/UCGNYJ3L_WiadhUf3VMU8axg",
       "위도": 36.47577,
       "경도": -5.05351,
       "이름": "Villa Padierna Golf Club",
@@ -372,6 +416,12 @@
     },
     {
       "id": "la-cala",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=9434Ou4DLFg",
+        "제목": "Authentic Andalusia Awaits — La Cala Resort"
+      },
+      "채널": "https://www.youtube.com/channel/UC_-yGqUV2pSamoCgwIn8OSA",
       "위도": 36.54208,
       "경도": -4.72251,
       "이름": "La Cala Resort",
@@ -405,6 +455,11 @@
     },
     {
       "id": "aloha",
+      "영상": {
+        "종류": "vimeo",
+        "주소": "https://vimeo.com/854391636",
+        "제목": "Rising the bar — 클럽 공식 영상"
+      },
       "위도": 36.51126,
       "경도": -4.95899,
       "이름": "Club de Golf Aloha",
@@ -433,7 +488,8 @@
       "복장": [],
       "호텔": null,
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "채널": ""
     },
     {
       "id": "novo-sancti-petri",
@@ -462,10 +518,18 @@
       "꼭보실점": [],
       "복장": [],
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null,
+      "채널": ""
     },
     {
       "id": "montecastillo",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=z8Gq_WCX6TU",
+        "제목": "Barceló Montecastillo Golf — Sports Resort"
+      },
+      "채널": "https://www.youtube.com/channel/UCVAEQpCFU99aYiSsx6B0_5A",
       "위도": 36.70246,
       "경도": -6.03795,
       "이름": "Barceló Montecastillo Golf",
@@ -500,6 +564,7 @@
     },
     {
       "id": "sherry-golf",
+      "채널": "https://www.youtube.com/channel/UCVEegLwdPnU_Palb6XwcIwg",
       "위도": 36.65863,
       "경도": -6.1557,
       "이름": "Sherry Golf Jerez",
@@ -528,10 +593,17 @@
       "핸디캡": "",
       "호텔": null,
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null
     },
     {
       "id": "rcg-sevilla",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=ZybVsHan3c4",
+        "제목": "Spotlight on: Real Club Sevilla Golf"
+      },
+      "채널": "https://www.youtube.com/channel/UCe0G2GnB4T-lj4JzSP0pQ5w",
       "위도": 37.35137,
       "경도": -5.91938,
       "이름": "Real Club de Golf de Sevilla",
@@ -565,6 +637,7 @@
     },
     {
       "id": "monte-rei",
+      "채널": "https://www.youtube.com/channel/UCREmmOB74Lf2-BaRlKEp4_g",
       "위도": 37.20465,
       "경도": -7.5512,
       "이름": "Monte Rei Golf & Country Club",
@@ -591,10 +664,12 @@
       "복장": [],
       "호텔": null,
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null
     },
     {
       "id": "quinta-do-lago",
+      "채널": "https://www.youtube.com/channel/UCIfR9Mv7aNXkHRU5Dq7QYLA",
       "위도": 37.0456,
       "경도": -8.01699,
       "이름": "Quinta do Lago Golf",
@@ -625,7 +700,8 @@
       },
       "복장": [],
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null
     },
     {
       "id": "vilamoura-old",
@@ -659,7 +735,9 @@
       "복장": [],
       "호텔": null,
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null,
+      "채널": ""
     },
     {
       "id": "palmares",
@@ -691,7 +769,9 @@
       "대회": [],
       "복장": [],
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null,
+      "채널": ""
     },
     {
       "id": "san-lorenzo",
@@ -723,7 +803,9 @@
       "대회": [],
       "복장": [],
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null,
+      "채널": ""
     },
     {
       "id": "quinta-da-ria",
@@ -758,10 +840,18 @@
         "메모": "대회 개최 연도 미확인. 호텔 별 등급 공식 확인 불가(4성 표기 자료 있음)."
       },
       "복장": [],
-      "링크": ""
+      "링크": "",
+      "영상": null,
+      "채널": ""
     },
     {
       "id": "ombria",
+      "영상": {
+        "종류": "youtube",
+        "주소": "https://www.youtube.com/watch?v=x_OfGsJ3Cq4",
+        "제목": "It's Always Now — Ombria Resort"
+      },
+      "채널": "https://www.youtube.com/channel/UCMnUAXjl7qpXGjWPTOCHB_Q",
       "위도": 37.19183,
       "경도": -8.01079,
       "이름": "Ombria Algarve Golf",
@@ -797,6 +887,7 @@
     },
     {
       "id": "amendoeira",
+      "채널": "https://www.youtube.com/channel/UCfQQYMe2D_snlpuRx6lStxw",
       "위도": 37.14699,
       "경도": -8.35872,
       "이름": "Amendoeira Golf Resort",
@@ -822,10 +913,12 @@
       "복장": [],
       "호텔": null,
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null
     },
     {
       "id": "vale-do-lobo",
+      "채널": "https://www.youtube.com/channel/UCrf_soKBGojFQESN85hSZeA",
       "위도": 37.05492,
       "경도": -8.06419,
       "이름": "Vale do Lobo Golf",
@@ -854,7 +947,8 @@
       "대회": [],
       "복장": [],
       "단체추천": false,
-      "링크": ""
+      "링크": "",
+      "영상": null
     },
     {
       "id": "penina",
@@ -888,7 +982,9 @@
         "메모": "별 등급 자료 불일치(공식 5성 / where2golf 4성). 객실 수 미확인."
       },
       "복장": [],
-      "링크": ""
+      "링크": "",
+      "영상": null,
+      "채널": ""
     }
   ],
   "_제외": [

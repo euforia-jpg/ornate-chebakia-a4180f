@@ -166,11 +166,19 @@ h1 em{ font-style:italic; color:var(--fair); }
        letter-spacing:-.012em; text-wrap:balance; }
 .ko{ font-size:12.5px; color:var(--ink-2); margin:0 0 2px; }
 .where{ font-family:var(--data); font-size:11.5px; color:var(--ink-2); margin:0; overflow-wrap:anywhere; }
-.site{ display:inline-flex; align-items:center; gap:5px; margin:12px 0 0; font-size:12.5px;
+.links{ display:flex; flex-wrap:wrap; gap:8px 14px; margin:13px 0 0; align-items:center; }
+.site{ display:inline-flex; align-items:center; gap:5px; font-size:12.5px;
        font-weight:600; color:var(--fair); text-decoration:none; border-bottom:1px solid currentColor;
        padding-bottom:1px; }
 .site:hover{ color:var(--deep); }
 .site:focus-visible{ outline:2px solid var(--fair); outline-offset:3px; border-radius:2px; }
+/* 홍보영상 — 코스마다 공식 채널에 올라온 것만 답니다 */
+.vid{ display:inline-flex; align-items:center; gap:7px; padding:6px 13px 6px 10px; border-radius:999px;
+      background:#FBEDEC; color:#9E2B22; border:1px solid #F0D4D1; font-size:12.5px; font-weight:600;
+      text-decoration:none; }
+.vid:hover{ background:#9E2B22; border-color:#9E2B22; color:#fff; }
+.vid:focus-visible{ outline:2px solid #9E2B22; outline-offset:3px; }
+.vid .tri{ font-size:10px; line-height:1; }
 .one{ margin:13px 0 0; font-size:14px; }
 
 .card-row{ display:grid; gap:1px; background:var(--line); border-top:1px solid var(--line);
@@ -397,8 +405,18 @@ html{ scroll-behavior:smooth; }
       '<p class="ko">' + esc(g.한글) + '</p>' +
       '<p class="where">' + esc(g.도시) + ' · ' + esc(g.홈페이지) + '</p></div></div>' +
       '<p class="one">' + esc(g.한줄) + '</p>' +
+      '<div class="links">' +
       '<a class="site" href="' + esc(g.링크 || ('https://' + g.홈페이지)) + '" target="_blank" rel="noopener">' +
-      '공식 사이트에서 코스 사진 보기 <span aria-hidden="true">\u2197</span></a></div>' +
+      '공식 사이트에서 코스 사진 보기 <span aria-hidden="true">\u2197</span></a>' +
+      (g.영상
+        ? '<a class="vid" href="' + esc(g.영상.주소) + '" target="_blank" rel="noopener"' +
+          ' title="' + esc(g.영상.제목) + '"><span class="tri" aria-hidden="true">\u25b6</span>' +
+          (g.영상.종류 === 'vimeo' ? '공식 영상 보기' : '홍보영상 보기') + '</a>'
+        : (g.채널
+            ? '<a class="vid" href="' + esc(g.채널) + '" target="_blank" rel="noopener">' +
+              '<span class="tri" aria-hidden="true">\u25b6</span>유튜브 채널 보기</a>'
+            : '')) +
+      '</div></div>' +
       (줄 ? '<dl class="card-row">' + 줄 + '</dl>' : '') + 숙 +
       (속 ? '<details><summary>자세히 보기 <span class="chev" aria-hidden="true">⌄</span></summary>' +
             '<div class="more">' + 속 + '</div></details>' : '') + '</article>';
