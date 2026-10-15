@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="스페인 남부와 포르투갈 남부 골프장 24곳 — 유포리아투어가 직접 확인한 코스와 코스 안 호텔, 지도로 보는 위치.">
+<link rel="icon" href="/favicon.ico">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>유포리아 골프</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* 레이아웃 — 머리말 · 권역 탭 · 지도(핀 번호 = 카드 번호) · 코스 카드 격자.
+   밝은 한낮의 코스 느낌. 바탕은 페어웨이를 깎은 줄무늬를 아주 옅게 깔았습니다. */
+:root{
+  color-scheme: light;
+  --paper:#F3F7F0;       /* 페어웨이 빛 */
+  --mow:#EFF4EB;         /* 잔디 깎은 줄 */
+  --card:#FFFFFF;
+  --ink:#152018; --ink-2:#5C6E62; --line:#DCE6D9;
+  --fair:#2C6B46;        /* 페어웨이 — 주 액센트 */
+  --deep:#17402B;        /* 짙은 그늘 */
+  --sand:#C79A52;        /* 벙커 모래 */
+  --sea:#DCEAEC;         /* 바다 */
+  --land:#E9EFE2;        /* 지도 땅 */
+  --wash:#E8F1E7;
+  --shadow:0 1px 2px rgba(21,32,24,.05), 0 12px 28px -20px rgba(21,32,24,.5);
+  --disp:'Fraunces', Georgia, 'Times New Roman', serif;
+  --body:'IBM Plex Sans KR', system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif;
+  --data:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0; color:var(--ink); font-family:var(--body); font-size:15px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  background:
+    repeating-linear-gradient(101deg, var(--mow) 0 54px, var(--paper) 54px 108px),
+    linear-gradient(176deg, #EDF4EE 0%, var(--paper) 46%, #F5F8F1 100%);
+  background-attachment: fixed;
+}
+body::before{ content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px);
+              z-index:10; background:var(--paper); }
+.wrap{ max-width:1140px; margin:0 auto;
+       padding-left:max(16px, env(safe-area-inset-left, 0px));
+       padding-right:max(16px, env(safe-area-inset-right, 0px)); }
+
+/* ── 머리말 ───────────────────────────────── */
+.top{ padding-block:34px 22px; }
+.kicker{ font-family:var(--data); font-size:11px; letter-spacing:.15em; text-transform:uppercase;
+         color:var(--fair); font-weight:500; margin:0 0 10px; }
+h1{ font-family:var(--disp); font-weight:600; font-size:clamp(31px,5.5vw,48px); line-height:1.06;
+    letter-spacing:-.018em; margin:0 0 13px; text-wrap:balance; }
+h1 em{ font-style:italic; color:var(--fair); }
+.lede{ margin:0; max-width:58ch; color:var(--ink-2); font-size:15.5px; }
+.count{ display:flex; flex-wrap:wrap; gap:6px 18px; margin:18px 0 0; padding:0; list-style:none;
+        font-family:var(--data); font-size:12px; color:var(--ink-2); font-variant-numeric:tabular-nums; }
+.count b{ color:var(--ink); font-weight:500; }
+
+/* ── 권역 탭 ───────────────────────────────── */
+.bar{ position:sticky; top:env(safe-area-inset-top, 0px); z-index:9;
+      background:rgba(243,247,240,.94); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); }
+.bar .wrap{ display:flex; gap:18px; align-items:center; overflow-x:auto; scrollbar-width:none; }
+.bar .wrap::-webkit-scrollbar{ display:none; }
+.tab{ all:unset; cursor:pointer; white-space:nowrap; padding:14px 0; font-size:14px; font-weight:600;
+      color:var(--ink-2); border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .15s; }
+.tab:hover{ color:var(--ink); }
+.tab[aria-selected="true"]{ color:var(--ink); border-bottom-color:var(--fair); }
+.tab .n{ font-family:var(--data); font-size:11px; color:var(--ink-2); margin-left:5px;
+         font-variant-numeric:tabular-nums; }
+.tab:focus-visible{ outline:2px solid var(--fair); outline-offset:3px; border-radius:3px; }
+
+/* ── 지도 ─────────────────────────────────── */
+.mapwrap{ display:grid; grid-template-columns:1.55fr 1fr; gap:0; margin-block:22px 4px;
+          background:var(--card); border:1px solid var(--line); border-radius:6px;
+          box-shadow:var(--shadow); overflow:hidden; }
+.mapbox{ position:relative; min-width:0; background:var(--sea); }
+.mapbox svg{ display:block; width:100%; height:auto; }
+.pin{ cursor:pointer; }
+.pin .dot{ fill:var(--fair); stroke:#fff; stroke-width:2.4; }
+.pin .num{ fill:#fff; font-family:var(--data); font-size:10px; font-weight:500; text-anchor:middle; }
+.pin.rec .dot{ fill:var(--sand); }
+.pin:hover .dot, .pin.on .dot{ fill:var(--deep); }
+.pin:focus-visible{ outline:none; }
+.pin:focus-visible .dot{ stroke:var(--deep); stroke-width:3.4; }
+.town{ fill:var(--ink-2); font-family:var(--data); font-size:9.5px; letter-spacing:.04em; }
+.scale{ position:absolute; left:12px; bottom:10px; font-family:var(--data); font-size:10px;
+        color:var(--ink-2); display:flex; align-items:flex-end; gap:6px; }
+.scale i{ display:block; height:5px; border:1px solid var(--ink-2); border-top:0; }
+.legend{ border-left:1px solid var(--line); padding:16px 18px; min-width:0; overflow-y:auto; max-height:420px; }
+.legend h3{ font-family:var(--data); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+            color:var(--ink-2); margin:0 0 10px; font-weight:500; }
+.legend ol{ margin:0; padding:0; list-style:none; display:grid; gap:2px; }
+.legend button{ all:unset; cursor:pointer; display:flex; gap:9px; align-items:center; width:100%;
+                padding:6px 8px; border-radius:4px; }
+.legend button:hover, .legend button.on{ background:var(--wash); }
+.legend button:focus-visible{ outline:2px solid var(--fair); outline-offset:-2px; }
+.legend .b{ flex:0 0 20px; height:20px; border-radius:50%; background:var(--fair); color:#fff;
+            font-family:var(--data); font-size:10px; display:inline-flex; align-items:center;
+            justify-content:center; }
+.legend .b.rec{ background:var(--sand); color:#20180A; }
+.legend .t{ font-size:12.5px; line-height:1.4; min-width:0; }
+.legend .t small{ display:block; color:var(--ink-2); font-size:11px; }
+.maphint{ font-family:var(--data); font-size:11px; color:var(--ink-2); margin:10px 0 0; }
+
+/* ── 거르개 ───────────────────────────────── */
+.sift{ display:flex; flex-wrap:wrap; gap:8px; padding-block:20px 4px; }
+.sift button{ all:unset; cursor:pointer; padding:6px 14px; border-radius:999px; font-size:12.5px;
+              font-weight:600; color:var(--ink-2); border:1px solid var(--line); background:var(--card); }
+.sift button:hover{ color:var(--ink); border-color:var(--fair); }
+.sift button[aria-pressed="true"]{ background:var(--fair); border-color:var(--fair); color:#fff; }
+.sift button:focus-visible{ outline:2px solid var(--fair); outline-offset:2px; }
+
+/* ── 권역 소개 ─────────────────────────────── */
+.area{ padding-block:20px 2px; }
+.area h2{ font-family:var(--disp); font-weight:600; font-size:25px; margin:0 0 6px; letter-spacing:-.012em; }
+.area p{ margin:0 0 10px; color:var(--ink-2); max-width:62ch; font-size:14.5px; }
+.air{ display:flex; flex-wrap:wrap; gap:6px 14px; margin:0; padding:0; list-style:none;
+      font-family:var(--data); font-size:11.5px; color:var(--ink-2); }
+.air li::before{ content:"\2708 "; color:var(--sand); }
+
+/* ── 카드 ─────────────────────────────────── */
+.grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(330px,1fr)); gap:16px;
+       padding-block:18px 38px; align-items:start; }
+.club{ background:var(--card); border:1px solid var(--line); border-radius:5px; box-shadow:var(--shadow);
+       overflow:hidden; min-width:0; scroll-margin-top:92px; transition:border-color .2s, box-shadow .2s; }
+.club.on{ border-color:var(--fair); box-shadow:0 0 0 2px rgba(44,107,70,.18), var(--shadow); }
+.club > .pad{ padding:18px 20px 16px; }
+.head{ display:flex; gap:11px; align-items:flex-start; }
+.head > div{ min-width:0; }
+.no{ flex:0 0 26px; height:26px; border-radius:50%; background:var(--fair); color:#fff;
+     font-family:var(--data); font-size:11.5px; display:inline-flex; align-items:center;
+     justify-content:center; margin-top:2px; }
+.no.rec{ background:var(--sand); color:#20180A; }
+.tagrow{ display:flex; flex-wrap:wrap; gap:6px; margin:0 0 9px; }
+.tag{ font-family:var(--data); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+      padding:3px 8px; border-radius:2px; background:var(--wash); color:var(--fair); font-weight:500; }
+.tag.rec{ background:var(--sand); color:#20180A; }
+.name{ font-family:var(--disp); font-size:20px; font-weight:600; line-height:1.2; margin:0 0 3px;
+       letter-spacing:-.012em; text-wrap:balance; }
+.ko{ font-size:12.5px; color:var(--ink-2); margin:0 0 2px; }
+.where{ font-family:var(--data); font-size:11.5px; color:var(--ink-2); margin:0; overflow-wrap:anywhere; }
+.site{ display:inline-flex; align-items:center; gap:5px; margin:12px 0 0; font-size:12.5px;
+       font-weight:600; color:var(--fair); text-decoration:none; border-bottom:1px solid currentColor;
+       padding-bottom:1px; }
+.site:hover{ color:var(--deep); }
+.site:focus-visible{ outline:2px solid var(--fair); outline-offset:3px; border-radius:2px; }
+.one{ margin:13px 0 0; font-size:14px; }
+
+.card-row{ display:grid; gap:1px; background:var(--line); border-top:1px solid var(--line);
+           border-bottom:1px solid var(--line); grid-template-columns:repeat(2,1fr); }
+.card-row div{ background:var(--card); padding:9px 12px; min-width:0; }
+.card-row div:last-child:nth-child(odd){ grid-column:1 / -1; }
+.card-row dt{ font-family:var(--data); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+              color:var(--ink-2); margin:0 0 2px; }
+.card-row dd{ margin:0; font-size:12.5px; line-height:1.45; overflow-wrap:anywhere;
+              font-variant-numeric:tabular-nums; }
+.hotel{ display:flex; gap:9px; padding:12px 20px; background:var(--wash); font-size:12.5px; align-items:flex-start; }
+.hotel .ic{ color:var(--fair); flex:0 0 auto; }
+.hotel b{ font-weight:600; }
+.hotel span{ color:var(--ink-2); }
+.nohotel{ padding:12px 20px; font-size:12.5px; color:var(--ink-2); border-top:1px solid var(--line); margin:0; }
+
+details{ border-top:1px solid var(--line); }
+summary{ cursor:pointer; list-style:none; padding:12px 20px; font-size:12.5px; font-weight:600;
+         color:var(--fair); display:flex; justify-content:space-between; align-items:center; gap:10px; }
+summary::-webkit-details-marker{ display:none; }
+summary .chev{ transition:transform .2s; font-family:var(--data); }
+details[open] summary .chev{ transform:rotate(180deg); }
+summary:focus-visible{ outline:2px solid var(--fair); outline-offset:-2px; }
+.more{ padding:0 20px 18px; display:grid; gap:14px; }
+.more h4{ font-family:var(--data); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+          color:var(--ink-2); margin:0 0 6px; font-weight:500; }
+.more ul{ margin:0; padding-left:17px; display:grid; gap:5px; font-size:13px; }
+.more ul.plain{ list-style:none; padding-left:0; }
+.more ul.plain li{ padding-left:14px; position:relative; }
+.more ul.plain li::before{ content:""; position:absolute; left:0; top:.62em; width:5px; height:5px;
+                           border-radius:50%; background:var(--sand); }
+.hc{ font-family:var(--data); font-size:12.5px; font-variant-numeric:tabular-nums; margin:0; }
+
+/* ── 꼬리말 ───────────────────────────────── */
+.foot{ border-top:1px solid var(--line); background:rgba(255,255,255,.55); }
+.foot .wrap{ padding-block:28px 42px; display:grid; gap:14px; }
+.foot p{ margin:0; font-size:13px; color:var(--ink-2); max-width:62ch; }
+.ask{ display:inline-flex; align-items:center; gap:8px; justify-self:start; padding:13px 24px;
+      background:var(--fair); color:#fff; text-decoration:none; border-radius:4px;
+      font-weight:600; font-size:14px; }
+.ask:hover{ background:var(--deep); }
+.ask:focus-visible{ outline:2px solid var(--sand); outline-offset:3px; }
+.sig{ font-family:var(--data); font-size:11px; color:var(--ink-2); letter-spacing:.04em; }
+.empty{ padding:46px 0 56px; text-align:center; color:var(--ink-2); font-size:14px; }
+
+@media (max-width:860px){
+  .mapwrap{ grid-template-columns:1fr; }
+  .legend{ border-left:0; border-top:1px solid var(--line); max-height:none; }
+}
+@media (max-width:420px){
+  .grid{ grid-template-columns:1fr; }
+  .club > .pad{ padding:16px 16px 14px; }
+  .hotel, .nohotel, summary{ padding-left:16px; padding-right:16px; }
+  .more{ padding-left:16px; padding-right:16px; }
+}
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } html{ scroll-behavior:auto !important; } }
+</style>
+</head>
+<body>
+
+
+<header class="top"><div class="wrap">
+  <p class="kicker">Euforia Tour &middot; Golf</p>
+  <h1>이베리아 반도의 <em>코스</em>를<br>한자리에</h1>
+  <p class="lede">스페인 남부와 포르투갈 남부에서 유포리아투어가 직접 확인한 골프장입니다.
+     라이더컵과 솔하임컵을 치른 코스부터 호텔이 코스 안에 있는 리조트까지,
+     지도에서 위치를 보고 일정에 맞춰 고르실 수 있습니다.</p>
+  <ul class="count" id="count"></ul>
+</div></header>
+
+<nav class="bar" aria-label="권역"><div class="wrap" id="tabs" role="tablist"></div></nav>
+
+<main class="wrap">
+  <section class="mapwrap" aria-label="골프장 위치">
+    <div class="mapbox" id="mapbox"></div>
+    <div class="legend">
+      <h3 id="legendTitle">코스 위치</h3>
+      <ol id="legend"></ol>
+      <p class="maphint">번호를 누르면 그 코스로 내려갑니다.</p>
+    </div>
+  </section>
+
+  <div class="sift" id="sift" role="group" aria-label="골라 보기">
+    <button type="button" data-f="all" aria-pressed="true">전체</button>
+    <button type="button" data-f="rec" aria-pressed="false">단체 추천</button>
+    <button type="button" data-f="hotel" aria-pressed="false">호텔 있는 곳</button>
+  </div>
+  <div id="list"></div>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <p id="noteFare"></p>
+  <p>핸디캡 제한과 복장 규정은 코스마다 다릅니다. 가시기 전에 확인해 드리고,
+     티타임과 버기&middot;캐디&middot;클럽 대여까지 함께 잡아 드립니다.</p>
+  <a class="ask" href="https://www.toureplus.co.kr/contact.html" target="_blank" rel="noopener">
+    골프 일정 문의하기 <span aria-hidden="true">&rarr;</span></a>
+  <p class="sig" id="sig"></p>
+</div></footer>
+
+<script type="application/json" id="data">{"기준":{"조사일":"2026-10-15","요금안내":"요금은 시즌·인원·숙박 여부에 따라 크게 달라집니다. 날짜와 인원을 알려 주시면 확정 요금을 안내해 드립니다."},"권역":[{"id":"sotogrande","이름":"소토그란데","나라":"스페인","설명":"지브롤터 해협을 내려다보는 스페인 골프의 심장. 유럽 랭킹 1·2위 코스가 차로 10분 거리에 붙어 있습니다.","공항":["지브롤터 (GIB) 약 25분","말라가 (AGP) 약 1시간 20분","세비야 (SVQ) 약 2시간"]},{"id":"costadelsol","이름":"코스타 델 솔","나라":"스페인","설명":"마르베야에서 카사레스까지 이어지는 해안. 호텔과 코스가 한 울타리에 있는 리조트가 많아 단체 일정을 짜기 좋습니다.","공항":["말라가 (AGP) 약 40분~1시간"]},{"id":"cadiz-sevilla","이름":"카디스 · 세비야","나라":"스페인","설명":"대서양 바람이 부는 코스타 데 라 루스와 안달루시아 내륙. 셰리 와인과 플라멩코를 일정에 엮기 좋은 권역입니다.","공항":["헤레스 (XRY) 약 15분~1시간","세비야 (SVQ) 약 20분~1시간 30분"]},{"id":"algarve","이름":"알가르브","나라":"포르투갈","설명":"포르투갈 남쪽 끝. 대서양 절벽과 소나무 숲을 끼고 유럽에서 가장 코스가 촘촘히 모인 골프 벨트입니다.","공항":["파루 (FAO) 약 20분~50분"]}],"골프장":[{"id":"valderrama","위도":36.28254,"경도":-5.32739,"이름":"Real Club Valderrama","한글":"레알 클럽 발데라마","권역":"sotogrande","도시":"소토그란데 · 카디스","등급":"챔피언십","홀":"18홀","설계":"로버트 트렌트 존스 시니어","개장":"","홈페이지":"valderrama.com","한줄":"1997년 라이더컵과 볼보 마스터스를 치른 유럽 대표 코스. 회원제 클럽이 방문객을 제한적으로 받습니다.","대회":["1997 라이더컵","볼보 마스터스","에스트레야 담 안달루시아 마스터스"],"핸디캡":"남자 24 · 여자 32 (증명 요구 가능)","꼭보실점":["방문객 티오프는 12~13시입니다. 4월 1일~10월 31일은 월~목에 한해 12~14시로 늘어납니다.","한 해 중 일부 기간은 회원과 그 초대객만 입장할 수 있습니다.","방문객은 같은 달에 2회, 1년에 7회까지만 플레이하실 수 있습니다.","출발조는 4인 1조입니다. 1~3인 팀은 다른 팀과 묶일 수 있습니다.","경기하지 않는 동반자는 코스에 들어가실 수 없습니다.","포어캐디 이용이 의무입니다. 팁은 별도이며 캐디에게 현금으로 직접 드립니다.","클럽 전 구역에서 휴대전화 통화가 금지됩니다.","10세 미만 어린이는 Spike Bar와 레스토랑에 들어가실 수 없습니다.","외부 음식·음료 반입과 반려동물 출입이 금지됩니다.","연습장은 출발 45분 전부터 쓰실 수 있습니다."],"복장":["카라 없는 티셔츠, 민소매 폴로, 운동복, 청바지, 수영복은 입으실 수 없습니다.","무릎 위로 올라오는 반바지와 카고 반바지도 금지입니다.","골프화를 신으셔야 합니다 (메탈 스파이크 불가). 슬리퍼는 클럽 안에서 신으실 수 없습니다."],"호텔":null,"단체추천":false,"링크":""},{"id":"rcg-sotogrande","위도":36.28009,"경도":-5.29189,"이름":"Real Club de Golf Sotogrande","한글":"레알 클럽 데 골프 소토그란데","권역":"sotogrande","도시":"소토그란데 · 카디스","등급":"챔피언십","홀":"18홀","설계":"로버트 트렌트 존스 시니어","개장":"","홈페이지":"golfsotogrande.com","한줄":"로버트 트렌트 존스가 스페인에 처음 만든 코스. 소토그란데라는 동네 자체가 이 골프장에서 시작됐습니다.","꼭보실점":["숙박 시설이 없는 골프 전용 클럽입니다. 호텔은 따로 잡아 드립니다."],"대회":[],"복장":[],"핸디캡":"","호텔":null,"단체추천":false,"링크":""},{"id":"la-reserva","위도":36.29411,"경도":-5.32005,"이름":"La Reserva Club Sotogrande","한글":"라 레세르바 클럽","권역":"sotogrande","도시":"소토그란데 · 산로케 · 카디스","등급":"챔피언십","홀":"18홀","설계":"캐벌 로빈슨","개장":"2003년","홈페이지":"lareservaclubsotogrande.com","한줄":"소토그란데 산자락을 타고 내려오는 현대 명작으로, 지중해와 지브롤터가 한눈에 들어옵니다.","핸디캡":"남자 28 · 여자 32","꼭보실점":["사전 예약이 반드시 필요합니다.","부지 안에는 빌라와 레지던스만 있고 호텔은 없습니다. 같은 소토그란데의 SO/ 소토그란데와 묶어 쓰실 수 있습니다."],"대회":[],"복장":[],"호텔":null,"단체추천":false,"링크":""},{"id":"san-roque","위도":36.26592,"경도":-5.33741,"이름":"The San Roque Club","한글":"더 산 로케 클럽","권역":"sotogrande","도시":"산로케 · 카디스","등급":"챔피언십","홀":"36홀 — 올드 코스 18홀 · 뉴 코스 18홀","설계":"올드: 데이브 토머스 (벙커는 세베 발레스테로스 재설계) · 뉴: 페리 다이","개장":"올드 1991년 · 뉴 2003년","홈페이지":"sanroqueclub.com","한줄":"발데라마 바로 옆, 1997년 라이더컵 당시 유럽·미국 양 팀이 묵었고 유러피언투어 Q스쿨 결선이 10년간 열린 코스입니다.","대회":["2005 스페인 오픈","1993~2003 유러피언투어 Q스쿨 파이널"],"호텔":{"이름":"클럽 내 빌라와 스위트","비고":"5베드룸 Villa 51(최대 10인)과 클럽하우스 안 로열 스위트가 있습니다. 단체 객실은 미리 확인해 드립니다."},"꼭보실점":["올드 코스는 회원 우선이며, 매일 정해진 시간대에만 일반 예약이 열립니다. 온라인 사전 예약과 핸디캡 증명이 필요합니다.","2021년 6월 전면 리노베이션을 마치고 다시 문을 열었습니다."],"복장":[],"핸디캡":"","단체추천":false,"링크":""},{"id":"la-hacienda","위도":36.24608,"경도":-5.31676,"이름":"La Hacienda Links Golf Resort","한글":"라 아시엔다 링크스 골프 리조트","권역":"sotogrande","도시":"알카이데사 · 산로케 · 카디스","등급":"리조트","단체추천":true,"홀":"36홀 — 링크스 코스 · 히스랜드 코스","설계":"","개장":"","홈페이지":"lahaciendagolf.com","한줄":"바다를 내려다보는 두 개 코스. 페어몬트 호텔이 같은 부지에 있어 숙박과 골프를 한 번에 묶기 좋습니다.","호텔":{"이름":"Fairmont La Hacienda Costa del Sol","비고":"골프장과 같은 부지에 있습니다. 숙박과 골프를 묶은 일정으로 안내해 드립니다."},"꼭보실점":["캐디는 상시 운영이 아니라 미리 요청하셔야 합니다."],"대회":[],"복장":[],"핸디캡":"","링크":""},{"id":"so-sotogrande","위도":36.27528,"경도":-5.35199,"이름":"SO/ Sotogrande Spa & Golf Resort","한글":"SO/ 소토그란데 스파 앤 골프 리조트","권역":"sotogrande","도시":"산로케 · 카디스","등급":"리조트","단체추천":true,"홀":"18홀 — 알메나라 코스","설계":"","개장":"","홈페이지":"so-sotogrande.com","한줄":"알메나라 코스를 품은 스파 리조트. 소토그란데 권역에서 가장 문턱이 낮아 입문 단체에 잘 맞습니다.","호텔":{"이름":"SO/ Sotogrande","비고":"리조트 안에서 숙박과 라운드를 함께 하실 수 있습니다."},"꼭보실점":["캐디 서비스는 운영하지 않습니다.","클럽을 빌리실 때는 성별과 오른손·왼손잡이를 미리 알려 주셔야 합니다."],"대회":[],"복장":[],"핸디캡":"","링크":""},{"id":"finca-cortesin","위도":36.39812,"경도":-5.22383,"이름":"Finca Cortesin Hotel, Golf & Spa","한글":"핀카 코르테신","권역":"costadelsol","도시":"카사레스 · 말라가","등급":"럭셔리 리조트","홀":"18홀","설계":"","개장":"","홈페이지":"fincacortesin.com","한줄":"2023년 솔하임컵을 치른 코스와 안달루시아풍 대저택 호텔. 전용 비치클럽까지 딸려 있습니다.","대회":["2023 솔하임컵"],"호텔":{"이름":"Finca Cortesin","비고":"주니어 스위트 기준. 조식, 스파와 온천 구역, 전용 비치클럽과 셔틀, 24시간 룸서비스, 무료 주차, 골프화 세척이 포함됩니다."},"꼭보실점":["그린피에 버기가 포함됩니다.","캐디는 4인당 1명을 권해 드립니다. 팁은 별도이며 캐디에게 현금으로 직접 드립니다.","12월 18일부터는 크리스마스·연말 성수기 요금이 적용됩니다."],"복장":[],"핸디캡":"","단체추천":false,"링크":""},{"id":"villa-padierna","위도":36.47577,"경도":-5.05351,"이름":"Villa Padierna Golf Club","한글":"비야 파디에르나 골프 클럽","권역":"costadelsol","도시":"베나아비스 · 말라가","등급":"럭셔리 리조트","단체추천":true,"홀":"54홀 — 플라밍고스 18홀 · 알페리니 18홀 · 트라모레스 18홀(이그제큐티브)","설계":"안토니오 가르시아 가리도 외","개장":"플라밍고스 2001년","홈페이지":"villapadierna.es","한줄":"궁전 같은 5성 호텔과 54홀이 한 울타리 안에 있어, 짐 풀고 그대로 라운드까지 이어집니다.","대회":["유러피언 시니어투어 2002·2003·2004","여자 스페인 오픈 2010","안달루시아 코스타 델 솔 스페인 오픈 2022"],"호텔":{"이름":"Anantara Villa Padierna Palace","비고":"5성. 같은 부지 안에 있어 단체 수배가 가장 쉬운 곳 가운데 하나입니다."},"핸디캡":"플라밍고스·알페리니 남자 27 · 여자 34 / 트라모레스 남녀 48","꼭보실점":["세 코스의 성격이 달라 실력 차가 있는 단체를 나눠 배정하기 좋습니다.","호텔에 묵으시면 그린피가 할인됩니다."],"복장":[],"링크":""},{"id":"la-cala","위도":36.54208,"경도":-4.72251,"이름":"La Cala Resort","한글":"라 칼라 리조트","권역":"costadelsol","도시":"미하스 · 말라가","등급":"리조트","단체추천":true,"홀":"54홀 — 아메리카 18홀 · 아시아 18홀 · 에우로파 18홀 + 6홀 아카데미","설계":"캐벌 로빈슨","개장":"아시아 1990년 · 에우로파 2005년","홈페이지":"lacala.com","한줄":"54홀과 107실 호텔, 스파와 아카데미가 한 계곡 안에 모인 스페인 3대 골프 리조트입니다.","대회":["유러피언 챌린지투어 스패니시 마스터스 2017"],"호텔":{"이름":"La Cala Hotel","비고":"4성 107실. 세 코스 한가운데에 있습니다. 20~30명 단체에 가장 현실적인 선택지입니다."},"꼭보실점":["세 코스를 돌리면 큰 단체도 하루에 모두 라운드할 수 있습니다."],"복장":[],"핸디캡":"","링크":""},{"id":"aloha","위도":36.51126,"경도":-4.95899,"이름":"Club de Golf Aloha","한글":"알로하 골프 클럽","권역":"costadelsol","도시":"누에바 안달루시아 · 마르베야 · 말라가","등급":"클래식","홀":"18홀","설계":"하비에르 아라나 (그의 마지막 작품)","개장":"1975년","홈페이지":"clubdegolfaloha.com","한줄":"스페인 골프 설계의 거장 하비에르 아라나가 남긴 유작으로, 손대지 않은 클래식 레이아웃이 그대로 살아 있습니다.","대회":["안달루시아 오픈 2007·2008·2012","여자 스페인 오픈 2016·2019","마르베야 레전드 2025·2026"],"핸디캡":"남자 25.7 · 여자 32.7","꼭보실점":["회원제 클럽으로, 외부 방문객은 정해진 인원만 받습니다. 단체는 반드시 사전 협의가 필요합니다."],"복장":[],"호텔":null,"단체추천":false,"링크":""},{"id":"novo-sancti-petri","위도":36.35186,"경도":-6.16149,"이름":"Real Novo Sancti Petri Golf Club","한글":"레알 노보 산크티 페트리","권역":"cadiz-sevilla","도시":"치클라나 데 라 프론테라 · 카디스","등급":"리조트","홀":"36홀 — A코스(마르 이 피노스) 18홀 · B코스(센트로) 18홀","설계":"세베 발레스테로스","개장":"1990년","홈페이지":"realnovosanctipetri.com","한줄":"세베 발레스테로스가 대서양 솔숲과 라 바로사 해변 사이에 그린 36홀, 코스타 데 라 루스 골프의 얼굴입니다.","호텔":{"이름":"단지 내 해변 호텔 다수","비고":"클럽 소유 호텔은 없지만 같은 단지 안 0.5~0.8km 거리에 Iberostar·Amàre 등 해변 호텔이 모여 있어 숙박과 골프를 묶기 쉽습니다."},"핸디캡":"남자 26 · 여자 36 (소속 클럽 핸디캡 증명서 필요)","대회":[],"꼭보실점":[],"복장":[],"단체추천":false,"링크":""},{"id":"montecastillo","위도":36.70246,"경도":-6.03795,"이름":"Barceló Montecastillo Golf","한글":"바르셀로 몬테카스티요 골프","권역":"cadiz-sevilla","도시":"헤레스 데 라 프론테라 · 카디스","등급":"리조트","단체추천":true,"홀":"18홀","설계":"잭 니클라우스","개장":"1992년","홈페이지":"barcelo.com","링크":"https://www.barcelo.com/en-gb/barcelo-montecastillo-golf/","한줄":"잭 니클라우스 설계에 볼보 마스터스를 다섯 해 연속 치른 코스가 5성 호텔 정원 바로 밖에 펼쳐집니다.","대회":["볼보 마스터스 1997~2001 (5년 연속)"],"호텔":{"이름":"Barceló Montecastillo Golf & Sports Resort","비고":"5성. 회의실 22개에 최대 600명 행사가 가능해 단체·인센티브에 가장 적합합니다."},"핸디캡":"남자 28 · 여자 36 (증명 요구)","꼭보실점":["오전 11시까지는 버기 사용이 의무입니다.","헤레스 서킷 바로 옆이라 모터스포츠 일정과 함께 짜실 수 있습니다."],"복장":[]},{"id":"sherry-golf","위도":36.65863,"경도":-6.1557,"이름":"Sherry Golf Jerez","한글":"셰리 골프 헤레스","권역":"cadiz-sevilla","도시":"헤레스 데 라 프론테라 · 카디스","등급":"실속형","홀":"18홀 + 9홀 파3","설계":"스털링 앤 마틴","개장":"","홈페이지":"sherrygolf.com","한줄":"셰리 와인 고장의 넓고 평탄한 18홀. 국왕컵과 여왕컵을 치른 코스를 부담 없이 도실 수 있습니다.","대회":["스페인 국왕컵 2006·2015·2022","여왕컵 2007·2011"],"꼭보실점":["핸디캡 증명서와 소프트 스파이크가 필요합니다.","클럽 안에 연회장이 있어 단체 식사와 시상식을 함께 하실 수 있습니다.","부지 안에 호텔은 없습니다. 11km 거리의 바르셀로 몬테카스티요와 묶어 쓰실 수 있습니다."],"복장":[],"핸디캡":"","호텔":null,"단체추천":false,"링크":""},{"id":"rcg-sevilla","위도":37.35137,"경도":-5.91938,"이름":"Real Club de Golf de Sevilla","한글":"레알 클럽 데 골프 데 세비야","권역":"cadiz-sevilla","도시":"알칼라 데 과다이라 · 세비야","등급":"챔피언십","홀":"18홀 파 72","설계":"호세 마리아 올라사발","개장":"1992년","홈페이지":"sevillagolf.com","한줄":"올라사발이 직접 설계해 월드컵과 스페인 오픈을 네 번 치른, 안달루시아 내륙 최고의 토너먼트 코스입니다.","대회":["2004 WGC 월드컵","스페인 오픈 2008·2010·2012·2016","안달루시아 오픈 2009"],"핸디캡":"남자 28 · 여자 36","꼭보실점":["세비야 시내에서 남쪽으로 5km 거리라 시내 관광과 하루에 묶을 수 있습니다.","부지 안에 호텔은 없습니다."],"복장":[],"호텔":null,"단체추천":false,"링크":""},{"id":"monte-rei","위도":37.20465,"경도":-7.5512,"이름":"Monte Rei Golf & Country Club","한글":"몬테 레이 골프 & 컨트리클럽","권역":"algarve","도시":"빌라 노바 드 카셀라 · 동부 알가르브","등급":"챔피언십","홀":"18홀 파 72 — 노스 코스","설계":"잭 니클라우스 (시그니처 코스)","개장":"2007년","홈페이지":"monte-rei.com","한줄":"잭 니클라우스가 직접 설계한 알가르브 1위 코스. 2026년 9월 전면 리노베이션을 마치고 다시 문을 열었습니다.","핸디캡":"남자 24 · 여자 32 (권장 상한, 증명 요구)","꼭보실점":["버기 사용이 의무이며 소프트 스파이크만 신으실 수 있습니다.","부지 안에는 클럽하우스 레지던스와 풀빌라가 있고 호텔은 없습니다.","파루 공항에서 차로 약 40분입니다."],"대회":[],"복장":[],"호텔":null,"단체추천":false,"링크":""},{"id":"quinta-do-lago","위도":37.0456,"경도":-8.01699,"이름":"Quinta do Lago Golf","한글":"킨타 두 라구 골프","권역":"algarve","도시":"알만실 · 중부 알가르브","등급":"리조트","홀":"54홀 — 사우스 18홀 · 노스 18홀 · 라란잘 18홀","설계":"사우스 윌리엄 미첼 · 노스 보 웰링과 폴 맥긴리 · 라란잘 조르지 산타나 다 실바","개장":"사우스 1974년 · 노스 2014년 재설계 · 라란잘 2009년","홈페이지":"quintadolago.com","한줄":"포르투갈 오픈을 여덟 번 치른 사우스 코스를 중심으로 세 개의 18홀을 한 리조트에서 도는, 알가르브 단체 골프의 표준입니다.","대회":["포르투갈 오픈 8회 (사우스)"],"호텔":{"이름":"The Magnolia Hotel","비고":"리조트 입구의 부티크 호텔입니다. 30명 단체에는 객실이 모자랄 수 있어 미리 확인해 드립니다. 빌라·타운하우스도 함께 쓰실 수 있습니다."},"핸디캡":"남자 28 · 여자 36 (공식 핸디캡 증명서 필요)","꼭보실점":["파루 공항에서 차로 약 20분입니다.","세 코스가 한 리조트 안에 있어 큰 단체를 나눠 배정하기 좋습니다."],"복장":[],"단체추천":false,"링크":""},{"id":"vilamoura-old","위도":37.10153,"경도":-8.11558,"이름":"The Old Course Golf Club, Vilamoura","한글":"올드 코스 골프클럽 빌라모라","권역":"algarve","도시":"빌라모라 · 중부 알가르브","등급":"클래식","홀":"18홀","설계":"프랭크 페닝크 (1996년 마틴 호트리 수정)","개장":"1969년","홈페이지":"vilamouragolf.com","한줄":"1969년 문을 연 알가르브 골프의 출발점. 소나무 숲을 따라 걷는 클래식 파크랜드 코스입니다.","대회":["포르투갈 오픈 1979"],"핸디캡":"남자 28 · 여자 36 (증명서 필요)","꼭보실점":["같은 운영사가 올드·피냘·라구나·밀레니엄 네 개 코스를 함께 운영합니다.","4인 1조가 원칙입니다. 인원이 4의 배수가 아니면 단독 조 편성에 사전 요청과 추가 그린피가 듭니다 — 단체 일정에서 꼭 확인할 점입니다.","버기는 운영사 보유 차량만 쓰실 수 있고 1대에 2명·2백입니다.","복장 규정이 엄격합니다. 청바지·사이클 쇼츠·티셔츠 차림은 입장이 거절됩니다.","부지 안에 호텔은 없습니다. 빌라모라 타운 안 호텔을 잡아 드립니다."],"복장":[],"호텔":null,"단체추천":false,"링크":""},{"id":"palmares","위도":37.126,"경도":-8.64125,"이름":"Palmares Ocean Living & Golf","한글":"팔마레스 오션 리빙 & 골프","권역":"algarve","도시":"라고스 · 서부 알가르브","등급":"리조트","홀":"27홀 — 알보르 · 라고스 · 프라이아 각 9홀","설계":"프랭크 페닝크 (로버트 트렌트 존스 주니어 확장·재설계)","개장":"1975년","홈페이지":"palmaresliving.com","한줄":"27홀 전 구간에서 대서양과 알보르 하구가 보이는, 알가르브에서 가장 바다에 가까운 링크스성 코스입니다.","호텔":{"이름":"Palmares Beach House Hotel","비고":"리조트 주소에 등록된 호텔입니다. 객실 규모는 미리 확인해 드립니다."},"핸디캡":"남자 27 · 여자 36","꼭보실점":["파루 공항에서 차로 약 50분입니다.","골프 복장이 필수이며 지키지 않으면 입장이 거절됩니다."],"대회":[],"복장":[],"단체추천":false,"링크":""},{"id":"san-lorenzo","위도":37.03124,"경도":-8.01164,"이름":"San Lorenzo Golf Course","한글":"산 로렌소 골프 코스","권역":"algarve","도시":"알만실 · 킨타 두 라구 · 중부 알가르브","등급":"챔피언십","홀":"18홀 파 72","설계":"조 리","개장":"1988년","홈페이지":"sanlorenzogolfcourse.com","한줄":"히아 포르모자 습지와 염전을 끼고 돌아 새소리만 들리는, 알가르브에서 가장 조용하고 그림 같은 코스입니다.","호텔":{"이름":"Dona Filipa Hotel","비고":"같은 계열 5성 호텔로, 호텔과 클럽하우스 사이에 무료 셔틀이 다닙니다. 투숙객은 산 로렌소와 피녜이루스 알투스 두 코스를 쓰실 수 있습니다."},"핸디캡":"남자 28 · 여자 36 (증명 필수)","꼭보실점":["티타임 간격이 8분이라 진행이 여유롭습니다.","코스가 히아 포르모자 자연공원 경계에 있습니다."],"대회":[],"복장":[],"단체추천":false,"링크":""},{"id":"quinta-da-ria","위도":37.15561,"경도":-7.56445,"이름":"Quinta da Ria & Quinta de Cima","한글":"킨타 다 리아 · 킨타 지 시마","권역":"algarve","도시":"빌라 노바 드 카셀라 · 동부 알가르브","등급":"리조트","단체추천":true,"홀":"36홀 — 리아 18홀 · 시마 18홀 + 6홀 아카데미","설계":"로키 로크모어","개장":"2002년","홈페이지":"quintadaria.com","한줄":"두 개의 18홀 사이에 호텔이 있어, 이동 없이 이틀 라운드를 묶기에 가장 편한 동부 알가르브 리조트입니다.","대회":["유러피언 시니어투어","레이디스 유러피언투어"],"호텔":{"이름":"Robinson Quinta da Ria","비고":"두 코스 사이에 있습니다. 20~30명 단체 2박 골프 일정에 가장 잘 맞습니다."},"핸디캡":"남자 28 · 여자 36","꼭보실점":["히아 포르모자 자연공원 안에 있습니다.","파루 공항에서 차로 약 45분입니다."],"복장":[],"링크":""},{"id":"ombria","위도":37.19183,"경도":-8.01079,"이름":"Ombria Algarve Golf","한글":"옴브리아 알가르브 골프","권역":"algarve","도시":"케렌사 · 로울레 · 내륙 알가르브","등급":"럭셔리 리조트","단체추천":true,"홀":"18홀 파 71","설계":"조르지 산타나 다 실바","개장":"2023년","홈페이지":"ombria.com","한줄":"2023년 문을 연 알가르브 유일의 산악 친환경 코스. 2024년 세계골프어워드 최고의 신규 코스에 뽑혔습니다.","대회":["World Golf Awards 2024 최고의 신규 코스"],"호텔":{"이름":"Viceroy at Ombria Algarve","비고":"5성 151실. 2024년 10월에 문을 열었고 레스토랑이 코스를 내려다봅니다."},"꼭보실점":["파루 공항에서 차로 약 20~25분 — 이 권역에서 공항이 가장 가깝습니다. 도착일이나 출발일에 라운드를 붙이기 좋습니다.","해안이 아닌 내륙 산지에 있습니다.","버기 사용이 의무이며 소프트 스파이크만 신으실 수 있습니다."],"복장":[],"핸디캡":"","링크":""},{"id":"amendoeira","위도":37.14699,"경도":-8.35872,"이름":"Amendoeira Golf Resort","한글":"아멘도에이라 골프 리조트","권역":"algarve","도시":"알칸타리야 · 실브스 · 중부 알가르브","등급":"리조트","홀":"36홀 — 팔도 코스 18홀 · 오코너 주니어 코스 18홀","설계":"닉 팔도 · 크리스티 오코너 주니어","개장":"2008년","홈페이지":"amendoeiraresort.com","한줄":"닉 팔도와 크리스티 오코너 주니어가 각각 설계한 두 18홀이 한 부지에 있어, 같은 숙소에서 성격이 전혀 다른 두 코스를 치실 수 있습니다.","핸디캡":"남자 28 · 여자 36 (권장)","꼭보실점":["부지 안에 호텔은 없고 리조트 소유 아파트와 빌라에 묵으십니다.","파루 공항에서 차로 약 40분입니다."],"대회":[],"복장":[],"호텔":null,"단체추천":false,"링크":""},{"id":"vale-do-lobo","위도":37.05492,"경도":-8.06419,"이름":"Vale do Lobo Golf","한글":"발레 두 로부 골프","권역":"algarve","도시":"알만실 · 중부 알가르브","등급":"리조트","홀":"36홀 — 로열 코스 18홀 · 오션 코스 18홀","설계":"서 헨리 코튼 (로키 로크모어 개조)","개장":"1968년 클럽 설립 · 로열 1997년 · 오션 2003년 개조","홈페이지":"valedolobo.com","한줄":"로열 코스 16번 홀 — 절벽과 협곡을 180야드 넘게 넘겨 치는 유럽에서 가장 많이 사진에 담긴 파3 — 그 한 홀로 기억되는 코스입니다.","호텔":{"이름":"리조트 내 빌라와 아파트","비고":"리조트 안에 렌탈 빌라와 아파트가 많습니다. 단체 객실은 미리 확보해 드립니다."},"핸디캡":"남자 28 · 여자 36 (증명서 필수)","꼭보실점":["파루 공항에서 차로 약 20분입니다.","소프트 스파이크가 의무입니다."],"대회":[],"복장":[],"단체추천":false,"링크":""},{"id":"penina","위도":37.1613,"경도":-8.58042,"이름":"Penina Hotel & Golf Resort","한글":"페니나 호텔 & 골프 리조트","권역":"algarve","도시":"포르티망 · 서부 알가르브","등급":"리조트","단체추천":true,"홀":"36홀 — 서 헨리 코튼 챔피언십 18홀 · 리조트 9홀 · 아카데미 9홀","설계":"서 헨리 코튼","개장":"1966년","홈페이지":"penina.com","한줄":"1966년 알가르브 골프의 역사가 시작된 코스. 호텔이 1번 티 바로 앞에 있고 포르투갈 오픈을 다섯 번 치렀습니다.","대회":["포르투갈 오픈 1998·1999·2000·2004·2006"],"호텔":{"이름":"Penina Hotel & Golf Resort","비고":"알가르브 최초의 5성 호텔입니다. 코스에 바로 붙어 있습니다."},"핸디캡":"남자 28 · 여자 36","꼭보실점":["9홀 코스가 두 개 더 있어 큰 단체를 나눠 운영하기 좋습니다.","파루 공항에서 차로 약 45분 — 이 권역에서 가장 멉니다."],"복장":[],"링크":""}],"땅":{"PRT":"-7.1,38.83 -7.28,38.6 -7.32,38.56 -7.34,38.51 -7.33,38.48 -7.34,38.46 -7.36,38.45 -7.32,38.42 -7.21,38.32 -7.2,38.3 -7.19,38.29 -7.17,38.28 -7.13,38.19 -7.1,38.17 -7.06,38.18 -7.04,38.19 -7.03,38.2 -6.99,38.2 -6.96,38.21 -6.95,38.2 -6.96,38.17 -6.97,38.15 -6.98,38.12 -7,38.09 -7.01,38.06 -7.02,38.02 -7.05,38.02 -7.11,38.04 -7.12,38.04 -7.14,38.01 -7.16,38 -7.19,37.99 -7.21,37.99 -7.23,37.99 -7.27,37.98 -7.27,37.96 -7.27,37.93 -7.3,37.88 -7.31,37.85 -7.33,37.81 -7.43,37.75 -7.44,37.73 -7.46,37.7 -7.47,37.65 -7.48,37.63 -7.5,37.61 -7.51,37.59 -7.53,37.57 -7.52,37.54 -7.51,37.52 -7.48,37.5 -7.47,37.48 -7.46,37.45 -7.46,37.43 -7.44,37.39 -7.44,37.31 -7.43,37.27 -7.43,37.26 -7.43,37.24 -7.41,37.19 -7.4,37.18 -7.42,37.18 -7.45,37.18 -7.47,37.18 -7.49,37.18 -7.51,37.17 -7.55,37.15 -7.57,37.14 -7.63,37.11 -7.79,37.02 -7.82,37 -7.85,37 -7.87,37.01 -7.93,37.01 -7.95,37.01 -7.97,37 -7.99,37.01 -7.98,37 -8,37.01 -8.04,37.04 -8.11,37.07 -8.15,37.08 -8.18,37.09 -8.21,37.09 -8.29,37.08 -8.33,37.09 -8.37,37.1 -8.4,37.09 -8.44,37.08 -8.48,37.1 -8.54,37.12 -8.58,37.12 -8.63,37.12 -8.65,37.11 -8.69,37.08 -8.75,37.08 -8.79,37.07 -8.81,37.06 -8.84,37.06 -8.86,37.04 -8.88,37.05 -8.9,37.03 -8.92,37.02 -8.94,37.01 -8.96,37.01 -8.98,37.03 -8.99,37.05 -8.98,37.07 -8.94,37.12 -8.93,37.15 -8.91,37.17 -8.92,37.2 -8.9,37.21 -8.88,37.23 -8.87,37.28 -8.87,37.29 -8.88,37.31 -8.87,37.34 -8.84,37.36 -8.83,37.38 -8.82,37.42 -8.8,37.46 -8.8,37.49 -8.8,37.54 -8.8,37.56 -8.81,37.57 -8.82,37.59 -8.81,37.64 -8.81,37.67 -8.8,37.7 -8.76,37.71 -8.75,37.73 -8.78,37.72 -8.81,37.72 -8.82,37.74 -8.81,37.79 -8.8,37.84 -8.8,37.88 -8.8,37.9 -8.82,37.93 -8.85,37.93 -8.89,37.95 -8.88,37.96 -8.87,37.97 -8.82,38.06 -8.8,38.13 -8.77,38.19 -8.78,38.24 -8.79,38.3 -8.8,38.36 -8.82,38.4 -8.85,38.42 -8.88,38.45 -8.91,38.47 -8.94,38.48 -8.93,38.49 -8.9,38.49 -8.87,38.46 -8.82,38.45 -8.8,38.44 -8.76,38.43 -8.66,38.41 -8.61,38.42 -8.64,38.42 -8.66,38.42 -8.74,38.45 -8.75,38.47 -8.75,38.5 -8.74,38.51 -8.75,38.53 -8.76,38.55 -8.77,38.57 -8.79,38.53 -8.81,38.53 -8.79,38.52 -8.78,38.51 -8.78,38.49 -8.81,38.48 -8.83,38.49 -8.87,38.5 -8.91,38.51 -8.95,38.51 -9,38.46 -9.05,38.44 -9.15,38.43 -9.17,38.43 -9.18,38.42 -9.2,38.41 -9.23,38.42 -9.23,38.44 -9.19,38.47 -9.18,38.5 -9.18,38.55 -9.21,38.6 -8.99,38.85 -9.11,38.71 -9.35,39.24 -8.85,40.14 -8.66,40.7 -8.66,41.03 -8.83,41.67 -8.52,42.08 -8.23,41.89 -7.62,41.84 -7.08,41.95 -6.57,41.73 -6.55,41.28 -6.83,40.8 -6.95,40.25 -7.02,39.69 -7.25,39.27 -7.05,38.88 -7.1,38.83","ESP":"-1.79,43.39 -1.44,43.04 -0.75,42.92 -0.13,42.74 0.65,42.8 1.43,42.6 1.95,42.38 2.64,42.34 3.2,42.34 3.23,41.97 2.19,41.36 0.75,40.77 0.52,40.51 -0.31,39.53 0.19,38.79 -0.41,38.4 -0.82,37.68 -1.26,37.57 -1.85,37.1 -2.34,36.83 -3.16,36.74 -3.6,36.74 -3.63,36.74 -3.67,36.74 -3.73,36.72 -3.8,36.74 -3.84,36.75 -3.89,36.74 -3.96,36.73 -4.06,36.75 -4.08,36.74 -4.11,36.73 -4.2,36.72 -4.22,36.71 -4.4,36.72 -4.43,36.71 -4.46,36.67 -4.48,36.65 -4.49,36.64 -4.52,36.58 -4.59,36.57 -4.62,36.53 -4.65,36.51 -4.68,36.5 -4.72,36.49 -4.76,36.49 -4.88,36.51 -4.9,36.51 -4.92,36.5 -4.99,36.46 -5.06,36.45 -5.11,36.43 -5.16,36.42 -5.19,36.41 -5.2,36.4 -5.23,36.36 -5.24,36.31 -5.26,36.29 -5.27,36.28 -5.29,36.27 -5.3,36.25 -5.33,36.2 -5.34,36.14 -5.36,36.14 -5.37,36.16 -5.38,36.17 -5.41,36.18 -5.43,36.18 -5.44,36.16 -5.44,36.13 -5.44,36.11 -5.43,36.09 -5.43,36.07 -5.45,36.06 -5.47,36.05 -5.57,36.02 -5.61,36.01 -5.63,36.04 -5.67,36.06 -5.69,36.07 -5.71,36.06 -5.73,36.07 -5.75,36.08 -5.8,36.09 -5.81,36.1 -5.83,36.12 -5.9,36.17 -5.92,36.18 -5.94,36.18 -5.98,36.18 -6.04,36.19 -6.06,36.22 -6.08,36.25 -6.1,36.28 -6.16,36.3 -6.17,36.34 -6.18,36.35 -6.18,36.37 -6.22,36.4 -6.24,36.45 -6.26,36.48 -6.28,36.51 -6.3,36.53 -6.26,36.51 -6.25,36.49 -6.23,36.47 -6.21,36.48 -6.18,36.51 -6.21,36.51 -6.23,36.53 -6.23,36.56 -6.23,36.58 -6.28,36.61 -6.36,36.62 -6.38,36.62 -6.39,36.64 -6.41,36.68 -6.42,36.7 -6.43,36.71 -6.44,36.73 -6.43,36.75 -6.41,36.77 -6.4,36.78 -6.36,36.79 -6.34,36.82 -6.34,36.86 -6.34,36.88 -6.3,36.91 -6.22,36.9 -6.19,36.93 -6.21,36.92 -6.24,36.91 -6.27,36.91 -6.28,36.93 -6.33,36.91 -6.34,36.9 -6.35,36.88 -6.35,36.82 -6.39,36.81 -6.42,36.84 -6.45,36.9 -6.47,36.94 -6.5,36.96 -6.74,37.1 -6.77,37.11 -6.79,37.12 -6.81,37.12 -6.85,37.15 -6.87,37.16 -6.89,37.17 -6.91,37.19 -6.92,37.22 -6.9,37.24 -6.86,37.28 -6.85,37.3 -6.9,37.25 -6.93,37.23 -6.96,37.23 -6.94,37.2 -6.93,37.18 -7.03,37.21 -7.06,37.21 -7.1,37.22 -7.13,37.21 -7.1,37.21 -7.33,37.2 -7.36,37.18 -7.38,37.18 -7.41,37.19 -7.43,37.24 -7.43,37.26 -7.44,37.31 -7.44,37.39 -7.46,37.42 -7.46,37.45 -7.47,37.48 -7.48,37.49 -7.5,37.51 -7.51,37.53 -7.52,37.56 -7.52,37.58 -7.51,37.6 -7.48,37.63 -7.47,37.65 -7.46,37.7 -7.44,37.73 -7.43,37.75 -7.33,37.81 -7.31,37.85 -7.3,37.88 -7.27,37.93 -7.27,37.95 -7.27,37.97 -7.23,37.99 -7.21,37.99 -7.19,37.99 -7.16,38 -7.14,38.01 -7.13,38.03 -7.11,38.04 -7.05,38.02 -7.02,38.02 -7.02,38.05 -7,38.09 -6.98,38.12 -6.97,38.15 -6.95,38.2 -6.96,38.21 -6.99,38.2 -7.02,38.2 -7.04,38.19 -7.06,38.18 -7.09,38.17 -7.12,38.18 -7.17,38.27 -7.19,38.29 -7.21,38.31 -7.32,38.42 -7.35,38.44 -7.34,38.47 -7.35,38.49 -7.32,38.56 -7.28,38.6 -7.06,38.86 -7.26,39.25 -7.04,39.69 -6.95,40.25 -6.83,40.88 -6.38,41.4 -6.58,41.88 -7.25,41.86 -7.9,41.89 -8.2,42.07 -8.88,41.91 -8.83,42.29 -8.83,42.49 -9.07,42.6 -9.1,42.83 -9.14,43.13 -8.79,43.31 -8.2,43.4 -8.07,43.69 -7.69,43.79 -7.03,43.53 -6.1,43.57 -5.18,43.49 -3.98,43.44 -3.51,43.48 -2.94,43.42 -2.14,43.3 -1.79,43.39;-5.34,35.85 -5.36,35.86 -5.38,35.88 -5.39,35.9 -5.4,35.92 -5.37,35.92 -5.34,35.91 -5.33,35.9 -5.31,35.9 -5.28,35.91 -5.29,35.89 -5.34,35.86 -5.34,35.85","MAR":"-8.82,34.5 -11.39,34.5 -8.75,34.5 -6.21,35.12 -6.02,35.5 -5.99,35.6 -5.97,35.67 -5.94,35.74 -5.87,35.8 -5.78,35.79 -5.71,35.83 -5.62,35.83 -5.54,35.85 -5.47,35.91 -5.39,35.9 -5.35,35.83 -5.33,35.76 -5.3,35.68 -5.26,35.6 -5.19,35.54 -5.07,35.42 -4.99,35.39 -4.93,35.33 -4.81,35.26 -4.63,35.21 -4.5,35.18 -4.38,35.15 -4.27,35.18 -4.13,35.2 -4.05,35.24 -3.96,35.25 -3.89,35.21 -3.79,35.21 -3.73,35.28 -3.61,35.25 -2.06,34.93 -2.08,34.5 -4.88,34.5 -7.73,34.5 -8.82,34.5"}}</script>
+<script>
+(function(){
+  var D = JSON.parse(document.getElementById('data').textContent);
+  var esc = function(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+
+  var 권역 = D.권역, 전부 = D.골프장, 땅 = D.땅;
+  var state = { 권역: 권역[0].id, 거르개: 'all' };
+
+  document.getElementById('count').innerHTML =
+    '<li>코스 <b>' + 전부.length + '</b>곳</li>' +
+    '<li>권역 <b>' + 권역.length + '</b>곳</li>' +
+    '<li>코스 안에 호텔 <b>' + 전부.filter(function(g){ return g.호텔; }).length + '</b>곳</li>';
+  document.getElementById('noteFare').textContent = D.기준.요금안내;
+  document.getElementById('sig').textContent = '조사 ' + D.기준.조사일 + ' · 유포리아투어';
+
+  document.getElementById('tabs').innerHTML = 권역.map(function(r){
+    var n = 전부.filter(function(g){ return g.권역 === r.id; }).length;
+    return '<button type="button" class="tab" role="tab" data-r="' + esc(r.id) + '"' +
+           ' aria-selected="' + (r.id === state.권역) + '">' + esc(r.이름) +
+           '<span class="n">' + n + '</span></button>';
+  }).join('');
+
+  function 보일것(){
+    return 전부.filter(function(g){
+      if(g.권역 !== state.권역) return false;
+      if(state.거르개 === 'rec') return !!g.단체추천;
+      if(state.거르개 === 'hotel') return !!g.호텔;
+      return true;
+    });
+  }
+
+  /* ───────── 지도 — 경위도를 그 자리에서 투영합니다.
+     보이는 코스에 맞춰 창이 바뀌므로 권역을 바꾸면 그 동네로 확대됩니다. ───────── */
+  var BOX = { W: 660, H: 400 };
+
+  function 창만들기(목록){
+    var la = 목록.map(function(g){ return g.위도; }), ln = 목록.map(function(g){ return g.경도; });
+    var 왼 = Math.min.apply(null, ln), 오 = Math.max.apply(null, ln),
+        아래 = Math.min.apply(null, la), 위 = Math.max.apply(null, la);
+    var 여1 = Math.max((오 - 왼) * 0.34, 0.14), 여2 = Math.max((위 - 아래) * 0.34, 0.11);
+    왼 -= 여1; 오 += 여1; 아래 -= 여2; 위 += 여2;
+
+    var 최소가로 = 0.45, 최소세로 = 0.32;
+    var cx = (왼 + 오) / 2, cy = (아래 + 위) / 2;
+    if(오 - 왼 < 최소가로){ 왼 = cx - 최소가로/2; 오 = cx + 최소가로/2; }
+    if(위 - 아래 < 최소세로){ 아래 = cy - 최소세로/2; 위 = cy + 최소세로/2; }
+
+    var k = Math.cos((아래 + 위) / 2 * Math.PI / 180);   /* 위도에 따른 가로 줄어듦 보정 */
+    var 폭 = (오 - 왼) * k, 높 = (위 - 아래), 바람 = BOX.W / BOX.H;
+    if(폭 / 높 < 바람){ var 새폭 = 높 * 바람 / k; cx = (왼+오)/2; 왼 = cx - 새폭/2; 오 = cx + 새폭/2; }
+    else { var 새높 = 폭 / 바람; cy = (아래+위)/2; 아래 = cy - 새높/2; 위 = cy + 새높/2; }
+
+    return { 왼:왼, 오:오, 아래:아래, 위:위, k:k, S: BOX.W / ((오 - 왼) * k) };
+  }
+  function 점(ln, la, c){ return [ (ln - c.왼) * c.k * c.S, (c.위 - la) * c.S ]; }
+
+  function 땅길(코드, c){
+    var out = [];
+    (땅[코드] || '').split(';').forEach(function(고리){
+      var d = '', 첫 = true;
+      고리.split(' ').forEach(function(p){
+        if(!p) return;
+        var a = p.split(','), xy = 점(parseFloat(a[0]), parseFloat(a[1]), c);
+        d += (첫 ? 'M' : 'L') + xy[0].toFixed(1) + ' ' + xy[1].toFixed(1); 첫 = false;
+      });
+      if(d) out.push(d + 'Z');
+    });
+    return out.join('');
+  }
+  function 축척(c){
+    var 후보 = [2,5,10,20,25,50,100], 목표 = BOX.W * 0.22, 픽셀당 = c.S / 111.32, km = 후보[0];
+    for(var i=0;i<후보.length;i++){ if(후보[i]*픽셀당 <= 목표) km = 후보[i]; }
+    return { km: km, px: km * 픽셀당 };
+  }
+
+  function 지도그리기(목록){
+    var box = document.getElementById('mapbox'), leg = document.getElementById('legend');
+    if(!목록.length){ box.innerHTML = ''; leg.innerHTML = ''; return; }
+    var c = 창만들기(목록);
+    var 땅들 = ['PRT','ESP','MAR'].map(function(k){
+      var d = 땅길(k, c);
+      return d ? '<path d="' + d + '" fill="var(--land)" stroke="#C7D7C0" stroke-width="1"/>' : '';
+    }).join('');
+    var 핀 = 목록.map(function(g, i){
+      var xy = 점(g.경도, g.위도, c);
+      return '<g class="pin' + (g.단체추천 ? ' rec' : '') + '" data-id="' + esc(g.id) + '" tabindex="0" role="button"' +
+        ' aria-label="' + esc(g.한글) + ' — 그 코스로 이동">' +
+        '<title>' + esc(g.한글) + ' · ' + esc(g.도시) + '</title>' +
+        '<circle class="dot" cx="' + xy[0].toFixed(1) + '" cy="' + xy[1].toFixed(1) + '" r="11"/>' +
+        '<text class="num" x="' + xy[0].toFixed(1) + '" y="' + (xy[1] + 3.6).toFixed(1) + '">' + (i+1) + '</text>' +
+        '</g>';
+    }).join('');
+    var s = 축척(c);
+    box.innerHTML =
+      '<svg viewBox="0 0 ' + BOX.W + ' ' + BOX.H + '" role="img" aria-label="골프장 위치 지도">' +
+      '<rect width="' + BOX.W + '" height="' + BOX.H + '" fill="var(--sea)"/>' + 땅들 + 핀 + '</svg>' +
+      '<div class="scale"><i style="width:' + s.px.toFixed(0) + 'px"></i>' + s.km + ' km</div>';
+    leg.innerHTML = 목록.map(function(g, i){
+      return '<li><button type="button" data-id="' + esc(g.id) + '">' +
+        '<span class="b' + (g.단체추천 ? ' rec' : '') + '">' + (i+1) + '</span>' +
+        '<span class="t">' + esc(g.한글) + '<small>' + esc(g.도시) + '</small></span></button></li>';
+    }).join('');
+  }
+
+  /* ───────── 카드 ───────── */
+  function 칸(라벨, 값){ return 값 ? '<div><dt>' + esc(라벨) + '</dt><dd>' + esc(값) + '</dd></div>' : ''; }
+  function 묶음(제목, 줄들, 꼴){
+    if(!줄들 || !줄들.length) return '';
+    return '<div><h4>' + esc(제목) + '</h4><ul class="' + (꼴||'') + '">' +
+      줄들.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
+  }
+  function 카드(g, i){
+    var 줄 = 칸('홀', g.홀) + 칸('설계', g.설계) + 칸('개장', g.개장);
+    var 숙 = g.호텔
+      ? '<div class="hotel"><span class="ic" aria-hidden="true">■</span><div><b>' + esc(g.호텔.이름) + '</b>' +
+        (g.호텔.비고 ? '<br><span>' + esc(g.호텔.비고) + '</span>' : '') + '</div></div>'
+      : '<p class="nohotel">코스 안에 호텔은 없습니다. 가까운 호텔을 함께 잡아 드립니다.</p>';
+    var 속 = (g.핸디캡 ? '<div><h4>핸디캡 상한</h4><p class="hc">' + esc(g.핸디캡) + '</p></div>' : '') +
+             묶음('치른 대회', g.대회) + 묶음('알아두실 점', g.꼭보실점, 'plain') + 묶음('복장', g.복장, 'plain');
+    return '<article class="club" id="c-' + esc(g.id) + '"><div class="pad">' +
+      '<div class="head"><span class="no' + (g.단체추천 ? ' rec' : '') + '">' + (i+1) + '</span><div>' +
+      '<div class="tagrow"><span class="tag">' + esc(g.등급) + '</span>' +
+      (g.단체추천 ? '<span class="tag rec">단체 추천</span>' : '') + '</div>' +
+      '<h3 class="name">' + esc(g.이름) + '</h3>' +
+      '<p class="ko">' + esc(g.한글) + '</p>' +
+      '<p class="where">' + esc(g.도시) + ' · ' + esc(g.홈페이지) + '</p></div></div>' +
+      '<p class="one">' + esc(g.한줄) + '</p>' +
+      '<a class="site" href="' + esc(g.링크 || ('https://' + g.홈페이지)) + '" target="_blank" rel="noopener">' +
+      '공식 사이트에서 코스 사진 보기 <span aria-hidden="true">\u2197</span></a></div>' +
+      (줄 ? '<dl class="card-row">' + 줄 + '</dl>' : '') + 숙 +
+      (속 ? '<details><summary>자세히 보기 <span class="chev" aria-hidden="true">⌄</span></summary>' +
+            '<div class="more">' + 속 + '</div></details>' : '') + '</article>';
+  }
+
+  function 그리기(){
+    var r = 권역.filter(function(x){ return x.id === state.권역; })[0];
+    var 목록 = 보일것();
+    지도그리기(목록);
+    document.getElementById('legendTitle').textContent = r.이름 + ' 코스 위치';
+    document.getElementById('list').innerHTML =
+      '<section class="area"><h2>' + esc(r.이름) + '</h2><p>' + esc(r.설명) + '</p>' +
+      '<ul class="air">' + (r.공항||[]).map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></section>' +
+      (목록.length ? '<div class="grid">' + 목록.map(카드).join('') + '</div>'
+                   : '<p class="empty">이 권역에는 조건에 맞는 코스가 없습니다. 거르개를 「전체」로 바꿔 보세요.</p>');
+    document.querySelectorAll('.tab').forEach(function(b){ b.setAttribute('aria-selected', b.dataset.r === state.권역); });
+    document.querySelectorAll('.sift button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.f === state.거르개); });
+  }
+
+  function 고르기(id){
+    document.querySelectorAll('.club').forEach(function(x){ x.classList.toggle('on', x.id === 'c-' + id); });
+    document.querySelectorAll('.pin').forEach(function(x){ x.classList.toggle('on', x.getAttribute('data-id') === id); });
+    document.querySelectorAll('.legend button').forEach(function(x){ x.classList.toggle('on', x.getAttribute('data-id') === id); });
+    var el = document.getElementById('c-' + id);
+    if(el) el.scrollIntoView({ block:'start' });
+  }
+
+  document.getElementById('tabs').addEventListener('click', function(e){
+    var b = e.target.closest('.tab'); if(!b) return; state.권역 = b.dataset.r; 그리기();
+  });
+  document.getElementById('sift').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return; state.거르개 = b.dataset.f; 그리기();
+  });
+  document.getElementById('mapbox').addEventListener('click', function(e){
+    var p = e.target.closest('.pin'); if(p) 고르기(p.getAttribute('data-id'));
+  });
+  document.getElementById('mapbox').addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    var p = e.target.closest('.pin'); if(p){ e.preventDefault(); 고르기(p.getAttribute('data-id')); }
+  });
+  document.getElementById('legend').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(b) 고르기(b.getAttribute('data-id'));
+  });
+
+  그리기();
+})();
+</script>
+
+</body>
+</html>
