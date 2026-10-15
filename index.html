@@ -64,7 +64,6 @@
   .section-head .sub{ color:var(--muted); font-size:13px; font-weight:600; }
   .section-head a.more{ text-decoration:none; font-size:12.5px; font-weight:800; color:var(--violet); }
   .section-head a.more:hover{ text-decoration:underline; }
-.tour-price{ display:inline-flex; align-items:stretch; max-width:100%; margin:0 0 14px; border-radius:11px; overflow:hidden; box-shadow:0 8px 16px -10px rgba(20,16,61,0.30); }
   .tour-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
   .tour-card{ background:var(--paper); border-radius:var(--radius); border:2px solid var(--line); overflow:hidden; transition: transform .15s ease, box-shadow .15s ease, border-color .15s; display:block; text-decoration:none; color:inherit; }
   .tour-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px -12px rgba(20,16,61,0.3); border-color: var(--violet); }
@@ -73,24 +72,49 @@
      카드를 세로 flex 로 만들고 가격칸부터 아래로 밀어 둡니다. */
   .tour-card{ display:flex; flex-direction:column; }
   .tour-body{ display:flex; flex-direction:column; flex:1 1 auto; }
-  .tour-body > .tour-price{ margin-top:auto; min-height:46px; }
+  .tour-body > .tour-price{ margin-top:auto; min-height:58px; }
   /* 금액이 한 줄인 상품도 두 줄짜리와 같은 높이가 되도록 가운데에 둡니다 */
-  .tour-body > .tour-price > .price-chip{ display:flex; flex-direction:column; justify-content:center; }
+  .tour-body > .tour-price > .price-chip{ display:block; }
 .badge-group{ position:absolute; top:12px; right:12px; z-index:5; display:flex; gap:6px; }
 .card-badge{ padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.5px; color:#fff; box-shadow:0 6px 14px -6px rgba(20,16,61,0.4); }
 .card-badge.new-badge{ background:linear-gradient(90deg,var(--teal),#0E9E8B); }
 .card-badge.best-badge{ background:linear-gradient(90deg,var(--orange),#FFB84D); display:none; }  /* 안 보일 때는 자리도 차지하지 않게 — 숨어 있던 BEST 자리가 기간 글자를 밀어내고 있었습니다 */
 .card-badge.best-badge.show{ display:inline-block; animation:badgeFlash 1s ease-in-out 2; }
 @keyframes badgeFlash{ 0%,100%{ opacity:1; } 50%{ opacity:0.35; } }
-  .tour-price .yt-btn{ display:flex; align-items:center; justify-content:center; padding:0 16px; min-width:48px; margin:0; border:none; background:#CC0000; color:#fff; flex-shrink:0; text-decoration:none; cursor:pointer; font:inherit; transition: background .15s ease; }
-.tour-price .yt-btn:hover{ background:#e52d27; }
-  .tour-price .price-chip{ display:block; box-sizing:border-box; flex:0 1 auto; padding:6px 12px 6px 10px; font-family:'Space Mono'; font-size:12px; font-weight:800; background:#fff; color:var(--navy); border:1.5px solid var(--line); border-left:4px solid var(--violet); line-height:1.4; white-space:normal; word-break:keep-all; }
-  .tour-price .price-sub{ display:block; font-size:0.78em; font-weight:700; color:var(--muted); margin-top:2px; }
- button.price-chip{ border:1.5px solid var(--line); border-left:4px solid var(--violet); cursor:pointer; text-align:left; font:inherit; }
-/* 오른쪽에 유튜브·헤드폰 단추가 붙을 때만 오른쪽 선을 뗍니다 */
-.tour-price .price-chip:not(:last-child){ border-right:none; }
-button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; border-left-color:var(--violet); }
-.price-cta-label{ display:block; font-size:0.78em; font-weight:700; color:var(--violet); margin-top:2px; text-decoration:underline; }
+  /* ===== 요금 자리 (5안 — 선 하나만) =====
+     상자를 없애고 점선 한 줄로만 나눕니다. 상세 쪽 요금 상자와 순서가 같습니다
+     — 작은 설명줄 → 큰 금액 → / 1인. 유튜브·헤드폰은 동그란 단추로 옆에 둡니다. */
+  .tour-price{ display:flex; align-items:flex-end; gap:9px; max-width:100%; margin:0 0 14px;
+               padding-top:12px; border-top:1.5px dashed #E0DAF4; }
+  .tour-price .price-chip{ display:block; box-sizing:border-box; flex:1 1 auto; min-width:0;
+                           padding:0; background:none; border:none; border-radius:0;
+                           font-family:'Work Sans', sans-serif; color:var(--navy);
+                           line-height:1.35; word-break:keep-all; }
+  .tour-price .price-eyebrow{ display:block; font-size:10.5px; font-weight:800;
+                              color:var(--muted); letter-spacing:0.2px; margin-bottom:5px; }
+  .tour-price .price-main{ display:block; white-space:nowrap; }
+  .tour-price .price-eur{ font-size:24px; font-weight:800; color:var(--navy);
+                          letter-spacing:-0.03em; line-height:1; }
+  .tour-price .price-per{ font-style:normal; font-size:12px; font-weight:700;
+                          color:var(--muted); margin-left:5px; }
+  .tour-price .price-sub{ display:block; font-size:11px; font-weight:700; color:var(--muted); margin-top:3px; }
+  /* 금액이 아직 없는 상품 — 칩 자체가 예약문의로 가는 단추입니다 */
+  button.price-chip{ cursor:pointer; text-align:left; font-size:15px; font-weight:800; }
+  button.price-chip:hover .price-cta-label{ color:var(--navy); }
+  .price-cta-label{ display:block; font-size:11.5px; font-weight:700; color:var(--violet);
+                    margin-top:3px; text-decoration:underline; }
+  /* 유튜브·헤드폰 — 동그란 단추 */
+  .tour-price .yt-btn, .tour-price .audio-badge{
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+    width:32px; height:32px; min-width:0; padding:0; margin:0;
+    border:1.5px solid var(--line); border-radius:50%; background:#fff;
+    cursor:pointer; font:inherit; text-decoration:none; transition: all .15s ease; }
+  .tour-price .yt-btn{ color:#CC0000; }
+  .tour-price .yt-btn svg{ width:16px; height:16px; }
+  .tour-price .yt-btn:hover{ background:#CC0000; color:#fff; border-color:#CC0000; }
+  .tour-price .audio-badge{ color:#0E9E8B; font-size:15px; }
+  .tour-price .audio-badge:hover{ background:var(--teal); color:#fff; border-color:var(--teal); }
+  .tour-price .audio-badge.playing{ background:var(--pink); border-color:var(--pink); color:#fff; }
  .tour-top{ padding:14px 18px; color:var(--navy); display:flex; flex-wrap:wrap; gap:4px 12px; justify-content:space-between; align-items:center; }
   .tour-top .region{ min-width:0; overflow-wrap:break-word; }
   .tour-top .days{ flex:0 0 auto; white-space:nowrap; }
@@ -771,7 +795,7 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
     <div class="tour-body">
       <h3>${p.title}</h3>
       <p>${p.summary}</p>
-    <div class="tour-price">${formatPriceBadge(p.price)}${formatYoutubeBtn(p.youtubeUrl)}${formatAudioBadge(p.audioGuide)}</div>
+    <div class="tour-price">${euFareChip(p)}${formatYoutubeBtn(p.youtubeUrl)}${formatAudioBadge(p.audioGuide)}</div>
     </div>
   </a>
 `).join('');

@@ -49,6 +49,7 @@
 
   .p-price{ display:inline-flex; align-items:stretch; max-width:100%; margin-bottom:14px; border-radius:13px; overflow:hidden; box-shadow:0 10px 20px -11px rgba(20,16,61,0.30); }
   .p-price .price-chip{ display:block; box-sizing:border-box; min-width:0; font-family:'Space Mono'; font-size:15px; font-weight:800; background:#fff; color:var(--navy); border:1.5px solid var(--line); border-left:4px solid var(--violet); padding:9px 18px 9px 15px; line-height:1.45; white-space:normal; word-break:keep-all; }
+  .p-price:empty{ display:none; }   /* 요금 상자로 옮겨 가서 안이 빈 경우 — 그림자만 남지 않게 */
   .p-price .price-sub{ display:block; font-size:0.72em; font-weight:700; color:var(--muted); margin-top:3px; }
   button.price-chip{ border:1.5px solid var(--line); border-left:4px solid var(--violet); cursor:pointer; text-align:left; font:inherit; }
 /* 오른쪽에 유튜브·헤드폰 단추가 붙을 때만 오른쪽 선을 뗍니다 */
@@ -672,6 +673,18 @@ function euFareCalc(f){
 
 function euFare(product){
   var f = product['요금'];
+
+  /* '요금' 을 아직 안 적었거나 값이 비어 있으면,
+     예전 price 글자('1인 80유로 (4인 이상 출발 기준)')에 적힌 금액이라도
+     같은 모양으로 보여 줍니다. 나중에 '요금' 에 값을 넣으시면 그쪽이 이깁니다. */
+  var 비었나 = !f || (f['꼴'] === '계산기'
+      ? !(f['구간'] || []).some(function(g){ return g && g['값'] != null; })
+      : f['값'] == null);
+  if(비었나 && typeof euPriceToFare === 'function'){
+    var g = euPriceToFare(product.price);
+    if(g) f = g;
+  }
+
   if(!f) return '';
   if(f['꼴'] === '계산기') return euFareCalc(f);
   return euFareOne(f);
@@ -1214,7 +1227,7 @@ function render(){
   el.innerHTML = `
     <div class="layout">
       <div class="section-inner">
-    <div class="p-price">${product['요금'] ? '' : formatPriceBadge(product.price)}${formatYoutubeBtn(product.youtubeUrl)}${formatAudioBadge(product.audioGuide)}</div>
+    <div class="p-price">${euFare(product) ? '' : formatPriceBadge(product.price)}${formatYoutubeBtn(product.youtubeUrl)}${formatAudioBadge(product.audioGuide)}</div>
         <div class="p-top ${product.topClass}">
           <span class="region">${product.region}</span>
           <span class="days">${product.days}</span>

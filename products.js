@@ -4339,12 +4339,16 @@ function euFareChip(p){
     return `<button type="button" class="price-chip" onclick="event.preventDefault();event.stopPropagation();location.href='contact.html';">가격 문의<span class="price-cta-label">예약문의 하러 가기 →</span></button>`;
   }
 
-  const 뒤 = 부터 ? `/ ${단위 || '1인'} 부터` : `/ ${단위 || '1인'}`;
-  return `<span class="price-chip"><span class="price-main">` +
-         `<b class="price-eur">${euCardMoney(값)}</b>` +
-         `<i class="price-per">${뒤}</i></span>` +
-         (덧말 ? `<span class="price-sub">${덧말}</span>` : '') +
-         `</span>`;
+  /* 상세 쪽 요금 상자와 같은 순서입니다 — 작은 설명줄 → 큰 금액 → / 1인 */
+  const 칸 = 단위 || '1인';
+  const 설명 = 덧말 ? `${칸} 요금 · ${덧말}` : `${칸} 요금`;
+  const 뒤 = 부터 ? `/ ${칸} 부터` : `/ ${칸}`;
+  return `<span class="price-chip">` +
+         `<span class="price-eyebrow">${설명}</span>` +
+         `<span class="price-main">` +
+           `<b class="price-eur">${euCardMoney(값)}</b>` +
+           `<i class="price-per">${뒤}</i>` +
+         `</span></span>`;
 }
 
 /* 상품에 youtubeUrl이 있으면 가격 뱃지 오른쪽에 빨간 유튜브 버튼을 붙여줘요.
