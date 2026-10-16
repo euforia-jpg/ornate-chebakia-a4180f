@@ -187,6 +187,65 @@
   @media (max-width:620px){ .euf-footer .ef-inner{ grid-template-columns:1fr; padding:26px 18px 24px; border-radius:18px; }
     .euf-footer .ef-bottom{ flex-direction:column; align-items:flex-start; }
     footer.euf-footer{ padding:6px 16px 28px; } }
+
+/* ── 머리말 오른쪽 선 모션 (euforia motion) ───────────────────────────── */
+.page-hero{ position:relative; }
+.hero-motion{ position:absolute; top:50%; transform:translateY(-50%);
+              right:clamp(20px,4vw,56px); width:min(380px,30vw); height:auto;
+              pointer-events:none; }
+.hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+                   font-size:9.5px; fill:#5B5587; letter-spacing:.03em; }
+.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+
+/* 회사소개 — 아치 창 너머로 도시가 드러나고 해가 떠오릅니다 */
+#emAbout .em-pane{ fill:#fff; opacity:0; animation:em-ar-pane 6s ease-out infinite; }
+#emAbout .em-frame, #emAbout .em-sill{
+  stroke:var(--navy,#14103D); stroke-width:2.6; fill:none;
+  stroke-dasharray:100; stroke-dashoffset:100; animation:em-ar-draw 6s ease-out infinite; }
+#emAbout .em-bar{ stroke:var(--navy,#14103D); stroke-width:1.8; fill:none;
+                  stroke-dasharray:100; stroke-dashoffset:100;
+                  animation:em-ar-bars 6s ease-out infinite; }
+#emAbout .em-roofs{ stroke:var(--violet,#6C3CE9); stroke-width:2; fill:none;
+                    stroke-dasharray:100; stroke-dashoffset:100;
+                    animation:em-ar-roof 6s ease-out infinite; }
+#emAbout .em-sun{ fill:none; stroke:var(--orange,#FF7A1A); stroke-width:2.4;
+                  animation:em-ar-sun 6s cubic-bezier(.3,.9,.3,1) infinite; }
+#emAbout .em-beam{ stroke:var(--orange,#FF7A1A); stroke-width:1.8; stroke-linecap:round;
+                   animation:em-ar-sun 6s cubic-bezier(.3,.9,.3,1) infinite; }
+#emAbout .em-bird{ stroke:var(--navy,#14103D); stroke-width:1.6; fill:none; opacity:.55;
+                   offset-path:path("M96,54 C140,34 220,40 268,30"); offset-rotate:0deg;
+                   animation:em-ar-bird 6s ease-in-out infinite; }
+@keyframes em-ar-pane{ 0%,4%{opacity:0} 22%,88%{opacity:1} 96%,100%{opacity:0} }
+@keyframes em-ar-draw{ 0%,2%{stroke-dashoffset:100} 22%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 96%,100%{stroke-dashoffset:100} }
+@keyframes em-ar-bars{ 0%,20%{stroke-dashoffset:100} 36%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 96%,100%{stroke-dashoffset:100} }
+@keyframes em-ar-roof{ 0%,32%{stroke-dashoffset:100} 50%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 96%,100%{stroke-dashoffset:100} }
+@keyframes em-ar-sun{ 0%,44%{transform:translateY(52px); opacity:0}
+                      62%,88%{transform:translateY(0); opacity:1}
+                      95%,100%{transform:translateY(52px); opacity:0} }
+@keyframes em-ar-bird{ 0%,56%{offset-distance:0%; opacity:0} 62%{opacity:.55}
+                       86%{offset-distance:100%; opacity:.55}
+                       90%,100%{offset-distance:100%; opacity:0} }
+@media (min-width:1001px){
+  /* 본문과 등록번호 배지가 모션 자리까지 늘어나지 않도록 */
+  .page-hero p, .page-hero .reg-badge{ max-width:calc(100% - 410px); }
+}
+@media (max-width:1000px){
+  /* 좁은 화면에서는 숨기지 않고 글 아래로 내려서 보여 줍니다 */
+  .hero-motion{ position:static; display:block; transform:none; right:auto;
+                width:min(340px, 86%); margin:16px 0 2px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-motion *{ animation:none !important; }
+  .hero-motion .em-frame, .hero-motion .em-sill, .hero-motion .em-bar,
+  .hero-motion .em-roofs{ stroke-dashoffset:0 !important; }
+  .hero-motion .em-pane, .hero-motion .em-sun, .hero-motion .em-beam{ opacity:1 !important; }
+  .hero-motion .em-sun, .hero-motion .em-beam{ transform:none !important; }
+  .hero-motion .em-bird{ opacity:0 !important; }
+}
 </style>
 
 <!-- 검색·공유 (대표주소 / 카톡·페북 미리보기 / 아이콘) -->
@@ -249,6 +308,36 @@
     <h1>스페인 현지에 기반을 둔<br><span class="hl">자유여행 전문 여행사</span></h1>
     <p>직접 스페인 현지에서 활동하고 있기 때문에 최신 정보와 진정한 스페인의 매력을 생생하게 전달해 드릴 수 있습니다. 차량투어부터 도슨트, 순례길, 그리고 라리가 직관까지 — 이베리아 반도에서 할 수 있는 특별한 경험을 여행 일정에 자연스럽게 더해 드려요.</p>
     <div class="reg-badge">현지여행사 등록번호 &middot; NIF B44605574 / CICMA No. 4443</div>
+    <svg class="hero-motion" id="emAbout" viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="emArchClip">
+          <path d="M106,162 L106,92 A74,74 0 0,1 254,92 L254,162 Z"/>
+        </clipPath>
+      </defs>
+      <path class="em-pane" d="M106,162 L106,92 A74,74 0 0,1 254,92 L254,162 Z"/>
+      <g clip-path="url(#emArchClip)">
+        <g class="em-sun">
+          <circle cx="180" cy="104" r="17"/>
+        </g>
+        <g class="em-beam">
+          <line x1="180" y1="74"  x2="180" y2="66"/>
+          <line x1="207" y1="83"  x2="213" y2="77"/>
+          <line x1="218" y1="104" x2="226" y2="104"/>
+          <line x1="153" y1="83"  x2="147" y2="77"/>
+          <line x1="142" y1="104" x2="134" y2="104"/>
+        </g>
+        <path class="em-ln em-roofs" pathLength="100"
+              d="M98,162 L98,142 L116,142 L116,128 L132,128 L132,148 L150,148 L150,134
+                 L168,134 L168,152 L192,152 L192,132 L208,132 L208,146 L226,146
+                 L226,126 L242,126 L242,150 L264,150 L264,162"/>
+      </g>
+      <path class="em-ln em-frame" pathLength="100" d="M106,162 L106,92 A74,74 0 0,1 254,92 L254,162"/>
+      <line class="em-ln em-bar" pathLength="100" x1="180" y1="18" x2="180" y2="162" style="animation-delay:0s"/>
+      <line class="em-ln em-bar" pathLength="100" x1="106" y1="92" x2="254" y2="92" style="animation-delay:.12s"/>
+      <line class="em-ln em-sill" pathLength="100" x1="92" y1="162" x2="268" y2="162"/>
+      <path class="em-ln em-bird" d="M-7,0 q3.5,-4.5 7,0 q3.5,-4.5 7,0"/>
+      <text class="em-ko" x="180" y="176" text-anchor="middle" fill="#6C3CE9">현지에서 보는 스페인</text>
+    </svg>
   </div>
 
   <div class="section">
