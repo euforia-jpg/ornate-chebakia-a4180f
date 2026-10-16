@@ -621,6 +621,45 @@
     .bx-pdf{ flex:1 1 0; text-align:center; padding:13px 0; }
     .bx-go{ flex:1.6 1 0; text-align:center; padding:13px 0; }
   }
+
+/* ── 머리말 오른쪽 선 모션 (euforia motion) ───────────────────────────── */
+.page-hero{ position:relative; }
+.hero-motion{ position:absolute; top:50%; transform:translateY(-50%);
+              right:clamp(20px,4vw,56px); width:min(380px,30vw); height:auto;
+              pointer-events:none; }
+.hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+                   font-size:9.5px; fill:#5B5587; letter-spacing:.03em; }
+.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+@media (max-width:1080px){ .hero-motion{ display:none; } }
+@media (prefers-reduced-motion: reduce){
+  .hero-motion *{ animation:none !important; }
+  .hero-motion .em-tick, .hero-motion .em-bub, .hero-motion .em-seen,
+  .hero-motion .em-typed{ stroke-dashoffset:0 !important; }
+  .hero-motion .em-chip, .hero-motion .em-rowln, .hero-motion .em-day{
+    opacity:1 !important; transform:none !important; }
+  .hero-motion .em-fill{ transform:scaleY(1) !important; }
+  .hero-motion .em-dots{ opacity:0 !important; }
+  .hero-motion .em-spark{ opacity:.8 !important; }
+}
+
+/* 자동견적 — 고를 때마다 금액 막대가 한 칸씩 올라갑니다 */
+#emQuote .em-box{ stroke:var(--navy,#14103D); stroke-width:2; fill:#fff; }
+#emQuote .em-rowln{ stroke:#B5AEDC; stroke-width:3.2; stroke-linecap:round; }
+#emQuote .em-tick{ stroke:var(--violet,#6C3CE9); stroke-width:3; stroke-dasharray:100;
+                   stroke-dashoffset:100; animation:em-qt-tick 6s ease-out infinite; }
+#emQuote .em-track{ fill:#fff; stroke:var(--navy,#14103D); stroke-width:2; }
+#emQuote .em-fill{ fill:var(--teal,#12C9AE); transform-box:fill-box; transform-origin:50% 100%;
+                   transform:scaleY(0); animation:em-qt-fill 6s steps(1,end) infinite; }
+#emQuote .em-chip{ opacity:0; animation:em-qt-chip 6s cubic-bezier(.3,1.4,.5,1) infinite; }
+@keyframes em-qt-tick{ 0%,8%{stroke-dashoffset:100} 20%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 96%,100%{stroke-dashoffset:100} }
+@keyframes em-qt-fill{ 0%,12%{transform:scaleY(0)} 22%{transform:scaleY(.25)} 32%{transform:scaleY(.5)}
+                       42%{transform:scaleY(.75)} 52%,88%{transform:scaleY(1)}
+                       96%,100%{transform:scaleY(0)} }
+@keyframes em-qt-chip{ 0%,54%{opacity:0; transform:translateY(14px)}
+                       64%,88%{opacity:1; transform:translateY(0)}
+                       96%,100%{opacity:0; transform:translateY(14px)} }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -683,6 +722,30 @@
     <div class="eyebrow">일정 만들기</div>
     <h1>고르면 <span class="hl">금액이 바로</span> 나옵니다</h1>
     <p>가고 싶은 곳과 숙박·차량·가이드·식사를 골라 보세요. 아래 띠에 예상 금액이 바로 뜹니다.</p>
+    <svg class="hero-motion" id="emQuote" viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+      <rect class="em-box" x="24" y="24"  width="17" height="17" rx="4"/>
+      <rect class="em-box" x="24" y="58"  width="17" height="17" rx="4"/>
+      <rect class="em-box" x="24" y="92"  width="17" height="17" rx="4"/>
+      <rect class="em-box" x="24" y="126" width="17" height="17" rx="4"/>
+      <path class="em-ln em-tick" pathLength="100" d="M28,33 l4,5 8,-10" style="animation-delay:0s"/>
+      <path class="em-ln em-tick" pathLength="100" d="M28,67 l4,5 8,-10" style="animation-delay:.6s"/>
+      <path class="em-ln em-tick" pathLength="100" d="M28,101 l4,5 8,-10" style="animation-delay:1.2s"/>
+      <path class="em-ln em-tick" pathLength="100" d="M28,135 l4,5 8,-10" style="animation-delay:1.8s"/>
+      <text class="em-ko" x="54" y="37">호텔 4성</text>
+      <text class="em-ko" x="54" y="71">전용 차량</text>
+      <text class="em-ko" x="54" y="105">식당 3회</text>
+      <text class="em-ko" x="54" y="139">입장권 2곳</text>
+      <line class="em-ln em-rowln" x1="140" y1="33"  x2="196" y2="33"/>
+      <line class="em-ln em-rowln" x1="140" y1="67"  x2="184" y2="67"/>
+      <line class="em-ln em-rowln" x1="140" y1="101" x2="200" y2="101"/>
+      <line class="em-ln em-rowln" x1="140" y1="135" x2="176" y2="135"/>
+      <rect class="em-track" x="268" y="40" width="48" height="110" rx="7"/>
+      <rect class="em-fill"  x="271" y="43" width="42" height="104" rx="5"/>
+      <g class="em-chip">
+        <rect x="258" y="6" width="68" height="26" rx="13" fill="#6C3CE9"/>
+        <text x="292" y="24" text-anchor="middle" fill="#fff" style="font-weight:700;font-size:13px">&#8364; 1인</text>
+      </g>
+    </svg>
   </div>
 
   <div class="section">

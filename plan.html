@@ -190,6 +190,46 @@
   @media (max-width:620px){ .euf-footer .ef-inner{ grid-template-columns:1fr; padding:26px 18px 24px; border-radius:18px; }
     .euf-footer .ef-bottom{ flex-direction:column; align-items:flex-start; }
     footer.euf-footer{ padding:6px 16px 28px; } }
+
+/* ── 머리말 오른쪽 선 모션 (euforia motion) ───────────────────────────── */
+.page-hero{ position:relative; }
+.hero-motion{ position:absolute; top:50%; transform:translateY(-50%);
+              right:clamp(20px,4vw,56px); width:min(380px,30vw); height:auto;
+              pointer-events:none; }
+.hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+                   font-size:9.5px; fill:#5B5587; letter-spacing:.03em; }
+.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+@media (max-width:1080px){ .hero-motion{ display:none; } }
+@media (prefers-reduced-motion: reduce){
+  .hero-motion *{ animation:none !important; }
+  .hero-motion .em-tick, .hero-motion .em-bub, .hero-motion .em-seen,
+  .hero-motion .em-typed{ stroke-dashoffset:0 !important; }
+  .hero-motion .em-chip, .hero-motion .em-rowln, .hero-motion .em-day{
+    opacity:1 !important; transform:none !important; }
+  .hero-motion .em-fill{ transform:scaleY(1) !important; }
+  .hero-motion .em-dots{ opacity:0 !important; }
+  .hero-motion .em-spark{ opacity:.8 !important; }
+}
+
+/* AI 일정 — 묻는 글이 써지고 일정이 돋아납니다 */
+#emAi .em-field{ stroke:var(--navy,#14103D); stroke-width:2.2; fill:#fff; }
+#emAi .em-typed{ stroke:#9A94C4; stroke-width:3.2; stroke-linecap:round; stroke-dasharray:100;
+                 stroke-dashoffset:100; animation:em-ai-type 6s steps(14,end) infinite; }
+#emAi .em-caret{ stroke:var(--violet,#6C3CE9); stroke-width:2.4; animation:em-ai-caret .8s steps(1,end) infinite; }
+#emAi .em-day{ opacity:0; animation:em-ai-day 6s cubic-bezier(.3,1.2,.4,1) infinite; }
+#emAi .em-dot{ fill:var(--violet,#6C3CE9); }
+#emAi .em-bar{ fill:#CFC8EC; }
+#emAi .em-spark{ fill:var(--teal,#12C9AE); transform-box:fill-box; transform-origin:center;
+                 animation:em-ai-spark 2.2s ease-in-out infinite; }
+#emAi .em-rail{ stroke:#B9B2DF; stroke-width:1.2; stroke-dasharray:2 7; opacity:.7; }
+@keyframes em-ai-type{ 0%,6%{stroke-dashoffset:100} 30%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 96%,100%{stroke-dashoffset:100} }
+@keyframes em-ai-caret{ 0%,50%{opacity:1} 51%,100%{opacity:0} }
+@keyframes em-ai-day{ 0%,34%{opacity:0; transform:translateX(-14px)}
+                      46%,88%{opacity:1; transform:translateX(0)}
+                      96%,100%{opacity:0; transform:translateX(-14px)} }
+@keyframes em-ai-spark{ 0%,100%{transform:scale(.45); opacity:.35} 50%{transform:scale(1); opacity:1} }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -253,6 +293,30 @@
     <div class="eyebrow">AI 일정 추천</div>
     <h1>어디로 갈지 고민이라면,<br><span class="hl">AI</span>에게 먼저 물어보세요</h1>
     <p>출발·도착 도시와 여행 스타일만 알려주시면, AI가 실제 이동 가능한 동선으로 일정과 예상 경비를 짜드려요. 마음에 드시면 그대로 예약문의로 이어가실 수 있어요.</p>
+    <svg class="hero-motion" id="emAi" viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+      <rect class="em-field" x="18" y="18" width="256" height="34" rx="9"/>
+      <line class="em-ln em-typed" pathLength="100" x1="32" y1="35" x2="222" y2="35"/>
+      <line class="em-ln em-caret" x1="232" y1="26" x2="232" y2="44"/>
+      <line class="em-ln em-rail" x1="28" y1="78" x2="28" y2="142"/>
+      <g class="em-day" style="animation-delay:0s">
+        <circle class="em-dot" cx="28" cy="78" r="5"/>
+        <rect class="em-bar" x="44" y="73"  width="164" height="10" rx="5"/>
+        <text x="218" y="82">바르셀로나</text>
+      </g>
+      <g class="em-day" style="animation-delay:.22s">
+        <circle class="em-dot" cx="28" cy="110" r="5"/>
+        <rect class="em-bar" x="44" y="105" width="124" height="10" rx="5"/>
+        <text x="178" y="114">발렌시아</text>
+      </g>
+      <g class="em-day" style="animation-delay:.44s">
+        <circle class="em-dot" cx="28" cy="142" r="5"/>
+        <rect class="em-bar" x="44" y="137" width="190" height="10" rx="5"/>
+        <text x="244" y="146">마드리드</text>
+      </g>
+      <path class="em-spark" d="M300,24 l3.5,9 9,3.5 -9,3.5 -3.5,9 -3.5,-9 -9,-3.5 9,-3.5 Z" style="animation-delay:0s"/>
+      <path class="em-spark" d="M330,52 l2.6,6.8 6.8,2.6 -6.8,2.6 -2.6,6.8 -2.6,-6.8 -6.8,-2.6 6.8,-2.6 Z" style="animation-delay:.5s"/>
+      <path class="em-spark" d="M312,70 l2,5.2 5.2,2 -5.2,2 -2,5.2 -2,-5.2 -5.2,-2 5.2,-2 Z" style="animation-delay:1s"/>
+    </svg>
   </div>
 
   <div class="section">

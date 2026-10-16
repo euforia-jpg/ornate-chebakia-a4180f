@@ -198,6 +198,49 @@
   @media (max-width:620px){ .euf-footer .ef-inner{ grid-template-columns:1fr; padding:26px 18px 24px; border-radius:18px; }
     .euf-footer .ef-bottom{ flex-direction:column; align-items:flex-start; }
     footer.euf-footer{ padding:6px 16px 28px; } }
+
+/* ── 머리말 오른쪽 선 모션 (euforia motion) ───────────────────────────── */
+.page-hero{ position:relative; }
+.hero-motion{ position:absolute; top:50%; transform:translateY(-50%);
+              right:clamp(20px,4vw,56px); width:min(380px,30vw); height:auto;
+              pointer-events:none; }
+.hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+                   font-size:9.5px; fill:#5B5587; letter-spacing:.03em; }
+.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+@media (max-width:1080px){ .hero-motion{ display:none; } }
+@media (prefers-reduced-motion: reduce){
+  .hero-motion *{ animation:none !important; }
+  .hero-motion .em-tick, .hero-motion .em-bub, .hero-motion .em-seen,
+  .hero-motion .em-typed{ stroke-dashoffset:0 !important; }
+  .hero-motion .em-chip, .hero-motion .em-rowln, .hero-motion .em-day{
+    opacity:1 !important; transform:none !important; }
+  .hero-motion .em-fill{ transform:scaleY(1) !important; }
+  .hero-motion .em-dots{ opacity:0 !important; }
+  .hero-motion .em-spark{ opacity:.8 !important; }
+}
+
+/* 예약문의 — 물으면 답이 돌아옵니다 */
+#emChat .em-bub{ stroke-width:2.2; fill:#fff; stroke-dasharray:100; stroke-dashoffset:100; }
+#emChat .em-ask{ stroke:var(--navy,#14103D); animation:em-ch-ask 6s ease-out infinite; }
+#emChat .em-ans{ stroke:var(--violet,#6C3CE9); animation:em-ch-ans 6s ease-out infinite; }
+#emChat .em-rowln{ stroke:#B5AEDC; stroke-width:3.2; stroke-linecap:round; opacity:0;
+                   animation:em-ch-row 6s ease-out infinite; }
+#emChat .em-ansln{ stroke:#C0B2F4; }
+#emChat .em-dots{ opacity:0; animation:em-ch-dots 6s ease-out infinite; }
+#emChat .em-dots circle{ fill:var(--violet,#6C3CE9); transform-box:fill-box;
+                         transform-origin:center; animation:em-ch-bob .9s ease-in-out infinite alternate; }
+#emChat .em-seen{ stroke:var(--teal,#12C9AE); stroke-width:2.4; stroke-dasharray:100;
+                  stroke-dashoffset:100; animation:em-ch-seen 6s ease-out infinite; }
+@keyframes em-ch-ask{ 0%,3%{stroke-dashoffset:100} 18%{stroke-dashoffset:0}
+                      88%{stroke-dashoffset:0} 96%,100%{stroke-dashoffset:100} }
+@keyframes em-ch-ans{ 0%,46%{stroke-dashoffset:100} 62%{stroke-dashoffset:0}
+                      88%{stroke-dashoffset:0} 96%,100%{stroke-dashoffset:100} }
+@keyframes em-ch-row{ 0%,18%{opacity:0} 26%,88%{opacity:1} 95%,100%{opacity:0} }
+@keyframes em-ch-dots{ 0%,26%{opacity:0} 32%,44%{opacity:1} 48%,100%{opacity:0} }
+@keyframes em-ch-bob{ from{transform:translateY(3px)} to{transform:translateY(-3px)} }
+@keyframes em-ch-seen{ 0%,66%{stroke-dashoffset:100} 76%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 96%,100%{stroke-dashoffset:100} }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -260,6 +303,23 @@
     <div class="eyebrow">예약문의</div>
     <h1>여행도 경기 관람도,<br>먼저 <span class="hl">물어보세요</span></h1>
     <p>희망하시는 여행상품이나 MATCHDAY 경기 관람 일정을 알려 주시면 담당자가 맞춤 견적과 예약 절차를 안내해 드려요.</p>
+    <svg class="hero-motion" id="emChat" viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+      <path class="em-ln em-bub em-ask" pathLength="100"
+            d="M24,20 L188,20 a9,9 0 0,1 9,9 L197,62 a9,9 0 0,1 -9,9 L46,71 L32,86 L34,71 L24,71 a9,9 0 0,1 -9,-9 L15,29 a9,9 0 0,1 9,-9 Z"/>
+      <line class="em-ln em-rowln" x1="32" y1="38" x2="150" y2="38"/>
+      <line class="em-ln em-rowln" x1="32" y1="52" x2="112" y2="52" style="animation-delay:.12s"/>
+      <g class="em-dots">
+        <rect x="212" y="78" width="54" height="26" rx="13" fill="#fff" stroke="#6C3CE9" stroke-width="2"/>
+        <circle cx="227" cy="91" r="3.4" style="animation-delay:0s"/>
+        <circle cx="239" cy="91" r="3.4" style="animation-delay:.18s"/>
+        <circle cx="251" cy="91" r="3.4" style="animation-delay:.36s"/>
+      </g>
+      <path class="em-ln em-bub em-ans" pathLength="100"
+            d="M172,96 L336,96 a9,9 0 0,1 9,9 L345,138 a9,9 0 0,1 -9,9 L334,147 L336,162 L322,147 L172,147 a9,9 0 0,1 -9,-9 L163,105 a9,9 0 0,1 9,-9 Z"/>
+      <line class="em-ln em-rowln em-ansln" x1="180" y1="114" x2="320" y2="114" style="animation-delay:2.9s"/>
+      <line class="em-ln em-rowln em-ansln" x1="180" y1="128" x2="268" y2="128" style="animation-delay:3.05s"/>
+      <path class="em-ln em-seen" pathLength="100" d="M292,166 l5,5 9,-11 M304,166 l5,5 9,-11"/>
+    </svg>
   </div>
 
   <div class="section">
