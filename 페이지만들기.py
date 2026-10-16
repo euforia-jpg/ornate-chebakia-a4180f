@@ -34,14 +34,15 @@ PAGE = r"""<title>유포리아 골프</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
 /* 레이아웃 — 머리말 · 권역 탭 · 지도(핀 번호 = 카드 번호) · 코스 카드 격자.
    밝은 한낮의 코스 느낌. 바탕은 페어웨이를 깎은 줄무늬를 아주 옅게 깔았습니다. */
 :root{
   color-scheme: light;
-  --paper:#F3F7F0;       /* 페어웨이 빛 */
-  --mow:#EFF4EB;         /* 잔디 깎은 줄 */
+  --paper:#F2F5F1;       /* 아침 페어웨이 */
+  --mow:#EFF3EE;         /* 잔디 깎은 줄 — 거의 안 보일 만큼만 */
+  --glow:#E4EEE6;        /* 위쪽 빛 번짐 */
   --card:#FFFFFF;
   --ink:#152018; --ink-2:#5C6E62; --line:#DCE6D9;
   --fair:#2C6B46;        /* 페어웨이 — 주 액센트 */
@@ -51,7 +52,6 @@ PAGE = r"""<title>유포리아 골프</title>
   --land:#E9EFE2;        /* 지도 땅 */
   --wash:#E8F1E7;
   --shadow:0 1px 2px rgba(21,32,24,.05), 0 12px 28px -20px rgba(21,32,24,.5);
-  --disp:'Fraunces', Georgia, 'Times New Roman', serif;
   --body:'IBM Plex Sans KR', system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif;
   --data:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -59,9 +59,11 @@ PAGE = r"""<title>유포리아 골프</title>
 body{
   margin:0; color:var(--ink); font-family:var(--body); font-size:15px; line-height:1.65;
   -webkit-font-smoothing:antialiased;
-  background:
-    repeating-linear-gradient(101deg, var(--mow) 0 54px, var(--paper) 54px 108px),
-    linear-gradient(176deg, #EDF4EE 0%, var(--paper) 46%, #F5F8F1 100%);
+  background-color:var(--paper);
+  background-image:
+    radial-gradient(120% 60% at 50% -12%, var(--glow) 0%, rgba(228,238,230,0) 62%),
+    repeating-linear-gradient(103deg, var(--mow) 0 86px, var(--paper) 86px 172px),
+    linear-gradient(180deg, #F4F7F3 0%, var(--paper) 55%, #F6F8F4 100%);
   background-attachment: fixed;
 }
 body::before{ content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px);
@@ -74,27 +76,33 @@ body::before{ content:""; position:fixed; inset:0 0 auto; height:env(safe-area-i
 .top{ padding-block:34px 22px; }
 .kicker{ font-family:var(--data); font-size:11px; letter-spacing:.15em; text-transform:uppercase;
          color:var(--fair); font-weight:500; margin:0 0 10px; }
-h1{ font-family:var(--disp); font-weight:600; font-size:clamp(31px,5.5vw,48px); line-height:1.06;
-    letter-spacing:-.018em; margin:0 0 13px; text-wrap:balance; }
-h1 em{ font-style:italic; color:var(--fair); }
+h1{ font-weight:700; font-size:clamp(29px,5.1vw,44px); line-height:1.18;
+    letter-spacing:-.035em; margin:0 0 13px; text-wrap:balance; }
+h1 em{ font-style:normal; color:var(--fair); }
 .lede{ margin:0; max-width:58ch; color:var(--ink-2); font-size:15.5px; }
 .count{ display:flex; flex-wrap:wrap; gap:6px 18px; margin:18px 0 0; padding:0; list-style:none;
         font-family:var(--data); font-size:12px; color:var(--ink-2); font-variant-numeric:tabular-nums; }
 .count b{ color:var(--ink); font-weight:500; }
 
-/* ── 권역 탭 ───────────────────────────────── */
+/* ── 권역 고르는 줄 — 가장 먼저 눈에 들어와야 해서 알약으로 키웠습니다 ── */
 .bar{ position:sticky; top:env(safe-area-inset-top, 0px); z-index:9;
-      background:rgba(243,247,240,.94); backdrop-filter:blur(8px);
+      background:rgba(242,245,241,.93); backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line); }
-.bar .wrap{ display:flex; gap:18px; align-items:center; overflow-x:auto; scrollbar-width:none; }
+.bar .wrap{ display:flex; gap:9px; align-items:center; overflow-x:auto; scrollbar-width:none;
+            padding-block:12px; }
 .bar .wrap::-webkit-scrollbar{ display:none; }
-.tab{ all:unset; cursor:pointer; white-space:nowrap; padding:14px 0; font-size:14px; font-weight:600;
-      color:var(--ink-2); border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .15s; }
-.tab:hover{ color:var(--ink); }
-.tab[aria-selected="true"]{ color:var(--ink); border-bottom-color:var(--fair); }
-.tab .n{ font-family:var(--data); font-size:11px; color:var(--ink-2); margin-left:5px;
+.tab{ all:unset; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:baseline; gap:8px;
+      padding:10px 17px; border-radius:999px; font-size:14.5px; font-weight:700; letter-spacing:-.012em;
+      color:var(--ink); background:var(--card); border:1px solid var(--line);
+      transition:background .15s, border-color .15s, color .15s; }
+.tab:hover{ border-color:var(--fair); }
+.tab .ct{ font-family:var(--body); font-size:11px; font-weight:600; color:var(--ink-2); letter-spacing:0; }
+.tab .n{ font-family:var(--data); font-size:11.5px; font-weight:500; color:var(--ink-2);
          font-variant-numeric:tabular-nums; }
-.tab:focus-visible{ outline:2px solid var(--fair); outline-offset:3px; border-radius:3px; }
+.tab[aria-selected="true"]{ background:var(--fair); border-color:var(--fair); color:#fff;
+                            box-shadow:0 6px 15px -8px rgba(44,107,70,.8); }
+.tab[aria-selected="true"] .ct, .tab[aria-selected="true"] .n{ color:rgba(255,255,255,.84); }
+.tab:focus-visible{ outline:2px solid var(--fair); outline-offset:3px; }
 
 /* ── 지도 ─────────────────────────────────── */
 .mapwrap{ display:grid; grid-template-columns:1.55fr 1fr; gap:0; margin-block:22px 4px;
@@ -139,7 +147,10 @@ h1 em{ font-style:italic; color:var(--fair); }
 
 /* ── 권역 소개 ─────────────────────────────── */
 .area{ padding-block:20px 2px; }
-.area h2{ font-family:var(--disp); font-weight:600; font-size:25px; margin:0 0 6px; letter-spacing:-.012em; }
+.area h2{ font-weight:700; font-size:23px; margin:0; letter-spacing:-.025em; }
+  .areahead{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin:0 0 7px; }
+  .nara{ font-size:11.5px; font-weight:600; color:var(--fair); background:var(--wash);
+         border-radius:999px; padding:3px 11px; letter-spacing:.01em; }
 .area p{ margin:0 0 10px; color:var(--ink-2); max-width:62ch; font-size:14.5px; }
 .air{ display:flex; flex-wrap:wrap; gap:6px 14px; margin:0; padding:0; list-style:none;
       font-family:var(--data); font-size:11.5px; color:var(--ink-2); }
@@ -162,8 +173,8 @@ h1 em{ font-style:italic; color:var(--fair); }
 .tag{ font-family:var(--data); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
       padding:3px 8px; border-radius:2px; background:var(--wash); color:var(--fair); font-weight:500; }
 .tag.rec{ background:var(--sand); color:#20180A; }
-.name{ font-family:var(--disp); font-size:20px; font-weight:600; line-height:1.2; margin:0 0 3px;
-       letter-spacing:-.012em; text-wrap:balance; }
+.name{ font-size:18.5px; font-weight:700; line-height:1.3; margin:0 0 3px;
+       letter-spacing:-.02em; text-wrap:balance; }
 .ko{ font-size:12.5px; color:var(--ink-2); margin:0 0 2px; }
 .where{ font-family:var(--data); font-size:11.5px; color:var(--ink-2); margin:0; overflow-wrap:anywhere; }
 .links{ display:flex; flex-wrap:wrap; gap:8px 14px; margin:13px 0 0; align-items:center; }
@@ -297,6 +308,7 @@ html{ scroll-behavior:smooth; }
     var n = 전부.filter(function(g){ return g.권역 === r.id; }).length;
     return '<button type="button" class="tab" role="tab" data-r="' + esc(r.id) + '"' +
            ' aria-selected="' + (r.id === state.권역) + '">' + esc(r.이름) +
+           '<span class="ct">' + esc(r.나라) + '</span>' +
            '<span class="n">' + n + '</span></button>';
   }).join('');
 
@@ -428,7 +440,8 @@ html{ scroll-behavior:smooth; }
     지도그리기(목록);
     document.getElementById('legendTitle').textContent = r.이름 + ' 코스 위치';
     document.getElementById('list').innerHTML =
-      '<section class="area"><h2>' + esc(r.이름) + '</h2><p>' + esc(r.설명) + '</p>' +
+      '<section class="area"><div class="areahead"><h2>' + esc(r.이름) + '</h2>' +
+      '<span class="nara">' + esc(r.나라) + '</span></div><p>' + esc(r.설명) + '</p>' +
       '<ul class="air">' + (r.공항||[]).map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></section>' +
       (목록.length ? '<div class="grid">' + 목록.map(카드).join('') + '</div>'
                    : '<p class="empty">이 권역에는 조건에 맞는 코스가 없습니다. 거르개를 「전체」로 바꿔 보세요.</p>');
