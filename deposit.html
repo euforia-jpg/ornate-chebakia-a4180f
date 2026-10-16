@@ -203,6 +203,56 @@
   @media (max-width:620px){ .euf-footer .ef-inner{ grid-template-columns:1fr; padding:26px 18px 24px; border-radius:18px; }
     .euf-footer .ef-bottom{ flex-direction:column; align-items:flex-start; }
     footer.euf-footer{ padding:6px 16px 28px; } }
+
+/* ── 머리말 오른쪽 선 모션 (euforia motion) ───────────────────────────── */
+.page-hero{ position:relative; }
+.hero-motion{ position:absolute; top:50%; transform:translateY(-50%);
+              right:clamp(20px,4vw,56px); width:min(360px,27vw); height:auto;
+              pointer-events:none; }
+.hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-motion .em-faint{ stroke:#B9B2DF; stroke-width:1.2; stroke-dasharray:2 7; opacity:.55; }
+.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+                   font-size:9.5px; fill:#5B5587; letter-spacing:.03em; }
+.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+@media (max-width:1000px){
+  /* 좁은 화면에서는 숨기지 않고 글 아래로 내려서 보여 줍니다 */
+  .hero-motion{ position:static; transform:none; right:auto;
+                width:min(340px, 86%); margin:16px 0 2px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-motion *{ animation:none !important; }
+  .hero-motion .em-road, .hero-motion .em-wall, .hero-motion .em-wave, .hero-motion .em-ticket,
+  .hero-motion .em-slip, .hero-motion .em-row, .hero-motion .em-amt, .hero-motion .em-ring,
+  .hero-motion .em-tick2, .hero-motion .em-cal{ stroke-dashoffset:0 !important; }
+  .hero-motion .em-node, .hero-motion .em-pin, .hero-motion .em-fee, .hero-motion .em-cap,
+  .hero-motion .em-win, .hero-motion .em-day2, .hero-motion .em-perf{
+    opacity:1 !important; transform:none !important; }
+  .hero-motion .em-star{ fill:#FF7A1A !important; }
+  .hero-motion .em-jet{ offset-distance:100% !important; opacity:1 !important; }
+  .hero-motion .em-bar2{ transform:scaleY(.6) !important; }
+}
+
+/* 입금 확인 — 전표가 채워지고 확인 표시가 그려집니다 */
+#emPay .em-slip{ stroke:var(--navy,#14103D); stroke-width:2.2; stroke-dasharray:100;
+                 stroke-dashoffset:100; animation:em-py-slip 6s ease-out infinite; }
+#emPay .em-row{ stroke:#9A94C4; stroke-width:3.4; stroke-dasharray:100; stroke-dashoffset:100;
+                animation:em-py-row 6s ease-out infinite; }
+#emPay .em-amt{ stroke:var(--violet,#6C3CE9); stroke-width:4.2; stroke-dasharray:100;
+                stroke-dashoffset:100; animation:em-py-row 6s ease-out infinite; }
+#emPay .em-ring{ stroke:#1F7A4C; stroke-width:2.6; stroke-dasharray:100; stroke-dashoffset:100;
+                 animation:em-py-ring 6s ease-out infinite; }
+#emPay .em-tick2{ stroke:#1F7A4C; stroke-width:3.4; stroke-dasharray:100; stroke-dashoffset:100;
+                  animation:em-py-tick 6s ease-out infinite; }
+#emPay .em-cap{ opacity:0; animation:em-py-cap 6s ease-out infinite; }
+@keyframes em-py-slip{ 0%,3%{stroke-dashoffset:100} 24%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 97%,100%{stroke-dashoffset:100} }
+@keyframes em-py-row{ 0%,26%{stroke-dashoffset:100} 46%{stroke-dashoffset:0}
+                      88%{stroke-dashoffset:0} 97%,100%{stroke-dashoffset:100} }
+@keyframes em-py-ring{ 0%,50%{stroke-dashoffset:100} 66%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 97%,100%{stroke-dashoffset:100} }
+@keyframes em-py-tick{ 0%,64%{stroke-dashoffset:100} 74%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 97%,100%{stroke-dashoffset:100} }
+@keyframes em-py-cap{ 0%,70%{opacity:0} 80%,88%{opacity:1} 96%,100%{opacity:0} }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -265,6 +315,17 @@
     <div class="eyebrow">입금확인</div>
     <h1>입금하셨다면,<br><span class="hl">여기</span>서 알려주세요</h1>
     <p>계좌로 입금하신 후 아래 정보를 남겨 주시면 담당자가 확인하고 예약을 확정해 드려요.</p>
+    <svg class="hero-motion" id="emPay" viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+      <path class="em-ln em-slip" pathLength="100"
+            d="M44,26 L182,26 L182,140 l-15.3,-9 -15.3,9 -15.3,-9 -15.3,9 -15.3,-9 -15.3,9 -15.3,-9 -15.3,9 -15.3,-9 L44,140 Z"/>
+      <line class="em-ln em-row" pathLength="100" x1="62" y1="52" x2="140" y2="52" style="animation-delay:0s"/>
+      <line class="em-ln em-row" pathLength="100" x1="62" y1="70" x2="164" y2="70" style="animation-delay:.16s"/>
+      <line class="em-ln em-amt" pathLength="100" x1="62" y1="96" x2="164" y2="96" style="animation-delay:.32s"/>
+      <line class="em-ln em-row" pathLength="100" x1="62" y1="116" x2="118" y2="116" style="animation-delay:.48s"/>
+      <circle class="em-ln em-ring" pathLength="100" cx="272" cy="84" r="34"/>
+      <path class="em-ln em-tick2" pathLength="100" d="M256,85 l12,12 22,-25"/>
+      <g class="em-cap"><text class="em-ko" x="272" y="142" text-anchor="middle" fill="#1F7A4C">입금 확인</text></g>
+    </svg>
   </div>
 
   <div class="section">

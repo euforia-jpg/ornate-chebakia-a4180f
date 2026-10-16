@@ -371,6 +371,53 @@
     .hm-photo{ height:110px; }
     .hm-ph-empty{ font-size:20px; padding:12px; }
   }
+
+/* ── 머리말 오른쪽 선 모션 (euforia motion) ───────────────────────────── */
+.page-hero{ position:relative; }
+.hero-motion{ position:absolute; top:50%; transform:translateY(-50%);
+              right:clamp(20px,4vw,56px); width:min(360px,27vw); height:auto;
+              pointer-events:none; }
+.hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-motion .em-faint{ stroke:#B9B2DF; stroke-width:1.2; stroke-dasharray:2 7; opacity:.55; }
+.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+                   font-size:9.5px; fill:#5B5587; letter-spacing:.03em; }
+.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+@media (max-width:1000px){
+  /* 좁은 화면에서는 숨기지 않고 글 아래로 내려서 보여 줍니다 */
+  .hero-motion{ position:static; transform:none; right:auto;
+                width:min(340px, 86%); margin:16px 0 2px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-motion *{ animation:none !important; }
+  .hero-motion .em-road, .hero-motion .em-wall, .hero-motion .em-wave, .hero-motion .em-ticket,
+  .hero-motion .em-slip, .hero-motion .em-row, .hero-motion .em-amt, .hero-motion .em-ring,
+  .hero-motion .em-tick2, .hero-motion .em-cal{ stroke-dashoffset:0 !important; }
+  .hero-motion .em-node, .hero-motion .em-pin, .hero-motion .em-fee, .hero-motion .em-cap,
+  .hero-motion .em-win, .hero-motion .em-day2, .hero-motion .em-perf{
+    opacity:1 !important; transform:none !important; }
+  .hero-motion .em-star{ fill:#FF7A1A !important; }
+  .hero-motion .em-jet{ offset-distance:100% !important; opacity:1 !important; }
+  .hero-motion .em-bar2{ transform:scaleY(.6) !important; }
+}
+
+/* 기준호텔 — 건물이 서고 창에 불이 켜지고 별이 채워집니다 */
+#emHotel .em-wall{ stroke:var(--teal,#12C9AE); stroke-width:2.4; stroke-dasharray:100;
+                   stroke-dashoffset:100; animation:em-ht-draw 6s ease-out infinite; }
+#emHotel .em-win{ fill:var(--teal,#12C9AE); opacity:0; animation:em-ht-win 6s ease-out infinite; }
+#emHotel .em-win.em-dot{ fill:var(--violet,#6C3CE9); }
+#emHotel .em-star{ fill:none; stroke:var(--orange,#FF7A1A); stroke-width:1.6; stroke-linejoin:round;
+                   animation:em-ht-star 6s ease-out infinite; }
+#emHotel .em-pin{ stroke:var(--violet,#6C3CE9); stroke-width:2.2; fill:#fff; transform-box:fill-box;
+                  transform-origin:50% 100%; animation:em-ht-pin 6s cubic-bezier(.3,1.5,.5,1) infinite; }
+#emHotel .em-cap{ opacity:0; animation:em-ht-cap 6s ease-out infinite; }
+@keyframes em-ht-draw{ 0%,3%{stroke-dashoffset:100} 26%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 97%,100%{stroke-dashoffset:100} }
+@keyframes em-ht-win{ 0%,28%{opacity:0} 36%{opacity:1} 88%{opacity:1} 95%,100%{opacity:0} }
+@keyframes em-ht-star{ 0%,52%{fill:transparent} 60%,88%{fill:#FF7A1A} 96%,100%{fill:transparent} }
+@keyframes em-ht-pin{ 0%,62%{transform:translateY(-26px) scale(.4); opacity:0}
+                      72%,88%{transform:translateY(0) scale(1); opacity:1}
+                      96%,100%{transform:translateY(-26px) scale(.4); opacity:0} }
+@keyframes em-ht-cap{ 0%,66%{opacity:0} 76%,88%{opacity:1} 96%,100%{opacity:0} }
 </style>
 
 <!-- 검색·공유 (대표주소 / 카톡·페북 미리보기 / 아이콘) -->
@@ -432,6 +479,26 @@
     <div class="eyebrow">기준호텔</div>
     <h1>스페인·포르투갈<br><span class="hl">도시별 기준호텔</span></h1>
     <p>유포리아투어 단체가 실제로 이용하는 4성급 호텔과, 시내 중심 10km 이내의 3성급 호텔을 지도에서 확인해 보세요. 스페인 북부(빌바오·산세바스티안·산탄데르·오비에도)는 3성급부터 안내하며, 산세바스티안은 온다리비아·사라우스 등 기푸스코아 지역 호텔도 함께 보여 드립니다. 호텔을 누르면 사진과 구글 평점, 길찾기를 볼 수 있고, 바로 예약 요청도 하실 수 있어요.</p>
+    <svg class="hero-motion" id="emHotel" viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+      <line class="em-ln em-faint" x1="18" y1="158" x2="342" y2="158"/>
+      <g class="em-star" style="animation-delay:0s"><path d="M106,22 l3.4,6.9 7.6,1.1 -5.5,5.4 1.3,7.6 -6.8,-3.6 -6.8,3.6 1.3,-7.6 -5.5,-5.4 7.6,-1.1 Z"/></g>
+      <g class="em-star" style="animation-delay:.14s"><path d="M134,22 l3.4,6.9 7.6,1.1 -5.5,5.4 1.3,7.6 -6.8,-3.6 -6.8,3.6 1.3,-7.6 -5.5,-5.4 7.6,-1.1 Z"/></g>
+      <g class="em-star" style="animation-delay:.28s"><path d="M162,22 l3.4,6.9 7.6,1.1 -5.5,5.4 1.3,7.6 -6.8,-3.6 -6.8,3.6 1.3,-7.6 -5.5,-5.4 7.6,-1.1 Z"/></g>
+      <g class="em-star" style="animation-delay:.42s"><path d="M190,22 l3.4,6.9 7.6,1.1 -5.5,5.4 1.3,7.6 -6.8,-3.6 -6.8,3.6 1.3,-7.6 -5.5,-5.4 7.6,-1.1 Z"/></g>
+      <path class="em-ln em-wall" pathLength="100"
+            d="M62,158 L62,62 L148,50 L234,62 L234,158 M62,78 L234,78 M138,158 L138,124 L158,124 L158,158"/>
+      <rect class="em-win" x="76"  y="92"  width="15" height="17" rx="1.5" style="animation-delay:0s"/>
+      <rect class="em-win" x="104" y="92"  width="15" height="17" rx="1.5" style="animation-delay:.08s"/>
+      <rect class="em-win" x="132" y="92"  width="15" height="17" rx="1.5" style="animation-delay:.16s"/>
+      <rect class="em-win" x="160" y="92"  width="15" height="17" rx="1.5" style="animation-delay:.24s"/>
+      <rect class="em-win" x="188" y="92"  width="15" height="17" rx="1.5" style="animation-delay:.32s"/>
+      <rect class="em-win" x="76"  y="124" width="15" height="17" rx="1.5" style="animation-delay:.40s"/>
+      <rect class="em-win" x="104" y="124" width="15" height="17" rx="1.5" style="animation-delay:.48s"/>
+      <rect class="em-win" x="188" y="124" width="15" height="17" rx="1.5" style="animation-delay:.56s"/>
+      <g class="em-pin"><path d="M292,138 C292,138 276,118 276,106 a16,16 0 1,1 32,0 c0,12 -16,32 -16,32 Z"/></g>
+      <circle cx="292" cy="106" r="5" class="em-win em-dot" style="animation-delay:.62s"/>
+      <g class="em-cap"><text x="292" y="154" text-anchor="middle">CITY 10km</text></g>
+    </svg>
   </div>
 
   <div class="section">

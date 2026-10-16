@@ -180,6 +180,49 @@
   @media (max-width:620px){ .euf-footer .ef-inner{ grid-template-columns:1fr; padding:26px 18px 24px; border-radius:18px; }
     .euf-footer .ef-bottom{ flex-direction:column; align-items:flex-start; }
     footer.euf-footer{ padding:6px 16px 28px; } }
+
+/* ── 머리말 오른쪽 선 모션 (euforia motion) ───────────────────────────── */
+.page-hero{ position:relative; }
+.hero-motion{ position:absolute; top:50%; transform:translateY(-50%);
+              right:clamp(20px,4vw,56px); width:min(360px,27vw); height:auto;
+              pointer-events:none; }
+.hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-motion .em-faint{ stroke:#B9B2DF; stroke-width:1.2; stroke-dasharray:2 7; opacity:.55; }
+.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+                   font-size:9.5px; fill:#5B5587; letter-spacing:.03em; }
+.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+@media (max-width:1000px){
+  /* 좁은 화면에서는 숨기지 않고 글 아래로 내려서 보여 줍니다 */
+  .hero-motion{ position:static; transform:none; right:auto;
+                width:min(340px, 86%); margin:16px 0 2px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-motion *{ animation:none !important; }
+  .hero-motion .em-road, .hero-motion .em-wall, .hero-motion .em-wave, .hero-motion .em-ticket,
+  .hero-motion .em-slip, .hero-motion .em-row, .hero-motion .em-amt, .hero-motion .em-ring,
+  .hero-motion .em-tick2, .hero-motion .em-cal{ stroke-dashoffset:0 !important; }
+  .hero-motion .em-node, .hero-motion .em-pin, .hero-motion .em-fee, .hero-motion .em-cap,
+  .hero-motion .em-win, .hero-motion .em-day2, .hero-motion .em-perf{
+    opacity:1 !important; transform:none !important; }
+  .hero-motion .em-star{ fill:#FF7A1A !important; }
+  .hero-motion .em-jet{ offset-distance:100% !important; opacity:1 !important; }
+  .hero-motion .em-bar2{ transform:scaleY(.6) !important; }
+}
+
+/* 취소·환불 — 날짜가 가까워질수록 수수료 칸이 길어집니다 */
+#emRule .em-cal{ stroke:var(--navy,#14103D); stroke-width:2.2; stroke-dasharray:100;
+                 stroke-dashoffset:100; animation:em-rl-cal 6s ease-out infinite; }
+#emRule .em-day2{ fill:#CFC8EC; opacity:0; animation:em-rl-day 6s ease-out infinite; }
+#emRule .em-day2.em-go{ fill:var(--orange,#FF7A1A); }
+#emRule .em-fee{ transform-box:fill-box; transform-origin:0% 50%; transform:scaleX(0);
+                 animation:em-rl-fee 6s cubic-bezier(.3,.9,.3,1) infinite; }
+#emRule .em-cap{ opacity:0; animation:em-rl-cap 6s ease-out infinite; }
+@keyframes em-rl-cal{ 0%,3%{stroke-dashoffset:100} 22%{stroke-dashoffset:0}
+                      88%{stroke-dashoffset:0} 97%,100%{stroke-dashoffset:100} }
+@keyframes em-rl-day{ 0%,24%{opacity:0} 34%{opacity:1} 88%{opacity:1} 95%,100%{opacity:0} }
+@keyframes em-rl-fee{ 0%,34%{transform:scaleX(0)} 56%,88%{transform:scaleX(1)}
+                      96%,100%{transform:scaleX(0)} }
+@keyframes em-rl-cap{ 0%,36%{opacity:0} 50%,88%{opacity:1} 96%,100%{opacity:0} }
 </style>
 
 <!-- 검색·공유 (대표주소 / 카톡·페북 미리보기 / 아이콘) -->
@@ -241,6 +284,28 @@
     <div class="eyebrow">CANCELLATION &amp; REFUND</div>
     <h1>취소 · <span class="hl">환불</span> 규정</h1>
     <p>본 상품은 해외여행 특별약관이 적용돼요. 취소 가능일과 위약금 기준을 예약 전에 꼭 확인해 주세요.</p>
+    <svg class="hero-motion" id="emRule" viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+      <path class="em-ln em-cal" pathLength="100"
+            d="M26,34 L150,34 L150,146 L26,146 Z M26,58 L150,58 M52,34 L52,22 M124,34 L124,22"/>
+      <rect class="em-day2" x="38"  y="70"  width="14" height="12" rx="2" style="animation-delay:0s"/>
+      <rect class="em-day2" x="62"  y="70"  width="14" height="12" rx="2" style="animation-delay:.05s"/>
+      <rect class="em-day2" x="86"  y="70"  width="14" height="12" rx="2" style="animation-delay:.10s"/>
+      <rect class="em-day2" x="110" y="70"  width="14" height="12" rx="2" style="animation-delay:.15s"/>
+      <rect class="em-day2" x="38"  y="92"  width="14" height="12" rx="2" style="animation-delay:.20s"/>
+      <rect class="em-day2" x="62"  y="92"  width="14" height="12" rx="2" style="animation-delay:.25s"/>
+      <rect class="em-day2" x="86"  y="92"  width="14" height="12" rx="2" style="animation-delay:.30s"/>
+      <rect class="em-day2" x="110" y="92"  width="14" height="12" rx="2" style="animation-delay:.35s"/>
+      <rect class="em-day2" x="38"  y="114" width="14" height="12" rx="2" style="animation-delay:.40s"/>
+      <rect class="em-day2" x="62"  y="114" width="14" height="12" rx="2" style="animation-delay:.45s"/>
+      <rect class="em-day2 em-go" x="86" y="114" width="14" height="12" rx="2" style="animation-delay:.50s"/>
+      <rect class="em-day2" x="110" y="114" width="14" height="12" rx="2" style="animation-delay:.55s"/>
+      <g class="em-cap" style="animation-delay:0s"><text x="176" y="56">30일 전</text></g>
+      <rect class="em-fee" x="176" y="62"  width="40"  height="11" rx="5.5" fill="#F9C8A4" style="animation-delay:0s"/>
+      <g class="em-cap" style="animation-delay:.2s"><text x="176" y="98">20일 전</text></g>
+      <rect class="em-fee" x="176" y="104" width="92"  height="11" rx="5.5" fill="#F8A567" style="animation-delay:.2s"/>
+      <g class="em-cap" style="animation-delay:.4s"><text x="176" y="140">10일 전</text></g>
+      <rect class="em-fee" x="176" y="146" width="156" height="11" rx="5.5" fill="#FF7A1A" style="animation-delay:.4s"/>
+    </svg>
   </div>
 
   <div class="section">

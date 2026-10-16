@@ -218,6 +218,57 @@
     55%    { box-shadow:0 0 0 14px rgba(108,60,233,0); filter:brightness(1.13); }
   }
   @media (prefers-reduced-motion: reduce){ .cta.flash{ animation:none; } }
+
+/* ── 머리말 오른쪽 선 모션 (euforia motion) ───────────────────────────── */
+.page-hero{ position:relative; }
+.hero-motion{ position:absolute; top:50%; transform:translateY(-50%);
+              right:clamp(20px,4vw,56px); width:min(360px,27vw); height:auto;
+              pointer-events:none; }
+.hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-motion .em-faint{ stroke:#B9B2DF; stroke-width:1.2; stroke-dasharray:2 7; opacity:.55; }
+.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+                   font-size:9.5px; fill:#5B5587; letter-spacing:.03em; }
+.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+@media (min-width:1001px){
+  /* 여행상품 쪽은 단추 줄이 길어서, 모션 자리를 비워 두고 미리 줄을 접습니다 */
+  .page-hero h1,
+  .page-hero .hero-ctas, .page-hero .app-badges{ max-width:calc(100% - 410px); }
+}
+@media (max-width:1000px){
+  /* 좁은 화면에서는 숨기지 않고 글 아래로 내려서 보여 줍니다 */
+  .hero-motion{ position:static; transform:none; right:auto;
+                width:min(340px, 86%); margin:16px 0 2px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-motion *{ animation:none !important; }
+  .hero-motion .em-road, .hero-motion .em-wall, .hero-motion .em-wave, .hero-motion .em-ticket,
+  .hero-motion .em-slip, .hero-motion .em-row, .hero-motion .em-amt, .hero-motion .em-ring,
+  .hero-motion .em-tick2, .hero-motion .em-cal{ stroke-dashoffset:0 !important; }
+  .hero-motion .em-node, .hero-motion .em-pin, .hero-motion .em-fee, .hero-motion .em-cap,
+  .hero-motion .em-win, .hero-motion .em-day2, .hero-motion .em-perf{
+    opacity:1 !important; transform:none !important; }
+  .hero-motion .em-star{ fill:#FF7A1A !important; }
+  .hero-motion .em-jet{ offset-distance:100% !important; opacity:1 !important; }
+  .hero-motion .em-bar2{ transform:scaleY(.6) !important; }
+}
+
+/* 여행상품 — 도시를 잇는 길이 그려지고 표식이 따라갑니다 */
+#emRoute .em-road{ stroke:var(--violet,#6C3CE9); stroke-width:2.4; stroke-dasharray:100;
+                   stroke-dashoffset:100; animation:em-rt-draw 6s ease-in-out infinite; }
+#emRoute .em-node{ fill:#fff; stroke:var(--violet,#6C3CE9); stroke-width:2.4; transform-box:fill-box;
+                   transform-origin:center; transform:scale(0); animation:em-rt-pop 6s ease-out infinite; }
+#emRoute .em-cap{ opacity:0; animation:em-rt-cap 6s ease-out infinite; }
+#emRoute .em-jet{ fill:var(--violet,#6C3CE9);
+                  offset-path:path("M34,122 Q77,118 120,80 T210,106 T300,58");
+                  offset-rotate:auto; animation:em-rt-fly 6s ease-in-out infinite; }
+@keyframes em-rt-draw{ 0%,3%{stroke-dashoffset:100} 50%{stroke-dashoffset:0}
+                       88%{stroke-dashoffset:0} 97%,100%{stroke-dashoffset:100} }
+@keyframes em-rt-pop{ 0%,8%{transform:scale(0)} 16%{transform:scale(1.25)} 22%,88%{transform:scale(1)}
+                      96%,100%{transform:scale(0)} }
+@keyframes em-rt-cap{ 0%,10%{opacity:0} 20%,88%{opacity:1} 96%,100%{opacity:0} }
+@keyframes em-rt-fly{ 0%,4%{offset-distance:0%;opacity:0} 8%{opacity:1}
+                      50%{offset-distance:100%;opacity:1} 58%{opacity:0}
+                      100%{offset-distance:100%;opacity:0} }
 </style>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#14103D">
@@ -290,6 +341,23 @@
       <a class="app-badge" href="https://euforia-tour-restaurants.netlify.app/" target="_blank" rel="noopener">🍽️ 스페인·포르투갈 맛집 앱 보러가기</a>
       <a class="app-badge golf" href="/golf.html">⛳ 스페인·포르투갈 골프장 보러가기</a>
     </div>
+    <svg class="hero-motion" id="emRoute" viewBox="0 0 360 180" aria-hidden="true" focusable="false">
+      <line class="em-ln em-faint" x1="18" y1="158" x2="342" y2="158"/>
+      <path class="em-ln em-road" pathLength="100" d="M34,122 Q77,118 120,80 T210,106 T300,58"/>
+      <g class="em-cap" style="animation-delay:0s">   <text x="34"  y="104" text-anchor="middle">DAY 1</text></g>
+      <g class="em-cap" style="animation-delay:.22s"> <text x="120" y="62"  text-anchor="middle">DAY 3</text></g>
+      <g class="em-cap" style="animation-delay:.44s"> <text x="210" y="88"  text-anchor="middle">DAY 6</text></g>
+      <g class="em-cap" style="animation-delay:.66s"> <text x="300" y="40"  text-anchor="middle">DAY 9</text></g>
+      <circle class="em-node" cx="34"  cy="122" r="6.5" style="animation-delay:0s"/>
+      <circle class="em-node" cx="120" cy="80"  r="6.5" style="animation-delay:.22s"/>
+      <circle class="em-node" cx="210" cy="106" r="6.5" style="animation-delay:.44s"/>
+      <circle class="em-node" cx="300" cy="58"  r="6.5" style="animation-delay:.66s"/>
+      <path class="em-jet" d="M9,0 L-6,-6 L-3,0 L-6,6 Z"/>
+      <text class="em-ko" x="34"  y="150" text-anchor="middle">마드리드</text>
+      <text class="em-ko" x="120" y="150" text-anchor="middle">세비야</text>
+      <text class="em-ko" x="210" y="150" text-anchor="middle">리스본</text>
+      <text class="em-ko" x="300" y="150" text-anchor="middle">바르셀로나</text>
+    </svg>
   </div>
   <div class="section">
  <div class="section-inner" id="productsBox">
