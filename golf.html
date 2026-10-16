@@ -70,6 +70,74 @@ h1 em{ font-style:normal; color:var(--fair); }
         font-family:var(--data); font-size:12px; color:var(--ink-2); font-variant-numeric:tabular-nums; }
 .count b{ color:var(--ink); font-weight:500; }
 
+/* ── 머리말 오른쪽 빈자리 — 스윙 한 번이 선으로 그려집니다 ── */
+.top .wrap{ position:relative; }
+.swing{ position:absolute; top:50%; transform:translateY(-48%);
+        right:max(16px, env(safe-area-inset-right, 0px));
+        width:min(372px, 32vw); height:auto; pointer-events:none; }
+.swing .ground{ stroke:var(--ink-2); stroke-width:1.2; stroke-dasharray:2 7; opacity:.38; }
+.swing .arc{ fill:none; stroke:var(--fair); stroke-width:1.1; stroke-dasharray:100; opacity:.3;
+             stroke-dashoffset:100; animation:sw-arc 4.6s linear infinite; }
+.swing .shaft{ fill:none; stroke:var(--fair); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+              transform-origin:100px 86px; animation:sw-club 4.6s cubic-bezier(.45,0,.2,1) infinite; }
+.swing .hands{ fill:var(--fair); opacity:.55; }
+.swing .trail{ fill:none; stroke:var(--fair); stroke-width:1.8; stroke-linecap:round;
+               stroke-dasharray:100; stroke-dashoffset:100; opacity:.75;
+               animation:sw-trail 4.6s linear infinite; }
+.swing .ball{ fill:#fff; stroke:var(--fair); stroke-width:1.8;
+              offset-path:path("M100,164 Q206,-12 305,167"); offset-rotate:0deg;
+              animation:sw-ball 4.6s linear infinite; }
+.swing .burst{ stroke:var(--sand); stroke-width:2; stroke-linecap:round; opacity:0;
+               transform-origin:100px 164px; animation:sw-burst 4.6s linear infinite; }
+.swing .pole{ stroke:var(--ink-2); stroke-width:1.6; opacity:.5; }
+.swing .flag{ fill:var(--sand); transform-origin:306px 128px; animation:sw-flag 2.3s ease-in-out infinite; }
+.swing .cup{ fill:none; stroke:var(--ink-2); stroke-width:1.2; opacity:.45; }
+@keyframes sw-club{
+  0%,6%    { transform:rotate(0deg); }
+  30%      { transform:rotate(168deg); }
+  35%      { transform:rotate(174deg); }
+  42%      { transform:rotate(0deg); }
+  52%      { transform:rotate(-158deg); }
+  60%,84%  { transform:rotate(-152deg); }
+  94%,100% { transform:rotate(0deg); }
+}
+@keyframes sw-arc{
+  0%,6%    { stroke-dashoffset:100; opacity:.3; }
+  35%      { stroke-dashoffset:0; opacity:.3; }
+  62%      { stroke-dashoffset:0; opacity:.3; }
+  88%,100% { stroke-dashoffset:100; opacity:.3; }
+}
+@keyframes sw-trail{
+  0%,42%   { stroke-dashoffset:100; opacity:.75; }
+  72%      { stroke-dashoffset:0; opacity:.75; }
+  86%      { stroke-dashoffset:0; opacity:.75; }
+  93%      { stroke-dashoffset:0; opacity:0; }
+  94%,100% { stroke-dashoffset:100; opacity:0; }
+}
+@keyframes sw-ball{
+  0%,42%   { offset-distance:0%; opacity:1; }
+  72%      { offset-distance:100%; opacity:1; }
+  86%      { offset-distance:100%; opacity:1; }
+  90%      { offset-distance:100%; opacity:0; }
+  91%      { offset-distance:0%; opacity:0; }
+  96%,100% { offset-distance:0%; opacity:1; }
+}
+@keyframes sw-burst{
+  0%,40%   { opacity:0; transform:scale(.5); }
+  43%      { opacity:.9; transform:scale(1); }
+  49%,100% { opacity:0; transform:scale(1.35); }
+}
+@keyframes sw-flag{
+  0%,100%{ transform:scaleX(1); } 50%{ transform:scaleX(.72); }
+}
+@media (max-width:1000px){ .swing{ display:none; } }
+@media (prefers-reduced-motion: reduce){
+  .swing .shaft, .swing .ball, .swing .trail, .swing .arc, .swing .burst, .swing .flag{
+    animation:none !important; }
+  .swing .trail, .swing .arc{ stroke-dashoffset:0; }
+  .swing .ball{ offset-distance:100%; }
+}
+
 /* ── 권역 고르는 줄 — 가장 먼저 눈에 들어와야 해서 알약으로 키웠습니다 ── */
 .bar{ position:sticky; top:env(safe-area-inset-top, 0px); z-index:9;
       background:rgba(246,243,253,.92); backdrop-filter:blur(10px);
@@ -248,6 +316,27 @@ html{ scroll-behavior:smooth; }
      라이더컵과 솔하임컵을 치른 코스부터 호텔이 코스 안에 있는 리조트까지,
      지도에서 위치를 보고 일정에 맞춰 고르실 수 있습니다.</p>
   <ul class="count" id="count"></ul>
+
+  <svg class="swing" viewBox="0 0 360 200" aria-hidden="true" focusable="false">
+    <line class="ground" x1="40" y1="170" x2="340" y2="170"/>
+    <line class="ground" x1="100" y1="170" x2="100" y2="165"/>
+    <path class="arc" d="M100,164 A78,78 0 0 1 91.9,8.4" pathLength="100"/>
+    <path class="trail" d="M100,164 Q206,-12 305,167" pathLength="100"/>
+    <g class="burst">
+      <line x1="108" y1="156" x2="117" y2="150"/>
+      <line x1="110" y1="164" x2="120" y2="164"/>
+      <line x1="108" y1="172" x2="117" y2="177"/>
+    </g>
+    <g class="shaft">
+      <line x1="100" y1="86" x2="100" y2="157"/>
+      <path d="M100,157 L100,164 L112,165"/>
+    </g>
+    <circle class="hands" cx="100" cy="86" r="3.4"/>
+    <ellipse class="cup" cx="306" cy="169" rx="7" ry="2.4"/>
+    <line class="pole" x1="306" y1="167" x2="306" y2="112"/>
+    <path class="flag" d="M306,114 L332,122 L306,130 Z"/>
+    <circle class="ball" r="5" cx="0" cy="0"/>
+  </svg>
 </div></header>
 
 <nav class="bar" aria-label="권역"><div class="wrap" id="tabs" role="tablist"></div></nav>
