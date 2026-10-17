@@ -51,6 +51,8 @@
   .p-price .price-chip{ display:block; box-sizing:border-box; min-width:0; font-family:'Space Mono'; font-size:15px; font-weight:800; background:#fff; color:var(--navy); border:1.5px solid var(--line); border-left:4px solid var(--violet); padding:9px 18px 9px 15px; line-height:1.45; white-space:normal; word-break:keep-all; }
   .p-price:empty{ display:none; }   /* 요금 상자로 옮겨 가서 안이 빈 경우 — 그림자만 남지 않게 */
   .p-price .price-sub{ display:block; font-size:0.72em; font-weight:700; color:var(--muted); margin-top:3px; }
+  .p-price .price-krw{ display:block; margin-top:4px; font-size:13px; font-weight:700;
+                       color:var(--ink-2,#6E6A93); font-family:'Work Sans',sans-serif; }
   button.price-chip{ border:1.5px solid var(--line); border-left:4px solid var(--violet); cursor:pointer; text-align:left; font:inherit; }
 /* 오른쪽에 유튜브·헤드폰 단추가 붙을 때만 오른쪽 선을 뗍니다 */
 .p-price .price-chip:not(:last-child){ border-right:none; }
@@ -585,25 +587,13 @@ function getParam(name){
    요금을 적어 넣으면 그때부터 숫자가 보입니다.
    ========================================================================= */
 
-/*
-   원화 환산 — 한 곳에서만 고칩니다.
-   EURKRW 를 0 으로 두면 원화를 아예 보여 주지 않습니다 (환율을 정하기 전까지 안전).
-*/
-var EU_RATE = { EURKRW: 0, 기준일: '' };
+/* 원화 환산(EU_RATE · euWon · euRateNote)은 products.js 에 한 벌만 두고 같이 씁니다.
+   products.js 가 이 파일보다 먼저 읽히므로 여기서는 그대로 가져다 쓰면 됩니다. */
 
 function euMoney(값){
   if(값 == null || !isFinite(값)) return '';
   /* 요금은 소수점을 떼고 보여 줍니다 — 계산은 원래 값 그대로 합니다 */
   return '€' + Math.round(Number(값)).toLocaleString('en-US');
-}
-function euWon(값){
-  if(값 == null || !isFinite(값) || !EU_RATE.EURKRW) return '';
-  return '약 ₩' + Math.round(값 * EU_RATE.EURKRW).toLocaleString('ko-KR');
-}
-function euRateNote(){
-  if(!EU_RATE.EURKRW) return '';
-  return (EU_RATE.기준일 ? EU_RATE.기준일 + ' ' : '') +
-         '환율 기준 참고용이며 결제는 유로입니다.';
 }
 
 /* 아직 요금을 안 적은 상품에 보여 줄 안내 */
@@ -627,7 +617,8 @@ function euFareOne(f){
     (f['덧말'] ? '<div class="eyebrow">' + (f['단위'] || '1인') + ' 요금 · ' + f['덧말'] + '</div>' : '') +
     '<div class="row"><span class="eur">' + euMoney(값) + '</span>' +
       '<span class="per">/ ' + (f['단위'] || '1인') + '</span></div>' +
-    (원 ? '<div class="krw">' + 원 + ' <em>' + euRateNote() + '</em></div>' : '') +
+    (원 ? '<div class="krw"><span data-eurkrw="' + 값 + '">' + 원 + '</span>' +
+            ' <em data-ratenote>' + euRateNote() + '</em></div>' : '') +
     (칩 ? '<div class="chips">' + 칩 + '</div>' : '') +
     (f['안내'] ? '<div class="note">' + f['안내'] + '</div>' : '') +
   '</div></div>';
@@ -661,16 +652,18 @@ function euFareCalc(f){
     '<div class="mid">' +
       '<div class="one"><u>' + (f['단위'] || '1인') + ' 요금</u>' +
         '<div class="eur" data-eur>' + euMoney(첫['값']) + '</div>' +
-        '<div class="krw" data-krw>' + euWon(첫['값']) + '</div></div>' +
+        '<div class="krw" data-krw data-eurkrw="' + 첫['값'] + '">' + euWon(첫['값']) + '</div></div>' +
       '<div class="tot"><u data-tlab>' + (첫['수'] || '') + '인 기준 합계</u>' +
         '<div class="eur" data-teur>' + euMoney(첫['값'] * (첫['수'] || 1)) + '</div>' +
-        '<div class="krw" data-tkrw>' + euWon(첫['값'] * (첫['수'] || 1)) + '</div></div>' +
+        '<div class="krw" data-tkrw data-eurkrw="' + (첫['값'] * (첫['수'] || 1)) + '">' +
+          euWon(첫['값'] * (첫['수'] || 1)) + '</div></div>' +
       (첫['차량'] ? '<div class="car">배정 차량 — <b data-car>' + 첫['차량'] + '</b></div>' : '') +
     '</div>' +
     '<div class="ft">' + (추가 ? 추가 + '<br>' : '') +
       /* 환율 안내가 꺼져 있으면 꼬리에 가운뎃점만 남지 않도록 합니다 */
-      [(f['최소'] ? '최소 출발 ' + f['최소'] + '인' : ''), euRateNote()]
-        .filter(function(t){ return t; }).join(' · ') + '</div>' +
+      (f['최소'] ? '최소 출발 ' + f['최소'] + '인' : '') +
+      (f['최소'] && euRateNote() ? ' · ' : '') +
+      '<span data-ratenote>' + euRateNote() + '</span></div>' +
   '</div></div>';
 }
 
@@ -707,10 +700,16 @@ function euFareWatch(){
       b.classList.add('on');
       var 수 = g['수'] || 1;
       var 넣 = function(sel, 글){ var e = box.querySelector(sel); if(e) e.textContent = 글; };
+      var 표 = function(sel, 유로, 글){
+        var e = box.querySelector(sel);
+        if(!e) return;
+        e.setAttribute('data-eurkrw', 유로);
+        e.textContent = 글;
+      };
       넣('[data-eur]', euMoney(g['값']));
-      넣('[data-krw]', euWon(g['값']));
+      표('[data-krw]', g['값'], euWon(g['값']));
       넣('[data-teur]', euMoney(g['값'] * 수));
-      넣('[data-tkrw]', euWon(g['값'] * 수));
+      표('[data-tkrw]', g['값'] * 수, euWon(g['값'] * 수));
       넣('[data-tlab]', 수 + '인 기준 합계');
       if(g['차량']) 넣('[data-car]', g['차량']);
     });
