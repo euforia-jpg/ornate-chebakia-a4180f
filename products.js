@@ -1958,7 +1958,7 @@ const PRODUCTS = [
       "spain,portugal,golf"
     ],
     "topClass": "camino",
-    "region": "포르투갈 (리스본 · 알가르브) · 스페인 (우엘바)",
+    "region": "포르투갈 · 스페인 ",
     "days": "7박 9일",
     "price": "1인 2,796 유로 (6인 기준)",
     "title": "[포르투갈 · 스페인 남부 골프] 럭셔리 7박 9일",
