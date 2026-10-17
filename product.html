@@ -668,7 +668,9 @@ function euFareCalc(f){
       (첫['차량'] ? '<div class="car">배정 차량 — <b data-car>' + 첫['차량'] + '</b></div>' : '') +
     '</div>' +
     '<div class="ft">' + (추가 ? 추가 + '<br>' : '') +
-      (f['최소'] ? '최소 출발 ' + f['최소'] + '인 · ' : '') + euRateNote() + '</div>' +
+      /* 환율 안내가 꺼져 있으면 꼬리에 가운뎃점만 남지 않도록 합니다 */
+      [(f['최소'] ? '최소 출발 ' + f['최소'] + '인' : ''), euRateNote()]
+        .filter(function(t){ return t; }).join(' · ') + '</div>' +
   '</div></div>';
 }
 
