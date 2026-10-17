@@ -838,7 +838,7 @@ var EU_PLACES = {
   '메리다':      [-6.34, 38.92, 0, 'R', 'ES'],
   '산티아고':     [-8.54, 42.88, 1, 'L', 'ES'],
   '론다':       [-5.17, 36.74, 1, 'L', 'ES'],
-  '말라가':      [-4.42, 36.72, 0, 'R', 'ES'],
+  '말라가':      [-4.42, 36.72, 1, 'R', 'ES'],
   '빌바오':      [-2.93, 43.26, 1, 'R', 'ES'],
   '산세바스티안':  [-1.98, 43.32, 0, 'R', 'ES'],
   '몬세라트':     [ 1.84, 41.59, 0, 'L', 'ES'],
@@ -1343,6 +1343,12 @@ function placeItineraryDownload(product){
   if(!root) return;
 
   const hasFile = !!product.downloadUrl;
+
+  /* download 속성에 한글 파일 이름을 넣어 봤지만 크로미움이 그 값을 버리고
+     "download"(확장자 없음)로 저장해 버려서 되돌렸습니다. 값을 비워 두면
+     주소 끝의 이름(예: spain-round-itinerary.pdf)으로 제대로 저장됩니다.
+     한글 이름으로 받게 하려면 Netlify _headers 에 Content-Disposition 을
+     filename*=UTF-8'' 형식으로 넣는 쪽이 맞습니다. */
   const bar = document.createElement('div');
   bar.className = 'itin-dl';
   bar.innerHTML = `
