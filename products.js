@@ -343,7 +343,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN",
     "days": "5박 6일",
-    "price": "1인 1,817 유로 (20인 기준)",
+    "price": "1인 1,867 유로 (20인 기준)",
     "title": "[스페인 일주] 5박6일 바르셀로나 & 스페인남부",
     "summary": "바르셀로나에서 국내선으로 남부로 내려가 알함브라와 플라멩코를 보고 지중해 항구 말라가에서 돌아오는 5박 6일 — 되돌아가는 구간 없이 스페인의 북동쪽과 남쪽을 한 여정에 담았어요.",
     "tags": [
@@ -544,22 +544,16 @@ const PRODUCTS = [
           "차량": "9인승 밴"
         },
         {
-          "인원": "10명",
-          "수": 10,
-          "값": 2110,
-          "차량": "30인승 중형 버스"
-        },
-        {
           "인원": "15명",
           "수": 15,
-          "값": 2015,
-          "차량": "30인승 중형 버스"
+          "값": 2082,
+          "차량": "45인승 대형 버스"
         },
         {
           "인원": "20명",
           "수": 20,
-          "값": 1817,
-          "차량": "30인승 중형 버스"
+          "값": 1867,
+          "차량": "45인승 대형 버스"
         }
       ],
       "추가": [
@@ -2590,7 +2584,7 @@ const PRODUCTS = [
     "topClass": "portugal",
     "region": "PORTUGAL",
     "days": "7박8일",
-    "price": "1인 2,102 유로 (20인 기준)",
+    "price": "1인 2,166 유로 (20인 기준)",
     "title": "[포르투갈 일주] 리스본 IN/OUT 7박8일",
     "summary": "리스본에서 대서양 절벽까지, 성벽 마을과 성지를 지나 포르투까지 — 유네스코 세계유산 9곳을 한 동선에 담은 8일 일주예요.",
     "tags": [
@@ -2729,22 +2723,16 @@ const PRODUCTS = [
           "차량": "9인승 밴"
         },
         {
-          "인원": "10명",
-          "수": 10,
-          "값": 2482,
-          "차량": "30인승 중형 버스"
-        },
-        {
           "인원": "15명",
           "수": 15,
-          "값": 2347,
-          "차량": "30인승 중형 버스"
+          "값": 2433,
+          "차량": "45인승 대형 버스"
         },
         {
           "인원": "20명",
           "수": 20,
-          "값": 2102,
-          "차량": "30인승 중형 버스"
+          "값": 2166,
+          "차량": "45인승 대형 버스"
         }
       ],
       "추가": [
@@ -2774,7 +2762,7 @@ const PRODUCTS = [
     "topClass": "portugal",
     "region": "PORTUGAL",
     "days": "9박10일",
-    "price": "1인 2,627 유로 (20인 기준)",
+    "price": "1인 2,706 유로 (20인 기준)",
     "title": "[포르투갈 남북종단] 리스본 IN/OUT 9박10일 (남부 포함)",
     "summary": "리스본에서 알가르베(베나길·라구스·사그레스)까지 내려갔다가, 성벽 마을과 성지를 지나 포르투·기마랑이스까지 — 유네스코 세계유산 10곳을 담은 남북 종단 일주예요.",
     "tags": [
@@ -2934,22 +2922,16 @@ const PRODUCTS = [
           "차량": "9인승 밴"
         },
         {
-          "인원": "10명",
-          "수": 10,
-          "값": 3081,
-          "차량": "30인승 중형 버스"
-        },
-        {
           "인원": "15명",
           "수": 15,
-          "값": 2925,
-          "차량": "30인승 중형 버스"
+          "값": 3030,
+          "차량": "45인승 대형 버스"
         },
         {
           "인원": "20명",
           "수": 20,
-          "값": 2627,
-          "차량": "30인승 중형 버스"
+          "값": 2706,
+          "차량": "45인승 대형 버스"
         }
       ],
       "추가": [
@@ -3192,7 +3174,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN",
     "days": "11박12일",
-    "price": "1인 3,233 유로 (20인 기준)",
+    "price": "1인 3,326 유로 (20인 기준)",
     "title": "[스페인 일주] 바르셀로나 IN/OUT 11박12일",
     "summary": "바르셀로나에서 지중해를 따라 남하해 알함브라와 백색마을을 지나고, 안달루시아 파라도르에서 사흘을 쉰 뒤 세비야·코르도바·마드리드를 거쳐 돌아오는 스페인 일주예요.",
     "tags": [
@@ -3364,22 +3346,16 @@ const PRODUCTS = [
           "차량": "9인승 밴"
         },
         {
-          "인원": "10명",
-          "수": 10,
-          "값": 3749,
-          "차량": "30인승 중형 버스"
-        },
-        {
           "인원": "15명",
           "수": 15,
-          "값": 3584,
-          "차량": "30인승 중형 버스"
+          "값": 3707,
+          "차량": "45인승 대형 버스"
         },
         {
           "인원": "20명",
           "수": 20,
-          "값": 3233,
-          "차량": "30인승 중형 버스"
+          "값": 3326,
+          "차량": "45인승 대형 버스"
         }
       ],
       "추가": [
@@ -4581,6 +4557,90 @@ const PRODUCTS = [
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요. 괄호 앞부분(가격)은 굵게 위 줄에,
    괄호 부분(조건, 예: (4인 이상 출발 기준))은 아래 줄에 작게 표시해요.
    괄호가 없는 가격(예: '가격 문의')은 그대로 한 줄로 나와요. */
+/* =========================================================================
+   원화 환산 — 오늘의 환율을 페이지가 직접 받아옵니다.
+
+   · 기본값은 아래 EU_RATE 에 적힌 고정 환율입니다. 외부에서 환율을 못 받아오면
+     이 값으로 보여 주므로 금액이 빈칸이 되는 일은 없습니다.
+   · 페이지가 열리면 유럽중앙은행(ECB) 고시 환율을 받아와 숫자를 다시 그립니다.
+     ECB 는 영업일 오후에 하루 한 번 고시하므로, 주말에는 금요일 고시가 쓰입니다.
+   · 같은 날 안에서는 브라우저에 담아 두고 다시 요청하지 않습니다.
+   · EURKRW 를 0 으로 두면 원화를 아예 보여 주지 않습니다.
+   ========================================================================= */
+var EU_RATE = { EURKRW: 1500, 기준일: '', 출처: '고정값' };
+
+function euWon(값){
+  if(값 == null || !isFinite(값) || !EU_RATE.EURKRW) return '';
+  return '약 ₩' + Math.round(값 * EU_RATE.EURKRW).toLocaleString('ko-KR');
+}
+function euRateNote(){
+  if(!EU_RATE.EURKRW) return '';
+  /* 빈 조각이 끼어 공백이 두 칸 되지 않도록 걸러서 잇습니다 */
+  return [EU_RATE.기준일, (EU_RATE.출처 === '고정값' ? '' : EU_RATE.출처),
+          '환율 기준 참고용이며 결제는 유로입니다.']
+         .filter(function(t){ return t; }).join(' ');
+}
+
+/* 환율이 바뀌면 이미 그려진 금액을 모두 다시 씁니다.
+   금액 칸에는 data-eurkrw 에 유로 원값이 들어 있습니다. */
+function euWonRedraw(){
+  document.querySelectorAll('[data-eurkrw]').forEach(function(el){
+    var v = parseFloat(el.getAttribute('data-eurkrw'));
+    el.textContent = euWon(v);
+  });
+  document.querySelectorAll('[data-ratenote]').forEach(function(el){
+    el.textContent = euRateNote();
+  });
+}
+
+function euRateSet(율, 기준일, 출처){
+  if(!율 || !isFinite(율)) return;
+  EU_RATE.EURKRW = 율;
+  EU_RATE.기준일 = 기준일 || '';
+  EU_RATE.출처 = 출처 || '';
+  try{
+    sessionStorage.setItem('euRate', JSON.stringify(
+      { 율: 율, 기준일: EU_RATE.기준일, 출처: EU_RATE.출처, 받은날: new Date().toDateString() }));
+  }catch(e){}
+  euWonRedraw();
+}
+
+function euRateFetch(){
+  if(!EU_RATE.EURKRW) return;                 /* 원화 숨김 상태면 건드리지 않습니다 */
+  try{
+    var 담 = JSON.parse(sessionStorage.getItem('euRate') || 'null');
+    if(담 && 담.율 && 담.받은날 === new Date().toDateString()){
+      EU_RATE.EURKRW = 담.율; EU_RATE.기준일 = 담.기준일; EU_RATE.출처 = 담.출처;
+      euWonRedraw(); return;
+    }
+  }catch(e){}
+
+  var 길 = [
+    { 주소: 'https://api.frankfurter.app/latest?base=EUR&symbols=KRW',
+      뽑: function(d){ return d && d.rates ? { 율: d.rates.KRW, 날: d.date, 곳: '유럽중앙은행' } : null; } },
+    { 주소: 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json',
+      뽑: function(d){ return d && d.eur ? { 율: d.eur.krw, 날: d.date, 곳: '' } : null; } }
+  ];
+  (function 시도(i){
+    if(i >= 길.length) return;                /* 전부 실패하면 고정값 그대로 둡니다 */
+    fetch(길[i].주소, { cache: 'no-store' })
+      .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function(d){
+        var g = 길[i].뽑(d);
+        if(!g || !g.율 || !isFinite(g.율)) throw new Error('empty');
+        euRateSet(g.율, g.날, g.곳);
+      })
+      .catch(function(){ 시도(i + 1); });
+  })(0);
+}
+
+if(typeof window !== 'undefined'){
+  if(document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', euRateFetch);
+  else euRateFetch();
+}
+
+
 function formatPriceBadge(price){
   const p = price || '가격 문의';
   const idx = p.indexOf('(');
@@ -4677,12 +4737,15 @@ function euFareChip(p){
   const 칸 = 단위 || '1인';
   const 설명 = 덧말 ? `${칸} 요금 · ${덧말}` : `${칸} 요금`;
   const 뒤 = 부터 ? `/ ${칸} 부터` : `/ ${칸}`;
+  const 원 = euWon(값);
   return `<span class="price-chip">` +
          `<span class="price-eyebrow">${설명}</span>` +
          `<span class="price-main">` +
            `<b class="price-eur">${euCardMoney(값)}</b>` +
            `<i class="price-per">${뒤}</i>` +
-         `</span></span>`;
+         `</span>` +
+         (원 ? `<span class="price-krw" data-eurkrw="${값}">${원}</span>` : '') +
+         `</span>`;
 }
 
 /* 상품에 youtubeUrl이 있으면 가격 뱃지 오른쪽에 빨간 유튜브 버튼을 붙여줘요.
