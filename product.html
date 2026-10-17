@@ -593,7 +593,8 @@ var EU_RATE = { EURKRW: 0, 기준일: '' };
 
 function euMoney(값){
   if(값 == null || !isFinite(값)) return '';
-  return '€' + Number(값).toLocaleString('en-US');
+  /* 요금은 소수점을 떼고 보여 줍니다 — 계산은 원래 값 그대로 합니다 */
+  return '€' + Math.round(Number(값)).toLocaleString('en-US');
 }
 function euWon(값){
   if(값 == null || !isFinite(값) || !EU_RATE.EURKRW) return '';
