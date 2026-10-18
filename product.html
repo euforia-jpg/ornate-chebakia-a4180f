@@ -84,7 +84,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-fare-soon b{ display:block; font-size:16px; font-weight:800; color:var(--navy); margin-bottom:5px; }
   .eu-fare-soon p{ margin:0 0 14px; font-size:13px; font-weight:600; color:var(--muted); line-height:1.7; }
   .eu-fare-cta{ display:flex; gap:9px; flex-wrap:wrap; }
-  .eu-fare-cta a{ flex:1 1 150px; text-align:center; text-decoration:none; padding:12px 16px;
+  .eu-fare-cta a{ flex:1 1 130px; text-align:center; text-decoration:none; padding:12px 16px;
     border-radius:12px; font-size:13.5px; font-weight:800; }
   .eu-fare-cta .main{ background:var(--violet); color:#fff;
     box-shadow:0 12px 26px -14px rgba(108,60,233,.9); }
@@ -121,14 +121,24 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
     box-shadow:0 10px 22px -12px rgba(108,60,233,.9); }
   .eu-fare-3 .steps button[disabled]{ opacity:.4; cursor:default; }
   .eu-fare-3 .mid{ padding:22px; display:flex; gap:26px; align-items:flex-end; flex-wrap:wrap; }
-  .eu-fare-3 .one u, .eu-fare-3 .tot u{ display:block; text-decoration:none; font-size:11.5px;
+  .eu-fare-3 .one u, .eu-fare-3 .mk u{ display:block; text-decoration:none; font-size:11.5px;
     font-weight:800; color:var(--muted); letter-spacing:.05em; margin-bottom:6px; }
   .eu-fare-3 .one .eur{ font-size:34px; font-weight:800; color:var(--navy);
     letter-spacing:-.025em; line-height:1; }
   .eu-fare-3 .one .krw{ margin-top:6px; font-size:13.5px; font-weight:700; color:var(--muted); }
-  .eu-fare-3 .tot{ margin-left:auto; text-align:right; }
-  .eu-fare-3 .tot .eur{ font-size:22px; font-weight:800; color:var(--violet); letter-spacing:-.02em; }
-  .eu-fare-3 .tot .krw{ margin-top:4px; font-size:12.5px; font-weight:700; color:var(--muted); }
+  /* 팀 합계 금액 자리에 들어가는 「일정 만들기」 카드 — 빌더 페이지로 보냅니다 */
+  .eu-fare-3 .mk{ display:block; margin-left:auto; max-width:310px; text-decoration:none;
+    padding:15px 17px; border-radius:15px; border:1.5px solid #E2DAFB;
+    background:linear-gradient(170deg,#FBFAFF,#F2EEFE); transition:.15s; }
+  .eu-fare-3 .mk:hover{ border-color:#C9BDF7;
+    box-shadow:0 16px 30px -20px rgba(108,60,233,.8); }
+  .eu-fare-3 .mk u{ color:var(--violet); margin-bottom:5px; }
+  .eu-fare-3 .mk b{ display:block; font-size:14.5px; font-weight:800; color:var(--navy);
+    letter-spacing:-.015em; line-height:1.5; margin-bottom:5px; }
+  .eu-fare-3 .mk span{ display:block; font-size:12px; font-weight:600; color:var(--muted);
+    line-height:1.7; margin-bottom:11px; }
+  .eu-fare-3 .mk em{ display:inline-block; font-style:normal; font-size:12.5px; font-weight:800;
+    color:var(--violet); }
   .eu-fare-3 .car{ width:100%; font-size:12.5px; font-weight:700; color:var(--muted);
     padding-top:14px; border-top:1.5px dashed #E6E2F4; }
   .eu-fare-3 .car b{ color:var(--navy); font-weight:800; }
@@ -137,9 +147,9 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-fare-3 .ft b{ color:var(--navy); font-weight:800; }
   @media (max-width:560px){
     .eu-fare-3 .mid{ gap:16px; }
-    .eu-fare-3 .tot{ margin-left:0; text-align:left; }
+    .eu-fare-3 .mk{ margin-left:0; max-width:none; }
   }
-  @media print{ .eu-fare-cta{ display:none !important; } }
+  @media print{ .eu-fare-cta, .eu-fare-3 .mk{ display:none !important; } }
 
   /* ---------- 일정 지도 ---------- */
   .eu-route{ margin:4px 0 28px; padding:20px 22px 22px; border:1.5px solid var(--line);
@@ -596,21 +606,47 @@ function euMoney(값){
   return '€' + Math.round(Number(값)).toLocaleString('en-US');
 }
 
-/* 아직 요금을 안 적은 상품에 보여 줄 안내 */
-function euFareSoon(말){
+/* 아직 요금을 안 적은 상품에 보여 줄 안내
+   -------------------------------------------------------------------------
+   그냥 euFareSoon() 으로 부르면 「요금 준비 중입니다」 + 세 단추가 나옵니다.
+   상품마다 말을 달리하고 싶으면 products.js 의 그 상품에 `요금안내` 를 넣으세요.
+
+     요금안내: {
+       제목: '일정을 직접 짜시는 상품입니다',
+       말:   '가고 싶은 도시를 고르시면 그 자리에서 요금이 나옵니다.',
+       단추: [ { 이름:'일정 만들기', 주소:'/builder.html', 꼴:'main' },
+               { 이름:'예약문의 하기', 주소:'/contact.html' },
+               { 이름:'카카오톡 문의', 주소:'https://…', 새창:true } ]
+     }
+
+   세 칸 모두 안 적어도 되고, 적은 것만 바뀝니다.
+   ------------------------------------------------------------------------- */
+var EU_SOON_단추 = [
+  { 이름:'예약문의 하기', 주소:'/contact.html', 꼴:'main' },
+  { 이름:'일정 만들기',   주소:'/builder.html' },
+  { 이름:'카카오톡 문의', 주소:'https://pf.kakao.com/_BSxggn/chat', 새창:true }
+];
+
+function euFareSoon(설){
+  설 = (typeof 설 === 'string') ? { 제목: 설 } : (설 || {});
+  var 단추 = (설['단추'] || EU_SOON_단추).filter(function(b){
+    return b && b['이름'] && b['주소'];
+  }).map(function(b){
+    return '<a class="' + (b['꼴'] === 'main' ? 'main' : 'sub') + '" href="' + b['주소'] + '"' +
+      (b['새창'] ? ' target="_blank" rel="noopener"' : '') + '>' + b['이름'] + '</a>';
+  }).join('');
   return '<div class="eu-fare-soon">' +
-    '<b>' + (말 || '요금 준비 중입니다') + '</b>' +
-    '<p>인원과 날짜를 알려 주시면 요금을 안내해 드려요.</p>' +
-    '<div class="eu-fare-cta">' +
-      '<a class="main" href="/contact.html">예약문의 하기</a>' +
-      '<a class="sub" href="https://pf.kakao.com/_BSxggn/chat" target="_blank" rel="noopener">카카오톡 문의</a>' +
-    '</div></div>';
+    '<b>' + (설['제목'] || '요금 준비 중입니다') + '</b>' +
+    '<p>' + (설['말'] ||
+      '인원과 날짜를 알려 주시면 요금을 안내해 드려요.<br>' +
+      '일정을 직접 만들어 보시면 그 자리에서 요금이 나옵니다.') + '</p>' +
+    '<div class="eu-fare-cta">' + 단추 + '</div></div>';
 }
 
 /* ---------- ① 한 줄 (당일 차량) ---------- */
-function euFareOne(f){
+function euFareOne(f, 설){
   var 값 = f['값'];
-  if(값 == null) return '<div class="eu-fare eu-fare-1">' + euFareSoon() + '</div>';
+  if(값 == null) return '<div class="eu-fare eu-fare-1">' + euFareSoon(설) + '</div>';
   var 원 = euWon(값);
   var 칩 = (f['칩'] || []).map(function(t){ return '<span>' + t + '</span>'; }).join('');
   return '<div class="eu-fare eu-fare-1"><div class="box">' +
@@ -625,11 +661,11 @@ function euFareOne(f){
 }
 
 /* ---------- ② 계산기 (여러 날 패키지) ---------- */
-function euFareCalc(f){
+function euFareCalc(f, 설){
   var 구간 = (f['구간'] || []).filter(function(g){ return g && g['인원']; });
   if(!구간.length) return '';
   var 있음 = 구간.some(function(g){ return g['값'] != null; });
-  if(!있음) return '<div class="eu-fare eu-fare-3">' + euFareSoon() + '</div>';
+  if(!있음) return '<div class="eu-fare eu-fare-3">' + euFareSoon(설) + '</div>';
 
   var 첫 = 구간.find(function(g){ return g['값'] != null; }) || 구간[0];
   var 단추 = 구간.map(function(g, i){
@@ -653,10 +689,12 @@ function euFareCalc(f){
       '<div class="one"><u>' + (f['단위'] || '1인') + ' 요금</u>' +
         '<div class="eur" data-eur>' + euMoney(첫['값']) + '</div>' +
         '<div class="krw" data-krw data-eurkrw="' + 첫['값'] + '">' + euWon(첫['값']) + '</div></div>' +
-      '<div class="tot"><u data-tlab>' + (첫['수'] || '') + '인 기준 합계</u>' +
-        '<div class="eur" data-teur>' + euMoney(첫['값'] * (첫['수'] || 1)) + '</div>' +
-        '<div class="krw" data-tkrw data-eurkrw="' + (첫['값'] * (첫['수'] || 1)) + '">' +
-          euWon(첫['값'] * (첫['수'] || 1)) + '</div></div>' +
+      '<a class="mk" href="/builder.html">' +
+        '<u>직접 만들기</u>' +
+        '<b>이 일정, 원하시는 대로<br>직접 만드실 수 있어요</b>' +
+        '<span>일수와 도시, 호텔 등급과 식사를 바꿔 보시면 ' +
+          '그 자리에서 요금이 나옵니다.</span>' +
+        '<em>일정 만들기 &rarr;</em></a>' +
       (첫['차량'] ? '<div class="car">배정 차량 — <b data-car>' + 첫['차량'] + '</b></div>' : '') +
     '</div>' +
     '<div class="ft">' + (추가 ? 추가 + '<br>' : '') +
@@ -681,9 +719,11 @@ function euFare(product){
     if(g) f = g;
   }
 
-  if(!f) return '';
-  if(f['꼴'] === '계산기') return euFareCalc(f);
-  return euFareOne(f);
+  /* 요금도 price 글자도 없으면 — 예전엔 요금칸이 통째로 사라졌습니다.
+     이제는 안내와 단추라도 보여 줍니다. 말은 상품의 `요금안내` 로 바꿉니다. */
+  if(!f) return '<div class="eu-fare eu-fare-1">' + euFareSoon(product['요금안내']) + '</div>';
+  if(f['꼴'] === '계산기') return euFareCalc(f, product['요금안내']);
+  return euFareOne(f, product['요금안내']);
 }
 
 /* 인원 단추를 누르면 값이 바뀝니다 */
@@ -698,7 +738,6 @@ function euFareWatch(){
       if(!g || g['값'] == null) return;
       box.querySelectorAll('.steps button').forEach(function(x){ x.classList.remove('on'); });
       b.classList.add('on');
-      var 수 = g['수'] || 1;
       var 넣 = function(sel, 글){ var e = box.querySelector(sel); if(e) e.textContent = 글; };
       var 표 = function(sel, 유로, 글){
         var e = box.querySelector(sel);
@@ -708,9 +747,6 @@ function euFareWatch(){
       };
       넣('[data-eur]', euMoney(g['값']));
       표('[data-krw]', g['값'], euWon(g['값']));
-      넣('[data-teur]', euMoney(g['값'] * 수));
-      표('[data-tkrw]', g['값'] * 수, euWon(g['값'] * 수));
-      넣('[data-tlab]', 수 + '인 기준 합계');
       if(g['차량']) 넣('[data-car]', g['차량']);
     });
   });
