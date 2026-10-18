@@ -557,6 +557,22 @@
 
   /* 종일 자유시간 */
   .bx-day.free{ background:#FBFEFD; border-color:#B7ECDE; }
+
+  /* 근교 왕복 — 기점에서 나갔다가 그 날 안에 돌아오는 날 */
+  .bx-near{ display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    margin-top:12px; padding:11px 14px; border-radius:12px;
+    background:#F1F4F5; border:1.5px solid #E0E6E9; }
+  .bx-near > b{ font-size:12.5px; font-weight:800; color:var(--navy); flex:none; }
+  .bx-near select{ padding:7px 11px; border:1.5px solid var(--line); border-radius:9px;
+    background:#fff; font-size:12.5px; font-weight:700; color:var(--navy);
+    font-family:inherit; cursor:pointer; }
+  .bx-near select:focus{ border-color:var(--violet); outline:none; }
+  .bx-near .way{ font-size:12.5px; font-weight:700; color:var(--muted);
+    font-variant-numeric:tabular-nums; }
+  .bx-near .way b{ color:var(--navy); font-weight:800; }
+  .bx-near .hint{ flex:1 1 100%; font-size:11.5px; font-weight:600; color:var(--muted);
+    line-height:1.6; }
+  @media (max-width:560px){ .bx-near{ padding:11px; } }
   .bx-freenote{ margin-top:12px; padding:10px 13px; border-radius:10px; background:#EDF1EF;
     font-size:12.5px; font-weight:600; color:#3E6155; line-height:1.7; }
   .bx-freenote b{ font-weight:800; }
@@ -915,6 +931,59 @@
   function 이름(id){ var it = 찾기(id); return it ? (it.이름 || '') : ''; }
 
   /* 두 도시 사이에 들를 만한 곳이 정해져 있으면 그 이름을 돌려줍니다 */
+  /* =======================================================================
+     근교 왕복 — 기점에서 나갔다가 그 날 안에 같은 곳으로 돌아오는 날
+     -----------------------------------------------------------------------
+     예) 마드리드에 묵으면서 세고비아를 다녀오는 날
+         세비야에 묵으면서 론다를 다녀오는 날
+
+     숙박 도시(day.도시)는 그대로 두고 day.근교 에 다녀올 곳만 적습니다.
+     그래서 호텔 계산은 아무것도 달라지지 않습니다.
+
+     차량비는 할증하지 않습니다.
+     숙박지를 옮기는 날(마드리드→세비야 530km)도 같은 하루치를 받는데,
+     왕복 190km 다녀오는 날에 더 받으면 앞뒤가 맞지 않기 때문입니다.
+
+     대신 편도 150km 가 넘으면 아예 고르지 못하게 막습니다.
+     그보다 멀면 하루가 차 안에서 지나가 「근교」 라고 부를 수 없습니다.
+     (마드리드→살라망카 편도 215km, 그라나다→론다 190km 가 여기서 걸립니다)
+     ======================================================================= */
+  var 근교선 = 150;   /* 편도 km */
+
+  /* 실제로 파는 조합만 적습니다. 가까운 도시를 자동으로 뽑으면
+     마드리드에서 코르도바 왕복 같은 것이 끼어듭니다. */
+  var 근교표 = {
+    '마드리드'  : ['톨레도', '세고비아', '쿠엥카', '살라망카'],
+    '세비야'    : ['론다', '코르도바'],
+    '그라나다'  : ['론다', '미하스'],
+    '말라가'    : ['론다', '미하스'],
+    '바르셀로나': ['몬세라트'],
+    '리스본'    : ['신트라', '오비두스', '파티마', '에보라'],
+    '포르투'    : ['브라가', '코임브라'],
+  };
+
+  /* 그 기점에서 다녀올 만한 곳 — 거리 선을 넘는 곳은 여기서 걸러집니다 */
+  function 근교목록(기점){
+    var 들 = 근교표[기점] || [];
+    return 들.filter(function(b){
+      if(!b || b === 기점 || !MAP_CITY[b]) return false;
+      /* 거리 — 편도 150km 를 넘으면 하루가 차 안에서 지나갑니다 */
+      var km = 차거리(기점, b);
+      if(!km || km > 근교선) return false;
+      /* 볼 것 — 그 도시에 등록된 입장지가 하나도 없으면 내놓지 않습니다.
+         골랐는데 아무것도 안 뜨는 빈 칸이 되기 때문입니다.
+         관리자에서 그 도시 입장지를 넣으시면 여기 저절로 나타납니다. */
+      return 종류('입장지').some(function(x){ return x.도시 === b; });
+    });
+  }
+
+  /* 왕복 거리와 주행시간 (가는 길 + 오는 길) */
+  function 근교정보(기점, 곳){
+    var 정 = 구간정보(기점, 곳, '차량');
+    if(!정) return null;
+    return { km: 정.km * 2, 분: 정.분 * 2 };
+  }
+
   function 경유찾기(a, b){
     if(!a || !b || a === b) return '';
     for(var i = 0; i < VIA.length; i++){
@@ -1145,6 +1214,14 @@
       if(c && (!순서.length || 순서[순서.length - 1].이름 !== c)) {
         순서.push({ 이름: c, 경유: false, 나가는수단: '' });
       }
+      /* 근교 왕복 — 다녀온 곳을 찍고 기점으로 되돌아오게 그립니다.
+         (경유지와 같은 모양으로 두되, 돌아오는 길이 있으므로 기점을 한 번 더 찍습니다) */
+      var 근 = S.일정[i].근교;
+      if(c && 근 && S.일정[i].종류 === '관광' && MAP_CITY[근]){
+        if(순서.length) 순서[순서.length - 1].나가는수단 = '차량';
+        순서.push({ 이름: 근, 경유: true, 나가는수단: '차량' });
+        순서.push({ 이름: c, 경유: false, 나가는수단: '' });
+      }
       if(i < S.일정.length - 1){
         var n = S.일정[i + 1].도시;
         if(!c || !n || c === n) continue;
@@ -1219,6 +1296,11 @@
       /* 차량은 공항 이동 그 자체라 켜 두고, 가이드 미팅은 덧붙이는 것이라 꺼 둡니다 */
       if(typeof d.미팅가이드 !== 'boolean') d.미팅가이드 = false;
       if(typeof d.미팅차량 !== 'boolean') d.미팅차량 = true;
+      /* 근교 왕복 — 관광일에만 둡니다.
+         도시를 바꾸셨는데 그 기점에서 못 가는 곳이면 조용히 비웁니다. */
+      if(typeof d.근교 !== 'string') d.근교 = '';
+      if(d.종류 !== '관광') d.근교 = '';
+      if(d.근교 && 근교목록(d.도시).indexOf(d.근교) === -1) d.근교 = '';
     });
     if(S.일정.length > S.일수) S.일정.length = S.일수;
     /* 예전에 쓰시던 "등급 하나만 고르기" 를 도시별 고르기로 옮깁니다 */
@@ -1254,9 +1336,21 @@
         if(v && S.일정[바뀐날] && S.일정[바뀐날].경유 !== false && v !== a && v !== b) 들를곳 = v;
       }
       var 정보 = 구간정보(a, b, 수단, MAP_CITY[들를곳] ? 들를곳 : '');
-      목록.push({ 번호: i + 1, a: a, b: b, 수단: 수단, 들를곳: 들를곳,
+      목록.push({ 번호: i + 1, 날: 도시들[i + 1].날, a: a, b: b, 수단: 수단, 들를곳: 들를곳,
                   km: 정보 ? 정보.km : 0, 분: 정보 ? 정보.분 : 0 });
     }
+    /* 근교 왕복 — 숙박 도시는 그대로라 위 셈에 안 잡힙니다. 날짜 차례로 끼워 넣습니다. */
+    S.일정.forEach(function(d, i){
+      if(!d.근교 || d.종류 !== '관광') return;
+      var 정 = 근교정보(d.도시, d.근교);
+      if(!정) return;
+      목록.push({ 날: i, a: d.도시, b: d.근교, 수단: '차량', 들를곳: '',
+                  왕복: true, km: 정.km, 분: 정.분 });
+    });
+    /* 날짜 차례대로 줄만 세웁니다. 번호는 손대지 않습니다 —
+       「1 마드리드 → 2 세비야」 의 숫자는 구간 차례가 아니라
+       몇 번째로 묵는 도시인지를 가리키기 때문입니다. */
+    목록.sort(function(x, y){ return (x.날 || 0) - (y.날 || 0); });
     return 목록;
   }
 
@@ -1267,6 +1361,17 @@
     var 줄 = 목록.map(function(g){
       총km += g.km; 총분 += g.분;
       var 색 = g.수단 === '기차' ? 'train' : g.수단 === '항공' ? 'air' : 'car';
+      /* 근교 왕복은 「마드리드 → 세고비아 → 마드리드」 로 적습니다.
+         숙박지가 바뀌는 구간과 헷갈리지 않도록 번호 대신 몇 일차인지를 답니다. */
+      if(g.왕복){
+        return '<div class="leg">' +
+          '<span class="way"><b>' + (g.날 + 1) + '일</b>' + esc(g.a) + ' → ' + esc(g.b) + ' → ' + esc(g.a) +
+            '<em>근교 왕복</em></span>' +
+          '<span class="mode car">차량</span>' +
+          '<span class="km">' + (g.km ? 돈(g.km) + 'km' : '—') + '</span>' +
+          '<span class="hr">' + (g.분 ? '약 ' + 시간글(g.분) : '—') + '</span>' +
+        '</div>';
+      }
       return '<div class="leg">' +
         '<span class="way"><b>' + g.번호 + '</b>' + esc(g.a) + ' → <b>' + (g.번호 + 1) + '</b>' + esc(g.b) +
           (g.들를곳 ? '<em>' + esc(g.들를곳) + ' 경유</em>' : '') + '</span>' +
@@ -1809,6 +1914,10 @@
         자동목록(d.도시).forEach(function(x){
           if(d.입장지.indexOf(x.id) === -1) d.입장지.push(x.id);
         });
+        /* 근교 도시의 무료 도보 관광지도 함께 (예: 세고비아 수도교) */
+        if(d.근교) 자동목록(d.근교).forEach(function(x){
+          if(d.입장지.indexOf(x.id) === -1) d.입장지.push(x.id);
+        });
       }
       d.채운도시 = d.도시;
     });
@@ -1981,7 +2090,9 @@
 
     var 조각 = S.일정.map(function(day, i){
       var 그날입장지 = 입장지.filter(function(x){
-        return !x.도시 || !CITIES.length || x.도시 === day.도시;
+        if(!x.도시 || !CITIES.length) return true;
+        /* 근교를 다녀오는 날에는 그 곳 입장지도 함께 고르실 수 있어야 합니다 */
+        return x.도시 === day.도시 || (day.근교 && x.도시 === day.근교);
       });
       var 도시고르기 = '';
       if(CITIES.length){
@@ -1999,6 +2110,34 @@
       var 안 = '<div class="bx-dayhead"><span class="bx-dayno">' + (i + 1) + '일차</span>' + 도시고르기 +
         '<span class="bx-kind">' + 갈래 + '</span>' +
         '</div>';
+
+      /* 근교 왕복 — 관광일이고, 그 기점에서 다녀올 곳이 있을 때만 보여 줍니다 */
+      if(day.종류 === '관광'){
+        var 갈곳 = 근교목록(day.도시);
+        if(갈곳.length){
+          var 고름 = '<select data-near="' + i + '">' +
+            '<option value="">다녀오지 않음 — ' + esc(day.도시) + ' 종일</option>' +
+            갈곳.map(function(c){
+              return '<option value="' + esc(c) + '"' + (day.근교 === c ? ' selected' : '') + '>' +
+                     esc(c) + '</option>';
+            }).join('') + '</select>';
+          var 길 = '';
+          if(day.근교){
+            var 정 = 근교정보(day.도시, day.근교);
+            if(정) 길 = '<span class="way"><b>' + esc(day.도시) + ' → ' + esc(day.근교) +
+                        ' → ' + esc(day.도시)
+                        + '</b> 왕복 ' + 돈(정.km) + 'km · 약 ' + 시간글(정.분) + '</span>';
+          }
+          안 += '<div class="bx-near"><b>근교 다녀오기</b>' + 고름 + 길 +
+            '<span class="hint">' +
+              (day.근교
+                ? '묵는 곳은 ' + esc(day.도시) + ' 그대로입니다. 짐을 옮기지 않습니다. ' +
+                  '아래에서 ' + esc(day.근교) + ' 입장지도 함께 고르실 수 있습니다.'
+                : '숙소를 옮기지 않고 가까운 곳을 다녀오는 날입니다. ' +
+                  '차량비는 더 붙지 않고, 들르는 곳의 입장료와 현지 가이드만 더해집니다.') +
+            '</span></div>';
+        }
+      }
 
       if(day.종류 === '자유'){
         안 += '<div class="bx-freenote">이 날은 <b>차량과 가이드 비용이 붙지 않습니다.</b> ' +
@@ -2162,6 +2301,26 @@
       if(!t.checked && 자리 !== -1) 통.splice(자리, 1);
       var 칸 = t.closest('.bx-opt');
       if(칸) 칸.classList.toggle('on', t.checked);
+      날짜그리기(); 지도그리기(); 계산();
+      return;
+    }
+
+    /* 근교 다녀오기 */
+    if(t.dataset && t.dataset.near !== undefined){
+      var ni = Number(t.dataset.near);
+      var 그날n = S.일정[ni];
+      var 옛근교 = 그날n.근교 || '';
+      그날n.근교 = t.value || '';
+      /* 다녀오던 곳을 바꾸거나 끄시면, 그 곳에서 고르셨던 입장지는 빼 드립니다
+         (화면에서 사라지는데 금액만 남는 일이 없도록) */
+      if(옛근교 && 옛근교 !== 그날n.근교){
+        var 뺄 = 종류('입장지').filter(function(x){ return x.도시 === 옛근교; })
+                 .map(function(x){ return x.id; });
+        그날n.입장지 = 그날n.입장지.filter(function(id){ return 뺄.indexOf(id) === -1; });
+      }
+      /* 새로 고르신 곳의 무료 도보 관광지를 담아 드립니다 */
+      그날n.채운도시 = '';
+      무료채우기();
       날짜그리기(); 지도그리기(); 계산();
       return;
     }
@@ -2349,7 +2508,14 @@
       var 밖 = 외관보기(i);
       if(밖.length) 안.push('외관 관광: ' + 밖.map(function(x){ return x.이름; }).join(', '));
       if(day.식사.length)  안.push('식사: ' + day.식사.map(이름).join(', '));
-      줄.push((i + 1) + '일차' + (day.도시 ? ' ' + day.도시 : '') + (안.length ? ' — ' + 안.join(' / ') : ''));
+      var 머리 = (i + 1) + '일차' + (day.도시 ? ' ' + day.도시 : '');
+      /* 근교 왕복은 「마드리드 → 세고비아 → 마드리드」 로 적습니다 */
+      if(day.근교 && day.종류 === '관광'){
+        var 정n = 근교정보(day.도시, day.근교);
+        머리 += ' → ' + day.근교 + ' → ' + day.도시 +
+                (정n ? ' (왕복 ' + 정n.km + 'km · 약 ' + 시간글(정n.분) + ')' : '');
+      }
+      줄.push(머리 + (안.length ? ' — ' + 안.join(' / ') : ''));
       if(i < S.일정.length - 1 && day.경유 !== false){
         var 다음 = S.일정[i + 1].도시;
         var 들를곳 = 경유찾기(day.도시, 다음);
@@ -2391,8 +2557,12 @@
       var 총km = 0, 총분 = 0;
       구간.forEach(function(g){
         총km += g.km; 총분 += g.분;
-        줄.push('  ' + g.a + ' → ' + g.b + ' · ' + g.수단 +
-                (g.들를곳 ? ' (' + g.들를곳 + ' 경유)' : '') +
+        /* 근교 왕복은 「마드리드 → 톨레도 → 마드리드 (왕복)」 로 적습니다.
+           km 가 이미 왕복 거리라, 편도처럼 적으면 두 배로 읽힙니다. */
+        줄.push('  ' + (g.왕복
+                  ? (g.날 + 1) + '일차 ' + g.a + ' → ' + g.b + ' → ' + g.a + ' · 차량 (근교 왕복)'
+                  : g.a + ' → ' + g.b + ' · ' + g.수단 +
+                    (g.들를곳 ? ' (' + g.들를곳 + ' 경유)' : '')) +
                 (g.km ? ' · ' + 돈(g.km) + 'km' : '') +
                 (g.분 ? ' · 약 ' + 시간글(g.분) : ''));
       });
