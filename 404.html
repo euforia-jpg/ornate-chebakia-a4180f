@@ -12,20 +12,16 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<meta name="theme-color" content="#14103D">
+<meta name="theme-color" content="#24303A">
 <style>
   :root{
-    --violet:#6C3CE9; --pink:#E6317B; --navy:#14103D; --ink:#201B4A;
-    --muted:#6E6A93; --line:#EAE7F7; --bg:#FBFAFF;
+    --violet:#4A6E86; --pink:#94634A; --navy:#24303A; --ink:#2B343A;
+    --muted:#64707A; --line:#E4E6E8; --bg:#F6F6F6;
   }
   *{ box-sizing:border-box; }
   html,body{ margin:0; min-height:100%; }
   body{
-    background:
-      repeating-linear-gradient(115deg,
-        rgba(239,235,253,.55) 0 90px, rgba(253,236,243,.55) 90px 180px,
-        rgba(255,242,230,.55) 180px 270px, rgba(231,248,245,.55) 270px 360px),
-      var(--bg);
+    background: var(--bg);
     color:var(--ink);
     font-family:'Work Sans','Pretendard','Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
     display:flex; align-items:center; justify-content:center; padding:28px 18px;
@@ -33,7 +29,7 @@
   }
   .box{
     background:#fff; border:1.5px solid var(--line); border-radius:26px;
-    box-shadow:0 22px 56px -28px rgba(20,16,61,.34);
+    box-shadow:0 22px 56px -28px rgba(36, 48, 58,.34);
     max-width:620px; width:100%; padding:44px clamp(22px,5vw,46px) 38px; text-align:center;
   }
   .mark{
@@ -51,7 +47,7 @@
   }
   .code{
     display:inline-block; font-size:12px; font-weight:800; letter-spacing:.14em;
-    color:var(--violet); background:#EFEBFD; padding:6px 14px; border-radius:999px; margin-bottom:14px;
+    color:var(--violet); background:#EEF1F3; padding:6px 14px; border-radius:999px; margin-bottom:14px;
   }
   h1{
     font-family:'Kanit',sans-serif; font-style:italic; font-weight:800;
@@ -67,8 +63,8 @@
   .links a:hover{ border-color:var(--violet); color:var(--violet); }
   .home{
     display:inline-block; text-decoration:none; font-size:14px; font-weight:800; color:#fff;
-    background:linear-gradient(135deg,var(--violet),#8B5CF6); padding:14px 30px; border-radius:999px;
-    box-shadow:0 14px 28px -14px rgba(108,60,233,.6);
+    background:linear-gradient(135deg,var(--violet),#5B8099); padding:14px 30px; border-radius:999px;
+    box-shadow:0 14px 28px -14px rgba(74, 110, 134,.6);
   }
   .home:hover{ filter:brightness(1.07); }
   .foot{ margin:24px 0 0; font-size:12px; color:var(--muted); font-weight:600; }

@@ -10,18 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --violet: #6C3CE9; --pink: #E6317B; --orange: #FF7A1A; --teal: #12C9AE;
-    --navy: #14103D; --paper: #FFFFFF; --ink: #171235; --muted: #6E6A93; --line: #EAE7F7;
+    --violet: #4A6E86; --pink: #94634A; --orange: #8E6139; --teal: #52786C;
+    --navy: #24303A; --paper: #FFFFFF; --ink: #24303A; --muted: #64707A; --line: #E4E6E8;
     --radius: 18px;
-    --wash-violet: #EFEBFD; --wash-pink: #FDECF3; --wash-orange: #FFF2E6; --wash-teal: #E7F8F5;
+    --wash-violet: #EEF1F3; --wash-pink: #F4EFEA; --wash-orange: #F5F1EB; --wash-teal: #EDF1EF;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background: repeating-linear-gradient(115deg, var(--wash-violet) 0 220px, var(--wash-pink) 220px 400px, var(--wash-orange) 400px 560px, var(--wash-teal) 560px 760px);
+    background: #F6F6F6;
     background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
   }
-  body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(20,16,61,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
+  body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
   a{ color:inherit; }
   .wrap{ position:relative; z-index:1; }
 
@@ -38,7 +38,7 @@
   .nav-group{ display:flex; align-items:center; gap:10px; }
   .site-nav{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:14px clamp(20px,4vw,56px); border-top:1.5px solid var(--line); }
   .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:800; color:var(--muted); padding:8px 14px; border-radius:999px; transition: all .15s ease; }
-  .site-nav a:hover{ color:var(--violet); background:rgba(108,60,233,0.08); }
+  .site-nav a:hover{ color:var(--violet); background:rgba(74, 110, 134,0.08); }
   .site-nav a.active{ color:#fff; background:var(--navy); }
 
   .hero{ padding: 34px clamp(20px,4vw,56px) 30px; display:grid; grid-template-columns:1.25fr 1fr; gap:36px; align-items:center; }
@@ -51,14 +51,14 @@
   .cta:hover{ filter:brightness(1.06); }
   .cta.outline{ background:transparent; border:2px solid var(--navy); color:var(--navy); }
 
-  .hero-card{ background:var(--paper); border:2px solid var(--line); border-radius:24px; padding:22px; box-shadow:0 20px 46px -24px rgba(20,16,61,0.32); }
+  .hero-card{ background:var(--paper); border:2px solid var(--line); border-radius:24px; padding:22px; box-shadow:0 20px 46px -24px rgba(36, 48, 58,0.32); }
   .hero-card .row{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--line); }
   .hero-card .row:last-child{ border-bottom:none; }
   .hero-card .row .k{ font-size:12.5px; color:var(--muted); font-weight:700; }
   .hero-card .row .v{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; color:var(--navy); }
 
   .section{ padding:8px clamp(20px,4vw,56px) 24px; }
-  .section-inner{ background:var(--paper); border-radius:26px; padding:36px clamp(18px,3vw,40px); box-shadow:0 18px 44px -24px rgba(20,16,61,0.32); border:1.5px solid var(--line); }
+  .section-inner{ background:var(--paper); border-radius:26px; padding:36px clamp(18px,3vw,40px); box-shadow:0 18px 44px -24px rgba(36, 48, 58,0.32); border:1.5px solid var(--line); }
   .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
   .section-head h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:23px; margin:0; color:var(--navy); }
   .section-head .sub{ color:var(--muted); font-size:13px; font-weight:600; }
@@ -66,7 +66,7 @@
   .section-head a.more:hover{ text-decoration:underline; }
   .tour-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
   .tour-card{ background:var(--paper); border-radius:var(--radius); border:2px solid var(--line); overflow:hidden; transition: transform .15s ease, box-shadow .15s ease, border-color .15s; display:block; text-decoration:none; color:inherit; }
-  .tour-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px -12px rgba(20,16,61,0.3); border-color: var(--violet); }
+  .tour-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px -12px rgba(36, 48, 58,0.3); border-color: var(--violet); }
   .tour-card{ position:relative; }
   /* 카드마다 제목·설명 길이가 달라도 가격 뱃지가 같은 높이에 오도록,
      카드를 세로 flex 로 만들고 가격칸부터 아래로 밀어 둡니다. */
@@ -76,16 +76,16 @@
   /* 금액이 한 줄인 상품도 두 줄짜리와 같은 높이가 되도록 가운데에 둡니다 */
   .tour-body > .tour-price > .price-chip{ display:block; }
 .badge-group{ position:absolute; top:12px; right:12px; z-index:5; display:flex; gap:6px; }
-.card-badge{ padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.5px; color:#fff; box-shadow:0 6px 14px -6px rgba(20,16,61,0.4); }
-.card-badge.new-badge{ background:linear-gradient(90deg,var(--teal),#0E9E8B); }
-.card-badge.best-badge{ background:linear-gradient(90deg,var(--orange),#FFB84D); display:none; }  /* 안 보일 때는 자리도 차지하지 않게 — 숨어 있던 BEST 자리가 기간 글자를 밀어내고 있었습니다 */
+.card-badge{ padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.5px; color:#fff; box-shadow:0 6px 14px -6px rgba(36, 48, 58,0.4); }
+.card-badge.new-badge{ background:linear-gradient(90deg,var(--teal),#46705F); }
+.card-badge.best-badge{ background:linear-gradient(90deg,var(--orange),#C9A06A); display:none; }  /* 안 보일 때는 자리도 차지하지 않게 — 숨어 있던 BEST 자리가 기간 글자를 밀어내고 있었습니다 */
 .card-badge.best-badge.show{ display:inline-block; animation:badgeFlash 1s ease-in-out 2; }
 @keyframes badgeFlash{ 0%,100%{ opacity:1; } 50%{ opacity:0.35; } }
   /* ===== 요금 자리 (5안 — 선 하나만) =====
      상자를 없애고 점선 한 줄로만 나눕니다. 상세 쪽 요금 상자와 순서가 같습니다
      — 작은 설명줄 → 큰 금액 → / 1인. 유튜브·헤드폰은 동그란 단추로 옆에 둡니다. */
   .tour-price{ display:flex; align-items:flex-end; gap:9px; max-width:100%; margin:0 0 14px;
-               padding-top:12px; border-top:1.5px dashed #E0DAF4; }
+               padding-top:12px; border-top:1.5px dashed #DFE3E6; }
   .tour-price .price-chip{ display:block; box-sizing:border-box; flex:1 1 auto; min-width:0;
                            padding:0; background:none; border:none; border-radius:0;
                            font-family:'Work Sans', sans-serif; color:var(--navy);
@@ -100,7 +100,7 @@
 
   /* 카드 유로 금액 아래 원화 — 오늘 환율로 환산해 보여 줍니다 */
   .tour-price .price-krw{ display:block; margin-top:3px; font-size:12.5px; font-weight:700;
-                          color:var(--muted,#6E6A93); letter-spacing:-.01em; white-space:nowrap; }
+                          color:var(--muted,#64707A); letter-spacing:-.01em; white-space:nowrap; }
   .tour-price .price-sub{ display:block; font-size:11px; font-weight:700; color:var(--muted); margin-top:3px; }
   /* 금액이 아직 없는 상품 — 칩 자체가 예약문의로 가는 단추입니다 */
   button.price-chip{ cursor:pointer; text-align:left; font-size:15px; font-weight:800; }
@@ -116,14 +116,14 @@
   .tour-price .yt-btn{ color:#CC0000; }
   .tour-price .yt-btn svg{ width:16px; height:16px; }
   .tour-price .yt-btn:hover{ background:#CC0000; color:#fff; border-color:#CC0000; }
-  .tour-price .audio-badge{ color:#0E9E8B; font-size:15px; }
+  .tour-price .audio-badge{ color:#46705F; font-size:15px; }
   .tour-price .audio-badge:hover{ background:var(--teal); color:#fff; border-color:var(--teal); }
   .tour-price .audio-badge.playing{ background:var(--pink); border-color:var(--pink); color:#fff; }
  .tour-top{ padding:14px 18px; color:var(--navy); display:flex; flex-wrap:wrap; gap:4px 12px; justify-content:space-between; align-items:center; }
   .tour-top .region{ min-width:0; overflow-wrap:break-word; }
   .tour-top .days{ flex:0 0 auto; white-space:nowrap; }
-  .tour-top .region{ font-size:14px; letter-spacing:1px; text-transform:uppercase; font-weight:800; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(20,16,61,.12); }
-  .tour-top .days{ font-family:'Space Mono'; font-size:12.5px; font-weight:700; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(20,16,61,.12); }
+  .tour-top .region{ font-size:14px; letter-spacing:1px; text-transform:uppercase; font-weight:800; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(36, 48, 58,.12); }
+  .tour-top .days{ font-family:'Space Mono'; font-size:12.5px; font-weight:700; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(36, 48, 58,.12); }
   /* NEW·BEST 배지가 카드 오른쪽 위에 떠 있어 기간 글자를 덮고 있었습니다.
      배지가 실제로 보이는 카드만 그만큼 자리를 비워 둡니다.
      (영어·중국어는 기간 글자가 길어져서 더 심하게 가려집니다) */
@@ -131,12 +131,12 @@
   .tour-card:has(.best-badge.show) .tour-top{ padding-right:78px; }
   .tour-card:has(.new-badge):has(.best-badge.show) .tour-top{ padding-right:132px; }
 
-  .tour-top.spain{ background: linear-gradient(90deg, color-mix(in srgb, var(--violet) 32%, white), color-mix(in srgb, #8B5CF6 32%, white)); }
-  .tour-top.camino{ background: linear-gradient(90deg, color-mix(in srgb, var(--teal) 32%, white), color-mix(in srgb, #0E9E8B 32%, white)); }
-  .tour-top.portugal{ background: linear-gradient(90deg, color-mix(in srgb, var(--pink) 32%, white), color-mix(in srgb, #A5124B 32%, white)); }
-  .tour-top.morocco{ background: linear-gradient(90deg, color-mix(in srgb, var(--orange) 32%, white), color-mix(in srgb, var(--pink) 32%, white)); }
-  .tour-top.iberia{ background: linear-gradient(90deg, color-mix(in srgb, var(--navy) 32%, white), color-mix(in srgb, var(--violet) 32%, white)); }
-  .tour-top.match{ background: linear-gradient(90deg, color-mix(in srgb, #0E9E8B 32%, white), color-mix(in srgb, var(--violet) 32%, white)); }
+  .tour-top.spain{ background: linear-gradient(90deg, color-mix(in srgb, var(--violet) 44%, white), color-mix(in srgb, #5B8099 44%, white)); }
+  .tour-top.camino{ background: linear-gradient(90deg, color-mix(in srgb, var(--teal) 44%, white), color-mix(in srgb, #46705F 44%, white)); }
+  .tour-top.portugal{ background: linear-gradient(90deg, color-mix(in srgb, var(--pink) 44%, white), color-mix(in srgb, #7A5A3E 44%, white)); }
+  .tour-top.morocco{ background: linear-gradient(90deg, color-mix(in srgb, var(--orange) 44%, white), color-mix(in srgb, var(--pink) 44%, white)); }
+  .tour-top.iberia{ background: linear-gradient(90deg, color-mix(in srgb, var(--navy) 44%, white), color-mix(in srgb, var(--violet) 44%, white)); }
+  .tour-top.match{ background: linear-gradient(90deg, color-mix(in srgb, #46705F 44%, white), color-mix(in srgb, var(--violet) 44%, white)); }
   .tour-body{ padding:16px 16px 18px; }
   .tour-body h3{ margin:0 0 6px; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16.5px; color:var(--navy); }
   .tour-body p{ margin:0 0 12px; font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.6; }
@@ -159,7 +159,7 @@
   .cta-band p{ margin:0; font-size:13px; color:var(--muted); font-weight:600; }
 
   footer{ padding:8px clamp(20px,4vw,56px) 40px; }
-  .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(20,16,61,0.28); }
+  .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(36, 48, 58,0.28); }
   .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
   .footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
   .footer-logo-img{ height:44px; width:auto; display:block; }
@@ -183,9 +183,9 @@
 .addon-card h3{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:20px; margin:0; }
 .addon-card p{ font-size:13.5px; line-height:1.6; opacity:.92; margin:0; flex:1; }
 .addon-card .cta{ align-self:flex-start; margin-top:6px; padding:10px 20px; border-radius:999px; background:#fff; color:var(--navy); font-weight:800; font-size:13px; text-decoration:none; }
-.addon-match{ background: linear-gradient(135deg, var(--violet), #8B5CF6); }
+.addon-match{ background: linear-gradient(135deg, var(--violet), #5B8099); }
 .addon-show{ background: linear-gradient(135deg, var(--pink), var(--orange)); }
-.addon-audio{ background: linear-gradient(135deg, var(--teal), #0E9E8B); }
+.addon-audio{ background: linear-gradient(135deg, var(--teal), #46705F); }
 /* ===== Mobile improvements (added) ===== */
   .nav-toggle{ display:none; }
   .nav-toggle-btn{ display:none; }
@@ -212,16 +212,16 @@
         .tour-grid{ grid-template-columns:1fr; }
     .app-badge{ display:flex; width:100%; box-sizing:border-box; justify-content:center; margin-top:12px; }
   }
-  .ai-plan-card{ background:linear-gradient(135deg, var(--violet), #8B5CF6 55%, var(--pink)); border-radius:var(--radius); padding:32px clamp(20px,4vw,44px); color:#fff; max-width:820px; margin:0 auto; text-align:center; }
+  .ai-plan-card{ background:linear-gradient(135deg, var(--violet), #5B8099 55%, var(--pink)); border-radius:var(--radius); padding:32px clamp(20px,4vw,44px); color:#fff; max-width:820px; margin:0 auto; text-align:center; }
 .ai-plan-tag{ display:inline-block; padding:6px 14px; border-radius:999px; background:rgba(255,255,255,.2); font-size:12px; font-weight:800; letter-spacing:0.5px; margin-bottom:14px; }
 .ai-plan-card h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(22px,3vw,28px); margin:0 0 10px; }
 .ai-plan-card p{ font-size:14px; line-height:1.7; opacity:.92; margin:0 auto 20px; max-width:520px; }
 .ai-plan-card .cta{ all:unset; display:inline-block; padding:13px 28px; background:#fff; color:var(--navy); font-weight:800; border-radius:999px; cursor:pointer; font-size:14px; text-decoration:none; }
 .ai-plan-card .cta:hover{ opacity:.9; }
 #productsBox{ position:relative; }
-.booking-toast{ position:absolute; right:16px; top:16px; z-index:20; display:flex; align-items:center; gap:12px; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:14px 18px; box-shadow:0 18px 34px -18px rgba(20,16,61,0.35); max-width:280px; opacity:0; transform:translateY(-12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease; }
+.booking-toast{ position:absolute; right:16px; top:16px; z-index:20; display:flex; align-items:center; gap:12px; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:14px 18px; box-shadow:0 18px 34px -18px rgba(36, 48, 58,0.35); max-width:280px; opacity:0; transform:translateY(-12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease; }
 .booking-toast.show{ opacity:1; transform:translateY(0); }
-.booking-toast .bt-dot{ flex:0 0 auto; width:10px; height:10px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 4px rgba(18,201,174,0.18); }
+.booking-toast .bt-dot{ flex:0 0 auto; width:10px; height:10px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 4px rgba(82, 120, 108,0.18); }
 .booking-toast .bt-text{ font-size:12.5px; line-height:1.5; color:var(--ink); font-weight:600; }
 .booking-toast .bt-text b{ color:var(--navy); font-weight:800; }
 .booking-toast .bt-time{ display:block; margin-top:2px; font-size:11px; color:var(--muted); font-weight:700; }
@@ -237,8 +237,8 @@
 .review-card .quote{ font-size:13px; line-height:1.6; color:var(--ink); margin-bottom:14px; }
 .review-card .who{ font-size:11.5px; color:var(--muted); font-weight:700; }
 @media (max-width:780px){ .review-cards{ grid-template-columns:1fr; } }
-.chat-fab{ position:fixed; right:20px; bottom:20px; z-index:300; width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--violet),#8B5CF6); color:#fff; border:none; padding:0; cursor:pointer; box-shadow:0 14px 30px -12px rgba(108,60,233,0.55); display:flex; align-items:center; justify-content:center; }
-.chat-window{ position:fixed; right:20px; bottom:88px; z-index:300; width:340px; max-width:calc(100vw - 40px); height:460px; max-height:calc(100vh - 140px); background:#fff; border-radius:20px; box-shadow:0 24px 60px -20px rgba(20,16,61,0.4); display:none; flex-direction:column; overflow:hidden; border:1.5px solid var(--line); }
+.chat-fab{ position:fixed; right:20px; bottom:20px; z-index:300; width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--violet),#5B8099); color:#fff; border:none; padding:0; cursor:pointer; box-shadow:0 14px 30px -12px rgba(74, 110, 134,0.55); display:flex; align-items:center; justify-content:center; }
+.chat-window{ position:fixed; right:20px; bottom:88px; z-index:300; width:340px; max-width:calc(100vw - 40px); height:460px; max-height:calc(100vh - 140px); background:#fff; border-radius:20px; box-shadow:0 24px 60px -20px rgba(36, 48, 58,0.4); display:none; flex-direction:column; overflow:hidden; border:1.5px solid var(--line); }
 .chat-window.open{ display:flex; }
 .chat-head{ background:var(--navy); color:#fff; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; }
 .chat-head .t{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:14px; display:inline-flex; align-items:center; gap:7px; }
@@ -256,18 +256,18 @@
 @media (max-width:480px){ .chat-window{ right:12px; bottom:80px; width:calc(100vw - 24px); } .chat-fab{ right:12px; bottom:12px; } }
 .audio-badge{ display:inline-flex; align-items:center; justify-content:center; width:36px; flex-shrink:0; background:var(--teal); font-size:15px; border:none; cursor:pointer; color:#fff; }
 .audio-badge.playing{ background:var(--pink); }
-.app-badge{ display:inline-flex; align-items:center; gap:6px; margin-top:16px; padding:10px 20px; border-radius:999px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; font-size:13.5px; text-decoration:none; box-shadow:0 8px 16px -9px rgba(230,49,123,0.55); }
+.app-badge{ display:inline-flex; align-items:center; gap:6px; margin-top:16px; padding:10px 20px; border-radius:999px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; font-size:13.5px; text-decoration:none; box-shadow:0 8px 16px -9px rgba(148, 99, 74,0.55); }
 .app-badge:hover{ opacity:.9; }
 /* 앱 단추 두 개 — 맛집 옆에 골프를 나란히 둡니다. 메뉴에는 넣지 않았습니다. */
 .app-badges{ display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
 .app-badges .app-badge{ margin-top:0; }
-.app-badge.golf{ background:linear-gradient(90deg,#1F7A4C,#12C9AE);
+.app-badge.golf{ background:linear-gradient(90deg,#46705F,#52786C);
                  box-shadow:0 8px 16px -9px rgba(31,122,76,0.6); }
 
-  .feature-overlay{ position:fixed; inset:0; background:rgba(20,16,61,0.6); z-index:500; display:none; align-items:center; justify-content:center; padding:20px; }
+  .feature-overlay{ position:fixed; inset:0; background:rgba(36, 48, 58,0.6); z-index:500; display:none; align-items:center; justify-content:center; padding:20px; }
 .feature-overlay.show{ display:flex; }
-.feature-box{ background:#fff; border-radius:24px; max-width:520px; width:100%; overflow:hidden; box-shadow:0 30px 70px -20px rgba(20,16,61,0.55); position:relative; }
-.feature-close{ position:absolute; top:16px; right:16px; z-index:5; background:rgba(20,16,61,0.35); border:none; color:#fff; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; }
+.feature-box{ background:#fff; border-radius:24px; max-width:520px; width:100%; overflow:hidden; box-shadow:0 30px 70px -20px rgba(36, 48, 58,0.55); position:relative; }
+.feature-close{ position:absolute; top:16px; right:16px; z-index:5; background:rgba(36, 48, 58,0.35); border:none; color:#fff; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; }
 .feature-head{ padding:30px 28px 22px; text-align:center; background:linear-gradient(160deg, var(--violet), var(--pink) 120%); color:#fff; }
 .feature-head .eyebrow{ display:inline-block; background:rgba(255,255,255,0.2); padding:5px 14px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:1px; margin-bottom:12px; }
 .feature-head h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:21px; margin:0; line-height:1.35; }
@@ -275,12 +275,12 @@
 .feature-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); }
 .feature-card{ background:#fff; padding:24px 20px; text-align:center; }
 .feature-card .ico{ width:52px; height:52px; border-radius:16px; margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-size:24px; }
-.feature-card.audio .ico{ background:linear-gradient(135deg, var(--teal), #0E9E8B); }
-.feature-card.ai .ico{ background:linear-gradient(135deg, var(--violet), #8B5CF6); }
+.feature-card.audio .ico{ background:linear-gradient(135deg, var(--teal), #46705F); }
+.feature-card.ai .ico{ background:linear-gradient(135deg, var(--violet), #5B8099); }
 .feature-card h4{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:15px; margin:0 0 8px; color:var(--navy); }
 .feature-card p{ font-size:12px; color:var(--muted); line-height:1.6; margin:0 0 16px; font-weight:600; }
 .feature-card .go{ all:unset; display:block; padding:9px; border-radius:999px; font-size:12px; font-weight:800; cursor:pointer; text-decoration:none; }
-.feature-card.audio .go{ background:var(--wash-teal); color:#0E9E8B; }
+.feature-card.audio .go{ background:var(--wash-teal); color:#46705F; }
 .feature-card.ai .go{ background:var(--wash-violet); color:var(--violet); }
 @media (max-width:480px){ .feature-grid{ grid-template-columns:1fr; } }
   
@@ -290,14 +290,14 @@
   .qr-box img{ width:92px; height:92px; border-radius:10px; border:1.5px solid var(--line); padding:6px; background:#fff; display:block; }
   .qr-box .qr-caption{ font-size:11px; color:var(--muted); font-weight:600; }
   .share-btn{ display:inline-flex; align-items:center; gap:7px; padding:9px 16px; border-radius:999px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink); font-size:12.5px; font-weight:800; cursor:pointer; font-family:inherit; transition:background .15s,border-color .15s; }
-  .share-btn:hover{ background:#F5F3FE; border-color:var(--violet); }
+  .share-btn:hover{ background:#F1F3F4; border-color:var(--violet); }
   .share-btn svg{ width:14px; height:14px; fill:var(--violet); flex-shrink:0; }
 
 /* ===== 푸터 (4단 레이아웃) ===== */
   footer.euf-footer{ padding:24px clamp(20px,4vw,56px) 40px; background:none; border:0; }
   .euf-footer .ef-inner{ display:grid; grid-template-columns:1.25fr 1.15fr 1.15fr .85fr; gap:34px;
     background:var(--paper); border:1.5px solid var(--line); border-radius:26px;
-    padding:36px clamp(18px,3vw,40px) 30px; box-shadow:0 18px 44px -28px rgba(20,16,61,0.28);
+    padding:36px clamp(18px,3vw,40px) 30px; box-shadow:0 18px 44px -28px rgba(36, 48, 58,0.28);
     max-width:1180px; margin:0 auto; }
   .euf-footer .ef-col h6{ margin:0 0 16px; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
     color:var(--navy); font-weight:800; }
@@ -307,7 +307,7 @@
     padding:10px 18px; border-radius:999px; font-size:12.5px; font-weight:800; cursor:pointer;
     border:1.5px solid var(--line); background:#fff; color:var(--ink); font-family:inherit;
     transition:background .15s,border-color .15s; }
-  .euf-footer .ef-share:hover{ background:#F5F3FE; border-color:var(--violet); }
+  .euf-footer .ef-share:hover{ background:#F1F3F4; border-color:var(--violet); }
   .euf-footer .ef-share svg{ width:14px; height:14px; fill:var(--violet); flex-shrink:0; }
   .euf-footer .ef-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
   .euf-footer .ef-list li{ display:flex; gap:11px; align-items:flex-start; }
@@ -325,7 +325,7 @@
   .euf-footer .ef-qr span{ font-size:11.5px; line-height:1.65; font-weight:600; color:var(--muted); }
   .euf-footer .ef-map{ display:flex; align-items:center; justify-content:center; gap:8px; height:118px;
     border-radius:14px; text-decoration:none; font-size:13px; font-weight:800;
-    background:#F5F3FE; border:1.5px solid var(--line); color:var(--navy);
+    background:#F1F3F4; border:1.5px solid var(--line); color:var(--navy);
     transition:border-color .15s,color .15s; }
   .euf-footer .ef-map:hover{ border-color:var(--violet); color:var(--violet); }
   .euf-footer .ef-map svg{ width:17px; height:17px; }
@@ -349,10 +349,10 @@
 /* ===== EUFORIA MOVE 와이드 카드 ===== */
   .mv-wide{ display:grid; grid-template-columns:1.55fr 1fr; gap:30px; align-items:center;
     border-radius:var(--radius); padding:30px clamp(20px,2.6vw,34px); margin-bottom:20px; color:#fff;
-    background:linear-gradient(120deg, var(--navy) 0%, #2A1F6B 52%, var(--violet) 100%);
+    background:linear-gradient(120deg, var(--navy) 0%, #3A4750 52%, var(--violet) 100%);
     position:relative; overflow:hidden; }
   .mv-wide::after{ content:''; position:absolute; right:-60px; top:-80px; width:260px; height:260px;
-    border-radius:50%; background:radial-gradient(circle, rgba(18,201,174,0.34), transparent 68%); pointer-events:none; }
+    border-radius:50%; background:radial-gradient(circle, rgba(82, 120, 108,0.34), transparent 68%); pointer-events:none; }
   .mv-wide .mv-left{ position:relative; z-index:1; }
   .mv-wide .tag{ display:inline-block; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,.2);
     font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
@@ -368,28 +368,28 @@
     .mv-wide p{ margin-bottom:16px; } }
 
   /* 일정 만들기 — 눈에 띄게 깜빡입니다 */
-  .cta.flash{ position:relative; background:linear-gradient(90deg,#6C3CE9,#8E6BFF);
+  .cta.flash{ position:relative; background:linear-gradient(90deg,#4A6E86,#3F86C9);
     border:none !important; color:#fff !important;
     animation:eufFlash 1.9s ease-in-out infinite; }
   .cta.flash .nu{ display:inline-block; margin-left:7px; padding:2px 7px; border-radius:999px;
     background:rgba(255,255,255,.24); font-size:10.5px; font-weight:900; letter-spacing:.04em; }
   @keyframes eufFlash{
-    0%,100%{ box-shadow:0 0 0 0 rgba(108,60,233,.55); filter:brightness(1); }
-    55%    { box-shadow:0 0 0 14px rgba(108,60,233,0); filter:brightness(1.13); }
+    0%,100%{ box-shadow:0 0 0 0 rgba(74, 110, 134,.55); filter:brightness(1); }
+    55%    { box-shadow:0 0 0 14px rgba(74, 110, 134,0); filter:brightness(1.13); }
   }
   @media (prefers-reduced-motion: reduce){ .cta.flash{ animation:none; } }
 
   /* 첫 화면 일정 만들기 카드 */
   .plan-card{ position:relative; overflow:hidden; border:none !important;
-    background:linear-gradient(145deg,#241662 0%,#6C3CE9 56%,#9150D6 100%);
+    background:linear-gradient(145deg,#2C3C48 0%,#4A6E86 56%,#5B8099 100%);
     color:#fff; padding:26px 26px 22px !important;
-    box-shadow:0 26px 54px -22px rgba(76,40,180,.62) !important; }
+    box-shadow:0 26px 54px -22px rgba(74,110,134,.62) !important; }
   .plan-card::after{ content:''; position:absolute; right:-80px; top:-80px; width:240px; height:240px;
     border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.20),transparent 70%);
     pointer-events:none; }
   .plan-card > *{ position:relative; z-index:1; }
   .plan-card .pc-new{ display:inline-block; padding:4px 12px; border-radius:999px;
-    background:var(--teal); color:#06231F; font-size:11px; font-weight:900; letter-spacing:.06em; }
+    background:var(--teal); color:#FFFFFF; font-size:11px; font-weight:900; letter-spacing:.06em; }
   .plan-card h3{ margin:13px 0 7px; font-size:23px; font-weight:800; line-height:1.32;
     letter-spacing:-.02em; color:#fff; }
   .plan-card h3 em{ font-style:normal; color:#FFD9A8; }
@@ -399,9 +399,9 @@
   .plan-card .pc-chips span{ padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:700;
     background:rgba(255,255,255,.15); color:#fff; }
   .plan-card .pc-go{ all:unset; display:block; box-sizing:border-box; text-align:center; cursor:pointer;
-    padding:15px 20px; border-radius:14px; background:#fff; color:#241662;
+    padding:15px 20px; border-radius:14px; background:#fff; color:#2C3C48;
     font-size:15px; font-weight:800; animation:pcPulse 2.3s ease-in-out infinite; }
-  .plan-card .pc-go:hover{ background:#F3EFFF; }
+  .plan-card .pc-go:hover{ background:#F1F3F4; }
   @keyframes pcPulse{
     0%,100%{ box-shadow:0 0 0 0 rgba(255,255,255,.55); }
     55%    { box-shadow:0 0 0 14px rgba(255,255,255,0); }
@@ -416,8 +416,8 @@
   .xmas-box{ max-width:560px; padding:0 !important; overflow:hidden; border-radius:22px; }
   .xmas-art{ position:relative; display:block; width:100%; height:auto; }
   /* 닫기(✕) 단추가 밤하늘 위에서도 잘 보이게 — 이 팝업에서만 바뀝니다 */
-  .xmas-box .feature-close{ color:#fff; background:rgba(11,8,37,.45); }
-  .xmas-box .feature-close:hover{ background:rgba(11,8,37,.75); }
+  .xmas-box .feature-close{ color:#fff; background:rgba(24,36,44,.45); }
+  .xmas-box .feature-close:hover{ background:rgba(24,36,44,.75); }
   .xmas-body{ padding:22px clamp(20px,4vw,30px) 26px; }
 
   /* 트리 꼭대기 별 반짝임 */
@@ -437,7 +437,7 @@
     .xmas-tip, .xmas-glow{ animation:none; opacity:1; }
   }
   .xmas-eyebrow{ display:inline-flex; align-items:center; gap:6px; padding:6px 14px;
-    border-radius:999px; background:#FFF2E6; color:#8A4A06;
+    border-radius:999px; background:#F5F1EB; color:#7A5A3E;
     font-size:11.5px; font-weight:800; letter-spacing:.04em; }
   .xmas-box h3{ margin:12px 0 10px; font-family:'Kanit',sans-serif; font-style:italic;
     font-weight:800; font-size:clamp(20px,3.4vw,25px); line-height:1.3; color:var(--navy);
@@ -447,21 +447,21 @@
   .xmas-lead b{ color:var(--navy); font-weight:800; }
 
   .xmas-two{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
-  .xmas-city{ border:1.5px solid var(--line); border-radius:14px; padding:13px 14px; background:#FCFBFF; }
+  .xmas-city{ border:1.5px solid var(--line); border-radius:14px; padding:13px 14px; background:#FDFDFD; }
   .xmas-city b{ display:block; font-size:13px; font-weight:800; color:var(--navy); margin-bottom:4px; }
   .xmas-city span{ display:block; font-size:11.5px; font-weight:600; color:var(--muted); line-height:1.7; }
   .xmas-city i{ font-style:normal; display:block; margin-top:6px; font-size:11px; font-weight:800;
-    color:#8A4A06; }
+    color:#7A5A3E; }
 
   .xmas-when{ display:flex; gap:9px; align-items:flex-start; margin:0 0 18px; padding:11px 14px;
-    border-radius:12px; background:#F5F2FE; border:1.5px solid #DED3FB;
+    border-radius:12px; background:#F7F8F9; border:1.5px solid #E3E8EB;
     font-size:12px; font-weight:600; color:var(--muted); line-height:1.7; }
   .xmas-when b{ color:var(--navy); font-weight:800; }
 
   .xmas-cta{ display:flex; gap:9px; flex-wrap:wrap; }
   .xmas-cta a{ flex:1 1 0; min-width:150px; text-align:center; text-decoration:none;
     padding:14px 16px; border-radius:12px; font-size:13.5px; font-weight:800; }
-  .xmas-cta .go{ background:linear-gradient(90deg,#B4123F,#E6317B); color:#fff;
+  .xmas-cta .go{ background:linear-gradient(90deg,#8F2E14,#94634A); color:#fff;
     box-shadow:0 10px 20px -10px rgba(180,18,63,.6); }
   .xmas-cta .go:hover{ filter:brightness(1.08); }
   .xmas-cta .sub{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
@@ -499,9 +499,14 @@
     .xmas-when{ margin-bottom:11px; padding:8px 10px; line-height:1.55; }
     .xmas-cta a{ padding:11px 12px; }
   }
+
+  /* 짙은 띠(.stats-band) 안에서는 강조색을 밝은 짝으로 씁니다 —
+     눕힌 세이지·황토는 어두운 바탕 위에서 2.5:1 까지 떨어집니다 */
+  .stats-band .stat .num{ color:#9DBDB1; }
+  .stats-band .stat .num span{ color:#D3A379; }
 </style>
 <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#14103D">
+  <meta name="theme-color" content="#24303A">
    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <script type="application/ld+json">
@@ -701,9 +706,9 @@
 
   <div class="section">
     <div class="stats-band">
-      <div class="stat"><div class="num" style="color:var(--teal);">1,240+</div><div class="label">팀과 함께한 여행</div></div>
-      <div class="stat"><div class="num" style="color:var(--orange);">4.9<span style="font-size:16px;">/5</span></div><div class="label">평균 만족도</div></div>
-      <div class="stat"><div class="num" style="color:var(--pink);">2019<span style="font-size:16px;">~</span></div><div class="label">스페인 현지 운영</div></div>
+      <div class="stat"><div class="num" style="color:#9DBDB1;">1,240+</div><div class="label">팀과 함께한 여행</div></div>
+      <div class="stat"><div class="num" style="color:#D3A379;">4.9<span style="font-size:16px;">/5</span></div><div class="label">평균 만족도</div></div>
+      <div class="stat"><div class="num" style="color:#C9966E;">2019<span style="font-size:16px;">~</span></div><div class="label">스페인 현지 운영</div></div>
     </div>
     <div class="review-cards" id="reviewCards"></div>
   </div>
@@ -895,10 +900,10 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
   setInterval(rotate, 7000);
 })();
 </script>
- <button class="chat-fab" id="chatFab" aria-label="유포리아 AI 상담 열기" title="유포리아 AI 상담"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="24" cy="18" r="7" fill="#fff" stroke="none"/><path d="M11 43c0-6.5 5.4-11.8 12-11.8S35 36.5 35 43" fill="#fff" stroke="none"/><path d="M24 30.4 18.9 38.2 24 41.8l5.1-3.6z" fill="#7340E7" stroke="none"/><path d="M34.5 15.5a10.5 10.5 0 0 0-21 0"/><rect x="33.5" y="14.5" width="5.6" height="9.5" rx="2.8" fill="#fff" stroke="none"/><rect x="8.9" y="14.5" width="5.6" height="9.5" rx="2.8" fill="#fff" stroke="none"/></svg></button>
+ <button class="chat-fab" id="chatFab" aria-label="유포리아 AI 상담 열기" title="유포리아 AI 상담"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="24" cy="18" r="7" fill="#fff" stroke="none"/><path d="M11 43c0-6.5 5.4-11.8 12-11.8S35 36.5 35 43" fill="#fff" stroke="none"/><path d="M24 30.4 18.9 38.2 24 41.8l5.1-3.6z" fill="#4A6E86" stroke="none"/><path d="M34.5 15.5a10.5 10.5 0 0 0-21 0"/><rect x="33.5" y="14.5" width="5.6" height="9.5" rx="2.8" fill="#fff" stroke="none"/><rect x="8.9" y="14.5" width="5.6" height="9.5" rx="2.8" fill="#fff" stroke="none"/></svg></button>
 <div class="chat-window" id="chatWindow">
   <div class="chat-head">
-    <span class="t"><svg class="ti" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="24" cy="18" r="7" fill="#fff" stroke="none"/><path d="M11 43c0-6.5 5.4-11.8 12-11.8S35 36.5 35 43" fill="#fff" stroke="none"/><path d="M24 30.4 18.9 38.2 24 41.8l5.1-3.6z" fill="#14103D" stroke="none"/><path d="M34.5 15.5a10.5 10.5 0 0 0-21 0"/><rect x="33.5" y="14.5" width="5.6" height="9.5" rx="2.8" fill="#fff" stroke="none"/><rect x="8.9" y="14.5" width="5.6" height="9.5" rx="2.8" fill="#fff" stroke="none"/></svg>유포리아 AI 상담</span>
+    <span class="t"><svg class="ti" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="24" cy="18" r="7" fill="#fff" stroke="none"/><path d="M11 43c0-6.5 5.4-11.8 12-11.8S35 36.5 35 43" fill="#fff" stroke="none"/><path d="M24 30.4 18.9 38.2 24 41.8l5.1-3.6z" fill="#24303A" stroke="none"/><path d="M34.5 15.5a10.5 10.5 0 0 0-21 0"/><rect x="33.5" y="14.5" width="5.6" height="9.5" rx="2.8" fill="#fff" stroke="none"/><rect x="8.9" y="14.5" width="5.6" height="9.5" rx="2.8" fill="#fff" stroke="none"/></svg>유포리아 AI 상담</span>
     <button id="chatClose">✕</button>
   </div>
   <div class="chat-body" id="chatBody">
@@ -1031,15 +1036,15 @@ window.toggleAudioGuide = function(btn){
          aria-label="밤하늘 아래 마드리드와 바르셀로나의 크리스마스 마켓 그림">
       <defs>
         <linearGradient id="xhanul" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0B0825"/><stop offset="55%" stop-color="#1E1550"/>
-          <stop offset="100%" stop-color="#3A1E63"/>
+          <stop offset="0%" stop-color="#18242C"/><stop offset="55%" stop-color="#2A343B"/>
+          <stop offset="100%" stop-color="#12304F"/>
         </linearGradient>
         <radialGradient id="xbul" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#FFD98A" stop-opacity=".95"/>
-          <stop offset="100%" stop-color="#FFD98A" stop-opacity="0"/>
+          <stop offset="0%" stop-color="#E6CBA2" stop-opacity=".95"/>
+          <stop offset="100%" stop-color="#E6CBA2" stop-opacity="0"/>
         </radialGradient>
         <linearGradient id="xnun" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#F3EFFF"/><stop offset="100%" stop-color="#D9D0F2"/>
+          <stop offset="0%" stop-color="#F1F3F4"/><stop offset="100%" stop-color="#DCE2E6"/>
         </linearGradient>
       </defs>
 
@@ -1055,34 +1060,34 @@ window.toggleAudioGuide = function(btn){
       </g>
 
       <!-- 왼쪽: 마드리드 플라자 마요르 (아케이드 + 쌍탑) -->
-      <g fill="#241A5C">
+      <g fill="#2C3C48">
         <rect x="18" y="96" width="196" height="76"/>
         <rect x="54" y="66" width="22" height="34"/><polygon points="65,50 54,68 76,68"/>
         <rect x="156" y="66" width="22" height="34"/><polygon points="167,50 156,68 178,68"/>
         <rect x="100" y="78" width="34" height="22"/><polygon points="117,62 98,80 136,80"/>
       </g>
-      <g fill="#FFC861" opacity=".9">
+      <g fill="#D9B072" opacity=".9">
         <rect x="30" y="112" width="9" height="13" rx="1"/><rect x="50" y="112" width="9" height="13" rx="1"/>
         <rect x="70" y="112" width="9" height="13" rx="1"/><rect x="90" y="112" width="9" height="13" rx="1"/>
         <rect x="110" y="112" width="9" height="13" rx="1"/><rect x="130" y="112" width="9" height="13" rx="1"/>
         <rect x="150" y="112" width="9" height="13" rx="1"/><rect x="170" y="112" width="9" height="13" rx="1"/>
         <rect x="190" y="112" width="9" height="13" rx="1"/>
       </g>
-      <g fill="#0B0825">
+      <g fill="#18242C">
         <path d="M26 172v-22a10 10 0 0 1 20 0v22z"/><path d="M56 172v-22a10 10 0 0 1 20 0v22z"/>
         <path d="M86 172v-22a10 10 0 0 1 20 0v22z"/><path d="M116 172v-22a10 10 0 0 1 20 0v22z"/>
         <path d="M146 172v-22a10 10 0 0 1 20 0v22z"/><path d="M176 172v-22a10 10 0 0 1 20 0v22z"/>
       </g>
 
       <!-- 오른쪽: 바르셀로나 사그라다 파밀리아 (첨탑) -->
-      <g fill="#241A5C">
+      <g fill="#2C3C48">
         <polygon points="372,172 372,96 384,54 396,96 396,172"/>
         <polygon points="402,172 402,86 416,36 430,86 430,172"/>
         <polygon points="436,172 436,96 448,54 460,96 460,172"/>
         <polygon points="466,172 466,106 476,70 486,106 486,172"/>
         <rect x="368" y="138" width="124" height="34"/>
       </g>
-      <g fill="#FFC861" opacity=".85">
+      <g fill="#D9B072" opacity=".85">
         <circle cx="384" cy="70" r="2.4"/><circle cx="416" cy="52" r="2.8"/>
         <circle cx="448" cy="70" r="2.4"/><circle cx="476" cy="84" r="2"/>
         <rect x="378" y="148" width="7" height="11" rx="1"/><rect x="398" y="148" width="7" height="11" rx="1"/>
@@ -1092,48 +1097,48 @@ window.toggleAudioGuide = function(btn){
 
       <!-- 가운데 크리스마스 트리 -->
       <g>
-        <polygon points="280,58 258,104 302,104" fill="#0E7A52"/>
+        <polygon points="280,58 258,104 302,104" fill="#46705F"/>
         <polygon points="280,86 252,134 308,134" fill="#12945F"/>
-        <polygon points="280,116 246,166 314,166" fill="#0E7A52"/>
+        <polygon points="280,116 246,166 314,166" fill="#46705F"/>
         <rect x="274" y="166" width="12" height="12" fill="#4A2F17"/>
         <g class="xmas-star">
           <circle class="xmas-glow" cx="280" cy="56" r="20" fill="url(#xbul)"/>
-          <polygon class="xmas-tip" points="280,40 284,52 296,52 286,60 290,72 280,64 270,72 274,60 264,52 276,52" fill="#FFD98A"/>
+          <polygon class="xmas-tip" points="280,40 284,52 296,52 286,60 290,72 280,64 270,72 274,60 264,52 276,52" fill="#E6CBA2"/>
         </g>
-        <g fill="#FFC861"><circle cx="268" cy="98" r="2.6"/><circle cx="292" cy="98" r="2.6"/>
+        <g fill="#D9B072"><circle cx="268" cy="98" r="2.6"/><circle cx="292" cy="98" r="2.6"/>
           <circle cx="262" cy="126" r="2.6"/><circle cx="298" cy="126" r="2.6"/><circle cx="280" cy="112" r="2.6"/>
           <circle cx="256" cy="156" r="2.6"/><circle cx="304" cy="156" r="2.6"/><circle cx="280" cy="146" r="2.6"/></g>
       </g>
 
       <!-- 전구 줄 -->
-      <path d="M0 44 Q140 86 280 44 Q420 2 560 44" fill="none" stroke="#6E6A93" stroke-width="1.2" opacity=".55"/>
+      <path d="M0 44 Q140 86 280 44 Q420 2 560 44" fill="none" stroke="#64707A" stroke-width="1.2" opacity=".55"/>
       <g>
-        <circle cx="70" cy="64" r="3.4" fill="#FFD98A"/><circle cx="140" cy="70" r="3.4" fill="#FF9A3D"/>
-        <circle cx="210" cy="62" r="3.4" fill="#FFD98A"/><circle cx="350" cy="24" r="3.4" fill="#FF9A3D"/>
-        <circle cx="420" cy="18" r="3.4" fill="#FFD98A"/><circle cx="490" cy="28" r="3.4" fill="#FF9A3D"/>
+        <circle cx="70" cy="64" r="3.4" fill="#E6CBA2"/><circle cx="140" cy="70" r="3.4" fill="#C58B52"/>
+        <circle cx="210" cy="62" r="3.4" fill="#E6CBA2"/><circle cx="350" cy="24" r="3.4" fill="#C58B52"/>
+        <circle cx="420" cy="18" r="3.4" fill="#E6CBA2"/><circle cx="490" cy="28" r="3.4" fill="#C58B52"/>
       </g>
 
       <!-- 마켓 가판대 -->
       <g>
         <g transform="translate(96,150)">
-          <polygon points="0,10 30,10 36,0 -6,0" fill="#C8305A"/>
-          <rect x="0" y="10" width="30" height="24" fill="#F3EFFF"/>
-          <rect x="6" y="16" width="18" height="12" fill="#FFC861"/>
+          <polygon points="0,10 30,10 36,0 -6,0" fill="#94634A"/>
+          <rect x="0" y="10" width="30" height="24" fill="#F1F3F4"/>
+          <rect x="6" y="16" width="18" height="12" fill="#D9B072"/>
         </g>
         <g transform="translate(196,154)">
-          <polygon points="0,10 30,10 36,0 -6,0" fill="#0E7A52"/>
-          <rect x="0" y="10" width="30" height="20" fill="#F3EFFF"/>
-          <rect x="6" y="15" width="18" height="10" fill="#FFC861"/>
+          <polygon points="0,10 30,10 36,0 -6,0" fill="#46705F"/>
+          <rect x="0" y="10" width="30" height="20" fill="#F1F3F4"/>
+          <rect x="6" y="15" width="18" height="10" fill="#D9B072"/>
         </g>
         <g transform="translate(304,150)">
-          <polygon points="0,10 30,10 36,0 -6,0" fill="#C8305A"/>
-          <rect x="0" y="10" width="30" height="24" fill="#F3EFFF"/>
-          <rect x="6" y="16" width="18" height="12" fill="#FFC861"/>
+          <polygon points="0,10 30,10 36,0 -6,0" fill="#94634A"/>
+          <rect x="0" y="10" width="30" height="24" fill="#F1F3F4"/>
+          <rect x="6" y="16" width="18" height="12" fill="#D9B072"/>
         </g>
         <g transform="translate(404,154)">
-          <polygon points="0,10 30,10 36,0 -6,0" fill="#0E7A52"/>
-          <rect x="0" y="10" width="30" height="20" fill="#F3EFFF"/>
-          <rect x="6" y="15" width="18" height="10" fill="#FFC861"/>
+          <polygon points="0,10 30,10 36,0 -6,0" fill="#46705F"/>
+          <rect x="0" y="10" width="30" height="20" fill="#F1F3F4"/>
+          <rect x="6" y="15" width="18" height="10" fill="#D9B072"/>
         </g>
       </g>
       <ellipse cx="111" cy="186" rx="86" ry="24" fill="url(#xbul)"/>

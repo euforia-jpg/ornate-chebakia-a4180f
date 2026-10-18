@@ -9,32 +9,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --violet: #6C3CE9;
-    --pink: #E6317B;
-    --orange: #FF7A1A;
-    --teal: #12C9AE;
-    --navy: #14103D;
+    --violet: #4A6E86;
+    --pink: #94634A;
+    --orange: #8E6139;
+    --teal: #52786C;
+    --navy: #24303A;
     --paper: #FFFFFF;
-    --ink: #171235;
-    --muted: #6E6A93;
-    --line: #EAE7F7;
+    --ink: #24303A;
+    --muted: #64707A;
+    --line: #E4E6E8;
     --radius: 18px;
 
     /* 연한 배경용 파스텔 톤 */
-    --wash-violet: #EFEBFD;
-    --wash-pink:   #FDECF3;
-    --wash-orange: #FFF2E6;
-    --wash-teal:   #E7F8F5;
+    --wash-violet: #EEF1F3;
+    --wash-pink:   #F4EFEA;
+    --wash-orange: #F5F1EB;
+    --wash-teal:   #EDF1EF;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:
-      repeating-linear-gradient(115deg,
-        var(--wash-violet) 0 220px,
-        var(--wash-pink) 220px 400px,
-        var(--wash-orange) 400px 560px,
-        var(--wash-teal) 560px 760px);
+      #F6F6F6;
     background-attachment: fixed;
     color: var(--ink);
     font-family: 'Work Sans', sans-serif;
@@ -44,7 +40,7 @@
   body::before{
     content:'';
     position: fixed; inset:0;
-    background-image: radial-gradient(rgba(20,16,61,0.055) 1.3px, transparent 1.3px);
+    background-image: radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px);
     background-size: 13px 13px;
     pointer-events:none;
   }
@@ -67,7 +63,7 @@
     display:flex; align-items:center; justify-content:center;
     color:#fff; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:30px;
     border: 3px solid #fff;
-    box-shadow: 0 10px 22px -10px rgba(20,16,61,0.5);
+    box-shadow: 0 10px 22px -10px rgba(36, 48, 58,0.5);
     flex:0 0 auto;
   }
   .logo .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:32px; color: var(--navy); line-height:1; }
@@ -97,7 +93,7 @@
     text-decoration:none; font-size:13.5px; font-weight:800; color: var(--muted);
     padding:8px 14px; border-radius:999px; transition: all .15s ease;
   }
-  .site-nav a:hover{ color: var(--violet); background: rgba(108,60,233,0.08); }
+  .site-nav a:hover{ color: var(--violet); background: rgba(74, 110, 134,0.08); }
   .site-nav a.active{ color:#fff; background: var(--navy); }
 
   /* ---- hero ---- */
@@ -127,7 +123,7 @@
   .section{ padding: 8px clamp(20px,4vw,56px) 56px; }
   .section-inner{
     background: var(--paper); border-radius: 26px; padding: 36px clamp(18px,3vw,40px);
-    box-shadow: 0 18px 44px -24px rgba(20,16,61,0.32);
+    box-shadow: 0 18px 44px -24px rgba(36, 48, 58,0.32);
     border: 1.5px solid var(--line);
   }
   .section-head{
@@ -146,9 +142,9 @@
     border:2px solid var(--line); border-radius: var(--radius); padding:16px 18px; background:#fff;
     transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
   }
-  .venue-card:hover{ transform: translateY(-3px); border-color: var(--violet); box-shadow: 0 14px 28px -18px rgba(20,16,61,0.45); }
+  .venue-card:hover{ transform: translateY(-3px); border-color: var(--violet); box-shadow: 0 14px 28px -18px rgba(36, 48, 58,0.45); }
   .venue-card:focus-visible{ outline:3px solid var(--violet); outline-offset:2px; }
-  .venue-card.active{ border-color: var(--navy); background: #FBFAFF; box-shadow: inset 0 0 0 1px var(--navy); }
+  .venue-card.active{ border-color: var(--navy); background: #FCFDFD; box-shadow: inset 0 0 0 1px var(--navy); }
   .venue-card .plan{ flex:0 0 58px; }
   .venue-card .city{ display:block; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:17px; color:var(--navy); }
   .venue-card .stad{ display:block; font-size:12.5px; color:var(--ink); font-weight:700; margin-top:3px; line-height:1.35; }
@@ -170,7 +166,7 @@
     padding:11px 40px 11px 40px; font-family:'Work Sans'; font-size:13.5px; font-weight:600; color:var(--ink);
     background:#fff; transition: border-color .15s ease;
   }
-  .search-box input::placeholder{ color:#A3A0BF; font-weight:600; }
+  .search-box input::placeholder{ color:#ABB0B4; font-weight:600; }
   .search-box input:focus{ border-color: var(--violet); }
   .search-clear{
     all:unset; position:absolute; right:10px; top:50%; transform:translateY(-50%);
@@ -183,7 +179,7 @@
     all:unset; cursor:pointer; display:flex; align-items:center; gap:7px; padding:8px 16px; border-radius:9px;
     font-size:13px; font-weight:800; color:var(--navy); transition: all .15s ease;
   }
-  .view-toggle button.active{ background:#fff; box-shadow: 0 2px 6px -2px rgba(20,16,61,0.3); color:var(--violet); }
+  .view-toggle button.active{ background:#fff; box-shadow: 0 2px 6px -2px rgba(36, 48, 58,0.3); color:var(--violet); }
 
   .filters{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; }
   .chip{
@@ -196,7 +192,7 @@
   .filters.dimmed{ opacity:.4; pointer-events:none; }
 
   .search-note{
-    display:none; align-items:center; gap:8px; background:#F3F0FF; border-radius:12px;
+    display:none; align-items:center; gap:8px; background:#F6F8F9; border-radius:12px;
     padding:11px 16px; font-size:12.5px; font-weight:700; color:var(--navy); margin-bottom:20px;
   }
   .search-note.show{ display:flex; }
@@ -212,18 +208,18 @@
     font-family:'Work Sans', sans-serif;
     transition: transform .15s ease, box-shadow .15s ease, border-color .15s;
   }
-  .ticket:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px -12px rgba(20,16,61,0.3); border-color: var(--violet); }
+  .ticket:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px -12px rgba(36, 48, 58,0.3); border-color: var(--violet); }
   .ticket:focus-visible{ outline:3px solid var(--violet); outline-offset:2px; }
 .ticket-top{
     display:flex; justify-content:space-between; align-items:center;
     padding: 12px 18px; border-radius: 16px 16px 0 0; color:var(--navy);min-height:20px;
   }
-  .ticket-top.madrid{ background: linear-gradient(90deg, color-mix(in srgb, var(--violet) 32%, white), color-mix(in srgb, #8B5CF6 32%, white)); }
-  .ticket-top.barcelona{ background: linear-gradient(90deg, color-mix(in srgb, var(--pink) 32%, white), color-mix(in srgb, #A5124B 32%, white)); }
+  .ticket-top.madrid{ background: linear-gradient(90deg, color-mix(in srgb, var(--violet) 32%, white), color-mix(in srgb, #5B8099 32%, white)); }
+  .ticket-top.barcelona{ background: linear-gradient(90deg, color-mix(in srgb, var(--pink) 32%, white), color-mix(in srgb, #7A5A3E 32%, white)); }
   .ticket-top.sevilla{ background: linear-gradient(90deg, color-mix(in srgb, var(--orange) 32%, white), color-mix(in srgb, var(--pink) 32%, white)); }
-  .ticket-top.otra{ background: linear-gradient(90deg, color-mix(in srgb, var(--teal) 32%, white), color-mix(in srgb, #0E9E8B 32%, white)); }
-  .t-date{ font-family:'Space Mono'; font-size:14.5px; font-weight:700; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(20,16,61,.12); }
-  .t-comp{ font-size:13px; letter-spacing:1px; text-transform:uppercase; font-weight:800; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(20,16,61,.12); }
+  .ticket-top.otra{ background: linear-gradient(90deg, color-mix(in srgb, var(--teal) 32%, white), color-mix(in srgb, #46705F 32%, white)); }
+  .t-date{ font-family:'Space Mono'; font-size:14.5px; font-weight:700; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(36, 48, 58,.12); }
+  .t-comp{ font-size:13px; letter-spacing:1px; text-transform:uppercase; font-weight:800; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(36, 48, 58,.12); }
   .ticket-main{ padding:18px 18px 14px; }
   .t-teams{ font-size:19px; font-weight:800; margin:0 0 6px; line-height:1.3; color: var(--navy); }
   .t-teams .vs{ color:var(--muted); font-weight:400; }
@@ -231,8 +227,8 @@
   .t-tags{ display:flex; gap:6px; margin-top:12px; flex-wrap:wrap; }
   .tag{ font-size:10.5px; padding:4px 10px; border-radius:6px; font-weight:800; letter-spacing:.3px; }
   .tag.derby{ background: #FDE4EC; color:#B31855; }
-  .tag.pkg{ background: #E7F9F5; color:#0A8A76; }
-  .tag.otra{ background: #F1EEFF; color:#4B29A8; }
+  .tag.pkg{ background: #EDF1EF; color:#3E6155; }
+  .tag.otra{ background: #F5F7F8; color:#164270; }
   .ticket-stub{
     display:flex; justify-content:space-between; align-items:center;
     border-top: 2px dashed var(--line); padding: 14px 18px;
@@ -270,7 +266,7 @@
   .cal-dow, .cal-body{ display:grid; grid-template-columns: repeat(7, 1fr); }
   .cal-dow div{
     padding:10px 6px; text-align:center; font-size:11.5px; font-weight:800; color:var(--muted);
-    background:#FBFAFF; border-bottom:2px solid var(--line); letter-spacing:.5px;
+    background:#FCFDFD; border-bottom:2px solid var(--line); letter-spacing:.5px;
   }
   .cal-dow div:first-child{ color:var(--pink); }
   .cal-dow div:last-child{ color:var(--violet); }
@@ -294,9 +290,9 @@
   .cal-pill:focus-visible{ outline:2px solid var(--navy); outline-offset:1px; }
   .cal-pill .ptime{ font-family:'Space Mono'; opacity:.85; font-size:9.5px; display:block; }
   .cal-pill.madrid{ background: var(--violet); }
-  .cal-pill.barcelona{ background: #A5124B; }
+  .cal-pill.barcelona{ background: #7A5A3E; }
   .cal-pill.sevilla{ background: var(--orange); }
-  .cal-pill.otra{ background: #0E9E8B; }
+  .cal-pill.otra{ background: #46705F; }
   .cal-pill.derby{ box-shadow: inset 0 0 0 2px var(--navy); }
 
   /* ---- 빈 상태 ---- */
@@ -329,7 +325,7 @@
   .stadium-title .meta{ font-size:12.5px; color:var(--muted); margin-top:6px; font-weight:600; }
   .stadium-title .cap{
     display:inline-block; margin-top:8px; font-family:'Space Mono'; font-size:11px; font-weight:700;
-    color:var(--violet); background:#F3F0FF; padding:4px 12px; border-radius:999px;
+    color:var(--violet); background:#F6F8F9; padding:4px 12px; border-radius:999px;
   }
   .seat-sec{ cursor:pointer; transition: opacity .12s ease; }
   .seat-sec.selected{ stroke: var(--navy); stroke-width:3; }
@@ -351,7 +347,7 @@
   .sec-row:last-of-type{ border-bottom:none; }
   .sec-row .label{ color:rgba(255,255,255,0.6); font-weight:600; flex:0 0 auto; }
   .sec-row .val{ font-family:'Space Mono'; font-weight:700; color: var(--teal); text-align:right; }
-  .sec-row .val.warn{ color: #FF9CBE; }
+  .sec-row .val.warn{ color: #E8B38F; }
 
   .qty-row{ display:flex; align-items:center; justify-content:space-between; margin:18px 0; }
   .qty-ctrl{ display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.1); border-radius:10px; padding:6px 10px;}
@@ -383,7 +379,7 @@
   .footer-inner{
     display:grid; grid-template-columns: 1.4fr 1fr auto; gap:32px;
     background: var(--paper); border:1.5px solid var(--line); border-radius: 26px;
-    padding: 34px clamp(18px,3vw,40px); box-shadow: 0 18px 44px -28px rgba(20,16,61,0.28);
+    padding: 34px clamp(18px,3vw,40px); box-shadow: 0 18px 44px -28px rgba(36, 48, 58,0.28);
   }
   .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
   .footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
@@ -444,7 +440,7 @@
   .field input:focus, .field select:focus{ border-color: var(--violet); }
   .pass-note{
     font-size:11.5px; color:var(--muted); font-weight:600; line-height:1.6; margin: 6px 0 24px;
-    background: #F3F0FF; border-radius:12px; padding:12px 16px;
+    background: #F6F8F9; border-radius:12px; padding:12px 16px;
   }
   .pass-actions{ display:flex; gap:12px; }
   .pass-actions .cta.secondary{ flex:0 0 140px; background: var(--line); color:var(--navy); margin-top:0; }
@@ -455,9 +451,9 @@
   .field.err input{ border-color: var(--pink); background:#FFF7FB; }
   .field.err .err-msg{ display:block; }
   .form-alert{
-    display:none; align-items:flex-start; gap:10px; background:#FDECF3; border:2px solid #F7B6CE;
+    display:none; align-items:flex-start; gap:10px; background:#F4EFEA; border:2px solid #EBC7AE;
     border-radius:12px; padding:12px 16px; margin-bottom:18px;
-    font-size:12.5px; font-weight:700; color:#9B1B4B; line-height:1.55;
+    font-size:12.5px; font-weight:700; color:#8F2E14; line-height:1.55;
   }
   .form-alert.show{ display:flex; }
 
@@ -475,7 +471,7 @@
     font-family:'Space Mono'; font-weight:700; font-size:15px; color:var(--navy);
     background:#fff; border-radius:8px; padding:3px 10px;
   }
-  .hold-bar.expired{ background: var(--wash-pink); border-color:#F7B6CE; color:#9B1B4B; }
+  .hold-bar.expired{ background: var(--wash-pink); border-color:#EBC7AE; color:#8F2E14; }
 
   .pay-card{
     background:var(--paper); border:2px solid var(--line); border-radius:var(--radius);
@@ -495,14 +491,14 @@
   .opt .t{ display:block; font-weight:800; font-size:13.5px; color:var(--navy); }
   .opt .d{ display:block; font-size:11.5px; color:var(--muted); font-weight:600; margin-top:4px; line-height:1.5; }
   .opt .p{ display:inline-block; margin-top:8px; font-family:'Space Mono'; font-size:11px; font-weight:700; color:var(--violet); }
-  .opt.on{ border-color:var(--navy); background:#FBFAFF; box-shadow: inset 0 0 0 1px var(--navy); }
+  .opt.on{ border-color:var(--navy); background:#FCFDFD; box-shadow: inset 0 0 0 1px var(--navy); }
 
   .agree{
     display:flex; gap:10px; align-items:flex-start; cursor:pointer;
     font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.6;
   }
   .agree input{ margin-top:2px; accent-color: var(--violet); width:16px; height:16px; flex:0 0 auto; }
-  .agree.err{ color:#9B1B4B; }
+  .agree.err{ color:#8F2E14; }
 
   .order-panel{
     background:var(--navy); color:#fff; border-radius:var(--radius); padding:22px;
@@ -553,7 +549,7 @@
   .pax-list{ display:flex; flex-direction:column; gap:8px; margin-top:10px; }
   .pax{
     display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-    background:#FBFAFF; border:1.5px solid var(--line); border-radius:10px; padding:9px 12px;
+    background:#FCFDFD; border:1.5px solid var(--line); border-radius:10px; padding:9px 12px;
     font-size:12.5px; font-weight:700; color:var(--navy);
   }
   .pax .doc{ font-family:'Space Mono'; font-weight:700; color:var(--muted); }
@@ -625,9 +621,9 @@
     footer{ padding:6px 16px 28px; }
     .footer-inner{ padding:22px 16px; border-radius:18px; }
   }
-.notice-overlay{ position:fixed; inset:0; background:rgba(20,16,61,0.55); z-index:500; display:none; align-items:center; justify-content:center; padding:20px; }
+.notice-overlay{ position:fixed; inset:0; background:rgba(36, 48, 58,0.55); z-index:500; display:none; align-items:center; justify-content:center; padding:20px; }
 .notice-overlay.show{ display:flex; }
-.notice-box{ background:#fff; border-radius:20px; max-width:400px; width:100%; overflow:hidden; box-shadow:0 30px 60px -20px rgba(20,16,61,0.5); }
+.notice-box{ background:#fff; border-radius:20px; max-width:400px; width:100%; overflow:hidden; box-shadow:0 30px 60px -20px rgba(36, 48, 58,0.5); }
 .notice-banner{ background:linear-gradient(135deg,var(--violet),var(--pink)); padding:28px 24px 24px; color:#fff; position:relative; }
 .notice-banner .tag{ display:inline-block; background:rgba(255,255,255,0.2); padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.5px; margin-bottom:12px; }
 .notice-banner h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:20px; margin:0; line-height:1.3; }
@@ -643,14 +639,14 @@
   .qr-box img{ width:92px; height:92px; border-radius:10px; border:1.5px solid var(--line); padding:6px; background:#fff; display:block; }
   .qr-box .qr-caption{ font-size:11px; color:var(--muted); font-weight:600; }
   .share-btn{ display:inline-flex; align-items:center; gap:7px; padding:9px 16px; border-radius:999px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink); font-size:12.5px; font-weight:800; cursor:pointer; font-family:inherit; transition:background .15s,border-color .15s; }
-  .share-btn:hover{ background:#F5F3FE; border-color:var(--violet); }
+  .share-btn:hover{ background:#F1F3F4; border-color:var(--violet); }
   .share-btn svg{ width:14px; height:14px; fill:var(--violet); flex-shrink:0; }
 
 /* ===== 푸터 (4단 레이아웃) ===== */
   footer.euf-footer{ padding:24px clamp(20px,4vw,56px) 40px; background:none; border:0; }
   .euf-footer .ef-inner{ display:grid; grid-template-columns:1.25fr 1.15fr 1.15fr .85fr; gap:34px;
     background:var(--paper); border:1.5px solid var(--line); border-radius:26px;
-    padding:36px clamp(18px,3vw,40px) 30px; box-shadow:0 18px 44px -28px rgba(20,16,61,0.28);
+    padding:36px clamp(18px,3vw,40px) 30px; box-shadow:0 18px 44px -28px rgba(36, 48, 58,0.28);
     max-width:1180px; margin:0 auto; }
   .euf-footer .ef-col h6{ margin:0 0 16px; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
     color:var(--navy); font-weight:800; }
@@ -660,7 +656,7 @@
     padding:10px 18px; border-radius:999px; font-size:12.5px; font-weight:800; cursor:pointer;
     border:1.5px solid var(--line); background:#fff; color:var(--ink); font-family:inherit;
     transition:background .15s,border-color .15s; }
-  .euf-footer .ef-share:hover{ background:#F5F3FE; border-color:var(--violet); }
+  .euf-footer .ef-share:hover{ background:#F1F3F4; border-color:var(--violet); }
   .euf-footer .ef-share svg{ width:14px; height:14px; fill:var(--violet); flex-shrink:0; }
   .euf-footer .ef-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
   .euf-footer .ef-list li{ display:flex; gap:11px; align-items:flex-start; }
@@ -678,7 +674,7 @@
   .euf-footer .ef-qr span{ font-size:11.5px; line-height:1.65; font-weight:600; color:var(--muted); }
   .euf-footer .ef-map{ display:flex; align-items:center; justify-content:center; gap:8px; height:118px;
     border-radius:14px; text-decoration:none; font-size:13px; font-weight:800;
-    background:#F5F3FE; border:1.5px solid var(--line); color:var(--navy);
+    background:#F1F3F4; border:1.5px solid var(--line); color:var(--navy);
     transition:border-color .15s,color .15s; }
   .euf-footer .ef-map:hover{ border-color:var(--violet); color:var(--violet); }
   .euf-footer .ef-map svg{ width:17px; height:17px; }
@@ -700,7 +696,7 @@
     footer.euf-footer{ padding:6px 16px 28px; } }
 </style>
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#14103D">
+  <meta name="theme-color" content="#24303A">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- 검색·공유 (대표주소 / 카톡·페북 미리보기 / 아이콘) -->
@@ -786,8 +782,8 @@
         <div class="toolbar">
           <div class="search-box">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <circle cx="7" cy="7" r="5" stroke="#6E6A93" stroke-width="2"/>
-              <path d="M11 11L14.5 14.5" stroke="#6E6A93" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="7" cy="7" r="5" stroke="#64707A" stroke-width="2"/>
+              <path d="M11 11L14.5 14.5" stroke="#64707A" stroke-width="2" stroke-linecap="round"/>
             </svg>
             <input type="search" id="searchInput" autocomplete="off"
                    placeholder="다른 경기 검색 — 팀, 구장, 도시, 날짜 (예: 발렌시아, 메스타야, 9월)">
@@ -830,10 +826,10 @@
               <button class="cal-today" id="calToday">이번 달</button>
             </div>
             <div class="cal-legend">
-              <span class="li"><span class="dot" style="background:#6C3CE9"></span>마드리드</span>
-              <span class="li"><span class="dot" style="background:#A5124B"></span>바르셀로나</span>
-              <span class="li"><span class="dot" style="background:#FF7A1A"></span>세비야</span>
-              <span class="li"><span class="dot" style="background:#0E9E8B"></span>그 외 도시</span>
+              <span class="li"><span class="dot" style="background:#4A6E86"></span>마드리드</span>
+              <span class="li"><span class="dot" style="background:#7A5A3E"></span>바르셀로나</span>
+              <span class="li"><span class="dot" style="background:#8E6139"></span>세비야</span>
+              <span class="li"><span class="dot" style="background:#46705F"></span>그 외 도시</span>
             </div>
           </div>
           <div class="cal-scroll">
@@ -848,8 +844,8 @@
 
         <div class="empty" id="emptyState">
           <svg width="46" height="46" viewBox="0 0 46 46" fill="none" aria-hidden="true">
-            <circle cx="20" cy="20" r="13" stroke="#EAE7F7" stroke-width="3"/>
-            <path d="M30 30L42 42" stroke="#EAE7F7" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="20" cy="20" r="13" stroke="#E4E6E8" stroke-width="3"/>
+            <path d="M30 30L42 42" stroke="#E4E6E8" stroke-width="3" stroke-linecap="round"/>
           </svg>
           <h3 id="emptyTitle">조건에 맞는 경기가 없어요</h3>
           <p id="emptyText">다른 팀 이름이나 구장으로 검색해 보세요. 라리가 전 구장 일정을 찾을 수 있어요.</p>
@@ -1205,128 +1201,126 @@ const VENUES = {
 };
 
 const MATCHES = [
-  { id:'m01', date:'2026-10-18', time:'21:00', round:'9라운드', venue:'bernabeu',
+  { id:'m01', date:'2026-10-17', time:'14:00', round:'9라운드', venue:'rcde',
+    home:'RCD 에스파뇰', away:'아틀레티코 마드리드', from:0, seats:'ok' },
+  { id:'m02', date:'2026-10-17', time:'16:15', round:'9라운드', venue:'ceramica',
+    home:'비야레알 CF', away:'엘체 CF', from:0, seats:'ok' },
+  { id:'m03', date:'2026-10-17', time:'18:30', round:'9라운드', venue:'villamarin',
+    home:'레알 베티스', away:'FC 바르셀로나', from:0, seats:'ok' },
+  { id:'m04', date:'2026-10-17', time:'21:00', round:'9라운드', venue:'mestalla',
+    home:'발렌시아 CF', away:'아틀레틱 클루브', from:0, seats:'ok' },
+  { id:'m05', date:'2026-10-18', time:'21:00', round:'9라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'세비야 FC', from:0, seats:'ok' },
-  { id:'m02', date:'2026-10-24', time:'18:30', round:'10라운드', venue:'mestalla',
+  { id:'m06', date:'2026-10-24', time:'18:30', round:'10라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'비야레알 CF', from:0, seats:'ok' },
-  { id:'m03', date:'2026-10-24', time:'21:00', round:'10라운드', venue:'metropolitano',
+  { id:'m07', date:'2026-10-24', time:'21:00', round:'10라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'데포르티보 라코루냐', from:0, seats:'ok' },
-  { id:'m04', date:'2026-10-25', time:'14:00', round:'10라운드', venue:'sanmames',
+  { id:'m08', date:'2026-10-25', time:'14:00', round:'10라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m05', date:'2026-10-25', time:'18:30', round:'10라운드', venue:'realearena',
+  { id:'m09', date:'2026-10-25', time:'18:30', round:'10라운드', venue:'realearena',
     home:'레알 소시에다드', away:'레반테 UD', from:0, seats:'ok' },
-  { id:'m06', date:'2026-10-25', time:'21:00', round:'10라운드', venue:'campnou',
+  { id:'m10', date:'2026-10-25', time:'21:00', round:'10라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'레알 마드리드', from:0, seats:'ok' },
-  { id:'m07', date:'2026-10-26', time:'21:00', round:'10라운드', venue:'pizjuan',
+  { id:'m11', date:'2026-10-26', time:'21:00', round:'10라운드', venue:'pizjuan',
     home:'세비야 FC', away:'오사수나', from:0, seats:'ok' },
-  { id:'m08', date:'2026-10-30', time:'21:00', round:'11라운드', venue:'ceramica',
+  { id:'m12', date:'2026-10-30', time:'21:00', round:'11라운드', venue:'ceramica',
     home:'비야레알 CF', away:'RCD 에스파뇰', from:0, seats:'ok' },
-  { id:'m09', date:'2026-10-31', time:'18:30', round:'11라운드', venue:'villamarin',
+  { id:'m13', date:'2026-10-31', time:'18:30', round:'11라운드', venue:'villamarin',
     home:'레알 베티스', away:'말라가 CF', from:0, seats:'ok' },
-  { id:'m10', date:'2026-10-31', time:'21:00', round:'11라운드', venue:'campnou',
+  { id:'m14', date:'2026-10-31', time:'21:00', round:'11라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m11', date:'2026-11-01', time:'21:00', round:'11라운드', venue:'sanmames',
+  { id:'m15', date:'2026-11-01', time:'21:00', round:'11라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'레알 소시에다드', from:0, seats:'ok' },
-  { id:'m12', date:'2026-11-06', time:'21:00', round:'12라운드', venue:'pizjuan',
+  { id:'m16', date:'2026-11-06', time:'21:00', round:'12라운드', venue:'pizjuan',
     home:'세비야 FC', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m13', date:'2026-11-07', time:'16:15', round:'12라운드', venue:'rcde',
+  { id:'m17', date:'2026-11-07', time:'16:15', round:'12라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'데포르티보 라코루냐', from:0, seats:'ok' },
-  { id:'m14', date:'2026-11-07', time:'21:00', round:'12라운드', venue:'mestalla',
+  { id:'m18', date:'2026-11-07', time:'21:00', round:'12라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'레알 마드리드', from:0, seats:'ok' },
-  { id:'m15', date:'2026-11-08', time:'16:15', round:'12라운드', venue:'realearena',
+  { id:'m19', date:'2026-11-08', time:'16:15', round:'12라운드', venue:'realearena',
     home:'레알 소시에다드', away:'라요 바예카노', from:0, seats:'ok' },
-  { id:'m16', date:'2026-11-08', time:'18:30', round:'12라운드', venue:'ceramica',
+  { id:'m20', date:'2026-11-08', time:'18:30', round:'12라운드', venue:'ceramica',
     home:'비야레알 CF', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m17', date:'2026-11-08', time:'21:00', round:'12라운드', venue:'metropolitano',
+  { id:'m21', date:'2026-11-08', time:'21:00', round:'12라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'FC 바르셀로나', from:0, seats:'ok' },
-  { id:'m18', date:'2026-11-22', time:'미정', round:'13라운드', venue:'sanmames',
+  { id:'m22', date:'2026-11-22', time:'미정', round:'13라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'RCD 에스파뇰', from:0, seats:'ok' },
-  { id:'m19', date:'2026-11-22', time:'미정', round:'13라운드', venue:'campnou',
+  { id:'m23', date:'2026-11-22', time:'미정', round:'13라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'비야레알 CF', from:0, seats:'ok' },
-  { id:'m20', date:'2026-11-22', time:'미정', round:'13라운드', venue:'bernabeu',
+  { id:'m24', date:'2026-11-22', time:'미정', round:'13라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'셀타 비고', from:0, seats:'ok' },
-  { id:'m21', date:'2026-11-22', time:'미정', round:'13라운드', venue:'pizjuan',
+  { id:'m25', date:'2026-11-22', time:'미정', round:'13라운드', venue:'pizjuan',
     home:'세비야 FC', away:'레알 베티스', from:0, seats:'ok' },
-  { id:'m22', date:'2026-11-29', time:'미정', round:'14라운드', venue:'villamarin',
+  { id:'m26', date:'2026-11-29', time:'미정', round:'14라운드', venue:'villamarin',
     home:'레알 베티스', away:'라요 바예카노', from:0, seats:'ok' },
-  { id:'m23', date:'2026-11-29', time:'미정', round:'14라운드', venue:'mestalla',
+  { id:'m27', date:'2026-11-29', time:'미정', round:'14라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'오사수나', from:0, seats:'ok' },
-  { id:'m24', date:'2026-11-29', time:'미정', round:'14라운드', venue:'bernabeu',
+  { id:'m28', date:'2026-11-29', time:'미정', round:'14라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m25', date:'2026-11-29', time:'미정', round:'14라운드', venue:'rcde',
+  { id:'m29', date:'2026-11-29', time:'미정', round:'14라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m26', date:'2026-11-29', time:'미정', round:'14라운드', venue:'realearena',
+  { id:'m30', date:'2026-11-29', time:'미정', round:'14라운드', venue:'realearena',
     home:'레알 소시에다드', away:'세비야 FC', from:0, seats:'ok' },
-  { id:'m27', date:'2026-12-06', time:'미정', round:'15라운드', venue:'pizjuan',
+  { id:'m31', date:'2026-12-06', time:'미정', round:'15라운드', venue:'pizjuan',
     home:'세비야 FC', away:'말라가 CF', from:0, seats:'ok' },
-  { id:'m28', date:'2026-12-06', time:'미정', round:'15라운드', venue:'metropolitano',
+  { id:'m32', date:'2026-12-06', time:'미정', round:'15라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'레알 베티스', from:0, seats:'ok' },
-  { id:'m29', date:'2026-12-06', time:'미정', round:'15라운드', venue:'campnou',
+  { id:'m33', date:'2026-12-06', time:'미정', round:'15라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'셀타 비고', from:0, seats:'ok' },
-  { id:'m30', date:'2026-12-06', time:'미정', round:'15라운드', venue:'sanmames',
+  { id:'m34', date:'2026-12-06', time:'미정', round:'15라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'레알 마드리드', from:0, seats:'ok' },
-  { id:'m31', date:'2026-12-06', time:'미정', round:'15라운드', venue:'ceramica',
+  { id:'m35', date:'2026-12-06', time:'미정', round:'15라운드', venue:'ceramica',
     home:'비야레알 CF', away:'레알 소시에다드', from:0, seats:'ok' },
-  { id:'m32', date:'2026-12-13', time:'미정', round:'16라운드', venue:'rcde',
+  { id:'m36', date:'2026-12-13', time:'미정', round:'16라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'셀타 비고', from:0, seats:'ok' },
-  { id:'m33', date:'2026-12-13', time:'미정', round:'16라운드', venue:'bernabeu',
+  { id:'m37', date:'2026-12-13', time:'미정', round:'16라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'오사수나', from:0, seats:'ok' },
-  { id:'m34', date:'2026-12-13', time:'미정', round:'16라운드', venue:'ceramica',
+  { id:'m38', date:'2026-12-13', time:'미정', round:'16라운드', venue:'ceramica',
     home:'비야레알 CF', away:'라요 바예카노', from:0, seats:'ok' },
-  { id:'m35', date:'2026-12-13', time:'미정', round:'16라운드', venue:'villamarin',
+  { id:'m39', date:'2026-12-13', time:'미정', round:'16라운드', venue:'villamarin',
     home:'레알 베티스', away:'라싱 산탄데르', from:0, seats:'ok' },
-  { id:'m36', date:'2026-12-13', time:'미정', round:'16라운드', venue:'realearena',
+  { id:'m40', date:'2026-12-13', time:'미정', round:'16라운드', venue:'realearena',
     home:'레알 소시에다드', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m37', date:'2026-12-13', time:'미정', round:'16라운드', venue:'metropolitano',
+  { id:'m41', date:'2026-12-13', time:'미정', round:'16라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'발렌시아 CF', from:0, seats:'ok' },
-  { id:'m38', date:'2026-12-20', time:'미정', round:'17라운드', venue:'sanmames',
+  { id:'m42', date:'2026-12-20', time:'미정', round:'17라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'레알 베티스', from:0, seats:'ok' },
-  { id:'m39', date:'2026-12-20', time:'미정', round:'17라운드', venue:'mestalla',
+  { id:'m43', date:'2026-12-20', time:'미정', round:'17라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'RCD 에스파뇰', from:0, seats:'ok' },
-  { id:'m40', date:'2026-12-20', time:'미정', round:'17라운드', venue:'campnou',
+  { id:'m44', date:'2026-12-20', time:'미정', round:'17라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'레알 소시에다드', from:0, seats:'ok' },
-  { id:'m41', date:'2026-12-20', time:'미정', round:'17라운드', venue:'pizjuan',
+  { id:'m45', date:'2026-12-20', time:'미정', round:'17라운드', venue:'pizjuan',
     home:'세비야 FC', away:'라싱 산탄데르', from:0, seats:'ok' },
-  { id:'m42', date:'2027-01-03', time:'미정', round:'18라운드', venue:'bernabeu',
+  { id:'m46', date:'2027-01-03', time:'미정', round:'18라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'헤타페 CF', from:0, seats:'ok' },
-  { id:'m43', date:'2027-01-03', time:'미정', round:'18라운드', venue:'realearena',
+  { id:'m47', date:'2027-01-03', time:'미정', round:'18라운드', venue:'realearena',
     home:'레알 소시에다드', away:'오사수나', from:0, seats:'ok' },
-  { id:'m44', date:'2027-01-03', time:'미정', round:'18라운드', venue:'villamarin',
+  { id:'m48', date:'2027-01-03', time:'미정', round:'18라운드', venue:'villamarin',
     home:'레알 베티스', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m45', date:'2027-01-03', time:'미정', round:'18라운드', venue:'rcde',
+  { id:'m49', date:'2027-01-03', time:'미정', round:'18라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'FC 바르셀로나', from:0, seats:'ok' },
-  { id:'m46', date:'2027-01-03', time:'미정', round:'18라운드', venue:'ceramica',
+  { id:'m50', date:'2027-01-03', time:'미정', round:'18라운드', venue:'ceramica',
     home:'비야레알 CF', away:'세비야 FC', from:0, seats:'ok' },
-  { id:'m47', date:'2027-01-10', time:'미정', round:'19라운드', venue:'sanmames',
+  { id:'m51', date:'2027-01-10', time:'미정', round:'19라운드', venue:'sanmames',
     home:'아틀레틱 클루브', away:'비야레알 CF', from:0, seats:'ok' },
-  { id:'m48', date:'2027-01-10', time:'미정', round:'19라운드', venue:'bernabeu',
+  { id:'m52', date:'2027-01-10', time:'미정', round:'19라운드', venue:'bernabeu',
     home:'레알 마드리드', away:'레반테 UD', from:0, seats:'ok' },
-  { id:'m49', date:'2027-01-10', time:'미정', round:'19라운드', venue:'metropolitano',
+  { id:'m53', date:'2027-01-10', time:'미정', round:'19라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'라싱 산탄데르', from:0, seats:'ok' },
-  { id:'m50', date:'2027-01-10', time:'미정', round:'19라운드', venue:'pizjuan',
+  { id:'m54', date:'2027-01-10', time:'미정', round:'19라운드', venue:'pizjuan',
     home:'세비야 FC', away:'셀타 비고', from:0, seats:'ok' },
-  { id:'m51', date:'2027-01-10', time:'미정', round:'19라운드', venue:'rcde',
+  { id:'m55', date:'2027-01-10', time:'미정', round:'19라운드', venue:'rcde',
     home:'RCD 에스파뇰', away:'레알 베티스', from:0, seats:'ok' },
-  { id:'m52', date:'2027-01-10', time:'미정', round:'19라운드', venue:'mestalla',
+  { id:'m56', date:'2027-01-10', time:'미정', round:'19라운드', venue:'mestalla',
     home:'발렌시아 CF', away:'말라가 CF', from:0, seats:'ok' },
-  { id:'m53', date:'2027-01-17', time:'미정', round:'20라운드', venue:'campnou',
+  { id:'m57', date:'2027-01-17', time:'미정', round:'20라운드', venue:'campnou',
     home:'FC 바르셀로나', away:'엘체 CF', from:0, seats:'ok' },
-  { id:'m54', date:'2027-01-17', time:'미정', round:'20라운드', venue:'ceramica',
+  { id:'m58', date:'2027-01-17', time:'미정', round:'20라운드', venue:'ceramica',
     home:'비야레알 CF', away:'데포르티보 알라베스', from:0, seats:'ok' },
-  { id:'m55', date:'2027-01-17', time:'미정', round:'20라운드', venue:'villamarin',
+  { id:'m59', date:'2027-01-17', time:'미정', round:'20라운드', venue:'villamarin',
     home:'레알 베티스', away:'데포르티보 라코루냐', from:0, seats:'ok' },
-  { id:'m56', date:'2027-01-17', time:'미정', round:'20라운드', venue:'metropolitano',
+  { id:'m60', date:'2027-01-17', time:'미정', round:'20라운드', venue:'metropolitano',
     home:'아틀레티코 마드리드', away:'레알 소시에다드', from:0, seats:'ok' },
-  { id:'m57', date:'2027-01-24', time:'미정', round:'21라운드', venue:'bernabeu',
-    home:'레알 마드리드', away:'레알 베티스', from:0, seats:'ok' },
-  { id:'m58', date:'2027-01-24', time:'미정', round:'21라운드', venue:'mestalla',
-    home:'발렌시아 CF', away:'세비야 FC', from:0, seats:'ok' },
-  { id:'m59', date:'2027-01-24', time:'미정', round:'21라운드', venue:'realearena',
-    home:'레알 소시에다드', away:'말라가 CF', from:0, seats:'ok' },
-  { id:'m60', date:'2027-01-24', time:'미정', round:'21라운드', venue:'sanmames',
-    home:'아틀레틱 클루브', away:'레반테 UD', from:0, seats:'ok' },
-  { id:'m61', date:'2027-01-24', time:'미정', round:'21라운드', venue:'rcde',
-    home:'RCD 에스파뇰', away:'비야레알 CF', from:0, seats:'ok' },
 ];
 
 /* ============ 헬퍼 ============ */
@@ -1412,11 +1406,11 @@ function seededInt(seed, min, max){
 
 /* ============ 구역(섹션) 구성 ============ */
 const SECTION_META = {
-  west:  { mult:2.2, color:'#6C3CE9', view:'센터라인 정면, 최상급 시야', fallback:'메인 스탠드' },
-  east:  { mult:1.6, color:'#E6317B', view:'센터라인 맞은편, 넓은 시야', fallback:'반대편 스탠드' },
-  north: { mult:1.0, color:'#12C9AE', view:'골대 뒤 정면, 가까운 거리',   fallback:'북측 골대석' },
-  south: { mult:0.95,color:'#12C9AE', view:'골대 뒤 정면, 응원 열기 중심', fallback:'남측 골대석' },
-  upper: { mult:0.8, color:'#FF7A1A', view:'높은 각도, 경기 전체가 한눈에', fallback:'상단 링' },
+  west:  { mult:2.2, color:'#4A6E86', view:'센터라인 정면, 최상급 시야', fallback:'메인 스탠드' },
+  east:  { mult:1.6, color:'#94634A', view:'센터라인 맞은편, 넓은 시야', fallback:'반대편 스탠드' },
+  north: { mult:1.0, color:'#52786C', view:'골대 뒤 정면, 가까운 거리',   fallback:'북측 골대석' },
+  south: { mult:0.95,color:'#52786C', view:'골대 뒤 정면, 응원 열기 중심', fallback:'남측 골대석' },
+  upper: { mult:0.8, color:'#8E6139', view:'높은 각도, 경기 전체가 한눈에', fallback:'상단 링' },
 };
 const PLANS = {
   rect: {
@@ -1544,16 +1538,16 @@ function visibleMatches(){
 function miniPlan(planKey, color){
   const plan = PLANS[planKey] || PLANS.rect;
   const paths = Object.keys(plan.paths)
-    .map(k => `<path d="${plan.paths[k]}" fill="${k==='upper' ? '#DCD6F7' : color}" fill-rule="evenodd" opacity="${k==='upper'?0.55:0.9}"/>`)
+    .map(k => `<path d="${plan.paths[k]}" fill="${k==='upper' ? '#E3E7EA' : color}" fill-rule="evenodd" opacity="${k==='upper'?0.55:0.9}"/>`)
     .join('');
   const p = plan.pitch;
   return `<svg viewBox="0 0 520 420" width="58" height="47" aria-hidden="true">
     ${paths}
-    <rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" rx="4" fill="#F1F5FF" stroke="#171235" stroke-width="3"/>
+    <rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" rx="4" fill="#F1F5FF" stroke="#24303A" stroke-width="3"/>
   </svg>`;
 }
 function renderVenueCards(){
-  const colors = { madrid:'#6C3CE9', barcelona:'#A5124B', sevilla:'#FF7A1A' };
+  const colors = { madrid:'#4A6E86', barcelona:'#7A5A3E', sevilla:'#8E6139' };
   $('venueRow').innerHTML = FEATURED.map(city => {
     const vs = Object.entries(VENUES).filter(([,v]) => v.city === city);
     const [mainKey, main] = vs[0];
@@ -1745,21 +1739,21 @@ function openSeatmap(id){
 
   $('svPlan').innerHTML = `
     ${secs.map(s => `<path class="seat-sec" data-key="${s.key}" d="${s.path}" fill-rule="evenodd"
-        fill="${s.carne ? '#B9B5D4' : s.color}" opacity="${s.key === 'upper' ? 0.75 : 0.9}"><title>${s.label}</title></path>`).join('')}
-    <rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" rx="4" fill="#F1F5FF" stroke="#171235" stroke-width="1.5"/>
-    <circle cx="${p.x + p.w/2}" cy="${p.y + p.h/2}" r="${Math.min(p.w,p.h)*0.16}" fill="none" stroke="#171235" stroke-width="1"/>
-    <line x1="${p.x + p.w/2}" y1="${p.y}" x2="${p.x + p.w/2}" y2="${p.y + p.h}" stroke="#171235" stroke-width="1"/>
+        fill="${s.carne ? '#C0C5C9' : s.color}" opacity="${s.key === 'upper' ? 0.75 : 0.9}"><title>${s.label}</title></path>`).join('')}
+    <rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" rx="4" fill="#F1F5FF" stroke="#24303A" stroke-width="1.5"/>
+    <circle cx="${p.x + p.w/2}" cy="${p.y + p.h/2}" r="${Math.min(p.w,p.h)*0.16}" fill="none" stroke="#24303A" stroke-width="1"/>
+    <line x1="${p.x + p.w/2}" y1="${p.y}" x2="${p.x + p.w/2}" y2="${p.y + p.h}" stroke="#24303A" stroke-width="1"/>
     ${secs.map(s => {
       const [tx, ty, rot] = s.text;
       const light = s.key === 'north' || s.key === 'south' ? '#083F37' : '#fff';
       return `<text x="${tx}" y="${ty}" text-anchor="middle" pointer-events="none"
-        fill="${s.carne ? '#3B3757' : light}" font-size="10.5" font-weight="800" font-family="Work Sans"
+        fill="${s.carne ? '#42484C' : light}" font-size="10.5" font-weight="800" font-family="Work Sans"
         ${rot ? `transform="rotate(${rot} ${tx} ${ty})"` : ''}>${s.label}</text>`;
     }).join('')}
   `;
 
   $('svLegend').innerHTML = secs.map(s =>
-    `<span class="legend-item"><span class="legend-swatch" style="background:${s.carne ? '#B9B5D4' : s.color}"></span>${s.label}${s.carne ? ' — 카르네 필요' : ''}</span>`
+    `<span class="legend-item"><span class="legend-swatch" style="background:${s.carne ? '#C0C5C9' : s.color}"></span>${s.label}${s.carne ? ' — 카르네 필요' : ''}</span>`
   ).join('');
 
   $('svPlan').querySelectorAll('.seat-sec').forEach(el => {
@@ -2211,7 +2205,7 @@ function codeSvg(text, px = 132){
     `<rect x="${x+2}" y="${y+2}" width="3" height="3"/>`;
 
   return `<svg viewBox="0 0 ${N} ${N}" width="${px}" height="${px}" shape-rendering="crispEdges"
-      role="img" aria-label="예약번호 ${text}" fill="#14103D">
+      role="img" aria-label="예약번호 ${text}" fill="#24303A">
     ${cells}${finder(0,0)}${finder(N-7,0)}${finder(0,N-7)}
   </svg>`;
 }
@@ -2395,13 +2389,13 @@ render();
 <style>
 /* 예약 신청이 서버까지 못 갔을 때 알리는 띠 */
 .dn-fail{ display:none; margin:0 0 18px; padding:14px 18px; border-radius:12px;
-  background:#FDECF3; border:2px solid #F6D3DE; color:#9A1240;
+  background:#F4EFEA; border:2px solid #F2DACB; color:#8F2E14;
   font-size:13px; font-weight:700; line-height:1.6; text-align:left; }
 .dn-fail.show{ display:block; }
-.dn-fail b{ color:#7A0E32; }
+.dn-fail b{ color:#6B2410; }
 .dn-fail .ways{ display:flex; gap:8px; flex-wrap:wrap; margin-top:9px; }
 .dn-fail .ways a{ display:inline-block; padding:7px 13px; border-radius:999px; background:#fff;
-  border:1.5px solid #F6D3DE; color:#9A1240; text-decoration:none; font-size:12.5px; font-weight:800; }
+  border:1.5px solid #F2DACB; color:#8F2E14; text-decoration:none; font-size:12.5px; font-weight:800; }
 
 /* ===== 팝업 배너의 골 장면 (그림 파일 없이 이모지 + CSS 로만 움직입니다) ===== */
 .goal-scene{ position:relative; height:70px; margin:-4px 0 10px; }
@@ -2453,7 +2447,7 @@ render();
 <div class="notice-overlay" id="noticeOverlay">
   <div class="notice-box">
     <div class="notice-banner" id="noticeBanner" style="padding:0; position:relative; overflow:hidden;">
-      <div id="noticeGlow" style="position:absolute; inset:0; background:radial-gradient(circle at 30% 18%, rgba(20,16,61,0.04), rgba(20,16,61,0.70) 78%);"></div>
+      <div id="noticeGlow" style="position:absolute; inset:0; background:radial-gradient(circle at 30% 18%, rgba(36, 48, 58,0.04), rgba(36, 48, 58,0.70) 78%);"></div>
       <button class="notice-close" id="noticeClose" aria-label="닫기" style="background:rgba(255,255,255,0.25); z-index:3;">✕</button>
       <div style="position:relative; z-index:1; padding:20px 24px 24px;">
 
@@ -2465,7 +2459,7 @@ render();
           <span class="gs-goal">GOL!</span>
         </div>
 
-        <span class="tag" id="noticeTag" style="background:rgba(255,255,255,0.92); color:#14103D;">⚽ 티켓 오픈</span>
+        <span class="tag" id="noticeTag" style="background:rgba(255,255,255,0.92); color:#24303A;">⚽ 티켓 오픈</span>
         <h3 id="noticeTitle" style="color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.55);"></h3>
         <div id="noticeWhen" style="margin-top:10px; font-size:12.5px; font-weight:700; color:rgba(255,255,255,0.93); text-shadow:0 1px 6px rgba(0,0,0,0.5); line-height:1.6;"></div>
       </div>
@@ -2473,7 +2467,7 @@ render();
     <div class="notice-body">
       <p id="noticeText">예약하기로 문의 남겨 주시면 좌석과 요금을 이메일로 안내드립니다.</p>
       <button class="cta" id="noticeCta">예약 문의하기</button>
-      <label class="hide-today"><input type="checkbox" id="noticeHide" style="accent-color:#6C3CE9;"> 오늘 하루 보지 않기</label>
+      <label class="hide-today"><input type="checkbox" id="noticeHide" style="accent-color:#4A6E86;"> 오늘 하루 보지 않기</label>
     </div>
   </div>
 </div>
@@ -2537,7 +2531,7 @@ render();
   /* 급이 높을수록 먼저. 같은 급이면 가까운 날짜 */
   var BIG = [
     { name:'엘 클라시코',  tag:'엘 클라시코 티켓 오픈',
-      bg:'linear-gradient(135deg,#004D98 0%,#6A0F3C 55%,#A50044 100%)',
+      bg:'linear-gradient(135deg,#004D98 0%,#6B2410 55%,#A50044 100%)',
       is:function(m){ return pair(m,'FC 바르셀로나','레알 마드리드'); } },
     { name:'마드리드 더비', tag:'마드리드 더비 티켓 오픈',
       bg:'repeating-linear-gradient(90deg,#C8102E 0 22px,#FFFFFF 22px 44px)',
@@ -2563,7 +2557,7 @@ render();
       if (pool[k].home === '아틀레티코 마드리드' || pool[k].home === '레알 마드리드') {
         pick = { m: pool[k], kind: {
           name: pool[k].home + ' 홈경기', tag: '이번 달 티켓 오픈',
-          bg: 'linear-gradient(135deg,#6C3CE9,#E6317B)'
+          bg: 'linear-gradient(135deg,#4A6E86,#94634A)'
         } };
         break;
       }
@@ -2573,7 +2567,7 @@ render();
   if (!pick) {
     pick = { m: pool[0], kind: {
       name: pool[0].home + ' 홈경기', tag: '티켓 오픈',
-      bg: 'linear-gradient(135deg,#6C3CE9,#E6317B)'
+      bg: 'linear-gradient(135deg,#4A6E86,#94634A)'
     } };
   }
 

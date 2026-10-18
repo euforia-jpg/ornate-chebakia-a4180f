@@ -18,17 +18,17 @@ html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 :root{
   color-scheme: light;
   /* 홈페이지와 같은 바탕 띠 */
-  --wash-violet:#EFEBFD; --wash-pink:#FDECF3; --wash-orange:#FFF2E6; --wash-teal:#E7F8F5;
-  --paper:#EFEBFD;       /* 바탕 기본색 — 띠가 시작하는 색 */
+  --wash-violet:#EEF1F3; --wash-pink:#F4EFEA; --wash-orange:#F5F1EB; --wash-teal:#EDF1EF;
+  --paper:#EEF1F3;       /* 바탕 기본색 — 띠가 시작하는 색 */
   --card:#FFFFFF;
-  --ink:#171235; --ink-2:#6E6A93; --line:#EAE7F7;   /* 홈페이지 글자·선 색 */
-  --fair:#1F7A4C;        /* 페어웨이 — 홈페이지 골프 단추와 같은 초록 */
+  --ink:#24303A; --ink-2:#64707A; --line:#E4E6E8;   /* 홈페이지 글자·선 색 */
+  --fair:#46705F;        /* 페어웨이 — 홈페이지 골프 단추와 같은 초록 */
   --deep:#143B27;        /* 짙은 그늘 */
-  --sand:#C79A52;        /* 벙커 모래 */
-  --sea:#E7F8F5;         /* 바다 */
+  --sand:#A8803C;        /* 벙커 모래 */
+  --sea:#EDF1EF;         /* 바다 */
   --land:#E9EFE2;        /* 지도 땅 */
-  --wash:#E7F8F5;
-  --shadow:0 1px 2px rgba(23,18,53,.05), 0 12px 28px -20px rgba(23,18,53,.55);
+  --wash:#EDF1EF;
+  --shadow:0 1px 2px rgba(36, 48, 58,.05), 0 12px 28px -20px rgba(36, 48, 58,.55);
   --body:'IBM Plex Sans KR', system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif;
   --data:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -38,10 +38,8 @@ body{
   min-height:100vh; -webkit-font-smoothing:antialiased;
   background-color:var(--paper);
   background-image:
-    radial-gradient(rgba(20,16,61,0.055) 1.3px, transparent 1.3px),
-    repeating-linear-gradient(115deg,
-      var(--wash-violet) 0 220px, var(--wash-pink) 220px 400px,
-      var(--wash-orange) 400px 560px, var(--wash-teal) 560px 760px);
+    radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px),
+    #F6F6F6;
   background-size: 13px 13px, auto;
   background-attachment: fixed, fixed;
 }
@@ -140,7 +138,7 @@ h1 em{ font-style:normal; color:var(--fair); }
 
 /* ── 권역 고르는 줄 — 가장 먼저 눈에 들어와야 해서 알약으로 키웠습니다 ── */
 .bar{ position:sticky; top:env(safe-area-inset-top, 0px); z-index:9;
-      background:rgba(246,243,253,.92); backdrop-filter:blur(10px);
+      background:rgba(246,247,248,.92); backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line); }
 .bar .wrap{ display:flex; gap:9px; align-items:center; overflow-x:auto; scrollbar-width:none;
             padding-block:12px; }

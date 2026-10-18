@@ -9,18 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --violet: #6C3CE9; --pink: #E6317B; --orange: #FF7A1A; --teal: #12C9AE;
-    --navy: #14103D; --paper: #FFFFFF; --ink: #171235; --muted: #6E6A93; --line: #EAE7F7;
+    --violet: #4A6E86; --pink: #94634A; --orange: #8E6139; --teal: #52786C;
+    --navy: #24303A; --paper: #FFFFFF; --ink: #24303A; --muted: #64707A; --line: #E4E6E8;
     --radius: 18px;
-    --wash-violet: #EFEBFD; --wash-pink: #FDECF3; --wash-orange: #FFF2E6; --wash-teal: #E7F8F5;
+    --wash-violet: #EEF1F3; --wash-pink: #F4EFEA; --wash-orange: #F5F1EB; --wash-teal: #EDF1EF;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background: repeating-linear-gradient(115deg, var(--wash-violet) 0 220px, var(--wash-pink) 220px 400px, var(--wash-orange) 400px 560px, var(--wash-teal) 560px 760px);
+    background: #F6F6F6;
     background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
   }
-  body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(20,16,61,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
+  body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
   a{ color:inherit; }
   .wrap{ position:relative; z-index:1; }
 
@@ -37,7 +37,7 @@
   .nav-group{ display:flex; align-items:center; gap:10px; }
   .site-nav{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:14px clamp(20px,4vw,56px); border-top:1.5px solid var(--line); }
   .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:800; color:var(--muted); padding:8px 14px; border-radius:999px; transition: all .15s ease; }
-  .site-nav a:hover{ color:var(--violet); background:rgba(108,60,233,0.08); }
+  .site-nav a:hover{ color:var(--violet); background:rgba(74, 110, 134,0.08); }
   .site-nav a.active{ color:#fff; background:var(--navy); }
 
   .back-link{ display:inline-flex; align-items:center; gap:6px; color:var(--violet); font-size:13px; cursor:pointer; font-weight:800; text-decoration:none; padding:0 clamp(20px,4vw,56px); margin-top:8px; }
@@ -45,18 +45,18 @@
   .section{ padding:14px clamp(20px,4vw,56px) 24px; }
    .layout{ display:grid; grid-template-columns:1.9fr 1fr; gap:22px; max-width:1200px; margin:0 auto; align-items:stretch; }
   .layout > div{ min-width:0; }
-  .section-inner{ background:var(--paper); border-radius:26px; padding:34px clamp(18px,3vw,38px); box-shadow:0 18px 44px -24px rgba(20,16,61,0.32); border:1.5px solid var(--line); }
+  .section-inner{ background:var(--paper); border-radius:26px; padding:34px clamp(18px,3vw,38px); box-shadow:0 18px 44px -24px rgba(36, 48, 58,0.32); border:1.5px solid var(--line); }
 
-  .p-price{ display:inline-flex; align-items:stretch; max-width:100%; margin-bottom:14px; border-radius:13px; overflow:hidden; box-shadow:0 10px 20px -11px rgba(20,16,61,0.30); }
+  .p-price{ display:inline-flex; align-items:stretch; max-width:100%; margin-bottom:14px; border-radius:13px; overflow:hidden; box-shadow:0 10px 20px -11px rgba(36, 48, 58,0.30); }
   .p-price .price-chip{ display:block; box-sizing:border-box; min-width:0; font-family:'Space Mono'; font-size:15px; font-weight:800; background:#fff; color:var(--navy); border:1.5px solid var(--line); border-left:4px solid var(--violet); padding:9px 18px 9px 15px; line-height:1.45; white-space:normal; word-break:keep-all; }
   .p-price:empty{ display:none; }   /* 요금 상자로 옮겨 가서 안이 빈 경우 — 그림자만 남지 않게 */
   .p-price .price-sub{ display:block; font-size:0.72em; font-weight:700; color:var(--muted); margin-top:3px; }
   .p-price .price-krw{ display:block; margin-top:4px; font-size:13px; font-weight:700;
-                       color:var(--ink-2,#6E6A93); font-family:'Work Sans',sans-serif; }
+                       color:var(--ink-2,#64707A); font-family:'Work Sans',sans-serif; }
   button.price-chip{ border:1.5px solid var(--line); border-left:4px solid var(--violet); cursor:pointer; text-align:left; font:inherit; }
 /* 오른쪽에 유튜브·헤드폰 단추가 붙을 때만 오른쪽 선을 뗍니다 */
 .p-price .price-chip:not(:last-child){ border-right:none; }
-button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; border-left-color:var(--violet); }
+button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; border-left-color:var(--violet); }
 .price-cta-label{ display:block; font-size:0.78em; font-weight:700; color:var(--violet); margin-top:2px; text-decoration:underline; }
   .p-price .yt-btn{ display:flex; align-items:center; justify-content:center; padding:0 15px; margin:0; border:none; background:#CC0000; color:#fff; flex-shrink:0; text-decoration:none; cursor:pointer; font:inherit; }
   .p-top{ display:flex; flex-wrap:wrap; gap:4px 12px; justify-content:space-between; align-items:center; padding:14px 20px; border-radius:16px; color:#fff; margin-bottom:22px; }
@@ -64,12 +64,12 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .p-top .days{ flex:0 0 auto; white-space:nowrap; }
   .p-top .region{ font-size:11px; letter-spacing:1px; text-transform:uppercase; font-weight:800; opacity:.9; }
   .p-top .days{ font-family:'Space Mono'; font-size:13px; font-weight:700; }
-  .p-top.spain{ background: linear-gradient(90deg, var(--violet), #8B5CF6); }
-  .p-top.camino{ background: linear-gradient(90deg, var(--teal), #0E9E8B); }
-  .p-top.portugal{ background: linear-gradient(90deg, var(--pink), #A5124B); }
+  .p-top.spain{ background: linear-gradient(90deg, var(--violet), #5B8099); }
+  .p-top.camino{ background: linear-gradient(90deg, var(--teal), #46705F); }
+  .p-top.portugal{ background: linear-gradient(90deg, var(--pink), #7A5A3E); }
   .p-top.morocco{ background: linear-gradient(90deg, var(--orange), var(--pink)); }
   .p-top.iberia{ background: linear-gradient(90deg, var(--navy), var(--violet)); }
-  .p-top.match{ background: linear-gradient(90deg, #0E9E8B, var(--violet)); }
+  .p-top.match{ background: linear-gradient(90deg, #46705F, var(--violet)); }
 
   .p-title{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(24px,3vw,32px); color:var(--navy); margin:0 0 10px; }
   .p-lead{ font-size:14.5px; color:var(--ink); font-weight:700; line-height:1.7; margin:0 0 18px; }
@@ -80,14 +80,14 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
 
   /* 아직 요금을 안 적은 상품 */
   .eu-fare-soon{ padding:22px 24px; border:1.5px solid var(--line); border-radius:18px;
-    background:linear-gradient(170deg,#FBFAFF,#F4F2FC); }
+    background:linear-gradient(170deg,#FCFDFD,#F6F7F8); }
   .eu-fare-soon b{ display:block; font-size:16px; font-weight:800; color:var(--navy); margin-bottom:5px; }
   .eu-fare-soon p{ margin:0 0 14px; font-size:13px; font-weight:600; color:var(--muted); line-height:1.7; }
   .eu-fare-cta{ display:flex; gap:9px; flex-wrap:wrap; }
   .eu-fare-cta a{ flex:1 1 130px; text-align:center; text-decoration:none; padding:12px 16px;
     border-radius:12px; font-size:13.5px; font-weight:800; }
   .eu-fare-cta .main{ background:var(--violet); color:#fff;
-    box-shadow:0 12px 26px -14px rgba(108,60,233,.9); }
+    box-shadow:0 12px 26px -14px rgba(74, 110, 134,.9); }
   .eu-fare-cta .sub{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
 
   /* ① 한 줄 */
@@ -100,15 +100,15 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-fare-1 .per{ font-size:14px; font-weight:700; color:var(--muted); padding-bottom:3px; }
   .eu-fare-1 .krw{ margin-top:7px; font-size:14px; font-weight:700; color:var(--muted); }
   .eu-fare-1 .krw em{ font-style:normal; font-size:11.5px; font-weight:600;
-    color:#A9A4C8; margin-left:6px; }
+    color:#6E7A82; margin-left:6px; }
   .eu-fare-1 .chips{ margin-top:13px; display:flex; gap:7px; flex-wrap:wrap; }
   .eu-fare-1 .chips span{ font-size:11.5px; font-weight:700; color:var(--violet);
-    background:#F2EEFE; border:1px solid #E2DAFB; border-radius:999px; padding:5px 11px; }
-  .eu-fare-1 .note{ margin-top:15px; padding-top:14px; border-top:1.5px dashed #E6E2F4;
+    background:#F5F6F7; border:1px solid #E7EBEE; border-radius:999px; padding:5px 11px; }
+  .eu-fare-1 .note{ margin-top:15px; padding-top:14px; border-top:1.5px dashed #E8EBEE;
     font-size:12.5px; font-weight:600; color:var(--muted); line-height:1.75; }
 
   /* ② 계산기 */
-  .eu-fare-3 .top{ padding:18px 22px 16px; background:linear-gradient(170deg,#FBFAFF,#F4F2FC);
+  .eu-fare-3 .top{ padding:18px 22px 16px; background:linear-gradient(170deg,#FCFDFD,#F6F7F8);
     border-bottom:1.5px solid var(--line); }
   .eu-fare-3 .top b{ display:block; font-size:14.5px; font-weight:800;
     color:var(--navy); margin-bottom:11px; }
@@ -116,9 +116,9 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-fare-3 .steps button{ all:unset; cursor:pointer; padding:9px 15px; border-radius:11px;
     border:1.5px solid var(--line); background:#fff; font-size:13px; font-weight:800;
     color:var(--muted); transition:.15s; }
-  .eu-fare-3 .steps button:hover{ border-color:#C9BDF7; color:var(--violet); }
+  .eu-fare-3 .steps button:hover{ border-color:#D4DBE0; color:var(--violet); }
   .eu-fare-3 .steps button.on{ background:var(--violet); border-color:var(--violet); color:#fff;
-    box-shadow:0 10px 22px -12px rgba(108,60,233,.9); }
+    box-shadow:0 10px 22px -12px rgba(74, 110, 134,.9); }
   .eu-fare-3 .steps button[disabled]{ opacity:.4; cursor:default; }
   .eu-fare-3 .mid{ padding:22px; display:flex; gap:26px; align-items:flex-end; flex-wrap:wrap; }
   .eu-fare-3 .one u, .eu-fare-3 .mk u{ display:block; text-decoration:none; font-size:11.5px;
@@ -128,10 +128,10 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-fare-3 .one .krw{ margin-top:6px; font-size:13.5px; font-weight:700; color:var(--muted); }
   /* 팀 합계 금액 자리에 들어가는 「일정 만들기」 카드 — 빌더 페이지로 보냅니다 */
   .eu-fare-3 .mk{ display:block; margin-left:auto; max-width:310px; text-decoration:none;
-    padding:15px 17px; border-radius:15px; border:1.5px solid #E2DAFB;
-    background:linear-gradient(170deg,#FBFAFF,#F2EEFE); transition:.15s; }
-  .eu-fare-3 .mk:hover{ border-color:#C9BDF7;
-    box-shadow:0 16px 30px -20px rgba(108,60,233,.8); }
+    padding:15px 17px; border-radius:15px; border:1.5px solid #E7EBEE;
+    background:linear-gradient(170deg,#FCFDFD,#F5F6F7); transition:.15s; }
+  .eu-fare-3 .mk:hover{ border-color:#D4DBE0;
+    box-shadow:0 16px 30px -20px rgba(74, 110, 134,.8); }
   .eu-fare-3 .mk u{ color:var(--violet); margin-bottom:5px; }
   .eu-fare-3 .mk b{ display:block; font-size:14.5px; font-weight:800; color:var(--navy);
     letter-spacing:-.015em; line-height:1.5; margin-bottom:5px; }
@@ -140,7 +140,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-fare-3 .mk em{ display:inline-block; font-style:normal; font-size:12.5px; font-weight:800;
     color:var(--violet); }
   .eu-fare-3 .car{ width:100%; font-size:12.5px; font-weight:700; color:var(--muted);
-    padding-top:14px; border-top:1.5px dashed #E6E2F4; }
+    padding-top:14px; border-top:1.5px dashed #E8EBEE; }
   .eu-fare-3 .car b{ color:var(--navy); font-weight:800; }
   .eu-fare-3 .ft{ padding:13px 22px 15px; background:#FAFAFE; border-top:1.5px solid var(--line);
     font-size:12px; font-weight:600; color:var(--muted); line-height:1.75; }
@@ -153,12 +153,12 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
 
   /* ---------- 일정 지도 ---------- */
   .eu-route{ margin:4px 0 28px; padding:20px 22px 22px; border:1.5px solid var(--line);
-    border-radius:20px; background:linear-gradient(170deg,#FBFAFF,#F4F2FC); }
+    border-radius:20px; background:linear-gradient(170deg,#FCFDFD,#F6F7F8); }
   .eu-route-head{ display:flex; align-items:center; gap:12px; margin-bottom:16px; }
   .eu-route-head h3{ margin:0; font-size:15px; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
   .eu-replay{ all:unset; cursor:pointer; margin-left:auto; padding:6px 13px; border-radius:999px;
     border:1.5px solid var(--line); background:#fff; font-size:11.5px; font-weight:800; color:var(--muted); }
-  .eu-replay:hover{ border-color:#C9BDF7; color:var(--violet); }
+  .eu-replay:hover{ border-color:#D4DBE0; color:var(--violet); }
 
   .eu-route-body{ display:flex; gap:22px; align-items:flex-start; }
   .eu-map{ flex:0 0 clamp(210px, 30vw, 310px); }
@@ -172,10 +172,10 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-wide .eu-pin.stay .eu-dot{ r:4.8; }
   .eu-wide .eu-halo{ r:9; }
 
-  .eu-sea{ fill:#DFDAF0; }
-  .eu-land{ fill:#EFEDF7; stroke:#E6E2F4; stroke-width:1; }
+  .eu-sea{ fill:#E2E6E8; }
+  .eu-land{ fill:#F0F2F3; stroke:#E8EBEE; stroke-width:1; }
   /* 그 상품이 도는 나라를 희게 띄웁니다 */
-  .eu-land.on{ fill:#FFFFFF; stroke:#C9BDF7; stroke-width:1.4; }
+  .eu-land.on{ fill:#FFFFFF; stroke:#D4DBE0; stroke-width:1.4; }
 
   .eu-line{ fill:none; stroke:var(--violet); stroke-width:3; stroke-linecap:round;
     stroke-linejoin:round; opacity:.92; }
@@ -193,7 +193,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-dot{ fill:#fff; stroke:var(--violet); stroke-width:3; }
   .eu-pin.stay .eu-dot{ fill:var(--violet); }
   .eu-pin.on .eu-halo{ opacity:.18; }
-  .eu-lead{ fill:none; stroke:#B9ACEF; stroke-width:1.2; }
+  .eu-lead{ fill:none; stroke:#C6CFD5; stroke-width:1.2; }
   .eu-wide .eu-lead{ stroke-width:.9; }
   .eu-tx{ font-family:inherit; font-size:16px; font-weight:800; fill:var(--navy);
     paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
@@ -207,7 +207,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-days ol{ list-style:none; margin:0; padding:0; }
   .eu-days li{ display:flex; gap:11px; align-items:baseline; padding:9px 11px; border-radius:11px;
     cursor:default; transition:background .15s; }
-  .eu-days li + li{ box-shadow:inset 0 1px 0 #EDEAF8; }
+  .eu-days li + li{ box-shadow:inset 0 1px 0 #EFF1F3; }
   .eu-days li.on{ background:#fff; }
   /* 당일 상품은 날짜 대신 시각이 들어가 자리가 더 필요합니다 */
   .eu-leg .eu-days li b{ width:50px; text-align:right; letter-spacing:-.02em; }
@@ -215,7 +215,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   /* 지점 사이 주행 거리 — 가느다란 줄 */
   .eu-leg .eu-days li.run{ padding:4px 11px 4px 0; box-shadow:none; cursor:default; }
   .eu-leg .eu-days li.run:hover{ background:none; }
-  .eu-leg .eu-days li.run .t{ font-size:11.5px; font-weight:700; color:#A9A4C8;
+  .eu-leg .eu-days li.run .t{ font-size:11.5px; font-weight:700; color:#6E7A82;
     letter-spacing:.01em; }
   .eu-leg .eu-sum span:last-child{ font-weight:800; color:var(--navy); }
   .eu-days li b{ flex:none; width:20px; font-size:12.5px; font-weight:800; color:var(--violet);
@@ -223,7 +223,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .eu-days li .t{ flex:1 1 auto; min-width:0; font-size:13px; font-weight:800; color:var(--navy); }
   .eu-days li .c{ font-size:12px; font-weight:600; color:var(--muted); margin-left:auto;
     text-align:right; max-width:52%; }
-  .eu-days li .c em{ font-style:normal; color:#A9A4C8; }
+  .eu-days li .c em{ font-style:normal; color:#6E7A82; }
 
   @media (max-width:760px){
     .eu-route{ padding:16px 14px 18px; }
@@ -287,9 +287,9 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .pax-stepper button:hover{ background:rgba(255,255,255,0.16); }
   .pax-stepper input{ all:unset; width:30px; text-align:center; color:#fff; font-weight:800; font-family:'Space Mono'; font-size:12.5px; }
   .pax-status{ font-size:11px; font-weight:700; padding:8px 10px; border-radius:8px; margin-bottom:10px; line-height:1.55; }
-  .pax-status.ok{ background:rgba(18,201,174,0.18); color:#9FF6E8; }
-  .pax-status.warn{ background:rgba(230,49,123,0.2); color:#FFC1D9; }
-  .pax-status.info{ background:rgba(255,122,26,0.18); color:#FFD3AE; }
+  .pax-status.ok{ background:rgba(82, 120, 108,0.18); color:#C6D6CF; }
+  .pax-status.warn{ background:rgba(148, 99, 74,0.2); color:#FFC1D9; }
+  .pax-status.info{ background:rgba(142, 97, 57,0.18); color:#FFD3AE; }
   .cal-nav{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
   .cal-nav button{ all:unset; cursor:pointer; width:22px; height:22px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; border-radius:6px; }
   .cal-nav button:hover{ background:rgba(255,255,255,0.14); }
@@ -299,8 +299,8 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .cal-day{ all:unset; display:flex; align-items:center; justify-content:center; height:26px; border-radius:8px; font-size:11px; font-weight:700; color:rgba(255,255,255,0.85); cursor:pointer; box-sizing:border-box; text-align:center; }
   .cal-day.empty{ visibility:hidden; cursor:default; }
   .cal-day.past{ color:rgba(255,255,255,0.2); cursor:default; }
-  .cal-day.avail{ background:rgba(18,201,174,0.16); }
-  .cal-day.avail:hover{ background:rgba(18,201,174,0.34); }
+  .cal-day.avail{ background:rgba(82, 120, 108,0.16); }
+  .cal-day.avail:hover{ background:rgba(82, 120, 108,0.34); }
   .cal-day.unavail{ color:rgba(255,255,255,0.22); cursor:not-allowed; }
   .cal-day.selected{ background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; }
   .cal-selected{ margin-top:8px; font-size:11.5px; font-weight:800; color:#fff; min-height:14px; }
@@ -318,7 +318,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .not-found p{ color:var(--muted); font-size:13.5px; font-weight:600; margin:0 0 20px; }
 
   footer{ padding:24px clamp(20px,4vw,56px) 40px; }
-  .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(20,16,61,0.28); max-width:1040px; margin:0 auto; }
+  .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(36, 48, 58,0.28); max-width:1040px; margin:0 auto; }
   .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
   .footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
   .footer-logo-img{ height:44px; width:auto; display:block; }
@@ -339,7 +339,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
 /* ===== 일정표 하단 PDF 다운로드 바 ===== */
   .itin-dl{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
             margin:18px 0 28px; padding:16px 20px; border-radius:16px;
-            border:1.5px solid var(--line); background:linear-gradient(180deg,#fff,#FAF9FF); }
+            border:1.5px solid var(--line); background:linear-gradient(180deg,#fff,#FCFCFC); }
   .itin-dl .idl-txt{ display:flex; flex-direction:column; gap:3px; min-width:0; }
   .itin-dl .idl-title{ font-size:14px; font-weight:800; color:var(--navy); }
   .itin-dl .idl-sub{ font-size:12px; font-weight:600; color:var(--muted); }
@@ -400,14 +400,14 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .qr-box img{ width:92px; height:92px; border-radius:10px; border:1.5px solid var(--line); padding:6px; background:#fff; display:block; }
   .qr-box .qr-caption{ font-size:11px; color:var(--muted); font-weight:600; }
   .share-btn{ display:inline-flex; align-items:center; gap:7px; padding:9px 16px; border-radius:999px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink); font-size:12.5px; font-weight:800; cursor:pointer; font-family:inherit; transition:background .15s,border-color .15s; }
-  .share-btn:hover{ background:#F5F3FE; border-color:var(--violet); }
+  .share-btn:hover{ background:#F1F3F4; border-color:var(--violet); }
   .share-btn svg{ width:14px; height:14px; fill:var(--violet); flex-shrink:0; }
 
 /* ===== 푸터 (4단 레이아웃) ===== */
   footer.euf-footer{ padding:24px clamp(20px,4vw,56px) 40px; background:none; border:0; }
   .euf-footer .ef-inner{ display:grid; grid-template-columns:1.25fr 1.15fr 1.15fr .85fr; gap:34px;
     background:var(--paper); border:1.5px solid var(--line); border-radius:26px;
-    padding:36px clamp(18px,3vw,40px) 30px; box-shadow:0 18px 44px -28px rgba(20,16,61,0.28);
+    padding:36px clamp(18px,3vw,40px) 30px; box-shadow:0 18px 44px -28px rgba(36, 48, 58,0.28);
     max-width:1180px; margin:0 auto; }
   .euf-footer .ef-col h6{ margin:0 0 16px; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
     color:var(--navy); font-weight:800; }
@@ -417,7 +417,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
     padding:10px 18px; border-radius:999px; font-size:12.5px; font-weight:800; cursor:pointer;
     border:1.5px solid var(--line); background:#fff; color:var(--ink); font-family:inherit;
     transition:background .15s,border-color .15s; }
-  .euf-footer .ef-share:hover{ background:#F5F3FE; border-color:var(--violet); }
+  .euf-footer .ef-share:hover{ background:#F1F3F4; border-color:var(--violet); }
   .euf-footer .ef-share svg{ width:14px; height:14px; fill:var(--violet); flex-shrink:0; }
   .euf-footer .ef-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
   .euf-footer .ef-list li{ display:flex; gap:11px; align-items:flex-start; }
@@ -435,7 +435,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
   .euf-footer .ef-qr span{ font-size:11.5px; line-height:1.65; font-weight:600; color:var(--muted); }
   .euf-footer .ef-map{ display:flex; align-items:center; justify-content:center; gap:8px; height:118px;
     border-radius:14px; text-decoration:none; font-size:13px; font-weight:800;
-    background:#F5F3FE; border:1.5px solid var(--line); color:var(--navy);
+    background:#F1F3F4; border:1.5px solid var(--line); color:var(--navy);
     transition:border-color .15s,color .15s; }
   .euf-footer .ef-map:hover{ border-color:var(--violet); color:var(--violet); }
   .euf-footer .ef-map svg{ width:17px; height:17px; }
@@ -457,7 +457,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#D9D0F8; bo
     footer.euf-footer{ padding:6px 16px 28px; } }
 </style>
 <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#14103D">
+  <meta name="theme-color" content="#24303A">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- 검색·공유 (대표주소 / 카톡·페북 미리보기 / 아이콘) -->
