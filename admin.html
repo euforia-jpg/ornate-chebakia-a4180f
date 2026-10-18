@@ -551,6 +551,47 @@
   .rk-n{ font-size:12.5px; font-weight:800; color:var(--navy); text-align:right;
     font-variant-numeric:tabular-nums; }
 
+  /* ---------- 일자별 보기 ---------- */
+  .st-dayzone{ margin-top:24px; border:1.5px solid var(--line); border-radius:14px; overflow:hidden; }
+  .st-dayhead{ display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    padding:13px 16px; background:#FAF9FE; border-bottom:1.5px solid var(--line); }
+  .st-dayhead h3{ margin:0; font-size:13.5px; font-weight:800; color:var(--navy); }
+  .st-dayhead .hint{ font-size:11.5px; font-weight:700; color:var(--muted); }
+  .st-dayhead .sp{ margin-left:auto; }
+  .st-daylist{ max-height:230px; overflow-y:auto; -webkit-overflow-scrolling:touch;
+    border-bottom:1.5px solid var(--line); }
+  /* 전역 table 규칙(min-width:820px)을 여기서만 풉니다 — 날짜 칸은 좁아도 됩니다 */
+  .st-daylist table{ width:100%; min-width:0; border-collapse:collapse; font-size:12.5px; }
+  .st-daylist td:first-child, .st-daylist th:first-child{ white-space:nowrap; width:34%; }
+  .st-daylist th:last-child, .st-daylist td:last-child{ width:22%; }
+  .st-daylist th{ position:sticky; top:0; z-index:1; background:#fff; text-align:right;
+    padding:8px 12px; font-size:11.5px; font-weight:800; color:var(--muted);
+    border-bottom:1px solid var(--line); }
+  .st-daylist th:first-child, .st-daylist td:first-child{ text-align:left; }
+  .st-daylist td{ padding:8px 12px; text-align:right; border-bottom:1px solid #F1EFFA;
+    font-variant-numeric:tabular-nums; }
+  .st-daylist tr.dayrow{ cursor:pointer; }
+  .st-daylist tr.dayrow:hover td{ background:#FAF9FE; }
+  .st-daylist tr.dayrow.on td{ background:#F2EEFE; font-weight:800; color:var(--navy); }
+  .st-daylist tr.dayrow.on td:first-child{ box-shadow:inset 3px 0 0 var(--violet); }
+  .st-daylist .zero td{ color:#A9A5C4; }
+  .st-daylist .wk{ color:var(--muted); font-weight:700; margin-left:5px; font-size:11.5px; }
+  .st-daylist .sun{ color:#B3365A; } .st-daylist .sat{ color:#2F5AA8; }
+  .st-daylist .dlt{ font-size:11.5px; font-weight:800; }
+  .st-daylist .dlt.up{ color:#0A6E5D; } .st-daylist .dlt.down{ color:var(--danger); }
+  .st-daylist .dlt.flat{ color:#A9A5C4; }
+  .st-daybody{ padding:16px; }
+  .st-daybody .st-cols{ margin-top:0; }
+  .st-daysum{ display:flex; gap:22px; flex-wrap:wrap; align-items:baseline; margin-bottom:16px; }
+  .st-daysum b{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:26px;
+    color:var(--navy); letter-spacing:-.02em; }
+  .st-daysum span{ font-size:11.5px; font-weight:700; color:var(--muted); margin-left:6px; }
+  .st-daysum .ttl{ font-size:14px; font-weight:800; color:var(--navy); margin-right:4px; }
+  @media (max-width:560px){
+    .st-daylist{ max-height:200px; }
+    .st-daysum b{ font-size:22px; }
+  }
+
   .st-table{ width:100%; border-collapse:collapse; margin-top:14px; font-size:12.5px; }
   .st-table th, .st-table td{ padding:8px 10px; text-align:right; border-bottom:1px solid var(--line);
     font-variant-numeric:tabular-nums; }
@@ -4059,12 +4100,15 @@
     '/matchday.html':'경기 일정', '/concert.html':'공연 일정', '/contact.html':'예약문의',
     '/deposit.html':'입금확인', '/faq.html':'자주 묻는 질문', '/about.html':'회사소개',
     '/plan.html':'맞춤여행', '/move.html':'교통', '/cancel.html':'취소·환불',
-    '/audio-guide.html':'오디오 가이드'
+    '/audio-guide.html':'오디오 가이드',
+    '/builder.html':'일정 만들기(빌더)', '/hotels.html':'기준호텔', '/golf.html':'골프',
+    '/404.html':'없는 쪽(404)'
   };
   var ST_CLICK_NAME = {
     inquiry:'예약문의하기', kakao:'카카오톡', tel:'전화 걸기', mail:'이메일',
     deposit:'입금확인', product:'상품 카드', match:'경기 일정', concert:'공연 일정',
-    tour:'여행상품 목록', plan:'맞춤여행', ai:'AI 상담', etc:'기타'
+    tour:'여행상품 목록', plan:'맞춤여행', ai:'AI 상담',
+    builder:'일정 만들기', etc:'기타'
   };
   var ST_REF_NAME = {
     naver:'네이버', google:'구글', daum:'다음·카카오', sns:'SNS(쓰레드·인스타 등)',
@@ -4246,6 +4290,149 @@
     return s;
   }
 
+  /* =======================================================================
+     일자별 보기
+     -----------------------------------------------------------------------
+     날짜를 고르면 그 날 하루의 숫자와 순위를 보여 줍니다.
+     기간을 90일로 잡으면 응답이 너무 커져 날짜별 순위를 받지 않으므로
+     (site-stats 가 `일별상세:false` 로 알려 줍니다) 그때는 안내만 둡니다.
+     ======================================================================= */
+  var ST_DAYS = [];      /* 지금 화면에 그린 날짜들 */
+  var ST_DETAIL = false; /* 날짜별 순위까지 받았는지 */
+  var ST_PICK = -1;      /* 고른 날짜의 자리 (ST_DAYS 안에서) */
+
+  var ST_WEEK = ['일','월','화','수','목','금','토'];
+
+  function stWeekday(date){
+    try { return ST_WEEK[new Date(date + 'T00:00:00Z').getUTCDay()]; }
+    catch(e){ return ''; }
+  }
+
+  /* 어제와 견준 증감 — 어제가 0이면 비교하지 않습니다 */
+  function stDelta(now, before){
+    if(before === undefined || before === null) return '<span class="dlt flat">—</span>';
+    var diff = (now || 0) - (before || 0);
+    if(!before) return diff > 0 ? '<span class="dlt up">+' + stNum(diff) + '</span>'
+                                : '<span class="dlt flat">—</span>';
+    var p = Math.round((diff / before) * 100);
+    if(p > 0) return '<span class="dlt up">+' + p + '%</span>';
+    if(p < 0) return '<span class="dlt down">' + p + '%</span>';
+    return '<span class="dlt flat">0%</span>';
+  }
+
+  /* 날짜 목록 — 최근 날짜가 위로 옵니다 */
+  function stDayList(days, pick){
+    var rows = '';
+    for(var i = days.length - 1; i >= 0; i--){
+      var d = days[i];
+      var 앞 = i > 0 ? days[i - 1] : null;
+      var w = stWeekday(d.date);
+      var wc = w === '일' ? ' sun' : (w === '토' ? ' sat' : '');
+      var 빈 = !(d.views || d.visits);
+      rows += '<tr class="dayrow' + (i === pick ? ' on' : '') + (빈 ? ' zero' : '') +
+              '" data-i="' + i + '" tabindex="0">' +
+        '<td>' + esc(d.date.slice(5)) + '<span class="wk' + wc + '">' + w + '</span></td>' +
+        '<td>' + stNum(d.views) + '</td>' +
+        '<td>' + stNum(d.visits) + '</td>' +
+        '<td>' + stDelta(d.views, 앞 ? 앞.views : null) + '</td></tr>';
+    }
+    return '<div class="st-daylist"><table>' +
+      '<thead><tr><th>날짜</th><th>조회</th><th>방문</th><th>전날 대비</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table></div>';
+  }
+
+  /* 고른 하루의 속내용 */
+  function stDayBody(d){
+    if(!d) return '<div class="st-daybody"><div class="st-note">날짜를 고르면 그 날 기록이 여기 나옵니다.</div></div>';
+
+    var h = '<div class="st-daybody">';
+    h += '<div class="st-daysum">' +
+      '<span class="ttl">' + esc(d.date) + ' (' + stWeekday(d.date) + ')</span>' +
+      '<span><b>' + stNum(d.views) + '</b><span>조회</span></span>' +
+      '<span><b>' + stNum(d.visits) + '</b><span>방문</span></span>' +
+      '</div>';
+
+    if(!ST_DETAIL){
+      h += '<div class="st-note">기간을 <b>90일</b>로 두면 날짜별 속내용은 받지 않습니다 ' +
+           '(응답이 너무 커집니다). 위 <b>기간</b>을 30일 이하로 바꾸시면 ' +
+           '그 날 어떤 페이지·상품·단추가 눌렸는지까지 보실 수 있습니다.</div></div>';
+      return h;
+    }
+
+    if(!(d.views || d.visits)){
+      h += '<div class="st-note">이 날은 들어온 기록이 없습니다.</div></div>';
+      return h;
+    }
+
+    h += '<div class="st-cols">' +
+      '<div class="st-col"><h3>많이 본 페이지</h3>' + stRank('page', d.인기페이지) + '</div>' +
+      '<div class="st-col"><h3>많이 본 상품</h3>' + stRank('prod', d.인기상품) + '</div>' +
+      '<div class="st-col"><h3>눌린 단추</h3>' + stRank('click', d.버튼클릭) + '</div>' +
+      '<div class="st-col"><h3>어디서 들어왔나</h3>' + stRank('ref', d.유입경로) + '</div>' +
+      '<div class="st-col"><h3>어느 나라에서</h3>' + stRank('country', d.나라) + '</div>' +
+      '<div class="st-col"><h3>어느 지역에서</h3>' + stRank('region', d.지역) + '</div>' +
+      '</div>';
+    return h + '</div>';
+  }
+
+  function stDayZone(days, pick){
+    return '<div class="st-dayzone" id="stDayZone">' +
+      '<div class="st-dayhead">' +
+        '<h3>일자별 보기</h3>' +
+        '<span class="hint">날짜를 누르면 그 날 하루만 봅니다</span>' +
+        '<span class="sp"></span>' +
+        '<button type="button" class="btn sm" id="stDayToday">가장 최근 날</button>' +
+      '</div>' +
+      stDayList(days, pick) +
+      '<div id="stDayBody">' + stDayBody(days[pick]) + '</div>' +
+    '</div>';
+  }
+
+  /* 날짜 하나를 고릅니다 (목록 표시와 아래 속내용만 다시 그립니다) */
+  function stPickDay(i){
+    if(!ST_DAYS.length) return;
+    if(i < 0) i = 0;
+    if(i > ST_DAYS.length - 1) i = ST_DAYS.length - 1;
+    ST_PICK = i;
+    var zone = $('stDayZone');
+    if(!zone) return;
+    var rows = zone.querySelectorAll('.st-daylist tr.dayrow');
+    for(var k = 0; k < rows.length; k++){
+      rows[k].classList.toggle('on', Number(rows[k].dataset.i) === i);
+    }
+    var body = $('stDayBody');
+    if(body) body.innerHTML = stDayBody(ST_DAYS[i]);
+    var on = zone.querySelector('.st-daylist tr.dayrow.on');
+    if(on && on.scrollIntoView) on.scrollIntoView({ block:'nearest' });
+  }
+
+  /* 가장 최근에 기록이 있는 날 (없으면 맨 끝 날) */
+  function stLatestWithData(days){
+    for(var i = days.length - 1; i >= 0; i--){
+      if(days[i].views || days[i].visits) return i;
+    }
+    return days.length - 1;
+  }
+
+  function stBindDays(){
+    var zone = $('stDayZone');
+    if(!zone) return;
+    zone.addEventListener('click', function(e){
+      var tr = e.target.closest ? e.target.closest('tr.dayrow') : null;
+      if(tr){ stPickDay(Number(tr.dataset.i)); return; }
+    });
+    /* 자판으로도 고를 수 있게 — 위/아래로 날짜 옮기기 */
+    zone.addEventListener('keydown', function(e){
+      var tr = e.target.closest ? e.target.closest('tr.dayrow') : null;
+      if(!tr) return;
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); stPickDay(Number(tr.dataset.i)); }
+      else if(e.key === 'ArrowDown'){ e.preventDefault(); stPickDay(ST_PICK - 1); }
+      else if(e.key === 'ArrowUp'){ e.preventDefault(); stPickDay(ST_PICK + 1); }
+    });
+    var t = $('stDayToday');
+    if(t) t.addEventListener('click', function(){ stPickDay(stLatestWithData(ST_DAYS)); });
+  }
+
   function stChartTable(days){
     var rows = days.slice().reverse().slice(0, 14).map(function(d){
       return '<tr><td>' + esc(d.date) + '</td><td>' + stNum(d.views) + '</td><td>' +
@@ -4267,6 +4454,9 @@
     }
 
     var d = j.일별 || [];
+    ST_DAYS = d;
+    ST_DETAIL = (j.일별상세 !== false);
+    ST_PICK = d.length ? stLatestWithData(d) : -1;
     var total = j.합계 || {};
     var wk = j.최근7일 || {};
     var anyData = (total.조회 || 0) > 0;
@@ -4307,6 +4497,12 @@
     html += '<div class="st-plot" id="stPlot">' + stChart(d) +
             '<div class="st-tip" id="stTip"></div></div>';
 
+    /* 날짜 하나만 떼어 보는 칸 — 그래프를 눌러도 여기가 바뀝니다 */
+    html += stDayZone(d, ST_PICK);
+
+    html += '<h3 style="margin:26px 0 0;font-size:13.5px;font-weight:800;color:var(--navy);">' +
+      '기간 합계 <span style="font-weight:700;font-size:11.5px;color:var(--muted);">' +
+      esc((j.기간 && j.기간.시작) || '') + ' ~ ' + esc((j.기간 && j.기간.끝) || '') + ' 전체를 더한 것</span></h3>';
     html += '<div class="st-cols">' +
       '<div class="st-col"><h3>많이 본 페이지</h3>' + stRank('page', j.인기페이지) + '</div>' +
       '<div class="st-col"><h3>많이 본 상품</h3>' + stRank('prod', j.인기상품) + '</div>' +
@@ -4341,6 +4537,7 @@
     });
 
     stBindHover(d);
+    stBindDays();
   }
 
   /* 그래프 위에 마우스를 올렸을 때 그 날 숫자를 띄웁니다 */
@@ -4376,6 +4573,16 @@
       tip.classList.remove('on');
       if(cross) cross.setAttribute('opacity','0');
     });
+
+    /* 그래프의 그 날 기둥을 누르면 아래 일자별 보기가 그 날로 바뀝니다 */
+    plot.addEventListener('click', function(e){
+      var hit = e.target.closest ? e.target.closest('.st-hit') : null;
+      if(!hit) return;
+      stPickDay(Number(hit.dataset.i));
+      var zone = $('stDayZone');
+      if(zone && zone.scrollIntoView) zone.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    });
+    plot.style.cursor = 'pointer';
   }
 
   function stRenderThreads(j){

@@ -74,6 +74,27 @@ function mergeInto(sum, day) {
   });
 }
 
+/*
+  하루치를 대쉬보드가 바로 쓸 수 있는 모양으로 바꿉니다.
+  합계와 똑같은 항목을 그 날짜 하나에 대해서만 담습니다.
+  (날짜를 고르면 그 날의 인기 페이지·상품·단추를 볼 수 있게 하려는 것입니다)
+*/
+function dayRow(r, 상세) {
+  const o = {
+    date: r.date,
+    views: r.views || 0,
+    visits: r.visits || 0,
+  };
+  if (!상세) return o;
+  o.인기페이지 = top(r.pages, 8);
+  o.인기상품   = top(r.products, 8);
+  o.버튼클릭   = top(r.clicks, 8);
+  o.유입경로   = top(r.refs, 6);
+  o.나라       = top(r.countries, 8);
+  o.지역       = top(r.regions, 8);
+  return o;
+}
+
 /* { 이름: 횟수 } 를 많은 순으로 줄 세워 위에서 n 개만 */
 function top(obj, n) {
   return Object.keys(obj || {})
@@ -214,9 +235,11 @@ exports.handler = async function (event) {
       지난7일조회: sumOf(prev, 'views'),
       지난7일방문: sumOf(prev, 'visits'),
     },
-    일별: rows.map(function (r) {
-      return { date: r.date, views: r.views || 0, visits: r.visits || 0 };
-    }),
+    /* 날짜마다 그 날의 순위까지 함께 보냅니다.
+       기간이 길면 덩치가 커지므로, 60일을 넘으면 숫자만 보냅니다
+       (대쉬보드의 일자별 보기는 그때 짧은 기간을 다시 부릅니다). */
+    일별상세: days <= 60,
+    일별: rows.map(function (r) { return dayRow(r, days <= 60); }),
     나라: top(sum.countries, 12),
     지역: top(sum.regions, 12),
     위치출처: top(sum.geoSrc, 4),

@@ -50,6 +50,7 @@ const CLICKS = [
   'concert',   // 공연
   'tour',      // 여행상품 목록
   'plan',      // 맞춤여행 만들기
+  'builder',   // 일정 만들기 (빌더)
   'ai',        // 유포리아 AI 상담
   'etc',
 ];

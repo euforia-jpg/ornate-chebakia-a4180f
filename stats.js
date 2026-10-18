@@ -64,6 +64,7 @@
       if (/concert\.html/i.test(href)) return 'concert';
       if (/tours\.html/i.test(href)) return 'tour';
       if (/plan\.html/i.test(href)) return 'plan';
+      if (/builder\.html/i.test(href) || /일정 ?만들기/.test(txt)) return 'builder';
       if (/kakao/i.test(href) || /카카오/.test(txt)) return 'kakao';
       if (/AI ?상담|유포리아 AI/i.test(txt) || /aiChat|ai-chat/i.test(id)) return 'ai';
       if (/예약 ?문의|문의하기|상담/.test(txt)) return 'inquiry';
