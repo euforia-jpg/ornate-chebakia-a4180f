@@ -1301,8 +1301,20 @@
  "신용카드 결제": "Credit Card Payment",
  "카드로 결제하시려면 먼저 문의해 주세요": "Paying by card? Please contact us first",
  "카드 결제 문의하기": "Ask about card payment",
+ "카드 결제 문의": "Ask about card payment",
  "상품과 금액에 따라 결제 방법이 달라집니다.": "The payment method depends on the tour and the amount.",
  "담당자가 확인한 뒤 결제 방법을 안내해 드립니다.": "We will confirm and then guide you through it.",
  "위 계좌로 이체하시는 경우에는 문의 없이 바로 진행하셔도 됩니다.": "For a bank transfer to the accounts above, no inquiry is needed.",
- "카카오톡 문의": "KakaoTalk"
+ "카카오톡 문의": "KakaoTalk",
+ "결제는 어떻게 하나요?": "How do I pay?",
+ "예약금": "Deposit",
+ "받으면 예약이 확정됩니다": "Confirms your booking",
+ "잔금": "Balance",
+ "출발 2주 전까지": "Due 2 weeks before departure",
+ "계좌이체": "Bank transfer",
+ "— 한국 계좌(유로·원화)와 스페인 계좌 모두 있습니다.": "— We have both Korean (EUR, KRW) and Spanish accounts.",
+ "계좌 보기": "See accounts",
+ "신용카드": "Credit card",
+ "— 먼저 문의해 주시면 방법을 안내해 드립니다.": "— Contact us first and we will guide you through it.",
+ "표시 금액은 유로 기준이고, 원화는 참고값입니다.": "Prices are in euros; the won figure is for reference only."
 }

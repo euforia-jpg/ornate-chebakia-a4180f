@@ -142,6 +142,34 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .eu-fare-3 .car{ width:100%; font-size:12.5px; font-weight:700; color:var(--muted);
     padding-top:14px; border-top:1.5px dashed #E8EBEE; }
   .eu-fare-3 .car b{ color:var(--navy); font-weight:800; }
+  /* ---------- 결제 안내 — 요금 밑에 접어 둡니다 ----------
+     손님이 요금을 보고 바로 떠올리는 「지금 얼마를 내나」에 답하는 자리입니다.
+     금액은 인원을 바꾸면 같이 바뀝니다. */
+  .eu-pay{ margin-top:15px; padding-top:14px; border-top:1.5px dashed #E0E4E6; }
+  .eu-pay summary{ cursor:pointer; list-style:none; display:flex; align-items:center; gap:7px;
+    font-size:12.5px; font-weight:800; color:var(--violet); }
+  .eu-pay summary::-webkit-details-marker{ display:none; }
+  .eu-pay summary::after{ content:'▾'; font-size:11px; transition:transform .15s ease; }
+  .eu-pay[open] summary::after{ transform:rotate(180deg); }
+  .eu-pay summary:focus-visible{ outline:2px solid var(--violet); outline-offset:3px; border-radius:4px; }
+  .eu-pay .in{ margin-top:12px; }
+  .eu-pay .line{ display:grid; grid-template-columns:1fr auto; gap:6px 12px;
+    align-items:baseline; padding:9px 0; border-top:1px solid var(--line); }
+  .eu-pay .line:first-child{ border-top:0; padding-top:0; }
+  .eu-pay .line .k{ font-size:12.5px; font-weight:800; color:var(--navy); }
+  .eu-pay .line .k em{ display:block; font-style:normal; font-size:11.5px; font-weight:600;
+    color:var(--muted); margin-top:1px; }
+  .eu-pay .line .v{ text-align:right; font-family:'Work Sans',sans-serif; font-weight:800;
+    font-size:15px; color:var(--navy); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .eu-pay .line .v em{ display:block; font-style:normal; font-size:11.5px; font-weight:700;
+    color:var(--muted); margin-top:2px; }
+  .eu-pay ul{ margin:12px 0 0; padding-left:16px; }
+  .eu-pay li{ font-size:12px; font-weight:600; color:var(--muted); line-height:1.75; margin:3px 0; }
+  .eu-pay li b{ color:var(--navy); font-weight:800; }
+  .eu-pay li a{ color:var(--violet); font-weight:800; text-decoration:none;
+    border-bottom:1.5px solid currentColor; }
+  @media print{ .eu-pay{ display:none !important; } }
+
   .eu-fare-3 .ft{ padding:13px 22px 15px; background:#FAFAFE; border-top:1.5px solid var(--line);
     font-size:12px; font-weight:600; color:var(--muted); line-height:1.75; }
   .eu-fare-3 .ft b{ color:var(--navy); font-weight:800; }
@@ -643,6 +671,46 @@ function euFareSoon(설){
     '<div class="eu-fare-cta">' + 단추 + '</div></div>';
 }
 
+/* =========================================================================
+   결제 안내 — 요금 밑에 접어 두는 칸
+   -------------------------------------------------------------------------
+   요금을 본 손님이 바로 떠올리는 것은 「지금 얼마를 내나」 입니다.
+   그래서 예약금(30%)과 잔금을 대신 계산해 보여 줍니다.
+   인원을 바꾸면 euFareWatch 가 이 칸을 다시 그립니다.
+
+   비율과 기한은 입금확인 쪽과 같은 값이라야 합니다.
+   바꾸실 때는 아래 두 줄과 deposit.html 을 함께 고쳐 주세요.
+   ========================================================================= */
+var EU_PAY = { 예약금비율: 0.30, 잔금기한: '출발 2주 전' };
+
+function euPayBox(값){
+  if(값 == null || !isFinite(값) || 값 <= 0) return '';
+  var 예약 = Math.round(값 * EU_PAY.예약금비율);
+  var 잔금 = 값 - 예약;
+  var 퍼 = Math.round(EU_PAY.예약금비율 * 100);
+  var 돈칸 = function(v){
+    var 원 = euWon(v);
+    return '<span class="v">' + euMoney(v) +
+      (원 ? '<em data-eurkrw="' + v + '">' + 원 + '</em>' : '') + '</span>';
+  };
+  return '<details class="eu-pay" data-pay="' + 값 + '" open>' +
+    '<summary>결제는 어떻게 하나요?</summary>' +
+    '<div class="in">' +
+      '<div class="line"><span class="k">예약금' +
+        '<em>받으면 예약이 확정됩니다<span> · ' + 퍼 + '%</span></em></span>' +
+        돈칸(예약) + '</div>' +
+      '<div class="line"><span class="k">잔금<em>' + EU_PAY.잔금기한 + '까지</em></span>' +
+        돈칸(잔금) + '</div>' +
+      '<ul>' +
+        '<li><b>계좌이체</b> — 한국 계좌(유로·원화)와 스페인 계좌 모두 있습니다. ' +
+          '<a href="/deposit.html">계좌 보기</a></li>' +
+        '<li><b>신용카드</b> — 먼저 문의해 주시면 방법을 안내해 드립니다. ' +
+          '<a href="/contact.html">카드 결제 문의</a></li>' +
+        '<li>표시 금액은 유로 기준이고, 원화는 참고값입니다.</li>' +
+      '</ul>' +
+    '</div></details>';
+}
+
 /* ---------- ① 한 줄 (당일 차량) ---------- */
 function euFareOne(f, 설){
   var 값 = f['값'];
@@ -657,6 +725,7 @@ function euFareOne(f, 설){
             ' <em data-ratenote>' + euRateNote() + '</em></div>' : '') +
     (칩 ? '<div class="chips">' + 칩 + '</div>' : '') +
     (f['안내'] ? '<div class="note">' + f['안내'] + '</div>' : '') +
+    euPayBox(값) +
   '</div></div>';
 }
 
@@ -696,6 +765,7 @@ function euFareCalc(f, 설){
           '그 자리에서 요금이 나옵니다.</span>' +
         '<em>일정 만들기 &rarr;</em></a>' +
       (첫['차량'] ? '<div class="car">배정 차량 — <b data-car>' + 첫['차량'] + '</b></div>' : '') +
+      '<div class="paywrap" style="width:100%">' + euPayBox(첫['값']) + '</div>' +
     '</div>' +
     '<div class="ft">' + (추가 ? 추가 + '<br>' : '') +
       /* 환율 안내가 꺼져 있으면 꼬리에 가운뎃점만 남지 않도록 합니다 */
@@ -748,6 +818,16 @@ function euFareWatch(){
       넣('[data-eur]', euMoney(g['값']));
       표('[data-krw]', g['값'], euWon(g['값']));
       if(g['차량']) 넣('[data-car]', g['차량']);
+      /* 결제 안내 — 예약금·잔금을 다시 셉니다.
+         펼쳐 두셨는지 접어 두셨는지는 그대로 이어 갑니다. */
+      var 지갑 = box.querySelector('.paywrap');
+      if(지갑){
+        var 옛칸 = 지갑.querySelector('.eu-pay');
+        var 펼침 = 옛칸 ? 옛칸.open : true;
+        지갑.innerHTML = euPayBox(g['값']);
+        var 새칸 = 지갑.querySelector('.eu-pay');
+        if(새칸) 새칸.open = 펼침;
+      }
     });
   });
 }
