@@ -54,11 +54,16 @@
   .section-inner h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:19px; margin:0 0 6px; color:var(--navy); }
   .section-inner .sub{ color:var(--muted); font-size:13px; font-weight:600; margin-bottom:20px; line-height:1.6; }
 
-  .account-card{ background:var(--navy); color:#fff; border-radius:var(--radius); padding:22px 24px; margin-bottom:16px; }
-  .account-card .lbl{ font-size:11px; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.55); font-weight:800; margin-bottom:6px; }
-  .account-card .bank{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:19px; }
-  .account-card .num{ font-family:'Space Mono'; font-weight:700; font-size:20px; color:#9DBDB1; margin-top:4px; letter-spacing:.5px; }
-  .account-card .holder{ font-size:13px; color:rgba(255,255,255,0.75); font-weight:700; margin-top:8px; }
+  /* 입금 계좌 — 아래 신용카드 결제 칸과 같은 흰 바탕·같은 글꼴로 맞춥니다 */
+  .account-card{ background:var(--paper); color:var(--ink); border:2px solid var(--line);
+    border-radius:16px; padding:20px 22px; margin-bottom:16px; }
+  .account-card .lbl{ font-size:11.5px; font-weight:800; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--pink); margin-bottom:8px; }
+  .account-card .bank{ font-size:15.5px; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .account-card .num{ font-size:15px; font-weight:800; color:var(--navy); margin-top:6px;
+    font-variant-numeric:tabular-nums; }
+  .account-card .holder{ font-size:13px; font-weight:600; color:var(--muted);
+    margin-top:10px; line-height:1.75; }
   /* 신용카드 결제 — 계좌 이체와 달리 먼저 문의가 필요한 건이라 따로 세웁니다 */
   .pay-card{ background:var(--paper); border:2px solid var(--line); border-radius:16px;
     padding:20px 22px; margin-bottom:16px; }
