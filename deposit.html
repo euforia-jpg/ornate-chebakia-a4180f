@@ -59,6 +59,23 @@
   .account-card .bank{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:19px; }
   .account-card .num{ font-family:'Space Mono'; font-weight:700; font-size:20px; color:#9DBDB1; margin-top:4px; letter-spacing:.5px; }
   .account-card .holder{ font-size:13px; color:rgba(255,255,255,0.75); font-weight:700; margin-top:8px; }
+  /* 신용카드 결제 — 계좌 이체와 달리 먼저 문의가 필요한 건이라 따로 세웁니다 */
+  .pay-card{ background:var(--paper); border:2px solid var(--line); border-radius:16px;
+    padding:20px 22px; margin-bottom:16px; }
+  .pay-card .lbl{ font-size:11.5px; font-weight:800; letter-spacing:.1em;
+    color:var(--pink); text-transform:uppercase; margin-bottom:8px; }
+  .pay-card h4{ margin:0 0 7px; font-size:15.5px; font-weight:800; color:var(--navy);
+    letter-spacing:-.01em; }
+  .pay-card p{ margin:0 0 14px; font-size:13px; line-height:1.75; color:var(--muted);
+    font-weight:600; }
+  .pay-card p b{ color:var(--navy); font-weight:800; }
+  .pay-cta{ display:flex; gap:8px; flex-wrap:wrap; }
+  .pay-cta a{ flex:1 1 150px; text-align:center; text-decoration:none; padding:11px 16px;
+    border-radius:11px; font-size:13px; font-weight:800; border:2px solid transparent; }
+  .pay-cta a.main{ background:var(--pink); color:#fff; }
+  .pay-cta a.sub{ background:var(--paper); color:var(--navy); border-color:var(--line); }
+  @media (max-width:560px){ .pay-cta a{ flex-basis:100%; } }
+
   .placeholder-note{ display:flex; gap:8px; align-items:flex-start; background:var(--wash-orange); border:2px solid #FFD3AC; border-radius:12px; padding:12px 14px; font-size:12px; color:#8A4A05; font-weight:700; line-height:1.6; margin-bottom:18px; }
 
   .steps{ display:flex; flex-direction:column; gap:12px; }
@@ -344,6 +361,16 @@
           <div class="num">ES77 2100 1441 6002 0052 4954</div>
           <div class="holder">SWIFT/BIC · CAIXESBBXXX<br>예금주 · Euforia Das Nuvens S.L</div>
         </div>
+        <div class="pay-card">
+          <div class="lbl">신용카드 결제</div>
+          <h4>카드로 결제하시려면 먼저 문의해 주세요</h4>
+          <p><span>상품과 금액에 따라 결제 방법이 달라집니다.</span> <b>담당자가 확인한 뒤 결제 방법을 안내해 드립니다.</b> <span>위 계좌로 이체하시는 경우에는 문의 없이 바로 진행하셔도 됩니다.</span></p>
+          <div class="pay-cta">
+            <a class="main" href="contact.html">카드 결제 문의하기</a>
+            <a class="sub" href="https://pf.kakao.com/_BSxggn/chat" target="_blank" rel="noopener">카카오톡 문의</a>
+          </div>
+        </div>
+
         <div class="fx-box">
           <h4>💱 환율 계산기</h4>
           <div class="fx-row">
