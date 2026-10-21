@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>오늘 · 유포리아투어</title>
+
+<!-- 휴대폰 홈 화면에 붙였을 때 앱처럼 열리도록 -->
+<meta name="theme-color" content="#24303A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="오늘">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+
+<style>
+/* ===========================================================
+   오늘 — 휴대폰에서 방문 현황만 빠르게 보는 쪽
+
+   · 손님에게 보여 주는 쪽이 아닙니다. robots.txt 와 위 meta 로
+     검색에서 빠지게 해 두었습니다.
+   · 바깥에서 글꼴이나 그림을 받아오지 않습니다. 휴대폰에서
+     1초 안에 뜨는 것이 이 쪽의 전부입니다.
+   · 숫자는 30초마다 저절로 다시 받아옵니다.
+   =========================================================== */
+:root{
+  --navy:#24303A; --blue:#4A6E86; --brown:#94634A; --sage:#52786C;
+  --muted:#64707A; --line:#E4E6E8; --paper:#FFFFFF; --bg:#F6F6F6;
+}
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--bg); color:var(--navy);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo',
+    'Noto Sans KR','Malgun Gothic',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+a{ color:var(--blue); }
+
+/* ---------- 비밀번호 ---------- */
+.gate{ position:fixed; inset:0; background:var(--navy); color:#fff;
+  display:flex; align-items:center; justify-content:center; padding:24px; z-index:50; }
+.gate-box{ width:100%; max-width:320px; text-align:center; }
+.gate .mark{ width:54px; height:54px; margin:0 auto 16px; border-radius:15px;
+  background:#fff; color:var(--navy); display:flex; align-items:center; justify-content:center;
+  font-size:26px; font-weight:800; font-style:italic; }
+.gate h1{ margin:0 0 4px; font-size:23px; font-weight:800; letter-spacing:-.02em; }
+.gate p{ margin:0 0 22px; font-size:13.5px; color:rgba(255,255,255,.62); font-weight:600; }
+.gate input{ width:100%; padding:15px 16px; border-radius:13px; border:0; font-size:16px;
+  font-family:inherit; font-weight:700; color:var(--navy); background:#fff; margin-bottom:9px; }
+.gate input:focus{ outline:3px solid rgba(255,255,255,.35); outline-offset:1px; }
+.gate button{ width:100%; padding:15px 16px; border-radius:13px; border:0; cursor:pointer;
+  font-size:15.5px; font-family:inherit; font-weight:800; color:var(--navy); background:#fff; }
+.gate button:disabled{ opacity:.55; }
+.gate .err{ min-height:20px; margin-top:12px; font-size:13px; font-weight:700; color:#FFC9B4; }
+
+/* ---------- 머리 ---------- */
+header{ position:sticky; top:0; z-index:20; background:var(--bg);
+  display:flex; align-items:center; gap:10px;
+  padding:16px 18px 12px; border-bottom:1px solid var(--line); }
+header .ttl{ flex:1 1 auto; min-width:0; }
+header .ttl b{ display:block; font-size:19px; font-weight:800; letter-spacing:-.02em; }
+header .ttl span{ display:block; font-size:12px; font-weight:700; color:var(--muted); margin-top:2px; }
+header button{ flex:0 0 auto; width:40px; height:40px; border-radius:12px; cursor:pointer;
+  border:1.5px solid var(--line); background:var(--paper); color:var(--navy);
+  font-size:18px; font-family:inherit; line-height:1; }
+header button:disabled{ opacity:.4; }
+header button.spin{ animation:turn .8s linear infinite; }
+@keyframes turn{ to{ transform:rotate(360deg); } }
+
+main{ padding:14px 18px 30px; max-width:640px; margin:0 auto; }
+main.loading{ opacity:.5; }
+
+/* ---------- 큰 숫자 ---------- */
+.big{ background:var(--navy); color:#fff; border-radius:20px; padding:22px 22px 20px; margin-bottom:14px; }
+.big .k{ font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+  color:rgba(255,255,255,.60); }
+.big .v{ font-size:56px; font-weight:800; line-height:1.05; letter-spacing:-.03em; margin:6px 0 2px;
+  font-variant-numeric:tabular-nums; }
+.big .v em{ font-style:normal; font-size:21px; font-weight:700; margin-left:5px;
+  color:rgba(255,255,255,.70); }
+.big .sub{ font-size:13px; font-weight:700; color:rgba(255,255,255,.72); line-height:1.7; }
+.big .sub b{ color:#fff; font-weight:800; }
+
+/* ---------- 카드 ---------- */
+.card{ background:var(--paper); border:1.5px solid var(--line); border-radius:18px;
+  padding:16px 17px; margin-bottom:12px; }
+.card h2{ margin:0 0 12px; font-size:13px; font-weight:800; letter-spacing:-.01em; }
+.card h2 small{ font-weight:700; color:var(--muted); font-size:11.5px; margin-left:5px; }
+
+/* ---------- 7일 막대 ---------- */
+.bars{ display:flex; align-items:flex-end; gap:6px; height:88px; }
+.bars .b{ flex:1 1 0; display:flex; flex-direction:column; justify-content:flex-end;
+  align-items:center; gap:5px; height:100%; min-width:0; }
+.bars .b i{ display:block; width:100%; border-radius:5px 5px 2px 2px; background:var(--blue);
+  min-height:3px; }
+.bars .b.now i{ background:var(--brown); }
+.bars .b u{ font-size:10.5px; font-weight:800; text-decoration:none; color:var(--muted);
+  white-space:nowrap; font-variant-numeric:tabular-nums; }
+.bars .b.now u{ color:var(--brown); }
+.bars .b s{ font-size:11px; font-weight:800; text-decoration:none; font-variant-numeric:tabular-nums; }
+
+/* ---------- 순위 ---------- */
+.rk-row{ display:grid; grid-template-columns:1fr 64px 34px; align-items:center; gap:9px;
+  padding:7px 0; }
+.rk-row + .rk-row{ border-top:1px solid var(--line); }
+.rk-name{ font-size:13px; font-weight:700; overflow:hidden; text-overflow:ellipsis;
+  white-space:nowrap; }
+.rk-bar{ height:7px; border-radius:4px; background:var(--line); overflow:hidden; }
+.rk-bar i{ display:block; height:100%; background:var(--sage); border-radius:4px; }
+.rk-n{ text-align:right; font-size:12.5px; font-weight:800; font-variant-numeric:tabular-nums; }
+.empty{ font-size:12.5px; font-weight:700; color:var(--muted); padding:8px 0; }
+
+/* ---------- 꼬리 ---------- */
+footer{ margin-top:18px; text-align:center; font-size:12px; font-weight:700; color:var(--muted); }
+footer .when{ margin-bottom:12px; }
+footer .when b{ color:var(--navy); font-variant-numeric:tabular-nums; }
+footer a{ display:inline-block; padding:12px 18px; border-radius:12px; text-decoration:none;
+  border:1.5px solid var(--line); background:var(--paper); font-weight:800; font-size:13px; }
+footer .out{ display:block; margin:14px auto 0; background:none; border:0; cursor:pointer;
+  font-family:inherit; font-size:12px; font-weight:700; color:var(--muted);
+  text-decoration:underline; padding:6px; }
+.warn{ background:#F5F1EB; border:1.5px solid #E2D6C4; border-radius:14px; padding:12px 14px;
+  font-size:12.5px; font-weight:700; color:#7A4E22; line-height:1.65; margin-bottom:12px; }
+</style>
+</head>
+<body>
+
+<!-- ================= 비밀번호 ================= -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="mark">E</div>
+    <h1>오늘</h1>
+    <p>유포리아투어 방문 현황</p>
+    <input id="pw" type="password" placeholder="관리자 비밀번호"
+           autocomplete="current-password" enterkeyhint="go">
+    <button type="button" id="go">들어가기</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+
+<!-- ================= 본문 ================= -->
+<header id="top" hidden>
+  <div class="ttl">
+    <b>오늘</b>
+    <span id="dateLine">불러오는 중…</span>
+  </div>
+  <button type="button" id="reload" aria-label="지금 새로고침">⟳</button>
+</header>
+
+<main id="app" hidden>
+  <div class="warn" id="warn" hidden></div>
+
+  <section class="big">
+    <div class="k">오늘 지금까지 방문</div>
+    <div class="v"><span id="vVisits">—</span><em>명</em></div>
+    <div class="sub" id="vSub">—</div>
+  </section>
+
+  <section class="card">
+    <h2>최근 8일 방문<small>오늘은 아직 진행 중입니다</small></h2>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <section class="card">
+    <h2>오늘 많이 본 쪽</h2>
+    <div id="rkPage"></div>
+  </section>
+
+  <section class="card">
+    <h2>오늘 많이 본 상품</h2>
+    <div id="rkProd"></div>
+  </section>
+
+  <section class="card">
+    <h2>오늘 눌린 단추</h2>
+    <div id="rkClick"></div>
+  </section>
+
+  <section class="card">
+    <h2>오늘 어디서 들어왔나</h2>
+    <div id="rkRef"></div>
+  </section>
+
+  <footer>
+    <div class="when">기준 <b id="when">—</b> · 30초마다 저절로 갱신</div>
+    <a href="/admin.html">전체 통계 보기 →</a>
+    <button type="button" class="out" id="out">로그아웃</button>
+  </footer>
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  var API   = '/.netlify/functions/admin-api';
+  var STATS = '/.netlify/functions/site-stats';
+  var 열쇠칸 = 'euf_today_token';   /* 홈 화면 앱에서 매번 비밀번호를 묻지 않도록 담아 둡니다 */
+  var 주기   = 30000;               /* 30초 */
+
+  var token = '';
+  var 타이머 = null;
+  var 받는중 = false;
+  var 상품이름 = null;              /* products.js 에서 뒤늦게 받아 옵니다 */
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+  function 수(n){ return (n == null ? 0 : n).toLocaleString('ko-KR'); }
+
+  /* ---------- 이름 풀이 (관리자 대쉬보드와 같은 표기) ---------- */
+  var 쪽이름 = {
+    '/':'첫 화면', '/tours.html':'여행상품', '/product.html':'상품 상세',
+    '/matchday.html':'경기 일정', '/concert.html':'공연 일정', '/contact.html':'예약문의',
+    '/deposit.html':'입금확인', '/faq.html':'자주 묻는 질문', '/about.html':'회사소개',
+    '/plan.html':'맞춤여행', '/move.html':'교통', '/cancel.html':'취소·환불',
+    '/audio-guide.html':'오디오 가이드', '/builder.html':'일정 만들기(빌더)',
+    '/hotels.html':'기준호텔', '/golf.html':'골프', '/404.html':'없는 쪽(404)'
+  };
+  var 단추이름 = {
+    inquiry:'예약문의하기', kakao:'카카오톡', tel:'전화 걸기', mail:'이메일',
+    deposit:'입금확인', product:'상품 카드', match:'경기 일정', concert:'공연 일정',
+    tour:'여행상품 목록', plan:'맞춤여행', ai:'AI 상담', builder:'일정 만들기', etc:'기타'
+  };
+  var 유입이름 = {
+    naver:'네이버', google:'구글', daum:'다음·카카오', sns:'SNS(쓰레드·인스타 등)',
+    other:'다른 사이트', direct:'주소 직접 입력·즐겨찾기'
+  };
+  function 풀이(갈래, 키){
+    if(갈래 === 'page')  return 쪽이름[키]  || 키;
+    if(갈래 === 'click') return 단추이름[키] || 키;
+    if(갈래 === 'ref')   return 유입이름[키] || 키;
+    if(갈래 === 'prod')  return (상품이름 && 상품이름[키]) || 키;
+    return 키;
+  }
+
+  /* ---------- 그리기 ---------- */
+  function 순위(갈래, 목록, 몇){
+    if(!목록 || !목록.length) return '<div class="empty">아직 없습니다.</div>';
+    var 들 = 목록.slice(0, 몇 || 4);
+    var 최대 = 들[0].n || 1;
+    return 들.map(function(r){
+      var w = Math.max(4, Math.round((r.n / 최대) * 100));
+      return '<div class="rk-row">' +
+        '<span class="rk-name">' + esc(풀이(갈래, r.name)) + '</span>' +
+        '<span class="rk-bar"><i style="width:' + w + '%"></i></span>' +
+        '<b class="rk-n">' + 수(r.n) + '</b></div>';
+    }).join('');
+  }
+
+  /* 2026-10-21 → 수   (막대 여덟 개가 좁아서 요일 한 글자만 적습니다) */
+  function 요일(s){
+    var p = String(s || '').split('-');
+    if(p.length !== 3) return '';
+    var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    return ['일','월','화','수','목','금','토'][d.getUTCDay()];
+  }
+
+  function 막대(일별){
+    if(!일별 || !일별.length) return '<div class="empty">아직 없습니다.</div>';
+    var 최대 = 일별.reduce(function(a,r){ return Math.max(a, r.visits || 0); }, 0) || 1;
+    return 일별.map(function(r, i){
+      var 오늘 = (i === 일별.length - 1);
+      var h = Math.max(3, Math.round(((r.visits || 0) / 최대) * 62));
+      return '<div class="b' + (오늘 ? ' now' : '') + '">' +
+        '<s>' + 수(r.visits) + '</s>' +
+        '<i style="height:' + h + 'px"></i>' +
+        '<u>' + (오늘 ? '오늘' : 요일(r.date)) + '</u>' +
+        '</div>';
+    }).join('');
+  }
+
+  var 마지막 = null;      /* 상품 이름이 늦게 도착하면 이것으로 다시 그립니다 */
+
+  function 그리기(j){
+    마지막 = j;
+    if(!j || !j.ready){
+      $('warn').hidden = false;
+      $('warn').textContent = (j && j.reason) ? j.reason : '통계를 읽지 못했습니다.';
+      return;
+    }
+    $('warn').hidden = true;
+
+    var 일별 = j['일별'] || [];
+    var 오늘 = 일별.length ? 일별[일별.length - 1] : { visits:0, views:0, date:'' };
+    var 어제 = 일별.length > 1 ? 일별[일별.length - 2] : null;
+
+    /* 지난 7일(오늘 제외) 하루 평균 — 오늘이 많은 편인지 가늠하는 데만 씁니다 */
+    var 앞 = 일별.slice(0, -1);
+    var 평균 = 앞.length
+      ? Math.round(앞.reduce(function(a,r){ return a + (r.visits || 0); }, 0) / 앞.length)
+      : 0;
+
+    $('vVisits').textContent = 수(오늘.visits);
+    $('vSub').innerHTML =
+      '쪽 열람 <b>' + 수(오늘.views) + '</b>회<br>' +
+      (어제 ? '어제 <b>' + 수(어제.visits) + '</b>명' : '') +
+      (평균 ? ' · 7일 평균 <b>' + 수(평균) + '</b>명' : '');
+
+    $('dateLine').textContent = 오늘.date ? (오늘.date + ' · 스페인 날짜 기준') : '';
+    $('bars').innerHTML = 막대(일별);
+
+    $('rkPage').innerHTML  = 순위('page',  오늘['인기페이지'], 4);
+    $('rkProd').innerHTML  = 순위('prod',  오늘['인기상품'],   4);
+    $('rkClick').innerHTML = 순위('click', 오늘['버튼클릭'],   4);
+    $('rkRef').innerHTML   = 순위('ref',   오늘['유입경로'],   4);
+
+    var t = new Date();
+    $('when').textContent =
+      String(t.getHours()).padStart(2,'0') + ':' + String(t.getMinutes()).padStart(2,'0');
+  }
+
+  /* ---------- 받아오기 ---------- */
+  function 받기(){
+    if(받는중 || !token) return;
+    받는중 = true;
+    var btn = $('reload');
+    btn.disabled = true; btn.classList.add('spin');
+    $('app').classList.add('loading');
+
+    fetch(STATS, {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ token: token, days: 8 })
+    }).then(function(r){
+      if(r.status === 401){ 나가기(true); throw new Error('로그인이 필요합니다'); }
+      return r.json();
+    }).then(그리기).catch(function(e){
+      $('warn').hidden = false;
+      $('warn').textContent = '숫자를 받지 못했습니다 — ' + e.message;
+    }).then(function(){
+      받는중 = false;
+      btn.disabled = false; btn.classList.remove('spin');
+      $('app').classList.remove('loading');
+    });
+  }
+
+  /* 상품 이름은 숫자를 먼저 띄운 뒤에 뒤늦게 받아옵니다 (급하지 않습니다) */
+  function 상품이름받기(){
+    if(상품이름) return;
+    fetch('/products.js').then(function(r){ return r.text(); }).then(function(s){
+      var i = s.indexOf('[');
+      var j = s.indexOf('\n];', i);
+      j = (j === -1) ? s.lastIndexOf(']') + 1 : j + 2;
+      var arr = JSON.parse(s.slice(i, j));
+      상품이름 = {};
+      arr.forEach(function(p){ if(p && p.id && p.title) 상품이름[p.id] = p.title; });
+      /* 서버를 다시 부르지 않고, 이미 받아 둔 숫자에 이름만 끼워 다시 그립니다 */
+      if(마지막) 그리기(마지막);
+    }).catch(function(){ /* 못 받으면 상품 번호 그대로 둡니다 */ });
+  }
+
+  /* ---------- 자동 갱신 ---------- */
+  function 돌리기(){ 멈추기(); 타이머 = setInterval(받기, 주기); }
+  function 멈추기(){ if(타이머){ clearInterval(타이머); 타이머 = null; } }
+
+  document.addEventListener('visibilitychange', function(){
+    /* 화면을 덮어 두는 동안에는 부르지 않습니다 (전지를 아낍니다) */
+    if(document.hidden){ 멈추기(); } else if(token){ 받기(); 돌리기(); }
+  });
+
+  /* ---------- 들어가기 · 나가기 ---------- */
+  function 시작(){
+    $('gate').style.display = 'none';
+    $('top').hidden = false;
+    $('app').hidden = false;
+    받기(); 돌리기();
+    setTimeout(상품이름받기, 1200);
+  }
+
+  function 나가기(만료){
+    token = '';
+    멈추기();
+    try{ localStorage.removeItem(열쇠칸); }catch(e){}
+    $('top').hidden = true;
+    $('app').hidden = true;
+    $('gate').style.display = '';
+    $('pw').value = '';
+    $('err').textContent = 만료 ? '다시 로그인해 주세요.' : '';
+  }
+
+  function 들어가기(){
+    var pw = $('pw').value;
+    if(!pw){ $('err').textContent = '비밀번호를 넣어 주세요.'; return; }
+    $('go').disabled = true; $('go').textContent = '확인 중…';
+    $('err').textContent = '';
+    fetch(API, {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ action:'login', password: pw })
+    }).then(function(r){
+      return r.json().then(function(j){ return { ok:r.ok, j:j }; });
+    }).then(function(res){
+      if(!res.ok) throw new Error(res.j.error || '로그인에 실패했습니다');
+      token = res.j.token;
+      try{ localStorage.setItem(열쇠칸, token); }catch(e){}
+      시작();
+    }).catch(function(e){
+      $('err').textContent = e.message;
+    }).then(function(){
+      $('go').disabled = false; $('go').textContent = '들어가기';
+    });
+  }
+
+  $('go').addEventListener('click', 들어가기);
+  $('pw').addEventListener('keydown', function(e){ if(e.key === 'Enter') 들어가기(); });
+  $('reload').addEventListener('click', 받기);
+  $('out').addEventListener('click', function(){ 나가기(false); });
+
+  /* 지난번에 넣어 둔 열쇠가 있으면 바로 들어갑니다 (틀렸으면 받기에서 되돌립니다) */
+  try{ token = localStorage.getItem(열쇠칸) || ''; }catch(e){}
+  if(token) 시작(); else setTimeout(function(){ $('pw').focus(); }, 300);
+})();
+</script>
+</body>
+</html>

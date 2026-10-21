@@ -4,6 +4,7 @@ Allow: /
 # 손님에게 보여 줄 쪽이 아닙니다 (검색 결과에서 빼 달라는 요청)
 Disallow: /admin.html
 Disallow: /audio-admin.html
+Disallow: /today.html
 Disallow: /data/
 Disallow: /move-hero-preview.html
 Disallow: /미리보기.html
