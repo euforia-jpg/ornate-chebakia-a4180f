@@ -147,30 +147,42 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
      금액은 인원을 바꾸면 같이 바뀝니다. */
   /* ---------- 제휴 예약처 — 같은 일정을 파는 다른 곳 ----------
      상품 자료의 「제휴코드」 한 칸이 채워져 있을 때만 나옵니다.
-     곳마다 빛깔을 달리해 서로 다른 회사임이 바로 보이게 했고,
-     색은 모두 홈페이지가 이미 쓰는 것에서 가져왔습니다. */
+
+     타일 바탕은 모두 흰색입니다. 로고에 이미 색이 많아 바탕까지 물들이면
+     셋이 서로 다투어 보입니다. 대신 타일 위쪽에 가는 띠로 회사 색을 둡니다.
+
+     로고는 가로세로 비가 제각각이라(6.4:1 / 3.9:1 / 8.0:1) 높이를 똑같이
+     주지 않습니다. 너비는 칸에 맞추고 높이에만 상한을 두어, 긴 로고가
+     혼자 작아지지 않게 했습니다. */
   .eu-also{ margin-top:15px; padding-top:14px; border-top:1.5px dashed #E0E4E6; width:100%; }
   .eu-also h4{ margin:0 0 3px; font-size:14px; font-weight:800; color:var(--navy);
     letter-spacing:-.01em; }
   .eu-also p{ margin:0 0 12px; font-size:12px; font-weight:600; color:var(--muted); line-height:1.6; }
-  .eu-also-b{ display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
-  /* 한두 곳만 올리셨을 때 단추가 한쪽에 몰려 보이지 않도록 */
+  .eu-also-b{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  /* 한두 곳만 올리셨을 때 타일이 한쪽에 몰려 보이지 않도록 */
   .eu-also-b[data-n="1"]{ grid-template-columns:1fr; }
   .eu-also-b[data-n="2"]{ grid-template-columns:1fr 1fr; }
-  .eu-also-b a{ display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:3px; text-decoration:none; border:1.5px solid var(--line); border-radius:12px;
-    padding:11px 4px; min-height:58px; transition:.15s; }
-  .eu-also-b a b{ font-size:12px; font-weight:800; line-height:1.25; text-align:center; }
-  .eu-also-b a em{ font-style:normal; font-size:10px; font-weight:700; color:var(--muted); }
+  .eu-also-b a{ display:flex; align-items:center; justify-content:center;
+    background:#fff; border:1.5px solid var(--line); border-top-width:2px;
+    border-radius:12px; padding:14px 9px; min-height:52px; text-decoration:none;
+    transition:.15s; }
   .eu-also-b a:hover{ transform:translateY(-1px);
     box-shadow:0 10px 20px -14px rgba(36, 48, 58,.5); }
   .eu-also-b a:focus-visible{ outline:2px solid var(--violet); outline-offset:2px; }
-  .eu-also-b a[data-also="privia"]    { background:#F0F4F7; border-color:#C9D8E2; }
-  .eu-also-b a[data-also="privia"] b  { color:#39566A; }
-  .eu-also-b a[data-also="tourvis"]   { background:#F6F1EC; border-color:#E0CDBC; }
-  .eu-also-b a[data-also="tourvis"] b { color:#7A4F38; }
-  .eu-also-b a[data-also="tmembers"]  { background:#EEF3F1; border-color:#C7DAD2; }
-  .eu-also-b a[data-also="tmembers"] b{ color:#3F6358; }
+  .eu-also-b img{ display:block; max-width:min(96%, 180px); max-height:15px;
+    width:auto; height:auto; object-fit:contain; }
+  /* 위쪽 띠 — 각 회사 색 */
+  .eu-also-b a[data-also="privia"]  { border-top-color:#E6186E; }
+  .eu-also-b a[data-also="tourvis"] { border-top-color:#2B2B2B; }
+  .eu-also-b a[data-also="tmembers"]{ border-top-color:#E8402A; }
+  /* 휴대폰에서는 한 줄에 하나씩 —
+     세 칸으로 쪼개면 「T 멤버십 글로벌여행」처럼 긴 로고가 8px 까지 줄어
+     읽히지 않습니다. 한 줄씩 두면 셋 다 또렷한 크기로 나옵니다. */
+  @media (max-width:480px){
+    .eu-also-b, .eu-also-b[data-n="2"]{ grid-template-columns:1fr; gap:7px; }
+    .eu-also-b a{ min-height:46px; padding:12px 14px; border-top-width:2px; }
+    .eu-also-b img{ max-width:min(100%, 200px); max-height:16px; }
+  }
   /* 아주 좁은 화면에서는 한 줄에 하나씩 */
   @media (max-width:359px){ .eu-also-b{ grid-template-columns:1fr; } }
   @media print{ .eu-also{ display:none !important; } }
@@ -727,13 +739,16 @@ function euFareSoon(설, 제휴){
    비워 두면 이 칸은 아예 나오지 않습니다.
    ========================================================================= */
 var EU_제휴 = [
-  /* 곁말을 「여행」 같은 흔한 낱말로 두면 다국어 사전이 홈페이지의 다른 곳까지
-     건드릴 수 있어, 겹칠 일이 없는 말로 적어 두었습니다 */
-  { 키:'privia',   이름:'현대카드 PRIVIA', 곁:'priviatravel.com',
+  /* 이름은 로고를 못 받아 왔을 때 대신 읽히는 말(alt)로 쓰입니다.
+     그림 크기(폭·높이)는 자리를 미리 잡아 두어 쪽이 덜컥거리지 않게 합니다. */
+  { 키:'privia',   이름:'현대카드 PRIVIA 여행',
+    그림:'/logo/privia.png',   폭:382, 높:60,
     틀:'https://www.priviatravel.com/activity/product/detail/{코드}' },
-  { 키:'tourvis',  이름:'투어비스',        곁:'tourvis.com',
+  { 키:'tourvis',  이름:'투어비스',
+    그림:'/logo/tourvis.png',  폭:402, 높:104,
     틀:'https://tourvis.com/activity/product/{코드}' },
-  { 키:'tmembers', 이름:'T멤버십',         곁:'SK텔레콤',
+  { 키:'tmembers', 이름:'T 멤버십 글로벌여행',
+    그림:'/logo/tmembers.png', 폭:368, 높:46,
     틀:'https://tmembership.tourvis.com/touract/preview/{코드}' }
 ];
 
@@ -772,8 +787,9 @@ function euAlso(값){
     '<div class="eu-also-b" data-n="' + 들.length + '">' +
       들.map(function(d){
         return '<a href="' + 막기(d.주소) + '" target="_blank" rel="noopener nofollow"' +
-          ' data-also="' + d.곳.키 + '">' +
-          '<b>' + d.곳.이름 + '</b><em>' + d.곳.곁 + '</em></a>';
+          ' data-also="' + d.곳.키 + '" title="' + 막기(d.곳.이름) + '">' +
+          '<img src="' + d.곳.그림 + '" alt="' + 막기(d.곳.이름) + '"' +
+          ' width="' + d.곳.폭 + '" height="' + d.곳.높 + '" loading="lazy"></a>';
       }).join('') +
     '</div></div>';
 }
