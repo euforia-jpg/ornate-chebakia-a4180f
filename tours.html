@@ -79,6 +79,12 @@
   /* ===== 요금 자리 (5안 — 선 하나만) =====
      상자를 없애고 점선 한 줄로만 나눕니다. 상세 쪽 요금 상자와 순서가 같습니다
      — 작은 설명줄 → 큰 금액 → / 1인. 유튜브·헤드폰은 동그란 단추로 옆에 둡니다. */
+  /* 제휴 예약처 배지 — 같은 일정을 파는 다른 곳이 있을 때만 카드에 붙습니다 */
+  .also-chip{ display:inline-flex; align-items:center; align-self:flex-start;
+    width:fit-content; margin:-4px 0 12px;
+    background:#EEF1F3; color:var(--violet); border:1px solid #DDE4E9;
+    border-radius:999px; padding:5px 11px; font-size:11px; font-weight:800;
+    line-height:1.2; letter-spacing:-.01em; }
   .tour-price{ display:flex; align-items:flex-end; gap:9px; max-width:100%; margin:0 0 14px;
                padding-top:12px; border-top:1.5px dashed #DFE3E6; }
   .tour-price .price-chip{ display:block; box-sizing:border-box; flex:1 1 auto; min-width:0;
@@ -484,6 +490,23 @@ function productLink(p){
   return p.link || ('product.html?id=' + encodeURIComponent(p.id));
 }
 
+/* ---------- 제휴 예약처 배지 ----------
+   상품 자료의 「제휴코드」가 채워져 있을 때만 카드에 작게 붙습니다.
+   어느 곳인지와 주소는 상품 상세 쪽 요금칸 아래에서 보여 드립니다. */
+function 제휴배지(p){
+  var v = p && p['제휴코드'];
+  if(!v) return '';
+  var n = 0;
+  if(typeof v === 'string'){ n = String(v).trim() ? 3 : 0; }
+  else if(typeof v === 'object'){
+    ['privia','tourvis','tmembers'].forEach(function(k){
+      if(v[k] != null && String(v[k]).trim()) n++;
+    });
+  }
+  if(!n) return '';
+  return '<div class="also-chip">제휴 예약처 ' + n + '곳</div>';
+}
+
 function renderFilters(){
   const wrap = document.getElementById('filters');
   wrap.innerHTML = FILTER_LABELS.map(f =>
@@ -514,6 +537,7 @@ function renderGrid(){
         <p>${p.summary}</p>
         <div class="tour-tags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
        <div class="tour-price">${euFareChip(p)}${formatYoutubeBtn(p.youtubeUrl)}${formatAudioBadge(p.audioGuide)}</div>
+        ${제휴배지(p)}
         <div class="tour-cta"><span>${p.ctaLabel || '상품 보기'} →</span></div>
       </div>
     </a>

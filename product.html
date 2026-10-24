@@ -145,6 +145,36 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   /* ---------- 결제 안내 — 요금 밑에 접어 둡니다 ----------
      손님이 요금을 보고 바로 떠올리는 「지금 얼마를 내나」에 답하는 자리입니다.
      금액은 인원을 바꾸면 같이 바뀝니다. */
+  /* ---------- 제휴 예약처 — 같은 일정을 파는 다른 곳 ----------
+     상품 자료의 「제휴코드」 한 칸이 채워져 있을 때만 나옵니다.
+     곳마다 빛깔을 달리해 서로 다른 회사임이 바로 보이게 했고,
+     색은 모두 홈페이지가 이미 쓰는 것에서 가져왔습니다. */
+  .eu-also{ margin-top:15px; padding-top:14px; border-top:1.5px dashed #E0E4E6; width:100%; }
+  .eu-also h4{ margin:0 0 3px; font-size:14px; font-weight:800; color:var(--navy);
+    letter-spacing:-.01em; }
+  .eu-also p{ margin:0 0 12px; font-size:12px; font-weight:600; color:var(--muted); line-height:1.6; }
+  .eu-also-b{ display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
+  /* 한두 곳만 올리셨을 때 단추가 한쪽에 몰려 보이지 않도록 */
+  .eu-also-b[data-n="1"]{ grid-template-columns:1fr; }
+  .eu-also-b[data-n="2"]{ grid-template-columns:1fr 1fr; }
+  .eu-also-b a{ display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:3px; text-decoration:none; border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 4px; min-height:58px; transition:.15s; }
+  .eu-also-b a b{ font-size:12px; font-weight:800; line-height:1.25; text-align:center; }
+  .eu-also-b a em{ font-style:normal; font-size:10px; font-weight:700; color:var(--muted); }
+  .eu-also-b a:hover{ transform:translateY(-1px);
+    box-shadow:0 10px 20px -14px rgba(36, 48, 58,.5); }
+  .eu-also-b a:focus-visible{ outline:2px solid var(--violet); outline-offset:2px; }
+  .eu-also-b a[data-also="privia"]    { background:#F0F4F7; border-color:#C9D8E2; }
+  .eu-also-b a[data-also="privia"] b  { color:#39566A; }
+  .eu-also-b a[data-also="tourvis"]   { background:#F6F1EC; border-color:#E0CDBC; }
+  .eu-also-b a[data-also="tourvis"] b { color:#7A4F38; }
+  .eu-also-b a[data-also="tmembers"]  { background:#EEF3F1; border-color:#C7DAD2; }
+  .eu-also-b a[data-also="tmembers"] b{ color:#3F6358; }
+  /* 아주 좁은 화면에서는 한 줄에 하나씩 */
+  @media (max-width:359px){ .eu-also-b{ grid-template-columns:1fr; } }
+  @media print{ .eu-also{ display:none !important; } }
+
   .eu-pay{ margin-top:15px; padding-top:14px; border-top:1.5px dashed #E0E4E6; }
   .eu-pay summary{ cursor:pointer; list-style:none; display:flex; align-items:center; gap:7px;
     font-size:12.5px; font-weight:800; color:var(--violet); }
@@ -655,7 +685,7 @@ var EU_SOON_단추 = [
   { 이름:'카카오톡 문의', 주소:'https://pf.kakao.com/_BSxggn/chat', 새창:true }
 ];
 
-function euFareSoon(설){
+function euFareSoon(설, 제휴){
   설 = (typeof 설 === 'string') ? { 제목: 설 } : (설 || {});
   var 단추 = (설['단추'] || EU_SOON_단추).filter(function(b){
     return b && b['이름'] && b['주소'];
@@ -668,7 +698,7 @@ function euFareSoon(설){
     '<p>' + (설['말'] ||
       '인원과 날짜를 알려 주시면 요금을 안내해 드려요.<br>' +
       '일정을 직접 만들어 보시면 그 자리에서 요금이 나옵니다.') + '</p>' +
-    '<div class="eu-fare-cta">' + 단추 + '</div></div>';
+    '<div class="eu-fare-cta">' + 단추 + '</div>' + (제휴 || '') + '</div>';
 }
 
 /* =========================================================================
@@ -681,6 +711,73 @@ function euFareSoon(설){
    비율과 기한은 입금확인 쪽과 같은 값이라야 합니다.
    바꾸실 때는 아래 두 줄과 deposit.html 을 함께 고쳐 주세요.
    ========================================================================= */
+/* =========================================================================
+   제휴 예약처 — 같은 일정을 파는 다른 곳
+   -------------------------------------------------------------------------
+   세 곳 모두 주소 끝의 상품 코드가 같습니다. 그래서 상품 자료에
+   「제휴코드」 한 칸만 채우시면 세 곳 주소가 저절로 만들어집니다.
+
+       "제휴코드": "PRD3017415695"
+
+   한두 곳에만 올리셨거나 코드가 서로 다르면 곳마다 따로 적으셔도 됩니다.
+   주소를 통째로 적으셔도 됩니다(http 로 시작하면 그대로 씁니다).
+
+       "제휴코드": { "privia": "PRD301...", "tourvis": "PRD999..." }
+
+   비워 두면 이 칸은 아예 나오지 않습니다.
+   ========================================================================= */
+var EU_제휴 = [
+  /* 곁말을 「여행」 같은 흔한 낱말로 두면 다국어 사전이 홈페이지의 다른 곳까지
+     건드릴 수 있어, 겹칠 일이 없는 말로 적어 두었습니다 */
+  { 키:'privia',   이름:'현대카드 PRIVIA', 곁:'priviatravel.com',
+    틀:'https://www.priviatravel.com/activity/product/detail/{코드}' },
+  { 키:'tourvis',  이름:'투어비스',        곁:'tourvis.com',
+    틀:'https://tourvis.com/activity/product/{코드}' },
+  { 키:'tmembers', 이름:'T멤버십',         곁:'SK텔레콤',
+    틀:'https://tmembership.tourvis.com/touract/preview/{코드}' }
+];
+
+function euAlso(값){
+  if(!값) return '';
+
+  /* 따옴표가 섞여 들어와도 주소 칸이 깨지지 않게 막아 둡니다 */
+  var 막기 = function(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  };
+
+  var 들 = [];
+  if(typeof 값 === 'string'){
+    var 코드 = 값.trim();
+    if(!코드) return '';
+    EU_제휴.forEach(function(x){
+      들.push({ 곳:x, 주소: x.틀.replace('{코드}', encodeURIComponent(코드)) });
+    });
+  } else if(typeof 값 === 'object'){
+    EU_제휴.forEach(function(x){
+      var v = 값[x.키];
+      if(v == null) return;
+      v = String(v).trim();
+      if(!v) return;
+      /* 주소를 통째로 적으신 경우 — http 로 시작하는 것만 받습니다 */
+      들.push({ 곳:x, 주소: /^https?:\/\//i.test(v)
+        ? v : x.틀.replace('{코드}', encodeURIComponent(v)) });
+    });
+  }
+  if(!들.length) return '';
+
+  return '<div class="eu-also">' +
+    '<h4>이곳에서도 예약하실 수 있어요</h4>' +
+    '<p>같은 일정을 아래 제휴처에서도 판매하고 있습니다.</p>' +
+    '<div class="eu-also-b" data-n="' + 들.length + '">' +
+      들.map(function(d){
+        return '<a href="' + 막기(d.주소) + '" target="_blank" rel="noopener nofollow"' +
+          ' data-also="' + d.곳.키 + '">' +
+          '<b>' + d.곳.이름 + '</b><em>' + d.곳.곁 + '</em></a>';
+      }).join('') +
+    '</div></div>';
+}
+
 var EU_PAY = { 예약금비율: 0.30, 잔금기한: '출발 2주 전' };
 
 function euPayBox(값){
@@ -712,9 +809,9 @@ function euPayBox(값){
 }
 
 /* ---------- ① 한 줄 (당일 차량) ---------- */
-function euFareOne(f, 설){
+function euFareOne(f, 설, 제휴){
   var 값 = f['값'];
-  if(값 == null) return '<div class="eu-fare eu-fare-1">' + euFareSoon(설) + '</div>';
+  if(값 == null) return '<div class="eu-fare eu-fare-1">' + euFareSoon(설, 제휴) + '</div>';
   var 원 = euWon(값);
   var 칩 = (f['칩'] || []).map(function(t){ return '<span>' + t + '</span>'; }).join('');
   return '<div class="eu-fare eu-fare-1"><div class="box">' +
@@ -726,15 +823,16 @@ function euFareOne(f, 설){
     (칩 ? '<div class="chips">' + 칩 + '</div>' : '') +
     (f['안내'] ? '<div class="note">' + f['안내'] + '</div>' : '') +
     euPayBox(값) +
+    (제휴 || '') +
   '</div></div>';
 }
 
 /* ---------- ② 계산기 (여러 날 패키지) ---------- */
-function euFareCalc(f, 설){
+function euFareCalc(f, 설, 제휴){
   var 구간 = (f['구간'] || []).filter(function(g){ return g && g['인원']; });
   if(!구간.length) return '';
   var 있음 = 구간.some(function(g){ return g['값'] != null; });
-  if(!있음) return '<div class="eu-fare eu-fare-3">' + euFareSoon(설) + '</div>';
+  if(!있음) return '<div class="eu-fare eu-fare-3">' + euFareSoon(설, 제휴) + '</div>';
 
   var 첫 = 구간.find(function(g){ return g['값'] != null; }) || 구간[0];
   var 단추 = 구간.map(function(g, i){
@@ -766,6 +864,7 @@ function euFareCalc(f, 설){
         '<em>일정 만들기 &rarr;</em></a>' +
       (첫['차량'] ? '<div class="car">배정 차량 — <b data-car>' + 첫['차량'] + '</b></div>' : '') +
       '<div class="paywrap" style="width:100%">' + euPayBox(첫['값']) + '</div>' +
+      (제휴 || '') +
     '</div>' +
     '<div class="ft">' + (추가 ? 추가 + '<br>' : '') +
       /* 환율 안내가 꺼져 있으면 꼬리에 가운뎃점만 남지 않도록 합니다 */
@@ -777,6 +876,7 @@ function euFareCalc(f, 설){
 
 function euFare(product){
   var f = product['요금'];
+  var 제휴 = euAlso(product['제휴코드']);
 
   /* '요금' 을 아직 안 적었거나 값이 비어 있으면,
      예전 price 글자('1인 80유로 (4인 이상 출발 기준)')에 적힌 금액이라도
@@ -791,9 +891,10 @@ function euFare(product){
 
   /* 요금도 price 글자도 없으면 — 예전엔 요금칸이 통째로 사라졌습니다.
      이제는 안내와 단추라도 보여 줍니다. 말은 상품의 `요금안내` 로 바꿉니다. */
-  if(!f) return '<div class="eu-fare eu-fare-1">' + euFareSoon(product['요금안내']) + '</div>';
-  if(f['꼴'] === '계산기') return euFareCalc(f, product['요금안내']);
-  return euFareOne(f, product['요금안내']);
+  if(!f) return '<div class="eu-fare eu-fare-1">' +
+    euFareSoon(product['요금안내'], 제휴) + '</div>';
+  if(f['꼴'] === '계산기') return euFareCalc(f, product['요금안내'], 제휴);
+  return euFareOne(f, product['요금안내'], 제휴);
 }
 
 /* 인원 단추를 누르면 값이 바뀝니다 */

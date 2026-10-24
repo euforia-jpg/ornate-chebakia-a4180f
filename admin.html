@@ -1439,6 +1439,9 @@
     ['ctaLabel', '버튼 문구',     'text'],
     ['downloadUrl','일정표 PDF',  'text', '예: /docs/xxx-itinerary.pdf'],
     ['youtubeUrl','유튜브 주소',  'text'],
+    ['제휴코드',  '제휴 예약처 코드', 'text',
+      '프리비아·투어비스·T멤버십에 올리신 상품 코드 (예: PRD3017415695). ' +
+      '적으시면 상품 쪽 요금칸 아래에 세 곳 단추가 나옵니다. 비워 두면 안 보입니다'],
     ['isNew',    'NEW 배지 표시', 'bool'],
     ['detail.lead',        '상세 머리말',  'area'],
     ['detail.duration',    '상세 기간',    'text'],
@@ -1470,6 +1473,9 @@
     var html = FIELDS.map(function(f){
       var key = f[0], label = f[1], kind = f[2], hint = f[3] || '';
       var v = getv(p, key);
+      /* 제휴 코드를 곳마다 따로 적어 두신 경우에는 그 모양 그대로 보여 드립니다
+         (그냥 두면 「[object Object]」 가 찍히고, 저장할 때 자료가 지워집니다) */
+      if(key === '제휴코드' && v && typeof v === 'object') v = JSON.stringify(v);
       var full = (kind === 'area' || kind === 'code' || kind === 'lines') ? ' full' : '';
       var body;
       if(kind === 'bool'){
@@ -1502,6 +1508,18 @@
       else if(kind === 'lines') v = el.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
       else if(kind === 'number') v = el.value === '' ? undefined : Number(el.value);
       else v = el.value;
+      /* 제휴 예약처 코드 — 비워 두시면 칸 자체를 지웁니다.
+         (빈 값이 상품 자료에 쌓이지 않도록. 앞뒤 공백도 떼어 둡니다) */
+      if(k === '제휴코드'){
+        var 코드 = String(v == null ? '' : v).trim();
+        if(!코드){ delete p['제휴코드']; return; }
+        /* { "privia": "...", … } 처럼 적으셨으면 그대로 받아 둡니다 */
+        if(코드.charAt(0) === '{'){
+          try{ p['제휴코드'] = JSON.parse(코드); return; }catch(e){ /* 글자 그대로 둡니다 */ }
+        }
+        p['제휴코드'] = 코드;
+        return;
+      }
       setv(p, k, v);
     });
     refreshSaveBar();
