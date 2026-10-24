@@ -148,8 +148,8 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   /* ---------- 제휴 예약처 — 같은 일정을 파는 다른 곳 ----------
      상품 자료의 「제휴코드」 한 칸이 채워져 있을 때만 나옵니다.
 
-     타일 바탕은 모두 흰색입니다. 로고에 이미 색이 많아 바탕까지 물들이면
-     셋이 서로 다투어 보입니다. 대신 타일 위쪽에 가는 띠로 회사 색을 둡니다.
+     타일은 바탕도 테두리도 색을 넣지 않습니다. 로고가 이미 색을 가지고
+     있어서, 타일에까지 색을 주면 색이 두 겹이 되어 어지러워집니다.
 
      로고는 가로세로 비가 제각각이라(6.4:1 / 3.9:1 / 8.0:1) 높이를 똑같이
      주지 않습니다. 너비는 칸에 맞추고 높이에만 상한을 두어, 긴 로고가
@@ -163,25 +163,34 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .eu-also-b[data-n="1"]{ grid-template-columns:1fr; }
   .eu-also-b[data-n="2"]{ grid-template-columns:1fr 1fr; }
   .eu-also-b a{ display:flex; align-items:center; justify-content:center;
-    background:#fff; border:1.5px solid var(--line); border-top-width:2px;
-    border-radius:12px; padding:14px 9px; min-height:52px; text-decoration:none;
-    transition:.15s; }
-  .eu-also-b a:hover{ transform:translateY(-1px);
+    background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:14px 9px; min-height:52px; text-decoration:none; transition:.15s;
+    overflow:hidden; }
+  .eu-also-b a:hover{ transform:translateY(-1px); border-color:#D4DBE0;
     box-shadow:0 10px 20px -14px rgba(36, 48, 58,.5); }
   .eu-also-b a:focus-visible{ outline:2px solid var(--violet); outline-offset:2px; }
-  .eu-also-b img{ display:block; max-width:min(96%, 180px); max-height:15px;
-    width:auto; height:auto; object-fit:contain; }
-  /* 위쪽 띠 — 각 회사 색 */
-  .eu-also-b a[data-also="privia"]  { border-top-color:#E6186E; }
-  .eu-also-b a[data-also="tourvis"] { border-top-color:#2B2B2B; }
-  .eu-also-b a[data-also="tmembers"]{ border-top-color:#E8402A; }
+  .eu-also-b img{ display:block; width:auto; max-width:100%; object-fit:contain; }
+  /*
+    로고마다 높이를 따로 줍니다. 왜 그런가 하면 —
+      · 그림 안에서 「글자」가 차지하는 비율이 제각각입니다
+        (PRIVIA 95% · TOURVIS 80%(아래로 핀이 나와 있음) · T Membership 95%)
+        그래서 그림 높이를 똑같이 주면 TOURVIS 글자만 작아집니다.
+      · 글자 굵기도 달라, 계산으로 맞춘 뒤 눈으로 한 번 더 고쳤습니다.
+        PRIVIA 는 분홍이 강해 조금 작게(0.88배), T멤버십은 조금 크게(1.15배).
+    숫자를 바꾸실 일이 생기면 이 세 줄만 고치시면 됩니다.
+  */
+  .eu-also-b a[data-also="privia"] img  { height:12.0px; }
+  .eu-also-b a[data-also="tourvis"] img { height:16.2px; }
+  .eu-also-b a[data-also="tmembers"] img{ height:15.7px; }
   /* 휴대폰에서는 한 줄에 하나씩 —
-     세 칸으로 쪼개면 「T 멤버십 글로벌여행」처럼 긴 로고가 8px 까지 줄어
+     세 칸으로 쪼개면 「T Membership」처럼 가로로 긴 로고가 8px 까지 줄어
      읽히지 않습니다. 한 줄씩 두면 셋 다 또렷한 크기로 나옵니다. */
   @media (max-width:480px){
     .eu-also-b, .eu-also-b[data-n="2"]{ grid-template-columns:1fr; gap:7px; }
-    .eu-also-b a{ min-height:46px; padding:12px 14px; border-top-width:2px; }
-    .eu-also-b img{ max-width:min(100%, 200px); max-height:16px; }
+    .eu-also-b a{ min-height:46px; padding:12px 14px; }
+    .eu-also-b a[data-also="privia"] img  { height:13.9px; }
+    .eu-also-b a[data-also="tourvis"] img { height:18.8px; }
+    .eu-also-b a[data-also="tmembers"] img{ height:18.2px; }
   }
   /* 아주 좁은 화면에서는 한 줄에 하나씩 */
   @media (max-width:359px){ .eu-also-b{ grid-template-columns:1fr; } }
@@ -742,13 +751,13 @@ var EU_제휴 = [
   /* 이름은 로고를 못 받아 왔을 때 대신 읽히는 말(alt)로 쓰입니다.
      그림 크기(폭·높이)는 자리를 미리 잡아 두어 쪽이 덜컥거리지 않게 합니다. */
   { 키:'privia',   이름:'현대카드 PRIVIA 여행',
-    그림:'/logo/privia.png',   폭:382, 높:60,
+    그림:'/logo/privia.png',   폭:257, 높:43,
     틀:'https://www.priviatravel.com/activity/product/detail/{코드}' },
   { 키:'tourvis',  이름:'투어비스',
-    그림:'/logo/tourvis.png',  폭:402, 높:104,
+    그림:'/logo/tourvis.png',  폭:273, 높:76,
     틀:'https://tourvis.com/activity/product/{코드}' },
-  { 키:'tmembers', 이름:'T 멤버십 글로벌여행',
-    그림:'/logo/tmembers.png', 폭:368, 높:46,
+  { 키:'tmembers', 이름:'T 멤버십',
+    그림:'/logo/tmembers.png', 폭:307, 높:42,
     틀:'https://tmembership.tourvis.com/touract/preview/{코드}' }
 ];
 
