@@ -2867,7 +2867,8 @@ const PRODUCTS = [
       ]
     },
     "minPeople": 4,
-    "maxPeople": 20
+    "maxPeople": 20,
+    "제휴코드": "PRD3017415695"
   },
   {
     "id": "portugal-10days",
