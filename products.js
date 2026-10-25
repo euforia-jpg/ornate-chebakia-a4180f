@@ -2499,7 +2499,8 @@ const PRODUCTS = [
           "새창": true
         }
       ]
-    }
+    },
+    "카드사진": "/card-sansebastian.jpg"
   },
   {
     "id": "spain-month-stay",
