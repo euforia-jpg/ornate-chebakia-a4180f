@@ -3635,7 +3635,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-barcelona.jpg"
+    "카드사진": "/card-barcelona1.jpg"
   },
   {
     "id": "north-cantabria-basque",
