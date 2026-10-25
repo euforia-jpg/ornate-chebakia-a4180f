@@ -2145,7 +2145,7 @@ const PRODUCTS = [
     "maxPeople": 6,
     "link": "",
     "ctaLabel": "",
-    "downloadUrl": "",
+    "downloadUrl": "blob:https://claude.ai/76ee66da-5bd9-43da-8012-25a800a4308c",
     "youtubeUrl": "",
     "isNew": false,
     "경로": [
