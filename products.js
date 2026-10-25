@@ -2619,7 +2619,13 @@ const PRODUCTS = [
           "새창": true
         }
       ]
-    }
+    },
+    "minPeople": 4,
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "isNew": false,
+    "카드사진": "/card-mountain-road.jpg"
   },
   {
     "id": "matchday",
