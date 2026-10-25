@@ -1095,7 +1095,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/card-burgos.jpg",
+    "카드사진": "/card-burgos1.jpg",
     "isNew": false
   },
   {
