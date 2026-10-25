@@ -3422,7 +3422,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-parador.jpg"
+    "카드사진": "/card-parador.jpg",
+    "제휴코드": "PRD3018128841"
   },
   {
     "id": "spain-12days-barcelona",
