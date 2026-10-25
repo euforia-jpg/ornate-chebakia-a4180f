@@ -360,7 +360,8 @@ const PRODUCTS = [
           "말": ""
         }
       ]
-    }
+    },
+    "카드사진": "/card-porto.jpg"
   },
   {
     "id": "spain-round",
