@@ -2643,7 +2643,19 @@ const PRODUCTS = [
       "검색으로 전 구장 확인"
     ],
     "link": "matchday.html",
-    "ctaLabel": "경기 일정 보기"
+    "ctaLabel": "경기 일정 보기",
+    "downloadUrl": "",
+    "youtubeUrl": "",
+    "카드사진": "/card-stadium.jpg",
+    "isNew": false,
+    "detail": {
+      "lead": "",
+      "duration": "",
+      "highlights": [],
+      "includes": [],
+      "excludes": [],
+      "description": ""
+    }
   },
   {
     "id": "basque-navarra-6days",
