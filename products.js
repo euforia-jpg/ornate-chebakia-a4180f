@@ -3957,7 +3957,8 @@ const PRODUCTS = [
           "말": ""
         }
       ]
-    }
+    },
+    "카드사진": "/card-picos.jpg"
   },
   {
     "id": "iberia-14days-madrid",
