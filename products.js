@@ -4878,7 +4878,8 @@ const PRODUCTS = [
       ]
     },
     "minPeople": 4,
-    "maxPeople": 20
+    "maxPeople": 20,
+    "카드사진": "/card-lisbon-se.jpg"
   }
 ];
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요.
