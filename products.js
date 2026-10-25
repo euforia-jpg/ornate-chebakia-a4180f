@@ -2375,7 +2375,8 @@ const PRODUCTS = [
           "말": "불포함 · 출발 시기에 맞는 노선을 따로 안내"
         }
       ]
-    }
+    },
+    "카드사진": "/card-golf.jpg"
   },
   {
     "id": "spain-free-itinerary",
