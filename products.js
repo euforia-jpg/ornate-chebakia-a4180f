@@ -3802,7 +3802,8 @@ const PRODUCTS = [
       ]
     },
     "minPeople": 4,
-    "maxPeople": 20
+    "maxPeople": 20,
+    "카드사진": "/card-santillana.jpg"
   },
   {
     "id": "north-asturias-picos",
