@@ -2377,7 +2377,8 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-golf.jpg"
+    "카드사진": "/card-golf.jpg",
+    "제휴코드": "PRD3018122255"
   },
   {
     "id": "spain-free-itinerary",
