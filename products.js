@@ -212,7 +212,13 @@ const PRODUCTS = [
           "새창": true
         }
       ]
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "youtubeUrl": "",
+    "카드사진": "/card-prado.jpg",
+    "isNew": false
   },
   {
     "id": "portugal-round",
