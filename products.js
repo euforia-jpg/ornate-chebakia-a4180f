@@ -1803,7 +1803,7 @@ const PRODUCTS = [
     "link": "",
     "ctaLabel": "",
     "downloadUrl": "",
-    "카드사진": "/card-sevilla-plaza.jpg",
+    "카드사진": "/card-sevilla-plaza1.jpg",
     "isNew": false
   },
   {
