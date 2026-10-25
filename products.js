@@ -1011,7 +1011,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/card-bilbao.jpg",
+    "카드사진": "/card-bilbao1.jpg",
     "isNew": false
   },
   {
