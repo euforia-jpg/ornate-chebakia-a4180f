@@ -2500,7 +2500,7 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-sansebastian.jpg"
+    "카드사진": "/card-sansebastian1.jpg"
   },
   {
     "id": "spain-month-stay",
