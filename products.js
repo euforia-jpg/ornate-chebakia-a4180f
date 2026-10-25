@@ -2185,7 +2185,12 @@ const PRODUCTS = [
         "콘수에그라 2시간"
       ],
       "안내": "확정일 기준 4인 미만이면 예약금을 100% 환불해 드려요."
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "카드사진": "/card-windmills.jpg",
+    "isNew": false
   },
   {
     "id": "golf-spain-portugal",
