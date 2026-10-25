@@ -80,19 +80,17 @@
      상자를 없애고 점선 한 줄로만 나눕니다. 상세 쪽 요금 상자와 순서가 같습니다
      — 작은 설명줄 → 큰 금액 → / 1인. 유튜브·헤드폰은 동그란 단추로 옆에 둡니다. */
   /* 제휴 예약처 배지 — 같은 일정을 파는 다른 곳이 있을 때만 카드에 붙습니다 */
-  .also-chip{ display:block; align-self:flex-start; width:fit-content; max-width:100%;
-    margin:-2px 0 12px; background:#F6F7F8; border:1px solid #E7EAEC;
-    border-radius:11px; padding:7px 11px 8px; }
-  .also-chip u{ display:block; text-decoration:none; font-size:9.5px; font-weight:800;
-    color:#8A9399; letter-spacing:.07em; margin-bottom:6px; }
-  .also-chip .row{ display:flex; align-items:center; gap:10px; }
-  .also-chip img{ display:block; width:auto; object-fit:contain; }
-  /* 카드가 좁아(300px까지) 상세 쪽보다 한 단계 작게 둡니다 */
-  .also-chip img[data-also="privia"]  { height:10.2px; }
-  .also-chip img[data-also="tourvis"] { height:13.8px; }
-  .also-chip img[data-also="tmembers"]{ height:13.3px; }
+  /* 요금 오른쪽 빈자리에 붙입니다 — 카드가 한 줄만큼 짧아집니다 */
+  .also-chip{ display:block; flex:0 0 auto; margin-left:auto; align-self:flex-end;
+    background:#F6F7F8; border:1px solid #E7EAEC; border-radius:11px;
+    padding:6px 9px 7px; }
+  .also-chip u{ display:block; text-decoration:none; font-size:9px; font-weight:800;
+    color:#8A9399; letter-spacing:.06em; margin-bottom:5px; white-space:nowrap; }
+  .also-chip .row{ display:flex; align-items:center; justify-content:center; gap:7px; }
+  /* 로고가 정사각형이라 셋 다 같은 크기 — 어디인지는 상세 쪽에서 이름과 함께 보여 줍니다 */
+  .also-chip img{ display:block; width:19px; height:19px; object-fit:contain; }
   .tour-price{ display:flex; align-items:flex-end; gap:9px; max-width:100%; margin:0 0 14px;
-               padding-top:12px; border-top:1.5px dashed #DFE3E6; }
+               padding-top:12px; border-top:1.5px dashed #DFE3E6; flex-wrap:wrap; }
   .tour-price .price-chip{ display:block; box-sizing:border-box; flex:1 1 auto; min-width:0;
                            padding:0; background:none; border:none; border-radius:0;
                            font-family:'Work Sans', sans-serif; color:var(--navy);
@@ -502,9 +500,9 @@ function productLink(p){
    누를 수 있는 링크는 상세 쪽에만 둡니다 — 카드 전체가 이미 링크라서,
    안에 또 링크를 넣으면 손님이 어디를 누른 것인지 헷갈립니다. */
 var EU_제휴곳 = [
-  { 키:'privia',   이름:'현대카드 PRIVIA 여행', 그림:'/logo/privia.png',   폭:257, 높:43  },
-  { 키:'tourvis',  이름:'투어비스',            그림:'/logo/tourvis.png',  폭:273, 높:76 },
-  { 키:'tmembers', 이름:'T 멤버십',           그림:'/logo/tmembers.png', 폭:307, 높:42  }
+  { 키:'privia',   이름:'현대카드 PRIVIA', 그림:'/logo/privia-icon.png'   },
+  { 키:'tourvis',  이름:'투어비스',        그림:'/logo/tourvis-icon.png'  },
+  { 키:'tmembers', 이름:'T 멤버십',        그림:'/logo/tmembers-icon.png' }
 ];
 
 function 제휴배지(p){
@@ -521,8 +519,8 @@ function 제휴배지(p){
   if(!들.length) return '';
   return '<div class="also-chip"><u>제휴 예약처</u><span class="row">' +
     들.map(function(x){
-      return '<img src="' + x.그림 + '" alt="' + x.이름 + '" data-also="' + x.키 +
-        '" width="' + x.폭 + '" height="' + x.높 + '" loading="lazy">';
+      return '<img src="' + x.그림 + '" alt="' + x.이름 + '" title="' + x.이름 +
+        '" width="256" height="256" loading="lazy">';
     }).join('') + '</span></div>';
 }
 
@@ -555,8 +553,7 @@ function renderGrid(){
         <h3>${p.title}</h3>
         <p>${p.summary}</p>
         <div class="tour-tags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
-       <div class="tour-price">${euFareChip(p)}${formatYoutubeBtn(p.youtubeUrl)}${formatAudioBadge(p.audioGuide)}</div>
-        ${제휴배지(p)}
+       <div class="tour-price">${euFareChip(p)}${제휴배지(p)}${formatYoutubeBtn(p.youtubeUrl)}${formatAudioBadge(p.audioGuide)}</div>
         <div class="tour-cta"><span>${p.ctaLabel || '상품 보기'} →</span></div>
       </div>
     </a>
