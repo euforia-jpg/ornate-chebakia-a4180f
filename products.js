@@ -832,7 +832,12 @@ const PRODUCTS = [
         "푸에르토라피체 2시간"
       ],
       "안내": "확정일 기준 4인 미만이면 예약금을 100% 환불해 드려요."
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "카드사진": "/card-windmills.jpg",
+    "isNew": false
   },
   {
     "id": "car-granada-cordoba-madrid",
