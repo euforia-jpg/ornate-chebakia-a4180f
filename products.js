@@ -750,7 +750,8 @@ const PRODUCTS = [
           "말": ""
         }
       ]
-    }
+    },
+    "카드사진": "/card-santiago.jpg"
   },
   {
     "id": "car-madrid-puertolapice-granada",
