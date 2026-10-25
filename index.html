@@ -115,9 +115,10 @@
   .pc button.price-chip{ color:#fff; }
   .pc .tour-price .yt-btn, .pc .tour-price .audio-badge{
     background:rgba(255,255,255,.92); border-color:transparent; }
-  /* 제휴 배지 — 사진 위라 흰 칸으로 */
-  .pc .also-chip{ background:rgba(255,255,255,.93); border-color:transparent; }
-  .pc .also-chip u{ color:#7B848A; }
+  /* 제휴 예약처 — 사진 위라 흰 동그라미 단추로 */
+  .pc .also-row{ border-top-color:rgba(255,255,255,.2); }
+  .pc .also-row u{ color:rgba(255,255,255,.66); }
+  .pc .also-row .pbtn{ background:rgba(255,255,255,.93); border-color:transparent; }
   .pc .badge-group{ display:none; }   /* NEW 는 위쪽 띠에서 보여 줍니다 */
   .pc-nw{ font-size:10px; font-weight:800; color:#fff; background:var(--teal);
     border-radius:7px; padding:5px 9px; white-space:nowrap; }
@@ -152,16 +153,23 @@
   /* ===== 요금 자리 (5안 — 선 하나만) =====
      상자를 없애고 점선 한 줄로만 나눕니다. 상세 쪽 요금 상자와 순서가 같습니다
      — 작은 설명줄 → 큰 금액 → / 1인. 유튜브·헤드폰은 동그란 단추로 옆에 둡니다. */
-  /* 제휴 예약처 배지 — 같은 일정을 파는 다른 곳이 있을 때만 카드에 붙습니다 */
-  /* 요금 오른쪽 빈자리에 붙입니다 — 카드가 한 줄만큼 짧아집니다 */
-  .also-chip{ display:block; flex:0 0 auto; margin-left:auto; align-self:flex-end;
-    background:#F6F7F8; border:1px solid #E7EAEC; border-radius:11px;
-    padding:6px 9px 7px; }
-  .also-chip u{ display:block; text-decoration:none; font-size:9px; font-weight:800;
-    color:#8A9399; letter-spacing:.06em; margin-bottom:5px; white-space:nowrap; }
-  .also-chip .row{ display:flex; align-items:center; justify-content:center; gap:7px; }
-  /* 로고가 정사각형이라 셋 다 같은 크기 — 어디인지는 상세 쪽에서 이름과 함께 보여 줍니다 */
-  .also-chip img{ display:block; width:19px; height:19px; object-fit:contain; }
+  /* 제휴 예약처 — 같은 일정을 파는 다른 곳이 있을 때만 카드에 붙습니다.
+     유튜브·오디오 단추와 같은 32px 동그라미로, 요금 아래 한 줄에 따로 깝니다.
+     요금 옆에 끼우면 가장 좁은 카드(300px)에서 유튜브 단추가 아랫줄로 밀립니다.
+     flex:1 0 100% 가 이 줄을 혼자 한 줄 쓰게 만듭니다. */
+  .also-row{ display:flex; align-items:center; gap:7px; flex:1 0 100%; width:100%;
+    margin-top:10px; padding-top:10px; border-top:1px solid #E7EAEC; }
+  .also-row u{ text-decoration:none; font-size:9.5px; font-weight:800; color:#8A9399;
+    letter-spacing:.06em; margin-right:2px; white-space:nowrap; }
+  /* 로고가 정사각형이라 셋 다 같은 크기 — 어디인지는 누르기 전 길잡이말로 알려 줍니다 */
+  .also-row .pbtn{ display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+    width:32px; height:32px; min-width:0; padding:0; margin:0;
+    border:1.5px solid var(--line); border-radius:50%; background:#fff;
+    cursor:pointer; font:inherit;
+    transition: transform .15s ease, box-shadow .15s ease; }
+  .also-row .pbtn:hover{ transform:translateY(-2px);
+    box-shadow:0 5px 12px -4px rgba(13,20,26,.55); }
+  .also-row .pbtn img{ display:block; width:19px; height:19px; object-fit:contain; }
   .tour-price{ display:flex; align-items:flex-end; gap:9px; max-width:100%; margin:0 0 14px;
                padding-top:12px; border-top:1.5px dashed #DFE3E6; flex-wrap:wrap; }
   .tour-price .price-chip{ display:block; box-sizing:border-box; flex:1 1 auto; min-width:0;
@@ -876,34 +884,62 @@ function 카드사진(p){
   return ' style="background-image:url(' + v + ')"';
 }
 
-/* ---------- 제휴 예약처 배지 ----------
-   상품 자료의 「제휴코드」가 채워져 있을 때만 카드에 작게 붙습니다.
-   로고마다 높이를 따로 주는 까닭은 상품 상세 쪽(product.html)에 적어 두었습니다.
-   누를 수 있는 링크는 상세 쪽에만 둡니다 — 카드 전체가 이미 링크라서,
-   안에 또 링크를 넣으면 손님이 어디를 누른 것인지 헷갈립니다. */
+/* ---------- 제휴 예약처 단추 ----------
+   상품 자료의 「제휴코드」가 채워져 있을 때만 카드에 붙습니다.
+   한 곳씩 따로 누를 수 있는 동그란 단추이고, 누르면 그 예약처가 새 창으로 열립니다.
+   카드 전체가 이미 상품 쪽 링크라 <a> 안에 <a>를 넣을 수 없습니다(틀이 깨집니다).
+   그래서 유튜브·오디오 단추와 똑같이 <button> + window.open 으로 만듭니다.
+   「제휴코드」에 코드 하나만 적으면 세 곳 모두 그 코드로, 곳마다 다르면
+   { privia:'…', tourvis:'…' } 처럼 적으면 적힌 곳만 나옵니다.
+   주소를 통째로 적어도(https…) 그 주소를 그대로 씁니다. */
 var EU_제휴곳 = [
-  { 키:'privia',   이름:'현대카드 PRIVIA', 그림:'/logo-privia.png'   },
-  { 키:'tourvis',  이름:'투어비스',        그림:'/logo-tourvis.png'  },
-  { 키:'tmembers', 이름:'T 멤버십',        그림:'/logo-tmembers.png' }
+  { 키:'privia',   이름:'현대카드 PRIVIA', 그림:'/logo-privia.png',
+    틀:'https://www.priviatravel.com/activity/product/detail/{코드}' },
+  { 키:'tourvis',  이름:'투어비스',        그림:'/logo-tourvis.png',
+    틀:'https://tourvis.com/activity/product/{코드}' },
+  { 키:'tmembers', 이름:'T 멤버십',        그림:'/logo-tmembers.png',
+    틀:'https://tmembership.tourvis.com/touract/preview/{코드}' }
 ];
 
 function 제휴배지(p){
   var v = p && p['제휴코드'];
   if(!v) return '';
+  /* 따옴표·꺾쇠가 섞여 들어와도 틀이 깨지지 않게 막습니다.
+     onclick 안이 겹따옴표 속 홑따옴표라 홑따옴표는 %27 로 바꿉니다. */
+  var 막기 = function(s){
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+                    .replace(/'/g, '%27');
+  };
   var 들 = [];
   if(typeof v === 'string'){
-    if(String(v).trim()) 들 = EU_제휴곳;
+    var 코드 = String(v).trim();
+    if(코드){
+      들 = EU_제휴곳.map(function(x){
+        return { 곳:x, 주소: x.틀.replace('{코드}', encodeURIComponent(코드)) };
+      });
+    }
   } else if(typeof v === 'object'){
-    들 = EU_제휴곳.filter(function(x){
-      return v[x.키] != null && String(v[x.키]).trim();
+    EU_제휴곳.forEach(function(x){
+      var 값 = v[x.키];
+      if(값 == null) return;
+      값 = String(값).trim();
+      if(!값) return;
+      들.push({ 곳:x, 주소: /^https?:\/\//i.test(값)
+        ? 값 : x.틀.replace('{코드}', encodeURIComponent(값)) });
     });
   }
   if(!들.length) return '';
-  return '<div class="also-chip"><u>제휴 예약처</u><span class="row">' +
-    들.map(function(x){
-      return '<img src="' + x.그림 + '" alt="' + x.이름 + '" title="' + x.이름 +
-        '" width="256" height="256" loading="lazy">';
-    }).join('') + '</span></div>';
+  return '<div class="also-row"><u>제휴 예약처</u>' +
+    들.map(function(d){
+      var 이름 = 막기(d.곳.이름);
+      return '<button type="button" class="pbtn" title="' + 이름 + '에서 예약하기"' +
+        ' aria-label="' + 이름 + '에서 예약하기"' +
+        " onclick=\"event.preventDefault();event.stopPropagation();" +
+        "window.open('" + 막기(d.주소) + "','_blank','noopener');\">" +
+        '<img src="' + d.곳.그림 + '" alt="" width="256" height="256" loading="lazy">' +
+        '</button>';
+    }).join('') + '</div>';
 }
 
 /* 홈 화면에는 대표 상품만 골라서 보여줘요. 다른 상품으로 바꾸려면 이 id 목록만 수정하면 돼요. */
@@ -934,7 +970,7 @@ document.getElementById('tourGrid').innerHTML = featured.map(p => `
       <h3>${p.title}</h3>
       <p>${p.summary}</p>
       <div class="pc-tg">${(p.tags||[]).slice(0,2).map(t=>`<span>${t}</span>`).join('')}</div>
-      <div class="tour-price">${euFareChip(p)}${제휴배지(p)}${formatYoutubeBtn(p.youtubeUrl)}${formatAudioBadge(p.audioGuide)}</div>
+      <div class="tour-price">${euFareChip(p)}${formatYoutubeBtn(p.youtubeUrl)}${formatAudioBadge(p.audioGuide)}${제휴배지(p)}</div>
     </div>
   </a>
 `).join('');
