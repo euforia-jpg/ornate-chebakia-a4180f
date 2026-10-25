@@ -82,7 +82,12 @@ const PRODUCTS = [
         "개인경비"
       ],
       "duration": "당일 (약 8시간 소요, 09:00 출발 · 17:00 도착 예정)"
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "카드사진": "/card-madrid.jpg",
+    "isNew": false
   },
   {
     "id": "docent-museum",
