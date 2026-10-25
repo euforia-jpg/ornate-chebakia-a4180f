@@ -2014,7 +2014,8 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "제휴코드": "PRD3017415695",
-    "isNew": false
+    "isNew": false,
+    "카드사진": "/card-ronda.jpg"
   },
   {
     "id": "car-sevilla-cordoba-madrid",
