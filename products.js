@@ -2432,7 +2432,13 @@ const PRODUCTS = [
           "새창": true
         }
       ]
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "youtubeUrl": "",
+    "카드사진": "/card-beach-bench.jpg",
+    "isNew": false
   },
   {
     "id": "spain-north",
