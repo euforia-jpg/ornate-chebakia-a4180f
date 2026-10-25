@@ -3005,7 +3005,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-lisbon-tram.jpg"
+    "카드사진": "/card-lisbon-tram1.jpg"
   },
   {
     "id": "portugal-10days",
