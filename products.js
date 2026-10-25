@@ -361,7 +361,8 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-porto.jpg"
+    "카드사진": "/card-porto.jpg",
+    "minPeople": 4
   },
   {
     "id": "spain-round",
