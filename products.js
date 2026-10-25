@@ -1006,7 +1006,13 @@ const PRODUCTS = [
         "부르고스 자유관광"
       ],
       "안내": "확정일 기준 4인 미만이면 예약금을 100% 환불해 드려요."
-    }
+    },
+    "link": "",
+    "ctaLabel": "",
+    "downloadUrl": "",
+    "youtubeUrl": "",
+    "카드사진": "/card-bilbao.jpg",
+    "isNew": false
   },
   {
     "id": "car-madrid-burgos-bilbao",
