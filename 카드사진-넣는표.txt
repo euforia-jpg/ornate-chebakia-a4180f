@@ -1,0 +1,118 @@
+관리자 화면 → 상품 → 「카드 사진」 칸에 아래 주소를 그대로 넣어 주십시오.
+(사진이 저장소 뿌리에 있으므로 폴더 이름 없이 / 로 바로 시작합니다)
+
+ 1. [일일차량 가이드] 마드리드 · 톨레도 · 마드리드
+    /card-madrid.jpg
+
+ 2. [도슨트] 프라도 & 레이나소피아 미술관
+    /card-prado.jpg
+
+ 3. [포르투갈 완전일주] 리스본 2박 + 포르투 3박/ 5박 6일
+    /card-porto.jpg
+
+ 4. [스페인 일주] 5박6일 바르셀로나 & 스페인남부
+    /card-barcelona-city.jpg
+
+ 5. [순례길 100km] 투이 → 산티아고 데 콤포스텔라
+    /card-santiago.jpg
+
+ 6. [차량 & 기사] 마드리드 – 푸에르토 라피세 – 그라나다
+    /card-windmills.jpg
+
+ 7. [차량 & 기사] 그라나다 – 꼬르도바 – 마드리드
+    /card-granada.jpg
+
+ 8. [차량 & 기사] 빌바오 – 부루고스 – 마드리드
+    /card-bilbao.jpg
+
+ 9. [차량 & 기사] 마드리드 – 부르고스 – 빌바오
+    /card-burgos.jpg
+
+10. [차량 & 기사] 리스본 – 메리다 – 마드리드
+    /card-merida.jpg
+
+11. [차량 & 기사] 마드리드 – 메리다 – 리스본
+    /card-merida.jpg
+
+12. [차량 & 기사] 마드리드 – 사라고사 – 바르셀로나
+    /card-zaragoza-night.jpg
+
+13. [차량 & 기사] 바르셀로나 – 사라고사 – 마드리드
+    /card-zaragoza-day.jpg
+
+14. [차량 & 기사] 포루투 – 살라망카 – 마드리드
+    /card-salamanca.jpg
+
+15. [차량 & 기사] 마드리드 – 살라망카 – 포루투
+    /card-salamanca.jpg
+
+16. [차량 & 기사] 리스본 – 베나길 – 세비야
+    /card-benagil.jpg
+
+17. [차량 & 기사] 세비야 – 베나길 – 리스본
+    /card-sevilla-plaza.jpg
+
+18. [차량 & 기사] 그라나다 – 네르하 – 프리힐리아나 – 론다 – 세비야
+    /card-frigiliana.jpg
+
+19. [차량 & 기사] 세비야 – 론다 – 프리힐리아나 – 네르하 – 그라나다
+    /card-ronda.jpg
+
+20. [차량 & 기사] 세비야 – 꼬르도바 – 마드리드
+    /card-sevilla.jpg
+
+21. [차량 & 기사] 마드리드 – 콘수에그라 – 세비야
+    /card-windmills.jpg
+
+22. [포르투갈 · 스페인 남부 골프] 럭셔리 7박 9일
+    /card-golf.jpg
+
+23. [스페인일주] 5박 6일 자유일정
+    /card-beach-bench.jpg
+
+24. [스페인북부] 6박 7일 자유일정
+    /card-sansebastian.jpg
+
+25. [스페인] 한달살기
+    /card-frigiliana-st.jpg
+
+26. [하이킹] 시에라네바다 4일
+    /card-mountain-road.jpg
+
+27. 라리가 직관 연계 상품
+    /card-stadium.jpg
+
+28. [바스크 & 나바라] 프랑스 바스크와 나바라 5박 6일
+    /card-sansebastian.jpg
+
+29. [포르투갈 일주] 리스본 IN/OUT 7박8일
+    /card-lisbon-tram.jpg
+
+30. [포르투갈 남북종단] 리스본 IN/OUT 9박10일 (남부 포함)
+    /card-algarve.jpg
+
+31. [이베리아 종단] 리스본 IN · 마드리드 OUT 11박12일
+    /card-parador.jpg
+
+32. [스페인 일주] 바르셀로나 IN/OUT 11박12일
+    /card-barcelona.jpg
+
+33. [스페인북부] 칸타브리아와 바스크 5박 6일
+    /card-santillana.jpg
+
+34. [스페인북부] 아스투리아스와 피코스 데 에우로파 5박 6일
+    /card-picos.jpg
+
+35. [이베리아 대종단] 마드리드 IN · 리스본 OUT 13박14일
+    /card-porto-bridge.jpg
+
+36. [스페인북부] 갈리시아와 루고 해안 5박 6일
+    /card-catedrais.jpg
+
+37. [스페인+포르투갈] 이베리아 대일주 14박 15일
+    /card-sagrada-city.jpg
+
+38. [포르투갈 · 북스페인] 리스본 IN · 마드리드 OUT 15박 17일
+    /card-lisbon-se.jpg
+
+— 모두 38개. 빠진 상품: 없음
