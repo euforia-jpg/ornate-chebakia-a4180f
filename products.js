@@ -491,8 +491,6 @@ const PRODUCTS = [
       "excludes": [
         "왕복 국제선 항공권(지상 수배 상품)",
         "여행자 보험",
-        "선택 관광 비용",
-        "바르셀로나 숙박세(카탈루냐 관광세 · 현지 납부)",
         "개인 경비",
         "초과 수하물 요금"
       ],
@@ -610,7 +608,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/pic-granada-interior.jpg"
+    "카드사진": "/pic-granada-interior.jpg",
+    "제휴코드": "PRD3018339107"
   },
   {
     "id": "camino-100",
@@ -1716,7 +1715,8 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "카드사진": "/pic-benagil.jpg",
-    "isNew": false
+    "isNew": false,
+    "제휴코드": "PRD3018339295"
   },
   {
     "id": "car-sevilla-benagil-lisbon",
@@ -1805,7 +1805,8 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "카드사진": "/pic-lisbon-descobrimentos.jpg",
-    "isNew": false
+    "isNew": false,
+    "제휴코드": "PRD3018339295"
   },
   {
     "id": "car-granada-frigiliana-nerja-ronda-sevilla",
