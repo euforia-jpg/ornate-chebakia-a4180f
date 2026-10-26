@@ -752,7 +752,7 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-santiago.jpg"
+    "카드사진": "/pic-santiago-shell.jpg"
   },
   {
     "id": "car-madrid-puertolapice-granada",
