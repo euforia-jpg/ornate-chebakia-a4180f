@@ -1012,7 +1012,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/pic-burgos.jpg",
+    "카드사진": "/pic-madrid-cibeles.jpg",
     "isNew": false
   },
   {
