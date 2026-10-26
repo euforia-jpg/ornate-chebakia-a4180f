@@ -2828,7 +2828,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-sansebastian.jpg"
+    "카드사진": "/pic-sansebastian-funicular.jpg"
   },
   {
     "id": "portugal-8days",
