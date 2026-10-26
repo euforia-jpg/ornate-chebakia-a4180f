@@ -4360,7 +4360,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-catedrais.jpg"
+    "카드사진": "/pic-catedrais.jpg"
   },
   {
     "id": "iberia-15days-grand",
