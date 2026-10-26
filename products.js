@@ -4192,7 +4192,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-porto-bridge.jpg"
+    "카드사진": "/pic-albaicin.jpg"
   },
   {
     "id": "galicia-a-marina",
