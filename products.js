@@ -3208,7 +3208,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-algarve.jpg"
+    "카드사진": "/pic-algarve-marinha.jpg"
   },
   {
     "id": "iberia-12days",
