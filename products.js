@@ -1184,7 +1184,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/card-merida1.jpg",
+    "카드사진": "/pic-merida-theatre2.jpg",
     "isNew": false
   },
   {
