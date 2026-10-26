@@ -217,7 +217,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/card-prado.jpg",
+    "카드사진": "/pic-prado.jpg",
     "isNew": false
   },
   {
