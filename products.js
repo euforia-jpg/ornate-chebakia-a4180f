@@ -837,7 +837,7 @@ const PRODUCTS = [
     "link": "",
     "ctaLabel": "",
     "downloadUrl": "",
-    "카드사진": "/card-windmills1.jpg",
+    "카드사진": "/pic-consuegra.jpg",
     "isNew": false
   },
   {
