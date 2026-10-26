@@ -1626,7 +1626,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/card-salamanca.jpg",
+    "카드사진": "/pic-porto-street.jpg",
     "isNew": false
   },
   {
