@@ -1537,7 +1537,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/card-salamanca.jpg",
+    "카드사진": "/pic-salamanca.jpg",
     "isNew": false
   },
   {
