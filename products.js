@@ -361,7 +361,7 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-porto.jpg",
+    "카드사진": "/pic-porto-ribeira.jpg",
     "minPeople": 4
   },
   {
