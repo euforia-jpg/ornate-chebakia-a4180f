@@ -4618,7 +4618,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-sagrada-city.jpg"
+    "카드사진": "/pic-sevilla-plaza2.jpg"
   },
   {
     "id": "portugal-north-spain-17days",
