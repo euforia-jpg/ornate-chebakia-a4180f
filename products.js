@@ -1715,7 +1715,7 @@ const PRODUCTS = [
     "link": "",
     "ctaLabel": "",
     "downloadUrl": "",
-    "카드사진": "/card-benagil.jpg",
+    "카드사진": "/pic-benagil.jpg",
     "isNew": false
   },
   {
