@@ -2102,7 +2102,7 @@ const PRODUCTS = [
     "link": "",
     "ctaLabel": "",
     "downloadUrl": "",
-    "카드사진": "/card-sevilla.jpg",
+    "카드사진": "/pic-cordoba-mezquita.jpg",
     "isNew": false
   },
   {
