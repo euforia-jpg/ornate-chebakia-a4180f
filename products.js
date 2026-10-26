@@ -610,7 +610,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-barcelona-city.jpg"
+    "카드사진": "/pic-granada-interior.jpg"
   },
   {
     "id": "camino-100",
