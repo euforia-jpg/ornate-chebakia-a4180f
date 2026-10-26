@@ -1448,7 +1448,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/card-zaragoza-day.jpg",
+    "카드사진": "/pic-madrid-almudena.jpg",
     "isNew": false
   },
   {
