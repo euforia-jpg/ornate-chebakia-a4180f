@@ -3807,7 +3807,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-santillana.jpg"
+    "카드사진": "/pic-cathedral-gothic.jpg"
   },
   {
     "id": "north-asturias-picos",
