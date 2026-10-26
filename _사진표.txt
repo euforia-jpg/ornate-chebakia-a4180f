@@ -1,0 +1,88 @@
+유포리아투어 상품 카드 사진 65장  (660×840, JPEG 품질 90)
+만든 날 2026-10-26
+
+■ 쓰는 법
+  1) 이 폴더의 pic-*.jpg 65장을 깃허브 저장소 뿌리(root)에 그대로 올립니다.
+     github.com/euforia-jpg/ornate-chebakia-a4180f/upload/main
+     ※ 관리자 대쉬보드를 열어 두신 상태로 올리시면 상품 자료가 덮어써질 수 있습니다. 먼저 닫아 주세요.
+  2) 관리자 화면 → 상품 → 「카드 사진」 칸에 /pic-○○○.jpg 를 적습니다.
+     예) /pic-granada-arrayanes.jpg
+  3) 기존 card-*.jpg 34장은 건드리지 않았습니다. 이름이 겹치지 않으니 둘 다 두셔도 됩니다.
+
+■ 배율 = 원본을 몇 배로 늘렸는지.  1.0 이하면 줄인 것(화질 손해 없음), 1.0 넘으면 늘린 것.
+  ★ 표시는 많이 늘려서 뭉개짐이 보이는 사진입니다. 원본을 더 큰 걸로 구하시면 좋습니다.
+
+새 파일 이름                        원본 파일                              원본 크기   배율
+──────────────────────────────────────────────────────────────────────────────────────
+pic-agueda-umbrella.jpg            lisbon3.jpg                            675×1200    0.98
+pic-albaicin.jpg                   알바이신.jpg                            480×666     1.38
+pic-algarve-marinha.jpg            portugal south.jpg                     687×1024    0.96
+pic-alicante.jpg                   alicante.jpg                           736×1308    0.90
+pic-aveiro.jpg                     aveiro.jpg                             960×1200    0.70
+pic-barcelona-batllo.jpg           cdc96b39969f74d0f03ff2cdfb5d0d39.jpg   576×975     1.15
+pic-barcelona-batllo-facade.jpg    5b217c1661030cada50fcca235b8bc24.jpg   1079×1804   0.61
+pic-barcelona-batllo-roof.jpg      9e0829a652f75b3d8803bd5dd61ef7b7.jpg   663×1024    1.00
+pic-barcelona-guell.jpg            fac5ed8db4ab279c7224e715dfc4ea22.jpg   736×1193    0.90
+pic-benagil.jpg                    benagil.png                            1152×2048   0.57
+pic-bilbao.jpg                     bilbao.jpg                             1125×2000   0.59
+pic-bilbao2.jpg                    bilbao1.jpg                            1200×1798   0.55
+pic-burgos.jpg                     brgos.jpg                              680×1020    0.97
+pic-burgos2.jpg                    brgos1.jpg                             736×981     0.90
+pic-camino.jpg                     순례길.jpg                              832×1248    0.79
+pic-catedrais.jpg                  galicia.jpg                            564×752     1.17
+pic-cathedral-gothic.jpg           a1be8814490848b10c4b0ec42f720d7d.jpg   1126×2000   0.59   ※어느 성당인지 확인 필요
+pic-consuegra.jpg                  consuegra.jpg                          720×1280    0.92
+pic-cordoba-mezquita.jpg           56e23194f22652f3591f171f66f73314.jpg   800×1200    0.82
+pic-gaztelugatxe.jpg               ruta-autocaravana-pais-vasco-...jpg    1024×682    1.23
+pic-gaztelugatxe2.jpg              vasco.jpg                              550×807     1.20
+pic-granada-arrayanes.jpg          granada.jpg                            736×1104    0.90
+pic-granada-city.jpg               granada1.jpg                           896×1344    0.74
+pic-granada-interior.jpg           granada3.jpg                           550×812     1.20
+pic-granada-leones.jpg             granada2.jpg                           564×564     1.49
+pic-lisbon-arco.jpg                lisbon7.jpg                            236×354     2.80  ★
+pic-lisbon-comercio.jpg            lisbon4.jpg                            1080×1350   0.62
+pic-lisbon-descobrimentos.jpg      lisbon.jpg                             736×1103    0.90
+pic-madrid-almudena.jpg            madrid1.jpg                            736×1104    0.90
+pic-madrid-cibeles.jpg             madrid.jpg                             1020×1495   0.65
+pic-merida-aqueduct.jpg            merida1.jpg                            640×640     1.31
+pic-merida-theatre.jpg             merida.jpg                             683×1024    0.97
+pic-merida-theatre2.jpg            merida2.jpg                            736×1308    0.90
+pic-montserrat.jpg                 monserat.jpg                           735×1107    0.90
+pic-montserrat2.jpg                monserat1.jpg                          550×807     1.20
+pic-nata.jpg                       lisbon5.jpg                            736×981     0.90
+pic-picos-fuentede.jpg             pico.jpg                               638×1054    1.03
+pic-picos-lake.jpg                 pico1.jpg                              1152×2048   0.57
+pic-pintxos.jpg                    san sebastian1.jpg                     236×356     2.80  ★
+pic-porto-lello.jpg                opoto1.jpg                             900×1200    0.73
+pic-porto-lello2.jpg               opoto2.jpg                             1200×1767   0.55
+pic-porto-ribeira.jpg              opoto.jpg                              1080×1350   0.62
+pic-porto-street.jpg               opoto3.jpg                             896×1344    0.74
+pic-prado.jpg                      prado.jpg                              736×1308    0.90
+pic-ronda.jpg                      78332072cd4e03defa821a29099a1d75.jpg   941×1176    0.71
+pic-sagrada.jpg                    8f5241b4d20ddd045995a211a87c5982.jpg   510×790     1.29
+pic-sagrada2.jpg                   98913b41181d7eb98b626a429e908e6c.jpg   1080×1323   0.63
+pic-salamanca.jpg                  salamanca.jpg                          640×960     1.03
+pic-sansebastian-concha.jpg        san sebastian2.jpg                     1080×1350   0.62
+pic-sansebastian-funicular.jpg     san sebastian.jpg                      736×1312    0.90
+pic-santiago.jpg                   santiago.jpg                           432×640     1.53  ★
+pic-santiago-plaza.jpg             santiago2.jpg                          900×1200    0.73
+pic-santiago-shell.jpg             santiago1.jpg                          1200×1600   0.55
+pic-segovia.jpg                    segovia.jpg                            1080×1080   0.78
+pic-setenil.jpg                    Setenil.jpg                            996×1594    0.66
+pic-setenil2.jpg                   Setenil1.jpg                           736×1103    0.90
+pic-sevilla-giralda.jpg            다운로드.png                            1152×2048   0.57
+pic-sevilla-plaza-canal.jpg        4b14c7358016f3dbd7aa9d974b23e3e0.jpg   720×1080    0.92
+pic-sevilla-plaza-tile.jpg         03fd646a90ccb44991552216ba3960c0.jpg   736×1308    0.90
+pic-sevilla-plaza2.jpg             c44c6bc8e4af97f7a613df8949132885.jpg   736×1308    0.90
+pic-sevilla-setas.jpg              a090c771c1f56353c0f1bb4cea359c05.jpg   236×433     2.80  ★
+pic-sintra-pena.jpg                lisbon1.jpg                            687×1024    0.96
+pic-sintra-pena2.jpg               lisbon2.jpg                            736×1104    0.90
+pic-sintra-pena3.jpg               lisbon6.jpg                            1122×1402   0.60
+pic-toledo.jpg                     toledo.jpg                             1080×1350   0.62
+
+■ 이름은 제가 사진을 보고 붙였습니다. 틀린 곳이 있으면 파일 이름만 바꿔 쓰시면 됩니다.
+   특히 pic-cathedral-gothic.jpg 는 어느 도시의 성당인지 확신이 없어 일반 이름으로 두었습니다.
+
+■ 사진 출처
+   파일 이름이 해시(영문+숫자 32자)이거나 가로 236px인 것은 핀터레스트 등에서 받으신 것으로 보입니다.
+   상업 광고에 쓰시려면 사용 권한이 있는 사진인지 확인해 주세요.
