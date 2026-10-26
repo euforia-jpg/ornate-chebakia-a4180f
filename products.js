@@ -3007,7 +3007,7 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/card-lisbon-tram1.jpg",
+    "카드사진": "/pic-sintra-pena3.jpg",
     "제휴코드": "PRD3018121367"
   },
   {
