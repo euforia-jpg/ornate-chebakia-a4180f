@@ -3962,7 +3962,7 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-picos.jpg"
+    "카드사진": "/pic-picos-lake.jpg"
   },
   {
     "id": "iberia-14days-madrid",
