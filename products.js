@@ -1804,7 +1804,7 @@ const PRODUCTS = [
     "link": "",
     "ctaLabel": "",
     "downloadUrl": "",
-    "카드사진": "/card-sevilla-plaza1.jpg",
+    "카드사진": "/pic-lisbon-descobrimentos.jpg",
     "isNew": false
   },
   {
