@@ -86,7 +86,7 @@ const PRODUCTS = [
     "link": "",
     "ctaLabel": "",
     "downloadUrl": "",
-    "카드사진": "/card-madrid.jpg",
+    "카드사진": "/pic-toledo.jpg",
     "isNew": false
   },
   {
