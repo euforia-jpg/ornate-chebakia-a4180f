@@ -1273,7 +1273,7 @@ const PRODUCTS = [
     "ctaLabel": "",
     "downloadUrl": "",
     "youtubeUrl": "",
-    "카드사진": "/card-merida.jpg",
+    "카드사진": "/pic-lisbon-comercio.jpg",
     "isNew": false
   },
   {
