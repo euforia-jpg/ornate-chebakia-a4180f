@@ -1910,7 +1910,7 @@ const PRODUCTS = [
     "downloadUrl": "",
     "제휴코드": "PRD3017415695",
     "isNew": true,
-    "카드사진": "/card-frigiliana.jpg"
+    "카드사진": "/pic-ronda.jpg"
   },
   {
     "id": "car-sevilla-ronda-nerja-granada",
