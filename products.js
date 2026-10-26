@@ -2016,7 +2016,7 @@ const PRODUCTS = [
     "downloadUrl": "",
     "제휴코드": "PRD3017415695",
     "isNew": false,
-    "카드사진": "/card-ronda.jpg"
+    "카드사진": "/pic-granada-city.jpg"
   },
   {
     "id": "car-sevilla-cordoba-madrid",
