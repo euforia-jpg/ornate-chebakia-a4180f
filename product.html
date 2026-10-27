@@ -50,6 +50,10 @@
     background:linear-gradient(to bottom,
       #F6F6F6 0%, rgba(246,246,246,.94) 42%, rgba(246,246,246,.62) 72%, rgba(246,246,246,0) 100%);
   }
+  /* 점무늬는 사진 위에 얹히면 모기장처럼 비쳐 보입니다.
+     사진이 깔린 상품에서만 점무늬를 끕니다 — 사진 자체가 결 역할을 합니다.
+     사진 없는 상품은 지금처럼 점무늬 바탕 그대로입니다. */
+  body:has(.eu-bg-on)::before{ display:none !important; }
   @media print{ body::after, .eu-bg-on{ display:none !important; } }
   /* ╚═══ 상품 사진 바탕 — 여기까지 ═══════════════════════════════════ */
 
