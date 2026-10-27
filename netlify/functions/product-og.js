@@ -140,6 +140,42 @@ function 갈기(글, 무늬, 새것) {
   return 무늬.test(글) ? 글.replace(무늬, 새것) : 글;
 }
 
+/*
+  주소에서 상품 번호를 찾습니다.
+
+  원래는 _redirects 의
+      /p/*  →  /.netlify/functions/product-og?id=:splat
+  가 넘겨 주기로 되어 있는데, 넷리파이가 물음표 뒤의 :splat 을
+  채워 주지 않는 경우가 있습니다(실제로 그래서 /p/ 가 전부
+  여행상품 목록으로 튕겼습니다).
+
+  그래서 넘어온 값이 없으면 원래 주소에서 직접 읽습니다.
+  되돌림 규칙이 어떻게 바뀌든 이쪽이 받아 냅니다.
+*/
+function 아이디찾기(event) {
+  const q = (event && event.queryStringParameters) || {};
+  const 넘어온것 = String(q.id || '').trim();
+  if (넘어온것) return 넘어온것;
+
+  const h = (event && event.headers) || {};
+  const 후보 = [event && event.rawUrl, event && event.path,
+                h['x-nf-original-path'], h['x-original-path']];
+
+  for (let i = 0; i < 후보.length; i++) {
+    if (!후보[i]) continue;
+    let 길 = String(후보[i]);
+    if (/^https?:\/\//i.test(길)) {
+      try { 길 = new URL(길).pathname; } catch (e) { /* 그냥 통째로 봅니다 */ }
+    }
+    const m = 길.match(/\/p\/([^/?#]+)/);
+    if (m) {
+      try { return decodeURIComponent(m[1]).trim(); }
+      catch (e) { return m[1].trim(); }
+    }
+  }
+  return '';
+}
+
 exports.handler = async function (event) {
   const 주기 = {
     'Content-Type': 'text/html; charset=utf-8',
@@ -150,8 +186,7 @@ exports.handler = async function (event) {
     'X-Robots-Tag': 'all',
   };
 
-  const q = (event && event.queryStringParameters) || {};
-  const 아이디 = String(q.id || '').trim();
+  const 아이디 = 아이디찾기(event);
 
   /* 주소로 만들 수 없는 값은 바로 목록으로 보냅니다 */
   const 쓸만한 = 아이디 && 아이디.length <= 80 &&
