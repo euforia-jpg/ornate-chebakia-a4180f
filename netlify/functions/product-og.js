@@ -234,6 +234,20 @@ exports.handler = async function (event) {
 
   let 글 = 자료.틀;
 
+  /* ── 상대 주소 바로잡기 ─────────────────────────────────
+     이 쪽은 /p/<상품id> 라는 한 칸 아래 주소로 보여 줍니다.
+     그런데 product.html 안에는 products.js · about.html 처럼
+     「/」 없이 적힌 주소가 많습니다. 그대로 두면 브라우저가
+     /p/products.js 를 찾다가 못 찾아 쪽이 통째로 안 그려집니다.
+     (실제로 「PRODUCTS is not defined」 가 났습니다)
+
+     <base> 를 머리말 맨 앞에 넣어 「상대 주소는 뿌리에서 센다」고
+     알려 주면 한 줄로 끝납니다. product.html 에는 href="#…" 식의
+     제자리 링크가 하나도 없어서 부작용이 없습니다. */
+  if (글.indexOf('<base ') === -1) {
+    글 = 글.replace(/<head([^>]*)>/i, '<head$1><base href="' + 도메인 + '/">');
+  }
+
   /* ── 머리말 갈아 끼우기 ───────────────────────────────── */
   글 = 갈기(글, /<title>[\s\S]*?<\/title>/i, '<title>' + 안전(제목) + '</title>');
   글 = 갈기(글, /<meta\s+name="description"[^>]*>/i,
