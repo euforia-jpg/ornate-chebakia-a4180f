@@ -241,18 +241,14 @@ exports.handler = async function (event) {
     description: 줄이기((p.detail && p.detail.lead) || p.summary, 300),
     url: 주소,
     image: 사진,
+    /* 첫 쪽(index.html)에 적어 둔 회사 정보와 같은 @id 를 씁니다.
+       이렇게 묶어 두면 구글이 「이 상품을 파는 곳 = 그 회사」로 읽습니다.
+       회사 정보를 여기서 또 길게 적으면 두 곳이 어긋날 때 서로 부딪칩니다. */
     provider: {
+      '@id': 도메인 + '/#organization',
       '@type': 'TravelAgency',
       name: '유포리아투어 Euforia Tour',
-      url: 도메인,
-      email: 'euforia@euforiatour.com',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Calle Gran Via 69, 810',
-        postalCode: '28013',
-        addressLocality: 'Madrid',
-        addressCountry: 'ES',
-      },
+      url: 도메인 + '/',
     },
   };
   if (p.days) 짜임.itinerary = { '@type': 'ItemList', name: p.days };

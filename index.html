@@ -597,25 +597,59 @@
   <meta name="theme-color" content="#24303A">
    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
+<!-- ═══════════════════════════════════════════════════════════════
+     회사 정보 — 검색엔진과 AI 가 「이 회사가 누구인가」를 읽는 자리
+
+     ★ url 은 반드시 toureplus.co.kr 이어야 합니다 ★
+       전에는 넷리파이 임시 주소(ornate-chebakia-a4180f.netlify.app)가
+       적혀 있었습니다. 그러면 구글이 「이 회사의 공식 홈페이지는 넷리파이 쪽」
+       으로 읽어, 회사와 toureplus.co.kr 이 같은 것으로 묶이지 않습니다.
+       대표주소(canonical)가 아무리 맞아도 이 줄이 틀리면 소용이 없습니다.
+
+     여기 적는 값은 전부 쪽에 실제로 적혀 있는 것이어야 합니다.
+     (전화·주소는 index/about/contact 와, 면허번호는 about/contact 와 같습니다)
+     구글은 쪽에 없는 내용이 여기만 있으면 통째로 무시합니다.
+     ═══════════════════════════════════════════════════════════════ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
+  "@id": "https://toureplus.co.kr/#organization",
   "name": "Euforia Tour",
-  "alternateName": "유포리아투어",
-  "url": "https://ornate-chebakia-a4180f.netlify.app",
+  "alternateName": ["유포리아투어", "Tour E+", "EUFORIA DAS NUVENS S.L."],
+  "url": "https://toureplus.co.kr/",
+  "logo": "https://toureplus.co.kr/og-image.png",
+  "image": "https://toureplus.co.kr/og-image.png",
   "email": "euforia@euforiatour.com",
+  "telephone": "+34611209095",
+  "vatID": "B44605574",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Calle Gran Via 69, 810",
     "postalCode": "28013",
     "addressLocality": "Madrid",
+    "addressRegion": "Madrid",
     "addressCountry": "ES"
   },
+  "hasMap": "https://maps.google.com/?q=Calle+Gran+Via+69,+28013+Madrid,+Espa%C3%B1a",
   "areaServed": ["ES", "PT", "MA"],
+  "knowsLanguage": ["ko", "es", "en", "zh"],
   "description": "스페인 마드리드 현지 법인이 운영하는 스페인·포르투갈·모로코 전문 여행사. 차량 & 기사 투어, 도슨트 투어, 순례길 트레킹, 국가별 일주 패키지, 라리가 경기 티켓, 공연 예매 서비스를 제공해요.",
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "스페인 여행업 면허 (CICMA)",
+    "identifier": "4443"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "예약 문의",
+    "telephone": "+34611209095",
+    "email": "euforia@euforiatour.com",
+    "availableLanguage": ["ko", "es", "en"],
+    "areaServed": ["ES", "PT", "MA", "KR"]
+  },
   "sameAs": [
-    "https://euforia-showtime.netlify.app/"
+    "https://www.threads.net/@es.ronda"
   ]
 }
 </script>
