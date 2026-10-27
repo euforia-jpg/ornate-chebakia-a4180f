@@ -153,7 +153,11 @@ exports.handler = async function (event) {
     줄들.push(줄(기준 + '/' + x[0], 날, x[1], x[2]));
   });
   상품.forEach(function (id) {
-    줄들.push(줄(기준 + '/product.html?id=' + encodeURIComponent(id), 날, 0.8, 'weekly'));
+    /* 짧은 주소(/p/<상품id>)를 알려 줍니다 — 이쪽은 넷리파이 함수가
+       그 상품의 제목·설명·카드 사진으로 머리말을 채워 내보냅니다.
+       /product.html?id=… 를 알려 주면 38개 상품이 전부 같은 머리말로
+       보여서, 구글이 한 쪽으로 묶어 버립니다. */
+    줄들.push(줄(기준 + '/p/' + encodeURIComponent(id), 날, 0.8, 'weekly'));
   });
 
   const xml =
