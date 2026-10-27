@@ -4,8 +4,8 @@
   <meta name="naver-site-verification" content="4e7afa9a8cff003ceca3a6decba5cf89f63cc23b" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Euforia Tour — 스페인·포르투갈·모로코 여행 예약</title>
-  	<meta name="description" content="스페인·포르투갈·모로코 전문 여행사 유포리아투어. 차량투어, 도슨트, 순례길, 라리가 직관까지 원하는 일정에 맞춰 예약하세요.">
+<title>스페인 현지 여행사 유포리아투어 — 스페인·포르투갈·모로코 여행 예약</title>
+  	<meta name="description" content="마드리드에 법인을 두고 스페인 현지에서 운영하는 여행사 유포리아투어. 전속 가이드가 안내하고 직영 차량과 협력사 차량을 함께 씁니다. 스페인·포르투갈 패키지, 차량투어, 순례길, 라리가 직관을 원하는 일정에 맞춰 예약하세요.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -43,7 +43,7 @@
 
   .hero{ padding: 34px clamp(20px,4vw,56px) 30px; display:grid; grid-template-columns:1.25fr 1fr; gap:36px; align-items:center; }
   .eyebrow{ display:inline-flex; align-items:center; gap:8px; color:#fff; background:var(--navy); font-size:12px; letter-spacing:1px; font-weight:800; margin-bottom:16px; padding:7px 16px; border-radius:999px; }
-  .hero h1{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(32px,4.4vw,50px); line-height:1.12; margin:0 0 16px; color:var(--navy); }
+  .hero h1{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(32px,4.4vw,50px); line-height:1.12; margin:0 0 16px; color:var(--navy); word-break:keep-all; }
   .hero h1 .hl{ color:#fff; background:var(--violet); padding:0 10px; }
   .hero p{ color:var(--muted); font-size:15.5px; line-height:1.75; max-width:520px; margin:0 0 22px; font-weight:600; }
   .hero-ctas{ display:flex; gap:12px; flex-wrap:wrap; }
@@ -230,7 +230,10 @@
   .tour-body p{ margin:0 0 12px; font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.6; }
   .tour-cta{ display:flex; justify-content:flex-end; font-size:12px; font-weight:800; color:var(--violet); }
 
-  .value-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .value-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:18px; }
+  /* 「선택하는 이유」 머리말 — 검색어가 들어가는 본문 줄입니다 */
+  .value-lead{ margin:0 0 20px; max-width:860px; font-size:14px; line-height:1.85; font-weight:600; color:var(--muted); }
+  .value-lead b{ color:var(--navy); font-weight:800; }
   .value-card{ border:2px solid var(--line); border-radius:var(--radius); padding:20px; background:#fff; }
   .value-card .ico{ width:38px;height:38px;border-radius:11px; background:var(--wash-violet); color:var(--violet); display:flex; align-items:center; justify-content:center; font-size:17px; margin-bottom:12px; font-weight:800; }
   .value-card h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:15px; margin:0 0 6px; color:var(--navy); }
@@ -634,7 +637,7 @@
   "hasMap": "https://maps.google.com/?q=Calle+Gran+Via+69,+28013+Madrid,+Espa%C3%B1a",
   "areaServed": ["ES", "PT", "MA"],
   "knowsLanguage": ["ko", "es", "en", "zh"],
-  "description": "스페인 마드리드 현지 법인이 운영하는 스페인·포르투갈·모로코 전문 여행사. 차량 & 기사 투어, 도슨트 투어, 순례길 트레킹, 국가별 일주 패키지, 라리가 경기 티켓, 공연 예매 서비스를 제공해요.",
+  "description": "마드리드에 법인을 두고 스페인 현지에서 운영하는 여행사. 전속 가이드가 안내하고 직영 차량과 협력사 차량을 함께 운영합니다. 차량 & 기사 투어, 도슨트 투어, 순례길 트레킹, 스페인·포르투갈 패키지, 라리가 경기 티켓, 공연 예매 서비스를 제공해요.",
   "hasCredential": {
     "@type": "EducationalOccupationalCredential",
     "credentialCategory": "스페인 여행업 면허 (CICMA)",
@@ -658,16 +661,16 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Euforia Tour 유포리아투어">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="Euforia Tour — 스페인·포르투갈·모로코 여행 예약">
-<meta property="og:description" content="스페인·포르투갈·모로코 전문 여행사 유포리아투어. 차량투어, 도슨트, 순례길, 라리가 직관까지 원하는 일정에 맞춰 예약하세요.">
+<meta property="og:title" content="스페인 현지 여행사 유포리아투어 — 스페인·포르투갈·모로코 여행 예약">
+<meta property="og:description" content="마드리드에 법인을 두고 스페인 현지에서 운영하는 여행사 유포리아투어. 전속 가이드와 직영·협력 차량으로 스페인·포르투갈 패키지, 차량투어, 순례길, 라리가 직관을 안내합니다.">
 <meta property="og:url" content="https://toureplus.co.kr/">
 <meta property="og:image" content="https://toureplus.co.kr/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="유포리아투어 — 스페인·포르투갈·모로코 전문 여행사">
+<meta property="og:image:alt" content="유포리아투어 — 스페인 현지 여행사">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Euforia Tour — 스페인·포르투갈·모로코 여행 예약">
-<meta name="twitter:description" content="스페인·포르투갈·모로코 전문 여행사 유포리아투어. 차량투어, 도슨트, 순례길, 라리가 직관까지 원하는 일정에 맞춰 예약하세요.">
+<meta name="twitter:title" content="스페인 현지 여행사 유포리아투어 — 스페인·포르투갈·모로코 여행 예약">
+<meta name="twitter:description" content="마드리드에 법인을 두고 스페인 현지에서 운영하는 여행사 유포리아투어. 전속 가이드와 직영·협력 차량으로 스페인·포르투갈 패키지, 차량투어, 순례길, 라리가 직관을 안내합니다.">
 <meta name="twitter:image" content="https://toureplus.co.kr/og-image.png">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -708,9 +711,9 @@
 
   <div class="hero">
     <div>
-      <div class="eyebrow">여행 상품 예약 · 유포리아투어</div>
-      <h1>스페인·포르투갈·모로코,<br>일정에 맞는 <span class="hl">여행</span>을 예약하세요</h1>
-      <p>차량 & 기사 투어, 도슨트, 순례길, 포르투갈·스페인 일주까지 — 원하는 여행상품을 고르고 바로 예약문의를 남길 수 있어요. 라리가 직관도 여행 일정에 쉽게 더할 수 있어요.</p>
+      <div class="eyebrow">스페인 · 포르투갈 · 모로코 · 유포리아투어</div>
+      <h1>스페인 현지 여행사,<br>일정에 맞는 <span class="hl">여행</span>을 예약하세요</h1>
+      <p>마드리드에 법인을 두고 스페인 현지에서 운영하는 여행사입니다. 전속 가이드가 직접 안내하고, 직영 차량과 협력사 차량을 함께 써서 인원과 거리에 맞는 차를 붙입니다. 차량 &amp; 기사 투어, 도슨트, 순례길, 스페인·포르투갈 패키지까지 — 원하는 여행상품을 고르고 바로 예약문의를 남길 수 있어요. 라리가 직관도 여행 일정에 쉽게 더할 수 있어요.</p>
 <div class="hero-ctas">
         <a class="cta" href="tours.html">여행상품 보러가기</a>
         <a class="cta outline" href="contact.html">예약문의 하기</a>
@@ -804,13 +807,23 @@
       <div class="section-head">
         <div>
           <h2>유포리아투어를 선택하는 이유</h2>
+          <div class="sub">스페인 현지에서 운영하는 여행사입니다</div>
         </div>
       </div>
+      <p class="value-lead">유포리아투어는 마드리드에 법인을 두고 <b>스페인 현지에서 운영하는 여행사</b>입니다.
+        한국에서 문의를 받아 현지 업체에 넘기는 방식이 아니라, 전속 가이드가 직접 안내하고
+        직영 차량과 협력사 차량을 함께 운영합니다. 스페인·포르투갈 패키지부터 당일 차량 투어까지
+        같은 팀이 처음부터 끝까지 맡습니다.</p>
       <div class="value-grid">
         <div class="value-card">
           <div class="ico">✓</div>
-          <h3>현지 밀착 가이드</h3>
-          <p>스페인 현지 상주 가이드와 드라이버가 실제 도로 사정과 현지 상황까지 고려해 일정을 설계해요.</p>
+          <h3>전속 가이드</h3>
+          <p>건마다 사람을 바꾸지 않습니다. 일정의 흐름과 현지 사정을 아는 전속 가이드가 처음부터 끝까지 안내해요.</p>
+        </div>
+        <div class="value-card">
+          <div class="ico">◆</div>
+          <h3>직영 차량과 협력 차량</h3>
+          <p>직영 차량과 협력사 차량을 함께 운영해요. 인원과 거리에 맞는 차를 붙이고, 성수기에도 차가 없어 일정이 밀리는 일을 막습니다.</p>
         </div>
         <div class="value-card">
           <div class="ico">＋</div>
