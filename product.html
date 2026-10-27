@@ -671,7 +671,12 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
 <script src="products.js"></script>
 <script>
 function getParam(name){
-  return new URLSearchParams(window.location.search).get(name);
+  var v = new URLSearchParams(window.location.search).get(name);
+  /* 짧은 주소(/p/<상품id>)로 들어오면 ?id= 가 없습니다.
+     그때는 넷리파이 함수(product-og.js)가 머리말에 심어 둔 값을 씁니다.
+     함수를 거치지 않는 /product.html?id=… 는 지금과 똑같이 돕니다. */
+  if(!v && name === 'id' && typeof window.__EU_PID === 'string') v = window.__EU_PID;
+  return v;
 }
 
 /* =========================================================================
@@ -1484,6 +1489,18 @@ function render(){
   }
 
   document.title = product.title + ' — Euforia Tour';
+
+  /* /product.html?id=… 로 들어온 경우, 이 상품의 대표주소를 짧은 주소로 알려 줍니다.
+     (짧은 주소로 들어오면 함수가 이미 바르게 적어 두므로 건드리지 않습니다)
+     카카오톡·문자 미리보기는 자바스크립트를 돌리지 않아 여기서는 못 고칩니다 —
+     그래서 손님께 보내실 때는 /p/<상품id> 쪽을 쓰셔야 합니다. */
+  if(!window.__EU_PID){
+    var 대표 = document.querySelector('link[rel="canonical"]');
+    var 짧은 = 'https://toureplus.co.kr/p/' + encodeURIComponent(product.id);
+    if(대표) 대표.setAttribute('href', 짧은);
+    var ogU = document.querySelector('meta[property="og:url"]');
+    if(ogU) ogU.setAttribute('content', 짧은);
+  }
 
   /* ╔═══ 바탕 사진 깔기 — 여기부터 ═══════════════════════════════════
      「카드 사진」 주소를 CSS 변수로 넘기고, 위쪽 흰 띠를 한 번만 깝니다.
