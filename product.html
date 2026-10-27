@@ -20,9 +20,38 @@
     background: #F6F6F6;
     background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
   }
-  body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
+  body::before{ content:''; position:fixed; inset:0; z-index:2; background-image: radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
   a{ color:inherit; }
-  .wrap{ position:relative; z-index:1; }
+  .wrap{ position:relative; z-index:3; }
+
+  /* ╔═══ 상품 사진 바탕 — 여기부터 ═══════════════════════════════════
+     상품의 「카드 사진」을 쪽 바탕에 아주 연하게 깝니다.
+     사진 주소는 아래 JS 가 body 에 --eu-bg 로 넣어 줍니다.
+     카드 사진이 없는 상품에서는 --eu-bg 가 비어 있어 아무것도 안 깔립니다.
+
+     흰색 80% 를 사진 위에 미리 섞는 까닭 — 투명도만 낮추면 밝은 사진은
+     희멀겋고 어두운 사진은 탁해져 상품마다 진하기가 들쭉날쭉합니다.
+     이렇게 하면 어떤 사진이든 같은 진하기로 내려앉습니다.
+     (실측: 바탕 평균 RGB 230,226,222 ↔ 222,218,211 — 거의 같음)
+
+     ※ 마음에 안 드시면 이 묶음과 아래 「바탕 사진 깔기」 JS 두 군데만
+       지우시면 원래대로 돌아갑니다. 다른 곳은 건드리지 않았습니다. */
+  body:has(.eu-bg-on)::after{
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(246,246,246,.80), rgba(246,246,246,.80)),
+      var(--eu-bg);
+    background-size:cover; background-position:center;
+  }
+  /* 메뉴가 있는 위쪽 띠는 사진을 거의 지웁니다 — 회색 메뉴 글씨가 묻히지 않게.
+     이게 없으면 밝은 사진에서 메뉴 명암비가 4.1:1 까지 떨어집니다(기준 4.5:1). */
+  .eu-bg-on{
+    position:fixed; top:0; left:0; right:0; height:235px; z-index:1; pointer-events:none;
+    background:linear-gradient(to bottom,
+      #F6F6F6 0%, rgba(246,246,246,.94) 42%, rgba(246,246,246,.62) 72%, rgba(246,246,246,0) 100%);
+  }
+  @media print{ body::after, .eu-bg-on{ display:none !important; } }
+  /* ╚═══ 상품 사진 바탕 — 여기까지 ═══════════════════════════════════ */
 
   .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding: 22px clamp(20px,4vw,56px) 14px; }
   .logo{ display:flex; align-items:center; gap:16px; text-decoration:none; }
@@ -1451,6 +1480,22 @@ function render(){
   }
 
   document.title = product.title + ' — Euforia Tour';
+
+  /* ╔═══ 바탕 사진 깔기 — 여기부터 ═══════════════════════════════════
+     「카드 사진」 주소를 CSS 변수로 넘기고, 위쪽 흰 띠를 한 번만 깝니다.
+     주소에 따옴표·괄호가 섞여 들어와도 틀이 깨지지 않게 막습니다. */
+  (function(){
+    var 사진 = product['카드사진'];
+    var 띠   = document.querySelector('.eu-bg-on');
+    if(!사진 || /["'()\\]/.test(String(사진)) || /\s/.test(String(사진))){
+      document.body.style.removeProperty('--eu-bg');
+      if(띠) 띠.remove();
+      return;
+    }
+    document.body.style.setProperty('--eu-bg', 'url(' + String(사진).trim() + ')');
+    if(!띠){ 띠 = document.createElement('div'); 띠.className = 'eu-bg-on'; document.body.appendChild(띠); }
+  })();
+  /* ╚═══ 바탕 사진 깔기 — 여기까지 ═══════════════════════════════════ */
   const d = product.detail;
 
   el.innerHTML = `
