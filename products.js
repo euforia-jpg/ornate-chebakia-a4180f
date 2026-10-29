@@ -2833,7 +2833,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/pic-sansebastian-funicular.jpg"
+    "카드사진": "/pic-sansebastian-funicular.jpg",
+    "제휴코드": "PRD3018752319"
   },
   {
     "id": "portugal-8days",
