@@ -3808,7 +3808,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/pic-cathedral-gothic.jpg"
+    "카드사진": "/pic-cathedral-gothic.jpg",
+    "제휴코드": "PRD3018540501"
   },
   {
     "id": "north-asturias-picos",
