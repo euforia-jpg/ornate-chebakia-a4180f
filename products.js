@@ -1274,7 +1274,8 @@ const PRODUCTS = [
     "downloadUrl": "",
     "youtubeUrl": "",
     "카드사진": "/pic-lisbon-comercio.jpg",
-    "isNew": false
+    "isNew": false,
+    "제휴코드": "PRD3018752183"
   },
   {
     "id": "car-madrid-zaragoza-barcelona",
