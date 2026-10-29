@@ -1627,7 +1627,8 @@ const PRODUCTS = [
     "downloadUrl": "",
     "youtubeUrl": "",
     "카드사진": "/pic-porto-street.jpg",
-    "isNew": false
+    "isNew": false,
+    "제휴코드": "PRD3018752151"
   },
   {
     "id": "car-lisbon-benagil-sevilla",
