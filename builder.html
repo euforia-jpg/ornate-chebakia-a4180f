@@ -357,6 +357,11 @@
     .bx-lb{ padding:10px; } .bx-lb .big img{ max-height:52vh; }
   }
   @media print{ .bx-lb{ display:none !important; } }
+  .bx-hc .ph .gc{ position:absolute; left:8px; bottom:8px; background:rgba(13,20,26,.55); color:#fff;
+    border-radius:5px; padding:2px 6px; font-size:9.5px; font-weight:700; letter-spacing:.2px; }
+  .bx-hc .ph.ld{ color:var(--muted); }
+  .bx-lb .cap a{ color:#E6EDF1; }
+  .bx-lb .wait{ height:46vh; display:flex; align-items:center; justify-content:center; color:#C9D1D6; font-size:13px; font-weight:700; }
   .bx-staysum .tb{ width:34px; height:26px; border-radius:5px; background:#E9EDF0 center/cover no-repeat; flex:none; align-self:center; }
 
   /* 숙박 카드 — 고르신 호텔 요약 */
@@ -1967,6 +1972,8 @@
   }
   function 호텔지도(h){
     if(h.지도 && /^https:\/\//.test(h.지도)) return h.지도;
+    var g = 구글[h.id];
+    if(g && g.maps && /^https:\/\//.test(g.maps)) return g.maps;
     return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(h.이름 + ' ' + (h.도시 || ''));
   }
   function 배경(src){ return "background-image:url('" + String(src).replace(/'/g, '%27') + "')"; }
@@ -1994,7 +2001,7 @@
         ? '<span class="ph" data-hphoto="' + esc(h.id) + '" style="' + 배경(사진[0].src) + '">' +
             (h.등급 ? '<span class="gr">' + esc(h.등급) + '</span>' : '') +
             '<span class="cnt">사진 ' + 사진.length + '장</span></span>'
-        : '<span class="ph none">' + (h.등급 ? '<span class="gr">' + esc(h.등급) + '</span>' : '') + '사진 준비 중</span>';
+        : 구글카드(h);
       var 설명 = String(h.설명 || '').replace(/^\s*\d성\s*·\s*/, '');   /* 등급은 사진 위 뱃지로 */
       return '<div class="bx-hc' + (고른 === h.id ? ' on' : '') + '" role="button" tabindex="0" ' +
           'data-hpick="' + esc(h.id) + '" data-hcity="' + esc(day.도시) + '">' +
@@ -2002,12 +2009,13 @@
         '<span class="hb"><span class="n">' + esc(h.이름) + '</span>' +
           (설명 ? '<span class="d">' + esc(설명) + '</span>' : '') +
           (CFG.항목금액보이기 ? '<span class="pr">' + 기호 + 돈(h.금액) + ' / 박</span>' : '') +
-          (사진.length
+          (사진.length || 구글있음(h.id)
             ? '<span class="lk" data-hphoto="' + esc(h.id) + '">사진 크게 보기 →</span>'
             : '<a class="lk" href="' + esc(호텔지도(h)) + '" target="_blank" rel="noopener">구글 지도에서 보기 ↗</a>') +
         '</span></div>';
     }).join('');
 
+    구글살피기예약();
     return '<div class="bx-stayrow">' +
       '<span class="sl">묵는 곳 · ' + esc(day.도시) + (호텔들.length ? ' — 사진을 보고 골라 주세요' : '') + '</span>' +
       (등급종류.length > 1
@@ -2031,6 +2039,78 @@
       '</div>';
   }
 
+  /* ── 구글 지도 사진 (관리자 화면에서 사진을 올리지 않은 호텔) ──
+     place-photo 함수가 구글 지도(Places API)에서 받아 옵니다. 카드가 화면에 보일 때만 부릅니다.
+     구글 약관에 따라 사진마다 촬영자(출처)를 표시합니다. */
+  var 구글 = {};      /* id → { s:'wait'|'ok'|'none', maps, photos } (카드용 1장) */
+  var 구글여럿 = {};  /* id → 크게 보기용 최대 6장 */
+  var 구글눈 = null, 구글예약 = 0;
+  function 구글있음(id){ var g = 구글[id]; return !!(g && g.s === 'ok' && g.photos && g.photos.length); }
+  function 구글카드(h){
+    var gr = h.등급 ? '<span class="gr">' + esc(h.등급) + '</span>' : '';
+    var g = 구글[h.id];
+    if(구글있음(h.id)) return '<span class="ph" data-hphoto="' + esc(h.id) + '" style="' + 배경(g.photos[0].u) + '">' + gr +
+      '<span class="gc">Google</span><span class="cnt">사진 보기</span></span>';
+    if(g && g.s === 'none') return '<span class="ph none">' + gr + '사진 준비 중</span>';
+    return '<span class="ph none ld" data-gph="' + esc(h.id) + '">' + gr + '사진 불러오는 중…</span>';
+  }
+  function 구글받기(id, n){
+    return fetch('/.netlify/functions/place-photo?id=' + encodeURIComponent(id) + '&n=' + n, { headers: { 'Accept': 'application/json' } })
+      .then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .catch(function(){ return {}; });
+  }
+  function 구글카드바꾸기(id){
+    var h = 찾기(id); if(!h) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.bx-hc[data-hpick="' + id + '"]'), function(c){
+      var ph = c.querySelector('.ph'); if(ph){ var t = document.createElement('div'); t.innerHTML = 구글카드(h); ph.replaceWith(t.firstChild); }
+      var lk = c.querySelector('.lk');
+      if(lk){
+        var t2 = document.createElement('div');
+        t2.innerHTML = 구글있음(id)
+          ? '<span class="lk" data-hphoto="' + esc(id) + '">사진 크게 보기 →</span>'
+          : '<a class="lk" href="' + esc(호텔지도(h)) + '" target="_blank" rel="noopener">구글 지도에서 보기 ↗</a>';
+        lk.replaceWith(t2.firstChild);
+      }
+    });
+  }
+  function 구글하나(id){
+    if(구글[id]) return;
+    구글[id] = { s: 'wait' };
+    구글받기(id, 1).then(function(d){
+      var ok = d && Array.isArray(d.photos) && d.photos.length && /^https:\/\//.test(d.photos[0].u || '');
+      구글[id] = ok ? { s: 'ok', maps: d.maps || '', photos: d.photos } : { s: 'none', maps: (d && d.maps) || '' };
+      구글카드바꾸기(id);
+    });
+  }
+  function 구글살피기예약(){
+    if(구글예약) return;
+    구글예약 = setTimeout(function(){ 구글예약 = 0; 구글살피기(); }, 0);
+  }
+  function 구글살피기(){
+    var 칸들 = document.querySelectorAll('[data-gph]');
+    if(!칸들.length) return;
+    if(!('IntersectionObserver' in window)){ Array.prototype.forEach.call(칸들, function(e){ 구글하나(e.dataset.gph); }); return; }
+    if(!구글눈) 구글눈 = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ 구글눈.unobserve(e.target); 구글하나(e.target.dataset.gph); } });
+    }, { rootMargin: '200px' });
+    Array.prototype.forEach.call(칸들, function(e){ 구글눈.observe(e); });
+  }
+
+  /* 크게 보기에 쓸 사진 목록 — 올린 사진이 먼저, 없으면 구글 사진 */
+  function 크게목록(h){
+    var 내 = 호텔사진(h);
+    if(내.length) return 내.map(function(p){
+      return { src: p.src, cap: p.설명 || '', credit: '사진 제공: ' + esc(h.사진제공 || '호텔') };
+    });
+    var g = 구글여럿[h.id] || (구글있음(h.id) ? 구글[h.id].photos : []);
+    return g.filter(function(p){ return /^https:\/\//.test(p.u || ''); }).map(function(p){
+      var 누구 = (p.a || []).map(function(a){
+        return a.u && /^https:\/\//.test(a.u) ? '<a href="' + esc(a.u) + '" target="_blank" rel="noopener">' + esc(a.n) + '</a>' : esc(a.n);
+      }).filter(Boolean).join(', ');
+      return { src: p.u, cap: '', credit: '사진: ' + (누구 ? 누구 + ' · ' : '') + 'Google 지도' };
+    });
+  }
+
   /* 호텔 고르기 — 예전 고르는 칸과 똑같이 S.숙박[도시] 에 적습니다. 고른 것을 다시 누르면 풉니다 */
   function 호텔고르기(도시, id){
     if(!S.숙박 || typeof S.숙박 !== 'object') S.숙박 = {};
@@ -2049,8 +2129,17 @@
   var 크게 = { id: '', i: 0, el: null };
   function 크게열기(id, i){
     var h = 찾기(id); if(!h) return;
-    var 사진 = 호텔사진(h); if(!사진.length) return;
+    var 사진 = 크게목록(h); if(!사진.length) return;
     크게.id = id; 크게.i = Math.max(0, Math.min(i || 0, 사진.length - 1));
+    /* 구글 사진이면 여러 장을 더 받아 옵니다 (처음엔 카드 사진 한 장으로 먼저 엽니다) */
+    if(!호텔사진(h).length && !구글여럿[id]){
+      구글받기(id, 6).then(function(d){
+        if(d && Array.isArray(d.photos) && d.photos.length){
+          구글여럿[id] = d.photos;
+          if(크게.id === id && 크게.el && 크게.el.classList.contains('open')) 크게그리기();
+        }
+      });
+    }
     if(!크게.el){
       크게.el = document.createElement('div');
       크게.el.className = 'bx-lb'; 크게.el.setAttribute('role', 'dialog'); 크게.el.setAttribute('aria-modal', 'true');
@@ -2093,23 +2182,25 @@
     document.documentElement.style.overflow = '';
   }
   function 크게넘기기(d){
-    var h = 찾기(크게.id); var n = 호텔사진(h).length; if(!n) return;
+    var h = 찾기(크게.id); var n = 크게목록(h).length; if(!n) return;
     크게.i = (크게.i + d + n) % n; 크게그리기();
   }
   function 크게그리기(){
     var h = 찾기(크게.id); if(!h) return;
-    var 사진 = 호텔사진(h), p = 사진[크게.i] || 사진[0];
+    var 사진 = 크게목록(h); if(!사진.length) return;
+    if(크게.i >= 사진.length) 크게.i = 0;
+    var p = 사진[크게.i];
     var 골랐나 = !!(S.숙박 && h.도시 && S.숙박[h.도시] === h.id);
     var 설명 = String(h.설명 || '').replace(/^\s*\d성\s*·\s*/, '');
     크게.el.innerHTML = '<div class="box">' +
       '<div class="top"><div><div class="t">' + esc(h.이름) + (h.등급 ? ' · ' + esc(h.등급) : '') + '</div>' +
         (설명 ? '<div class="s">' + esc(설명) + '</div>' : '') + '</div>' +
         '<button type="button" class="x" aria-label="닫기">✕</button></div>' +
-      '<div class="big"><img src="' + esc(p.src) + '" alt="' + esc((p.설명 || h.이름)) + '">' +
+      '<div class="big"><img src="' + esc(p.src) + '" alt="' + esc((p.cap || h.이름)) + '" referrerpolicy="no-referrer">' +
         (사진.length > 1 ? '<button type="button" class="nav l" aria-label="이전 사진">‹</button>' +
                            '<button type="button" class="nav r" aria-label="다음 사진">›</button>' : '') + '</div>' +
-      '<div class="cap"><span>' + esc(p.설명 || '') + '</span><span>' + (크게.i + 1) + ' / ' + 사진.length +
-        ' · 사진 제공: ' + esc(h.사진제공 || '호텔') + '</span></div>' +
+      '<div class="cap"><span>' + esc(p.cap || '') + '</span><span>' + (크게.i + 1) + ' / ' + 사진.length +
+        ' · ' + p.credit + '</span></div>' +
       (사진.length > 1 ? '<div class="th">' + 사진.map(function(q, j){
           return '<button type="button" class="' + (j === 크게.i ? 'on' : '') + '" data-lbi="' + j +
             '" style="' + 배경(q.src) + '" aria-label="사진 ' + (j + 1) + '"></button>';
