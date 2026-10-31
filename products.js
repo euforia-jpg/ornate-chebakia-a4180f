@@ -3214,7 +3214,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/pic-algarve-marinha.jpg"
+    "카드사진": "/pic-algarve-marinha.jpg",
+    "제휴코드": "PRD3018936035"
   },
   {
     "id": "iberia-12days",
