@@ -297,6 +297,68 @@
   .bx-stayrow em{ flex:1 1 100%; font-style:normal; font-size:11.5px; font-weight:600;
     color:var(--muted); }
 
+  /* ── 묵는 곳: 호텔 카드 (사진을 보고 고르기 · 2026-11) ── */
+  .bx-hwrap{ flex:1 1 100%; min-width:0; }
+  .bx-htabs{ display:flex; gap:6px; flex-wrap:wrap; }
+  .bx-htabs button{ all:unset; cursor:pointer; font-size:11.5px; font-weight:800; padding:5px 11px; border-radius:999px;
+    border:1.5px solid var(--line); background:#fff; color:var(--muted); }
+  .bx-htabs button.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .bx-hrow{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(200px,230px); gap:10px; overflow-x:auto;
+    padding:2px 2px 6px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
+  .bx-hc{ scroll-snap-align:start; position:relative; display:flex; flex-direction:column; text-align:left;
+    background:#fff; border:1.5px solid var(--line); border-radius:12px; overflow:hidden; cursor:pointer;
+    font:inherit; color:var(--ink); padding:0; transition:border-color .15s, box-shadow .15s; }
+  .bx-hc:hover{ border-color:var(--violet); }
+  .bx-hc.on{ border-color:var(--navy); box-shadow:0 0 0 2px var(--navy) inset; }
+  .bx-hc .ck{ position:absolute; right:8px; top:8px; z-index:2; width:24px; height:24px; border-radius:50%;
+    background:var(--navy); color:#fff; font-size:13px; font-weight:900; display:none; align-items:center; justify-content:center; }
+  .bx-hc.on .ck{ display:flex; }
+  .bx-hc .ph{ position:relative; height:120px; background:#E9EDF0 center/cover no-repeat; }
+  .bx-hc .ph.none{ background:repeating-linear-gradient(135deg,#EEF1F3 0 10px,#E6EAED 10px 20px);
+    display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:700; color:var(--muted); }
+  .bx-hc .ph .gr{ position:absolute; left:8px; top:8px; background:rgba(255,255,255,.95); color:var(--navy);
+    border-radius:6px; padding:3px 7px; font-size:10.5px; font-weight:800; }
+  .bx-hc .ph .cnt{ position:absolute; right:8px; bottom:8px; background:rgba(13,20,26,.62); color:#fff;
+    border-radius:999px; padding:3px 8px; font-size:10.5px; font-weight:800; }
+  .bx-hc .hb{ flex:1; display:flex; flex-direction:column; gap:2px; padding:9px 11px 10px; }
+  .bx-hc .n{ font-size:13.2px; font-weight:800; line-height:1.35; }
+  .bx-hc .d{ font-size:11.5px; font-weight:600; color:var(--muted); line-height:1.5; }
+  .bx-hc .pr{ font-size:11.5px; font-weight:800; color:var(--violet); }
+  .bx-hc .lk{ margin-top:auto; padding-top:6px; font-size:11.5px; font-weight:800; color:var(--violet); text-decoration:none; }
+  .bx-hc .lk:hover{ text-decoration:underline; }
+  .bx-hgen{ display:flex; flex-wrap:wrap; gap:6px 8px; align-items:center; margin-top:8px; font-size:11.5px; font-weight:700; color:var(--muted); }
+  .bx-hgen button{ all:unset; cursor:pointer; padding:6px 11px; border-radius:999px; border:1.5px solid var(--line);
+    background:#fff; font-size:11.5px; font-weight:800; color:var(--ink); }
+  .bx-hgen button.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  /* 사진 크게 보기 */
+  .bx-lb{ position:fixed; inset:0; z-index:1000; background:rgba(14,20,25,.97); display:none;
+    align-items:center; justify-content:center; padding:18px; }
+  .bx-lb.open{ display:flex; }
+  .bx-lb .box{ width:100%; max-width:920px; max-height:100%; overflow:auto; color:#fff; }
+  .bx-lb .top{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px; }
+  .bx-lb .t{ font-size:17px; font-weight:800; } .bx-lb .s{ font-size:12px; font-weight:600; color:#C9D1D6; margin-top:3px; }
+  .bx-lb .x{ all:unset; cursor:pointer; font-size:20px; line-height:1; padding:4px 8px; opacity:.85; }
+  .bx-lb .big{ position:relative; border-radius:12px; overflow:hidden; background:#000; }
+  .bx-lb .big img{ display:block; width:100%; max-height:62vh; object-fit:contain; background:#000; }
+  .bx-lb .nav{ all:unset; cursor:pointer; position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px;
+    border-radius:50%; background:rgba(255,255,255,.92); color:var(--navy); font-weight:900; font-size:18px;
+    display:flex; align-items:center; justify-content:center; }
+  .bx-lb .nav.l{ left:10px; } .bx-lb .nav.r{ right:10px; }
+  .bx-lb .cap{ display:flex; justify-content:space-between; gap:10px; margin-top:9px; font-size:12px; font-weight:600; color:#C9D1D6; }
+  .bx-lb .th{ display:flex; gap:8px; margin-top:10px; overflow-x:auto; padding:3px; }
+  .bx-lb .th button{ all:unset; cursor:pointer; flex:0 0 78px; height:54px; border-radius:7px; background:#333 center/cover no-repeat; opacity:.55; }
+  .bx-lb .th button.on{ opacity:1; outline:2px solid #fff; outline-offset:2px; }
+  .bx-lb .bt{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .bx-lb .pick{ all:unset; cursor:pointer; background:#fff; color:var(--navy); border-radius:999px; padding:11px 18px; font-size:13.5px; font-weight:800; }
+  .bx-lb .pick.on{ background:#F1C48A; }
+  .bx-lb .ext{ font-size:12px; font-weight:700; color:#C9D1D6; }
+  @media (max-width:560px){
+    .bx-hrow{ grid-auto-columns:76%; }
+    .bx-lb{ padding:10px; } .bx-lb .big img{ max-height:52vh; }
+  }
+  @media print{ .bx-lb{ display:none !important; } }
+  .bx-staysum .tb{ width:34px; height:26px; border-radius:5px; background:#E9EDF0 center/cover no-repeat; flex:none; align-self:center; }
+
   /* 숙박 카드 — 고르신 호텔 요약 */
   .bx-staysum .r{ display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px;
     padding:9px 2px; border-bottom:1px solid var(--line); font-size:13.5px; font-weight:700; }
@@ -1770,6 +1832,23 @@
       if(통 && 통.indexOf(t.dataset.id) === -1) 통.push(t.dataset.id);
       날짜그리기(); 계산();
     });
+    /* 묵는 곳 — 호텔 카드 · 등급 단추 · 사진 크게 보기 */
+    $('bxRoot').addEventListener('click', function(e){
+      if(!e.target || !e.target.closest) return;
+      if(e.target.closest('a.lk')) return;                    /* 구글 지도 링크는 그대로 엽니다 */
+      var g = e.target.closest('[data-hgrade]');
+      if(g){ 호텔등급보기[g.dataset.hcity] = g.dataset.hgrade; 날짜그리기(); return; }
+      var ph = e.target.closest('[data-hphoto]');
+      if(ph){ 크게열기(ph.dataset.hphoto, 0); return; }
+      var c = e.target.closest('[data-hpick]');
+      if(c){ 호텔고르기(c.dataset.hcity, c.dataset.hpick); }
+    });
+    $('bxRoot').addEventListener('keydown', function(e){
+      if((e.key === 'Enter' || e.key === ' ') && e.target && e.target.matches && e.target.matches('.bx-hc[data-hpick]')){
+        e.preventDefault(); 호텔고르기(e.target.dataset.hcity, e.target.dataset.hpick);
+      }
+    });
+
     /* "○○에서 1박 넣기" — 너무 먼 구간을 하루 늘려 끊어 갑니다 */
     $('bxRoot').addEventListener('click', function(e){
       var t = e.target && e.target.closest ? e.target.closest('[data-split]') : null;
@@ -1863,7 +1942,9 @@
     }
     box.innerHTML = '<div class="bx-staysum">' + 목록.map(function(x){
       var it = 찾기(x.id);
+      var 첫사진 = it ? 호텔사진(it)[0] : null;
       return '<div class="r' + (it ? '' : ' none') + '">' +
+        (첫사진 ? '<span class="tb" style="' + 배경(첫사진.src) + '"></span>' : '') +
         '<span class="c">' + esc(x.도시) + '</span>' +
         '<span class="n">' + x.박 + '박</span>' +
         '<span class="h">' + (it ? esc(it.이름) : '아래 날짜 칸에서 호텔을 골라 주세요') + '</span>' +
@@ -1873,7 +1954,23 @@
   }
 
   /* 그 날 밤 묵으실 호텔을 고르는 바. 마지막 날은 돌아가는 날이라 달지 않습니다.
-     같은 도시에 며칠 머무시면 한 호텔로 이어서 잡습니다. */
+     같은 도시에 며칠 머무시면 한 호텔로 이어서 잡습니다.
+     (2026-11) 고르는 칸 대신 호텔 카드로 — 사진을 보고 고르실 수 있게.
+       사진은 관리자 화면 「일정 품목 · 숙박」 에서 올린 것만 나옵니다 (호텔 공식 사진 · 직접 찍은 사진).
+       사진이 없는 호텔은 「구글 지도에서 보기」 링크를 대신 답니다. */
+  var 호텔등급보기 = {};   /* 도시별 「전체 / 3성 / 4성」 */
+  function 호텔사진(h){
+    return (h && Array.isArray(h.사진) ? h.사진 : []).filter(function(p){
+      var src = p && String(p.src || '');
+      return src && (src.indexOf('/.netlify/functions/hotel-photo?k=') === 0 || /^\/images\/hotels\/[\w.\-\/]+$/.test(src));
+    });
+  }
+  function 호텔지도(h){
+    if(h.지도 && /^https:\/\//.test(h.지도)) return h.지도;
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(h.이름 + ' ' + (h.도시 || ''));
+  }
+  function 배경(src){ return "background-image:url('" + String(src).replace(/'/g, '%27') + "')"; }
+
   function 잠자리바(i, day){
     if(i >= S.일정.length - 1) return '';      /* 마지막 날 = 묵지 않음 */
     if(!day.도시) return '';
@@ -1882,18 +1979,146 @@
     var 고른 = (S.숙박 && S.숙박[day.도시]) || '';
     var 먼저 = -1;
     for(var k = 0; k < i; k++){ if(S.일정[k].도시 === day.도시){ 먼저 = k; break; } }
+    var 호텔들 = 목록.filter(function(h){ return h.도시; });
+    var 등급들 = 목록.filter(function(h){ return !h.도시; });
+    var 등급종류 = [];
+    호텔들.forEach(function(h){ if(h.등급 && 등급종류.indexOf(h.등급) === -1) 등급종류.push(h.등급); });
+    등급종류.sort();
+    var 보기 = 호텔등급보기[day.도시] || '';
+    if(보기 && 등급종류.indexOf(보기) === -1) 보기 = '';
+    var 보일 = 호텔들.filter(function(h){ return !보기 || h.등급 === 보기; });
+
+    var 카드 = 보일.map(function(h){
+      var 사진 = 호텔사진(h);
+      var 위 = 사진.length
+        ? '<span class="ph" data-hphoto="' + esc(h.id) + '" style="' + 배경(사진[0].src) + '">' +
+            (h.등급 ? '<span class="gr">' + esc(h.등급) + '</span>' : '') +
+            '<span class="cnt">사진 ' + 사진.length + '장</span></span>'
+        : '<span class="ph none">' + (h.등급 ? '<span class="gr">' + esc(h.등급) + '</span>' : '') + '사진 준비 중</span>';
+      var 설명 = String(h.설명 || '').replace(/^\s*\d성\s*·\s*/, '');   /* 등급은 사진 위 뱃지로 */
+      return '<div class="bx-hc' + (고른 === h.id ? ' on' : '') + '" role="button" tabindex="0" ' +
+          'data-hpick="' + esc(h.id) + '" data-hcity="' + esc(day.도시) + '">' +
+        '<span class="ck">✓</span>' + 위 +
+        '<span class="hb"><span class="n">' + esc(h.이름) + '</span>' +
+          (설명 ? '<span class="d">' + esc(설명) + '</span>' : '') +
+          (CFG.항목금액보이기 ? '<span class="pr">' + 기호 + 돈(h.금액) + ' / 박</span>' : '') +
+          (사진.length
+            ? '<span class="lk" data-hphoto="' + esc(h.id) + '">사진 크게 보기 →</span>'
+            : '<a class="lk" href="' + esc(호텔지도(h)) + '" target="_blank" rel="noopener">구글 지도에서 보기 ↗</a>') +
+        '</span></div>';
+    }).join('');
+
     return '<div class="bx-stayrow">' +
-      '<span class="sl">묵는 곳 · ' + esc(day.도시) + '</span>' +
-      '<select data-stay-city="' + esc(day.도시) + '">' +
-        '<option value="">호텔을 골라 주세요</option>' +
-        목록.map(function(h){
-          return '<option value="' + esc(h.id) + '"' + (고른 === h.id ? ' selected' : '') + '>' +
-            esc(h.이름) + (h.설명 ? ' — ' + esc(h.설명) : '') +
-            (CFG.항목금액보이기 ? ' (' + 기호 + 돈(h.금액) + ')' : '') + '</option>';
-        }).join('') +
-      '</select>' +
+      '<span class="sl">묵는 곳 · ' + esc(day.도시) + (호텔들.length ? ' — 사진을 보고 골라 주세요' : '') + '</span>' +
+      (등급종류.length > 1
+        ? '<span class="bx-htabs">' + [''].concat(등급종류).map(function(g){
+            return '<button type="button" class="' + (보기 === g ? 'on' : '') + '" data-hgrade="' + esc(g) +
+              '" data-hcity="' + esc(day.도시) + '">' + (g ? esc(g) : '전체') + '</button>';
+          }).join('') + '</span>'
+        : '') +
+      '<div class="bx-hwrap">' +
+        (카드 ? '<div class="bx-hrow">' + 카드 + '</div>' : '') +
+        (등급들.length
+          ? '<div class="bx-hgen">' + (호텔들.length ? '호텔은 맡기고 등급만 정하기' : '등급 고르기') + ' ' +
+              등급들.map(function(h){
+                return '<button type="button" class="' + (고른 === h.id ? 'on' : '') + '" data-hpick="' + esc(h.id) +
+                  '" data-hcity="' + esc(day.도시) + '">' + esc(h.이름) +
+                  (CFG.항목금액보이기 ? ' (' + 기호 + 돈(h.금액) + ')' : '') + '</button>';
+              }).join('') + '</div>'
+          : '') +
+      '</div>' +
       (먼저 >= 0 ? '<em>' + (먼저 + 1) + '일차와 같은 호텔로 이어서 잡힙니다</em>' : '') +
       '</div>';
+  }
+
+  /* 호텔 고르기 — 예전 고르는 칸과 똑같이 S.숙박[도시] 에 적습니다. 고른 것을 다시 누르면 풉니다 */
+  function 호텔고르기(도시, id){
+    if(!S.숙박 || typeof S.숙박 !== 'object') S.숙박 = {};
+    if(S.숙박[도시] === id) delete S.숙박[도시];
+    else S.숙박[도시] = id;
+    자리지키며(function(){ 날짜그리기(); 숙박그리기(); 계산(); });
+  }
+  /* 다시 그려도 옆으로 밀어 둔 카드 줄이 처음으로 돌아가지 않게 */
+  function 자리지키며(fn){
+    var 전 = Array.prototype.map.call(document.querySelectorAll('.bx-hrow'), function(r){ return r.scrollLeft; });
+    fn();
+    Array.prototype.forEach.call(document.querySelectorAll('.bx-hrow'), function(r, i){ if(전[i]) r.scrollLeft = 전[i]; });
+  }
+
+  /* 사진 크게 보기 */
+  var 크게 = { id: '', i: 0, el: null };
+  function 크게열기(id, i){
+    var h = 찾기(id); if(!h) return;
+    var 사진 = 호텔사진(h); if(!사진.length) return;
+    크게.id = id; 크게.i = Math.max(0, Math.min(i || 0, 사진.length - 1));
+    if(!크게.el){
+      크게.el = document.createElement('div');
+      크게.el.className = 'bx-lb'; 크게.el.setAttribute('role', 'dialog'); 크게.el.setAttribute('aria-modal', 'true');
+      document.body.appendChild(크게.el);
+      크게.el.addEventListener('click', function(e){
+        var t = e.target;
+        if(t === 크게.el || t.closest('.x')){ 크게닫기(); return; }
+        if(t.closest('.nav.l')){ 크게넘기기(-1); return; }
+        if(t.closest('.nav.r')){ 크게넘기기(1); return; }
+        var th = t.closest('[data-lbi]'); if(th){ 크게.i = Number(th.dataset.lbi); 크게그리기(); return; }
+        if(t.closest('.pick')){
+          var hh = 찾기(크게.id);
+          if(hh && hh.도시){
+            if(!(S.숙박 && S.숙박[hh.도시] === hh.id)) 호텔고르기(hh.도시, hh.id);
+          }
+          크게닫기();
+        }
+      });
+      document.addEventListener('keydown', function(e){
+        if(!크게.el || !크게.el.classList.contains('open')) return;
+        if(e.key === 'Escape') 크게닫기();
+        else if(e.key === 'ArrowLeft') 크게넘기기(-1);
+        else if(e.key === 'ArrowRight') 크게넘기기(1);
+      });
+      /* 휴대폰 — 옆으로 밀어서 넘기기 */
+      var x0 = null;
+      크게.el.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, { passive: true });
+      크게.el.addEventListener('touchend', function(e){
+        if(x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0; x0 = null;
+        if(Math.abs(dx) > 45) 크게넘기기(dx < 0 ? 1 : -1);
+      });
+    }
+    크게그리기();
+    크게.el.classList.add('open');
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function 크게닫기(){
+    if(크게.el) 크게.el.classList.remove('open');
+    document.documentElement.style.overflow = '';
+  }
+  function 크게넘기기(d){
+    var h = 찾기(크게.id); var n = 호텔사진(h).length; if(!n) return;
+    크게.i = (크게.i + d + n) % n; 크게그리기();
+  }
+  function 크게그리기(){
+    var h = 찾기(크게.id); if(!h) return;
+    var 사진 = 호텔사진(h), p = 사진[크게.i] || 사진[0];
+    var 골랐나 = !!(S.숙박 && h.도시 && S.숙박[h.도시] === h.id);
+    var 설명 = String(h.설명 || '').replace(/^\s*\d성\s*·\s*/, '');
+    크게.el.innerHTML = '<div class="box">' +
+      '<div class="top"><div><div class="t">' + esc(h.이름) + (h.등급 ? ' · ' + esc(h.등급) : '') + '</div>' +
+        (설명 ? '<div class="s">' + esc(설명) + '</div>' : '') + '</div>' +
+        '<button type="button" class="x" aria-label="닫기">✕</button></div>' +
+      '<div class="big"><img src="' + esc(p.src) + '" alt="' + esc((p.설명 || h.이름)) + '">' +
+        (사진.length > 1 ? '<button type="button" class="nav l" aria-label="이전 사진">‹</button>' +
+                           '<button type="button" class="nav r" aria-label="다음 사진">›</button>' : '') + '</div>' +
+      '<div class="cap"><span>' + esc(p.설명 || '') + '</span><span>' + (크게.i + 1) + ' / ' + 사진.length +
+        ' · 사진 제공: ' + esc(h.사진제공 || '호텔') + '</span></div>' +
+      (사진.length > 1 ? '<div class="th">' + 사진.map(function(q, j){
+          return '<button type="button" class="' + (j === 크게.i ? 'on' : '') + '" data-lbi="' + j +
+            '" style="' + 배경(q.src) + '" aria-label="사진 ' + (j + 1) + '"></button>';
+        }).join('') + '</div>' : '') +
+      '<div class="bt">' +
+        (h.도시 ? '<button type="button" class="pick' + (골랐나 ? ' on' : '') + '">' +
+                  (골랐나 ? '✓ 고른 호텔입니다' : '이 호텔로 고르기') + '</button>' : '<span></span>') +
+        '<a class="ext" href="' + esc(호텔지도(h)) + '" target="_blank" rel="noopener">호텔 위치 · 구글 지도에서 보기 ↗</a>' +
+      '</div></div>';
   }
 
   /* ---------------- 입장료 없는 도보 관광지 ---------------- */

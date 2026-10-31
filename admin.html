@@ -280,6 +280,28 @@
     background:#F6F5FC; font-size:12.5px; color:var(--muted); }
   .bd-money input{ width:100%; border-radius:0 9px 9px 0 !important; text-align:right;
     font-variant-numeric:tabular-nums; }
+  /* 호텔 사진 (일정 품목 · 숙박) */
+  .bd-row .bd-phbtn{ all:unset; cursor:pointer; padding:6px 11px; border-radius:8px; font-size:11.5px; font-weight:800;
+    color:var(--violet); background:#EEF1F3; white-space:nowrap; }
+  .bd-row .bd-phbtn.has{ color:#fff; background:var(--violet); }
+  .bd-photos{ flex:1 1 100%; margin-top:6px; padding:12px; border-radius:10px; background:#F7F8F9; border:1.5px dashed #D5DBDF; }
+  .bd-photos .warn{ font-size:11.5px; font-weight:700; color:#7A5A3E; background:#FFF6EC; border-radius:8px; padding:8px 10px; margin-bottom:10px; line-height:1.6; }
+  .bd-photos .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .bd-photos .ph{ background:#fff; border:1.5px solid var(--line); border-radius:9px; overflow:hidden; }
+  .bd-photos .ph img{ display:block; width:100%; height:96px; object-fit:cover; background:#E9ECEE; }
+  .bd-photos .ph input{ width:100%; border:0; border-top:1px solid var(--line); padding:7px 8px; font:inherit; font-size:12px; font-weight:600; }
+  .bd-photos .ph .tools{ display:flex; justify-content:space-between; padding:4px 6px; border-top:1px solid var(--line); }
+  .bd-photos .ph .tools button{ all:unset; cursor:pointer; font-size:11.5px; font-weight:800; color:var(--muted); padding:3px 6px; border-radius:6px; }
+  .bd-photos .ph .tools button:hover{ background:#EEF1F3; color:var(--ink); }
+  .bd-photos .ph .tools .del{ color:#B04A2E; }
+  .bd-photos .first{ font-size:10.5px; font-weight:800; color:#fff; background:var(--violet); padding:2px 7px; border-radius:0 0 7px 0; position:absolute; }
+  .bd-photos .phw{ position:relative; }
+  .bd-photos .more{ display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; margin-top:10px; }
+  .bd-photos .more label{ display:flex; gap:6px; align-items:center; font-size:11.5px; font-weight:800; color:var(--muted); }
+  .bd-photos .more input{ padding:7px 9px; border:2px solid var(--line); border-radius:8px; font:inherit; font-size:12.5px; font-weight:600; }
+  .bd-photos .more .mp{ width:260px; max-width:100%; }
+  .bd-photos .up{ all:unset; cursor:pointer; padding:9px 14px; border-radius:9px; font-size:12.5px; font-weight:800; color:#fff; background:var(--navy); }
+  .bd-photos .up[disabled]{ opacity:.5; cursor:wait; }
   .bd-unit{ flex:0 0 auto; font-size:11.5px; font-weight:800; color:var(--muted); white-space:nowrap; }
   .bd-row .on{ display:flex; gap:5px; align-items:center; font-size:11.5px; font-weight:800; color:var(--muted); cursor:pointer; }
   .bd-row .on input{ width:15px; height:15px; accent-color:var(--violet); cursor:pointer; }
@@ -3235,8 +3257,98 @@
           '<input type="checkbox" data-f="외관"' + (it.외관 ? ' checked' : '') + '>외관 관광</label>'
         : '') +
       '<label class="on"><input type="checkbox" data-f="공개"' + (it.공개 ? ' checked' : '') + '>공개</label>' +
+      (kind.k === '숙박'
+        ? '<button type="button" class="bd-phbtn' + (bdPhotos(it).length ? ' has' : '') + '" data-ph-open>' +
+            '사진 ' + bdPhotos(it).length + '장' + (bdPhotoOpen === it.id ? ' ▴' : ' ▾') + '</button>'
+        : '') +
       '<button type="button" class="rm" data-rm>지우기</button>' +
+      (kind.k === '숙박' && bdPhotoOpen === it.id ? bdPhotoPanel(it) : '') +
     '</div>';
+  }
+
+  /* ---------- 호텔 사진 (일정 만들기 화면의 호텔 카드에 나옵니다) ----------
+     사진은 hotel-photo 함수가 Netlify 저장소에 넣습니다 — 올려도 사이트가 다시 배포되지 않습니다.
+     여기서는 목록(주소 · 설명 · 순서)만 고치고, 위 「저장」 을 눌러야 손님 화면에 반영됩니다. */
+  var bdPhotoOpen = '';
+  var bdPhotoBusy = false;
+  function bdPhotos(it){ return Array.isArray(it.사진) ? it.사진 : []; }
+  function bdPhotoPanel(it){
+    var list = bdPhotos(it);
+    return '<div class="bd-photos">' +
+      '<div class="warn">호텔에서 받은 공식 사진(미디어 킷)이나 직접 찍은 사진만 올려 주세요. ' +
+        '예약 사이트 · 호텔 홈페이지 사진을 내려받아 올리면 저작권 문제가 생깁니다. ' +
+        '첫 번째 사진이 카드 대표 사진이 됩니다. 사진은 1600px 로 줄여서 올라갑니다.</div>' +
+      (list.length ? '<div class="grid">' + list.map(function(ph, i){
+        return '<div class="ph"><div class="phw">' + (i === 0 ? '<span class="first">대표</span>' : '') +
+          '<img src="' + esc(ph.src) + '" alt="" loading="lazy"></div>' +
+          '<input type="text" data-phc="' + i + '" placeholder="설명 (예: 객실 · 트윈)" value="' + esc(ph.설명 || '') + '">' +
+          '<div class="tools"><span>' +
+            '<button type="button" data-ph-mv="' + i + '" data-dir="-1" title="앞으로">◀</button>' +
+            '<button type="button" data-ph-mv="' + i + '" data-dir="1" title="뒤로">▶</button></span>' +
+            '<button type="button" class="del" data-ph-rm="' + i + '">빼기</button></div></div>';
+      }).join('') + '</div>'
+      : '<div class="bd-none">아직 사진이 없습니다. 사진이 없으면 손님 화면에 「구글 지도에서 보기」 링크가 대신 나옵니다.</div>') +
+      '<div class="more">' +
+        '<button type="button" class="up" data-ph-up' + (bdPhotoBusy ? ' disabled' : '') + '>' +
+          (bdPhotoBusy ? '올리는 중…' : '+ 사진 올리기 (여러 장 가능)') + '</button>' +
+        '<label>사진 제공 <input type="text" data-phm="사진제공" placeholder="호텔" value="' + esc(it.사진제공 || '') + '"></label>' +
+        '<label>지도 주소 <input type="text" class="mp" data-phm="지도" placeholder="비우면 호텔 이름으로 구글 지도를 엽니다" value="' + esc(it.지도 || '') + '"></label>' +
+      '</div></div>';
+  }
+  /* 고른 사진을 1600px · JPEG 로 줄입니다 (원본이 커도 저장소와 손님 화면이 가벼워지게) */
+  function bdShrink(file){
+    return new Promise(function(ok, no){
+      var fr = new FileReader();
+      fr.onerror = function(){ no(new Error('사진을 읽지 못했습니다')); };
+      fr.onload = function(){
+        var img = new Image();
+        img.onerror = function(){ no(new Error('사진 형식을 읽지 못했습니다 (JPG · PNG · WEBP)')); };
+        img.onload = function(){
+          var M = 1600, w = img.naturalWidth, h = img.naturalHeight, r = Math.min(1, M / Math.max(w, h));
+          var c = document.createElement('canvas');
+          c.width = Math.round(w * r); c.height = Math.round(h * r);
+          var g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height);
+          g.drawImage(img, 0, 0, c.width, c.height);
+          ok(c.toDataURL('image/jpeg', 0.82).split(',')[1] || '');
+        };
+        img.src = fr.result;
+      };
+      fr.readAsDataURL(file);
+    });
+  }
+  function bdPhotoUpload(it){
+    var inp = document.createElement('input');
+    inp.type = 'file'; inp.multiple = true;
+    inp.accept = 'image/jpeg,image/png,image/webp';
+    inp.addEventListener('change', function(){
+      var files = Array.prototype.slice.call(this.files || []);
+      if(!files.length) return;
+      if(files.some(function(f){ return f.size > 20 * 1024 * 1024; })){ toast('20MB 가 넘는 사진이 있습니다. 줄여서 올려 주세요.', true); return; }
+      bdPhotoBusy = true; renderBuilder();
+      var 성공 = 0;
+      files.reduce(function(p, f){
+        return p.then(function(){
+          return bdShrink(f).then(function(b64){
+            return fetch('/.netlify/functions/hotel-photo', {
+              method:'POST', headers:{'Content-Type':'application/json'},
+              body: JSON.stringify({ token: token, action:'upload', id: it.id, data: b64 })
+            }).then(function(r){
+              return r.json().catch(function(){ return {}; }).then(function(j){
+                if(r.status === 401){ logout(true); throw new Error('로그인이 필요합니다'); }
+                if(!r.ok || !j.src) throw new Error(j.error || ('오류 ' + r.status));
+                if(!Array.isArray(it.사진)) it.사진 = [];
+                it.사진.push({ src: j.src, 설명: '' });
+                성공++;
+              });
+            });
+          });
+        });
+      }, Promise.resolve())
+      .then(function(){ toast('사진 ' + 성공 + '장을 올렸습니다. 위 「저장」 을 누르셔야 손님 화면에 나옵니다.'); })
+      .catch(function(e){ toast((성공 ? 성공 + '장은 올렸고, ' : '') + e.message, true); })
+      .then(function(){ bdPhotoBusy = false; renderBuilder(); refreshSaveBar(); });
+    });
+    inp.click();
   }
 
   function renderBuilder(){
@@ -3301,6 +3413,22 @@
       return;
     }
 
+    /* 호텔 사진 — 설명 · 사진 제공 · 지도 주소 */
+    if(t.dataset && (t.dataset.phc !== undefined || t.dataset.phm)){
+      var prow = t.closest('.bd-row');
+      var pit = prow && d.품목.filter(function(x){ return x.id === prow.dataset.id; })[0];
+      if(!pit) return;
+      if(t.dataset.phc !== undefined){
+        var ph = bdPhotos(pit)[Number(t.dataset.phc)];
+        if(ph) ph.설명 = t.value;
+      } else {
+        var v0 = String(t.value || '').trim();
+        if(v0) pit[t.dataset.phm] = v0; else delete pit[t.dataset.phm];
+      }
+      refreshSaveBar();
+      return;
+    }
+
     /* 품목 한 줄 */
     var row = t.closest ? t.closest('.bd-row') : null;
     if(!row || !t.dataset || !t.dataset.f) return;
@@ -3358,6 +3486,32 @@
       d.경유.splice(Number(t.dataset.viaRm), 1);
       renderBuilder(); refreshSaveBar();
       return;
+    }
+
+    /* 호텔 사진 */
+    var phRow = t.closest ? t.closest('.bd-row') : null;
+    var phIt = phRow && d.품목.filter(function(x){ return x.id === phRow.dataset.id; })[0];
+    if(phIt && t.hasAttribute){
+      if(t.hasAttribute('data-ph-open')){
+        bdPhotoOpen = (bdPhotoOpen === phIt.id) ? '' : phIt.id;
+        renderBuilder();
+        return;
+      }
+      if(t.hasAttribute('data-ph-up')){ if(!bdPhotoBusy) bdPhotoUpload(phIt); return; }
+      if(t.dataset.phMv !== undefined){
+        var a = bdPhotos(phIt), i0 = Number(t.dataset.phMv), j0 = i0 + Number(t.dataset.dir);
+        if(j0 < 0 || j0 >= a.length) return;
+        var tmp = a[i0]; a[i0] = a[j0]; a[j0] = tmp;
+        renderBuilder(); refreshSaveBar();
+        return;
+      }
+      if(t.dataset.phRm !== undefined){
+        bdPhotos(phIt).splice(Number(t.dataset.phRm), 1);
+        if(!phIt.사진.length) delete phIt.사진;
+        renderBuilder(); refreshSaveBar();
+        toast('목록에서 뺐습니다. 저장하기 전이면 위 “되돌리기” 로 살릴 수 있습니다.');
+        return;
+      }
     }
 
     /* 품목 추가 */
