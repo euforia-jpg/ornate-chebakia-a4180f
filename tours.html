@@ -6,6 +6,13 @@
 <title>스페인 포르투갈 패키지 · 여행상품 — 유포리아투어</title>
   <meta name="description" content="스페인 포르투갈 패키지와 일주 상품 — 마드리드 현지 법인이 운영하는 스페인 현지 여행사 유포리아투어. 차량&기사 투어, 도슨트, 순례길, 스페인·포르투갈 일주까지 기간과 지역에 맞춰 고르고 예약문의하세요.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- 한글 글꼴 Pretendard — 윈도우에서 한글이 뭉개지지 않게 (2026-10) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style id="eu-hangul">
+  html{ font-synthesis:none; }
+  .logo .name{ font-style:italic !important; }   /* 로고 글자만 기울임 유지 */
+</style>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -18,7 +25,7 @@
   html,body{margin:0;padding:0;}
   body{
     background: #F6F6F6;
-    background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
+    background-attachment: fixed; color: var(--ink); font-family:'Work Sans','Pretendard Variable',Pretendard, sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
   }
   body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
   a{ color:inherit; }
@@ -26,9 +33,9 @@
 
   .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding: 22px clamp(20px,4vw,56px) 14px; }
   .logo{ display:flex; align-items:center; gap:16px; text-decoration:none; }
-  .logo .badge{ width:68px;height:68px;border-radius:16px; background:var(--navy); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:30px; border:3px solid #fff; box-shadow: 0 10px 22px -10px rgba(36, 48, 58,0.5); flex:0 0 auto; }
-  .logo .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:32px; color:var(--navy); line-height:1; }
-  .logo small{ display:block; font-family:'Work Sans'; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+  .logo .badge{ width:68px;height:68px;border-radius:16px; background:var(--navy); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:30px; border:3px solid #fff; box-shadow: 0 10px 22px -10px rgba(36, 48, 58,0.5); flex:0 0 auto; }
+  .logo .name{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:32px; color:var(--navy); line-height:1; }
+  .logo small{ display:block; font-family:'Work Sans','Pretendard Variable',Pretendard; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
   .logo-img{ height:76px; width:auto; display:block; flex:0 0 auto; }
   .footer-logo-img{ height:44px; width:auto; display:block; }
   .lang-switch{ display:flex; gap:4px; background:rgba(255,255,255,0.75); border:1.5px solid var(--line); border-radius:10px; padding:4px; backdrop-filter: blur(6px); }
@@ -44,14 +51,14 @@
 
   .page-hero{ padding:36px clamp(20px,4vw,56px) 8px; }
   .eyebrow{ display:inline-flex; align-items:center; gap:8px; color:#fff; background:var(--navy); font-size:12px; letter-spacing:1px; font-weight:800; margin-bottom:16px; padding:7px 16px; border-radius:999px; }
-  .page-hero h1{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); word-break:keep-all; }
+  .page-hero h1{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); word-break:keep-all; }
   .page-hero h1 .hl{ color:#fff; background:var(--violet); padding:0 10px; }
   .page-hero p{ color:var(--muted); font-size:15.5px; line-height:1.75; max-width:640px; margin:0; font-weight:600; }
 
   .section{ padding:8px clamp(20px,4vw,56px) 24px; }
   .section-inner{ background:var(--paper); border-radius:26px; padding:36px clamp(18px,3vw,40px); box-shadow:0 18px 44px -24px rgba(36, 48, 58,0.32); border:1.5px solid var(--line); }
   .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
-  .section-head h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:23px; margin:0; color:var(--navy); }
+  .section-head h2{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:23px; margin:0; color:var(--navy); }
   .section-head .sub{ color:var(--muted); font-size:13px; font-weight:600; }
 
   .filters{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; }
@@ -92,7 +99,7 @@
   .pc-dy{ font-size:10.5px; font-weight:800; color:#fff; white-space:nowrap;
     background:rgba(13,20,26,.42); border-radius:7px; padding:5px 9px; }
   .pc-bt{ position:absolute; left:16px; right:16px; bottom:15px; z-index:3; color:#fff; }
-  .pc-bt h3{ margin:0; font-family:'Kanit'; font-weight:800; font-style:italic;
+  .pc-bt h3{ margin:0; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal;
     font-size:17.5px; color:#fff; line-height:1.35; letter-spacing:-.01em; }
   .pc-bt p{ margin:7px 0 0; font-size:12px; font-weight:500; color:rgba(255,255,255,.84);
     line-height:1.62; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
@@ -171,7 +178,7 @@
                padding-top:12px; border-top:1.5px dashed #DFE3E6; flex-wrap:wrap; }
   .tour-price .price-chip{ display:block; box-sizing:border-box; flex:1 1 auto; min-width:0;
                            padding:0; background:none; border:none; border-radius:0;
-                           font-family:'Work Sans', sans-serif; color:var(--navy);
+                           font-family:'Work Sans','Pretendard Variable',Pretendard, sans-serif; color:var(--navy);
                            line-height:1.35; word-break:keep-all; }
   .tour-price .price-eyebrow{ display:block; font-size:10.5px; font-weight:800;
                               color:var(--muted); letter-spacing:0.2px; margin-bottom:5px; }
@@ -206,7 +213,7 @@
   .tour-top .region{ min-width:0; overflow-wrap:break-word; }
   .tour-top .days{ flex:0 0 auto; white-space:nowrap; }
   .tour-top .region{ font-size:14px; letter-spacing:1px; text-transform:uppercase; font-weight:800; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(36, 48, 58,.12); }
-  .tour-top .days{ font-family:'Space Mono'; font-size:12.5px; font-weight:700; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(36, 48, 58,.12); }
+  .tour-top .days{ font-family:'Space Mono','Pretendard Variable',Pretendard; font-size:12.5px; font-weight:700; text-shadow:0 1px 0 rgba(255,255,255,.8), 0 -1px 0 rgba(36, 48, 58,.12); }
   /* NEW·BEST 배지가 카드 오른쪽 위에 떠 있어 기간 글자를 덮고 있었습니다.
      배지가 실제로 보이는 카드만 그만큼 자리를 비워 둡니다.
      (영어·중국어는 기간 글자가 길어져서 더 심하게 가려집니다) */
@@ -221,7 +228,7 @@
   .tour-top.iberia{ background: linear-gradient(90deg, color-mix(in srgb, var(--navy) 44%, white), color-mix(in srgb, var(--violet) 44%, white)); }
   .tour-top.match{ background: linear-gradient(90deg, color-mix(in srgb, #46705F 44%, white), color-mix(in srgb, var(--violet) 44%, white)); }
   .tour-body{ padding:18px 18px 20px; }
-  .tour-body h3{ margin:0 0 8px; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:18px; color:var(--navy); }
+  .tour-body h3{ margin:0 0 8px; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:18px; color:var(--navy); }
   .tour-body p{ margin:0 0 14px; font-size:13px; color:var(--muted); font-weight:600; line-height:1.7; }
   .tour-tags{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
   .tour-tags span{ font-size:10.5px; padding:4px 10px; border-radius:6px; font-weight:800; background:var(--wash-violet); color:var(--violet); }
@@ -229,7 +236,7 @@
   .tour-cta span{ text-decoration:none; }
 
   .cta-band{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; background:var(--navy); border-radius:24px; padding:30px 34px; color:#fff; }
-  .cta-band h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:20px; margin:0 0 6px; }
+  .cta-band h3{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:20px; margin:0 0 6px; }
   .cta-band p{ margin:0; font-size:13px; color:rgba(255,255,255,0.7); font-weight:600; }
   .cta{ all:unset; display:inline-block; text-align:center; padding:14px 26px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; border-radius:12px; cursor:pointer; font-size:14px; box-sizing:border-box; max-width:100%; }
   .cta.outline{ background:transparent; border:2px solid var(--navy); color:var(--navy); }
@@ -240,8 +247,8 @@
   .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(36, 48, 58,0.28); }
   .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
   .footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-  .footer-brand .badge{ width:36px;height:36px;border-radius:9px; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; }
-  .footer-brand .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; color:var(--navy); }
+  .footer-brand .badge{ width:36px;height:36px;border-radius:9px; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:16px; }
+  .footer-brand .name{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:16px; color:var(--navy); }
   .footer-col p{ margin:0; font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.7; max-width:320px; }
   .footer-links{ display:flex; flex-direction:column; gap:9px; }
   .footer-links a{ text-decoration:none; font-size:13px; font-weight:700; color:var(--ink); }
@@ -318,9 +325,9 @@
               pointer-events:none; }
 .hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
 .hero-motion .em-faint{ stroke:#C2CACF; stroke-width:1.2; stroke-dasharray:2 7; opacity:.55; }
-.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+.hero-motion text{ font-family:'Space Mono','Pretendard Variable',Pretendard, ui-monospace, Menlo, monospace;
                    font-size:9.5px; fill:#676F76; letter-spacing:.03em; }
-.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+.hero-motion text.em-ko{ font-family:'Work Sans','Pretendard Variable',Pretendard, sans-serif; font-size:10px; font-weight:600; }
 @media (min-width:1001px){
   /* 여행상품 쪽은 단추 줄이 길어서, 모션 자리를 비워 두고 미리 줄을 접습니다 */
   .page-hero h1,
@@ -817,7 +824,7 @@ window.toggleAudioGuide = function(btn){
                        border:1px solid rgba(255,255,255,0.28);
                        padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800;
                        letter-spacing:.06em; margin-bottom:12px; }
-  .euf-pop .head h3{ font-family:'Kanit'; font-weight:800; font-style:italic;
+  .euf-pop .head h3{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal;
                      font-size:22px; line-height:1.32; margin:0 0 8px; }
   .euf-pop .head p{ margin:0; font-size:13px; font-weight:600; color:rgba(255,255,255,0.86); line-height:1.6; }
   .euf-pop .x{ position:absolute; top:15px; right:15px; width:30px; height:30px; border:0;
@@ -832,7 +839,7 @@ window.toggleAudioGuide = function(btn){
   .euf-pop ol li::before{ content:counter(eufc); position:absolute; left:0; top:1px;
                           width:26px; height:26px; border-radius:9px;
                           background:var(--navy); color:#fff;
-                          font-family:'Kanit'; font-weight:800; font-size:13px;
+                          font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-size:13px;
                           display:flex; align-items:center; justify-content:center; }
   .euf-pop ol li b{ display:block; font-size:14px; font-weight:800; color:var(--ink); margin-bottom:3px; }
   .euf-pop ol li span{ display:block; font-size:12.6px; font-weight:600; color:var(--muted); line-height:1.62; }

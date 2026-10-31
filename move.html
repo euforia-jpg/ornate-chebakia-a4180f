@@ -6,6 +6,13 @@
 <title>바르셀로나 · 마드리드 공항 픽업 서비스 — EUFORIA MOVE | 유포리아투어</title>
   <meta name="description" content="바르셀로나 공항 픽업 서비스와 마드리드 공항 픽업 — 스페인·포르투갈 도시 간 이동과 시간제 대절 차량을 한국어로 미리 예약하세요. 확정 요금, 직영 차량과 협력사 차량 운영.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- 한글 글꼴 Pretendard — 윈도우에서 한글이 뭉개지지 않게 (2026-10) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style id="eu-hangul">
+  html{ font-synthesis:none; }
+  .logo .name{ font-style:italic !important; }   /* 로고 글자만 기울임 유지 */
+</style>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -18,7 +25,7 @@
   html,body{margin:0;padding:0;}
   body{
     background: #F6F6F6;
-    background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
+    background-attachment: fixed; color: var(--ink); font-family:'Work Sans','Pretendard Variable',Pretendard, sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
   }
   body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
   a{ color:inherit; }
@@ -26,9 +33,9 @@
 
   .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding: 22px clamp(20px,4vw,56px) 14px; }
   .logo{ display:flex; align-items:center; gap:16px; text-decoration:none; }
-  .logo .badge{ width:68px;height:68px;border-radius:16px; background:var(--navy); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:30px; border:3px solid #fff; box-shadow: 0 10px 22px -10px rgba(36, 48, 58,0.5); flex:0 0 auto; }
-  .logo .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:32px; color:var(--navy); line-height:1; }
-  .logo small{ display:block; font-family:'Work Sans'; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+  .logo .badge{ width:68px;height:68px;border-radius:16px; background:var(--navy); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:30px; border:3px solid #fff; box-shadow: 0 10px 22px -10px rgba(36, 48, 58,0.5); flex:0 0 auto; }
+  .logo .name{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:32px; color:var(--navy); line-height:1; }
+  .logo small{ display:block; font-family:'Work Sans','Pretendard Variable',Pretendard; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
   .logo-img{ height:76px; width:auto; display:block; flex:0 0 auto; }
   .footer-logo-img{ height:44px; width:auto; display:block; }
   .lang-switch{ display:flex; gap:4px; background:rgba(255,255,255,0.75); border:1.5px solid var(--line); border-radius:10px; padding:4px; backdrop-filter: blur(6px); }
@@ -44,14 +51,14 @@
 
   .page-hero{ padding:36px clamp(20px,4vw,56px) 8px; }
   .eyebrow{ display:inline-flex; align-items:center; gap:8px; color:#fff; background:var(--navy); font-size:12px; letter-spacing:1px; font-weight:800; margin-bottom:16px; padding:7px 16px; border-radius:999px; }
-  .page-hero h1{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); }
+  .page-hero h1{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); }
   .page-hero h1 .hl{ color:#fff; background:var(--violet); padding:0 10px; }
   .page-hero p{ color:var(--muted); font-size:15.5px; line-height:1.75; max-width:640px; margin:0; font-weight:600; }
 
   .section{ padding:8px clamp(20px,4vw,56px) 24px; }
   .layout{ display:grid; grid-template-columns:1.5fr 1fr; gap:22px; max-width:1000px; margin:0 auto; }
   .section-inner{ background:var(--paper); border-radius:26px; padding:32px clamp(18px,3vw,36px); box-shadow:0 18px 44px -24px rgba(36, 48, 58,0.32); border:1.5px solid var(--line); }
-  .section-inner h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:20px; margin:0 0 6px; color:var(--navy); }
+  .section-inner h2{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:20px; margin:0 0 6px; color:var(--navy); }
   .section-inner .sub{ color:var(--muted); font-size:13px; font-weight:600; margin-bottom:22px; }
 
   .field-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
@@ -60,7 +67,7 @@
   .field label{ font-size:12px; font-weight:800; color:var(--navy); }
   .field input, .field select, .field textarea{
     all:unset; border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-size:13.5px;
-    font-family:'Work Sans'; color:var(--ink); box-sizing:border-box; width:100%; background:#fff;
+    font-family:'Work Sans','Pretendard Variable',Pretendard; color:var(--ink); box-sizing:border-box; width:100%; background:#fff;
   }
   .field textarea{ min-height:110px; resize:vertical; line-height:1.6; }
   .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--violet); }
@@ -75,7 +82,7 @@
   .form-alert.show{ display:flex; }
 
   .side-card{ background:var(--navy); color:#fff; border-radius:var(--radius); padding:24px; margin-bottom:16px; }
-  .side-card h3{ margin:0 0 8px; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; }
+  .side-card h3{ margin:0 0 8px; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:16px; }
   .side-card p{ margin:0; font-size:12.5px; color:rgba(255,255,255,0.72); font-weight:600; line-height:1.7; }
   .side-list{ margin-top:14px; display:flex; flex-direction:column; gap:10px; }
   .side-list .row{ display:flex; justify-content:space-between; gap:10px; font-size:12.5px; border-bottom:1px solid rgba(255,255,255,0.14); padding-bottom:10px; }
@@ -91,8 +98,8 @@
   .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(36, 48, 58,0.28); max-width:1120px; margin:0 auto; }
   .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
   .footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-  .footer-brand .badge{ width:36px;height:36px;border-radius:9px; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; }
-  .footer-brand .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; color:var(--navy); }
+  .footer-brand .badge{ width:36px;height:36px;border-radius:9px; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:16px; }
+  .footer-brand .name{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:16px; color:var(--navy); }
   .footer-col p{ margin:0; font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.7; max-width:320px; }
   .footer-links{ display:flex; flex-direction:column; gap:9px; }
   .footer-links a{ text-decoration:none; font-size:13px; font-weight:700; color:var(--ink); }
@@ -201,7 +208,7 @@
     border-radius:50%; background:radial-gradient(circle, rgba(82, 120, 108,0.35), transparent 68%); pointer-events:none; }
   .mv-hero .mv-tag{ display:inline-block; padding:6px 14px; border-radius:999px; background:rgba(255,255,255,0.18);
     font-size:11px; font-weight:800; letter-spacing:1.6px; text-transform:uppercase; }
-  .mv-hero h1{ font-family:'Kanit'; font-style:italic; font-weight:800; font-size:clamp(26px,3.4vw,38px);
+  .mv-hero h1{ font-family:'Kanit','Pretendard Variable',Pretendard; font-style:normal; font-weight:800; font-size:clamp(26px,3.4vw,38px);
     line-height:1.28; margin:16px 0 12px; max-width:640px; }
   .mv-hero h1 .hl{ color:var(--teal); }
   .mv-hero > p{ margin:0; font-size:14px; line-height:1.75; font-weight:600; opacity:.9; max-width:620px; }
@@ -310,7 +317,7 @@
     stroke-linecap:round; }
   .mv-map .city{ fill:rgba(255,255,255,.85); }
   .mv-map .ring{ fill:none; stroke:rgba(82, 120, 108,.6); stroke-width:1.4; }
-  .mv-map .lbl{ fill:rgba(255,255,255,.42); font-family:'Work Sans',sans-serif; font-size:9px;
+  .mv-map .lbl{ fill:rgba(255,255,255,.42); font-family:'Work Sans','Pretendard Variable',Pretendard,sans-serif; font-size:9px;
     font-weight:800; letter-spacing:1.2px; }
   @media (max-width:1080px){ .mv-map{ width:36%; opacity:.85; } }
   @media (max-width:900px){ .mv-map{ display:none; } }

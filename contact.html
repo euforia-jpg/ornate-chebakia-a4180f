@@ -6,6 +6,13 @@
 <title>예약문의 — Euforia Tour</title>
   <meta name="description" content="유포리아투어 예약문의 — 원하는 여행 일정과 인원을 알려주시면 맞춤 견적을 보내드려요.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- 한글 글꼴 Pretendard — 윈도우에서 한글이 뭉개지지 않게 (2026-10) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style id="eu-hangul">
+  html{ font-synthesis:none; }
+  .logo .name{ font-style:italic !important; }   /* 로고 글자만 기울임 유지 */
+</style>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,600;0,700;0,800;1,800&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -18,7 +25,7 @@
   html,body{margin:0;padding:0;}
   body{
     background: #F6F6F6;
-    background-attachment: fixed; color: var(--ink); font-family:'Work Sans', sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
+    background-attachment: fixed; color: var(--ink); font-family:'Work Sans','Pretendard Variable',Pretendard, sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased;
   }
   body::before{ content:''; position:fixed; inset:0; background-image: radial-gradient(rgba(36, 48, 58,0.055) 1.3px, transparent 1.3px); background-size:13px 13px; pointer-events:none; }
   a{ color:inherit; }
@@ -26,9 +33,9 @@
 
   .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding: 22px clamp(20px,4vw,56px) 14px; }
   .logo{ display:flex; align-items:center; gap:16px; text-decoration:none; }
-  .logo .badge{ width:68px;height:68px;border-radius:16px; background:var(--navy); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:30px; border:3px solid #fff; box-shadow: 0 10px 22px -10px rgba(36, 48, 58,0.5); flex:0 0 auto; }
-  .logo .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:32px; color:var(--navy); line-height:1; }
-  .logo small{ display:block; font-family:'Work Sans'; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+  .logo .badge{ width:68px;height:68px;border-radius:16px; background:var(--navy); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:30px; border:3px solid #fff; box-shadow: 0 10px 22px -10px rgba(36, 48, 58,0.5); flex:0 0 auto; }
+  .logo .name{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:32px; color:var(--navy); line-height:1; }
+  .logo small{ display:block; font-family:'Work Sans','Pretendard Variable',Pretendard; font-weight:700; font-size:12.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
   .logo-img{ height:76px; width:auto; display:block; flex:0 0 auto; }
   .footer-logo-img{ height:44px; width:auto; display:block; }
   .lang-switch{ display:flex; gap:4px; background:rgba(255,255,255,0.75); border:1.5px solid var(--line); border-radius:10px; padding:4px; backdrop-filter: blur(6px); }
@@ -44,14 +51,14 @@
 
   .page-hero{ padding:36px clamp(20px,4vw,56px) 8px; }
   .eyebrow{ display:inline-flex; align-items:center; gap:8px; color:#fff; background:var(--navy); font-size:12px; letter-spacing:1px; font-weight:800; margin-bottom:16px; padding:7px 16px; border-radius:999px; }
-  .page-hero h1{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); }
+  .page-hero h1{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:clamp(30px,4vw,46px); line-height:1.15; margin:0 0 14px; color:var(--navy); }
   .page-hero h1 .hl{ color:#fff; background:var(--violet); padding:0 10px; }
   .page-hero p{ color:var(--muted); font-size:15.5px; line-height:1.75; max-width:640px; margin:0; font-weight:600; }
 
   .section{ padding:8px clamp(20px,4vw,56px) 24px; }
   .layout{ display:grid; grid-template-columns:1.5fr 1fr; gap:22px; max-width:1000px; margin:0 auto; }
   .section-inner{ background:var(--paper); border-radius:26px; padding:32px clamp(18px,3vw,36px); box-shadow:0 18px 44px -24px rgba(36, 48, 58,0.32); border:1.5px solid var(--line); }
-  .section-inner h2{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:20px; margin:0 0 6px; color:var(--navy); }
+  .section-inner h2{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:20px; margin:0 0 6px; color:var(--navy); }
   .section-inner .sub{ color:var(--muted); font-size:13px; font-weight:600; margin-bottom:22px; }
 
   .field-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
@@ -60,7 +67,7 @@
   .field label{ font-size:12px; font-weight:800; color:var(--navy); }
   .field input, .field select, .field textarea{
     all:unset; border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-size:13.5px;
-    font-family:'Work Sans'; color:var(--ink); box-sizing:border-box; width:100%; background:#fff;
+    font-family:'Work Sans','Pretendard Variable',Pretendard; color:var(--ink); box-sizing:border-box; width:100%; background:#fff;
   }
   .field textarea{ min-height:110px; resize:vertical; line-height:1.6; }
   .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--violet); }
@@ -81,7 +88,7 @@
   .form-alert.bad .ways a:hover{ border-color:#8F2E14; }
 
   .side-card{ background:var(--navy); color:#fff; border-radius:var(--radius); padding:24px; margin-bottom:16px; }
-  .side-card h3{ margin:0 0 8px; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; }
+  .side-card h3{ margin:0 0 8px; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:16px; }
   .side-card p{ margin:0; font-size:12.5px; color:rgba(255,255,255,0.72); font-weight:600; line-height:1.7; }
   .side-list{ margin-top:14px; display:flex; flex-direction:column; gap:10px; }
   .side-list .row{ display:flex; justify-content:space-between; gap:10px; font-size:12.5px; border-bottom:1px solid rgba(255,255,255,0.14); padding-bottom:10px; }
@@ -97,8 +104,8 @@
   .footer-inner{ display:grid; grid-template-columns:1.4fr 1fr auto; gap:32px; background:var(--paper); border:1.5px solid var(--line); border-radius:26px; padding:34px clamp(18px,3vw,40px); box-shadow:0 18px 44px -28px rgba(36, 48, 58,0.28); max-width:1120px; margin:0 auto; }
   .footer-col h6{ margin:0 0 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--navy); font-weight:800; }
   .footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-  .footer-brand .badge{ width:36px;height:36px;border-radius:9px; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; }
-  .footer-brand .name{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; color:var(--navy); }
+  .footer-brand .badge{ width:36px;height:36px;border-radius:9px; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:16px; }
+  .footer-brand .name{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:16px; color:var(--navy); }
   .footer-col p{ margin:0; font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.7; max-width:320px; }
   .footer-links{ display:flex; flex-direction:column; gap:9px; }
   .footer-links a{ text-decoration:none; font-size:13px; font-weight:700; color:var(--ink); }
@@ -205,9 +212,9 @@
               right:clamp(20px,4vw,56px); width:min(360px,27vw); height:auto;
               pointer-events:none; }
 .hero-motion .em-ln{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
-.hero-motion text{ font-family:'Space Mono', ui-monospace, Menlo, monospace;
+.hero-motion text{ font-family:'Space Mono','Pretendard Variable',Pretendard, ui-monospace, Menlo, monospace;
                    font-size:9.5px; fill:#676F76; letter-spacing:.03em; }
-.hero-motion text.em-ko{ font-family:'Work Sans', sans-serif; font-size:10px; font-weight:600; }
+.hero-motion text.em-ko{ font-family:'Work Sans','Pretendard Variable',Pretendard, sans-serif; font-size:10px; font-weight:600; }
 @media (max-width:1000px){
   /* 좁은 화면에서는 숨기지 않고 글 아래로 내려서 보여 줍니다 */
   .hero-motion{ position:static; transform:none; right:auto;
