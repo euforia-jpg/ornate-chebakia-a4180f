@@ -365,8 +365,8 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .audio-list-item.playing{ background:var(--violet); }
   .audio-list-item.playing .al-name, .audio-list-item.playing .al-play{ color:#fff; }
   /* ╔═══ 이런 경험 · 포함 불포함 — 카드 모양 (2026-10) ═══╗ */
-  .hl-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0; padding:0; list-style:none; word-break:keep-all; }
-  .hl-grid li{ display:flex; gap:12px; align-items:flex-start; background:#fff; border:1.5px solid var(--line);
+  .hl-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; margin:0; padding:0; list-style:none; word-break:keep-all; }
+  .hl-grid li{ min-width:0; overflow:hidden; display:flex; gap:12px; align-items:flex-start; background:#fff; border:1.5px solid var(--line);
     border-radius:14px; padding:13px 15px; font-size:13.5px; font-weight:600; color:var(--ink); line-height:1.55; }
   .hl-grid .n{ flex:0 0 22px; font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:15px; color:var(--violet); line-height:1.4; }
   .hl-grid .wh{ display:inline-block; font-size:10.5px; font-weight:800; color:#fff; background:var(--teal);
@@ -378,10 +378,14 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .hl-ph:empty:not(.ld){ display:none; }
   .hl-ph.ld{ height:128px; border-radius:10px; background:linear-gradient(90deg,#EEF1F3 0%,#F6F8F9 50%,#EEF1F3 100%); background-size:200% 100%; animation:hlShine 1.2s linear infinite; }
   @keyframes hlShine{ from{ background-position:100% 0 } to{ background-position:-100% 0 } }
-  .hl-ph img{ display:block; width:100%; height:128px; object-fit:cover; border-radius:10px; cursor:zoom-in; background:#EEF1F3; }
-  .hl-ph .cr{ display:block; margin-top:4px; font-size:10.5px; font-weight:600; color:#9AA4AB; line-height:1.4;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .hl-ph .cr a{ color:inherit; }
+  .hl-ph{ max-width:100%; overflow:hidden; border-radius:10px; }
+  .hl-ph img{ display:block; width:100%; max-width:100%; height:128px; object-fit:cover; border-radius:10px; cursor:zoom-in; background:#EEF1F3; }
+  /* 출처 — 사진 오른쪽 아래 구석에 아주 작게 (구글 약관상 완전히 지울 수는 없습니다) */
+  .hl-ph{ position:relative; }
+  .hl-ph .cr{ position:absolute; right:6px; bottom:6px; max-width:calc(100% - 12px); padding:1px 6px; border-radius:4px;
+    background:rgba(13,20,26,.38); color:rgba(255,255,255,.82); font-size:9px; font-weight:600; line-height:1.5;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; pointer-events:auto; }
+  .hl-ph .cr a{ color:inherit; text-decoration:none; }
   .hl-pop{ position:fixed; z-index:1200; width:min(560px, 46vw); background:#fff; border-radius:14px; padding:8px;
     box-shadow:0 26px 60px -20px rgba(13,20,26,.55); pointer-events:none; opacity:0; transform:scale(.97);
     transition:opacity .15s ease, transform .15s ease; }
@@ -415,7 +419,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .ie-box.no .ic{ background:#B9A396; }
   .ie-box .t{ font-size:13.5px; font-weight:700; color:var(--ink); line-height:1.45; }
   .ie-box .s{ display:block; font-size:12px; font-weight:500; color:var(--muted); margin-top:2px; }
-  @media (max-width:560px){ .hl-grid{ grid-template-columns:1fr; } .ie-grid{ grid-template-columns:1fr; } }
+  @media (max-width:560px){ .hl-grid{ grid-template-columns:minmax(0,1fr); } .ie-grid{ grid-template-columns:1fr; } }
   /* ╚═══ 여기까지 ═══╝ */
 
    .side-card{ background:var(--navy); color:#fff; border-radius:var(--radius); padding:24px; margin-bottom:16px; position:sticky; top:20px; }
@@ -1543,6 +1547,12 @@ function euSpotPhotos(pid){
     }).filter(Boolean).join(', ');
     return '사진: ' + (누구 ? 누구 + ' · ' : '') + 'Google 지도';
   }
+  /* 사진 위 작은 글씨 — 「© 촬영자 · Google」 */
+  function 짧은출처(d){
+    var a = ((d.photo && d.photo.a) || [])[0];
+    var 이름 = a ? (a.u && /^https:\/\//.test(a.u) ? '<a href="' + 이스(a.u) + '" target="_blank" rel="noopener">' + 이스(a.n) + '</a>' : 이스(a.n)) : '';
+    return (이름 ? '© ' + 이름 + ' · ' : '') + 'Google';
+  }
   function 하나(el){
     fetch('/.netlify/functions/spot-photo?p=' + encodeURIComponent(pid) + '&i=' + el.dataset.spot, { headers:{ 'Accept':'application/json' } })
       .then(function(r){ return r.json().catch(function(){ return {}; }); })
@@ -1551,7 +1561,7 @@ function euSpotPhotos(pid){
         el.classList.remove('ld');
         if(!d || !d.photo || !/^https:\/\//.test(d.photo.u || '')){ el.innerHTML = ''; return; }
         el.innerHTML = '<img src="' + 이스(d.photo.u) + '" alt="' + 이스(d.name || '') + '" loading="lazy" referrerpolicy="no-referrer">' +
-          '<span class="cr">' + (d.name ? 이스(d.name) + ' · ' : '') + 출처(d) + '</span>';
+          '<span class="cr">' + 짧은출처(d) + '</span>';
         var img = el.querySelector('img');
         img.addEventListener('error', function(){ el.innerHTML = ''; });
         img._spot = d;
