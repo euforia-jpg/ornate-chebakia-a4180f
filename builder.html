@@ -310,9 +310,20 @@
     font:inherit; color:var(--ink); padding:0; transition:border-color .15s, box-shadow .15s; }
   .bx-hc:hover{ border-color:var(--violet); }
   .bx-hc.on{ border-color:var(--navy); box-shadow:0 0 0 2px var(--navy) inset; }
-  .bx-hc .ck{ position:absolute; right:8px; top:8px; z-index:2; width:24px; height:24px; border-radius:50%;
-    background:var(--navy); color:#fff; font-size:13px; font-weight:900; display:none; align-items:center; justify-content:center; }
-  .bx-hc.on .ck{ display:flex; }
+  /* 고르기 네모 — 늘 보이고, 고르면 채워집니다 (2026-11) */
+  .bx-hc .ck{ position:absolute; right:8px; top:8px; z-index:2; width:26px; height:26px; border-radius:7px;
+    background:rgba(255,255,255,.96); border:2px solid #fff; box-shadow:0 0 0 1.5px rgba(36,48,58,.35), 0 4px 10px -4px rgba(0,0,0,.45);
+    color:transparent; font-size:15px; font-weight:900; display:flex; align-items:center; justify-content:center; }
+  .bx-hc:hover .ck{ box-shadow:0 0 0 2px var(--violet), 0 4px 10px -4px rgba(0,0,0,.45); }
+  .bx-hc.on .ck{ background:var(--navy); color:#fff; box-shadow:0 0 0 1.5px var(--navy), 0 4px 10px -4px rgba(0,0,0,.45); }
+  .bx-hc .ft{ margin-top:auto; padding-top:8px; display:flex; flex-direction:column; gap:5px; }
+  .bx-hc .ft .lk{ margin-top:0; padding-top:0; }
+  .bx-hc .pk{ display:flex; align-items:center; gap:7px; padding:7px 9px; border-radius:8px;
+    background:#F3F5F6; font-size:12px; font-weight:800; color:var(--ink); }
+  .bx-hc .pk i{ flex:none; width:16px; height:16px; border-radius:4px; border:2px solid #9AA4AB; background:#fff;
+    font-style:normal; font-size:11px; line-height:1; color:transparent; display:flex; align-items:center; justify-content:center; }
+  .bx-hc.on .pk{ background:var(--navy); color:#fff; }
+  .bx-hc.on .pk i{ border-color:#fff; background:#fff; color:var(--navy); }
   .bx-hc .ph{ position:relative; height:120px; background:#E9EDF0 center/cover no-repeat; }
   .bx-hc .ph.none{ background:repeating-linear-gradient(135deg,#EEF1F3 0 10px,#E6EAED 10px 20px);
     display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:700; color:var(--muted); }
@@ -2003,15 +2014,16 @@
             '<span class="cnt">사진 ' + 사진.length + '장</span></span>'
         : 구글카드(h);
       var 설명 = String(h.설명 || '').replace(/^\s*\d성\s*·\s*/, '');   /* 등급은 사진 위 뱃지로 */
-      return '<div class="bx-hc' + (고른 === h.id ? ' on' : '') + '" role="button" tabindex="0" ' +
+      return '<div class="bx-hc' + (고른 === h.id ? ' on' : '') + '" role="checkbox" aria-checked="' + (고른 === h.id) + '" tabindex="0" ' +
           'data-hpick="' + esc(h.id) + '" data-hcity="' + esc(day.도시) + '">' +
-        '<span class="ck">✓</span>' + 위 +
+        '<span class="ck" aria-hidden="true">✓</span>' + 위 +
         '<span class="hb"><span class="n">' + esc(h.이름) + '</span>' +
           (설명 ? '<span class="d">' + esc(설명) + '</span>' : '') +
           (CFG.항목금액보이기 ? '<span class="pr">' + 기호 + 돈(h.금액) + ' / 박</span>' : '') +
+          '<span class="ft"><span class="pk"><i>✓</i>' + (고른 === h.id ? '고른 호텔입니다' : '이 호텔로 고르기') + '</span>' +
           (사진.length || 구글있음(h.id)
             ? '<span class="lk" data-hphoto="' + esc(h.id) + '">사진 크게 보기 →</span>'
-            : '<a class="lk" href="' + esc(호텔지도(h)) + '" target="_blank" rel="noopener">구글 지도에서 보기 ↗</a>') +
+            : '<a class="lk" href="' + esc(호텔지도(h)) + '" target="_blank" rel="noopener">구글 지도에서 보기 ↗</a>') + '</span>' +
         '</span></div>';
     }).join('');
 

@@ -372,6 +372,31 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .hl-grid .wh{ display:inline-block; font-size:10.5px; font-weight:800; color:#fff; background:var(--teal);
     padding:1px 6px; border-radius:4px; margin:0 2px 0 4px; vertical-align:2px; white-space:nowrap; }
   .hl-grid .sub{ color:var(--muted); font-weight:500; }
+  /* 관광지 사진 — 구글 지도에서 자동으로 (spot-photo 함수 · 2026-11) */
+  .hl-grid .hl-tx{ flex:1; min-width:0; }
+  .hl-ph{ display:block; margin-top:10px; }
+  .hl-ph:empty:not(.ld){ display:none; }
+  .hl-ph.ld{ height:128px; border-radius:10px; background:linear-gradient(90deg,#EEF1F3 0%,#F6F8F9 50%,#EEF1F3 100%); background-size:200% 100%; animation:hlShine 1.2s linear infinite; }
+  @keyframes hlShine{ from{ background-position:100% 0 } to{ background-position:-100% 0 } }
+  .hl-ph img{ display:block; width:100%; height:128px; object-fit:cover; border-radius:10px; cursor:zoom-in; background:#EEF1F3; }
+  .hl-ph .cr{ display:block; margin-top:4px; font-size:10.5px; font-weight:600; color:#9AA4AB; line-height:1.4;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .hl-ph .cr a{ color:inherit; }
+  .hl-pop{ position:fixed; z-index:1200; width:min(560px, 46vw); background:#fff; border-radius:14px; padding:8px;
+    box-shadow:0 26px 60px -20px rgba(13,20,26,.55); pointer-events:none; opacity:0; transform:scale(.97);
+    transition:opacity .15s ease, transform .15s ease; }
+  .hl-pop.on{ opacity:1; transform:none; }
+  .hl-pop img{ display:block; width:100%; max-height:62vh; object-fit:cover; border-radius:9px; }
+  .hl-pop .t{ padding:7px 4px 2px; font-size:12.5px; font-weight:800; color:var(--ink); }
+  .hl-pop .c{ padding:0 4px 2px; font-size:10.5px; font-weight:600; color:#9AA4AB; }
+  .hl-lb{ position:fixed; inset:0; z-index:1300; background:rgba(14,20,25,.94); display:none; align-items:center;
+    justify-content:center; flex-direction:column; padding:16px; cursor:zoom-out; }
+  .hl-lb.on{ display:flex; }
+  .hl-lb img{ max-width:100%; max-height:78vh; border-radius:10px; }
+  .hl-lb .t{ margin-top:10px; color:#fff; font-size:14px; font-weight:800; text-align:center; }
+  .hl-lb .c{ margin-top:3px; color:#C9D1D6; font-size:11.5px; font-weight:600; text-align:center; }
+  .hl-lb .c a{ color:#E6EDF1; }
+  @media print{ .hl-ph, .hl-pop, .hl-lb{ display:none !important; } }
 
   .ie-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:start; word-break:keep-all; }
   .ie-box{ border-radius:16px; padding:18px 18px 8px; }
@@ -1503,6 +1528,82 @@ function euHL(t){
     .replace(/\s*\(세계유산\)/g, '<span class="wh">세계유산</span>')
     .replace(/\(([^()<>]+)\)/g, '<span class="sub">($1)</span>');
 }
+/* ╔═══ 이런 경험 — 관광지 사진 (구글 지도에서 자동) ═══╗
+   spot-photo 함수가 줄마다 첫 장소를 구글 지도에서 찾아 사진 1장을 돌려줍니다.
+   카드가 화면에 보일 때만 부르고, 사진이 없거나 안내 줄이면 자리를 비웁니다.
+   사진 위에 마우스를 올리면 크게 보이고, 누르면(휴대폰은 손가락으로) 화면 가득 보입니다.
+   구글 약관에 따라 사진마다 촬영자(출처)를 표시합니다. */
+function euSpotPhotos(pid){
+  var 칸들 = document.querySelectorAll('.hl-ph[data-spot]');
+  if(!칸들.length) return;
+  function 이스(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function 출처(d){
+    var 누구 = ((d.photo && d.photo.a) || []).map(function(a){
+      return a.u && /^https:\/\//.test(a.u) ? '<a href="' + 이스(a.u) + '" target="_blank" rel="noopener">' + 이스(a.n) + '</a>' : 이스(a.n);
+    }).filter(Boolean).join(', ');
+    return '사진: ' + (누구 ? 누구 + ' · ' : '') + 'Google 지도';
+  }
+  function 하나(el){
+    fetch('/.netlify/functions/spot-photo?p=' + encodeURIComponent(pid) + '&i=' + el.dataset.spot, { headers:{ 'Accept':'application/json' } })
+      .then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .catch(function(){ return {}; })
+      .then(function(d){
+        el.classList.remove('ld');
+        if(!d || !d.photo || !/^https:\/\//.test(d.photo.u || '')){ el.innerHTML = ''; return; }
+        el.innerHTML = '<img src="' + 이스(d.photo.u) + '" alt="' + 이스(d.name || '') + '" loading="lazy" referrerpolicy="no-referrer">' +
+          '<span class="cr">' + (d.name ? 이스(d.name) + ' · ' : '') + 출처(d) + '</span>';
+        var img = el.querySelector('img');
+        img.addEventListener('error', function(){ el.innerHTML = ''; });
+        img._spot = d;
+      });
+  }
+  if('IntersectionObserver' in window){
+    var 눈 = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ 눈.unobserve(e.target); 하나(e.target); } });
+    }, { rootMargin:'300px' });
+    Array.prototype.forEach.call(칸들, function(el){ 눈.observe(el); });
+  } else Array.prototype.forEach.call(칸들, 하나);
+
+  if(euSpotPhotos.묶음) return;      /* 크게 보기 장치는 한 번만 붙입니다 */
+  euSpotPhotos.묶음 = true;
+  var 팝 = document.createElement('div'); 팝.className = 'hl-pop'; document.body.appendChild(팝);
+  var 판 = document.createElement('div'); 판.className = 'hl-lb'; 판.setAttribute('role','dialog'); document.body.appendChild(판);
+  var 마우스 = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  function 자리(img){
+    var r = img.getBoundingClientRect(), w = 팝.offsetWidth, h = 팝.offsetHeight, vw = innerWidth, vh = innerHeight;
+    var x = r.right + 14; if(x + w > vw - 10) x = r.left - w - 14; if(x < 10) x = Math.max(10, (vw - w) / 2);
+    var y = r.top + r.height / 2 - h / 2; y = Math.max(10, Math.min(y, vh - h - 10));
+    팝.style.left = x + 'px'; 팝.style.top = y + 'px';
+  }
+  document.addEventListener('mouseover', function(e){
+    if(!마우스) return;
+    var img = e.target.closest && e.target.closest('.hl-ph img'); if(!img || !img._spot) return;
+    var d = img._spot;
+    팝.innerHTML = '<img src="' + 이스(d.photo.u) + '" alt="" referrerpolicy="no-referrer">' +
+      (d.name ? '<div class="t">' + 이스(d.name) + '</div>' : '') + '<div class="c">' + 출처(d).replace(/<[^>]+>/g, '') + '</div>';
+    var big = 팝.querySelector('img');
+    if(big.complete) 자리(img); else big.onload = function(){ 자리(img); };
+    자리(img); 팝.classList.add('on');
+  });
+  document.addEventListener('mouseout', function(e){
+    var img = e.target.closest && e.target.closest('.hl-ph img');
+    if(img && !(e.relatedTarget && img.contains(e.relatedTarget))) 팝.classList.remove('on');
+  });
+  window.addEventListener('scroll', function(){ 팝.classList.remove('on'); }, { passive:true });
+  document.addEventListener('click', function(e){
+    var img = e.target.closest && e.target.closest('.hl-ph img');
+    if(img && img._spot){
+      var d = img._spot; 팝.classList.remove('on');
+      판.innerHTML = '<img src="' + 이스(d.photo.u) + '" alt="' + 이스(d.name || '') + '" referrerpolicy="no-referrer">' +
+        (d.name ? '<div class="t">' + 이스(d.name) + '</div>' : '') + '<div class="c">' + 출처(d) + '</div>';
+      판.classList.add('on'); return;
+    }
+    if(판.classList.contains('on') && !(e.target.closest && e.target.closest('.hl-lb a'))) 판.classList.remove('on');
+  });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') 판.classList.remove('on'); });
+}
+
 function euIE(cls, 제목, 목록, 기호){
   if(!목록.length) return '';
   return '<div class="ie-box ' + cls + '"><h4>' + 제목 + ' <span class="c">' + 목록.length + '</span></h4><ul>' +
@@ -1596,7 +1697,7 @@ function render(){
               ${d.highlights && d.highlights.length ? `
         <div class="p-block">
           <h3>이런 경험을 할 수 있어요</h3>
-          <ul class="hl-grid">${d.highlights.map((h,i)=>`<li><span class="n">${String(i+1).padStart(2,'0')}</span><span>${euHL(h)}</span></li>`).join('')}</ul>
+          <ul class="hl-grid">${d.highlights.map((h,i)=>`<li><span class="n">${String(i+1).padStart(2,'0')}</span><span class="hl-tx">${euHL(h)}<span class="hl-ph ld" data-spot="${i}"></span></span></li>`).join('')}</ul>
         </div>
         ` : ''}
 
@@ -1652,6 +1753,7 @@ function render(){
 
   euRouteWatch();
   euFareWatch();
+  euSpotPhotos(product.id);
   placeItineraryDownload(product);
   initAvailCalendar(product);
 }
