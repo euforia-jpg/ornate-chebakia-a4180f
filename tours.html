@@ -296,13 +296,6 @@
 .app-badge.golf{ background:linear-gradient(90deg,#46705F,#52786C);
                  box-shadow:0 8px 16px -9px rgba(31,122,76,0.6); }
 #productsBox{ position:relative; }
-.booking-toast{ position:absolute; right:16px; top:16px; z-index:20; display:flex; align-items:center; gap:12px; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:14px 18px; box-shadow:0 18px 34px -18px rgba(36, 48, 58,0.35); max-width:280px; opacity:0; transform:translateY(-12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease; }
-.booking-toast.show{ opacity:1; transform:translateY(0); }
-.booking-toast .bt-dot{ flex:0 0 auto; width:10px; height:10px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 4px rgba(82, 120, 108,0.18); }
-.booking-toast .bt-text{ font-size:12.5px; line-height:1.5; color:var(--ink); font-weight:600; }
-.booking-toast .bt-text b{ color:var(--navy); font-weight:800; }
-.booking-toast .bt-time{ display:block; margin-top:2px; font-size:11px; color:var(--muted); font-weight:700; }
-@media (max-width:480px){ .booking-toast{ left:12px; right:12px; top:12px; max-width:none; } }
 .audio-badge{ display:inline-flex; align-items:center; justify-content:center; width:36px; flex-shrink:0; background:var(--teal); font-size:15px; border:none; cursor:pointer; color:#fff; }
 .audio-badge.playing{ background:var(--pink); }
 
@@ -460,10 +453,6 @@
   </div>
   <div class="section">
  <div class="section-inner" id="productsBox">
-      <div class="booking-toast" id="bookingToast">
-        <span class="bt-dot"></span>
-        <span class="bt-text" id="bookingToastText"></span>
-      </div>
       <div class="section-head">
         <div>
           <h2>대표 여행상품</h2>
@@ -713,36 +702,6 @@ if (SHUFFLE_INTERVAL_MS > 0) {
   }
   </script>
  
-<script>
-(function(){
-  const SURNAMES = ['김','이','박','최','정','강','조','윤','장','임','한','오','서','신','권'];
-  const TIMES = ['방금 전', '2분 전', '5분 전', '8분 전', '12분 전'];
-
-  function randomName(){
-    const s = SURNAMES[Math.floor(Math.random() * SURNAMES.length)];
-    return s + '**';
-  }
-
-  function showToast(){
-    if (typeof PRODUCTS === 'undefined' || !PRODUCTS.length) return;
-    const p = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
-    const name = randomName();
-    const time = TIMES[Math.floor(Math.random() * TIMES.length)];
-
-    document.getElementById('bookingToastText').innerHTML =
-      `<b>${name}</b>님이 <b>${p.title}</b> 예약문의를 남겼어요<span class="bt-time">${time}</span>`;
-
-    const toast = document.getElementById('bookingToast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
-  }
-
-  setTimeout(showToast, 3000);
-  setInterval(() => {
-    showToast();
-  }, 10000 + Math.random() * 4000);
-})();
-</script>
 <script>
 window.toggleAudioGuide = function(btn){
   const url = btn.dataset.audio;
@@ -997,6 +956,8 @@ window.toggleAudioGuide = function(btn){
 
 <!-- 나에게 맞는 일정 찾기 (2026-10) -->
 <script src="/trip-finder.js" defer></script>
+<!-- 일정 짜기 카드 + 실제 예약문의를 상품 카드 안에 표시 (2026-10) -->
+<script src="/tour-live.js" defer></script>
 
 <!-- 다국어 (한국어 / English / 中文) -->
 <script src="/i18n.js" defer></script>
