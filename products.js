@@ -4200,7 +4200,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/pic-albaicin.jpg"
+    "카드사진": "/pic-albaicin.jpg",
+    "제휴코드": "PRD3018976275"
   },
   {
     "id": "galicia-a-marina",
