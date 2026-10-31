@@ -349,7 +349,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
 .dl-itin-btn{ display:inline-flex; align-items:center; gap:6px; margin-bottom:24px; padding:9px 16px; border-radius:10px; border:1.5px solid var(--line); background:#fff; color:var(--navy); font-size:12.5px; font-weight:800; text-decoration:none; }
 .dl-itin-btn:hover{ border-color:var(--violet); color:var(--violet); }
   .p-block{ margin-bottom:24px; }
-  .p-block h3{ font-family:'Kanit'; font-weight:800; font-style:italic; font-size:15.5px; color:var(--navy); margin:0 0 12px; }
+  .p-block h3{ font-family:'Kanit'; font-weight:800; font-style:normal; font-size:15.5px; color:var(--navy); margin:0 0 14px; }
   .audio-list{ display:flex; flex-direction:column; gap:8px; }
   .audio-list-item{ all:unset; display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--wash-violet); border-radius:12px; cursor:pointer; box-sizing:border-box; width:100%; }
   .audio-list-item:hover{ background:color-mix(in srgb, var(--violet) 18%, white); }
@@ -357,16 +357,34 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .audio-list-item .al-play{ font-size:11px; color:var(--violet); }
   .audio-list-item.playing{ background:var(--violet); }
   .audio-list-item.playing .al-name, .audio-list-item.playing .al-play{ color:#fff; }
-  .p-list{ display:flex; flex-direction:column; gap:8px; margin:0; padding:0; list-style:none; }
-  .p-list li{ display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--ink); font-weight:600; line-height:1.6; }
-  .p-list li .dot{ width:7px;height:7px;border-radius:50%; background:var(--violet); margin-top:7px; flex:0 0 auto; }
+  /* ╔═══ 이런 경험 · 포함 불포함 — 카드 모양 (2026-10) ═══╗ */
+  .hl-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0; padding:0; list-style:none; word-break:keep-all; }
+  .hl-grid li{ display:flex; gap:12px; align-items:flex-start; background:#fff; border:1.5px solid var(--line);
+    border-radius:14px; padding:13px 15px; font-size:13.5px; font-weight:600; color:var(--ink); line-height:1.55; }
+  .hl-grid .n{ flex:0 0 22px; font-family:'Kanit'; font-weight:800; font-style:normal; font-size:15px; color:var(--violet); line-height:1.4; }
+  .hl-grid .wh{ display:inline-block; font-size:10.5px; font-weight:800; color:#fff; background:var(--teal);
+    padding:1px 6px; border-radius:4px; margin:0 2px 0 4px; vertical-align:2px; white-space:nowrap; }
+  .hl-grid .sub{ color:var(--muted); font-weight:500; }
 
-  .inc-exc{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .inc-exc h4{ font-size:12px; font-weight:800; margin:0 0 8px; text-transform:uppercase; letter-spacing:.5px; }
-  .inc-exc.ok h4{ color:var(--teal); }
-  .inc-exc .no h4{ color:var(--pink); }
-  .inc-exc ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px; }
-  .inc-exc li{ font-size:12.5px; color:var(--muted); font-weight:600; }
+  .ie-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:start; word-break:keep-all; }
+  .ie-box{ border-radius:16px; padding:18px 18px 8px; }
+  .ie-box.ok{ background:#EDF1EF; }
+  .ie-box.no{ background:#F4EFEA; }
+  .ie-box h4{ display:flex; align-items:center; gap:8px; margin:0 0 6px; font-size:13px; font-weight:800; }
+  .ie-box.ok h4{ color:var(--teal); }
+  .ie-box.no h4{ color:var(--pink); }
+  .ie-box h4 .c{ font-size:11px; font-weight:700; color:#8A9399; }
+  .ie-box ul{ list-style:none; margin:0; padding:0; }
+  .ie-box li{ display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-top:1px solid rgba(36,48,58,.08); }
+  .ie-box li:first-child{ border-top:none; }
+  .ie-box .ic{ flex:0 0 20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:900; color:#fff; margin-top:1px; }
+  .ie-box.ok .ic{ background:var(--teal); }
+  .ie-box.no .ic{ background:#B9A396; }
+  .ie-box .t{ font-size:13.5px; font-weight:700; color:var(--ink); line-height:1.45; }
+  .ie-box .s{ display:block; font-size:12px; font-weight:500; color:var(--muted); margin-top:2px; }
+  @media (max-width:560px){ .hl-grid{ grid-template-columns:1fr; } .ie-grid{ grid-template-columns:1fr; } }
+  /* ╚═══ 여기까지 ═══╝ */
 
    .side-card{ background:var(--navy); color:#fff; border-radius:var(--radius); padding:24px; margin-bottom:16px; position:sticky; top:20px; }
   .side-card h3{ margin:0 0 6px; font-family:'Kanit'; font-weight:800; font-style:italic; font-size:16px; }
@@ -429,7 +447,7 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
 .footer-links span{ display:flex; align-items:flex-start; gap:8px; font-size:14px; color:var(--muted); font-weight:600; }
 .footer-links .ft-ico{ flex-shrink:0; font-size:14px; }
 
-  @media (max-width:860px){ .layout{ grid-template-columns:1fr; } .inc-exc{ grid-template-columns:1fr; } .side-card{ position:static; } .footer-inner{ grid-template-columns:1fr; } }
+  @media (max-width:860px){ .layout{ grid-template-columns:1fr; } .side-card{ position:static; } .footer-inner{ grid-template-columns:1fr; } }
 
 /* ===== 일정표 하단 PDF 다운로드 바 ===== */
   .itin-dl{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
@@ -1470,6 +1488,25 @@ function euRouteWatch(){
   }
 }
 
+/* ╔═══ 이런 경험 · 포함 불포함 그리기 도우미 ═══╗
+   경험: "(세계유산)" 은 초록 표시로, 나머지 괄호는 옅은 글씨로
+   포함·불포함: "본문(설명)" 처럼 끝에 붙은 괄호를 작은 둘째 줄로 나눕니다 */
+function euHL(t){
+  return String(t)
+    .replace(/\s*\(세계유산\)/g, '<span class="wh">세계유산</span>')
+    .replace(/\(([^()<>]+)\)/g, '<span class="sub">($1)</span>');
+}
+function euIE(cls, 제목, 목록, 기호){
+  if(!목록.length) return '';
+  return '<div class="ie-box ' + cls + '"><h4>' + 제목 + ' <span class="c">' + 목록.length + '</span></h4><ul>' +
+    목록.map(function(x){
+      var m = String(x).match(/^(.*?)\s*[(（]([^()（）<>]+)[)）]\s*$/);
+      var 본 = m ? m[1] : x, 덧 = m ? m[2] : '';
+      return '<li><span class="ic">' + 기호 + '</span><span class="t">' + 본 + (덧 ? '<span class="s">' + 덧 + '</span>' : '') + '</span></li>';
+    }).join('') + '</ul></div>';
+}
+/* ╚═══ 여기까지 ═══╝ */
+
 function render(){
   const id = getParam('id');
   const product = PRODUCTS.find(p => p.id === id && p.detail);
@@ -1552,22 +1589,16 @@ function render(){
               ${d.highlights && d.highlights.length ? `
         <div class="p-block">
           <h3>이런 경험을 할 수 있어요</h3>
-          <ul class="p-list">${d.highlights.map(h=>`<li><span class="dot"></span>${h}</li>`).join('')}</ul>
+          <ul class="hl-grid">${d.highlights.map((h,i)=>`<li><span class="n">${String(i+1).padStart(2,'0')}</span><span>${euHL(h)}</span></li>`).join('')}</ul>
         </div>
         ` : ''}
 
         ${(d.includes && d.includes.length) || (d.excludes && d.excludes.length) ? `
         <div class="p-block">
           <h3>포함 · 불포함 사항</h3>
-          <div class="inc-exc">
-            <div class="ok">
-              <h4>포함</h4>
-              <ul>${(d.includes||[]).map(i=>`<li>${i}</li>`).join('')}</ul>
-            </div>
-            <div class="no">
-              <h4>불포함</h4>
-              <ul>${(d.excludes||[]).map(i=>`<li>${i}</li>`).join('')}</ul>
-            </div>
+          <div class="ie-grid">
+            ${euIE('ok', '포함', d.includes || [], '&#10003;')}
+            ${euIE('no', '불포함', d.excludes || [], '&#10005;')}
           </div>
         </div>
         ` : ''}
