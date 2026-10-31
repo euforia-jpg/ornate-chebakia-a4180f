@@ -3645,7 +3645,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/pic-sagrada2.jpg"
+    "카드사진": "/pic-sagrada2.jpg",
+    "제휴코드": "PRD3018128841"
   },
   {
     "id": "north-cantabria-basque",
