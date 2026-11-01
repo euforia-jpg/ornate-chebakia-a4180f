@@ -65,6 +65,27 @@
   .chip{ padding:8px 18px; border-radius:999px; border:2px solid var(--line); font-size:13px; color:var(--navy); cursor:pointer; background:#fff; transition: all .12s ease; font-weight:700; }
   .chip.active{ background:var(--violet); border-color:var(--violet); color:#fff; }
   .chip:hover:not(.active){ border-color:var(--violet); }
+  /* ===== 차량 & 기사 — 출발 · 도착 도시로 찾기 ===== */
+  .route-find{ display:none; margin:-6px 0 22px; padding:14px 16px; border:1.5px solid var(--line); border-radius:16px; background:#fff; }
+  .route-find.on{ display:block; }
+  #filters[style*="none"] + .route-find{ display:none !important; }
+  .rf-row{ display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+  .rf-row + .rf-row{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); }
+  .rf-lb{ flex:0 0 auto; min-width:66px; font-size:12px; font-weight:800; color:var(--navy); }
+  .rf-c{ flex:0 0 auto; padding:6px 12px; border-radius:999px; border:1.5px solid var(--line); background:#fff; color:var(--navy);
+         font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; white-space:nowrap; }
+  .rf-c small{ margin-left:3px; font-size:11px; font-weight:600; opacity:.55; }
+  .rf-c:hover:not(.on){ border-color:var(--navy); }
+  .rf-c.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .rf-c.on small{ opacity:.8; }
+  .rf-ft{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:12px; font-size:12px; color:var(--muted); }
+  .rf-ft b{ color:var(--navy); }
+  .rf-ft a{ color:var(--navy); font-weight:700; }
+  .rf-ft button{ all:unset; cursor:pointer; font-weight:700; color:var(--navy); text-decoration:underline; }
+  @media (max-width:640px){
+    .rf-row{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px; scrollbar-width:none; }
+    .rf-row::-webkit-scrollbar{ display:none; }
+  }
 
   /* ═══════════════════════════════════════════════════════════
      상품 카드 — 사진 전면
@@ -461,6 +482,7 @@
       </div>
 
       <div class="filters" id="filters"></div>
+      <div class="route-find" id="routeFind" aria-label="출발 도시로 차량 상품 찾기"></div>
 
       <div class="tour-grid" id="tourGrid"></div>
     </div>
@@ -542,6 +564,76 @@ const FILTER_LABELS = [
   { key: 'matchday', label: 'MATCHDAY' }
 ];
 let activeFilter = 'all';
+
+/* ===== 차량 & 기사 — 출발 · 도착 도시로 찾기 =====
+   「차량 & 기사」 를 고르면 필터 아래에 출발 도시 · 도착 도시 칸이 열립니다.
+   도시 목록은 products.js 의 「구간」(첫 곳 · 마지막 곳)에서 저절로 만들어지므로
+   상품을 더하거나 빼도 이 부분은 고칠 필요가 없습니다.
+   주소에도 남겨 두어(?cat=transfer&from=마드리드) 그대로 손님께 보낼 수 있습니다. */
+let rfFrom = '', rfTo = '';
+function 차량양끝(p){
+  const d = p['구간'] && p['구간']['들'];
+  if (d && d.length) return [String(d[0]['곳'] || ''), String(d[d.length - 1]['곳'] || '')];
+  const m = String(p.title || '').replace(/^\[[^\]]*\]\s*/, '').split(/\s+[–·-]\s+/);
+  return [m[0] || '', m[m.length - 1] || ''];
+}
+function 차량상품(){ return PRODUCTS.filter(p => p.cats.includes('transfer')); }
+function 세어(list, i){
+  const n = {};
+  list.forEach(p => { const c = 차량양끝(p)[i]; if (c) n[c] = (n[c] || 0) + 1; });
+  return Object.keys(n).sort((a, b) => n[b] - n[a] || a.localeCompare(b, 'ko')).map(c => [c, n[c]]);
+}
+function rfEsc(t){ return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function rfSync(){
+  try{
+    const u = new URL(location.href);
+    if (activeFilter === 'all') u.searchParams.delete('cat'); else u.searchParams.set('cat', activeFilter);
+    if (activeFilter === 'transfer' && rfFrom) u.searchParams.set('from', rfFrom); else u.searchParams.delete('from');
+    if (activeFilter === 'transfer' && rfTo) u.searchParams.set('to', rfTo); else u.searchParams.delete('to');
+    history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+  }catch(e){}
+}
+function renderRouteFind(){
+  const el = document.getElementById('routeFind');
+  if (!el) return;
+  if (activeFilter !== 'transfer'){ el.classList.remove('on'); el.innerHTML = ''; return; }
+  const 전부 = 차량상품();
+  const 출발 = 세어(전부, 0);
+  if (rfFrom && !출발.some(x => x[0] === rfFrom)) rfFrom = '';
+  const 도착 = 세어(rfFrom ? 전부.filter(p => 차량양끝(p)[0] === rfFrom) : 전부, 1);
+  if (rfTo && !도착.some(x => x[0] === rfTo)) rfTo = '';
+  const 칩 = (kind, cur, list, total) =>
+    `<button type="button" class="rf-c${cur ? '' : ' on'}" data-rf="${kind}" data-city="">전체<small>${total}</small></button>` +
+    list.map(([c, n]) => `<button type="button" class="rf-c${cur === c ? ' on' : ''}" data-rf="${kind}" data-city="${rfEsc(c)}">${rfEsc(c)}${kind === 'to' && c === rfFrom ? ' (왕복)' : ''}<small>${n}</small></button>`).join('');
+  const 맞음 = 전부.filter(p => { const e = 차량양끝(p); return (!rfFrom || e[0] === rfFrom) && (!rfTo || e[1] === rfTo); }).length;
+  const 문의 = 'contact.html?product=' + encodeURIComponent('차량 & 기사 맞춤 구간' + (rfFrom ? ' (' + rfFrom + ' 출발)' : ''));
+  el.innerHTML =
+    `<div class="rf-row"><span class="rf-lb">출발 도시</span>${칩('from', rfFrom, 출발, 전부.length)}</div>` +
+    `<div class="rf-row"><span class="rf-lb">도착 도시</span>${칩('to', rfTo, 도착, 도착.reduce((a, x) => a + x[1], 0))}</div>` +
+    `<div class="rf-ft"><span>${rfFrom ? '<b>' + rfEsc(rfFrom) + '</b> 출발 ' : ''}${rfTo ? '<b>' + rfEsc(rfTo) + '</b> 도착 ' : ''}구간 <b>${맞음}</b>개</span>` +
+    `${(rfFrom || rfTo) ? '<button type="button" data-rf="reset">처음으로</button>' : ''}` +
+    `<a href="${문의}">찾는 구간이 없나요? 맞춤 차량 문의 →</a></div>`;
+  el.classList.add('on');
+}
+document.addEventListener('click', function(e){
+  const b = e.target.closest && e.target.closest('#routeFind [data-rf]');
+  if (!b) return;
+  const k = b.getAttribute('data-rf');
+  if (k === 'reset'){ rfFrom = ''; rfTo = ''; }
+  else if (k === 'from'){ rfFrom = b.getAttribute('data-city') || ''; }
+  else if (k === 'to'){ rfTo = b.getAttribute('data-city') || ''; }
+  renderRouteFind(); renderGrid(); rfSync();
+});
+/* 주소로 들어온 고름 (?cat=transfer&from=마드리드&to=세비야) */
+(function(){
+  try{
+    const q = new URLSearchParams(location.search);
+    const c = q.get('cat');
+    if (c && FILTER_LABELS.some(f => f.key === c)) activeFilter = c;
+    rfFrom = (q.get('from') || '').trim();
+    rfTo = (q.get('to') || '').trim();
+  }catch(e){}
+})();
 
 /* ===== 상품 노출 순서 무작위 섞기 =====
    페이지에 들어올 때마다, 그리고 필터를 바꿀 때마다 카드 순서를 새로 섞어요.
@@ -644,18 +736,24 @@ function renderFilters(){
   wrap.innerHTML = FILTER_LABELS.map(f =>
     `<button class="chip${f.key===activeFilter?' active':''}" data-key="${f.key}">${f.label}</button>`
   ).join('');
+  renderRouteFind();
   wrap.querySelectorAll('.chip').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       activeFilter = btn.getAttribute('data-key');
+      rfFrom = ''; rfTo = '';
       renderFilters();
       renderGrid();
+      rfSync();
     });
   });
 }
 
 function renderGrid(){
   const grid = document.getElementById('tourGrid');
-  const base = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cats.includes(activeFilter));
+  let base = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cats.includes(activeFilter));
+  if (activeFilter === 'transfer' && (rfFrom || rfTo)){
+    base = base.filter(p => { const e = 차량양끝(p); return (!rfFrom || e[0] === rfFrom) && (!rfTo || e[1] === rfTo); });
+  }
   const list = shuffled(base);
   grid.innerHTML = list.map(p => `
     <a class="tour-card pc ${p.topClass}${p['카드사진'] ? ' has-shot' : ''}" href="${productLink(p)}">
