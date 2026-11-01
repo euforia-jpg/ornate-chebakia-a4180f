@@ -263,6 +263,28 @@
   .bd-cities input:focus{ border-color:var(--violet); outline:none; }
 
   .bd-sec{ margin-top:26px; }
+  /* 추천 코스 (일정 만들기 「추천 코스로 시작」) */
+  .co-box{ margin:6px 0 26px; padding:16px; border:1.5px solid var(--line); border-radius:14px; background:#FBFCFC; }
+  .co-box h3{ margin:0 0 4px; font-size:15px; }
+  .co-box .how{ margin:0 0 12px; font-size:12.5px; font-weight:600; color:var(--muted); line-height:1.7; }
+  .co-tabs{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .co-tabs button{ all:unset; cursor:pointer; padding:7px 13px; border-radius:999px; border:1.5px solid var(--line); font-size:12.5px; font-weight:800; color:var(--muted); background:#fff; }
+  .co-tabs button.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .co-row{ display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-top:1px dashed var(--line); flex-wrap:wrap; }
+  .co-row:first-of-type{ border-top:0; }
+  .co-n{ flex:0 0 86px; font-size:13px; font-weight:800; color:var(--navy); padding-top:8px; }
+  .co-n small{ display:block; font-size:11px; font-weight:700; color:var(--muted); }
+  .co-n .bad{ color:#B04A2E; }
+  .co-stops{ flex:1 1 520px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  .co-stop{ display:flex; gap:4px; align-items:center; padding:5px 6px; border:1.5px solid var(--line); border-radius:10px; background:#fff; }
+  .co-stop select, .co-stop input{ padding:5px 6px; border:1.5px solid var(--line); border-radius:7px; font:inherit; font-size:12.5px; font-weight:700; }
+  .co-stop input.nt{ width:46px; text-align:center; }
+  .co-stop input.ds{ width:150px; font-weight:600; }
+  .co-stop button, .co-row .rm2, .co-stops .ad{ all:unset; cursor:pointer; font-size:12px; font-weight:800; color:var(--muted); padding:4px 7px; border-radius:6px; }
+  .co-stop button:hover, .co-row .rm2:hover, .co-stops .ad:hover{ background:#EEF1F3; color:var(--ink); }
+  .co-stops .ar{ color:#9AA4AB; font-weight:900; }
+  .co-foot{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:12px; }
+  .co-foot input{ width:70px; padding:7px 9px; border:2px solid var(--line); border-radius:9px; font:inherit; font-size:13px; font-weight:700; }
   .bd-sec h3{ margin:0 0 4px; font-size:15px; font-weight:800; color:var(--navy); }
   .bd-sec .how{ margin:0 0 12px; font-size:12.5px; font-weight:600; color:var(--muted); line-height:1.7; }
   .bd-sec .how code{ background:#F3F1FB; padding:1px 6px; border-radius:5px; font-size:11.5px; }
@@ -3185,6 +3207,121 @@
       '</div>';
   }
 
+  /* ---------- 추천 코스 — 손님 화면 「추천 코스로 시작」 에 쓰는 나라별 · 박 수별 기본 코스 ----------
+     builder.json 의 「코스」 에 저장합니다. 비어 있으면 손님 화면은 builder.html 안의 기본 코스를 씁니다.
+     박 수 줄에 없는 일수를 손님이 고르면, 가까운 아래 줄 코스에서 큰 도시에 하루씩 더해 맞춥니다. */
+  var BD_COURSE_DEFAULT = {"es":{"2":[["마드리드",2,"프라도 · 왕궁"]],"3":[["마드리드",3,"프라도 · 톨레도 당일"]],"4":[["마드리드",2,"프라도 · 톨레도 당일"],["세비야",2,"대성당 · 스페인 광장"]],"5":[["마드리드",2,"프라도 · 톨레도 당일"],["세비야",2,"대성당 · 스페인 광장"],["그라나다",1,"알함브라"]],"6":[["마드리드",2,"프라도 · 톨레도 당일"],["세비야",2,"대성당 · 스페인 광장"],["그라나다",2,"알함브라 · 알바이신"]],"7":[["마드리드",2,"프라도 · 왕궁"],["코르도바",1,"메스키타"],["세비야",2,"대성당 · 스페인 광장"],["그라나다",2,"알함브라 · 알바이신"]],"8":[["마드리드",2,"프라도 · 왕궁"],["톨레도",1,"구시가"],["코르도바",1,"메스키타"],["세비야",2,"대성당 · 스페인 광장"],["그라나다",2,"알함브라 · 알바이신"]],"9":[["마드리드",2,"프라도 · 톨레도 당일"],["세비야",2,"대성당 · 스페인 광장"],["그라나다",2,"알함브라"],["발렌시아",1,"예술과학도시"],["바르셀로나",2,"가우디"]],"10":[["마드리드",2,"프라도 · 왕궁"],["톨레도",1,"구시가"],["세비야",2,"대성당 · 스페인 광장"],["그라나다",2,"알함브라"],["발렌시아",1,"예술과학도시"],["바르셀로나",2,"가우디"]],"11":[["마드리드",2,"프라도 · 왕궁"],["톨레도",1,"구시가"],["코르도바",1,"메스키타"],["세비야",2,"대성당 · 스페인 광장"],["그라나다",2,"알함브라"],["발렌시아",1,"예술과학도시"],["바르셀로나",2,"가우디"]],"12":[["마드리드",2,"프라도 · 왕궁"],["톨레도",1,"구시가"],["코르도바",1,"메스키타"],["세비야",2,"대성당 · 스페인 광장"],["론다",1,"누에보 다리"],["그라나다",2,"알함브라"],["발렌시아",1,"예술과학도시"],["바르셀로나",2,"가우디"]]},"pt":{"2":[["리스본",2,"벨렝 · 알파마"]],"3":[["리스본",3,"벨렝 · 신트라 당일"]],"4":[["리스본",2,"벨렝 · 알파마"],["포르투",2,"도루 강 · 와인 셀러"]],"5":[["리스본",3,"벨렝 · 신트라 당일"],["포르투",2,"도루 강 · 와인 셀러"]],"6":[["리스본",3,"벨렝 · 신트라 당일"],["파티마",1,"성지"],["포르투",2,"도루 강 · 와인 셀러"]],"7":[["리스본",3,"벨렝 · 신트라 당일"],["파티마",1,"성지"],["코임브라",1,"대학 · 도서관"],["포르투",2,"도루 강 · 와인 셀러"]]},"ib":{"4":[["마드리드",2,"프라도 · 왕궁"],["리스본",2,"벨렝 · 알파마"]],"5":[["마드리드",2,"프라도 · 왕궁"],["세비야",1,"대성당"],["리스본",2,"벨렝 · 알파마"]],"6":[["마드리드",2,"프라도 · 톨레도 당일"],["세비야",2,"대성당 · 스페인 광장"],["리스본",2,"벨렝 · 신트라"]],"7":[["마드리드",2,"프라도 · 톨레도 당일"],["세비야",2,"대성당 · 스페인 광장"],["리스본",2,"벨렝 · 신트라"],["포르투",1,"도루 강"]],"8":[["마드리드",2,"프라도 · 톨레도 당일"],["세비야",2,"대성당 · 스페인 광장"],["리스본",2,"벨렝 · 신트라"],["포르투",2,"도루 강 · 와인 셀러"]],"9":[["마드리드",2,"프라도 · 톨레도 당일"],["그라나다",1,"알함브라"],["세비야",2,"대성당 · 스페인 광장"],["리스본",2,"벨렝 · 신트라"],["포르투",2,"도루 강 · 와인 셀러"]],"10":[["마드리드",2,"프라도 · 톨레도 당일"],["그라나다",1,"알함브라"],["세비야",2,"대성당 · 스페인 광장"],["리스본",2,"벨렝 · 신트라"],["파티마",1,"성지"],["포르투",2,"도루 강 · 와인 셀러"]],"11":[["마드리드",2,"프라도 · 톨레도 당일"],["그라나다",2,"알함브라 · 알바이신"],["세비야",2,"대성당 · 스페인 광장"],["리스본",2,"벨렝 · 신트라"],["파티마",1,"성지"],["포르투",2,"도루 강 · 와인 셀러"]],"12":[["마드리드",2,"프라도 · 왕궁"],["코르도바",1,"메스키타"],["그라나다",2,"알함브라 · 알바이신"],["세비야",2,"대성당 · 스페인 광장"],["리스본",2,"벨렝 · 신트라"],["파티마",1,"성지"],["포르투",2,"도루 강 · 와인 셀러"]],"13":[["바르셀로나",2,"가우디"],["마드리드",2,"프라도 · 왕궁"],["그라나다",2,"알함브라 · 알바이신"],["세비야",2,"대성당 · 스페인 광장"],["리스본",2,"벨렝 · 신트라"],["파티마",1,"성지"],["포르투",2,"도루 강 · 와인 셀러"]]}};
+  var BD_COURSE_NAMES = { es:'스페인', pt:'포르투갈', ib:'스페인 + 포르투갈' };
+  var bdCourseTab = 'es';
+  var BD_PT_CITIES = ['리스본','포르투','코임브라','신트라','파티마','파루','브라가','에보라','나자레','오비두스'];
+  /* 이 나라 탭에서 고를 수 있는 도시 (스페인 탭 = 포르투갈 도시 빼고, 포르투갈 탭 = 포르투갈 도시만) */
+  function bdCourseCities(tab){
+    var all = bdData().도시 || [];
+    if(tab === 'pt') return all.filter(function(c){ return BD_PT_CITIES.indexOf(c) !== -1; });
+    if(tab === 'es') return all.filter(function(c){ return BD_PT_CITIES.indexOf(c) === -1; });
+    return all.slice();
+  }
+  function bdCourse(){ var d = bdData(); return (d.코스 && typeof d.코스 === 'object') ? d.코스 : null; }
+  function bdCourseBox(){
+    var d = bdData(), co = bdCourse();
+    var head = '<div class="co-box"><h3>추천 코스 <span style="font-size:11.5px;color:var(--muted);font-weight:700;">· 손님 화면 「추천 코스로 시작」</span></h3>' +
+      '<p class="how">나라 · 박 수마다 도시와 박 수를 정해 두면, 손님이 그 나라와 일수를 고를 때 날짜가 이 순서대로 채워집니다. ' +
+      '줄에 없는 박 수는 가까운 아래 줄 코스에서 큰 도시에 하루씩 더해 맞춥니다. 도시의 박 수 합이 그 줄의 박 수와 같아야 합니다.</p>';
+    if(!co){
+      return head + '<p class="how" style="margin:0 0 10px;">지금은 기본 코스(제작 때 넣어 둔 코스)를 쓰고 있습니다.</p>' +
+        '<button type="button" class="bd-add" data-co-start>기본 코스를 불러와 고치기</button></div>';
+    }
+    var tbl = co[bdCourseTab] || {};
+    var keys = Object.keys(tbl).map(Number).filter(function(n){ return n > 0; }).sort(function(a, b){ return a - b; });
+    var cityOpts = function(cur){
+      var list = bdCourseCities(bdCourseTab); if(cur && list.indexOf(cur) === -1) list.unshift(cur);
+      return list.map(function(c){ return '<option value="' + esc(c) + '"' + (c === cur ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('');
+    };
+    var rows = keys.map(function(n){
+      var stops = Array.isArray(tbl[n]) ? tbl[n] : [];
+      var sum = stops.reduce(function(a, x){ return a + (Number(x[1]) || 0); }, 0);
+      return '<div class="co-row" data-co-n="' + n + '">' +
+        '<div class="co-n">' + n + '박 ' + (n + 1) + '일' +
+          '<small class="' + (sum === n ? '' : 'bad') + '">' + (sum === n ? '합 ' + sum + '박 ✓' : '합 ' + sum + '박 — ' + n + '박이 되어야 합니다') + '</small></div>' +
+        '<div class="co-stops">' + stops.map(function(x, i){
+          return (i ? '<span class="ar">→</span>' : '') +
+            '<span class="co-stop"><select data-co-i="' + i + '" data-co-f="도시">' + cityOpts(x[0]) + '</select>' +
+            '<input class="nt" type="number" min="1" max="20" data-co-i="' + i + '" data-co-f="박" value="' + (Number(x[1]) || 1) + '">박' +
+            '<input class="ds" type="text" data-co-i="' + i + '" data-co-f="소개" placeholder="한 줄 소개 (예: 프라도 · 왕궁)" value="' + esc(x[2] || '') + '">' +
+            '<button type="button" data-co-mv="' + i + '" data-dir="-1" title="앞으로">◀</button>' +
+            '<button type="button" data-co-mv="' + i + '" data-dir="1" title="뒤로">▶</button>' +
+            '<button type="button" data-co-del="' + i + '" title="빼기">✕</button></span>';
+        }).join('') + '<button type="button" class="ad" data-co-addstop>+ 도시</button></div>' +
+        '<button type="button" class="rm2" data-co-delrow>줄 지우기</button></div>';
+    }).join('');
+    return head +
+      '<div class="co-tabs">' + Object.keys(BD_COURSE_NAMES).map(function(k){
+        return '<button type="button" class="' + (bdCourseTab === k ? 'on' : '') + '" data-co-tab="' + k + '">' + BD_COURSE_NAMES[k] + '</button>';
+      }).join('') + '</div>' +
+      (rows || '<p class="how">이 나라는 아직 코스가 없습니다. 아래에서 박 수 줄을 추가해 주세요. (비워 두면 기본 코스를 씁니다)</p>') +
+      '<div class="co-foot"><input type="number" id="coNewN" min="1" max="30" placeholder="박 수">' +
+        '<button type="button" class="bd-add" data-co-addrow>+ 박 수 줄 추가</button>' +
+        '<button type="button" class="bd-add" data-co-reset style="margin-left:auto;">이 나라를 기본 코스로 되돌리기</button></div></div>';
+  }
+  function bdCourseClick(t, d){
+    if(t.hasAttribute('data-co-start')){
+      d.코스 = JSON.parse(JSON.stringify(BD_COURSE_DEFAULT));
+      renderBuilder(); refreshSaveBar(); return true;
+    }
+    if(t.dataset.coTab){ bdCourseTab = t.dataset.coTab; renderBuilder(); return true; }
+    var co = bdCourse(); if(!co) return false;
+    if(!co[bdCourseTab] || typeof co[bdCourseTab] !== 'object') co[bdCourseTab] = {};
+    var tbl = co[bdCourseTab];
+    if(t.hasAttribute('data-co-addrow')){
+      var n = parseInt(($('coNewN') || {}).value, 10);
+      if(!(n >= 1 && n <= 30)){ toast('박 수를 1~30 사이로 넣어 주세요.', true); return true; }
+      if(tbl[n]){ toast(n + '박 줄은 이미 있습니다.', true); return true; }
+      tbl[n] = [[bdCourseCities(bdCourseTab)[0] || d.도시[0] || '', n, '']];
+      renderBuilder(); refreshSaveBar(); return true;
+    }
+    if(t.hasAttribute('data-co-reset')){
+      if(!confirm(BD_COURSE_NAMES[bdCourseTab] + ' 코스를 기본 코스로 되돌릴까요?')) return true;
+      co[bdCourseTab] = JSON.parse(JSON.stringify(BD_COURSE_DEFAULT[bdCourseTab] || {}));
+      renderBuilder(); refreshSaveBar(); return true;
+    }
+    var row = t.closest('.co-row'); if(!row) return false;
+    var key = row.dataset.coN, stops = tbl[key]; if(!Array.isArray(stops)) return true;
+    if(t.hasAttribute('data-co-delrow')){
+      if(!confirm(key + '박 줄을 지울까요?')) return true;
+      delete tbl[key]; renderBuilder(); refreshSaveBar(); return true;
+    }
+    if(t.hasAttribute('data-co-addstop')){
+      /* 아직 이 줄에 없는 도시를 먼저 넣습니다 */
+      var cand = bdCourseCities(bdCourseTab), used = stops.map(function(x){ return x[0]; });
+      var pick = cand.filter(function(c){ return used.indexOf(c) === -1; })[0] || cand[0] || d.도시[0] || '';
+      stops.push([pick, 1, '']); renderBuilder(); refreshSaveBar(); return true; }
+    if(t.dataset.coDel !== undefined){ stops.splice(Number(t.dataset.coDel), 1); renderBuilder(); refreshSaveBar(); return true; }
+    if(t.dataset.coMv !== undefined){
+      var i = Number(t.dataset.coMv), j = i + Number(t.dataset.dir);
+      if(j < 0 || j >= stops.length) return true;
+      var x = stops[i]; stops[i] = stops[j]; stops[j] = x;
+      renderBuilder(); refreshSaveBar(); return true;
+    }
+    return false;
+  }
+  function bdCourseEdit(t, d){
+    if(!t.dataset || t.dataset.coF === undefined) return false;
+    var co = bdCourse(); if(!co) return true;
+    var row = t.closest('.co-row'); if(!row) return true;
+    var stops = (co[bdCourseTab] || {})[row.dataset.coN]; if(!Array.isArray(stops)) return true;
+    var st = stops[Number(t.dataset.coI)]; if(!st) return true;
+    if(t.dataset.coF === '도시') st[0] = t.value;
+    else if(t.dataset.coF === '박'){
+      st[1] = Math.max(1, Math.min(20, parseInt(t.value, 10) || 1));
+      /* 합 표시만 바로 고칩니다 (입력 중 화면을 다시 그리지 않도록) */
+      var n = Number(row.dataset.coN), sum = stops.reduce(function(a, x){ return a + (Number(x[1]) || 0); }, 0);
+      var sm = row.querySelector('.co-n small');
+      if(sm){ sm.className = sum === n ? '' : 'bad'; sm.textContent = sum === n ? '합 ' + sum + '박 ✓' : '합 ' + sum + '박 — ' + n + '박이 되어야 합니다'; }
+    }
+    else st[2] = t.value;
+    refreshSaveBar(); return true;
+  }
+
   function bdCityBox(){
     var d = bdData();
     var chips = d.도시.map(function(c, i){
@@ -3357,7 +3494,7 @@
     if(!store.builder.loaded){ box.innerHTML = '<div class="empty">불러오는 중…</div>'; return; }
 
     var d = bdData();
-    var html = bdSetBox() + bdCityBox();
+    var html = bdSetBox() + bdCityBox() + bdCourseBox();
 
     BD_KINDS.forEach(function(kind){
       var list = d.품목.filter(function(x){ return x.종류 === kind.k; });
@@ -3412,6 +3549,9 @@
       if(v){ v[t.dataset.vf] = t.value; refreshSaveBar(); }
       return;
     }
+
+    /* 추천 코스 */
+    if(bdCourseEdit(t, d)) return;
 
     /* 호텔 사진 — 설명 · 사진 제공 · 지도 주소 */
     if(t.dataset && (t.dataset.phc !== undefined || t.dataset.phm)){
@@ -3486,6 +3626,12 @@
       d.경유.splice(Number(t.dataset.viaRm), 1);
       renderBuilder(); refreshSaveBar();
       return;
+    }
+
+    /* 추천 코스 */
+    if(t.closest && t.closest('.co-box')){
+      var 단추 = t.closest('button');
+      if(단추 && bdCourseClick(단추, d)) return;
     }
 
     /* 호텔 사진 */
