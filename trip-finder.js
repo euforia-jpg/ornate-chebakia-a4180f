@@ -169,7 +169,7 @@
   '.tf-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}' +
   '.tf-btn{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--navy,#24303A);background:var(--navy,#24303A);color:#fff;font:inherit;font-size:14px;font-weight:800;padding:10px 16px;border-radius:999px;cursor:pointer;box-shadow:0 10px 22px -12px rgba(36,48,58,.7);transition:transform .15s}' +
   '.tf-btn:hover{transform:translateY(-1px)}' +
-  '.tf-btn .tf-spark{width:20px;height:20px;border-radius:50%;background:#F1C48A;color:#24303A;display:inline-flex;align-items:center;justify-content:center;font-size:11px}' +
+  '.tf-btn .tf-spark{width:20px;height:20px;border-radius:50%;background:#F1C48A;color:#24303A;display:inline-flex;align-items:center;justify-content:center;font-size:13px;line-height:1}' +
   '.tf-btn .tf-arr{font-size:11px;opacity:.75}' +
   '.tf-btn[aria-expanded="true"]{background:#fff;color:var(--navy,#24303A);box-shadow:none}' +
   '.tf-panel{display:none;margin:0 0 26px}' +
@@ -221,6 +221,27 @@
   '.tf-more{margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:14px;background:#F4EFEA;border-radius:16px;padding:16px 20px}' +
   '.tf-more p{margin:0;font-size:13.5px;font-weight:600;color:var(--ink,#24303A)}' +
   '.tf-more a{flex:0 0 auto;font-size:13px;font-weight:800;background:var(--pink,#94634A);color:#fff;border-radius:999px;padding:10px 16px;text-decoration:none}' +
+  /* ── 먼저 눌러 보시게 — 반짝임 · 말풍선 (한 번 누르시면 그 기기에서는 멈춥니다) ── */
+  '.tf-actions{position:relative}' +
+  '.tf-btn.tf-lure{position:relative;animation:tfPulse 2.4s ease-out infinite}' +
+  '.tf-btn.tf-lure::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;' +
+    'background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.38) 50%,transparent 70%);background-size:250% 100%;' +
+    'animation:tfShine 2.4s ease-in-out infinite}' +
+  '.tf-btn.tf-lure .tf-spark{animation:tfTwinkle 1.2s ease-in-out infinite}' +
+  '@keyframes tfPulse{0%{box-shadow:0 0 0 0 rgba(241,196,138,.85),0 10px 22px -12px rgba(36,48,58,.7)}' +
+    '70%{box-shadow:0 0 0 14px rgba(241,196,138,0),0 10px 22px -12px rgba(36,48,58,.7)}' +
+    '100%{box-shadow:0 0 0 0 rgba(241,196,138,0),0 10px 22px -12px rgba(36,48,58,.7)}}' +
+  '@keyframes tfShine{0%,35%{background-position:120% 0}75%,100%{background-position:-120% 0}}' +
+  '@keyframes tfTwinkle{0%,100%{transform:scale(1) rotate(0);box-shadow:0 0 0 0 rgba(241,196,138,0)}' +
+    '50%{transform:scale(1.18) rotate(20deg);box-shadow:0 0 10px 2px rgba(241,196,138,.9)}}' +
+  '.tf-tip{position:absolute;left:0;top:calc(100% + 10px);z-index:5;white-space:nowrap;background:#F1C48A;color:#24303A;' +
+    'font-size:12.5px;font-weight:800;padding:7px 12px;border-radius:10px;box-shadow:0 8px 18px -10px rgba(36,48,58,.6);' +
+    'opacity:0;transform:translateY(-4px);transition:opacity .35s,transform .35s;line-height:1.35;letter-spacing:0}' +
+  '.tf-tip::before{content:"";position:absolute;left:22px;top:-6px;width:12px;height:12px;background:#F1C48A;transform:rotate(45deg);border-radius:2px}' +
+  '.tf-tip.on{opacity:1;transform:none;animation:tfBob 2.4s ease-in-out .4s infinite}' +
+  '@keyframes tfBob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}' +
+  '@media (prefers-reduced-motion:reduce){.tf-btn.tf-lure,.tf-btn.tf-lure::after,.tf-btn.tf-lure .tf-spark,.tf-tip.on{animation:none}' +
+    '.tf-btn.tf-lure{box-shadow:0 0 0 3px rgba(241,196,138,.9),0 10px 22px -12px rgba(36,48,58,.7)}}' +
   '@media (max-width:600px){' +
     '.tf-box{padding:18px 14px}.tf-sentence{font-size:16.5px;line-height:2.3}' +
     '.tf-slot{padding:0 9px;margin:0 2px;border-radius:10px}.tf-slot .tf-v{font-size:10px}' +
@@ -306,8 +327,27 @@
     var 묶음 = document.createElement('div'); 묶음.className = 'tf-actions';
     단추 = document.createElement('button'); 단추.type = 'button'; 단추.className = 'tf-btn';
     단추.setAttribute('aria-expanded', 'false');
-    단추.innerHTML = '<span class="tf-spark">✦</span>나에게 맞는 일정 찾기 <span class="tf-arr">▾</span>';
+    단추.innerHTML = '<span class="tf-spark">🧭</span>나에게 맞는 일정 찾기 <span class="tf-arr">▾</span>';
     묶음.appendChild(단추);
+
+    /* 아직 한 번도 안 눌러 보신 손님께는 단추를 반짝이고 말풍선을 띄웁니다 */
+    var 써봄 = false;
+    try { 써봄 = localStorage.getItem('eu-tf-used') === '1'; } catch (e) {}
+    var 말풍선 = null;
+    if (!써봄) {
+      단추.classList.add('tf-lure');
+      말풍선 = document.createElement('span'); 말풍선.className = 'tf-tip'; 말풍선.setAttribute('aria-hidden', 'true');
+      말풍선.textContent = '질문 4개로 딱 맞는 일정을 찾아 드려요';
+      단추.appendChild(말풍선);   /* 말풍선을 눌러도 단추를 누른 것과 같습니다 */
+      setTimeout(function () { if (말풍선) 말풍선.classList.add('on'); }, 1200);
+      /* 말풍선은 9초 뒤 저절로 접어 아래 버튼(필터)을 가리지 않게 합니다. 반짝임은 계속됩니다 */
+      setTimeout(function () { if (말풍선) { 말풍선.classList.remove('on'); 말풍선.style.visibility = 'hidden'; } }, 10200);
+    }
+    function 유도끄기() {
+      단추.classList.remove('tf-lure');
+      if (말풍선) { 말풍선.remove(); 말풍선 = null; }
+      try { localStorage.setItem('eu-tf-used', '1'); } catch (e) {}
+    }
     var 원래링크 = 머리.querySelector('a.more');
     if (원래링크) 묶음.appendChild(원래링크);
     머리.appendChild(묶음);
@@ -315,7 +355,7 @@
     판 = document.createElement('div'); 판.className = 'tf-panel'; 판.id = 'tripFinder';
     머리.parentNode.insertBefore(판, 머리.nextSibling);
 
-    단추.addEventListener('click', function () { 열고닫기(!판.classList.contains('open')); });
+    단추.addEventListener('click', function () { 유도끄기(); 열고닫기(!판.classList.contains('open')); });
     판.addEventListener('click', function (e) {
       var t = e.target.closest('button'); if (!t) return;
       if (t.dataset.slot) { 열린칸 = (열린칸 === t.dataset.slot) ? '' : t.dataset.slot; 그리기(); return; }
