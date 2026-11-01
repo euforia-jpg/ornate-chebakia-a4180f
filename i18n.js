@@ -310,3 +310,78 @@
     refresh: function () { 한판(document.body); }
   };
 })();
+
+/*
+  ===========================================================
+  페이지별 「공유하기」
+  -----------------------------------------------------------
+  쪽 아래(바닥글)의 「공유하기」 단추는 원래 어느 쪽에서 눌러도
+  첫 페이지 주소(toureplus.co.kr)만 보냈습니다.
+  이제는 지금 보고 있는 쪽의 주소 · 제목 · 소개글을 보냅니다.
+
+    · 상품 쪽   → 짧은 주소 https://toureplus.co.kr/p/<상품id>
+                  (카카오톡 미리보기에 그 상품의 이름 · 사진이 뜨는 주소)
+    · 그 밖의 쪽 → 그 쪽 주소 (예: /tours.html, /builder.html)
+
+  이 파일은 모든 쪽이 맨 나중에(defer) 읽으므로, 쪽마다 들어 있는
+  옛 shareEuforiaSite 를 여기서 바꿔 끼웁니다.
+  → 쪽 파일 16개를 하나하나 고치지 않아도 됩니다.
+  ===========================================================
+*/
+(function () {
+  'use strict';
+  var 도메인 = 'https://toureplus.co.kr';
+  var 추적꼬리 = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid'];
+
+  var 말 = {
+    ko: ['이 페이지 주소가 복사되었어요.', '아래 주소를 복사해서 공유해 주세요.'],
+    en: ['The link to this page has been copied.', 'Copy the address below to share this page.'],
+    zh: ['已复制本页链接。', '请复制下方链接进行分享。']
+  };
+  function 글(i) {
+    var l = 'ko';
+    try { l = (window.EuforiaI18n && window.EuforiaI18n.get()) || 'ko'; } catch (e) {}
+    return (말[l] || 말.ko)[i];
+  }
+
+  function 주소() {
+    var 지금;
+    try { 지금 = new URL(location.href); } catch (e) { return 도메인 + '/'; }
+    추적꼬리.forEach(function (k) { 지금.searchParams.delete(k); });
+
+    var 대표 = null, c = document.querySelector('link[rel="canonical"]');
+    try { if (c && c.getAttribute('href')) 대표 = new URL(c.getAttribute('href'), 도메인); } catch (e) {}
+    if (대표 && !/(^|\.)toureplus\.co\.kr$/.test(대표.hostname)) 대표 = null;
+
+    /* 상품 쪽 — product.html 이 대표주소를 /p/<상품id> 로 바꿔 둡니다 */
+    if (대표 && /^\/p\/[^/]+$/.test(대표.pathname)) return 도메인 + 대표.pathname;
+    /* 주소 뒤에 ?… 가 붙어 뜻이 달라지는 쪽(공연 · 경기 등)은 그대로 */
+    if (지금.search) return 도메인 + 지금.pathname + 지금.search;
+    if (대표) return 도메인 + 대표.pathname;
+    return 도메인 + 지금.pathname;
+  }
+
+  function 소개() {
+    var m = document.querySelector('meta[name="description"]');
+    var t = String((m && m.getAttribute('content')) || '').replace(/\s+/g, ' ').trim();
+    return t.length > 100 ? t.slice(0, 99) + '…' : t;
+  }
+
+  function 공유() {
+    var u = 주소();
+    var 자료 = { title: document.title || 'Euforia Tour', text: 소개(), url: u };
+    if (!자료.text) delete 자료.text;
+    if (navigator.share) {
+      navigator.share(자료).catch(function () {});
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(u).then(function () {
+        alert(글(0) + '\n' + u);
+      }).catch(function () { window.prompt(글(1), u); });
+    } else {
+      window.prompt(글(1), u);
+    }
+  }
+
+  window.shareEuforiaSite = 공유;
+  window.euSharePage = 공유;
+})();
