@@ -222,6 +222,80 @@
   .bx-f input:focus, .bx-f textarea:focus{ border-color:var(--violet); outline:none; }
   .bx-f .hint{ font-size:11.5px; font-weight:600; color:var(--muted); }
 
+  /* ── 쉽게 고르기 (나라 · 인원 · 일수 · 코스) — 2026-11 ── */
+  .bx-flow{ display:flex; gap:6px; flex-wrap:wrap; margin:0 0 16px; }
+  .bx-flow button{ all:unset; cursor:pointer; font-size:11.5px; font-weight:800; padding:6px 11px; border-radius:999px;
+    background:#EEF1F3; color:var(--muted); }
+  .bx-flow button.on{ background:var(--navy); color:#fff; }
+  .bx-q{ font-size:12px; font-weight:800; color:var(--muted); margin:0 0 8px; }
+  .bx-nara{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:18px; }
+  .bx-nara button{ all:unset; box-sizing:border-box; cursor:pointer; border:2px solid var(--line); border-radius:16px;
+    padding:13px 15px; display:flex; gap:12px; align-items:center; background:#fff; }
+  .bx-nara button:hover{ border-color:var(--violet); }
+  .bx-nara button.on{ border-color:var(--navy); box-shadow:0 0 0 2px var(--navy) inset; background:#F7F9FA; }
+  .bx-nara .fl{ flex:none; width:40px; height:40px; border-radius:11px; }
+  .bx-nara .fl.es{ background:linear-gradient(180deg,#B7413A 0 28%,#E2B33C 28% 72%,#B7413A 72%); }
+  .bx-nara .fl.pt{ background:linear-gradient(90deg,#3E7A4A 0 42%,#B7413A 42%); }
+  .bx-nara .fl.ib{ background:linear-gradient(135deg,#B7413A 0 50%,#3E7A4A 50%); }
+  .bx-nara b{ display:block; font-size:14.5px; font-weight:800; color:var(--ink); }
+  .bx-nara small{ display:block; font-size:11.5px; font-weight:600; color:var(--muted); margin-top:2px; }
+  .bx-stp{ display:flex; align-items:stretch; border:2px solid var(--line); border-radius:12px; overflow:hidden; height:46px; }
+  .bx-stp button{ all:unset; cursor:pointer; flex:none; width:44px; display:flex; align-items:center; justify-content:center;
+    font-size:19px; font-weight:800; color:var(--navy); background:#F5F7F8; }
+  .bx-stp button:hover{ background:#EAEFF2; }
+  .bx-f .bx-stp input{ border:0; border-radius:0; text-align:center; padding:0 4px; font-size:16px; font-weight:800; min-width:0; -moz-appearance:textfield; }
+  .bx-stp input::-webkit-outer-spin-button, .bx-stp input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  .bx-dchips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .bx-dchips button{ all:unset; cursor:pointer; padding:7px 10px; border-radius:10px; border:1.5px solid var(--line);
+    font-size:12.5px; font-weight:800; color:var(--ink); background:#fff; }
+  .bx-dchips button small{ font-size:10.5px; font-weight:700; color:var(--muted); margin-left:2px; }
+  .bx-dchips button.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .bx-dchips button.on small{ color:#cfd6db; }
+  .bx-mode{ display:inline-grid; grid-auto-flow:column; gap:4px; background:#EEF1F3; border-radius:12px; padding:4px; margin-bottom:14px; max-width:100%; }
+  .bx-mode button{ all:unset; cursor:pointer; padding:9px 14px; border-radius:9px; font-size:13px; font-weight:800; color:var(--muted); text-align:center; }
+  .bx-mode button.on{ background:#fff; color:var(--navy); box-shadow:0 2px 6px -3px rgba(0,0,0,.3); }
+  .bx-route{ border-radius:16px; background:linear-gradient(135deg,#EEF1F3,#F4EFEA); padding:18px 20px; }
+  .bx-route .top{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+  .bx-route .top b{ font-size:15px; font-weight:800; color:var(--navy); }
+  .bx-route .top span{ font-size:12px; font-weight:700; color:var(--muted); }
+  .bx-path{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+  .bx-path .st{ background:#fff; border-radius:11px; padding:8px 12px; font-size:13.5px; font-weight:800; color:var(--ink);
+    box-shadow:0 3px 8px -5px rgba(0,0,0,.35); }
+  .bx-path .st small{ display:block; font-size:10.5px; font-weight:700; color:var(--violet); margin-top:1px; }
+  .bx-path .ar{ color:#9AA4AB; font-weight:900; }
+  .bx-route .why{ margin-top:12px; font-size:12.5px; font-weight:600; color:#4A565F; line-height:1.7; }
+  .bx-vars{ display:flex; gap:6px; flex-wrap:wrap; margin-top:12px; }
+  .bx-vars button{ all:unset; cursor:pointer; font-size:11.5px; font-weight:800; padding:6px 11px; border-radius:999px;
+    background:#fff; border:1.5px solid var(--line); color:var(--muted); }
+  .bx-vars button.on{ border-color:var(--violet); color:var(--violet); }
+  .bx-cgo{ display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; align-items:center; }
+  .bx-cgo .p{ all:unset; cursor:pointer; background:var(--navy); color:#fff; padding:12px 18px; border-radius:999px; font-size:13.5px; font-weight:800; }
+  .bx-cgo .p:hover{ background:var(--violet); }
+  .bx-cgo .p[disabled]{ opacity:.45; cursor:not-allowed; }
+  .bx-cgo .ok{ font-size:12.5px; font-weight:800; color:var(--teal); }
+  .bx-cg{ margin-bottom:12px; }
+  .bx-cg h4{ margin:0 0 8px; font-size:12px; font-weight:800; color:var(--muted); }
+  .bx-cities{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:8px; }
+  .bx-ct{ border:2px solid var(--line); border-radius:12px; padding:8px 9px 8px 11px; display:flex; align-items:center;
+    justify-content:space-between; gap:6px; background:#fff; }
+  .bx-ct.on{ border-color:var(--navy); background:#F7F9FA; }
+  .bx-ct b{ flex:1; min-width:0; font-size:13.5px; font-weight:800; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bx-ct .nt{ flex:none; }
+  .bx-ct .nt{ display:flex; align-items:center; gap:5px; }
+  .bx-ct .nt button{ all:unset; cursor:pointer; width:26px; height:26px; border-radius:8px; background:#EEF1F3;
+    display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--navy); }
+  .bx-ct .nt em{ font-style:normal; font-size:12.5px; font-weight:800; min-width:30px; text-align:center; color:var(--ink); }
+  .bx-ct:not(.on) .nt em{ color:#B5BDC2; }
+  .bx-sumbar{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:4px;
+    padding:11px 14px; border-radius:12px; background:#EDF1EF; font-size:12.5px; font-weight:700; color:#3E6155; }
+  .bx-blank{ padding:14px 16px; border-radius:12px; background:#F5F7F8; font-size:13px; font-weight:600; color:var(--muted); line-height:1.7; }
+  @media (max-width:640px){
+    .bx-nara{ grid-template-columns:1fr; } .bx-nara button{ padding:10px 12px; } .bx-nara .fl{ width:34px; height:34px; }
+    .bx-mode{ display:grid; grid-template-columns:repeat(3,1fr); width:100%; } .bx-mode button{ padding:9px 4px; font-size:12px; }
+    .bx-cities{ grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } .bx-route{ padding:15px 14px; }
+    .bx-ct{ padding:7px 7px 7px 10px; } .bx-ct .nt{ gap:3px; } .bx-ct .nt button{ width:24px; height:24px; } .bx-ct .nt em{ min-width:26px; font-size:12px; }
+  }
+
   .bx-day{ border:1.5px solid var(--line); border-radius:16px; padding:16px clamp(14px,2.5vw,20px);
     margin-bottom:12px; background:#fff; }
   .bx-dayhead{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
@@ -1348,7 +1422,10 @@
     S.일수 = Math.max(최소날(), Number(CFG.기본일수) || 7);
     맞추기();
     뼈대();
+    $('bxRoot').addEventListener('click', 코스누름);
     규칙그리기();
+    코스자동();
+    코스그리기();
     날짜그리기();
     숙박그리기();
     지도그리기();
@@ -1371,7 +1448,10 @@
     S.일수 = Math.max(최소날(), S.일수);
     while(S.일정.length < S.일수){
       /* 1일차는 도착하는 날이라 공항 → 호텔 이동만 두고 시작합니다 */
-      S.일정.push({ 도시: CITIES[0] || '', 입장지: [], 식사: [],
+      /* 늘어난 날은 바로 앞날 도시로 (처음이면 고른 나라의 첫 도시) */
+      var 앞도시 = S.일정.length ? S.일정[S.일정.length - 1].도시
+                 : ((typeof 나라도시 === 'function' && 코스상태 ? 나라도시(코스상태.나라)[0] : '') || CITIES[0] || '');
+      S.일정.push({ 도시: 앞도시, 입장지: [], 식사: [],
                     종류: S.일정.length === 0 ? '이동' : '관광' });
     }
     /* 종류: 관광 · 이동(공항↔호텔) · 자유(종일 자유시간) */
@@ -1657,6 +1737,302 @@
     box.innerHTML = 줄;
   }
 
+  /* ---------------- 나라 · 추천 코스 · 도시만 고르기 (2026-11) ----------------
+     ① 나라를 고르면 날짜 칸의 도시 목록이 그 나라 도시로 줄어듭니다.
+     ② 추천 코스 — 나라 · 여행일수에 맞춰 도시와 박 수를 미리 나눠 둔 코스로 날짜를 한 번에 채웁니다.
+        아래 「코스표」 를 고치시면 추천 코스가 바뀝니다. (관리자 화면의 도시 목록에 없는 도시는 저절로 빠집니다)
+     ③ 도시만 고르기 — 도시마다 박 수만 정하면, 도는 순서는 지도 거리로 가장 짧게 정해 채웁니다.
+     손님이 날짜 칸에서 도시를 직접 바꾸시기 전까지는, 나라나 여행일수를 바꾸면 추천 코스가 저절로 다시 채워집니다. */
+  var 포도시목록 = ['리스본','포르투','코임브라','신트라','파티마','파루','브라가','에보라','나자레','오비두스'];
+  var 나라들 = {
+    es: { 이름:'스페인',           설명:'마드리드 · 바르셀로나 · 안달루시아' },
+    pt: { 이름:'포르투갈',         설명:'리스본 · 포르투 · 파티마' },
+    ib: { 이름:'스페인 + 포르투갈', 설명:'두 나라를 한 번에' }
+  };
+  /* 박 수별 대표 코스 — [도시, 박, 한 줄 소개]. 표에 없는 박 수는 가까운 아래 칸에서 큰 도시에 하루씩 더합니다. */
+  var 코스표 = {
+    es: {
+      2: [['마드리드',2,'프라도 · 왕궁']],
+      3: [['마드리드',3,'프라도 · 톨레도 당일']],
+      4: [['마드리드',2,'프라도 · 톨레도 당일'],['세비야',2,'대성당 · 스페인 광장']],
+      5: [['마드리드',2,'프라도 · 톨레도 당일'],['세비야',2,'대성당 · 스페인 광장'],['그라나다',1,'알함브라']],
+      6: [['마드리드',2,'프라도 · 톨레도 당일'],['세비야',2,'대성당 · 스페인 광장'],['그라나다',2,'알함브라 · 알바이신']],
+      7: [['마드리드',2,'프라도 · 왕궁'],['코르도바',1,'메스키타'],['세비야',2,'대성당 · 스페인 광장'],['그라나다',2,'알함브라 · 알바이신']],
+      8: [['마드리드',2,'프라도 · 왕궁'],['톨레도',1,'구시가'],['코르도바',1,'메스키타'],['세비야',2,'대성당 · 스페인 광장'],['그라나다',2,'알함브라 · 알바이신']],
+      9: [['마드리드',2,'프라도 · 톨레도 당일'],['세비야',2,'대성당 · 스페인 광장'],['그라나다',2,'알함브라'],['발렌시아',1,'예술과학도시'],['바르셀로나',2,'가우디']],
+      10:[['마드리드',2,'프라도 · 왕궁'],['톨레도',1,'구시가'],['세비야',2,'대성당 · 스페인 광장'],['그라나다',2,'알함브라'],['발렌시아',1,'예술과학도시'],['바르셀로나',2,'가우디']],
+      11:[['마드리드',2,'프라도 · 왕궁'],['톨레도',1,'구시가'],['코르도바',1,'메스키타'],['세비야',2,'대성당 · 스페인 광장'],['그라나다',2,'알함브라'],['발렌시아',1,'예술과학도시'],['바르셀로나',2,'가우디']],
+      12:[['마드리드',2,'프라도 · 왕궁'],['톨레도',1,'구시가'],['코르도바',1,'메스키타'],['세비야',2,'대성당 · 스페인 광장'],['론다',1,'누에보 다리'],['그라나다',2,'알함브라'],['발렌시아',1,'예술과학도시'],['바르셀로나',2,'가우디']]
+    },
+    pt: {
+      2: [['리스본',2,'벨렝 · 알파마']],
+      3: [['리스본',3,'벨렝 · 신트라 당일']],
+      4: [['리스본',2,'벨렝 · 알파마'],['포르투',2,'도루 강 · 와인 셀러']],
+      5: [['리스본',3,'벨렝 · 신트라 당일'],['포르투',2,'도루 강 · 와인 셀러']],
+      6: [['리스본',3,'벨렝 · 신트라 당일'],['파티마',1,'성지'],['포르투',2,'도루 강 · 와인 셀러']],
+      7: [['리스본',3,'벨렝 · 신트라 당일'],['파티마',1,'성지'],['코임브라',1,'대학 · 도서관'],['포르투',2,'도루 강 · 와인 셀러']]
+    },
+    ib: {
+      4: [['마드리드',2,'프라도 · 왕궁'],['리스본',2,'벨렝 · 알파마']],
+      5: [['마드리드',2,'프라도 · 왕궁'],['세비야',1,'대성당'],['리스본',2,'벨렝 · 알파마']],
+      6: [['마드리드',2,'프라도 · 톨레도 당일'],['세비야',2,'대성당 · 스페인 광장'],['리스본',2,'벨렝 · 신트라']],
+      7: [['마드리드',2,'프라도 · 톨레도 당일'],['세비야',2,'대성당 · 스페인 광장'],['리스본',2,'벨렝 · 신트라'],['포르투',1,'도루 강']],
+      8: [['마드리드',2,'프라도 · 톨레도 당일'],['세비야',2,'대성당 · 스페인 광장'],['리스본',2,'벨렝 · 신트라'],['포르투',2,'도루 강 · 와인 셀러']],
+      9: [['마드리드',2,'프라도 · 톨레도 당일'],['그라나다',1,'알함브라'],['세비야',2,'대성당 · 스페인 광장'],['리스본',2,'벨렝 · 신트라'],['포르투',2,'도루 강 · 와인 셀러']],
+      10:[['마드리드',2,'프라도 · 톨레도 당일'],['그라나다',1,'알함브라'],['세비야',2,'대성당 · 스페인 광장'],['리스본',2,'벨렝 · 신트라'],['파티마',1,'성지'],['포르투',2,'도루 강 · 와인 셀러']],
+      11:[['마드리드',2,'프라도 · 톨레도 당일'],['그라나다',2,'알함브라 · 알바이신'],['세비야',2,'대성당 · 스페인 광장'],['리스본',2,'벨렝 · 신트라'],['파티마',1,'성지'],['포르투',2,'도루 강 · 와인 셀러']],
+      12:[['마드리드',2,'프라도 · 왕궁'],['코르도바',1,'메스키타'],['그라나다',2,'알함브라 · 알바이신'],['세비야',2,'대성당 · 스페인 광장'],['리스본',2,'벨렝 · 신트라'],['파티마',1,'성지'],['포르투',2,'도루 강 · 와인 셀러']],
+      13:[['바르셀로나',2,'가우디'],['마드리드',2,'프라도 · 왕궁'],['그라나다',2,'알함브라 · 알바이신'],['세비야',2,'대성당 · 스페인 광장'],['리스본',2,'벨렝 · 신트라'],['파티마',1,'성지'],['포르투',2,'도루 강 · 와인 셀러']]
+    }
+  };
+  var 코스상태 = { 나라:'es', 방식:'rec', 종류:'대표', 고른:null, 손댐:false, 채움:'' };
+  var 코스종류 = [['대표','대표 코스'], ['여유','여유롭게 (도시 수 줄이기)'], ['부모','부모님과 (한 곳에 오래)']];
+
+  function 나라도시(나라){
+    return CITIES.filter(function(c){
+      var pt = 포도시목록.indexOf(c) !== -1;
+      return 나라 === 'ib' ? true : (나라 === 'pt' ? pt : !pt);
+    });
+  }
+  function 나라카드(){
+    return Object.keys(나라들).map(function(k){
+      return '<button type="button" class="' + (코스상태.나라 === k ? 'on' : '') + '" data-nara="' + k + '">' +
+        '<span class="fl ' + k + '"></span><span><b>' + 나라들[k].이름 + '</b><small>' + 나라들[k].설명 + '</small></span></button>';
+    }).join('');
+  }
+  function 일수칩(최소, 최대){
+    return [5, 7, 9, 10, 12, 14].filter(function(d){ return d >= 최소 && d <= 최대; }).map(function(d){
+      return '<button type="button" class="' + (S.일수 === d ? 'on' : '') + '" data-days="' + d + '">' + d + '일<small>' + (d - 1) + '박</small></button>';
+    }).join('');
+  }
+  /* 도시 사이 거리 (km, 직선) */
+  function 거리(a, b){
+    var p = MAP_CITY[a], q = MAP_CITY[b];
+    if(!p || !q) return 300;
+    var R = 6371, r = Math.PI / 180, dLa = (q[1] - p[1]) * r, dLo = (q[0] - p[0]) * r;
+    var h = Math.sin(dLa / 2) * Math.sin(dLa / 2) + Math.cos(p[1] * r) * Math.cos(q[1] * r) * Math.sin(dLo / 2) * Math.sin(dLo / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  /* 1박짜리 도시를 이웃 도시에 합쳐 도시 수를 줄입니다 */
+  function 합치기(코스, 최소박, 최대도시){
+    var c = 코스.map(function(x){ return x.slice(); });
+    var 돌기 = 0;
+    while(c.length > 1 && 돌기++ < 30){
+      var i = -1, 작은 = 99;
+      var 넘침 = 최대도시 && c.length > 최대도시;
+      /* 박 수가 가장 적은 도시부터 (같으면 뒤쪽 도시부터) 이웃에 합칩니다 */
+      c.forEach(function(x, j){ if((넘침 || x[1] < 최소박) && x[1] <= 작은){ 작은 = x[1]; i = j; } });
+      if(i === -1) break;
+      var 앞 = c[i - 1], 뒤 = c[i + 1];
+      var 받을 = !앞 ? 뒤 : !뒤 ? 앞 : (앞[1] >= 뒤[1] ? 앞 : 뒤);
+      받을[1] += c[i][1];
+      c.splice(i, 1);
+    }
+    return c;
+  }
+  function 줄이기(코스, 남길, 박){
+    /* 박 수가 많은 도시부터 (같으면 앞 도시부터) 남기고, 원래 순서를 지킵니다 */
+    var 순 = 코스.map(function(x, i){ return { x:x, i:i }; })
+      .sort(function(a, b){ return b.x[1] - a.x[1] || a.i - b.i; }).slice(0, 남길)
+      .sort(function(a, b){ return a.i - b.i; }).map(function(o){ return o.x.slice(); });
+    var 기본 = Math.floor(박 / 순.length), 남 = 박 - 기본 * 순.length;
+    순.forEach(function(x, i){ x[1] = 기본 + (i < 남 ? 1 : 0); });
+    return 순;
+  }
+  function 추천코스(나라, 박, 종류){
+    /* 두 나라를 3일 안쪽으로는 돌기 어려워 스페인 코스로 보여 드립니다 */
+    if(나라 === 'ib' && 박 < 4) 나라 = 'es';
+    var 표 = 코스표[나라] || 코스표.es;
+    var 칸들 = Object.keys(표).map(Number).sort(function(a, b){ return a - b; });
+    var 쓸 = 칸들[0];
+    칸들.forEach(function(n){ if(n <= 박) 쓸 = n; });
+    var 코스 = 표[쓸].map(function(x){ return x.slice(); });
+    /* 관리자 도시 목록에 없는 도시는 빼고 그 박 수는 이웃에 넘깁니다 */
+    코스 = 코스.filter(function(x, i){
+      if(CITIES.indexOf(x[0]) !== -1) return true;
+      var 받을 = 코스[i - 1] || 코스[i + 1]; if(받을) 받을[1] += x[1];
+      return false;
+    });
+    if(!코스.length) 코스 = [[나라도시(나라)[0] || CITIES[0] || '', 1, '']];
+    var 합 = 코스.reduce(function(a, x){ return a + x[1]; }, 0);
+    /* 남는 박은 2박 이상 머무는 도시들에 고르게 하루씩 나눠 드립니다 */
+    var 큰도시 = 코스.filter(function(x){ return x[1] >= 2; });
+    if(!큰도시.length) 큰도시 = 코스;
+    var 돌기 = 0;
+    while(합 < 박 && 돌기++ < 100){
+      var 줄 = 큰도시.slice().sort(function(a, b){ return a[1] - b[1]; })[0];
+      줄[1]++; 합++;
+    }
+    while(합 > 박 && 돌기++ < 200){
+      var 긴 = 코스.slice().sort(function(a, b){ return b[1] - a[1]; })[0];
+      if(긴[1] > 1){ 긴[1]--; 합--; } else { 코스.pop(); 합 = 코스.reduce(function(a, x){ return a + x[1]; }, 0); }
+    }
+    /* 여유롭게 — 1박짜리 도시를 빼고, 남은 도시에 박 수를 고르게 나눕니다
+       부모님과 — 도시를 박 수의 3분의 1 정도로 줄여 한 곳에 오래 머뭅니다 */
+    if(종류 === '여유' || 종류 === '부모'){
+      var 두박 = 코스.filter(function(x){ return x[1] >= 2; }).length || 1;
+      var 남길 = 종류 === '부모' ? Math.min(두박, Math.max(1, Math.round(박 / 3))) : 두박;
+      코스 = 줄이기(코스, 남길, 박);
+    }
+    return 코스;
+  }
+  /* 고른 도시들의 도는 순서 — 지도 거리로 가장 짧게, 공항 도시에서 시작 */
+  function 도는순서(도시들){
+    if(도시들.length < 3) return 도시들.slice();
+    var 좋은 = null, 짧은 = 1e9;
+    도시들.forEach(function(시작){
+      var 남 = 도시들.filter(function(c){ return c !== 시작; }), 길 = [시작], 합 = 0;
+      while(남.length){
+        var 끝 = 길[길.length - 1];
+        남.sort(function(a, b){ return 거리(끝, a) - 거리(끝, b); });
+        합 += 거리(끝, 남[0]); 길.push(남.shift());
+      }
+      if(합 < 짧은){ 짧은 = 합; 좋은 = 길; }
+    });
+    var 공항 = ['마드리드','바르셀로나','리스본','포르투'];
+    var 첫 = 공항.indexOf(좋은[0]), 끝 = 공항.indexOf(좋은[좋은.length - 1]);
+    if((첫 === -1 && 끝 !== -1) || (첫 > -1 && 끝 > -1 && 끝 < 첫)) 좋은.reverse();
+    return 좋은;
+  }
+  /* 코스로 날짜를 채웁니다 — 1일차부터 박 수만큼, 마지막 날은 마지막 도시 */
+  function 코스채우기(코스){
+    var 박 = 코스.reduce(function(a, x){ return a + x[1]; }, 0);
+    var 최대 = Math.max(1, Number(CFG.최대일수) || 20);
+    S.일수 = Math.max(최소날(), Math.min(최대, 박 + 1));
+    var 칸 = $('bxDaysN'); if(칸) 칸.value = S.일수;
+    맞추기();
+    var 날도시 = [];
+    코스.forEach(function(x){ for(var k = 0; k < x[1]; k++) 날도시.push(x[0]); });
+    while(날도시.length < S.일수) 날도시.push(날도시[날도시.length - 1] || CITIES[0]);
+    S.일정.forEach(function(d, i){
+      var 새 = 날도시[i];
+      if(d.도시 !== 새){
+        d.도시 = 새; d.입장지 = []; d.채운도시 = ''; d.근교 = '';
+        if(조언 && 조언.날 && 조언.날[i]) 조언.날[i] = null;
+      }
+    });
+    맞추기(); 무료채우기();
+    날짜그리기(); 숙박그리기(); 지도그리기(); 계산(); 규칙그리기();
+    일수칩그리기();
+  }
+  function 일수칩그리기(){
+    var c = $('bxDchips'); if(!c) return;
+    Array.prototype.forEach.call(c.querySelectorAll('[data-days]'), function(b){
+      b.classList.toggle('on', Number(b.dataset.days) === S.일수);
+    });
+  }
+  /* 손님이 날짜 칸을 직접 고치기 전이면, 추천 코스를 다시 채웁니다 */
+  function 코스자동(){
+    if(코스상태.손댐 || 코스상태.방식 !== 'rec') return;
+    코스채우기(추천코스(코스상태.나라, S.일수 - 1, 코스상태.종류));
+    코스상태.채움 = 'rec';
+  }
+  function 코스그리기(){
+    var box = $('bxCourse'); if(!box) return;
+    var 상 = 코스상태, 박 = S.일수 - 1;
+    var 방식 = '<div class="bx-mode">' +
+      [['rec','✨ 추천 코스로 시작'], ['pick','도시만 고르기'], ['blank','빈 일정부터']].map(function(x){
+        return '<button type="button" class="' + (상.방식 === x[0] ? 'on' : '') + '" data-cmode="' + x[0] + '">' + x[1] + '</button>';
+      }).join('') + '</div>';
+    var 안 = '';
+    if(상.방식 === 'rec'){
+      var 코스 = 추천코스(상.나라, 박, 상.종류);
+      안 = '<div class="bx-route"><div class="top"><b>' + 나라들[상.나라].이름 + ' ' + S.일수 + '일 추천 코스</b>' +
+        '<span>' + 박 + '박 · 도시 ' + 코스.length + '곳</span></div>' +
+        '<div class="bx-path">' + 코스.map(function(x, i){
+          return (i ? '<span class="ar">→</span>' : '') + '<span class="st">' + esc(x[0]) +
+            '<small>' + x[1] + '박' + (x[2] ? ' · ' + esc(x[2]) : '') + '</small></span>';
+        }).join('') + '</div>' +
+        '<div class="why">여행일수에 맞춰 도시와 박 수를 미리 나눠 둔 코스입니다. 아래 날짜별 칸에서 언제든 바꾸실 수 있어요.</div>' +
+        '<div class="bx-vars">' + 코스종류.map(function(x){
+          return '<button type="button" class="' + (상.종류 === x[0] ? 'on' : '') + '" data-cvar="' + x[0] + '">' + x[1] + '</button>';
+        }).join('') + '</div>' +
+        '<div class="bx-cgo"><button type="button" class="p" data-cfill="rec">이 코스로 날짜 채우기</button>' +
+          (상.채움 === 'rec' && !상.손댐 ? '<span class="ok">✓ 아래 날짜에 채워 두었습니다</span>' : '') + '</div></div>';
+    } else if(상.방식 === 'pick'){
+      if(!상.고른){
+        상.고른 = {};
+        추천코스(상.나라, 박, '대표').forEach(function(x){ 상.고른[x[0]] = (상.고른[x[0]] || 0) + x[1]; });
+      }
+      var 무리 = 상.나라 === 'ib' ? [['es','스페인'], ['pt','포르투갈']] : [[상.나라, 나라들[상.나라].이름]];
+      var 합 = Object.keys(상.고른).reduce(function(a, k){ return a + (상.고른[k] || 0); }, 0);
+      var 개 = Object.keys(상.고른).filter(function(k){ return 상.고른[k] > 0; }).length;
+      안 = 무리.map(function(m){
+        var 목록 = 나라도시(m[0]);
+        if(!목록.length) return '';
+        return '<div class="bx-cg"><h4>' + m[1] + '</h4><div class="bx-cities">' + 목록.map(function(c){
+          var n = 상.고른[c] || 0;
+          return '<div class="bx-ct' + (n ? ' on' : '') + '"><b>' + esc(c) + '</b><span class="nt">' +
+            '<button type="button" data-cpick="' + esc(c) + '" data-d="-1" aria-label="' + esc(c) + ' 하루 줄이기">−</button>' +
+            '<em>' + (n ? n + '박' : '—') + '</em>' +
+            '<button type="button" data-cpick="' + esc(c) + '" data-d="1" aria-label="' + esc(c) + ' 하루 늘리기">+</button></span></div>';
+        }).join('') + '</div></div>';
+      }).join('') +
+      '<div class="bx-sumbar"><span>고른 도시 ' + 개 + '곳 · 모두 ' + 합 + '박 → 여행일수 ' + (합 + 1) + '일로 맞춰 드립니다</span>' +
+        '<span>도는 순서는 동선에 맞게 저절로 정해 드립니다</span></div>' +
+      '<div class="bx-cgo"><button type="button" class="p" data-cfill="pick"' + (합 ? '' : ' disabled') + '>이 도시들로 날짜 채우기</button>' +
+        (상.채움 === 'pick' && !상.손댐 ? '<span class="ok">✓ 아래 날짜에 채워 두었습니다</span>' : '') + '</div>';
+    } else {
+      안 = '<div class="bx-blank">아래 <b>날짜별로 담기</b>에서 하루씩 도시를 골라 주세요. 위에서 고르신 나라의 도시만 보입니다.</div>' +
+        '<div class="bx-cgo"><button type="button" class="p" data-goto="bxDays">날짜별 칸으로 가기 ↓</button></div>';
+    }
+    box.innerHTML = 방식 + 안;
+  }
+  function 코스누름(e){
+    var t = e.target && e.target.closest ? e.target.closest('button') : null;
+    if(!t) return;
+    var 상 = 코스상태;
+    if(t.dataset.goto){
+      var 곳 = $(t.dataset.goto); if(곳) 곳.scrollIntoView({ behavior:'smooth', block:'start' });
+      return;
+    }
+    if(t.dataset.nara){
+      상.나라 = t.dataset.nara; 상.고른 = null;
+      $('bxNara').innerHTML = 나라카드();
+      /* 고른 나라에 없는 도시로 짜여 있으면 추천 코스로 다시 채웁니다 */
+      var 맞는 = 나라도시(상.나라);
+      var 벗어남 = S.일정.some(function(d){ return 맞는.indexOf(d.도시) === -1; });
+      if(!상.손댐 || 벗어남){ 상.손댐 = false; 상.방식 = 'rec'; 코스자동(); }
+      날짜그리기(); 코스그리기();
+      return;
+    }
+    if(t.dataset.stp){
+      var 칸 = $(t.dataset.stp); if(!칸) return;
+      var v = (Number(칸.value) || 0) + Number(t.dataset.d);
+      v = Math.max(Number(칸.min) || 1, Math.min(Number(칸.max) || 99, v));
+      칸.value = v; 칸.dispatchEvent(new Event('input', { bubbles:true }));
+      return;
+    }
+    if(t.dataset.days){
+      var 일칸 = $('bxDaysN'); 일칸.value = t.dataset.days;
+      일칸.dispatchEvent(new Event('input', { bubbles:true }));
+      return;
+    }
+    if(t.dataset.cmode){ 상.방식 = t.dataset.cmode; 코스그리기(); return; }
+    if(t.dataset.cvar){ 상.종류 = t.dataset.cvar; 상.손댐 = false; 코스자동(); 코스그리기(); return; }
+    if(t.dataset.cpick){
+      var c = t.dataset.cpick, n = (상.고른[c] || 0) + Number(t.dataset.d);
+      var 최대박 = Math.max(1, Number(CFG.최대일수) || 20) - 1;
+      var 합 = Object.keys(상.고른).reduce(function(a, k){ return a + (k === c ? 0 : (상.고른[k] || 0)); }, 0);
+      n = Math.max(0, Math.min(n, 최대박 - 합));
+      if(n) 상.고른[c] = n; else delete 상.고른[c];
+      코스그리기(); return;
+    }
+    if(t.dataset.cfill === 'rec'){
+      상.손댐 = false; 코스채우기(추천코스(상.나라, S.일수 - 1, 상.종류)); 상.채움 = 'rec'; 코스그리기();
+      var 날 = $('bxDays'); if(날) 날.scrollIntoView({ behavior:'smooth', block:'start' });
+      return;
+    }
+    if(t.dataset.cfill === 'pick'){
+      var 도시들 = Object.keys(상.고른).filter(function(k){ return 상.고른[k] > 0; });
+      if(!도시들.length) return;
+      var 순서 = 도는순서(도시들);
+      상.손댐 = false; 코스채우기(순서.map(function(k){ return [k, 상.고른[k], '']; })); 상.채움 = 'pick'; 상.손댐 = true;
+      코스그리기();
+      var 날2 = $('bxDays'); if(날2) 날2.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+  }
+
   /* ---------------- 화면 ---------------- */
   function 뼈대(){
     var 최대인원 = Math.max(1, Number(CFG.최대인원) || 45);
@@ -1666,21 +2042,38 @@
     var 안내 = CFG.안내문 || '';
 
     var html =
-      '<div class="bx-card">' +
-        '<h2>기본 설정</h2>' +
-        '<div class="sub">인원과 여행일수를 먼저 정해 주세요. 아래 금액이 이 기준으로 계산됩니다.</div>' +
+      '<div class="bx-card" id="bxSecBase">' +
+        '<div class="bx-flow">' +
+          '<button type="button" class="on" data-goto="bxSecBase">① 어디로 · 몇 명 · 며칠</button>' +
+          '<button type="button" data-goto="bxSecCourse">② 코스</button>' +
+          '<button type="button" data-goto="bxSecStay">③ 호텔 · 차량 · 가이드</button>' +
+          '<button type="button" data-goto="bxDays">④ 날짜별 다듬기</button></div>' +
+        '<h2>어디로 떠나세요?</h2>' +
+        '<div class="sub">나라를 고르시면 그 나라 도시만 보이고, 알맞은 추천 코스가 채워집니다. 아래 금액은 인원과 여행일수 기준으로 계산됩니다.</div>' +
+        '<div class="bx-q">나라</div>' +
+        '<div class="bx-nara" id="bxNara">' + 나라카드() + '</div>' +
         '<div class="bx-base">' +
           '<div class="bx-f"><label for="bxPeople">인원</label>' +
+            '<div class="bx-stp"><button type="button" data-stp="bxPeople" data-d="-1" aria-label="한 명 줄이기">−</button>' +
             '<input type="number" id="bxPeople" min="' + 최소인원 + '" max="' + 최대인원 + '" value="' + S.인원 + '">' +
+            '<button type="button" data-stp="bxPeople" data-d="1" aria-label="한 명 늘리기">+</button></div>' +
             '<span class="hint">' + (최소인원 > 1 ? 최소인원 + '명부터 · ' : '') + '최대 ' + 최대인원 + '명</span></div>' +
           '<div class="bx-f"><label for="bxDaysN">여행일수</label>' +
+            '<div class="bx-stp"><button type="button" data-stp="bxDaysN" data-d="-1" aria-label="하루 줄이기">−</button>' +
             '<input type="number" id="bxDaysN" min="' + 최소일수 + '" max="' + 최대일수 + '" value="' + S.일수 + '">' +
-            '<span class="hint" id="bxNights"></span></div>' +
+            '<button type="button" data-stp="bxDaysN" data-d="1" aria-label="하루 늘리기">+</button></div>' +
+            '<span class="hint" id="bxNights"></span>' +
+            '<div class="bx-dchips" id="bxDchips">' + 일수칩(최소일수, 최대일수) + '</div></div>' +
           '<div class="bx-f"><label for="bxStart">출발 희망일</label>' +
             '<input type="date" id="bxStart"><span class="hint">아직 안 정하셨어도 괜찮아요</span></div>' +
         '</div>' +
         '<div id="bxRule"></div>' +
         (안내 ? '<div class="bx-recap" style="margin:18px 0 0;"><div>' + esc(안내) + '</div></div>' : '') +
+      '</div>' +
+      '<div class="bx-card" id="bxSecCourse">' +
+        '<h2>코스는 어떻게 시작할까요?</h2>' +
+        '<div class="sub">추천 코스로 시작해서 날짜별로 바꾸셔도 되고, 가고 싶은 도시만 골라도 됩니다.</div>' +
+        '<div id="bxCourse"></div>' +
       '</div>';
 
 
@@ -1711,7 +2104,7 @@
       /* 숙박만 도시별로 따로 고릅니다 — 내용은 숙박그리기() 가 채웁니다 */
       if(k === '숙박'){
         html +=
-          '<div class="bx-card">' +
+          '<div class="bx-card" id="bxSecStay">' +
             '<h2>숙박</h2>' +
             '<div class="sub">호텔은 아래 <b>날짜별로 담기</b>에서 날마다 고르실 수 있습니다. 같은 도시에 며칠 머무시면 한 호텔로 이어서 잡아 드립니다. 2인 1실 1박 요금입니다.' +
               (CFG.숙박조건 ? ' ' + esc(CFG.숙박조건) : '') + '</div>' +
@@ -1811,7 +2204,8 @@
     });
     $('bxDaysN').addEventListener('input', function(){
       S.일수 = Math.max(최소날(), Math.min(최대일수, Number(this.value) || 최소날()));
-      맞추기(); 날짜그리기(); 숙박그리기(); 지도그리기(); 계산(); 규칙그리기();
+      맞추기(); 코스자동(); 날짜그리기(); 숙박그리기(); 지도그리기(); 계산(); 규칙그리기();
+      일수칩그리기(); 코스그리기();
     });
     /* 손님이 범위 밖 숫자를 넣으시면, 다 쓰고 칸을 벗어날 때 바로잡아 드립니다.
        (글자를 치는 중에 고치면 "10" 을 치려다 "1" 에서 튀어 버립니다) */
@@ -2431,8 +2825,11 @@
       });
       var 도시고르기 = '';
       if(CITIES.length){
+        var 보일도시 = 나라도시(코스상태.나라);
+        if(보일도시.indexOf(day.도시) === -1 && day.도시) 보일도시 = [day.도시].concat(보일도시);
+        if(!보일도시.length) 보일도시 = CITIES;
         도시고르기 = '<select data-city="' + i + '">' +
-          CITIES.map(function(c){
+          보일도시.map(function(c){
             return '<option value="' + esc(c) + '"' + (day.도시 === c ? ' selected' : '') + '>' + esc(c) + '</option>';
           }).join('') + '</select>';
       }
@@ -2664,6 +3061,8 @@
     if(t.dataset && t.dataset.city !== undefined){
       var di = Number(t.dataset.city);
       S.일정[di].도시 = t.value;
+      코스상태.손댐 = true;
+      코스그리기();
       /* 도시가 바뀌면 그 날 고른 입장지는 비웁니다 (다른 도시 것이 남지 않도록) */
       S.일정[di].입장지 = [];
       S.일정[di].채운도시 = '';          /* 새 도시의 무료 관광지를 다시 넣게 합니다 */
