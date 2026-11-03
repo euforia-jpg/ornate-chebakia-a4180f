@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>달력 직항 항공편 시안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --violet:#4A6E86; --pink:#94634A; --orange:#8E6139; --teal:#52786C;
+    --navy:#24303A; --ink:#24303A; --muted:#64707A; --line:#E4E6E8;
+    /* 항공사 구분색 (로고 대신 글자 + 색 점) */
+    --ke:#6FB7E0; --oz:#E39A8B; --tw:#E6C35C;
+  }
+  *{ box-sizing:border-box; }
+  html{ font-synthesis:none; }
+  body{ margin:0; font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif; color:var(--ink);
+    background:#EEF1F3; -webkit-font-smoothing:antialiased; }
+  .page{ max-width:1080px; margin:0 auto; padding:28px 16px 60px; }
+  .tag{ display:inline-block; font-size:11px; font-weight:800; letter-spacing:.06em; color:#fff; background:var(--pink);
+    border-radius:6px; padding:3px 8px; }
+  h1{ margin:10px 0 6px; font-size:24px; font-weight:800; color:var(--navy); letter-spacing:-.02em; }
+  .lede{ margin:0 0 18px; font-size:14px; color:var(--muted); line-height:1.7; max-width:70ch; word-break:keep-all; }
+  .pick{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px; }
+  .pick button{ all:unset; cursor:pointer; font-size:13px; font-weight:800; color:var(--navy); background:#fff;
+    border:1.5px solid var(--line); border-radius:999px; padding:8px 14px; }
+  .pick button.on{ background:var(--navy); color:#fff; border-color:var(--navy); }
+
+  .grid{ display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:24px; align-items:start; }
+  @media (max-width:860px){ .grid{ grid-template-columns:minmax(0,1fr); } .explain{ order:2; } }
+
+  /* 왼쪽: 설명 카드 */
+  .explain{ min-width:0; background:#fff; border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .explain h2{ margin:0 0 12px; font-size:16px; font-weight:800; color:var(--navy); }
+  .explain ol{ margin:0; padding-left:20px; font-size:13.5px; line-height:1.85; color:#3B4852; word-break:keep-all; }
+  .explain ol b{ color:var(--navy); }
+  .tblw{ overflow-x:auto; margin-top:18px; }
+  .tbl{ width:100%; min-width:460px; border-collapse:collapse; font-size:12.5px; }
+  .tbl th, .tbl td{ white-space:nowrap; text-align:left; padding:8px 8px; border-bottom:1px solid #EEF0F2; vertical-align:top; }
+  .tbl th{ font-size:11px; color:var(--muted); font-weight:800; }
+  .tbl td.num{ font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .src{ margin:14px 0 0; font-size:11.5px; color:var(--muted); line-height:1.7; }
+  .al{ display:inline-flex; align-items:center; gap:6px; font-weight:800; white-space:nowrap; }
+  .al i{ width:9px; height:9px; border-radius:50%; display:inline-block; flex:none; }
+  .al.ke i{ background:var(--ke); } .al.oz i{ background:var(--oz); } .al.tw i{ background:var(--tw); }
+
+  /* 오른쪽: 상품 쪽 사이드 카드 (실제 product.html 과 같은 모양) */
+  .side-card{ background:var(--navy); color:#fff; border-radius:18px; padding:22px; }
+  .side-card h3{ margin:0 0 6px; font-size:16px; font-weight:800; }
+  .side-card .sub{ margin:0 0 14px; font-size:12.5px; color:rgba(255,255,255,.7); font-weight:600; line-height:1.65; }
+  .avail-box{ background:rgba(255,255,255,.1); border-radius:12px; padding:14px; }
+  .avail-box h4{ margin:0 0 10px; font-size:11.5px; font-weight:800; letter-spacing:.5px; color:rgba(255,255,255,.6); }
+
+  .fl-head{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px; }
+  .fl-head .t{ font-size:12px; font-weight:800; color:#fff; }
+  .fl-head .t small{ font-weight:700; color:rgba(255,255,255,.55); margin-left:4px; }
+  .sw{ flex:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:800; color:rgba(255,255,255,.75); cursor:pointer; user-select:none; }
+  .sw input{ display:none; }
+  .sw span{ width:30px; height:17px; border-radius:999px; background:rgba(255,255,255,.18); position:relative; transition:.2s; }
+  .sw span::after{ content:""; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%; background:#fff; transition:.2s; }
+  .sw input:checked + span{ background:var(--teal); }
+  .sw input:checked + span::after{ left:15px; }
+
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .chip{ all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:800;
+    color:#fff; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:999px; padding:5px 10px; }
+  .chip i{ width:8px; height:8px; border-radius:50%; }
+  .chip.off{ opacity:.38; }
+  .chip.none{ opacity:.38; cursor:default; }
+  .chip .r{ font-weight:700; color:rgba(255,255,255,.55); }
+
+  .cal-nav{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+  .cal-nav button{ all:unset; cursor:pointer; width:26px; height:26px; display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:800; border-radius:6px; }
+  .cal-nav button:hover{ background:rgba(255,255,255,.14); }
+  .cal-nav .lbl{ font-size:12.5px; font-weight:800; }
+  .cal-dow{ display:grid; grid-template-columns:repeat(7,1fr); text-align:center; font-size:10px; color:rgba(255,255,255,.45);
+    font-weight:800; margin-bottom:4px; }
+  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+  .d{ all:unset; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:3px;
+    height:40px; padding-top:6px; border-radius:9px; font-size:11.5px; font-weight:700; color:rgba(255,255,255,.85);
+    cursor:pointer; box-sizing:border-box; }
+  .d.empty{ visibility:hidden; }
+  .d.past{ color:rgba(255,255,255,.2); cursor:default; }
+  .d:not(.past):hover{ background:rgba(255,255,255,.1); }
+  .d .dots{ display:flex; gap:2px; height:6px; }
+  .d .dots i{ width:6px; height:6px; border-radius:50%; }
+  .d.rt{ background:rgba(82,120,108,.28); box-shadow:inset 0 0 0 1px rgba(150,200,180,.45); }
+  .d.dim{ opacity:.28; }
+  .d.sel, .d.sel:not(.past):hover{ background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; box-shadow:none; }
+  .d.ret{ box-shadow:inset 0 0 0 1.5px #F2C9A8; }
+  .d.ret::after{ content:"귀국"; position:absolute; bottom:2px; font-size:8px; font-weight:800; color:#F2C9A8; letter-spacing:-.02em; }
+  .d.ret .dots{ display:none; }
+  .d.trip{ background:rgba(255,255,255,.07); border-radius:0; }
+
+  .legend{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; font-size:10.5px; color:rgba(255,255,255,.55); font-weight:700; }
+  .legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .legend b{ width:14px; height:10px; border-radius:3px; display:inline-block; }
+
+  .pane{ margin-top:12px; background:#fff; color:var(--ink); border-radius:12px; padding:12px 13px; }
+  .pane .empty{ font-size:12px; color:var(--muted); font-weight:600; line-height:1.6; }
+  .leg{ padding:4px 0 8px; }
+  .leg + .leg{ border-top:1px dashed #E3E7EA; padding-top:10px; }
+  .leg h5{ margin:0 0 6px; font-size:12px; font-weight:800; color:var(--navy); display:flex; justify-content:space-between; gap:6px; }
+  .leg h5 small{ color:var(--muted); font-weight:700; }
+  .fl{ display:grid; grid-template-columns:auto 1fr auto; gap:8px; align-items:center; padding:7px 9px; border-radius:9px;
+    background:#F5F7F8; margin-bottom:5px; font-size:12px; }
+  .fl .no{ font-weight:800; color:var(--navy); font-variant-numeric:tabular-nums; }
+  .fl .tm{ font-variant-numeric:tabular-nums; font-weight:800; color:#3B4852; text-align:right; white-space:nowrap; }
+  .fl .tm sup{ font-size:9px; color:var(--pink); margin-left:1px; }
+  .fl .ac{ grid-column:2 / 4; margin-top:-4px; font-size:10.5px; color:var(--muted); font-weight:600; }
+  .nofl{ font-size:11.5px; color:var(--pink); font-weight:700; background:#FBF3EE; border-radius:8px; padding:7px 9px; line-height:1.55; }
+  .same{ margin-top:6px; font-size:11.5px; font-weight:800; color:var(--teal); }
+  .note{ margin:10px 0 0; font-size:10px; color:rgba(255,255,255,.45); font-weight:600; line-height:1.65; }
+  .cta{ display:block; margin-top:14px; text-align:center; padding:13px; border-radius:12px; font-size:14px; font-weight:800;
+    background:#FEE500; color:#391B1B; text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <span class="tag">시안</span>
+  <h1>출발 가능일 달력 + 직항 항공편</h1>
+  <p class="lede">상품 쪽 오른쪽 「출발 가능일 확인」 달력에 인천 직항편을 겹쳐 보여 주는 시안입니다.
+    날짜 아래 색 점이 그날 인천에서 출발하는 직항이고, 초록 칸은 <b>가는 날 · 오는 날 모두 직항이 있는 날</b>입니다.
+    날짜를 누르면 출발편과 여행 마지막 날 귀국편이 함께 나옵니다.</p>
+
+  <div class="pick" id="pick"></div>
+
+  <div class="grid">
+    <section class="explain">
+      <h2>이렇게 작동합니다</h2>
+      <ol>
+        <li><b>상품마다 도착 · 출발 도시</b>를 정해 두면(예: 바르셀로나 IN · 바르셀로나 OUT) 그 도시의 인천 직항만 골라 보여 줍니다.</li>
+        <li><b>날짜 = 여행 1일차</b> = 인천 출발일입니다. 세 노선 모두 오전에 인천을 떠나 같은 날 저녁 현지에 도착합니다.</li>
+        <li><b>귀국편</b>은 상품 일수에 맞춰 마지막 날(예: 7박8일 → 8일차) 현지 출발편을 자동으로 찾습니다.</li>
+        <li>항공사 칩을 눌러 끄고 켤 수 있고, 「직항 왕복만」을 켜면 가는 날 · 오는 날 모두 직항이 있는 날만 남습니다.</li>
+        <li>항공권은 상품 요금에 포함되지 않으며, 운항표는 계절마다 바뀌어 관리자 화면에서 고칠 수 있게 만들 예정입니다.</li>
+      </ol>
+
+      <div class="tblw"><table class="tbl" aria-label="시안에 넣은 직항 운항표">
+        <thead><tr><th>항공사 · 편명</th><th>구간</th><th>요일</th><th>시각 (현지)</th></tr></thead>
+        <tbody id="tbl"></tbody>
+      </table></div>
+      <p class="src">2026 동계(2026.10.25 ~ 2027.3.27) 운항표 기준입니다. 운항편 조회 사이트와 아시아나항공 공지를 참고했으며,
+        아시아나 바르셀로나 동계 요일은 자료마다 달라(화·목·토 / 매일) 실제 적용 전에 항공사 시간표로 한 번 더 확인이 필요합니다.
+        리스본 직항(대한항공)은 동계 운항 여부를 확인한 뒤 추가합니다.</p>
+    </section>
+
+    <aside class="side-card">
+      <h3 id="pTitle"></h3>
+      <p class="sub" id="pSub"></p>
+      <div class="avail-box">
+        <h4>출발 가능일 확인</h4>
+        <div class="fl-head">
+          <div class="t">✈ 인천 직항 함께 보기<small id="route"></small></div>
+          <label class="sw"><input type="checkbox" id="rtOnly"><span></span>직항 왕복만</label>
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="cal-nav">
+          <button type="button" id="prev" aria-label="이전 달">&lsaquo;</button>
+          <div class="lbl" id="lbl"></div>
+          <button type="button" id="next" aria-label="다음 달">&rsaquo;</button>
+        </div>
+        <div class="cal-dow"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+        <div class="cal-grid" id="cal"></div>
+        <div class="legend">
+          <span><b style="background:rgba(82,120,108,.5)"></b>직항 왕복 가능</span>
+          <span><b style="background:linear-gradient(90deg,#94634A,#8E6139)"></b>고른 출발일</span>
+          <span><b style="box-shadow:inset 0 0 0 1.5px #F2C9A8"></b>귀국일</span>
+        </div>
+        <div class="pane" id="pane"><div class="empty">날짜를 누르면 그날 출발하는 직항편과 귀국편이 여기에 나와요.</div></div>
+        <p class="note">* 항공권은 상품 요금에 포함되지 않아요. 직항편은 2026 동계 운항표 기준이며 항공사 사정으로 바뀔 수 있어요. 항공권 예약을 도와드립니다.</p>
+      </div>
+      <a class="cta" href="#" onclick="return false">카카오톡으로 바로 문의하기</a>
+    </aside>
+  </div>
+</div>
+
+<script>
+/* ── 직항 운항표 (2026 동계) ─ 요일: 0=일 … 6=토 ── */
+const 항공사 = {
+  KE:{ 이름:'대한항공', cls:'ke', 색:'var(--ke)' },
+  OZ:{ 이름:'아시아나', cls:'oz', 색:'var(--oz)' },
+  TW:{ 이름:'티웨이',  cls:'tw', 색:'var(--tw)' }
+};
+const 직항 = [
+  { 사:'KE', 편:'KE913', 출:'ICN', 도:'MAD', 요일:[0,2,4,5], 떠남:'12:10', 닿음:'19:25', 다음날:false, 기종:'B787-9' },
+  { 사:'KE', 편:'KE914', 출:'MAD', 도:'ICN', 요일:[0,2,4,5], 떠남:'21:25', 닿음:'18:15', 다음날:true,  기종:'B787-9' },
+  { 사:'OZ', 편:'OZ511', 출:'ICN', 도:'BCN', 요일:[2,4,6],   떠남:'11:15', 닿음:'17:50', 다음날:false, 기종:'A350-900' },
+  { 사:'OZ', 편:'OZ512', 출:'BCN', 도:'ICN', 요일:[2,4,6],   떠남:'19:35', 닿음:'16:05', 다음날:true,  기종:'A350-900' },
+  { 사:'TW', 편:'TW407', 출:'ICN', 도:'BCN', 요일:[1,3,5,6], 떠남:'11:05', 닿음:'19:00', 다음날:false, 기종:'A330-200' },
+  { 사:'TW', 편:'TW408', 출:'BCN', 도:'ICN', 요일:[1,3,5,6], 떠남:'21:00', 닿음:'16:25', 다음날:true,  기종:'A330-200' }
+];
+const 도시 = { ICN:'인천', MAD:'마드리드', BCN:'바르셀로나', LIS:'리스본' };
+const 기간 = { 시작:new Date(2026,9,25), 끝:new Date(2027,2,27) };
+
+/* ── 시안에 쓰는 실제 상품 두 개 ── */
+const 상품들 = [
+  { id:'spain-8days-barcelona', 이름:'바르셀로나 IN · OUT 7박 8일', 일수:8, IN:'BCN', OUT:'BCN',
+    설명:'바르셀로나 3박 · 마드리드 2박 · 세비야 · 그라나다. 바르셀로나 자유일정 하루 포함.' },
+  { id:'iberia-14days-madrid', 이름:'이베리아 종단 13박 14일 (마드리드 IN · 리스본 OUT)', 일수:14, IN:'MAD', OUT:'LIS',
+    설명:'마드리드로 들어가 리스본에서 나오는 일정. 리스본 출발 직항은 아직 확정 전이라 「직항 없음」으로 보입니다.' }
+];
+
+const 요일글 = ['일','월','화','수','목','금','토'];
+let P = 상품들[0], 끔 = new Set(), 고른날 = null;
+let 보는달 = new Date(2026,10,1);
+const 오늘 = new Date(2026,10,3);
+
+function 편들(날, 출, 도){
+  if(날 < 기간.시작 || 날 > 기간.끝) return [];
+  return 직항.filter(f => f.출===출 && f.도===도 && f.요일.includes(날.getDay()) && !끔.has(f.사));
+}
+function 더하기(날, n){ const d = new Date(날); d.setDate(d.getDate()+n); return d; }
+function 글(날){ return (날.getMonth()+1)+'월 '+날.getDate()+'일('+요일글[날.getDay()]+')'; }
+function 같은날(a,b){ return a && b && a.getTime()===b.getTime(); }
+
+function 칩(){
+  const 쓰는 = new Set(직항.filter(f => (f.출==='ICN'&&f.도===P.IN)||(f.출===P.OUT&&f.도==='ICN')).map(f=>f.사));
+  document.getElementById('chips').innerHTML = Object.keys(항공사).map(k=>{
+    const a = 항공사[k], 있음 = 쓰는.has(k);
+    const 노선 = 있음 ? [...new Set(직항.filter(f=>f.사===k&&(f.도===P.IN||f.출===P.OUT)).map(f=>도시[f.도==='ICN'?f.출:f.도]))].join('·') : '이 상품 노선 없음';
+    return `<button type="button" class="chip ${있음?(끔.has(k)?'off':''):'none'}" data-k="${k}" ${있음?'':'disabled'}>
+      <i style="background:${a.색}"></i>${a.이름}<span class="r">${노선}</span></button>`;
+  }).join('');
+  document.querySelectorAll('.chip[data-k]:not(.none)').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k; 끔.has(k)?끔.delete(k):끔.add(k); 칩(); 달력(); 창();
+  });
+}
+
+function 달력(){
+  const y=보는달.getFullYear(), m=보는달.getMonth();
+  document.getElementById('lbl').textContent = y+'. '+String(m+1).padStart(2,'0');
+  const 첫 = new Date(y,m,1).getDay(), 끝날 = new Date(y,m+1,0).getDate();
+  const 왕복만 = document.getElementById('rtOnly').checked;
+  const 귀국 = 고른날 ? 더하기(고른날, P.일수-1) : null;
+  let h='';
+  for(let i=0;i<첫;i++) h+='<span class="d empty"></span>';
+  for(let n=1;n<=끝날;n++){
+    const 날 = new Date(y,m,n);
+    const 지남 = 날 < 오늘;
+    const 가는 = 편들(날,'ICN',P.IN), 오는 = 편들(더하기(날,P.일수-1),P.OUT,'ICN');
+    const 왕복 = 가는.length && 오는.length;
+    const 점 = [...new Set(가는.map(f=>f.사))].map(k=>`<i style="background:${항공사[k].색}"></i>`).join('');
+    let c='d';
+    if(지남) c+=' past';
+    else{
+      if(왕복) c+=' rt';
+      if(왕복만 && !왕복) c+=' dim';
+      if(같은날(날,고른날)) c+=' sel';
+      else if(같은날(날,귀국)) c+=' ret';
+      else if(고른날 && 날>고른날 && 날<귀국) c+=' trip';
+    }
+    h+=`<button type="button" class="${c}" data-n="${n}" ${지남?'disabled':''}>${n}<span class="dots">${지남?'':점}</span></button>`;
+  }
+  const cal=document.getElementById('cal'); cal.innerHTML=h;
+  cal.querySelectorAll('.d[data-n]:not(.past)').forEach(b=>b.onclick=()=>{ 고른날=new Date(y,m,+b.dataset.n); 달력(); 창(); });
+}
+
+function 줄(f){
+  const a=항공사[f.사];
+  return `<div class="fl"><span class="al ${a.cls}"><i></i>${a.이름}</span><span class="no">${f.편}</span>
+    <span class="tm">${f.떠남} → ${f.닿음}${f.다음날?'<sup>+1</sup>':''}</span>
+    <span class="ac">${도시[f.출]} ${f.떠남} 출발 · ${도시[f.도]} ${f.다음날?'다음 날 ':''}${f.닿음} 도착 · ${f.기종}</span></div>`;
+}
+function 창(){
+  const pane=document.getElementById('pane');
+  if(!고른날){ pane.innerHTML='<div class="empty">날짜를 누르면 그날 출발하는 직항편과 귀국편이 여기에 나와요.</div>'; return; }
+  const 귀국=더하기(고른날,P.일수-1);
+  const 가는=편들(고른날,'ICN',P.IN), 오는=편들(귀국,P.OUT,'ICN');
+  const 같은=[...new Set(가는.map(f=>f.사))].filter(k=>오는.some(f=>f.사===k)).map(k=>항공사[k].이름);
+  pane.innerHTML =
+    `<div class="leg"><h5>출발 ${글(고른날)} <small>인천 → ${도시[P.IN]}</small></h5>
+      ${가는.length?가는.map(줄).join(''):`<div class="nofl">이날은 인천 → ${도시[P.IN]} 직항이 없어요. 경유편이나 다른 날짜를 안내해 드릴게요.</div>`}</div>
+     <div class="leg"><h5>귀국 ${글(귀국)} <small>${도시[P.OUT]} → 인천 · ${P.일수}일차</small></h5>
+      ${오는.length?오는.map(줄).join(''):`<div class="nofl">이날은 ${도시[P.OUT]} → 인천 직항이 없어요${P.OUT==='LIS'?' (리스본 직항은 운항 시기 확인 중)':''}. 경유편을 안내해 드릴게요.</div>`}
+      ${같은.length?`<div class="same">✓ 같은 항공사 왕복 가능: ${같은.join(', ')}</div>`:''}</div>`;
+}
+
+function 표(){
+  document.getElementById('tbl').innerHTML = 직항.map(f=>{const a=항공사[f.사];
+    return `<tr><td><span class="al ${a.cls}"><i></i>${a.이름}</span> ${f.편}</td><td>${도시[f.출]} → ${도시[f.도]}</td>
+      <td>${f.요일.slice().sort((x,y)=>((x+6)%7)-((y+6)%7)).map(d=>요일글[d]).join('·')}</td>
+      <td class="num">${f.떠남} → ${f.닿음}${f.다음날?' (+1)':''}</td></tr>`;}).join('');
+}
+function 상품(i){
+  P=상품들[i]; 고른날=null; 끔.clear();
+  document.querySelectorAll('#pick button').forEach((b,j)=>b.classList.toggle('on',j===i));
+  document.getElementById('pTitle').textContent=P.이름;
+  document.getElementById('pSub').textContent=P.설명;
+  document.getElementById('route').textContent=' '+도시[P.IN]+' IN · '+도시[P.OUT]+' OUT';
+  칩(); 달력(); 창();
+}
+document.getElementById('pick').innerHTML=상품들.map((p,i)=>`<button type="button">${p.이름}</button>`).join('');
+document.querySelectorAll('#pick button').forEach((b,i)=>b.onclick=()=>상품(i));
+document.getElementById('prev').onclick=()=>{ 보는달=new Date(보는달.getFullYear(),보는달.getMonth()-1,1); 달력(); };
+document.getElementById('next').onclick=()=>{ 보는달=new Date(보는달.getFullYear(),보는달.getMonth()+1,1); 달력(); };
+document.getElementById('rtOnly').onchange=달력;
+표(); 상품(0);
+/* 시안: 처음 열면 11월 18일(수)을 골라 둔 모습으로 */
+고른날=new Date(2026,10,18); 달력(); 창();
+</script>
+</body>
+</html>
