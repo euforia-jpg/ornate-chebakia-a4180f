@@ -402,6 +402,24 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .hl-lb .c a{ color:#E6EDF1; }
   @media print{ .hl-ph, .hl-pop, .hl-lb{ display:none !important; } }
 
+  /* 상품 안에 함께 보는 앱 (예: 골프 상품 → /golf 골프장 지도) · 2026-11 */
+  .app-emb{ border:1px solid #E3E8EC; border-radius:14px; background:#fff; overflow:hidden; }
+  .app-emb .ae-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    padding:12px 14px; border-bottom:1px solid #EEF1F3; background:#F7F9FA; }
+  .app-emb .ae-head p{ margin:0; font-size:13px; color:#4A5862; line-height:1.5; word-break:keep-all; }
+  .app-emb .ae-new{ flex:none; font-size:12.5px; font-weight:800; color:var(--navy); text-decoration:none;
+    border:1px solid #D5DDE2; border-radius:999px; padding:6px 12px; background:#fff; white-space:nowrap; }
+  .app-emb .ae-new:hover{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .app-emb .ae-box{ position:relative; max-height:760px; overflow:hidden; transition:max-height .35s ease; }
+  .app-emb.open .ae-box{ max-height:none; }
+  .app-emb iframe{ display:block; width:100%; height:760px; border:0; background:#F4F6F7; }
+  .app-emb .ae-fade{ position:absolute; left:0; right:0; bottom:0; height:120px; display:flex; align-items:flex-end; justify-content:center;
+    padding-bottom:16px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, #fff 78%); }
+  .app-emb.open .ae-fade, .app-emb.short .ae-fade{ display:none; }
+  .app-emb .ae-more{ font:inherit; font-size:13.5px; font-weight:800; color:#fff; background:var(--navy); border:0; border-radius:999px;
+    padding:10px 20px; cursor:pointer; box-shadow:0 6px 18px rgba(14,30,45,.18); }
+  @media print{ .app-emb{ display:none !important; } }
+
   .ie-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:start; word-break:keep-all; }
   .ie-box{ border-radius:16px; padding:18px 18px 8px; }
   .ie-box.ok{ background:#EDF1EF; }
@@ -1532,6 +1550,60 @@ function euRouteWatch(){
   }
 }
 
+/* ╔═══ 상품 안에 함께 보는 앱 ═══╗
+   products.js 의 상품에 "앱": {"주소":"/golf", "제목":"…", "말":"…", "단추":"…"} 이 있으면
+   「이런 경험」 아래에 그 페이지를 그대로 넣어 보여 줍니다. (같은 사이트 주소만 · / 로 시작)
+   - 넣은 페이지의 머리(header.top)·꼬리(footer)는 숨기고, 높이는 내용에 맞춰 자동으로 늘어납니다.
+   - 처음엔 760px 까지만 보이고 「펼쳐 보기」로 전부 엽니다. 안에서 무엇이든 누르면 저절로 펼쳐집니다.
+   - 「새 창에서 크게 보기」는 원래 페이지를 그대로 엽니다. */
+function euAppEmbed(p){
+  var a = p && p.앱;
+  if(!a || typeof a.주소 !== 'string' || !/^\/(?!\/)/.test(a.주소)) return '';
+  function 이스(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  return '<div class="p-block">' +
+    '<h3>' + 이스(a.제목 || '함께 보기') + '</h3>' +
+    '<div class="app-emb" id="appEmb"' + (a.탭 ? ' data-tab="' + 이스(a.탭) + '"' : '') + '>' +
+      '<div class="ae-head"><p>' + 이스(a.말 || '') + '</p>' +
+        '<a class="ae-new" href="' + 이스(a.주소) + '" target="_blank" rel="noopener">새 창에서 크게 보기 ↗</a></div>' +
+      '<div class="ae-box"><iframe src="' + 이스(a.주소) + '" title="' + 이스(a.제목 || '') + '" loading="lazy"></iframe>' +
+        '<div class="ae-fade"><button type="button" class="ae-more">' + 이스(a.단추 || '전체 펼쳐 보기') + ' ▾</button></div></div>' +
+    '</div></div>';
+}
+function euAppEmbedWatch(){
+  var box = document.getElementById('appEmb'); if(!box) return;
+  var fr = box.querySelector('iframe'), btn = box.querySelector('.ae-more');
+  function 펼침(){ box.classList.add('open'); }
+  btn.addEventListener('click', 펼침);
+  fr.addEventListener('load', function(){
+    var doc; try{ doc = fr.contentDocument; }catch(e){ return; }
+    if(!doc || !doc.body) return;
+    var st = doc.createElement('style');
+    st.textContent = 'header.top, footer.foot, footer, .chat-fab, .eu-live, #eufPop, .euf-pop{ display:none !important; }' +
+      'html, body{ min-height:0 !important; height:auto !important; overflow:hidden !important; }' +
+      'body::before{ display:none !important; } .bar{ position:static !important; } main{ padding-bottom:18px; }';
+    doc.head.appendChild(st);
+    /* 안의 링크 중 같은 창으로 가는 것은 바깥(상품 쪽) 창에서 열리게 */
+    Array.prototype.forEach.call(doc.querySelectorAll('a[href]:not([target])'), function(a){
+      if(!/^#/.test(a.getAttribute('href'))) a.target = '_top';
+    });
+    /* "탭": "알가르브" 처럼 적으면 그 권역 탭을 먼저 열어 둡니다 */
+    var 탭 = box.dataset.tab;
+    if(탭){
+      var t = Array.prototype.find.call(doc.querySelectorAll('#tabs [role="tab"], #tabs button'), function(b){ return b.textContent.indexOf(탭) > -1; });
+      if(t) t.click();
+    }
+    function 높이(){
+      var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+      if(h > 0) fr.style.height = h + 'px';
+      box.classList.toggle('short', h <= 780);
+    }
+    높이();
+    if('ResizeObserver' in window) new ResizeObserver(높이).observe(doc.body);
+    setTimeout(높이, 800); setTimeout(높이, 2500);
+    doc.addEventListener('click', function(){ 펼침(); setTimeout(높이, 50); }, true);
+  });
+}
+
 /* ╔═══ 이런 경험 · 포함 불포함 그리기 도우미 ═══╗
    경험: "(세계유산)" 은 초록 표시로, 나머지 괄호는 옅은 글씨로
    포함·불포함: "본문(설명)" 처럼 끝에 붙은 괄호를 작은 둘째 줄로 나눕니다 */
@@ -1726,6 +1798,8 @@ function render(){
         </div>
         ` : ''}
 
+        ${euAppEmbed(product)}
+
         ${(d.includes && d.includes.length) || (d.excludes && d.excludes.length) ? `
         <div class="p-block">
           <h3>포함 · 불포함 사항</h3>
@@ -1780,6 +1854,7 @@ function render(){
   euRouteWatch();
   euFareWatch();
   euSpotPhotos(product.id);
+  euAppEmbedWatch();
   placeItineraryDownload(product);
   initAvailCalendar(product);
 }
