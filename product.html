@@ -1593,7 +1593,14 @@ function euAppEmbedWatch(){
       if(t) t.click();
     }
     function 높이(){
-      var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+      /* 문서 전체 높이(html)는 틀 높이보다 줄어들지 않아서, 실제 내용(body) 높이로 잽니다 — 탭을 바꿔 내용이 짧아지면 틀도 줄어듦 */
+      /* body 밖으로 삐져나오는 칸(.more 등)까지 보이는 요소 중 가장 아래 끝을 잽니다 */
+      var 끝 = doc.body.getBoundingClientRect().bottom;
+      Array.prototype.forEach.call(doc.body.querySelectorAll('main *, main'), function(e){
+        if(e.offsetParent === null) return;
+        var b = e.getBoundingClientRect().bottom; if(b > 끝) 끝 = b;
+      });
+      var h = Math.ceil(끝 - doc.documentElement.getBoundingClientRect().top + 20);
       if(h > 0) fr.style.height = h + 'px';
       box.classList.toggle('short', h <= 780);
     }
