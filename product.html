@@ -515,6 +515,21 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .fl-row .ac{ grid-column:1 / 4; margin-top:-3px; font-size:10.5px; color:var(--muted); font-weight:600; }
   .fl-none{ font-size:11px; color:var(--pink); font-weight:700; background:#FBF3EE; border-radius:8px; padding:7px 9px; line-height:1.55; }
   .fl-same{ margin-top:4px; font-size:11px; font-weight:800; color:var(--teal); }
+  /* 차량 & 기사 — 항공 연결 · 이어 타기 */
+  .fl-st{ position:relative; padding:0 0 11px 18px; }
+  .fl-st::before{ content:""; position:absolute; left:5px; top:7px; bottom:-3px; width:2px; background:#E3E7EA; }
+  .fl-st:last-child{ padding-bottom:0; } .fl-st:last-child::before{ display:none; }
+  .fl-st::after{ content:""; position:absolute; left:1px; top:4px; width:10px; height:10px; border-radius:50%; background:#fff; box-shadow:inset 0 0 0 2.5px var(--navy); }
+  .fl-st.fly::after{ box-shadow:inset 0 0 0 2.5px #6FB7E0; } .fl-st.car::after{ background:var(--navy); }
+  .fl-st h5{ margin:0 0 5px; font-size:12px; font-weight:800; color:var(--navy); display:flex; justify-content:space-between; gap:6px; }
+  .fl-st h5 small{ color:var(--muted); font-weight:700; font-size:10.5px; text-align:right; }
+  .fl-txt{ font-size:11.5px; color:#3B4852; line-height:1.6; font-weight:600; }
+  .fl-ok{ font-size:11px; font-weight:700; color:var(--teal); background:#EAF2EE; border-radius:8px; padding:6px 8px; line-height:1.55; margin-bottom:4px; }
+  .fl-next{ display:grid; gap:5px; }
+  .fl-next a{ display:flex; justify-content:space-between; gap:8px; text-decoration:none; color:var(--navy); font-size:11.5px; font-weight:800; padding:7px 9px; border-radius:8px; border:1px solid #E3E7EA; line-height:1.45; }
+  .fl-next a:hover{ border-color:var(--navy); }
+  .fl-next a span:last-child{ color:var(--pink); white-space:nowrap; }
+  .fl-next a.more{ justify-content:center; color:var(--muted); font-weight:700; }
   @media print{ .fl-box, .fl-pane, .fl-legend{ display:none !important; } }
   .cta{ all:unset; display:block; width:100%; text-align:center; padding:14px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; border-radius:12px; cursor:pointer; font-size:14px; box-sizing:border-box; }
   .cta:hover{ filter:brightness(1.06); }
@@ -1978,7 +1993,7 @@ function placeItineraryDownload(product){
    운항표 밖의 날짜는 점 없이 「운항표 미정」 으로 안내합니다. */
 function euFlightInit(product, redraw){
   var 항 = product && product.항공;
-  if(!항 || !항.IN || !항.OUT) return;
+  if(!항 || !항.IN || !항.OUT){ euCarFlightInit(product, redraw); return; }
   var 귀국 = parseInt(항.귀국일차, 10) || 1;
   fetch('/flights.json', { cache:'no-cache' }).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }).then(function(D){
     if(!D || !D.편) return;
@@ -2075,6 +2090,121 @@ function euFlightInit(product, redraw){
       노트.insertAdjacentHTML('afterend', '<p class="cal-note" id="flNote" style="margin-top:4px">* 항공권은 상품 요금에 포함되지 않아요. 직항편은 ' + (D.기준||'항공사 운항표') + ' 기준이며 항공사 사정으로 바뀔 수 있어요. 항공권 예약은 따로 도와드립니다.</p>');
     }
     머리();
+    redraw();
+  });
+}
+
+/* ╔═══ 차량 & 기사 — 항공 연결 · 이어 타기 ═══╗
+   차량 상품(id 가 car- · 구간 정보 있음)은 왕복 직항 대신
+   ① 날짜 아래 점: 전날 인천 → 출발 도시 도착 직항 (저녁 도착이라 다음 날 아침 출발이 기본)
+   ② 귀국 연결: 끝 도시 → 인천 직항을 같은 날(드롭 + 공항 이동 1시간 + 국제선 3시간 전) · 다음 날로 나눠 안내
+   ③ 이어 타기: 끝 도시에서 출발하는 다른 차량 상품을 다음 날 날짜와 함께 보여 줍니다. */
+function euCarFlightInit(product, redraw){
+  var g = product && product.구간, 들 = g && g.들;
+  if(!/^car-/.test(product.id || '') || !들 || 들.length < 2) return;
+  var 출곳 = 들[0].곳, 도곳 = 들[들.length-1].곳;
+  var 시각 = String(g.시간 || '').match(/(\d{1,2}:\d{2})\s*~\s*(\d{1,2}:\d{2})/);
+  var 시작 = 시각 ? 시각[1] : (들[0].때 || ''), 끝 = 시각 ? 시각[2] : String(들[들.length-1].때 || '').replace('~','');
+  var 코드 = { '마드리드':'MAD', '바르셀로나':'BCN', '리스본':'LIS' };
+  var 출코 = 코드[출곳], 도코 = 코드[도곳];
+  var 이어 = (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []).filter(function(p){
+    var q = p.구간 && p.구간.들;
+    return p.id !== product.id && /^car-/.test(p.id) && q && q.length && q[0].곳 === 도곳;
+  });
+  fetch('/flights.json', { cache:'no-cache' }).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }).then(function(D){
+    D = D || { 편:[], 항공사:{}, 도시:{} };
+    if(!출코 && !도코 && !이어.length) return;
+    var 사 = D.항공사 || {}, 시작일 = D.시작 ? 날짜(D.시작) : null, 끝일 = D.끝 ? 날짜(D.끝) : null;
+    var 요일 = ['일','월','화','수','목','금','토'];
+    function 날짜(iso){ var a = String(iso).split('-').map(Number); return new Date(a[0], a[1]-1, a[2]); }
+    function 더(d, n){ var x = new Date(d); x.setDate(x.getDate()+n); return x; }
+    function 글(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일('+요일[d.getDay()]+')'; }
+    function 분(t){ var a = String(t).split(':').map(Number); return a[0]*60 + (a[1]||0); }
+    function 안(d){ return 시작일 && d >= 시작일 && d <= 끝일; }
+    function 편(d, 출, 도){
+      if(!출 || !도 || !안(d)) return [];
+      return (D.편||[]).filter(function(f){ return f.출===출 && f.도===도 && f.요일.indexOf(d.getDay())>-1; });
+    }
+    function 줄(f){
+      var a = 사[f.사] || {};
+      return '<div class="fl-row"><span class="al"><i style="background:' + (a.색||'#ccc') + '"></i>' + (a.이름||f.사) + '</span>' +
+        '<span class="no">' + f.편 + '</span><span class="tm">' + f.떠남 + ' → ' + f.닿음 + (f.다음날?'<sup>+1</sup>':'') + '</span></div>';
+    }
+    function 점(fs){
+      var 본 = {}, h = '';
+      fs.forEach(function(f){ if(본[f.사]) return; 본[f.사]=1; h += '<i style="background:' + ((사[f.사]||{}).색||'#ccc') + '"></i>'; });
+      return h;
+    }
+    var box = document.getElementById('flBox');
+    if(!box) return;
+    box.hidden = false;
+    var 쓰는 = {};
+    (D.편||[]).forEach(function(f){ if((출코 && f.출==='ICN' && f.도===출코) || (도코 && f.출===도코 && f.도==='ICN')) 쓰는[f.사]=1; });
+    box.innerHTML = '<div class="fl-head"><div class="t">✈ 항공 연결 · 이어 타기<small>' + 출곳 + ' 출발 · ' + 도곳 + ' 도착' + '</small></div></div>' +
+      (Object.keys(쓰는).length ? '<div class="fl-chips">' + Object.keys(쓰는).map(function(k){
+        return '<span class="fl-chip" style="cursor:default"><i style="background:' + ((사[k]||{}).색||'#ccc') + '"></i>' + ((사[k]||{}).이름||k) + '</span>';
+      }).join('') + '</div>' : '');
+    var 마지막 = null;
+    window.euFl = {
+      deco: function(grid, sel){
+        grid.classList.add('fl');
+        Array.prototype.forEach.call(grid.querySelectorAll('.cal-day[data-date]'), function(el){
+          var d = 날짜(el.dataset.date);
+          el.insertAdjacentHTML('beforeend', '<span class="fd">' + (el.classList.contains('past') ? '' : 점(편(더(d,-1), 'ICN', 출코))) + '</span>');
+        });
+        if(마지막) euFl.pane(마지막);
+      },
+      pane: function(sel){
+        마지막 = sel;
+        var pane = document.getElementById('flPane'); if(!pane || !sel) return;
+        var s = 날짜(sel), 전 = 더(s,-1), 다음 = 더(s,1);
+        var h = '';
+        if(출코){
+          var 도착 = 편(전, 'ICN', 출코);
+          h += '<div class="fl-st fly"><h5>전날 ' + 글(전) + ' 도착 직항<small>인천 → ' + 출곳 + '</small></h5>' +
+            (도착.length ? 도착.map(줄).join('') + '<div class="fl-txt">공항 → 숙소 이동은 따로 안내해 드려요.</div>'
+              : '<div class="fl-txt">' + (안(전) ? '이날은 ' + 출곳 + ' 도착 직항이 없어요. 경유편이나 다른 날짜를 안내해 드릴게요.' : '이 날짜의 직항 운항표는 아직 나오지 않았어요.') + '</div>') + '</div>';
+        }
+        h += '<div class="fl-st car"><h5>' + 글(s) + ' 차량 운행<small>' + 시작 + ' → ' + 끝 + '</small></h5>' +
+          '<div class="fl-txt">' + 들.map(function(x){ return x.곳; }).join(' → ') + '</div></div>';
+        if(도코){
+          var 당일 = 편(s, 도코, 'ICN'), 가능 = 당일.filter(function(f){ return 분(f.떠남) - 분(끝) >= 240; }), 다음편 = 편(다음, 도코, 'ICN');
+          var r = '';
+          if(가능.length) r += '<div class="fl-ok">공항 드롭 후 같은 날 귀국할 수 있어요.</div>' + 가능.map(줄).join('');
+          else if(당일.length) r += '<div class="fl-none" style="margin-bottom:4px">같은 날 ' + 당일.map(function(f){ return f.편 + ' ' + f.떠남; }).join(', ') + ' 출발은 ' + 끝 + ' 도착 후 공항 이동 · 국제선 3시간 전 도착 기준으로 빠듯해요. 다음 날 귀국편을 권해 드려요.</div>';
+          r += 다음편.length ? '<div class="fl-txt" style="margin:4px 0">다음 날 ' + 글(다음) + ' ' + 도곳 + ' → 인천</div>' + 다음편.map(줄).join('')
+            : '<div class="fl-txt">' + (안(다음) ? '다음 날 ' + 글(다음) + '에는 ' + 도곳 + ' → 인천 직항이 없어요.' : '다음 날 직항 운항표는 아직 나오지 않았어요.') + '</div>';
+          h += '<div class="fl-st fly"><h5>귀국 직항 연결<small>' + 도곳 + ' → 인천</small></h5>' + r + '</div>';
+        }
+        if(이어.length){
+          var 날글 = (다음.getMonth()+1) + '월 ' + 다음.getDate() + '일';
+          h += '<div class="fl-st"><h5>다음 날 이어 타기<small>' + 도곳 + ' 출발 차량</small></h5><div class="fl-next">' +
+            이어.slice(0,4).map(function(p){
+              var 값 = p.요금 && p.요금.값 ? '€' + p.요금.값 : '';
+              return '<a href="product.html?id=' + encodeURIComponent(p.id) + '">' + '<span>' + 날글 + ' · ' + String(p.title).replace(/^\[[^\]]*\]\s*/, '') + '</span><span>' + 값 + '</span></a>';
+            }).join('') +
+            (이어.length > 4 ? '<a class="more" href="tours.html?cat=transfer&from=' + encodeURIComponent(도곳) + '">' + 도곳 + ' 출발 차량 ' + 이어.length + '개 모두 보기 →</a>' : '') +
+            '</div></div>';
+        }
+        pane.innerHTML = h;
+      },
+      msg: function(sel){
+        if(!sel) return [];
+        var s = 날짜(sel), out = [];
+        var a = 편(더(s,-1), 'ICN', 출코).map(function(f){ return f.편; });
+        var b = 편(더(s,1), 도코, 'ICN').map(function(f){ return f.편; });
+        if(출코) out.push('전날 도착 직항 참고: ' + (a.join('/') || '직항 없음'));
+        if(도코) out.push('다음 날 귀국 직항 참고: ' + (b.join('/') || '직항 없음'));
+        return out;
+      }
+    };
+    var 노트 = document.querySelector('#availBox .cal-note');
+    if(노트 && 출코 && !document.getElementById('flNote')){
+      노트.insertAdjacentHTML('beforebegin', '<div class="fl-legend" id="flLegend"><span>· 날짜 아래 점 = 전날 ' + 출곳 + '에 도착하는 인천 직항</span></div>');
+    }
+    if(노트 && (출코 || 도코) && !document.getElementById('flNote')){
+      노트.insertAdjacentHTML('afterend', '<p class="cal-note" id="flNote" style="margin-top:4px">* 항공권은 차량 요금에 포함되지 않아요. 직항편은 ' + (D.기준||'항공사 운항표') + ' 기준이며 항공사 사정으로 바뀔 수 있어요.</p>');
+    }
     redraw();
   });
 }
