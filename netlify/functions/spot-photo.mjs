@@ -418,6 +418,24 @@ const 직접표 = {
   "지랄두 광장 자유시간 · 알렌테주 평원 드라이브": "Praça do Giraldo, Évora",
   "시각은 각 나라 현지 시각 기준 (포르투갈은 스페인보다 1시간 늦어요)": "",
   "최소 인원 미달 시 예약금 100% 환불": ""
+ },
+ "car-madrid-toledo-segovia-day": {
+  "08:30 마드리드 출발 · 19:30 마드리드 도착(예정)": "",
+  "톨레도 대성당 · 산토토메 성당 (엘 그레코 명작)": "Catedral Primada de Toledo",
+  "톨레도 구시가지 골목 · 전망대에서 보는 톨레도 전경": "Mirador del Valle, Toledo",
+  "세고비아 로마 수도교 · 알카사르 (유네스코 세계유산)": "Acueducto de Segovia",
+  "세고비아 대성당 · 마요르 광장 자유시간": "Catedral de Segovia",
+  "최소 인원 미달 시 예약금 100% 환불": ""
+ },
+ "north-spain-7days-madrid": {
+  "라 리오하 와이너리 — 스페인 대표 와인 산지": "Logroño, La Rioja",
+  "산세바스티안 라 콘차 해변 · 구시가지 저녁 산책": "Playa de La Concha, San Sebastián",
+  "빌바오 구겐하임 미술관 — 입장 포함": "Museo Guggenheim Bilbao",
+  "산티야나 델 마르 중세 마을 · 코미야스 가우디의 엘 카프리초": "Santillana del Mar",
+  "피코스 데 에우로파 — 푸엔테 데 케이블카 · 코바동가 성지와 호수": "Teleférico de Fuente Dé",
+  "카테드랄레스 해변 (간조 때 걷는 바위 아치)": "Praia das Catedrais",
+  "산티아고 데 콤포스텔라 대성당 · 땅끝 피니스테레": "Catedral de Santiago de Compostela",
+  "레온 대성당 · 가우디의 카사 보티네스": "Catedral de León"
  }
 };
 
