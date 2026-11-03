@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>차량 상품 항공 연결 시안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+:root{ --pink:#94634A; --orange:#8E6139; --teal:#52786C; --navy:#24303A; --ink:#24303A; --muted:#64707A; --line:#E4E6E8; }
+*{ box-sizing:border-box; } html{ font-synthesis:none; }
+body{ margin:0; font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif; color:var(--ink); background:#EEF1F3; -webkit-font-smoothing:antialiased; }
+.page{ max-width:1080px; margin:0 auto; padding:28px 16px 60px; }
+.tag{ display:inline-block; font-size:11px; font-weight:800; color:#fff; background:var(--pink); border-radius:6px; padding:3px 8px; }
+h1{ margin:10px 0 6px; font-size:24px; font-weight:800; color:var(--navy); letter-spacing:-.02em; }
+.lede{ margin:0 0 20px; font-size:14px; color:var(--muted); line-height:1.7; max-width:72ch; word-break:keep-all; }
+.grid{ display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:24px; align-items:start; }
+@media (max-width:860px){ .grid{ grid-template-columns:minmax(0,1fr); } .ideas{ order:2; } }
+.ideas{ min-width:0; display:grid; gap:12px; }
+.idea{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px 20px; }
+.idea .no{ display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:var(--navy); color:#fff; font-size:12px; font-weight:800; margin-right:8px; }
+.idea h2{ margin:0 0 8px; font-size:15.5px; font-weight:800; color:var(--navy); display:flex; align-items:center; }
+.idea h2 .rec{ margin-left:auto; font-size:10.5px; font-weight:800; color:var(--teal); background:#E8F0EC; border-radius:999px; padding:3px 9px; white-space:nowrap; }
+.idea h2 .later{ margin-left:auto; font-size:10.5px; font-weight:800; color:var(--muted); background:#F0F2F4; border-radius:999px; padding:3px 9px; white-space:nowrap; }
+.idea p{ margin:0; font-size:13.5px; line-height:1.75; color:#3B4852; word-break:keep-all; }
+.idea p b{ color:var(--navy); }
+.side-card{ background:var(--navy); color:#fff; border-radius:18px; padding:22px; }
+.side-card h3{ margin:0 0 6px; font-size:16px; font-weight:800; line-height:1.4; }
+.side-card .sub{ margin:0 0 14px; font-size:12.5px; color:rgba(255,255,255,.7); font-weight:600; line-height:1.65; }
+.box{ background:rgba(255,255,255,.1); border-radius:12px; padding:14px; }
+.box h4{ margin:0 0 10px; font-size:11.5px; font-weight:800; letter-spacing:.5px; color:rgba(255,255,255,.6); }
+.lbl{ font-size:12px; font-weight:800; margin:0 0 6px; }
+.lbl small{ font-weight:700; color:rgba(255,255,255,.55); margin-left:4px; }
+.seg{ display:grid; grid-template-columns:repeat(3,1fr); gap:5px; margin-bottom:12px; }
+.seg button{ all:unset; cursor:pointer; text-align:center; font-size:11.5px; font-weight:800; padding:8px 4px; border-radius:9px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); }
+.seg button.on{ background:#fff; color:var(--navy); }
+.cal-nav{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.cal-nav button{ all:unset; cursor:pointer; width:26px; height:26px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; border-radius:6px; }
+.cal-nav .m{ font-size:12.5px; font-weight:800; }
+.dow{ display:grid; grid-template-columns:repeat(7,1fr); text-align:center; font-size:10px; color:rgba(255,255,255,.45); font-weight:800; margin-bottom:4px; }
+.cal{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+.d{ all:unset; position:relative; display:flex; flex-direction:column; align-items:center; gap:3px; height:38px; padding-top:6px; border-radius:9px; font-size:11.5px; font-weight:700; color:rgba(255,255,255,.85); cursor:pointer; box-sizing:border-box; background:rgba(82,120,108,.16); }
+.d.empty{ visibility:hidden; } .d.past{ background:none; color:rgba(255,255,255,.2); cursor:default; }
+.d .ds{ display:flex; gap:2px; height:6px; } .d .ds i{ width:6px; height:6px; border-radius:50%; }
+.d.sel{ background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; }
+.legend{ display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; font-size:10.5px; color:rgba(255,255,255,.55); font-weight:700; }
+.legend span{ display:inline-flex; align-items:center; gap:5px; } .legend i{ width:7px; height:7px; border-radius:50%; display:inline-block; }
+.pane{ margin-top:12px; background:#fff; color:var(--ink); border-radius:12px; padding:12px 13px; }
+.st{ position:relative; padding:0 0 12px 18px; }
+.st::before{ content:""; position:absolute; left:5px; top:6px; bottom:-2px; width:2px; background:#E3E7EA; }
+.st:last-child{ padding-bottom:0; } .st:last-child::before{ display:none; }
+.st::after{ content:""; position:absolute; left:1px; top:4px; width:10px; height:10px; border-radius:50%; background:#fff; box-shadow:inset 0 0 0 2.5px var(--navy); }
+.st.fly::after{ box-shadow:inset 0 0 0 2.5px #6FB7E0; } .st.car::after{ background:var(--navy); }
+.st h5{ margin:0 0 4px; font-size:12px; font-weight:800; color:var(--navy); display:flex; justify-content:space-between; gap:6px; }
+.st h5 small{ color:var(--muted); font-weight:700; font-size:10.5px; }
+.fl{ display:grid; grid-template-columns:auto 1fr auto; gap:7px; align-items:center; padding:6px 8px; border-radius:8px; background:#F5F7F8; margin-bottom:4px; font-size:11.5px; }
+.fl .al{ display:inline-flex; align-items:center; gap:5px; font-weight:800; } .fl .al i{ width:8px; height:8px; border-radius:50%; }
+.fl .n{ font-weight:800; } .fl .t{ font-weight:800; color:#3B4852; white-space:nowrap; font-variant-numeric:tabular-nums; } .fl .t sup{ font-size:9px; color:var(--pink); }
+.txt{ font-size:11.5px; color:#3B4852; line-height:1.6; font-weight:600; }
+.warn{ font-size:11px; font-weight:700; color:var(--pink); background:#FBF3EE; border-radius:8px; padding:6px 8px; line-height:1.55; margin-bottom:4px; }
+.ok{ font-size:11px; font-weight:700; color:var(--teal); background:#EAF2EE; border-radius:8px; padding:6px 8px; line-height:1.55; margin-bottom:4px; }
+.next{ display:grid; gap:5px; }
+.next a{ display:flex; justify-content:space-between; gap:8px; text-decoration:none; color:var(--navy); font-size:11.5px; font-weight:800; padding:7px 9px; border-radius:8px; border:1px solid #E3E7EA; }
+.next a span:last-child{ color:var(--pink); white-space:nowrap; }
+.note{ margin:10px 0 0; font-size:10px; color:rgba(255,255,255,.45); font-weight:600; line-height:1.65; }
+.cta{ display:block; margin-top:14px; text-align:center; padding:13px; border-radius:12px; font-size:14px; font-weight:800; background:#FEE500; color:#391B1B; text-decoration:none; }
+</style></head><body>
+<div class="page">
+  <span class="tag">시안</span>
+  <h1>차량 & 기사 상품 — 항공 연결 · 이어 타기</h1>
+  <p class="lede">차량 상품은 「인천 출발 → 귀국」 일정이 아니라 도시와 도시를 잇는 하루 이동이라, IN/OUT 상품처럼 왕복 직항을 겹치는 것보다
+    <b>앞뒤로 무엇과 이어지는지</b>를 보여 주는 편이 손님에게 더 쓸모 있습니다. 오른쪽은 「바르셀로나 – 몬세라트 – 사라고사 – 마드리드」 상품에 적용한 모습입니다.</p>
+  <div class="grid">
+    <section class="ideas">
+      <div class="idea"><h2><span class="no">1</span>전날 도착 직항 표시<span class="rec">추천</span></h2>
+        <p>출발 도시에 인천 직항이 들어오면(마드리드 · 바르셀로나 · 리스본) 달력 날짜 아래에 <b>「전날 도착하는 직항」</b>을 색 점으로 보여 줍니다.
+          세 노선 모두 저녁 7시 전후 도착이라 <b>도착한 날 바로 출발은 어렵고, 다음 날 아침 출발</b>이 기본이 됩니다. 공항 → 호텔 픽업은 따로 안내합니다.</p></div>
+      <div class="idea"><h2><span class="no">2</span>끝 도시에서 귀국 직항 연결<span class="rec">추천</span></h2>
+        <p>도착 도시에서 인천으로 가는 직항이 있으면 <b>그날 탈 수 있는지 자동으로 따져</b> 보여 줍니다. 기준은 「드롭 예정 시각 + 공항 이동 + 국제선 3시간 전 도착」.
+          이 상품은 19:30 마드리드 도착이라 같은 날 21:25 대한항공은 빠듯해서 <b>「다음 날 귀국편」</b>을 권해 드립니다.</p></div>
+      <div class="idea"><h2><span class="no">3</span>다음 날 이어 타기<span class="rec">추천</span></h2>
+        <p>도착 도시에서 출발하는 다른 차량 상품을 <b>다음 날 날짜와 함께</b> 바로 보여 줍니다. 바르셀로나 → 마드리드 다음 날 마드리드 → 세비야 · 그라나다처럼
+          하루짜리 차량 상품을 이어 붙여 손님이 며칠짜리 자유 일정을 직접 짤 수 있습니다. 문의 메시지에도 이어 탈 상품이 함께 들어갑니다.</p></div>
+      <div class="idea"><h2><span class="no">4</span>미팅 장소 고르기<span class="later">요금 확인 후</span></h2>
+        <p>숙소 · 공항 · 기차역 중 미팅 장소를 고르게 해 문의 메시지에 넣습니다. 공항 미팅에 추가 요금이 있다면 금액을 정해 주셔야 해서, 지금 시안에는 선택만 넣었습니다.</p></div>
+    </section>
+
+    <aside class="side-card">
+      <h3>[차량 & 기사] 바르셀로나 – 몬세라트 – 사라고사 – 마드리드</h3>
+      <p class="sub">07:30 바르셀로나 출발 · 19:30 마드리드 도착 예정 · 1인 270유로 (4인 이상)</p>
+      <div class="box">
+        <h4>출발일 · 미팅 장소</h4>
+        <div class="lbl">미팅 장소</div>
+        <div class="seg" id="seg"><button type="button" class="on">숙소</button><button type="button">공항</button><button type="button">기차역</button></div>
+        <div class="cal-nav"><button type="button" id="pv">&lsaquo;</button><div class="m" id="mm"></div><button type="button" id="nx">&rsaquo;</button></div>
+        <div class="dow"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+        <div class="cal" id="cal"></div>
+        <div class="legend" id="lg"></div>
+        <div class="pane" id="pane"></div>
+        <p class="note">* 항공권은 차량 요금에 포함되지 않아요. 직항편은 2026 동계 운항표 기준이며 항공사 사정으로 바뀔 수 있어요.</p>
+      </div>
+      <a class="cta" href="#" onclick="return false">카카오톡으로 바로 문의하기</a>
+    </aside>
+  </div>
+</div>
+<script>
+const D = {"_설명": "상품 쪽 출발 가능일 달력에 겹쳐 보여 주는 인천 직항 운항표. 계절이 바뀌면 이 파일만 고쳐 올리면 됩니다. 요일: 0=일 1=월 2=화 3=수 4=목 5=금 6=토. 시각은 모두 현지 시각.", "기준": "2026 동계 운항표", "시작": "2026-10-25", "끝": "2027-03-27", "항공사": {"KE": {"이름": "대한항공", "색": "#6FB7E0"}, "OZ": {"이름": "아시아나", "색": "#E39A8B"}, "TW": {"이름": "티웨이", "색": "#E6C35C"}}, "도시": {"ICN": "인천", "MAD": "마드리드", "BCN": "바르셀로나", "LIS": "리스본"}, "편": [{"사": "KE", "편": "KE913", "출": "ICN", "도": "MAD", "요일": [0, 2, 4, 5], "떠남": "12:10", "닿음": "19:25", "다음날": false, "기종": "B787-9"}, {"사": "KE", "편": "KE914", "출": "MAD", "도": "ICN", "요일": [0, 2, 4, 5], "떠남": "21:25", "닿음": "18:15", "다음날": true, "기종": "B787-9"}, {"사": "KE", "편": "KE921", "출": "ICN", "도": "LIS", "요일": [0, 3, 5], "떠남": "13:00", "닿음": "19:35", "다음날": false, "기종": "B787-9"}, {"사": "KE", "편": "KE922", "출": "LIS", "도": "ICN", "요일": [0, 3, 5], "떠남": "21:40", "닿음": "20:00", "다음날": true, "기종": "B787-9"}, {"사": "OZ", "편": "OZ511", "출": "ICN", "도": "BCN", "요일": [2, 4, 6], "떠남": "11:15", "닿음": "17:50", "다음날": false, "기종": "A350-900"}, {"사": "OZ", "편": "OZ512", "출": "BCN", "도": "ICN", "요일": [2, 4, 6], "떠남": "19:35", "닿음": "16:05", "다음날": true, "기종": "A350-900"}, {"사": "TW", "편": "TW407", "출": "ICN", "도": "BCN", "요일": [1, 3, 5, 6], "떠남": "11:05", "닿음": "19:00", "다음날": false, "기종": "A330-200"}, {"사": "TW", "편": "TW408", "출": "BCN", "도": "ICN", "요일": [1, 3, 5, 6], "떠남": "21:00", "닿음": "16:25", "다음날": true, "기종": "A330-200"}]};
+const NEXT = [{"id": "car-madrid-toledo-segovia-day", "제목": "마드리드 – 톨레도 – 세고비아 – 마드리드", "출": "마드리드", "도": "마드리드", "시간": "08:30 ~ 19:30", "값": 235, "price": "1인 235 유로 (4인 이상 출발 기준)"}, {"id": "car-madrid-puertolapice-granada", "제목": "마드리드 – 푸에르토 라피세 – 그라나다", "출": "마드리드", "도": "그라나다", "시간": "09:00 ~ 18:00", "값": 170, "price": "1인 170유로 (4인 이상 출발 기준)"}, {"id": "car-madrid-burgos-bilbao", "제목": "마드리드 – 부르고스 – 빌바오", "출": "마드리드", "도": "빌바오", "시간": "08:00 ~ 18:00", "값": 180, "price": "1인 180유로 (4인 이상 출발 기준)"}, {"id": "car-madrid-merida-lisbon", "제목": "마드리드 – 메리다 – 리스본", "출": "마드리드", "도": "리스본", "시간": "08:00 ~ 18:00", "값": 193, "price": "1인 193유로 (4인 이상 출발 기준)"}, {"id": "car-madrid-zaragoza-barcelona", "제목": "마드리드 – 사라고사 – 바르셀로나", "출": "마드리드", "도": "바르셀로나", "시간": "09:00 ~ 19:00", "값": 170, "price": "1인 170유로 (4인 이상 출발 기준)"}, {"id": "car-madrid-salamanca-porto", "제목": "마드리드 – 살라망카 – 포루투", "출": "마드리드", "도": "포르투", "시간": "09:00 ~ 18:00", "값": 217, "price": "1인 217유로 (4인 이상 출발 기준)"}, {"id": "car-madrid-consuegra-sevilla", "제목": "마드리드 – 콘수에그라 – 세비야", "출": "마드리드", "도": "세비야", "시간": "09:00 ~ 18:00", "값": 170, "price": "1인 170유로 (4인 이상 출발 기준)"}, {"id": "car-madrid-toledo-sevilla", "제목": "마드리드 – 톨레도 – 세비야", "출": "마드리드", "도": "세비야", "시간": "08:00 ~ 19:00", "값": 160, "price": "1인 170유로 (4인 이상 출발 기준)"}, {"id": "car-madrid-segovia-avila-salamanca", "제목": "마드리드 – 세고비아 – 아빌라 – 살라망카", "출": "마드리드", "도": "살라망카", "시간": "08:00 ~ 19:00", "값": 170, "price": "1인 170유로 (4인 이상 출발 기준)"}];
+const P = { 출:'BCN', 도:'MAD', 출이름:'바르셀로나', 도이름:'마드리드', 시작:'07:30', 끝:'19:30' };
+const 요일=['일','월','화','수','목','금','토'];
+const 사=D.항공사, 도시=D.도시;
+const 시작=new Date(2026,9,25), 끝=new Date(2027,2,27), 오늘=new Date(2026,10,3);
+let 달=new Date(2026,10,1), 고른=new Date(2026,10,19);
+function 더(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+function 글(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일('+요일[d.getDay()]+')'; }
+function 편(d,출,도){ if(d<시작||d>끝) return []; return D.편.filter(f=>f.출===출&&f.도===도&&f.요일.includes(d.getDay())); }
+function 분(t){ const [h,m]=t.split(':').map(Number); return h*60+m; }
+function 줄(f){ const a=사[f.사]; return `<div class="fl"><span class="al"><i style="background:${a.색}"></i>${a.이름}</span><span class="n">${f.편}</span><span class="t">${f.떠남} → ${f.닿음}${f.다음날?'<sup>+1</sup>':''}</span></div>`; }
+function 달력(){
+  const y=달.getFullYear(), m=달.getMonth();
+  document.getElementById('mm').textContent=y+'. '+String(m+1).padStart(2,'0');
+  let h=''; for(let i=0;i<new Date(y,m,1).getDay();i++) h+='<span class="d empty"></span>';
+  for(let n=1;n<=new Date(y,m+1,0).getDate();n++){
+    const d=new Date(y,m,n), 지남=d<오늘;
+    const 전날=편(더(d,-1),'ICN',P.출);
+    const 점=[...new Set(전날.map(f=>f.사))].map(k=>`<i style="background:${사[k].색}"></i>`).join('');
+    h+=`<button type="button" class="d${지남?' past':''}${!지남&&d.getTime()===고른.getTime()?' sel':''}" data-n="${n}" ${지남?'disabled':''}>${n}<span class="ds">${지남?'':점}</span></button>`;
+  }
+  const c=document.getElementById('cal'); c.innerHTML=h;
+  c.querySelectorAll('.d[data-n]:not(.past)').forEach(b=>b.onclick=()=>{ 고른=new Date(y,m,+b.dataset.n); 달력(); 창(); });
+}
+function 창(){
+  const 전날=더(고른,-1), 다음=더(고른,1);
+  const 도착편=편(전날,'ICN',P.출);
+  const 당일귀국=편(고른,P.도,'ICN'), 다음귀국=편(다음,P.도,'ICN');
+  const 드롭=분(P.끝);
+  const 당일가능=당일귀국.filter(f=>분(f.떠남)-드롭>=60+180);
+  let 귀국='';
+  if(당일귀국.length && !당일가능.length) 귀국+=`<div class="warn">같은 날 ${당일귀국.map(f=>f.편+' '+f.떠남).join(', ')} 출발은 ${P.끝} 도착 후 공항 이동 · 국제선 3시간 전 도착 기준으로 빠듯해요. 다음 날 귀국편을 권해 드려요.</div>`;
+  if(당일가능.length) 귀국+=`<div class="ok">공항 드롭 후 같은 날 귀국할 수 있어요.</div>`+당일가능.map(줄).join('');
+  귀국+= 다음귀국.length ? `<div class="txt" style="margin:4px 0">다음 날 ${글(다음)} ${P.도이름} → 인천</div>`+다음귀국.map(줄).join('')
+                       : `<div class="txt">다음 날 ${글(다음)}에는 ${P.도이름} → 인천 직항이 없어요.</div>`;
+  const 이어=NEXT.map(c=>`<a href="#" onclick="return false"><span>${글(다음).replace(/\(.+\)/,'')} · ${c.제목}</span><span>€${c.값}</span></a>`).slice(0,4).join('');
+  document.getElementById('pane').innerHTML=`
+    <div class="st fly"><h5>전날 ${글(전날)} 도착 직항<small>인천 → ${P.출이름}</small></h5>
+      ${도착편.length?도착편.map(줄).join('')+'<div class="txt">공항 → 호텔 픽업은 따로 안내해 드려요.</div>':`<div class="txt">이날은 ${P.출이름} 도착 직항이 없어요. 경유편 · 다른 날짜를 안내해 드릴게요.</div>`}</div>
+    <div class="st car"><h5>${글(고른)} 차량 운행<small>${P.시작} → ${P.끝}</small></h5>
+      <div class="txt">${P.출이름} 숙소 미팅 → 몬세라트 → 사라고사 → ${P.도이름} 숙소 드롭</div></div>
+    <div class="st fly"><h5>귀국 직항 연결<small>${P.도이름} → 인천</small></h5>${귀국}</div>
+    <div class="st"><h5>다음 날 이어 타기<small>${P.도이름} 출발 차량</small></h5><div class="next">${이어}</div></div>`;
+}
+document.getElementById('lg').innerHTML=Object.keys(사).map(k=>`<span><i style="background:${사[k].색}"></i>${사[k].이름}</span>`).join('')+'<span>· 점 = 전날 도착하는 직항</span>';
+document.getElementById('pv').onclick=()=>{ 달=new Date(달.getFullYear(),달.getMonth()-1,1); 달력(); };
+document.getElementById('nx').onclick=()=>{ 달=new Date(달.getFullYear(),달.getMonth()+1,1); 달력(); };
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x===b)); });
+달력(); 창();
+</script></body></html>

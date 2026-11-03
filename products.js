@@ -458,7 +458,8 @@ const PRODUCTS = [
       ]
     },
     "카드사진": "/pic-porto-ribeira.jpg",
-    "minPeople": 4
+    "minPeople": 4,
+    "항공": {"IN": "LIS", "OUT": "LIS", "귀국일차": 6}
   },
   {
     "id": "spain-round",
@@ -705,7 +706,8 @@ const PRODUCTS = [
     "minPeople": 4,
     "maxPeople": 20,
     "카드사진": "/pic-granada-interior.jpg",
-    "제휴코드": "PRD3018339107"
+    "제휴코드": "PRD3018339107",
+    "항공": {"IN": "BCN", "OUT": "BCN", "귀국일차": 6}
   },
   {
     "id": "camino-100",
@@ -3585,7 +3587,8 @@ const PRODUCTS = [
     },
     "카드사진": "/card-golf.jpg",
     "제휴코드": "PRD3018122255",
-    "앱": {"주소": "/golf", "제목": "골프장 지도 — 포르투갈 · 스페인 남부 24곳", "말": "유포리아투어가 현지에서 직접 확인한 알가르브 · 카디스 · 세비야 · 코스타 델 솔 · 소토그란데 골프장을 지도와 함께 보실 수 있어요. 라운드할 코스는 일정에 맞춰 함께 정해 드립니다.", "단추": "골프장 24곳 모두 펼쳐 보기", "탭": "알가르브"}
+    "앱": {"주소": "/golf", "제목": "골프장 지도 — 포르투갈 · 스페인 남부 24곳", "말": "유포리아투어가 현지에서 직접 확인한 알가르브 · 카디스 · 세비야 · 코스타 델 솔 · 소토그란데 골프장을 지도와 함께 보실 수 있어요. 라운드할 코스는 일정에 맞춰 함께 정해 드립니다.", "단추": "골프장 24곳 모두 펼쳐 보기", "탭": "알가르브"},
+    "항공": {"IN": "LIS", "OUT": "LIS", "귀국일차": 8}
   },
   {
     "id": "spain-free-itinerary",
@@ -4216,7 +4219,8 @@ const PRODUCTS = [
     "minPeople": 4,
     "maxPeople": 20,
     "카드사진": "/pic-sintra-pena3.jpg",
-    "제휴코드": "PRD3018121367"
+    "제휴코드": "PRD3018121367",
+    "항공": {"IN": "LIS", "OUT": "LIS", "귀국일차": 8}
   },
   {
     "id": "portugal-10days",
@@ -4416,7 +4420,8 @@ const PRODUCTS = [
     "minPeople": 4,
     "maxPeople": 20,
     "카드사진": "/pic-algarve-marinha.jpg",
-    "제휴코드": "PRD3018936035"
+    "제휴코드": "PRD3018936035",
+    "항공": {"IN": "LIS", "OUT": "LIS", "귀국일차": 10}
   },
   {
     "id": "iberia-12days",
@@ -4631,7 +4636,8 @@ const PRODUCTS = [
     "minPeople": 4,
     "maxPeople": 20,
     "카드사진": "/card-parador.jpg",
-    "제휴코드": "PRD3018128841"
+    "제휴코드": "PRD3018128841",
+    "항공": {"IN": "LIS", "OUT": "MAD", "귀국일차": 12}
   },
   {
     "id": "spain-8days-barcelona",
@@ -4770,7 +4776,8 @@ const PRODUCTS = [
       "안내": "6명 미만 일정이라 프라도 미술관을 뺀 관광지는 가이드가 밖에서 설명해 드린 뒤 자유관람합니다. 기차 · 항공 이동 중에는 가이드가 동행하지 않고 마드리드 도착역에서 미팅하며, 기차 · 항공은 출발 2개월 전 예약 기준이에요."
     },
     "minPeople": 4,
-    "카드사진": "/card-sagrada-city.jpg"
+    "카드사진": "/card-sagrada-city.jpg",
+    "항공": {"IN": "BCN", "OUT": "BCN", "귀국일차": 8}
   },
   {
     "id": "spain-12days-barcelona",
@@ -4987,7 +4994,8 @@ const PRODUCTS = [
     "minPeople": 4,
     "maxPeople": 20,
     "카드사진": "/pic-sagrada2.jpg",
-    "제휴코드": "PRD3018128841"
+    "제휴코드": "PRD3018128841",
+    "항공": {"IN": "BCN", "OUT": "BCN", "귀국일차": 12}
   },
   {
     "id": "north-cantabria-basque",
@@ -5714,7 +5722,8 @@ const PRODUCTS = [
     "minPeople": 4,
     "maxPeople": 20,
     "카드사진": "/pic-albaicin.jpg",
-    "제휴코드": "PRD3018976275"
+    "제휴코드": "PRD3018976275",
+    "항공": {"IN": "MAD", "OUT": "LIS", "귀국일차": 14}
   },
   {
     "id": "galicia-a-marina",
@@ -6140,7 +6149,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/pic-sevilla-plaza2.jpg"
+    "카드사진": "/pic-sevilla-plaza2.jpg",
+    "항공": {"IN": "BCN", "OUT": "BCN", "귀국일차": 15}
   },
   {
     "id": "portugal-north-spain-17days",
@@ -6405,7 +6415,8 @@ const PRODUCTS = [
     },
     "minPeople": 4,
     "maxPeople": 20,
-    "카드사진": "/pic-lisbon-arco.jpg"
+    "카드사진": "/pic-lisbon-arco.jpg",
+    "항공": {"IN": "LIS", "OUT": "MAD", "귀국일차": 16}
   }
 ];
 /* 가격 배지를 두 줄로 나눠 보여줄 때 써요.

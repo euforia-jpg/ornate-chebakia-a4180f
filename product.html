@@ -472,6 +472,50 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .cal-day.selected{ background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; }
   .cal-selected{ margin-top:8px; font-size:11.5px; font-weight:800; color:#fff; min-height:14px; }
   .cal-note{ margin:8px 0 0; font-size:10px; color:rgba(255,255,255,0.42); font-weight:600; line-height:1.6; }
+  /* 달력 + 인천 직항 (flights.json · 상품 "항공" 칸이 있는 IN/OUT 상품만) · 2026-11 */
+  .fl-head{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin:2px 0 8px; }
+  .fl-head .t{ font-size:12px; font-weight:800; color:#fff; line-height:1.4; }
+  .fl-head .t small{ display:block; font-size:10.5px; font-weight:700; color:rgba(255,255,255,.55); }
+  .fl-sw{ flex:none; display:inline-flex; align-items:center; gap:6px; font-size:10.5px; font-weight:800; color:rgba(255,255,255,.75); cursor:pointer; user-select:none; white-space:nowrap; }
+  .fl-sw input{ display:none; }
+  .fl-sw span{ width:28px; height:16px; border-radius:999px; background:rgba(255,255,255,.18); position:relative; transition:.2s; }
+  .fl-sw span::after{ content:""; position:absolute; top:2px; left:2px; width:12px; height:12px; border-radius:50%; background:#fff; transition:.2s; }
+  .fl-sw input:checked + span{ background:var(--teal); }
+  .fl-sw input:checked + span::after{ left:14px; }
+  .fl-chips{ display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
+  .fl-chip{ all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:800; color:#fff;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:999px; padding:4px 9px; }
+  .fl-chip i{ width:7px; height:7px; border-radius:50%; }
+  .fl-chip .r{ font-weight:700; color:rgba(255,255,255,.55); }
+  .fl-chip.off{ opacity:.38; }
+  .cal-grid.fl .cal-day{ position:relative; height:36px; flex-direction:column; justify-content:flex-start; gap:3px; padding-top:5px; }
+  .cal-grid.fl .cal-day .fd{ display:flex; gap:2px; height:5px; }
+  .cal-grid.fl .cal-day .fd i{ width:5px; height:5px; border-radius:50%; }
+  .cal-grid.fl .cal-day.avail.fl-rt{ background:rgba(82,120,108,.34); box-shadow:inset 0 0 0 1px rgba(150,200,180,.45); }
+  .cal-grid.fl .cal-day.avail.fl-dim{ opacity:.28; }
+  .cal-grid.fl .cal-day.avail.fl-trip{ background:rgba(255,255,255,.07); box-shadow:none; }
+  .cal-grid.fl .cal-day.avail.fl-ret{ box-shadow:inset 0 0 0 1.5px #F2C9A8; }
+  .cal-grid.fl .cal-day.avail.fl-ret::after{ content:"귀국"; position:absolute; bottom:2px; font-size:8px; font-weight:800; color:#F2C9A8; }
+  .cal-grid.fl .cal-day.avail.fl-ret .fd{ display:none; }
+  .cal-grid.fl .cal-day.avail.selected{ background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; box-shadow:none; opacity:1; }
+  .fl-legend{ display:flex; flex-wrap:wrap; gap:9px; margin-top:8px; font-size:10px; color:rgba(255,255,255,.55); font-weight:700; }
+  .fl-legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .fl-legend b{ width:13px; height:9px; border-radius:3px; display:inline-block; }
+  .fl-pane{ margin-top:10px; background:#fff; color:var(--ink); border-radius:12px; padding:11px 12px; }
+  .fl-pane:empty{ display:none; }
+  .fl-leg + .fl-leg{ border-top:1px dashed #E3E7EA; margin-top:8px; padding-top:9px; }
+  .fl-leg h5{ margin:0 0 6px; font-size:12px; font-weight:800; color:var(--navy); display:flex; justify-content:space-between; gap:6px; }
+  .fl-leg h5 small{ color:var(--muted); font-weight:700; font-size:10.5px; text-align:right; }
+  .fl-row{ display:grid; grid-template-columns:auto 1fr auto; gap:7px; align-items:center; padding:7px 9px; border-radius:9px; background:#F5F7F8; margin-bottom:5px; font-size:11.5px; }
+  .fl-row .al{ display:inline-flex; align-items:center; gap:5px; font-weight:800; white-space:nowrap; }
+  .fl-row .al i{ width:8px; height:8px; border-radius:50%; }
+  .fl-row .no{ font-weight:800; color:var(--navy); }
+  .fl-row .tm{ font-weight:800; color:#3B4852; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .fl-row .tm sup{ font-size:9px; color:var(--pink); }
+  .fl-row .ac{ grid-column:1 / 4; margin-top:-3px; font-size:10.5px; color:var(--muted); font-weight:600; }
+  .fl-none{ font-size:11px; color:var(--pink); font-weight:700; background:#FBF3EE; border-radius:8px; padding:7px 9px; line-height:1.55; }
+  .fl-same{ margin-top:4px; font-size:11px; font-weight:800; color:var(--teal); }
+  @media print{ .fl-box, .fl-pane, .fl-legend{ display:none !important; } }
   .cta{ all:unset; display:block; width:100%; text-align:center; padding:14px; background:linear-gradient(90deg,var(--pink),var(--orange)); color:#fff; font-weight:800; border-radius:12px; cursor:pointer; font-size:14px; box-sizing:border-box; }
   .cta:hover{ filter:brightness(1.06); }
   .cta.secondary{ background:rgba(255,255,255,0.12); color:#fff; margin-top:10px; }
@@ -1836,6 +1880,7 @@ function render(){
             </div>
             <div class="pax-status" id="paxStatus"></div>
             <div id="calWrap">
+              <div class="fl-box" id="flBox" hidden></div>
               <div class="cal-nav">
                 <button type="button" id="calPrev">&lsaquo;</button>
                 <div class="lbl" id="calLabel"></div>
@@ -1845,6 +1890,7 @@ function render(){
               <div class="cal-grid" id="calGrid"></div>
             </div>
             <div class="cal-selected" id="calSelected"></div>
+            <div class="fl-pane" id="flPane"></div>
             <p class="cal-note">* 인원 조건 기준 예상 가능일이며, 실제 예약 확정은 예약문의로 최종 확인해 드려요.</p>
           </div>
 
@@ -1924,6 +1970,115 @@ function placeItineraryDownload(product){
 /* 예약 인원에 맞춰 출발 가능한 날짜를 보여주는 달력 위젯이에요.
    상품별 최소/최대 인원(minPeople/maxPeople)은 products.js에서 지정할 수 있고,
    지정하지 않으면 기본값 1~8인이 적용돼요. */
+/* ╔═══ 달력 + 인천 직항 ═══╗
+   상품에 "항공": {"IN":"BCN", "OUT":"BCN", "귀국일차":8} 이 있으면 flights.json 을 읽어
+   - 날짜 아래 색 점: 그날 인천 → IN 도시 직항
+   - 초록 칸: 그날 출발 + 귀국일차 날 OUT 도시 → 인천 직항이 모두 있는 날
+   - 날짜를 고르면 출발편 · 귀국편을 아래 흰 창에 보여 줍니다. (항공권은 상품 요금 불포함)
+   운항표 밖의 날짜는 점 없이 「운항표 미정」 으로 안내합니다. */
+function euFlightInit(product, redraw){
+  var 항 = product && product.항공;
+  if(!항 || !항.IN || !항.OUT) return;
+  var 귀국 = parseInt(항.귀국일차, 10) || 1;
+  fetch('/flights.json', { cache:'no-cache' }).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }).then(function(D){
+    if(!D || !D.편) return;
+    var 사 = D.항공사 || {}, 도시 = D.도시 || {}, 끔 = {}, 왕복만 = false;
+    var 시작 = 날짜(D.시작), 끝 = 날짜(D.끝);
+    var 요일 = ['일','월','화','수','목','금','토'];
+    function 날짜(iso){ var a = String(iso).split('-').map(Number); return new Date(a[0], a[1]-1, a[2]); }
+    function 더(d, n){ var x = new Date(d); x.setDate(x.getDate()+n); return x; }
+    function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+    function 글(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일('+요일[d.getDay()]+')'; }
+    function 안(d){ return d >= 시작 && d <= 끝; }
+    function 편(d, 출, 도){
+      if(!안(d)) return [];
+      return D.편.filter(function(f){ return f.출===출 && f.도===도 && f.요일.indexOf(d.getDay())>-1 && !끔[f.사]; });
+    }
+    var 쓰는 = {};
+    D.편.forEach(function(f){ if((f.출==='ICN'&&f.도===항.IN)||(f.출===항.OUT&&f.도==='ICN')) 쓰는[f.사]=1; });
+    var 쓰는목록 = Object.keys(쓰는);
+    var box = document.getElementById('flBox');
+    if(!box) return;
+    box.hidden = false;
+    function 머리(){
+      var 노선 = (도시[항.IN]||항.IN) + ' IN · ' + (도시[항.OUT]||항.OUT) + ' OUT';
+      box.innerHTML =
+        '<div class="fl-head"><div class="t">✈ 인천 직항 함께 보기<small>' + 노선 + '</small></div>' +
+        (쓰는목록.length ? '<label class="fl-sw"><input type="checkbox" id="flRt"' + (왕복만?' checked':'') + '><span></span>직항 왕복만</label>' : '') + '</div>' +
+        '<div class="fl-chips">' + (쓰는목록.length ? 쓰는목록.map(function(k){
+          var 곳 = []; D.편.forEach(function(f){ if(f.사!==k) return; var c = f.출==='ICN'?f.도:f.출; if((c===항.IN||c===항.OUT) && 곳.indexOf(c)<0) 곳.push(c); });
+          return '<button type="button" class="fl-chip' + (끔[k]?' off':'') + '" data-k="' + k + '"><i style="background:' + ((사[k]||{}).색||'#ccc') + '"></i>' +
+            ((사[k]||{}).이름||k) + '<span class="r">' + 곳.map(function(c){ return 도시[c]||c; }).join('·') + '</span></button>';
+        }).join('') : '<span class="fl-chip" style="cursor:default">이 노선은 인천 직항이 없어요 · 경유편 안내</span>') + '</div>';
+      var rt = document.getElementById('flRt');
+      if(rt) rt.onchange = function(){ 왕복만 = rt.checked; redraw(); };
+      Array.prototype.forEach.call(box.querySelectorAll('.fl-chip[data-k]'), function(b){
+        b.onclick = function(){ var k = b.dataset.k; 끔[k] = !끔[k]; 머리(); redraw(); };
+      });
+    }
+    function 점(fs){
+      var 본 = {}, h = '';
+      fs.forEach(function(f){ if(본[f.사]) return; 본[f.사]=1; h += '<i style="background:' + ((사[f.사]||{}).색||'#ccc') + '"></i>'; });
+      return h;
+    }
+    var 마지막선택 = null;
+    window.euFl = {
+      deco: function(grid, sel){
+        grid.classList.add('fl');
+        var s = sel ? 날짜(sel) : null, r = s ? 더(s, 귀국-1) : null;
+        Array.prototype.forEach.call(grid.querySelectorAll('.cal-day[data-date]'), function(el){
+          var d = 날짜(el.dataset.date);
+          var 가 = 편(d, 'ICN', 항.IN), 오 = 편(더(d, 귀국-1), 항.OUT, 'ICN');
+          el.insertAdjacentHTML('beforeend', '<span class="fd">' + (el.classList.contains('past') ? '' : 점(가)) + '</span>');
+          if(!el.classList.contains('avail') && !el.classList.contains('selected')) return;
+          var 왕 = 가.length && 오.length;
+          if(왕) el.classList.add('fl-rt');
+          else if(왕복만) el.classList.add('fl-dim');
+          if(s && r && !el.classList.contains('selected')){
+            if(d.getTime()===r.getTime()) el.classList.add('fl-ret');
+            else if(d > s && d < r) el.classList.add('fl-trip');
+          }
+        });
+        if(마지막선택) euFl.pane(마지막선택);
+      },
+      pane: function(sel){
+        마지막선택 = sel;
+        var pane = document.getElementById('flPane'); if(!pane || !sel) return;
+        var s = 날짜(sel), r = 더(s, 귀국-1);
+        var 가 = 편(s, 'ICN', 항.IN), 오 = 편(r, 항.OUT, 'ICN');
+        function 줄(f){
+          var a = 사[f.사] || {};
+          return '<div class="fl-row"><span class="al"><i style="background:' + (a.색||'#ccc') + '"></i>' + (a.이름||f.사) + '</span>' +
+            '<span class="no">' + f.편 + '</span><span class="tm">' + f.떠남 + ' → ' + f.닿음 + (f.다음날?'<sup>+1</sup>':'') + '</span>' +
+            '<span class="ac">' + (도시[f.출]||f.출) + ' ' + f.떠남 + ' 출발 · ' + (도시[f.도]||f.도) + ' ' + (f.다음날?'다음 날 ':'') + f.닿음 + ' 도착 · ' + f.기종 + '</span></div>';
+        }
+        function 없음(d, 출, 도){
+          return '<div class="fl-none">' + (안(d) ? '이날은 ' + (도시[출]||출) + ' → ' + (도시[도]||도) + ' 직항이 없어요. 경유편이나 가까운 날짜를 안내해 드릴게요.'
+            : '이 날짜의 직항 운항표는 아직 나오지 않았어요. 운항표가 나오면 바로 안내해 드릴게요.') + '</div>';
+        }
+        var 같은 = []; 가.forEach(function(f){ if(같은.indexOf(f.사)<0 && 오.some(function(g){ return g.사===f.사; })) 같은.push(f.사); });
+        pane.innerHTML =
+          '<div class="fl-leg"><h5>출발 ' + 글(s) + '<small>인천 → ' + (도시[항.IN]||항.IN) + '</small></h5>' + (가.length ? 가.map(줄).join('') : 없음(s,'ICN',항.IN)) + '</div>' +
+          '<div class="fl-leg"><h5>귀국 ' + 글(r) + '<small>' + (도시[항.OUT]||항.OUT) + ' → 인천 · ' + 귀국 + '일차</small></h5>' + (오.length ? 오.map(줄).join('') : 없음(r,항.OUT,'ICN')) +
+            (같은.length ? '<div class="fl-same">✓ 같은 항공사 왕복 가능: ' + 같은.map(function(k){ return (사[k]||{}).이름||k; }).join(', ') + '</div>' : '') + '</div>';
+      },
+      msg: function(sel){
+        if(!sel) return [];
+        var s = 날짜(sel), r = 더(s, 귀국-1);
+        var 가 = 편(s, 'ICN', 항.IN).map(function(f){ return f.편; }), 오 = 편(r, 항.OUT, 'ICN').map(function(f){ return f.편; });
+        return ['직항 참고: 출발 ' + (가.join('/') || '직항 없음') + ' · 귀국 ' + 글(r) + ' ' + (오.join('/') || '직항 없음')];
+      }
+    };
+    var 노트 = document.querySelector('#availBox .cal-note');
+    if(노트 && !document.getElementById('flNote')){
+      노트.insertAdjacentHTML('beforebegin', '<div class="fl-legend" id="flLegend"><span><b style="background:rgba(82,120,108,.6)"></b>직항 왕복 가능</span><span><b style="background:linear-gradient(90deg,#94634A,#8E6139)"></b>고른 출발일</span><span><b style="box-shadow:inset 0 0 0 1.5px #F2C9A8"></b>귀국일</span></div>');
+      노트.insertAdjacentHTML('afterend', '<p class="cal-note" id="flNote" style="margin-top:4px">* 항공권은 상품 요금에 포함되지 않아요. 직항편은 ' + (D.기준||'항공사 운항표') + ' 기준이며 항공사 사정으로 바뀔 수 있어요. 항공권 예약은 따로 도와드립니다.</p>');
+    }
+    머리();
+    redraw();
+  });
+}
+
 function initAvailCalendar(product){
   const box = document.getElementById('availBox');
   if(!box) return;
@@ -1987,6 +2142,7 @@ function initAvailCalendar(product){
       html += `<button type="button" class="${cls}" data-date="${iso}" ${disabled?'disabled':''}>${d}</button>`;
     }
     calGrid.innerHTML = html;
+    if(window.euFl) euFl.deco(calGrid, selectedDate);
     calGrid.querySelectorAll('.cal-day.avail, .cal-day.selected').forEach(btn=>{
       btn.addEventListener('click', ()=>{
         selectedDate = btn.dataset.date;
@@ -1994,6 +2150,7 @@ function initAvailCalendar(product){
         const [y,m,dd] = selectedDate.split('-').map(Number);
         const dow = ['일','월','화','수','목','금','토'][new Date(y, m-1, dd).getDay()];
         calSelected.textContent = `선택하신 날짜 · ${y}년 ${m}월 ${dd}일(${dow}) · ${pax}인`;
+        if(window.euFl) euFl.pane(selectedDate);
         updateCtaLink();
       });
     });
@@ -2041,6 +2198,7 @@ function initAvailCalendar(product){
       `희망 날짜: ${selectedDate ? dateLabel(selectedDate) : '미정'}`,
       `인원: ${pax}명`,
       `참고 가격: ${product.price || '가격 문의'}`,
+      ...(window.euFl ? euFl.msg(selectedDate) : []),
       '',
       '안녕하세요! 위 일정으로 예약 상담 부탁드립니다.'
     ].join('\n');
@@ -2074,6 +2232,7 @@ function initAvailCalendar(product){
   updateStatus();
   renderCalendar();
   updateCtaLink();
+  euFlightInit(product, renderCalendar);
 }
 
 render();
