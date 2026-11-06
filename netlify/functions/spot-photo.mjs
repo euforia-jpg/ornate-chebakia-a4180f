@@ -471,6 +471,18 @@ const 직접표 = {
   "라리가 경기 관람 — 아틀레티코 마드리드 vs 레반테 (메트로폴리타노 경기장)": "Estadio Riyadh Air Metropolitano",
   "바르셀로나 → 마드리드 고속철도(AVE) 약 2시간 30분": "",
   "제6일 바르셀로나 전일 자유시간 (체크아웃 후 짐 보관)": "Barrio Gótico, Barcelona"
+ },
+ "sevilla-costa-de-la-luz-7days-madrid": {
+  "세비야 대성당 · 히랄다 탑 (세계유산)": "Catedral de Sevilla",
+  "레알 알카사르 (세계유산) — 무데하르 양식 궁전과 정원": "Real Alcázar de Sevilla",
+  "스페인 광장 · 산타 크루스 지구": "Plaza de España, Sevilla",
+  "헤레스 셰리 와이너리 방문 · 시음": "Bodegas Tío Pepe, Jerez de la Frontera",
+  "카디스 대성당 · 라 칼레타 해변": "Catedral de Cádiz",
+  "베헤르 데 라 프론테라 — 언덕 위 하얀 마을": "Vejer de la Frontera",
+  "바엘로 클라우디아 로마 유적 · 볼로니아 사구 해변": "Conjunto Arqueológico de Baelo Claudia",
+  "타리파 — 유럽 대륙 최남단": "Castillo de Guzmán el Bueno, Tarifa",
+  "아르코스 데 라 프론테라 — 절벽 위 하얀 마을": "Mirador de la Peña Nueva, Arcos de la Frontera",
+  "론다 누에보 다리 · 투우장": "Puente Nuevo, Ronda"
  }
 };
 
