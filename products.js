@@ -4039,7 +4039,8 @@ const PRODUCTS = [
     "minPeople": 4,
     "maxPeople": 20,
     "카드사진": "/pic-sansebastian-funicular.jpg",
-    "제휴코드": "PRD3018752319"
+    "제휴코드": "PRD3018752319",
+    "항공": {"IN": "MAD", "OUT": "MAD", "도착일차": 0, "귀국일차": 7}
   },
   {
     "id": "portugal-8days",
@@ -5285,7 +5286,8 @@ const PRODUCTS = [
     "minPeople": 4,
     "maxPeople": 20,
     "카드사진": "/pic-cathedral-gothic.jpg",
-    "제휴코드": "PRD3018540501"
+    "제휴코드": "PRD3018540501",
+    "항공": {"IN": "MAD", "OUT": "MAD", "도착일차": 0, "귀국일차": 7}
   },
   {
     "id": "north-asturias-picos",
@@ -5440,7 +5442,8 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/pic-picos-lake.jpg"
+    "카드사진": "/pic-picos-lake.jpg",
+    "항공": {"IN": "MAD", "OUT": "MAD", "도착일차": 0, "귀국일차": 7}
   },
   {
     "id": "north-spain-7days-madrid",
@@ -5612,7 +5615,8 @@ const PRODUCTS = [
           "말": "불포함 · 마드리드 현지 집합"
         }
       ]
-    }
+    },
+    "항공": {"IN": "MAD", "OUT": "MAD", "도착일차": 0, "귀국일차": 8}
   },
   {
     "id": "castilla-valladolid-6days-madrid",
@@ -5778,7 +5782,8 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-zamora.jpg"
+    "카드사진": "/card-zamora.jpg",
+    "항공": {"IN": "MAD", "OUT": "MAD", "도착일차": 0, "귀국일차": 7}
   },
   {
     "id": "galicia-costa-da-morte-6days-madrid",
@@ -5951,7 +5956,8 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-ezaro.jpg"
+    "카드사진": "/card-ezaro.jpg",
+    "항공": {"IN": "MAD", "OUT": "MAD", "도착일차": 0, "귀국일차": 7}
   },
   {
     "id": "white-towns-morocco-6days-madrid",
@@ -6124,7 +6130,8 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-chefchaouen.jpg"
+    "카드사진": "/card-chefchaouen.jpg",
+    "항공": {"IN": "MAD", "OUT": "MAD", "도착일차": 0, "귀국일차": 7}
   },
   {
     "id": "costa-brava-france-6days-barcelona",
@@ -6291,7 +6298,8 @@ const PRODUCTS = [
         }
       ]
     },
-    "카드사진": "/card-besalu.jpg"
+    "카드사진": "/card-besalu.jpg",
+    "항공": {"IN": "BCN", "OUT": "BCN", "도착일차": 0, "귀국일차": 7}
   },
   {
     "id": "iberia-14days-madrid",

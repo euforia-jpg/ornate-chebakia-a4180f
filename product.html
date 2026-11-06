@@ -2034,6 +2034,10 @@ function euFlightInit(product, redraw){
   var 항 = product && product.항공;
   if(!항 || !항.IN || !항.OUT){ euCarFlightInit(product, redraw); return; }
   var 귀국 = parseInt(항.귀국일차, 10) || 1;
+  /* "도착일차": 0 이면 여행 전날 도착(현지 집합 상품) · 기본 1 = 1일차가 인천 출발일 */
+  var 도착 = (항.도착일차 != null) ? parseInt(항.도착일차, 10) : 1, 앞 = 도착 - 1;
+  var 일수 = (product.경로 || []).length;
+  var 집합 = 앞 < 0;
   fetch('/flights.json', { cache:'no-cache' }).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }).then(function(D){
     if(!D || !D.편) return;
     var 사 = D.항공사 || {}, 도시 = D.도시 || {}, 끔 = {}, 왕복만 = false;
@@ -2055,7 +2059,7 @@ function euFlightInit(product, redraw){
     if(!box) return;
     box.hidden = false;
     function 머리(){
-      var 노선 = (도시[항.IN]||항.IN) + ' IN · ' + (도시[항.OUT]||항.OUT) + ' OUT';
+      var 노선 = 집합 ? (도시[항.IN]||항.IN) + ' 집합 · ' + (도시[항.OUT]||항.OUT) + ' 해산 · 전날 도착 · 다음 날 귀국 기준' : (도시[항.IN]||항.IN) + ' IN · ' + (도시[항.OUT]||항.OUT) + ' OUT';
       box.innerHTML =
         '<div class="fl-head"><div class="t">✈ 인천 직항 함께 보기<small>' + 노선 + '</small></div>' +
         (쓰는목록.length ? '<label class="fl-sw"><input type="checkbox" id="flRt"' + (왕복만?' checked':'') + '><span></span>직항 왕복만</label>' : '') + '</div>' +
@@ -2082,7 +2086,7 @@ function euFlightInit(product, redraw){
         var s = sel ? 날짜(sel) : null, r = s ? 더(s, 귀국-1) : null;
         Array.prototype.forEach.call(grid.querySelectorAll('.cal-day[data-date]'), function(el){
           var d = 날짜(el.dataset.date);
-          var 가 = 편(d, 'ICN', 항.IN), 오 = 편(더(d, 귀국-1), 항.OUT, 'ICN');
+          var 가 = 편(더(d, 앞), 'ICN', 항.IN), 오 = 편(더(d, 귀국-1), 항.OUT, 'ICN');
           el.insertAdjacentHTML('beforeend', '<span class="fd">' + (el.classList.contains('past') ? '' : 점(가)) + '</span>');
           if(!el.classList.contains('avail') && !el.classList.contains('selected')) return;
           var 왕 = 가.length && 오.length;
@@ -2098,7 +2102,7 @@ function euFlightInit(product, redraw){
       pane: function(sel){
         마지막선택 = sel;
         var pane = document.getElementById('flPane'); if(!pane || !sel) return;
-        var s = 날짜(sel), r = 더(s, 귀국-1);
+        var s0 = 날짜(sel), s = 더(s0, 앞), r = 더(s0, 귀국-1);
         var 가 = 편(s, 'ICN', 항.IN), 오 = 편(r, 항.OUT, 'ICN');
         function 줄(f){
           var a = 사[f.사] || {};
@@ -2112,15 +2116,15 @@ function euFlightInit(product, redraw){
         }
         var 같은 = []; 가.forEach(function(f){ if(같은.indexOf(f.사)<0 && 오.some(function(g){ return g.사===f.사; })) 같은.push(f.사); });
         pane.innerHTML =
-          '<div class="fl-leg"><h5>출발 ' + 글(s) + '<small>인천 → ' + (도시[항.IN]||항.IN) + '</small></h5>' + (가.length ? 가.map(줄).join('') : 없음(s,'ICN',항.IN)) + '</div>' +
-          '<div class="fl-leg"><h5>귀국 ' + 글(r) + '<small>' + (도시[항.OUT]||항.OUT) + ' → 인천 · ' + 귀국 + '일차</small></h5>' + (오.length ? 오.map(줄).join('') : 없음(r,항.OUT,'ICN')) +
+          '<div class="fl-leg"><h5>' + (집합 ? '도착 ' : '출발 ') + 글(s) + '<small>인천 → ' + (도시[항.IN]||항.IN) + (집합 ? ' · 여행 전날' : '') + '</small></h5>' + (가.length ? 가.map(줄).join('') : 없음(s,'ICN',항.IN)) + '</div>' +
+          '<div class="fl-leg"><h5>귀국 ' + 글(r) + '<small>' + (도시[항.OUT]||항.OUT) + ' → 인천 · ' + (일수 && 귀국 > 일수 ? '여행 다음 날' : 귀국 + '일차') + '</small></h5>' + (오.length ? 오.map(줄).join('') : 없음(r,항.OUT,'ICN')) +
             (같은.length ? '<div class="fl-same">✓ 같은 항공사 왕복 가능: ' + 같은.map(function(k){ return (사[k]||{}).이름||k; }).join(', ') + '</div>' : '') + '</div>';
       },
       msg: function(sel){
         if(!sel) return [];
-        var s = 날짜(sel), r = 더(s, 귀국-1);
+        var s0 = 날짜(sel), s = 더(s0, 앞), r = 더(s0, 귀국-1);
         var 가 = 편(s, 'ICN', 항.IN).map(function(f){ return f.편; }), 오 = 편(r, 항.OUT, 'ICN').map(function(f){ return f.편; });
-        return ['직항 참고: 출발 ' + (가.join('/') || '직항 없음') + ' · 귀국 ' + 글(r) + ' ' + (오.join('/') || '직항 없음')];
+        return ['직항 참고: ' + (집합 ? '전날 도착 ' + 글(s) + ' ' : '출발 ') + (가.join('/') || '직항 없음') + ' · 귀국 ' + 글(r) + ' ' + (오.join('/') || '직항 없음')];
       }
     };
     var 노트 = document.querySelector('#availBox .cal-note');
