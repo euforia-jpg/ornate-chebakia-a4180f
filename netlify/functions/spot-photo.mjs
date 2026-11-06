@@ -16,7 +16,7 @@
   - 검색어를 직접 정하려면 products.js 의 그 상품 detail 에
         사진검색어: ["에보라 대성당", "", ...]
     처럼 줄 순서대로 적으면 됩니다. 빈 칸("")은 사진을 붙이지 않는다는 뜻입니다.
-  - 찾는 범위는 이베리아 반도(스페인 · 포르투갈 · 프랑스 바스크 일부)로 묶어,
+  - 찾는 범위는 이베리아 반도 + 남프랑스 · 모로코 북부(탕헤르 · 테투안 · 셰프샤우엔)로 묶어,
     이름이 같은 다른 나라 장소가 나오지 않게 합니다.
   - 구글이 찾은 장소 번호(ID)만 저장해 두고, 사진 주소는 매번 새로 받습니다.
   ===========================================================
@@ -80,7 +80,7 @@ const 직접표 = {
   "알함브라 궁전 (세계유산) · 알바이신 · 산 니콜라스 전망대": "Alhambra, Granada",
   "론다 누에보 다리 — 협곡 위에 걸린 마을": "Puente Nuevo, Ronda",
   "세비야 대성당 · 히랄다 탑 (세계유산)": "Catedral de Sevilla",
-  "플라멩코 공연 (유네스코 무형문화유산)": "",
+  "플라멩코 공연 (유네스코 무형문화유산)": "Museo del Baile Flamenco, Sevilla",
   "말라가 — 라리오스 거리 · 무엘레 우노 항구": "Calle Larios, Málaga"
  },
  "camino-100": {
@@ -118,7 +118,7 @@ const 직접표 = {
   "신트라 문화경관 · 유라시아 최서단 까보 다 로카": "Palácio Nacional da Pena",
   "에보라 역사지구 (세계유산) · 뼈 예배당": "Templo Romano de Évora",
   "세비야 대성당 · 레알 알카사르 (세계유산)": "Catedral de Sevilla",
-  "카르모나·론다 파라도르(국영 고성 호텔) 3박": "",
+  "카르모나·론다 파라도르(국영 고성 호텔) 3박": "Parador de Carmona",
   "프리힐리아나 백색마을 · 알함브라 궁전 (세계유산)": "Frigiliana",
   "그라나다 알바이신 · 사크로몬테 · 프라도 미술관": "Mirador de San Nicolás, Granada"
  },
@@ -135,7 +135,7 @@ const 직접표 = {
   "사그라다 파밀리아 · 구엘 공원 (세계유산)": "Basílica de la Sagrada Família",
   "몬세라트 수도원 · 발렌시아 라 론하 (세계유산)": "Monasterio de Montserrat",
   "알함브라 궁전 (세계유산) · 프리힐리아나 백색마을": "Alhambra, Granada",
-  "론다·카르모나 파라도르(국영 고성 호텔) 3박": "",
+  "론다·카르모나 파라도르(국영 고성 호텔) 3박": "Parador de Ronda",
   "세비야 대성당 · 레알 알카사르 (세계유산)": "Catedral de Sevilla",
   "코르도바 역사지구 (세계유산)": "Mezquita-Catedral de Córdoba",
   "프라도 미술관 · 파세오 델 프라도 (세계유산)": "Museo del Prado",
@@ -192,7 +192,7 @@ const 직접표 = {
   "산티아고 데 콤포스텔라와 땅끝 피니스테레": "Catedral de Santiago de Compostela",
   "피코스 데 에우로파 코바동가 호수": "Lagos de Covadonga",
   "가우디의 엘 카프리초와 알타미라 복제 동굴": "El Capricho de Gaudí, Comillas",
-  "산 세바스티안 2박 — 하루는 온전히 쉬어 갑니다": ""
+  "산 세바스티안 2박 — 하루는 온전히 쉬어 갑니다": "Playa de La Concha, San Sebastián"
  },
  "golf-spain-portugal": {
   "리스본 IN / OUT · 18홀 4라운드 (포르투갈 2회 + 스페인 2회)": "",
@@ -436,6 +436,41 @@ const 직접표 = {
   "카테드랄레스 해변 (간조 때 걷는 바위 아치)": "Praia das Catedrais",
   "산티아고 데 콤포스텔라 대성당 · 땅끝 피니스테레": "Catedral de Santiago de Compostela",
   "레온 대성당 · 가우디의 카사 보티네스": "Catedral de León"
+ },
+ "castilla-valladolid-6days-madrid": {
+  "바야돌리드 구시가지 — 마요르 광장 · 산 파블로 성당 · 국립조각미술관": "Plaza Mayor de Valladolid",
+  "올메도 — 무데하르 양식 성당이 남은 성벽 마을": "Olmedo, Valladolid",
+  "아리베스 델 두에로 협곡 유람선 (스페인 · 포르투갈 국경)": "Cruzeiro Ambiental Arribas do Douro, Miranda do Douro",
+  "토로 와이너리 방문 · 시음 (D.O. 토로)": "Colegiata de Santa María la Mayor, Toro",
+  "메디나 데 리오세코 아케이드 거리": "Calle Mayor, Medina de Rioseco"
+ },
+ "costa-brava-france-6days-barcelona": {
+  "가로차 화산 자연공원 · 현무암 절벽 마을 카스텔폴리트 데 라 로카": "Castellfollit de la Roca",
+  "베살루 — 중세 돌다리와 유대인 지구": "Pont Vell de Besalú",
+  "남프랑스 나르본 — 대성당 · 로마 시대 도미티아 가도": "Cathédrale Saint-Just-et-Saint-Pasteur de Narbonne"
+ },
+ "galicia-costa-da-morte-6days-madrid": {
+  "페롤 해군 박물관": "Museo Naval de Ferrol",
+  "부뇨 도자기 마을": "Ecomuseo Forno do Forte, Buño",
+  "에사로 폭포 — 바다로 떨어지는 폭포": "Fervenza do Ézaro",
+  "카마리냐스 레이스 마을": "Faro de Cabo Vilán, Camariñas",
+  "보르네이로 카스트로 · 돔바테 고인돌": "Castro de Borneiro",
+  "빔비안소 성": "Castelo de Vimianzo"
+ },
+ "white-towns-morocco-6days-madrid": {
+  "베헤르 데 라 프론테라 — 언덕 위 성벽 하얀 마을": "Vejer de la Frontera",
+  "아르코스 데 라 프론테라 — 절벽 위 구시가지 · 파요요 치즈 시식": "Mirador de la Peña Nueva, Arcos de la Frontera",
+  "메디나 시도니아 언덕 마을": "Medina-Sidonia",
+  "타리파 → 탕헤르 페리로 지브롤터 해협 건너기": "Puerto de Tarifa",
+  "탕헤르 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "테투안 메디나 (세계유산)": "Medina of Tétouan",
+  "셰프샤우엔 — 푸른 골목 마을": "Plaza Outa el Hammam, Chefchaouen",
+  "세우타 아프리카 성모 성당 · 왕실 성벽": "Santuario de Nuestra Señora de África, Ceuta"
+ },
+ "spain-football-7days-barcelona": {
+  "라리가 경기 관람 — 아틀레티코 마드리드 vs 레반테 (메트로폴리타노 경기장)": "Estadio Riyadh Air Metropolitano",
+  "바르셀로나 → 마드리드 고속철도(AVE) 약 2시간 30분": "",
+  "제6일 바르셀로나 전일 자유시간 (체크아웃 후 짐 보관)": "Barrio Gótico, Barcelona"
  }
 };
 
@@ -488,7 +523,7 @@ export default async (req) => {
         headers: { ...H, "Content-Type": "application/json", "X-Goog-FieldMask": "places.id" },
         body: JSON.stringify({
           textQuery: q, languageCode: "ko", maxResultCount: 1,
-          locationRestriction: { rectangle: { low: { latitude: 35.8, longitude: -9.8 }, high: { latitude: 44.2, longitude: 3.6 } } },
+          locationRestriction: { rectangle: { low: { latitude: 35.0, longitude: -9.8 }, high: { latitude: 44.2, longitude: 3.6 } } },
         }),
       });
       const d = await r.json();
