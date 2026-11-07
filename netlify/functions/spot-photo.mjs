@@ -483,6 +483,104 @@ const 직접표 = {
   "타리파 — 유럽 대륙 최남단": "Castillo de Guzmán el Bueno, Tarifa",
   "아르코스 데 라 프론테라 — 절벽 위 하얀 마을": "Mirador de la Peña Nueva, Arcos de la Frontera",
   "론다 누에보 다리 · 투우장": "Puente Nuevo, Ronda"
+ },
+ "cruise-spain-morocco-8days-barcelona": {
+  "로열캐리비안 마리너 오브 더 시즈 — 보이저급 · 승객 약 3,300명": "Terminal de Creuers, Port de Barcelona",
+  "카디스 기항 · 세비야 스페인 광장 · 세비야 대성당 (세계유산)": "Plaza de España, Sevilla",
+  "카사블랑카 하산 2세 모스크 — 바다 위에 세운 모스크": "Hassan II Mosque, Casablanca",
+  "탕헤르 카스바 · 메디나 · 헤라클레스 동굴": "Kasbah Museum, Tangier",
+  "말라가 기항 · 그라나다 알함브라 궁전 (세계유산)": "Alhambra, Granada",
+  "해상일 2일 — 선내 공연 · 수영장 · 암벽 등반 · 아이스링크": ""
+ },
+ "cruise-mariner-spain-morocco-9days-barcelona": {
+  "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급": "",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
+  "카디스(세비야) — 세비야 대성당 · 스페인 광장까지 다녀올 수 있는 기항지": "Plaza de España, Sevilla",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca"
+ },
+ "cruise-mariner-best-spain-morocco-8days-barcelona": {
+  "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급": "",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca"
+ },
+ "cruise-legend-western-med-8days-barcelona": {
+  "로열캐리비안 「레전드 오브 더 시즈」 — 아이콘급 · 2026년 취항": "",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille",
+  "라 스페치아 — 친퀘테레 · 피사 · 피렌체로 가는 항구": "Manarola, Cinque Terre",
+  "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸": "Colosseum, Rome",
+  "나폴리 — 폼페이 · 카프리섬 · 나폴리 구시가지": "Pompeii Archaeological Park"
+ },
+ "cruise-liberty-spain-italy-france-8days-barcelona": {
+  "로열캐리비안 「리버티 오브 더 시즈」 — 프리덤급": "",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille",
+  "라 스페치아 — 친퀘테레 · 피사 · 피렌체로 가는 항구": "Manarola, Cinque Terre",
+  "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸": "Colosseum, Rome",
+  "나폴리 — 폼페이 · 카프리섬 · 나폴리 구시가지": "Pompeii Archaeological Park"
+ },
+ "cruise-liberty-spain-italy-france-9days-barcelona": {
+  "로열캐리비안 「리버티 오브 더 시즈」 — 프리덤급": "",
+  "카르타헤나 — 로마 극장 유적이 남은 항구 도시": "Roman Theatre of Cartagena",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille",
+  "라 스페치아 — 친퀘테레 · 피사 · 피렌체로 가는 항구": "Manarola, Cinque Terre",
+  "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸": "Colosseum, Rome",
+  "나폴리 — 폼페이 · 카프리섬 · 나폴리 구시가지": "Pompeii Archaeological Park"
+ },
+ "cruise-mariner-spain-portugal-morocco-8days-lisbon": {
+  "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급": "",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
+  "포르투 — 도루강 · 와인 저장고 · 포르투 구시가지": "Ribeira, Porto"
+ },
+ "cruise-mariner-spain-portugal-morocco-11days-lisbon": {
+  "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급": "",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
+  "마데이라 — 대서양의 꽃섬 · 푼샬 구시가지": "Mercado dos Lavradores, Funchal",
+  "포르투 — 도루강 · 와인 저장고 · 포르투 구시가지": "Ribeira, Porto"
+ },
+ "cruise-rhapsody-canary-portugal-morocco-12days-lisbon": {
+  "로열캐리비안 「랩소디 오브 더 시즈」 — 비전급": "",
+  "멜리야 — 모더니즘 건축이 가득한 북아프리카의 스페인 도시": "Melilla la Vieja",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
+  "테네리페 — 테이데 국립공원 · 산타 크루스": "Teide National Park",
+  "그란 카나리아 — 라스 팔마스 구시가지 · 카나리아 해변": "Vegueta, Las Palmas de Gran Canaria",
+  "란사로테 — 화산섬 · 티만파야 국립공원": "Timanfaya National Park",
+  "리스본 — ": ""
+ },
+ "cruise-explorer-italy-france-8days-ravenna": {
+  "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급": "",
+  "툴롱 — 프로방스 해안 · 지중해 군항 도시": "Mont Faron, Toulon",
+  "아작시오 — 코르시카섬 · 나폴레옹의 고향": "Maison Bonaparte, Ajaccio",
+  "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸": "Colosseum, Rome",
+  "살레르노 — 아말피 · 포지타노로 가는 항구": "Positano",
+  "카타니아 — 에트나 화산 · 타오르미나": "Teatro Antico di Taormina"
+ },
+ "cruise-explorer-greek-isles-italy-8days-athens": {
+  "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급": "",
+  "팔레르모 — 노르만 왕궁 · 몬레알레 대성당": "Palermo Cathedral",
+  "미코노스 — 하얀 골목과 풍차의 섬": "Little Venice, Mykonos",
+  "쿠샤다스 — 고대 도시 에페소 유적": "Ephesus Ancient City",
+  "산토리니 — 피라 · 이아 마을 칼데라 전망": "Oia, Santorini"
+ },
+ "cruise-mariner-italy-spain-riviera-9days-rome": {
+  "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급": "",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca",
+  "툴롱 — 프로방스 해안 · 지중해 군항 도시": "Mont Faron, Toulon",
+  "빌프랑슈 — 니스 · 모나코 · 에즈": "Promenade des Anglais, Nice",
+  "리보르노 — 피렌체 · 피사로 가는 항구": "Leaning Tower of Pisa",
+  "카타니아 — 에트나 화산 · 타오르미나": "Teatro Antico di Taormina",
+  "살레르노 — 아말피 · 포지타노로 가는 항구": "Positano"
  }
 };
 
@@ -535,7 +633,7 @@ export default async (req) => {
         headers: { ...H, "Content-Type": "application/json", "X-Goog-FieldMask": "places.id" },
         body: JSON.stringify({
           textQuery: q, languageCode: "ko", maxResultCount: 1,
-          locationRestriction: { rectangle: { low: { latitude: 35.0, longitude: -9.8 }, high: { latitude: 44.2, longitude: 3.6 } } },
+          locationRestriction: { rectangle: { low: { latitude: 27.0, longitude: -19.0 }, high: { latitude: 46.8, longitude: 29.5 } } },
         }),
       });
       const d = await r.json();
