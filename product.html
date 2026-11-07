@@ -273,6 +273,8 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .eu-wide .eu-dot{ r:3.4; stroke-width:2; }
   .eu-wide .eu-pin.stay .eu-dot{ r:4.8; }
   .eu-wide .eu-halo{ r:9; }
+  .eu-wide .eu-mi circle{ r:9; stroke-width:1.5; }
+  .eu-wide .eu-mi path{ scale:.72; }
 
   .eu-sea{ fill:#E2E6E8; }
   .eu-land{ fill:#F0F2F3; stroke:#E8EBEE; stroke-width:1; }
@@ -285,6 +287,36 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
     animation:euDraw 2.4s cubic-bezier(.45,.05,.2,1) forwards; }
   .eu-route.go.still .eu-line{ animation:none; stroke-dasharray:none; stroke-dashoffset:0; }
   @keyframes euDraw{ to{ stroke-dashoffset:0; } }
+
+  /* 이동수단별 선 */
+  .eu-maskline{ stroke:#fff !important; stroke-width:46 !important; opacity:1 !important; }
+  .eu-seg{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .eu-seg.s-car{ stroke:var(--violet); stroke-width:3; opacity:.92; }
+  .eu-seg.s-train{ stroke:var(--navy); stroke-width:4.6; stroke-linecap:butt; }
+  .eu-seg.s-train-tie{ stroke:#fff; stroke-width:1.8; stroke-dasharray:5 5; stroke-linecap:butt; }
+  .eu-seg.s-ship{ stroke:#2C86B5; stroke-width:3; stroke-dasharray:7 6; }
+  .eu-seg.s-plane{ stroke:#C97B3C; stroke-width:2.6; stroke-dasharray:.5 7; }
+  .eu-wide .eu-seg.s-car{ stroke-width:2; }
+  .eu-wide .eu-seg.s-train{ stroke-width:3.4; }
+  .eu-wide .eu-seg.s-train-tie{ stroke-width:1.3; stroke-dasharray:4 4; }
+  .eu-wide .eu-seg.s-ship, .eu-wide .eu-seg.s-plane{ stroke-width:2; }
+  .eu-mi circle{ fill:#fff; stroke-width:2; }
+  .eu-wide .eu-mi{ transform-box:fill-box; }
+  .eu-mode.m-car .eu-mi circle{ stroke:var(--violet); }  .eu-mode.m-car path{ fill:var(--violet); }
+  .eu-mode.m-train .eu-mi circle{ stroke:var(--navy); }  .eu-mode.m-train path{ fill:var(--navy); }
+  .eu-mode.m-ship .eu-mi circle{ stroke:#2C86B5; }       .eu-mode.m-ship path{ fill:#2C86B5; }
+  .eu-mode.m-plane .eu-mi circle{ stroke:#C97B3C; }      .eu-mode.m-plane path{ fill:#C97B3C; }
+  .eu-legend{ display:flex; flex-wrap:wrap; gap:6px 14px; justify-content:center; margin-top:10px;
+    font-size:11.5px; font-weight:700; color:var(--muted); }
+  .eu-legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .eu-legend svg:first-child{ width:30px; height:10px; }
+  .eu-mico{ width:14px; height:14px; flex:none; }
+  .eu-mico.m-car{ fill:var(--violet); } .eu-mico.m-train{ fill:var(--navy); }
+  .eu-mico.m-ship{ fill:#2C86B5; } .eu-mico.m-plane{ fill:#C97B3C; }
+  .eu-mtag{ display:inline-flex; align-items:center; gap:3px; vertical-align:1px; margin-left:4px;
+    padding:1px 7px 1px 5px; border-radius:999px; background:#fff; border:1px solid var(--line);
+    font-style:normal; font-size:10.5px; font-weight:800; color:var(--muted); }
+  .eu-mtag .eu-mico{ width:12px; height:12px; }
 
   .eu-pin{ opacity:0; }
   .eu-route.go .eu-pin{ animation:euPop .5s ease-out forwards; animation-delay:var(--d); }
@@ -339,6 +371,11 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
     .eu-wide .eu-pin.stay .eu-dot{ r:7; }
     .eu-wide .eu-halo{ r:13; }
     .eu-wide .eu-lead{ stroke-width:1.2; }
+    .eu-days li .t{ flex-basis:0; }   /* 수단 표시가 붙어도 날짜 번호와 한 줄에 */
+    .eu-wide .eu-mi circle{ r:12.5; stroke-width:2; }
+    .eu-wide .eu-mi path{ scale:1; }
+    .eu-wide .eu-seg.s-car{ stroke-width:3; } .eu-wide .eu-seg.s-train{ stroke-width:4.6; }
+    .eu-wide .eu-seg.s-ship, .eu-wide .eu-seg.s-plane{ stroke-width:3; }
     .eu-days li{ flex-wrap:wrap; gap:6px 10px; }
     .eu-days li .c{ margin-left:31px; text-align:left; max-width:none; width:100%; }
   }
@@ -1424,7 +1461,7 @@ function euRoutePoints(경로, 틀){
       if(!p) return;
       var 앞 = 점[점.length - 1];
       if(앞 && 앞.이름 === 이름){ 앞.끝일 = d.일; return; }
-      p.일 = d.일; p.끝일 = d.일;
+      p.일 = d.일; p.끝일 = d.일; p.날 = d;
       p.숙 = (d.숙 === 이름);
       점.push(p);
     });
@@ -1451,6 +1488,57 @@ function euLegToRoute(구간){
   });
 }
 
+/* ── 이동수단 ──────────────────────────────────────────
+   구간마다 수단을 정합니다. 순서:
+     ① 그 날 자료에 `수단:{'도착지':'기차'}` 이 있으면 그대로 (기차 · 선박 · 항공 · 차량)
+     ② 없으면 그 날 `말` · `제목` 에서 도착지 이름이 든 대목의 낱말로 짐작
+        (고속철도 · AVE · 기차 · 열차 → 기차 / 페리 · 여객선 · 배로 → 선박 / 항공편 · 국내선 · 비행기로 → 항공)
+     ③ 그래도 없으면 차량                                                    */
+var EU_MODE_KW = [
+  ['train', /고속철도|AVE|기차|열차/],
+  ['ship',  /페리|여객선|배로|선박/],
+  ['plane', /항공편|국내선|비행기로|항공으로/]
+];
+var EU_MODE_NAME = { car:'차량', train:'기차', ship:'선박', plane:'항공' };
+var EU_MODE_KO = { '차량':'car', '버스':'car', '기차':'train', '고속철도':'train', '선박':'ship', '페리':'ship', '항공':'plane', '비행기':'plane' };
+/* Material Icons (Apache 2.0) — 24×24 */
+var EU_MODE_ICON = {
+  car:   'M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z',
+  train: 'M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h2.23l2-2H14l2 2h2v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-3.58-4-8-4zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm3.5-7H6V6h5v4zm2 0V6h5v4h-5zm3.5 7c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z',
+  ship:  'M20 21c-1.39 0-2.78-.47-4-1.32-2.44 1.71-5.56 1.71-8 0C6.78 20.53 5.39 21 4 21H2v2h2c1.38 0 2.74-.35 4-.99 2.52 1.29 5.48 1.29 8 0 1.26.65 2.62.99 4 .99h2v-2h-2zM3.95 19H4c1.6 0 3.02-.88 4-2 .98 1.12 2.4 2 4 2s3.02-.88 4-2c.98 1.12 2.4 2 4 2h.05l1.89-6.68c.08-.26.06-.54-.06-.78s-.34-.42-.6-.5L20 10.62V6c0-1.1-.9-2-2-2h-3V1H9v3H6c-1.1 0-2 .9-2 2v4.62l-1.29.42c-.26.08-.48.26-.6.5s-.15.52-.06.78L3.95 19zM6 6h12v3.97L12 8 6 9.97V6z',
+  plane: 'M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z'
+};
+
+function euLegMode(d, 도착){
+  if(!d) return 'car';
+  var 정함 = d['수단'];
+  if(정함 && 정함[도착]) return EU_MODE_KO[정함[도착]] || 'car';
+  var 글 = [d['말'] || '', d['제목'] || ''].join(' · ');
+  var 대목 = 글.split(/ · |\. |, /).filter(function(s){ return s.indexOf(도착) >= 0; });
+  for(var i = 0; i < 대목.length; i++){
+    for(var k = 0; k < EU_MODE_KW.length; k++){
+      if(EU_MODE_KW[k][1].test(대목[i])) return EU_MODE_KW[k][0];
+    }
+  }
+  return 'car';
+}
+
+/* 아이콘 한 개 — 흰 동그라미 안에 수단 그림 */
+function euModeBadge(종, x, y, 늦, 일, 각){
+  var 돌림 = (종 === 'plane') ? ' rotate(' + 각.toFixed(0) + ' 12 12)' : '';
+  return '<g class="eu-pin eu-mode m-' + 종 + '" data-day="' + 일 + '" style="--d:' + 늦 + 's">' +
+    '<g class="eu-mi" transform="translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ')">' +
+      '<circle r="12.5"/>' +
+      '<path transform="translate(-8.4 -8.4) scale(.7)' + 돌림 + '" d="' + EU_MODE_ICON[종] + '"/>' +
+    '</g></g>';
+}
+
+/* 목록·범례에 쓰는 작은 아이콘 */
+function euModeIcon(종){
+  return '<svg class="eu-mico m-' + 종 + '" viewBox="0 0 24 24" aria-hidden="true"><path d="' +
+    EU_MODE_ICON[종] + '"' + (종 === 'plane' ? ' transform="rotate(90 12 12)"' : '') + '/></svg>';
+}
+
 function euRouteMap(product){
   var 당일 = product['구간'] || null;
   var 경로 = 당일 ? euLegToRoute(당일) : product['경로'];
@@ -1475,8 +1563,69 @@ function euRouteMap(product){
   for(var n = 1; n < 점.length; n++){
     길이 += Math.hypot(점[n].x - 점[n-1].x, 점[n].y - 점[n-1].y);
   }
-  var 선 = '<path class="eu-line" style="--len:' + Math.ceil(길이 + 20) + '" d="' + d + '"/>';
   var 늦기 = function(i){ return (i / Math.max(1, 핀.length - 1) * 2.1).toFixed(2); };
+
+  /* 구간마다 수단을 정해 모양을 달리 그립니다 */
+  var 조각 = [], 표지 = [], 가림 = [], 쓴수단 = {}, 지난 = 0, 전체 = 0;
+  for(var n2 = 1; n2 < 점.length; n2++){
+    var a = 점[n2-1], b = 점[n2];
+    var 종 = euLegMode(b.날, b.이름);
+    var dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy);
+    var 휨 = (종 === 'plane') ? 0.24 : (종 === 'ship') ? 0.16 : 0;
+    /* 가는 방향의 왼쪽으로 휩니다 — 가는 편과 오는 편이 겹치지 않습니다 */
+    var nx = dy, ny = -dx;
+    var cx = (a.x + b.x) / 2 + nx * 휨, cy = (a.y + b.y) / 2 + ny * 휨;
+    var 길 = 휨 ? 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) + ' Q' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ' ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1)
+               : 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) + ' L' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
+    조각.push({ 종:종, 길:길, a:a, b:b, cx:cx, cy:cy, 휨:휨, L:L, 일:b.일 });
+    전체 += L * (휨 ? 1.25 : 1);
+    쓴수단[종] = 1;
+    가림.push(길);
+  }
+  var 선 = '<defs><mask id="euDrawMask" maskUnits="userSpaceOnUse" x="0" y="0" width="' + m.W.toFixed(1) + '" height="' + m.H.toFixed(1) + '">' +
+      '<path class="eu-line eu-maskline" style="--len:' + Math.ceil(전체 + 40) + '" d="' + 가림.join(' ') + '"/></mask></defs>' +
+    '<g mask="url(#euDrawMask)">' + 조각.map(function(s){
+      if(s.종 === 'train') return '<path class="eu-seg s-train" d="' + s.길 + '"/><path class="eu-seg s-train-tie" d="' + s.길 + '"/>';
+      return '<path class="eu-seg s-' + s.종 + '" d="' + s.길 + '"/>';
+    }).join('') + '</g>';
+
+  /* 아이콘 — 기차·선박·항공은 늘, 차량은 그 날 가장 긴 구간이 지도에서 충분히 길 때만 */
+  var 날최장 = {};
+  조각.forEach(function(s){ if(s.종 === 'car' && (!날최장[s.일] || s.L > 날최장[s.일].L)) 날최장[s.일] = s; });
+  /* 차량 구간이 있으면 가장 긴 곳에는 꼭 한 번 답니다 */
+  var 차최장 = null;
+  조각.forEach(function(s){ if(s.종 === 'car' && (!차최장 || s.L > 차최장.L)) 차최장 = s; });
+  /* 아이콘끼리, 아이콘과 지점이 겹치지 않게 구간 위에서 자리를 고릅니다 */
+  var 놓은표 = [], 같은길 = {};
+  var 거리최소 = function(x, y){
+    var 최 = Infinity;
+    점.forEach(function(p){ 최 = Math.min(최, Math.hypot(p.x - x, p.y - y)); });
+    놓은표.forEach(function(q){ 최 = Math.min(최, Math.hypot(q.x - x, q.y - y) * 0.8); });
+    return 최;
+  };
+  조각.forEach(function(s){
+    지난 += s.L * (s.휨 ? 1.25 : 1);
+    if(s.종 === 'car' && s !== 차최장 && (s.L < 95 || 날최장[s.일] !== s)) return;
+    /* 같은 길을 같은 수단으로 오가면(왕복 기차 등) 아이콘은 한 번만 */
+    var 짝 = [s.a.이름, s.b.이름].sort().join('|') + '|' + s.종;
+    if(같은길[짝]) return;
+    같은길[짝] = 1;
+    var 최고 = null;
+    [0.5, 0.4, 0.6, 0.32, 0.68, 0.25, 0.75].some(function(t){
+      var u = 1 - t;
+      var x = s.휨 ? u*u*s.a.x + 2*u*t*s.cx + t*t*s.b.x : s.a.x + (s.b.x - s.a.x) * t;
+      var y = s.휨 ? u*u*s.a.y + 2*u*t*s.cy + t*t*s.b.y : s.a.y + (s.b.y - s.a.y) * t;
+      var 여유 = 거리최소(x, y);
+      if(!최고 || 여유 > 최고.여유) 최고 = { x:x, y:y, 여유:여유 };
+      return 여유 >= 30;
+    });
+    /* 차량 아이콘은 자리가 없으면 생략합니다 (기차·선박·항공은 늘 답니다) */
+    if(s.종 === 'car' && 최고.여유 < (s === 차최장 ? 24 : 38)) return;
+    놓은표.push(최고);
+    var 각 = Math.atan2(s.b.y - s.a.y, s.b.x - s.a.x) * 180 / Math.PI + 90;
+    표지.push(euModeBadge(s.종, 최고.x, 최고.y, (지난 / 전체 * 2.3).toFixed(2), s.일, 각));
+  });
+  선 += 표지.join('');
 
   /* 동그라미를 먼저 다 찍고, 이름표는 그 위에 얹습니다 */
   var 동그라미 = 핀.map(function(p, i){
@@ -1551,8 +1700,13 @@ function euRouteMap(product){
     var 들 = (x.들 || []).join(' · ');
     var 왼 = 당일 ? (x.때 || '') : x.일;
     var 오 = 당일 ? (x.말 || '') : (들 + (x.숙 ? ' <em>· ' + x.숙 + ' 숙박</em>' : ''));
+    var 그날 = 조각.filter(function(s){ return s.일 === x.일 && s.종 !== 'car'; })
+                 .map(function(s){ return s.종; })
+                 .filter(function(v, i, arr){ return arr.indexOf(v) === i; });
     var 줄 = '<li data-day="' + x.일 + '"><b>' + 왼 + '</b>' +
-      '<span class="t">' + (x.제목 || 들) + '</span>' +
+      '<span class="t">' + (x.제목 || 들) +
+        그날.map(function(v){ return ' <i class="eu-mtag m-' + v + '">' + euModeIcon(v) + EU_MODE_NAME[v] + '</i>'; }).join('') +
+      '</span>' +
       '<span class="c">' + 오 + '</span></li>';
 
     /* 당일 상품은 지점과 지점 사이에 주행 거리를 한 줄 끼웁니다 */
@@ -1604,6 +1758,11 @@ function euRouteMap(product){
             땅그림 + '</g>' +
           선 + 동그라미 + 이름표 +
         '</svg>' +
+        (Object.keys(쓴수단).join() === 'car' ? '' : '<div class="eu-legend">' + ['car', 'train', 'ship', 'plane'].filter(function(v){ return 쓴수단[v]; }).map(function(v){
+          return '<span class="m-' + v + '"><svg viewBox="0 0 34 10" aria-hidden="true">' +
+            (v === 'train' ? '<path class="eu-seg s-train" d="M2 5H32"/><path class="eu-seg s-train-tie" d="M2 5H32"/>' : '<path class="eu-seg s-' + v + '" d="M2 5H32"/>') +
+            '</svg>' + euModeIcon(v) + EU_MODE_NAME[v] + '</span>';
+        }).join('') + '</div>') +
       '</div>' +
       '<div class="eu-days">' +
         '<div class="eu-sum">' + 요약 + '</div>' +
