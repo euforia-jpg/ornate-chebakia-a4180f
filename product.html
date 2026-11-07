@@ -317,6 +317,26 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .cz-ft{ margin:12px 0 4px; font-size:11.5px; color:var(--muted); line-height:1.6; }
   .cz-fare .eu-fare-cta{ margin-top:10px; }
   .cz-src{ font-size:10.5px; color:#9AA5AD; }
+  .cz-cph{ position:relative; }
+  .cz-pcap{ position:absolute; left:0; right:0; bottom:0; padding:12px 6px 4px; font-style:normal; font-size:9.5px; font-weight:700; line-height:1.3;
+    color:#fff; background:linear-gradient(to top, rgba(13,20,26,.72), rgba(13,20,26,0)); }
+  .cz-stat{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px; }
+  .cz-stat div{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:9px 11px; }
+  .cz-stat u{ display:block; text-decoration:none; font-size:11px; font-weight:700; color:var(--muted); }
+  .cz-stat b{ display:block; margin-top:2px; font-size:14px; font-weight:900; color:var(--navy); }
+  .cz-fac{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+  .cz-fac li{ padding:9px 0; border-top:1px solid #EEF0F2; }
+  .cz-fac li b{ display:block; font-size:13.5px; font-weight:900; color:var(--navy); }
+  .cz-fac li span{ display:block; margin-top:2px; font-size:12.5px; color:#4A5862; line-height:1.55; }
+  .cal-grid .cal-day.cz-sail{ box-shadow:inset 0 0 0 1.5px rgba(150,205,240,.75); color:#fff; }
+  .cal-grid .cal-day.cz-sail .cz-calp{ display:block; font-size:7.5px; font-weight:800; line-height:1; color:#BFE0F5; letter-spacing:-.02em; }
+  .cal-grid .cal-day.selected .cz-calp{ color:#fff; }
+  .cal-grid:not(.fl) .cal-day.cz-sail{ height:34px; flex-direction:column; gap:2px; }
+  .cal-grid .cal-day.cz-on{ background:rgba(255,255,255,.09); color:rgba(255,255,255,.85); }
+  .cal-grid .cal-day.cz-end{ box-shadow:inset 0 0 0 1.5px #F2C9A8; }
+  .cal-grid .cal-day.cz-end::before{ content:"하선"; position:absolute; bottom:2px; font-size:8px; font-weight:800; color:#F2C9A8; }
+  .cal-grid .cal-day.cz-end{ position:relative; }
+  .cal-grid .cal-day.cz-end .cz-calp, .cal-grid .cal-day.cz-on .cz-calp{ display:none; }
   .cz-h small.tn{ background:#FBF3EE; color:#9A5E33; margin-left:auto; }
   .cz-h small.tn + small{ margin-left:4px; }
   @media (max-width:760px){
@@ -343,6 +363,8 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
   .cz-note{ margin:12px 0 0; font-size:12px; color:var(--muted); line-height:1.6; }
   @media (max-width:760px){
     .cz-grid{ grid-template-columns:1fr; }
+    .cz-stat{ grid-template-columns:1fr 1fr; }
+    .cz-fac{ grid-template-columns:1fr; }
     .cz-pgrid{ grid-template-columns:1fr 1fr; }
     .cz-ph.big > a{ aspect-ratio:4 / 3; }
     .cz-tours{ padding:16px 14px 18px; }
@@ -1214,7 +1236,7 @@ function euCruiseFare(product, 제휴){
       ? '<img src="' + 이스(c['사진']) + '" alt="' + 이스(c['이름']) + ' 선실" loading="lazy" referrerpolicy="no-referrer">'
       : '<span class="cz-noph">선실 사진<br>준비 중</span>';
     var v = 첫['값'][i];
-    return '<div class="cz-cab"><div class="cz-cph">' + 사진 + '</div>' +
+    return '<div class="cz-cab"><div class="cz-cph">' + 사진 + (c['사진설명'] && c['사진'] ? '<em class="cz-pcap">' + 이스(c['사진설명']) + '</em>' : '') + '</div>' +
       '<div class="cz-cin"><b>' + 이스(c['이름']) + '</b>' + (c['크기'] ? '<span>' + 이스(c['크기']) + '</span>' : '') +
         (c['말'] ? '<p>' + 이스(c['말']) + '</p>' : '') + '</div>' +
       '<div class="cz-cpr"><u>1인</u><strong data-cv="' + i + '">' + (v != null ? euMoney(v) : '문의') + '</strong>' +
@@ -1252,6 +1274,7 @@ function euCruiseFareWatch(){
       });
       var m = box.querySelector('[data-memo]');
       if(m){ m.textContent = o['메모'] || ''; m.hidden = !o['메모']; }
+      if(window.euCalPick) euCalPick(o['날']);
     });
   });
 }
@@ -1802,6 +1825,21 @@ function euCruiseDays(기항){
 }
 /* 선박 · 선실 사진 — 크루즈.사진 [{주소, 제목, 말, 누구, 원본, 허가, 허가주소}]
    첫 장은 크게, 나머지는 작게 놓고 사진마다 출처를 붙입니다. 누르면 원본 페이지가 열립니다. */
+/* 배 정보 — 크루즈.배정보 {톤수, 승객, 승무원, 길이, 갑판, 취항, 개조, 시설:[{이름, 말}], 출처} */
+function euCruiseShip(product){
+  var 크 = product['크루즈'], s = 크 && 크['배정보'];
+  if(!s) return '';
+  var 이스 = function(v){ return String(v == null ? '' : v).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var 칸 = [['총톤수', s['톤수']], ['승객', s['승객']], ['승무원', s['승무원']], ['길이', s['길이']], ['승객 갑판', s['갑판']], ['취항', s['취항']], ['개조', s['개조']]]
+    .filter(function(a){ return a[1]; })
+    .map(function(a){ return '<div><u>' + a[0] + '</u><b>' + 이스(a[1]) + '</b></div>'; }).join('');
+  var 시설 = (s['시설'] || []).map(function(f){ return '<li><b>' + 이스(f['이름']) + '</b><span>' + 이스(f['말']) + '</span></li>'; }).join('');
+  return '<div class="cz-tours cz-ship"><div class="cz-th"><h3>' + 이스(크['배'] || '배 정보') + '</h3><span>' + 이스((크['선사'] || '') + (크['등급'] ? ' · ' + 크['등급'] : '')) + '</span></div>' +
+    '<div class="cz-stat">' + 칸 + '</div>' +
+    (시설 ? '<ul class="cz-fac">' + 시설 + '</ul>' : '') +
+    (s['출처'] ? '<p class="cz-note">' + 이스(s['출처']) + '</p>' : '') + '</div>';
+}
+
 function euCruisePhotos(product){
   var 크 = product['크루즈'], 장 = 크 && 크['사진'];
   if(!장 || !장.length) return '';
@@ -2349,6 +2387,7 @@ function render(){
         <p class="p-lead">${d.lead}</p>
         ${euFare(product)}
         ${euRouteMap(product)}
+        ${euCruiseShip(product)}
         ${euCruisePhotos(product)}
         ${euCruiseTours(product)}
         <p class="p-desc">${d.description}</p>
@@ -2514,7 +2553,7 @@ function euFlightInit(product, redraw){
   var 집합 = 앞 < 0;
   fetch('/flights.json', { cache:'no-cache' }).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }).then(function(D){
     if(!D || !D.편) return;
-    var 사 = D.항공사 || {}, 도시 = D.도시 || {}, 끔 = {}, 왕복만 = false;
+    var 사 = D.항공사 || {}, 도시 = Object.assign({ FCO:'로마', ATH:'아테네', BLQ:'볼로냐', VCE:'베네치아' }, D.도시 || {}), 끔 = {}, 왕복만 = false;
     var 시작 = 날짜(D.시작), 끝 = 날짜(D.끝);
     var 요일 = ['일','월','화','수','목','금','토'];
     function 날짜(iso){ var a = String(iso).split('-').map(Number); return new Date(a[0], a[1]-1, a[2]); }
@@ -2533,7 +2572,8 @@ function euFlightInit(product, redraw){
     if(!box) return;
     box.hidden = false;
     function 머리(){
-      var 노선 = 집합 ? (도시[항.IN]||항.IN) + ' 집합 · ' + (도시[항.OUT]||항.OUT) + ' 해산 · 전날 도착 · 다음 날 귀국 기준' : (도시[항.IN]||항.IN) + ' IN · ' + (도시[항.OUT]||항.OUT) + ' OUT';
+      var 노선 = product['크루즈'] ? (도시[항.IN]||항.IN) + ' 승선 · ' + (도시[항.OUT]||항.OUT) + ' 하선 · 승선 전날 도착 · 하선일 귀국 기준'
+        : 집합 ? (도시[항.IN]||항.IN) + ' 집합 · ' + (도시[항.OUT]||항.OUT) + ' 해산 · 전날 도착 · 다음 날 귀국 기준' : (도시[항.IN]||항.IN) + ' IN · ' + (도시[항.OUT]||항.OUT) + ' OUT';
       box.innerHTML =
         '<div class="fl-head"><div class="t">✈ 인천 직항 함께 보기<small>' + 노선 + '</small></div>' +
         (쓰는목록.length ? '<label class="fl-sw"><input type="checkbox" id="flRt"' + (왕복만?' checked':'') + '><span></span>직항 왕복만</label>' : '') + '</div>' +
@@ -2571,7 +2611,7 @@ function euFlightInit(product, redraw){
             else if(d > s && d < r) el.classList.add('fl-trip');
           }
         });
-        if(마지막선택) euFl.pane(마지막선택);
+        if(마지막선택 || sel) euFl.pane(마지막선택 || sel);
       },
       pane: function(sel){
         마지막선택 = sel;
@@ -2747,6 +2787,19 @@ function initAvailCalendar(product){
   const today = new Date(); today.setHours(0,0,0,0);
   let viewYear = today.getFullYear();
   let viewMonth = today.getMonth();
+  /* 크루즈 상품 — 출항일만 고를 수 있고, 고른 날부터 하선일까지 칠합니다 */
+  const 크 = product['크루즈'] || null;
+  const 크출 = (크 && 크['출항']) ? 크['출항'].map(o => o['날']) : null;
+  const 크일수 = 크 && 크['기항'] ? 크['기항'].length : 0;
+  const 크값 = {};
+  if(크출) 크['출항'].forEach(o => {
+    const v = (o['값'] || []).filter(x => x != null);
+    if(v.length) 크값[o['날']] = euCruisePrice(Math.min.apply(null, v), 크['마진']);
+  });
+  const 크첫 = 크출 ? 크출.filter(d => new Date(d + 'T00:00:00') >= today)[0] : null;
+  if(크첫){ const a = 크첫.split('-').map(Number); viewYear = a[0]; viewMonth = a[1] - 1; }
+  function 날더(iso, n){ const a = iso.split('-').map(Number); const x = new Date(a[0], a[1]-1, a[2] + n);
+    return x.getFullYear() + '-' + String(x.getMonth()+1).padStart(2,'0') + '-' + String(x.getDate()).padStart(2,'0'); }
 
   function clampPax(v){ return Math.max(1, Math.min(99, v)); }
   /* 1인부터 언제든 예약(조인) 가능해요. minPeople은 "출발 확정"에 필요한 총 인원 조건이라
@@ -2762,7 +2815,7 @@ function initAvailCalendar(product){
       paxStatus.textContent = `1인부터 예약(조인) 가능해요. 이 상품은 총 ${minP}인 이상 모이면 출발이 확정되며, 인원이 모이는 대로 순차 안내해 드려요.`;
     } else {
       paxStatus.className = 'pax-status ok';
-      paxStatus.textContent = `${pax}인 기준으로 출발 가능한 날짜예요. 원하는 날짜를 선택해 주세요.`;
+      paxStatus.textContent = 크출 ? `${pax}인 기준 · 크루즈 출항일(테두리 날짜)만 고르실 수 있어요.` : `${pax}인 기준으로 출발 가능한 날짜예요. 원하는 날짜를 선택해 주세요.`;
     }
     calWrap.style.opacity = paxOk() ? '1' : '0.4';
   }
@@ -2780,28 +2833,43 @@ function initAvailCalendar(product){
       const dateObj = new Date(viewYear, viewMonth, d);
       const iso = `${viewYear}-${String(viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
       const isPast = dateObj < today;
+      const 출항날 = 크출 && 크출.indexOf(iso) > -1;
       let cls = 'cal-day';
       if(isPast) cls += ' past';
-      else if(!paxOk()) cls += ' unavail';
+      else if(!paxOk() || (크출 && !출항날)) cls += ' unavail';
       else cls += ' avail';
+      if(출항날) cls += ' cz-sail';
+      if(크출 && selectedDate && iso > selectedDate && iso <= 날더(selectedDate, 크일수 - 1)) cls += (iso === 날더(selectedDate, 크일수 - 1) ? ' cz-on cz-end' : ' cz-on');
       if(selectedDate === iso) cls += ' selected';
-      const disabled = isPast || !paxOk();
-      html += `<button type="button" class="${cls}" data-date="${iso}" ${disabled?'disabled':''}>${d}</button>`;
+      const disabled = isPast || !paxOk() || (크출 && !출항날);
+      const 값 = (출항날 && !isPast && 크값[iso] != null) ? `<small class="cz-calp">€${Number(크값[iso]).toLocaleString('en-US')}</small>` : '';
+      html += `<button type="button" class="${cls}" data-date="${iso}" ${disabled?'disabled':''}>${d}${값}</button>`;
     }
     calGrid.innerHTML = html;
     if(window.euFl) euFl.deco(calGrid, selectedDate);
     calGrid.querySelectorAll('.cal-day.avail, .cal-day.selected').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        selectedDate = btn.dataset.date;
-        renderCalendar();
-        const [y,m,dd] = selectedDate.split('-').map(Number);
-        const dow = ['일','월','화','수','목','금','토'][new Date(y, m-1, dd).getDay()];
-        calSelected.textContent = `선택하신 날짜 · ${y}년 ${m}월 ${dd}일(${dow}) · ${pax}인`;
-        if(window.euFl) euFl.pane(selectedDate);
-        updateCtaLink();
-      });
+      btn.addEventListener('click', ()=>{ 날고름(btn.dataset.date, false); });
     });
   }
+
+  /* 날짜 고르기 — 달력 · 크루즈 요금표 어느 쪽에서 골라도 같이 움직입니다 */
+  function 날고름(iso, 요금표에서){
+    selectedDate = iso;
+    const [y,m,dd] = selectedDate.split('-').map(Number);
+    if(크출){ viewYear = y; viewMonth = m - 1; }
+    renderCalendar();
+    const dow = ['일','월','화','수','목','금','토'][new Date(y, m-1, dd).getDay()];
+    calSelected.textContent = 크출
+      ? `출항 ${y}년 ${m}월 ${dd}일(${dow}) → 하선 ${dateLabel(날더(iso, 크일수 - 1)).replace(/^\d+년 /, '')} · ${pax}인`
+      : `선택하신 날짜 · ${y}년 ${m}월 ${dd}일(${dow}) · ${pax}인`;
+    if(window.euFl) euFl.pane(selectedDate);
+    updateCtaLink();
+    if(크출 && !요금표에서){
+      const 칩 = document.querySelector('.cz-fare .cz-days button[data-i="' + 크출.indexOf(iso) + '"]');
+      if(칩 && !칩.classList.contains('on')) 칩.click();
+    }
+  }
+  window.euCalPick = function(iso){ if(크출 && 크출.indexOf(iso) > -1 && selectedDate !== iso) 날고름(iso, true); };
 
   function dateLabel(iso){
     const [y,m,dd] = iso.split('-').map(Number);
@@ -2880,6 +2948,7 @@ function initAvailCalendar(product){
   renderCalendar();
   updateCtaLink();
   euFlightInit(product, renderCalendar);
+  if(크첫) 날고름(크첫, false);
 }
 
 render();
