@@ -1519,6 +1519,8 @@ var EU_PLACES = {
   '그란 카나리아': [-15.44, 28.13, 1, 'R', 'ES'],
   '란사로테': [-13.55, 28.96, 1, 'R', 'ES'],
   '마데이라': [-16.92, 32.65, 1, 'R', 'PT'],
+  '발레타': [ 14.51, 35.90, 1, 'R', 'MT'],
+  '산타 마르게리타': [  9.22, 44.33, 1, 'L', 'IT'],
   '테투안':      [-5.37, 35.57, 1, 'R', 'MA'],
   '셰프샤우엔':    [-5.27, 35.17, 1, 'R', 'MA'],
   '지브롤터':     [-5.35, 36.14, 0, 'R', 'ES'],
@@ -2543,6 +2545,11 @@ function placeItineraryDownload(product){
    - 초록 칸: 그날 출발 + 귀국일차 날 OUT 도시 → 인천 직항이 모두 있는 날
    - 날짜를 고르면 출발편 · 귀국편을 아래 흰 창에 보여 줍니다. (항공권은 상품 요금 불포함)
    운항표 밖의 날짜는 점 없이 「운항표 미정」 으로 안내합니다. */
+/* 편마다 "시작" · "끝"(운항 계절)이 적혀 있으면 그 기간 안의 날짜에만 그 편을 보여 줍니다 */
+function euFlSeason(f, d){
+  function 날(iso){ var a = String(iso).split('-').map(Number); return new Date(a[0], a[1]-1, a[2]); }
+  return (!f.시작 || d >= 날(f.시작)) && (!f.끝 || d <= 날(f.끝));
+}
 function euFlightInit(product, redraw){
   var 항 = product && product.항공;
   if(!항 || !항.IN || !항.OUT){ euCarFlightInit(product, redraw); return; }
@@ -2563,7 +2570,7 @@ function euFlightInit(product, redraw){
     function 안(d){ return d >= 시작 && d <= 끝; }
     function 편(d, 출, 도){
       if(!안(d)) return [];
-      return D.편.filter(function(f){ return f.출===출 && f.도===도 && f.요일.indexOf(d.getDay())>-1 && !끔[f.사]; });
+      return D.편.filter(function(f){ return f.출===출 && f.도===도 && f.요일.indexOf(d.getDay())>-1 && euFlSeason(f, d) && !끔[f.사]; });
     }
     var 쓰는 = {};
     D.편.forEach(function(f){ if((f.출==='ICN'&&f.도===항.IN)||(f.출===항.OUT&&f.도==='ICN')) 쓰는[f.사]=1; });
@@ -2622,7 +2629,7 @@ function euFlightInit(product, redraw){
           var a = 사[f.사] || {};
           return '<div class="fl-row"><span class="al"><i style="background:' + (a.색||'#ccc') + '"></i>' + (a.이름||f.사) + '</span>' +
             '<span class="no">' + f.편 + '</span><span class="tm">' + f.떠남 + ' → ' + f.닿음 + (f.다음날?'<sup>+1</sup>':'') + '</span>' +
-            '<span class="ac">' + (도시[f.출]||f.출) + ' ' + f.떠남 + ' 출발 · ' + (도시[f.도]||f.도) + ' ' + (f.다음날?'다음 날 ':'') + f.닿음 + ' 도착 · ' + f.기종 + '</span></div>';
+            '<span class="ac">' + (도시[f.출]||f.출) + ' ' + f.떠남 + ' 출발 · ' + (도시[f.도]||f.도) + ' ' + (f.다음날?'다음 날 ':'') + f.닿음 + ' 도착 · ' + f.기종 + (f.잠정 ? ' · 예정 편' : '') + '</span></div>';
         }
         function 없음(d, 출, 도){
           return '<div class="fl-none">' + (안(d) ? '이날은 ' + (도시[출]||출) + ' → ' + (도시[도]||도) + ' 직항이 없어요. 경유편이나 가까운 날짜를 안내해 드릴게요.'
@@ -2680,7 +2687,7 @@ function euCarFlightInit(product, redraw){
     function 안(d){ return 시작일 && d >= 시작일 && d <= 끝일; }
     function 편(d, 출, 도){
       if(!출 || !도 || !안(d)) return [];
-      return (D.편||[]).filter(function(f){ return f.출===출 && f.도===도 && f.요일.indexOf(d.getDay())>-1; });
+      return (D.편||[]).filter(function(f){ return f.출===출 && f.도===도 && f.요일.indexOf(d.getDay())>-1 && euFlSeason(f, d); });
     }
     function 줄(f){
       var a = 사[f.사] || {};
