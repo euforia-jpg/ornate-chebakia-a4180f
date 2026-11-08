@@ -69,8 +69,22 @@
   .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
   .section-head h2{ font-family:'Kanit','Pretendard Variable',Pretendard; font-weight:800; font-style:normal; font-size:23px; margin:0; color:var(--navy); }
   .section-head .sub{ color:var(--muted); font-size:13px; font-weight:600; }
-  .section-head a.more{ text-decoration:none; font-size:12.5px; font-weight:800; color:var(--violet); }
-  .section-head a.more:hover{ text-decoration:underline; }
+  /* 「전체 상품 보기」 — 「나에게 맞는 일정 찾기」 단추와 같은 크기의 알약 단추 */
+  .section-head a.more{ display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    border:2px solid var(--violet); background:var(--violet); color:#fff;
+    font-size:14px; font-weight:800; padding:10px 16px; border-radius:999px; white-space:nowrap;
+    box-shadow:0 10px 22px -12px rgba(74,110,134,.75); transition:transform .15s, background .15s; }
+  .section-head a.more .mo-ic{ width:20px; height:20px; border-radius:50%; background:#fff; color:var(--violet);
+    display:inline-flex; align-items:center; justify-content:center; font-size:12px; line-height:1; }
+  .section-head a.more:hover{ transform:translateY(-1px); background:#3D5D72; border-color:#3D5D72; }
+  .section-head a.more:focus-visible{ outline:3px solid #F1C48A; outline-offset:2px; }
+  @media (max-width:600px){
+    /* 휴대폰: 두 단추를 같은 너비로 위아래에 — 말풍선은 단추 위로 올려 아래 단추를 가리지 않게 */
+    .section-head .tf-actions{ display:grid; grid-template-columns:1fr; gap:10px; }
+    .section-head .tf-actions .tf-btn, .section-head .tf-actions a.more{ width:100%; justify-content:center; box-sizing:border-box; }
+    .section-head .tf-actions .tf-tip{ top:auto; bottom:calc(100% + 10px); }
+    .section-head .tf-actions .tf-tip::before{ top:auto; bottom:-6px; }
+  }
   /* ═══════════════════════════════════════════════════════════
      상품 카드 — 사진 전면
      사진이 있으면 사진이 카드를 꽉 채우고, 글씨는 그 위에 얹습니다.
@@ -558,6 +572,16 @@
   .xmas-cta .sub{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
   .xmas-cta .sub:hover{ border-color:var(--violet); color:var(--violet); }
 
+  /* ---- 팝업 아래 막대: 오늘 하루 보이지 않기 · 닫기 ---- */
+  .feature-foot{ display:flex; align-items:stretch; border-top:1px solid #E3E7EA; background:#F6F7F8; }
+  .feature-foot button{ all:unset; box-sizing:border-box; cursor:pointer; padding:14px 18px;
+    font-family:inherit; font-size:13px; font-weight:700; color:#5B6770; display:flex; align-items:center; gap:6px; }
+  .feature-foot .ff-today{ flex:1 1 auto; }
+  .feature-foot .ff-close{ flex:0 0 auto; border-left:1px solid #E3E7EA; color:var(--navy); font-weight:800; }
+  .feature-foot .ff-close span{ font-size:14px; }
+  .feature-foot button:hover{ background:#ECEFF1; color:var(--navy); }
+  .feature-foot button:focus-visible{ outline:2px solid var(--violet); outline-offset:-2px; }
+
   /* ---- 휴대폰: 팝업이 화면을 넘지 않도록 줄입니다 ---- */
   @media (max-width:520px){
     .feature-overlay{ padding:12px; }
@@ -578,6 +602,8 @@
     .xmas-when{ margin:0 0 13px; padding:9px 11px; gap:7px; font-size:11.5px; line-height:1.6; }
     .xmas-cta{ gap:8px; }
     .xmas-cta a{ flex:1 1 100%; min-width:0; padding:12px 14px; font-size:13px; }
+    .feature-foot{ flex:0 0 auto; }
+    .feature-foot button{ padding:13px 15px; font-size:12.5px; }
   }
   @media (max-width:400px){
     .xmas-art{ height:102px; }
@@ -747,7 +773,7 @@
           <h2>대표 여행상품</h2>
           <div class="sub">카드를 누르면 상품 상세 정보를 볼 수 있어요</div>
         </div>
-        <a class="more" href="tours.html">전체 상품 보기 →</a>
+        <a class="more" href="tours.html"><span class="mo-ic" aria-hidden="true">▦</span>전체 상품 보기 →</a>
       </div>
       <div class="tour-grid" id="tourGrid"></div>
     </div>
@@ -1190,8 +1216,6 @@ window.toggleAudioGuide = function(btn){
 </script>
   <div class="feature-overlay" id="featureOverlay">
   <div class="feature-box xmas-box">
-    <button class="feature-close" id="featureClose" aria-label="닫기">✕</button>
-
     <svg class="xmas-art" viewBox="0 0 560 206" preserveAspectRatio="xMidYMid slice" role="img"
          aria-label="밤하늘 아래 마드리드와 바르셀로나의 크리스마스 마켓 그림">
       <defs>
@@ -1345,15 +1369,30 @@ window.toggleAudioGuide = function(btn){
         <a class="sub" href="contact.html">바로 문의하기</a>
       </div>
     </div>
+    <div class="feature-foot">
+      <button type="button" class="ff-today" id="featureToday">오늘 하루 보이지 않기</button>
+      <button type="button" class="ff-close" id="featureClose" aria-label="닫기">닫기 <span aria-hidden="true">✕</span></button>
+    </div>
   </div>
 </div>
 <script>
 (function(){
   const overlay = document.getElementById('featureOverlay');
   const closeBtn = document.getElementById('featureClose');
+  const todayBtn = document.getElementById('featureToday');
+  /* 「오늘 하루 보이지 않기」 — 그 기기에서 오늘 자정까지 팝업을 띄우지 않습니다 */
+  const 칸 = 'euf-popup-hide-until';
+  let 숨김 = 0;
+  try { 숨김 = Number(localStorage.getItem(칸)) || 0; } catch(e) {}
+  if (Date.now() < 숨김) { overlay.remove(); return; }
   setTimeout(() => overlay.classList.add('show'), 700);
   function closeFeature(){ overlay.classList.remove('show'); }
   closeBtn.addEventListener('click', closeFeature);
+  todayBtn.addEventListener('click', () => {
+    const 자정 = new Date(); 자정.setHours(24, 0, 0, 0);
+    try { localStorage.setItem(칸, String(자정.getTime())); } catch(e) {}
+    closeFeature();
+  });
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFeature(); });
 })();
 </script>
