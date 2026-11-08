@@ -599,8 +599,7 @@ async function 상품들(origin) {
 }
 
 export default async (req) => {
-  const key = process.env.GOOGLE_PLACES_KEY;
-  if (!key) return J({ error: "nokey" }, 503);
+  const key = process.env.GOOGLE_PLACES_KEY || "";
 
   const u = new URL(req.url);
   const pid = u.searchParams.get("p") || "";
@@ -621,6 +620,18 @@ export default async (req) => {
   else q = (상품제외.test(pid) || 줄제외.test(줄들[i])) ? "" : 검색어(줄들[i]);
   if (!q || q.length < 2) return J({ skip: true }, 200, "public, max-age=3600");
 
+  /* ① 구글 지도 → ② 안 되면(키 권한 · 요금 · 장애) 위키백과 · 위키미디어 공용 사진 */
+  let 구글결과 = null;
+  if (key) 구글결과 = await 구글사진(key, q);
+  if (구글결과 && 구글결과.photo) return J(구글결과, 200, "private, max-age=1800");
+
+  const w = await 위키사진(q);
+  if (w) return J(w, 200, "public, max-age=21600");
+  return J(구글결과 && 구글결과.err ? { error: "google" } : { skip: true, q }, 구글결과 && 구글결과.err ? 502 : 200, "private, max-age=600");
+};
+
+/* ── 구글 지도 사진 — 결과 덩어리 · {skip} · {err} 중 하나를 돌려줍니다 ── */
+async function 구글사진(key, q) {
   const H = { "X-Goog-Api-Key": key };
   let st = null, place = null;
   try { st = getStore("euforia-spot-place"); place = await st.get(q); } catch (e) { /* 저장소 없이도 찾기는 됩니다 */ }
@@ -636,9 +647,9 @@ export default async (req) => {
         }),
       });
       const d = await r.json();
-      if (d && d.error) { console.error("[spot-photo] 검색 오류:", d.error.status, d.error.message); return J({ error: "google" }, 502); }
+      if (d && d.error) { console.error("[spot-photo] 검색 오류:", d.error.status, d.error.message); return { err: true }; }
       place = d.places && d.places[0] && d.places[0].id;
-      if (!place) return J({ skip: true, q }, 200, "public, max-age=3600");
+      if (!place) return { skip: true };
       try { if (st) await st.set(q, place); } catch (e) { /* 다음에 다시 찾으면 됩니다 */ }
     }
 
@@ -646,22 +657,124 @@ export default async (req) => {
       headers: { ...H, "X-Goog-FieldMask": "displayName,googleMapsUri,photos" },
     });
     const d = await r.json();
-    if (d && d.error) { console.error("[spot-photo] 상세 오류:", d.error.status, d.error.message); return J({ error: "google" }, 502); }
+    if (d && d.error) { console.error("[spot-photo] 상세 오류:", d.error.status, d.error.message); return { err: true }; }
     const x = (d.photos || [])[0];
-    if (!x) return J({ skip: true, q }, 200, "private, max-age=1800");
+    if (!x) return { skip: true };
 
     const m = await fetch("https://places.googleapis.com/v1/" + x.name + "/media?maxWidthPx=1200&skipHttpRedirect=true", { headers: H });
     const j = await m.json();
-    if (!j.photoUri) return J({ skip: true, q }, 200, "private, max-age=1800");
+    if (!j.photoUri) return { skip: true };
 
-    return J({
-      q,
+    return {
+      q, src: "google",
       name: (d.displayName && d.displayName.text) || "",
       maps: d.googleMapsUri || "",
       photo: { u: j.photoUri, a: (x.authorAttributions || []).map(a => ({ n: a.displayName || "", u: a.uri || "" })) },
-    }, 200, "private, max-age=1800");
+    };
   } catch (e) {
     console.error("[spot-photo] 실패:", e && e.message);
-    return J({ error: "fail" }, 502);
+    return { err: true };
   }
+}
+
+/* ── 위키백과 대표 사진 (위키미디어 공용 · 자유 이용 사진만) ──
+   구글이 안 될 때 씁니다. 검색어로 위키백과 문서를 찾아 그 문서의 대표 사진을 쓰고
+   촬영자 · 라이선스를 함께 돌려줍니다.
+   틀린 사진을 막는 장치
+     · 문서 제목이 검색어와 같은 문서(넘겨주기 포함)를 먼저 찾고, 없을 때만 검색 결과를 씁니다
+     · 「장소, 도시」 꼴이면 문서 좌표가 그 도시에서 40km 안이어야 합니다
+     · 그 밖에는 문서 좌표가 이베리아 · 지중해 범위 안이어야 합니다 (검색 결과는 낱말도 2/3 이상 맞아야 함)
+     · 지도 · 문장(紋章) · 깃발 · 로고 · SVG 그림은 건너뜁니다
+   찾은 결과는 Blobs(euforia-spot-wiki)에 넣어 두고 다시 씁니다. */
+const 위키UA = { "User-Agent": "EuforiaTour-spot-photo/1.0 (https://toureplus.co.kr)", "Accept": "application/json" };
+const 그림아님 = /(\.svg$|map|mapa|karte|carte|locator|location|escudo|coat[_ ]of[_ ]arms|flag|bandera|logo|seal|emblem|blason|wappen|plan[_ ]|diagram)/i;
+const 펴기 = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").normalize("NFC").toLowerCase();
+const 거리 = (a, b) => {
+  const R = 6371, t = Math.PI / 180, dl = (b.lat - a.lat) * t, dn = (b.lon - a.lon) * t;
+  const h = Math.sin(dl / 2) ** 2 + Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(dn / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
 };
+const 범위안 = (c) => c && c.lat >= 27 && c.lat <= 47 && c.lon >= -19 && c.lon <= 30;
+
+async function 위키묻기(lang, params) {
+  const sp = new URLSearchParams(Object.assign({
+    action: "query", format: "json", prop: "pageimages|info|coordinates", piprop: "name", inprop: "url", redirects: "1",
+  }, params));
+  const d = await (await fetch("https://" + lang + ".wikipedia.org/w/api.php?" + sp.toString(), { headers: 위키UA })).json();
+  return Object.values((d && d.query && d.query.pages) || {})
+    .filter((p) => !("missing" in p))
+    .sort((a, b) => (a.index || 0) - (b.index || 0));
+}
+
+async function 사진파일(file) {
+  if (!file || 그림아님.test(file)) return null;
+  const ip = new URLSearchParams({
+    action: "query", format: "json", titles: "File:" + file, prop: "imageinfo", iiprop: "url|extmetadata|mime", iiurlwidth: "1200",
+  });
+  const f = await (await fetch("https://commons.wikimedia.org/w/api.php?" + ip.toString(), { headers: 위키UA })).json();
+  const fp = Object.values((f && f.query && f.query.pages) || {})[0];
+  const ii = fp && fp.imageinfo && fp.imageinfo[0];
+  if (!ii || !/^image\/(jpeg|png|webp)$/.test(ii.mime || "") || !/^https:\/\//.test(ii.thumburl || "")) return null;
+  const md = ii.extmetadata || {};
+  const 글 = (v) => String((v && v.value) || "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  const 허락 = 글(md.LicenseShortName);
+  if (허락 && !/(CC|Public domain|PD|GFDL|Attribution)/i.test(허락)) return null;   /* 자유 이용 사진만 */
+  return { u: ii.thumburl, n: (글(md.Artist).slice(0, 60) || "Wikimedia Commons") + (허락 ? " (" + 허락 + ")" : ""), d: ii.descriptionurl || "" };
+}
+
+async function 위키사진(q) {
+  let st = null;
+  try { st = getStore("euforia-spot-wiki"); const c = await st.get(q, { type: "json" }); if (c && c.photo) return c; if (c && c.none && Date.now() - (c.at || 0) < 7 * 864e5) return null; } catch (e) { st = null; }
+  const 한글 = /[가-힣]/.test(q);
+  const 언어 = 한글 ? ["ko", "en", "es"] : ["es", "en", "pt"];
+  const ci = q.indexOf(",");
+  const 머리 = (ci > 0 ? q.slice(0, ci) : q).trim(), 도시 = ci > 0 ? q.slice(ci + 1).trim() : "";
+  try {
+    let 도시점 = null;
+    if (도시) {
+      for (const lang of ["es", "en"]) {
+        const ps = await 위키묻기(lang, { titles: 도시 });
+        const c = ps[0] && ps[0].coordinates && ps[0].coordinates[0];
+        if (c) { 도시점 = c; break; }
+      }
+    }
+    /* 같음: 2 = 검색어 그대로인 제목, 1 = 쉼표 앞 이름만 같은 제목, 0 = 검색 결과 */
+    const 자리맞음 = (pg, 같음) => {
+      const c = pg.coordinates && pg.coordinates[0];
+      if (도시점) return c ? 거리(c, 도시점) <= 40 : 같음 === 2;
+      if (c) return 범위안(c);
+      return 같음 > 0;
+    };
+    const 만들기 = (pg, ph) => ({
+      q, src: "wiki", name: pg.title || "",
+      maps: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q),
+      photo: { u: ph.u, a: [{ n: ph.n, u: ph.d }] },
+    });
+    for (const lang of 언어) {
+      for (const [제목, 같음] of [[q, 2], [머리, 1]]) {
+        if (같음 === 1 && 제목 === q) continue;
+        for (const pg of await 위키묻기(lang, { titles: 제목 })) {
+          if (!자리맞음(pg, 같음)) continue;
+          const ph = await 사진파일(pg.pageimage);
+          if (ph) { const out = 만들기(pg, ph); try { if (st) await st.setJSON(q, out); } catch (e) {} return out; }
+        }
+      }
+    }
+    const 낱말 = 펴기(머리).split(/[^a-z0-9가-힣]+/)
+      .filter((w) => (/[가-힣]/.test(w) ? w.length >= 2 : w.length >= 3) && !["del", "las", "los", "dos", "das", "the"].includes(w));
+    /* 한글 검색어는 절반, 그 밖에는 2/3 이상의 낱말이 문서 제목에 있어야 합니다 */
+    const 필요 = 낱말.length >= 2 ? Math.ceil(낱말.length * (한글 ? 1 / 2 : 2 / 3)) : 낱말.length;
+    for (const lang of 언어) {
+      for (const pg of await 위키묻기(lang, { generator: "search", gsrsearch: q, gsrlimit: "5" })) {
+        if (낱말.filter((w) => 펴기(pg.title).includes(w)).length < 필요) continue;
+        if (!자리맞음(pg, 0)) continue;
+        const ph = await 사진파일(pg.pageimage);
+        if (ph) { const out = 만들기(pg, ph); try { if (st) await st.setJSON(q, out); } catch (e) {} return out; }
+      }
+    }
+    try { if (st) await st.setJSON(q, { none: true, at: Date.now() }); } catch (e) {}
+  } catch (e) {
+    console.error("[spot-photo] 위키 실패:", e && e.message);
+  }
+  return null;
+}
