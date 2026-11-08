@@ -393,6 +393,12 @@
   .au-no{width:84px;height:84px;flex:none;border-radius:10px;background:#f1f2f7;border:1px dashed #c8ccda;
          display:flex;align-items:center;justify-content:center;font-size:11.5px;color:var(--muted);text-align:center;line-height:1.4}
   .au-body{flex:1;min-width:0}
+  .au-pic{position:relative;flex:none}
+  .au-pic .au-thumb{width:84px;height:105px}
+  .au-pic em{position:absolute;left:5px;bottom:5px;font-style:normal;font-size:10.5px;font-weight:800;
+             background:rgba(36,48,58,.82);color:#fff;padding:2px 6px;border-radius:6px}
+  .au-fill{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;padding:11px 14px;
+           border:1.5px dashed #c8ccda;border-radius:11px;font-size:12.5px;color:var(--muted)}
   .au-title{font-weight:800;font-size:14px;margin-bottom:6px}
   .au-body textarea{width:100%;box-sizing:border-box;min-height:74px;resize:vertical;
         padding:9px 11px;border:2px solid var(--line);border-radius:9px;font-family:inherit;font-size:13px;line-height:1.6}
@@ -983,7 +989,8 @@
         <h2>요일별 자동 발행</h2>
         <div class="sub">
           고르신 상품을 정해진 요일·시각에 <b>사진과 함께</b> 하나씩 돌아가며 올립니다.
-          사진은 아래에서 직접 올리시면 됩니다. 사진이 없는 상품은 차례를 건너뜁니다.
+          상품을 <b>추가</b>하면 홈페이지 상품카드 사진으로 광고 사진(1080×1350, 제목 · 일정 글씨 포함)을 자동으로 만들어 붙입니다.
+          직접 찍은 사진으로 바꾸려면 「사진 올리기」를 누르세요. 사진 칸이 비어 있어도 올릴 때 상품카드 사진을 대신 씁니다.
         </div>
 
         <div class="bar">
@@ -5367,6 +5374,184 @@
      ====================================================== */
 
   var AU_DAYS = ['일','월','화','수','목','금','토'];
+
+  /* ------------------------------------------------------
+     상품카드 → 쓰레드 광고 사진 (1080×1350)
+     홈페이지 상품카드와 같은 사진(products.js 「카드사진」)을 깔고
+     나라 · 제목 · 일정 · 태그 · 사이트 주소를 얹어 JPEG 로 만듭니다.
+     만든 사진은 「사진 올리기」와 같은 길로 images/threads/ 에 올라갑니다.
+     ------------------------------------------------------ */
+  var AU_FONT = '"Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif';
+
+  function auCardSrc(p){
+    var v = String((p && p['카드사진']) || '').trim();
+    if(!v) return '';
+    return /^https?:\/\//i.test(v) ? v : '/' + v.replace(/^\/+/, '');
+  }
+
+  function auLoadImg(src){
+    return new Promise(function(ok, no){
+      var im = new Image();
+      if(/^https?:\/\//i.test(src)) im.crossOrigin = 'anonymous';   /* 위키미디어 사진도 그릴 수 있게 */
+      im.onload = function(){ ok(im); };
+      im.onerror = function(){ no(new Error('상품카드 사진을 불러오지 못했습니다')); };
+      im.src = src;
+    });
+  }
+
+  /* 한 줄에 들어가게 낱말 단위로 자르고, 너무 긴 낱말은 글자 단위로 자릅니다 */
+  function auWrap(ctx, text, maxW, maxLines){
+    var words = String(text || '').split(/\s+/).filter(Boolean), lines = [], cur = '';
+    function push(w){
+      var tryLine = cur ? cur + ' ' + w : w;
+      if(ctx.measureText(tryLine).width <= maxW){ cur = tryLine; return; }
+      if(cur){ lines.push(cur); cur = ''; }
+      if(ctx.measureText(w).width <= maxW){ cur = w; return; }
+      var piece = '';
+      Array.from(w).forEach(function(ch){
+        if(ctx.measureText(piece + ch).width > maxW){ lines.push(piece); piece = ch; }
+        else piece += ch;
+      });
+      cur = piece;
+    }
+    words.forEach(push);
+    if(cur) lines.push(cur);
+    if(lines.length > maxLines){
+      lines = lines.slice(0, maxLines);
+      var last = lines[maxLines - 1];
+      while(last && ctx.measureText(last + '…').width > maxW) last = last.slice(0, -1);
+      lines[maxLines - 1] = last + '…';
+    }
+    return lines;
+  }
+
+  function auRound(ctx, x, y, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+
+  function auMakeCard(p){
+    var W = 1080, H = 1350, PAD = 64;
+    var title = String(p.title || '').replace(/<[^>]*>/g, '').trim();
+    var m = title.match(/^\[([^\]]+)\]\s*(.*)$/);
+    var eyebrow = m ? m[1] : String(p.region || '').trim();
+    var main = m ? m[2] : title;
+    var days = String(p.days || '').trim();
+    var tags = (p.tags || []).slice(0, 2).map(String);
+    var sample = eyebrow + main + days + tags.join('') + '예약 · 문의 toureplus.co.kr';
+
+    var fonts = document.fonts && document.fonts.load
+      ? Promise.all([
+          document.fonts.load('800 80px ' + AU_FONT, sample),
+          document.fonts.load('700 34px ' + AU_FONT, sample),
+          document.fonts.load('italic 800 48px Kanit', 'Euforia Tour')
+        ]).catch(function(){})
+      : Promise.resolve();
+    var src = auCardSrc(p);
+    var pic = src ? auLoadImg(src) : Promise.reject(new Error('이 상품에는 카드 사진이 없습니다'));
+
+    return Promise.all([pic, fonts]).then(function(r){
+      var im = r[0];
+      var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      var c = cv.getContext('2d');
+
+      /* 사진 — 화면을 꽉 채우게(cover) */
+      var s = Math.max(W / im.naturalWidth, H / im.naturalHeight);
+      var iw = im.naturalWidth * s, ih = im.naturalHeight * s;
+      c.drawImage(im, (W - iw) / 2, (H - ih) / 2, iw, ih);
+
+      /* 위 · 아래 어둡게 (글씨가 읽히도록) */
+      var g1 = c.createLinearGradient(0, 0, 0, 300);
+      g1.addColorStop(0, 'rgba(18,26,33,.55)'); g1.addColorStop(1, 'rgba(18,26,33,0)');
+      c.fillStyle = g1; c.fillRect(0, 0, W, 300);
+      var g2 = c.createLinearGradient(0, H * 0.42, 0, H);
+      g2.addColorStop(0, 'rgba(18,26,33,0)'); g2.addColorStop(.45, 'rgba(18,26,33,.62)'); g2.addColorStop(1, 'rgba(18,26,33,.94)');
+      c.fillStyle = g2; c.fillRect(0, H * 0.42, W, H * 0.58);
+
+      c.textBaseline = 'alphabetic';
+      /* 왼쪽 위 — 로고 글씨 */
+      c.fillStyle = '#fff';
+      c.font = 'italic 800 50px Kanit, ' + AU_FONT;
+      c.shadowColor = 'rgba(0,0,0,.35)'; c.shadowBlur = 12;
+      c.fillText('Euforia Tour', PAD, 112);
+      c.shadowBlur = 0;
+
+      /* 오른쪽 위 — 일정 알약 */
+      if(days){
+        c.font = '800 36px ' + AU_FONT;
+        var dw = c.measureText(days).width + 52;
+        auRound(c, W - PAD - dw, 62, dw, 66, 33);
+        c.fillStyle = 'rgba(255,255,255,.94)'; c.fill();
+        c.fillStyle = '#24303A'; c.fillText(days, W - PAD - dw + 26, 108);
+      }
+
+      /* 아래 — 바닥 줄부터 위로 쌓습니다 */
+      var y = H - 70;
+      c.font = '700 32px ' + AU_FONT;
+      c.fillStyle = 'rgba(255,255,255,.88)';
+      c.fillText('예약 · 문의', PAD, y);
+      var lw = c.measureText('예약 · 문의').width;
+      c.font = '800 32px ' + AU_FONT; c.fillStyle = '#F1C48A';
+      c.fillText('toureplus.co.kr', PAD + lw + 18, y);
+      c.fillStyle = 'rgba(255,255,255,.28)'; c.fillRect(PAD, y - 62, W - PAD * 2, 2);
+      y -= 104;
+
+      if(tags.length){
+        c.font = '700 30px ' + AU_FONT;
+        var x = PAD;
+        tags.forEach(function(tg){
+          var tw = c.measureText(tg).width + 40;
+          if(x + tw > W - PAD) return;
+          auRound(c, x, y - 40, tw, 56, 28);
+          c.fillStyle = 'rgba(255,255,255,.16)'; c.fill();
+          c.strokeStyle = 'rgba(255,255,255,.45)'; c.lineWidth = 2; c.stroke();
+          c.fillStyle = '#fff'; c.fillText(tg, x + 20, y - 1);
+          x += tw + 12;
+        });
+        y -= 92;
+      }
+
+      c.font = '800 78px ' + AU_FONT;
+      var lines = auWrap(c, main, W - PAD * 2, 3);
+      c.fillStyle = '#fff';
+      c.shadowColor = 'rgba(0,0,0,.35)'; c.shadowBlur = 14;
+      for(var i = lines.length - 1; i >= 0; i--){ c.fillText(lines[i], PAD, y); y -= 96; }
+      c.shadowBlur = 0;
+
+      if(eyebrow){
+        c.font = '800 32px ' + AU_FONT;
+        var ew = Math.min(c.measureText(eyebrow).width + 44, W - PAD * 2);
+        auRound(c, PAD, y - 46, ew, 58, 29);
+        c.fillStyle = '#F1C48A'; c.fill();
+        c.fillStyle = '#24303A';
+        c.fillText(auWrap(c, eyebrow, ew - 44, 1)[0], PAD + 22, y - 5);
+      }
+
+      var url;
+      try { url = cv.toDataURL('image/jpeg', 0.9); }
+      catch(e){ throw new Error('사진 서버가 그리기를 막아 카드 사진을 만들지 못했습니다'); }
+      return url;
+    });
+  }
+
+  /* 카드 사진을 만들어 images/threads/ 에 올리고 그 항목에 붙입니다 */
+  function auAutoCard(i, quiet){
+    var it = auCfg.items[i];
+    var p = it && findProduct(it.slug);
+    if(!p) return Promise.reject(new Error('상품 정보를 찾지 못했습니다'));
+    it.__busy = true; auRenderList();
+    return auMakeCard(p).then(function(dataUrl){
+      var name = String(it.slug || 'ad').toLowerCase()
+                   .replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40) +
+                 '-card-' + Date.now().toString(36) + '.jpg';
+      return api({ action:'upload', name:name, data:dataUrl.split(',')[1] }).then(function(j){
+        it.image = j.path; it.__preview = dataUrl;
+        if(!quiet) toast('카드 사진을 만들어 붙였습니다. 「설정 저장」을 눌러 주세요.');
+      });
+    }).finally(function(){ it.__busy = false; auRenderList(); auTouch(); });
+  }
+
   var auCfg = null;            /* 지금 화면에 떠 있는 설정 */
   var auLoaded = false;
 
@@ -5446,7 +5631,7 @@
 
   function auTouch(){
     if(!auCfg) return;
-    var live = auCfg.items.filter(function(x){ return !x.off && x.image; }).length;
+    var live = auCfg.items.filter(function(x){ return !x.off && (x.image || auCardSrc(findProduct(x.slug))); }).length;
     $('auState').textContent = auCfg.enabled
       ? ('켜짐 — ' + AU_DAYS.filter(function(_,i){ return auCfg.days.indexOf(i)!==-1; }).join('·') +
          '요일 ' + auCfg.hour + '시 · 올릴 상품 ' + live + '개')
@@ -5502,8 +5687,13 @@
       var row = document.createElement('div');
       row.className = 'au-item' + (it.off ? ' off' : '');
 
-      var img = it.image
-        ? '<img class="au-thumb" src="/' + String(it.image).replace(/^\/+/,'') + '" alt="">'
+      var cardSrc = auCardSrc(findProduct(it.slug));
+      var img = it.__busy
+        ? '<div class="au-no"><span class="spin"></span><br>카드 사진<br>만드는 중</div>'
+        : (it.__preview || it.image)
+        ? '<div class="au-pic"><img class="au-thumb" src="' + esc(it.__preview || ('/' + String(it.image).replace(/^\/+/,''))) + '" alt=""></div>'
+        : cardSrc
+        ? '<div class="au-pic"><img class="au-thumb" src="' + esc(cardSrc) + '" alt=""><em>자동</em></div>'
         : '<div class="au-no">사진<br>없음</div>';
 
       var len = String(it.text||'').length;
@@ -5514,6 +5704,7 @@
           '<textarea data-i="' + i + '">' + esc(it.text || '') + '</textarea>' +
           '<div class="au-row">' +
             '<span class="au-len' + (len>500?' over':'') + '" data-len="' + i + '">' + len + ' / 500자</span>' +
+            '<button type="button" class="btn sm" data-card="' + i + '"' + (it.__busy ? ' disabled' : '') + '>카드로 사진 만들기</button>' +
             '<button type="button" class="btn sm" data-up="' + i + '">사진 올리기</button>' +
             '<button type="button" class="btn sm" data-off="' + i + '">' + (it.off?'다시 켜기':'잠시 끄기') + '</button>' +
             '<button type="button" class="btn sm" data-mv="' + i + '">위로</button>' +
@@ -5557,6 +5748,29 @@
         auRenderList();
       });
     });
+    box.querySelectorAll('[data-card]').forEach(function(b){
+      b.addEventListener('click', function(){
+        auAutoCard(Number(this.getAttribute('data-card'))).catch(function(e){ toast(e.message, true); });
+      });
+    });
+
+    /* 사진이 비어 있는 항목을 한 번에 채우기 */
+    var empty = auCfg.items.map(function(x, k){ return k; })
+                  .filter(function(k){ var x = auCfg.items[k]; return !x.image && !x.__busy; });
+    if(empty.length){
+      var bar = document.createElement('div');
+      bar.className = 'au-fill';
+      bar.innerHTML = '<span>사진이 비어 있는 상품 <b>' + empty.length + '개</b> — 지금은 올릴 때 상품카드 사진만 붙습니다.</span>' +
+        '<button type="button" class="btn sm dark">카드 사진으로 한 번에 만들기</button>';
+      bar.querySelector('button').addEventListener('click', function(){
+        var b = this; b.disabled = true;
+        empty.reduce(function(pr, k){
+          return pr.then(function(){ return auAutoCard(k, true).catch(function(e){ toast(e.message, true); }); });
+        }, Promise.resolve()).then(function(){ toast('카드 사진을 만들었습니다. 「설정 저장」을 눌러 주세요.'); });
+      });
+      box.insertBefore(bar, box.firstChild);
+    }
+
     box.querySelectorAll('[data-up]').forEach(function(b){
       b.addEventListener('click', function(){ auUpload(Number(this.getAttribute('data-up'))); });
     });
@@ -5584,7 +5798,7 @@
         toast('사진을 올리는 중입니다…');
         api({ action:'upload', name:name, data:b64 })
           .then(function(j){
-            auCfg.items[i].image = j.path;
+            auCfg.items[i].image = j.path; auCfg.items[i].__preview = '';
             auRenderList(); auTouch();
             toast('사진을 올렸습니다. 1~2분 뒤부터 보입니다.');
           })
@@ -5621,6 +5835,11 @@
     auCfg.items.push({ slug:p.id, title:p.title, text:auText(p), image:'' });
     $('auPick').value = '';
     auRenderList(); auTouch();
+    if(auCardSrc(p)){
+      auAutoCard(auCfg.items.length - 1).catch(function(e){
+        toast(e.message + ' — 올릴 때는 상품카드 사진만 붙습니다.', true);
+      });
+    }
   });
 
   $('auSave').addEventListener('click', function(){
