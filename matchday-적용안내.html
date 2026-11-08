@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>matchday.html 수정 안내 — 「라리가 경기」 860노출을 클릭으로</title>
+<style>
+  :root{--ink:#1a1d21;--ink2:#4a5058;--ink3:#767d86;--line:#e2e5e9;--line2:#eef0f3;
+    --bg:#fbfbfc;--card:#fff;--accent:#1f5c8b;--accent-bg:#eef4f9;
+    --warn:#9a5b00;--warn-bg:#fdf5e7;--stop:#a32b2b;--stop-bg:#fcf0ef;--ok:#2a6a4a;--ok-bg:#eef6f1}
+  *{box-sizing:border-box}
+  body{margin:0;padding:40px 24px 80px;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+    font-size:15px;line-height:1.72;-webkit-font-smoothing:antialiased;word-break:keep-all}
+  .wrap{max-width:1000px;margin:0 auto}
+  header{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:30px}
+  .eyebrow{font-size:12.5px;letter-spacing:.09em;color:var(--ink3);text-transform:uppercase;margin-bottom:9px}
+  h1{font-size:25px;line-height:1.36;margin:0 0 14px;font-weight:700;letter-spacing:-.01em}
+  .meta{display:flex;flex-wrap:wrap;gap:7px 10px;font-size:13px;color:var(--ink2)}
+  .meta span{background:#fff;border:1px solid var(--line);border-radius:4px;padding:3px 10px}
+  section{margin:0 0 40px}
+  h2{font-size:18px;margin:0 0 6px;font-weight:700;display:flex;align-items:baseline;gap:11px}
+  h2 .n{font-size:12px;color:#fff;background:var(--ink);border-radius:3px;padding:2px 7px;font-weight:600}
+  h3{font-size:14.5px;margin:24px 0 8px;font-weight:700}
+  .lede{color:var(--ink2);margin:0 0 16px;font-size:14px}
+  table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.5px;margin:12px 0 6px;border:1px solid var(--line)}
+  th,td{padding:9px 11px;border-bottom:1px solid var(--line2);text-align:left;vertical-align:top}
+  thead th{background:#f4f6f8;font-weight:700;font-size:12.5px;color:var(--ink2);border-bottom:1px solid var(--line);white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.k{color:var(--ink3);font-size:12.5px}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+  .tag{display:inline-block;font-size:11.5px;padding:1px 6px;border-radius:3px;font-weight:600;white-space:nowrap}
+  .t-un{background:var(--stop-bg);color:var(--stop)}
+  .t-ok{background:var(--ok-bg);color:var(--ok)}
+  .box{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);padding:14px 17px;margin:16px 0;font-size:13.5px}
+  .box.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+  .box.stop{border-left-color:var(--stop);background:var(--stop-bg)}
+  .box.ok{border-left-color:var(--ok);background:var(--ok-bg)}
+  .box p{margin:0 0 8px}.box p:last-child{margin:0}
+  pre{background:#1f2328;color:#e6edf3;padding:13px 15px;border-radius:5px;overflow-x:auto;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.3px;line-height:1.7;margin:10px 0;white-space:pre-wrap;word-break:break-all}
+  pre .c{color:#8b949e}
+  pre .d{color:#ff9492;text-decoration:line-through;opacity:.75}
+  pre .a{color:#7ee787}
+  ol,ul{margin:10px 0;padding-left:22px}li{margin:7px 0}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding-top:18px;font-size:12px;color:var(--ink3)}
+  @media (max-width:640px){body{padding:26px 14px 60px;font-size:14px}h1{font-size:21px}
+    table{font-size:12.5px}th,td{padding:7px 8px}pre{font-size:11.5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">matchday.html · 수정 안내</div>
+  <h1>「라리가 경기」 860번 노출을<br>클릭으로 바꾸는 네 가지 수정</h1>
+  <div class="meta">
+    <span>대상 <span class="mono">toureplus.co.kr/matchday.html</span></span>
+    <span>경기 37건 · 2026-11-08 ~ 2027-02-14</span>
+    <span>작성 2026-11-08</span>
+  </div>
+</header>
+
+<div class="box stop">
+  <p><b>원인을 특정했습니다.</b> 페이지 원본(464KB)을 받아 확인해 보니, <b>경기 일정이 글자가 아니라 자바스크립트 객체 안에만 들어 있습니다.</b> 구장 이름 「메트로폴리타노」가 원본 HTML에 <b>딱 한 번</b>만 나오고, 그것도 좌석 배치 설정값 안입니다. 화면의 경기 카드 37개는 전부 <b>브라우저가 실행된 뒤에</b> 만들어집니다.</p>
+  <p>구글은 자바스크립트를 실행하기는 하지만 <b>나중에, 그리고 덜 확실하게</b> 합니다. 그래서 「라리가 경기」로 860번 보여지면서도 <b>10.8위</b>에 머물러 있습니다. <b>일정을 글자로 박아 두는 것이 이 문제의 정답입니다.</b></p>
+</div>
+
+<section>
+  <h2><span class="n">01</span> 네 가지 수정 — 요약</h2>
+  <table>
+    <thead><tr><th style="width:30px">#</th><th>무엇을</th><th>어디에</th><th>효과</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><b>title · description · og</b> 교체</td><td class="mono">&lt;head&gt;</td><td>검색 의도 일치 — 「표 파는 곳」에서 「일정 보는 곳」으로</td></tr>
+      <tr><td>2</td><td><b>h1</b> 교체</td><td class="mono">본문 맨 위</td><td>같은 이유</td></tr>
+      <tr><td>3</td><td><b>경기 일정 37건을 글자로</b></td><td class="mono">h1 바로 아래</td><td><b>가장 큼</b> — 구글이 읽을 수 있는 답이 생깁니다</td></tr>
+      <tr><td>4</td><td><b>JSON-LD 구조화 데이터</b></td><td class="mono">&lt;/body&gt; 직전</td><td>구글이 「이건 경기 일정이다」로 이해 — 리치 결과 가능</td></tr>
+    </tbody>
+  </table>
+  <p class="lede">3번과 4번은 <b>붙여넣기만 하면 되도록</b> 파일로 만들어 두었습니다 — <span class="mono">matchday-삽입블록.html</span>. 1·2번은 아래 그대로 바꾸십시오.</p>
+</section>
+
+<section>
+  <h2><span class="n">02</span> 수정 1 — <span class="mono">&lt;head&gt;</span></h2>
+  <h3>지금</h3>
+  <pre><span class="c">&lt;!-- 현재 --&gt;</span>
+<span class="d">&lt;title&gt;라리가 티켓 예매 — 경기 일정과 좌석 | 유포리아투어&lt;/title&gt;</span>
+<span class="d">&lt;meta name="description" content="라리가 티켓 예매 — 레알 마드리드, 바르셀로나, 아틀레티코 경기 일정과 좌석, 티켓 가격을 보고 한국어로 예매를 맡기세요. 여권 등록·클럽 카르네 안내 포함."&gt;</span>
+<span class="d">&lt;meta property="og:title" content="라리가 티켓 예매 — 경기 일정과 좌석 | 유포리아투어"&gt;</span></pre>
+
+  <h3>바꿀 것</h3>
+  <pre><span class="a">&lt;title&gt;라리가 경기 일정 2026-27 — 전 구장 날짜·구장·티켓 | 유포리아투어&lt;/title&gt;</span>
+
+<span class="a">&lt;meta name="description" content="2026-27 라리가 경기 일정을 날짜별로 확인하세요. 레알 마드리드·바르셀로나·아틀레티코·세비야 홈경기 날짜와 구장, 좌석 등급과 티켓 가격까지 한국어로 안내하고 예매를 대행합니다. 여권 등록·클럽 카르네 안내 포함."&gt;</span>
+
+<span class="a">&lt;meta property="og:title" content="라리가 경기 일정 2026-27 — 전 구장 날짜·구장·티켓"&gt;</span>
+<span class="a">&lt;meta property="og:description" content="레알 마드리드·바르셀로나·아틀레티코·세비야 홈경기 일정과 구장, 좌석·티켓 가격을 한국어로."&gt;</span></pre>
+
+  <div class="box">
+    <p><b>무엇이 달라졌나</b></p>
+    <p>· <b>「경기 일정」을 맨 앞으로</b> 옮겼습니다. 검색어가 「라리가 경기」이므로 제목 첫머리에 그 말이 있어야 합니다.<br>
+       · <b>「2026-27」</b>을 넣었습니다. 시즌을 붙이면 「라리가 일정 2026」 같은 검색도 함께 잡습니다.<br>
+       · 설명문 첫 문장을 <b>「경기 일정을 날짜별로 확인하세요」</b>로 바꿨습니다. 지금은 첫 단어가 「티켓 예매」라, 일정을 찾는 사람이 자기 답이 아니라고 판단하고 지나갑니다.<br>
+       · <b>세비야를 추가</b>했습니다. 37경기 중 12경기가 세비야 홈경기인데 설명에 빠져 있었습니다.<br>
+       · <b>「티켓」은 뒤로 뺐지만 지우지 않았습니다.</b> 「라리가 티켓 예매」(9.9위)도 살려야 합니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">03</span> 수정 2 — <span class="mono">h1</span></h2>
+  <pre><span class="c">&lt;!-- 현재 --&gt;</span>
+<span class="d">&lt;h1&gt;라리가 티켓 예매,여행에 경기 하나 더하세요&lt;/h1&gt;</span>
+
+<span class="c">&lt;!-- 바꿀 것 --&gt;</span>
+<span class="a">&lt;h1&gt;라리가 경기 일정, 여행에 경기 하나 더하세요&lt;/h1&gt;</span></pre>
+  <div class="box warn">
+    <p><b>덤으로 오타 하나</b> — 지금 h1이 <span class="mono">라리가 티켓 예매,여행에</span>로 <b>쉼표 뒤 띄어쓰기가 빠져</b> 있습니다. 같이 고쳐 두었습니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">04</span> 수정 3 · 4 — 삽입블록 붙여넣기</h2>
+  <p class="lede">파일 <span class="mono">matchday-삽입블록.html</span>을 열면 두 덩어리가 들어 있습니다.</p>
+
+  <table>
+    <thead><tr><th>덩어리</th><th>어디에</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td><span class="mono">&lt;style&gt;</span> ~ <span class="mono">&lt;/section&gt;</span></td>
+          <td><b>h1 바로 아래</b></td>
+          <td>경기 <b>37건</b>을 날짜·시각·라운드·대진·구장으로 적은 표. CSS는 <span class="mono">.md-seo</span> 안에만 걸려 있어 <b>기존 디자인을 건드리지 않습니다.</b></td></tr>
+      <tr><td><span class="mono">&lt;script type="application/ld+json"&gt;</span></td>
+          <td><b><span class="mono">&lt;/body&gt;</span> 직전</b></td>
+          <td>같은 37경기를 구글이 읽는 형식(SportsEvent)으로. 화면에는 보이지 않습니다.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box ok">
+    <p><b>기존 「경기 일정」 위젯은 그대로 두십시오.</b> 새 표는 그 위에 놓이는 <b>요약표</b>입니다. 손님은 표로 날짜를 먼저 훑고, 고른 경기를 아래 위젯에서 눌러 좌석과 가격을 봅니다. <b>중복이 아니라 순서입니다.</b></p>
+  </div>
+
+  <div class="box">
+    <p><b>데이터는 지어내지 않았습니다.</b> 37경기 전부 <b>지금 홈페이지가 화면에 그리고 있는 바로 그 데이터</b>를 그대로 읽어 온 것입니다 — 2026-11-08 AT.마드리드 vs 바르셀로나부터 2027-02-14 R.마드리드 vs 아틀레틱까지. 마드리드 13 · 세비야 12 · 바르셀로나 12경기이고, <b>8경기는 시각이 확정, 29경기는 「시간 미정」</b>이라 표에도 그대로 적었습니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">05</span> 적용한 뒤 할 일</h2>
+  <ol>
+    <li><b>배포하고 실제 주소를 여십시오.</b> 표가 보이고 글자로 선택되면(마우스로 드래그해 복사되면) 성공입니다.</li>
+    <li><b>서치콘솔 → URL 검사</b>에 <span class="mono">https://toureplus.co.kr/matchday.html</span>을 넣고 <b>「색인 생성 요청」</b>을 누르십시오. 보통 며칠 안에 반영됩니다.</li>
+    <li><b>같은 화면의 「렌더링된 HTML 보기」</b>에서 경기 일정 글자가 보이는지 확인하십시오. 거기 보이면 구글이 읽은 것입니다.</li>
+    <li><b>2주 뒤 실적 보고서</b>에서 「라리가 경기」의 게재순위와 CTR을 다시 보겠습니다. <b>지금 기준선은 노출 860 · 클릭 0 · 순위 10.8입니다.</b></li>
+  </ol>
+
+  <div class="box warn">
+    <p><b>한 가지 당부</b> — 「시간 미정」 29경기는 라리가가 중계 일정에 맞춰 킥오프를 <b>경기 2~3주 전에 확정</b>합니다. 확정될 때마다 표와 JSON-LD의 시각을 같이 갱신하셔야 합니다. <b>지금처럼 데이터가 자바스크립트 안에 있으면 표가 따로 놀게 되므로</b>, 가능하면 빌드할 때 같은 데이터로 표를 자동 생성하도록 담당자에게 요청하십시오. 그 전까지는 제가 월 1회 갱신본을 만들어 드리겠습니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">06</span> 제가 하지 않은 것</h2>
+  <ul>
+    <li><b>라이브 사이트를 고치지 않았습니다.</b> 붙여넣을 블록과 바꿀 문구만 만들었습니다. 배포는 김이 하십시오.</li>
+    <li><b>464KB 원본을 통째로 다시 쓰지 않았습니다.</b> 그렇게 하면 무엇이 바뀌었는지 확인할 수 없고, 기존 기능이 깨질 위험이 큽니다.</li>
+    <li><b>경기 일정을 지어내지 않았습니다.</b> 전부 홈페이지가 가진 데이터입니다. 외부 출처와 대조하지는 않았으므로, <b>원래 데이터가 틀렸다면 표도 같이 틀립니다.</b></li>
+  </ul>
+</section>
+
+<footer>
+  <b>출처</b> — <span class="mono">toureplus.co.kr/matchday.html</span> 원본 HTML(464,147바이트) 및 렌더된 DOM 직접 조회(2026-11-08) ·
+  현재 title·description·h1은 같은 조회에서 확인 ·
+  경기 37건은 렌더된 경기 카드에서 추출 ·
+  구글 서치콘솔 실적 보고서(「라리가 경기」 노출 860 · 클릭 0 · 순위 10.8 · 데이터 2026-10-27~11-06).<br><br>
+  작성 비서실장 케이 · 2026-11-08
+</footer>
+
+</div>
+</body>
+</html>
