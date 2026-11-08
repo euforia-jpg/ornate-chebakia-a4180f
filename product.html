@@ -2232,7 +2232,8 @@ function euHL(t){
    spot-photo 함수가 줄마다 첫 장소를 구글 지도에서 찾아 사진 1장을 돌려줍니다.
    카드가 화면에 보일 때만 부르고, 사진이 없거나 안내 줄이면 자리를 비웁니다.
    사진 위에 마우스를 올리면 크게 보이고, 누르면(휴대폰은 손가락으로) 화면 가득 보입니다.
-   구글 약관에 따라 사진마다 촬영자(출처)를 표시합니다. */
+   구글 약관에 따라 사진마다 촬영자(출처)를 표시합니다.
+   구글이 안 될 때는 위키백과 · 위키미디어 공용의 자유 이용 사진으로 대신하고 촬영자 · 라이선스를 적습니다 (src:'wiki'). */
 function euSpotPhotos(pid){
   var 칸들 = document.querySelectorAll('.hl-ph[data-spot]');
   if(!칸들.length) return;
@@ -2241,13 +2242,13 @@ function euSpotPhotos(pid){
     var 누구 = ((d.photo && d.photo.a) || []).map(function(a){
       return a.u && /^https:\/\//.test(a.u) ? '<a href="' + 이스(a.u) + '" target="_blank" rel="noopener">' + 이스(a.n) + '</a>' : 이스(a.n);
     }).filter(Boolean).join(', ');
-    return '사진: ' + (누구 ? 누구 + ' · ' : '') + 'Google 지도';
+    return '사진: ' + (누구 ? 누구 + ' · ' : '') + (d.src === 'wiki' ? '위키미디어 공용' : 'Google 지도');
   }
   /* 사진 위 작은 글씨 — 「© 촬영자 · Google」 */
   function 짧은출처(d){
     var a = ((d.photo && d.photo.a) || [])[0];
     var 이름 = a ? (a.u && /^https:\/\//.test(a.u) ? '<a href="' + 이스(a.u) + '" target="_blank" rel="noopener">' + 이스(a.n) + '</a>' : 이스(a.n)) : '';
-    return (이름 ? '© ' + 이름 + ' · ' : '') + 'Google';
+    return (이름 ? '© ' + 이름 + ' · ' : '') + (d.src === 'wiki' ? 'Wikimedia' : 'Google');
   }
   function 하나(el){
     fetch('/.netlify/functions/spot-photo?p=' + encodeURIComponent(pid) + '&i=' + el.dataset.spot, { headers:{ 'Accept':'application/json' } })
