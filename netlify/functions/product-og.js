@@ -27,6 +27,15 @@
         https://toureplus.co.kr/p/spain-12days-barcelona
     기존 /product.html?id=… 도 그대로 열립니다. 한 쪽도 안 막힙니다.
 
+  본문도 미리 채워 둡니다 (2026-11 · 검색 노출)
+    네이버 검색 로봇은 자바스크립트를 거의 돌리지 않아, 상품 쪽을 열어도
+    빈 상자만 보였습니다. 그래서 이 함수가 상품의 제목 · 소개 · 이런 경험 ·
+    일자별 일정 · 포함/불포함 · 함께 보면 좋은 상품 링크를 글로 만들어
+    본문 자리(#content)에 미리 넣어 둡니다.
+    손님 화면에서는 product.html 이 상품을 그리는 순간 이 글을 통째로
+    바꿔 끼우므로 두 번 보이지 않습니다. 화면이 그려지기 전 잠깐은
+    이 글이 먼저 보여, 느린 휴대폰에서도 빈 화면 대신 내용이 보입니다.
+
   잘못되면
     무슨 일이 생기든 원래 product.html 을 그대로 돌려줍니다.
     그것마저 못 가져오면 /product.html?id=… 로 보냅니다.
@@ -176,6 +185,92 @@ function 아이디찾기(event) {
   return '';
 }
 
+/* ── 검색 로봇용 본문 ─────────────────────────────────────
+   product.html 이 그리는 내용과 같은 자료를 글(HTML)로 미리 만듭니다.
+   요금 · 일정은 products.js 에 적힌 그대로만 씁니다(지어내지 않습니다). */
+function 글만(s) { return 줄이기(s, 100000); }
+
+function 장소들(p) {
+  const 본 = [];
+  (Array.isArray(p['경로']) ? p['경로'] : []).forEach(function (d) {
+    (Array.isArray(d && d['들']) ? d['들'] : []).forEach(function (x) {
+      const v = String(x || '').trim();
+      if (v && v.charAt(0) !== '~' && 본.indexOf(v) === -1) 본.push(v);
+    });
+  });
+  return 본;
+}
+
+function 본문만들기(p, 모두) {
+  const d = p.detail || {};
+  const 목록 = function (arr) {
+    return (Array.isArray(arr) ? arr : []).map(글만).filter(Boolean)
+      .map(function (x) { return '<li>' + 안전(x) + '</li>'; }).join('');
+  };
+  const 줄들 = [];
+  줄들.push('<p class="eu-ssr-meta">' + 안전([p.region, p.days, 글만(p.price)].filter(Boolean).join(' · ')) + '</p>');
+  줄들.push('<h1>' + 안전(p.title) + '</h1>');
+  const 소개 = 글만(d.lead || p.summary);
+  if (소개) 줄들.push('<p>' + 안전(소개) + '</p>');
+  if (d.lead && p.summary && 글만(p.summary) !== 소개) 줄들.push('<p>' + 안전(글만(p.summary)) + '</p>');
+  const 설명 = 글만(String(d.description || '').replace(/<p class="photo-credit"[\s\S]*?<\/p>/gi, ''));
+  if (설명) 줄들.push('<p>' + 안전(설명.slice(0, 1200)) + '</p>');
+
+  const 경험 = 목록(d.highlights);
+  if (경험) 줄들.push('<h2>이런 경험을 할 수 있어요</h2><ul>' + 경험 + '</ul>');
+
+  /* 일자별 일정 — 「경로」 칸(지도와 같은 자료). 크루즈는 기항지 표 */
+  const 경로 = Array.isArray(p['경로']) ? p['경로'] : [];
+  const 기항 = p['크루즈'] && Array.isArray(p['크루즈']['기항']) ? p['크루즈']['기항'] : null;
+  if (기항 && 기항.length) {
+    줄들.push('<h2>일자별 일정</h2><ol>' + 기항.map(function (g) {
+      const 곳 = [g['곳'], g['꼬리']].filter(Boolean).join(' · ');
+      const 때 = (g['입표'] || '') + (g['출표'] ? ' / ' + g['출표'] : '');
+      return '<li><b>' + 안전((g['일'] || '') + '일차 ' + (g['날'] || '')) + '</b> ' + 안전(곳) +
+             (g['말'] ? ' — ' + 안전(글만(g['말'])) : '') + (때.trim() ? ' (' + 안전(때.trim()) + ')' : '') + '</li>';
+    }).join('') + '</ol>');
+  } else if (경로.length) {
+    줄들.push('<h2>일자별 일정</h2><ol>' + 경로.map(function (x) {
+      const 곳 = (Array.isArray(x['들']) ? x['들'] : []).map(String).filter(function (v) { return v && v.charAt(0) !== '~'; });
+      return '<li><b>' + 안전((x['일'] || '') + '일차' + (x['제목'] ? ' · ' + 글만(x['제목']) : '')) + '</b>' +
+             (곳.length ? ' — ' + 안전(곳.join(' → ')) : '') +
+             (x['말'] ? ' · ' + 안전(글만(x['말'])) : '') +
+             (x['숙'] ? ' (숙박: ' + 안전(글만(x['숙'])) + ')' : '') + '</li>';
+    }).join('') + '</ol>');
+  }
+
+  const 포함 = 목록(d.includes), 불포함 = 목록(d.excludes);
+  if (포함) 줄들.push('<h2>포함 사항</h2><ul>' + 포함 + '</ul>');
+  if (불포함) 줄들.push('<h2>불포함 사항</h2><ul>' + 불포함 + '</ul>');
+  if (d.duration) 줄들.push('<p><b>여행 기간</b> ' + 안전(글만(d.duration)) + '</p>');
+  const 태그 = (Array.isArray(p.tags) ? p.tags : []).map(글만).filter(Boolean);
+  if (태그.length) 줄들.push('<p>' + 태그.map(function (x) { return '#' + 안전(x.replace(/\s+/g, '')); }).join(' ') + '</p>');
+  if (p.downloadUrl && /^\/?[\w\-./]+\.pdf$/i.test(String(p.downloadUrl)))
+    줄들.push('<p><a href="' + 안전('/' + String(p.downloadUrl).replace(/^\/+/, '')) + '">일정표 PDF 내려받기</a></p>');
+  줄들.push('<p><a href="/contact.html">예약 문의하기</a> · <a href="/tours.html">전체 여행상품 보기</a> · <a href="/">유포리아투어 첫 화면</a></p>');
+
+  /* 함께 보면 좋은 상품 — 같은 갈래(cats 첫 칸) 상품 6개까지 */
+  const 갈래 = Array.isArray(p.cats) && p.cats[0];
+  const 이웃 = (모두 || []).filter(function (x) {
+    return x && x.detail && x.id !== p.id && 갈래 && Array.isArray(x.cats) && x.cats.indexOf(갈래) !== -1 &&
+           !/[\s"'<>]/.test(x.id);
+  }).slice(0, 6);
+  if (이웃.length) {
+    줄들.push('<h2>함께 보면 좋은 상품</h2><ul>' + 이웃.map(function (x) {
+      return '<li><a href="/p/' + encodeURIComponent(x.id) + '">' + 안전(x.title) + '</a>' +
+             (x.days ? ' · ' + 안전(x.days) : '') + '</li>';
+    }).join('') + '</ul>');
+  }
+  return '<div class="layout" style="grid-template-columns:1fr;"><div class="section-inner eu-ssr">' +
+         줄들.join('\n') + '</div></div>';
+}
+
+const 본문꾸밈 =
+  '<style>.eu-ssr h1{font-size:24px;line-height:1.35;margin:6px 0 12px}' +
+  '.eu-ssr h2{font-size:17px;margin:24px 0 8px}.eu-ssr p,.eu-ssr li{font-size:14.5px;line-height:1.8}' +
+  '.eu-ssr ul,.eu-ssr ol{padding-left:20px;margin:0}.eu-ssr .eu-ssr-meta{font-size:13px;opacity:.75;margin:0}' +
+  '.eu-ssr a{color:inherit;text-decoration:underline}</style>';
+
 exports.handler = async function (event) {
   const 주기 = {
     'Content-Type': 'text/html; charset=utf-8',
@@ -300,7 +395,18 @@ exports.handler = async function (event) {
       url: 도메인 + '/',
     },
   };
-  if (p.days) 짜임.itinerary = { '@type': 'ItemList', name: p.days };
+  const 들른곳 = 장소들(p);
+  if (들른곳.length) {
+    짜임.itinerary = {
+      '@type': 'ItemList',
+      name: p.days || '',
+      numberOfItems: 들른곳.length,
+      itemListElement: 들른곳.map(function (n, k) {
+        return { '@type': 'ListItem', position: k + 1, item: { '@type': 'Place', name: n } };
+      }),
+    };
+  } else if (p.days) 짜임.itinerary = { '@type': 'ItemList', name: p.days };
+  if (Array.isArray(p.tags) && p.tags.length) 짜임.keywords = p.tags.join(', ');
   if (요금 != null) {
     짜임.offers = {
       '@type': 'Offer',
@@ -311,14 +417,37 @@ exports.handler = async function (event) {
     };
   }
 
+  /* 첫 화면 › 여행상품 › 이 상품 — 검색 결과에 경로로 보입니다 */
+  const 길 = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '유포리아투어', item: 도메인 + '/' },
+      { '@type': 'ListItem', position: 2, name: '여행상품', item: 도메인 + '/tours.html' },
+      { '@type': 'ListItem', position: 3, name: p.title, item: 주소 },
+    ],
+  };
+
   const 덧 =
     '<script type="application/ld+json">' +
       JSON.stringify(짜임).replace(/</g, '\\u003c') +
     '</script>' +
+    '<script type="application/ld+json">' +
+      JSON.stringify(길).replace(/</g, '\\u003c') +
+    '</script>' + 본문꾸밈 +
     /* 주소에 ?id= 가 없으므로 어느 상품인지 알려 줍니다 */
     '<script>window.__EU_PID=' + 스크립트안전(아이디) + ';</script>';
 
   글 = 글.indexOf('</head>') !== -1 ? 글.replace('</head>', 덧 + '</head>') : (글 + 덧);
+
+  /* ── 본문 미리 채우기 (검색 로봇용 · 화면이 그려지면 바뀜) ── */
+  try {
+    const 본문 = 본문만들기(p, 자료.상품);
+    const 자리 = /(<div class="section" id="content">)\s*(<!--[\s\S]*?-->)?/i;
+    if (자리.test(글)) 글 = 글.replace(자리, function (m, 앞) { return 앞 + 본문; });
+  } catch (e) {
+    console.error('[product-og] 본문 만들기 실패:', e && e.message);
+  }
 
   return { statusCode: 200, headers: 주기, body: 글 };
 };
