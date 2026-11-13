@@ -47,6 +47,51 @@
 
 const crypto = require('crypto');
 
+/*
+  같은 글이 여러 번 올라가지 않게 (2026-11)
+
+  넷리파이 예약 실행은 함수가 15초 안에 끝나지 않으면 "실패"로 보고
+  16초 간격으로 두 번 더 부릅니다. 사진 글은 쓰레드가 사진을 처리할
+  시간을 기다리느라 15초를 넘기기 쉬워, 같은 글이 3번 올라갔습니다.
+  (11/12 05:00 기록: 04:00:51 · 04:01:07 · 04:01:23 세 번 호출)
+
+  그래서 두 겹으로 막습니다.
+    ① 자리표 — 그 날 그 시각에 처음 깨어난 호출이 저장소(Blobs)에
+       「이 시각 발행 중」 표를 먼저 붙이고, 뒤따라온 호출은 표를 보면 그냥 돌아갑니다.
+    ② 쓰레드 확인 — 올리기 직전에 내 계정의 최근 글을 읽어,
+       3시간 안에 같은 글이 이미 있으면 올리지 않습니다.
+       (저장소를 못 쓰는 경우에도 이 확인은 돕니다)
+  대쉬보드의 「지금 한 번 올리기」(force)는 사람이 누른 것이므로 ①은 건너뛰고 ②만 봅니다.
+*/
+let blobs = null;
+try { blobs = require('@netlify/blobs'); } catch (e) { blobs = null; }
+
+function 자리창고(event) {
+  if (!blobs) return null;
+  try { if (event && event.blobs) blobs.connectLambda(event); } catch (e) { /* 새 방식 함수에는 없습니다 */ }
+  try { return blobs.getStore({ name: 'euforia-threads' }); } catch (e) { return null; }
+}
+
+/* 글 앞부분을 비교용으로 다듬습니다 */
+function 글머리(s) {
+  return String(s || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+}
+
+/* 내 계정 최근 글 중, 몇 시간 안에 같은 글이 있었나 */
+async function 이미올렸나(text, 시간) {
+  try {
+    const d = await th('/' + uid() + '/threads', { fields: 'id,text,timestamp', limit: '10' });
+    const 기준 = Date.now() - 시간 * 3600 * 1000, 머리 = 글머리(text);
+    return (d && d.data || []).find(function (p) {
+      const t = Date.parse(p.timestamp || '');
+      return 머리 && 글머리(p.text) === 머리 && !(t < 기준);
+    }) || null;
+  } catch (e) {
+    console.error('[쓰레드 자동] 최근 글 확인 실패:', e.message);
+    return null;   /* 확인을 못 해도 ①의 자리표가 막아 줍니다 */
+  }
+}
+
 const API = 'https://graph.threads.net/v1.0';
 const TZ  = 'Europe/Madrid';
 
@@ -159,8 +204,12 @@ async function publish(item) {
   /* 사진은 쓰레드 쪽에서 내려받아 처리할 시간이 필요합니다 */
   if (img) await new Promise(function (r) { setTimeout(r, 6000); });
 
+  /* 올리기 직전 한 번 더 — 그사이 다른 호출이 같은 글을 올렸으면 멈춥니다 */
+  const 겹침 = await 이미올렸나(text, 3);
+  if (겹침) return { dup: 겹침.id };
+
   const out = await th('/' + uid() + '/threads_publish', { creation_id: box.id }, 'POST');
-  return out && out.id;
+  return { id: out && out.id };
 }
 
 /* 대쉬보드 로그인 토큰 확인 — 사람이 주소로 부를 때만 씁니다 */
@@ -226,6 +275,21 @@ exports.handler = async function (event) {
     }
   }
 
+  /* ---------- 자리표: 이 날 이 시각은 한 번만 ---------- */
+  if (!forced && !dry) {
+    const 창고 = 자리창고(event);
+    const 열쇠 = 'slot/' + now.date + '-' + String(now.hour).padStart(2, '0');
+    if (창고) {
+      try {
+        const 있음 = await 창고.get(열쇠, { type: 'json' });
+        if (있음) return json(200, { skipped: '이 시각 글은 이미 다른 호출이 맡았습니다 (중복 방지)', 자리표: 있음 });
+        await 창고.setJSON(열쇠, { at: new Date().toISOString() });
+      } catch (e) {
+        console.error('[쓰레드 자동] 자리표 저장소를 못 씀:', e.message);
+      }
+    }
+  }
+
   /* ---------- 사진이 빈 항목은 상품카드 사진으로 채웁니다 ---------- */
   if ((cfg.items || []).some(function (it) { return it && !String(it.image || '').trim(); })) {
     const cards = await cardPhotos();
@@ -268,8 +332,14 @@ exports.handler = async function (event) {
 
   if (dry) return json(200, { dryRun: true, 올릴내용: preview });
 
+  /* ---------- 같은 글이 3시간 안에 이미 있으면 올리지 않습니다 ---------- */
+  const 먼저 = await 이미올렸나(item.text, 3);
+  if (먼저) return json(200, { skipped: '같은 글을 3시간 안에 이미 올렸습니다 (중복 방지)', 기존글: 먼저.id, 올리려던내용: preview });
+
   try {
-    const id = await publish(item);
+    const r = await publish(item);
+    if (r && r.dup) return json(200, { skipped: '올리는 사이 같은 글이 먼저 올라가 멈췄습니다 (중복 방지)', 기존글: r.dup, 올리려던내용: preview });
+    const id = r && r.id;
     return json(200, { ok: true, id: id, 올린내용: preview });
   } catch (e) {
     return json(200, { error: '발행에 실패했습니다', detail: e.message, 올리려던내용: preview });
