@@ -14,7 +14,7 @@
   ===========================================================
 */
 
-exports.handler = async function () {
+exports.handler = async function (event) {
   let target;
   try {
     target = require('./threads-auto.js');
@@ -25,7 +25,8 @@ exports.handler = async function () {
 
   try {
     /* __internal 을 붙여 보내면 로그인 확인을 건너뜁니다 */
-    const r = await target.handler({ __internal: true, queryStringParameters: {} });
+    /* 예약 실행이 받은 저장소 열쇠(event.blobs)를 그대로 넘겨 중복 방지 자리표를 쓸 수 있게 합니다 */
+    const r = await target.handler({ __internal: true, queryStringParameters: {}, blobs: event && event.blobs, headers: event && event.headers });
     console.log('[쓰레드 자동] ' + (r && r.body));
     return { statusCode: 200, body: (r && r.body) || 'ok' };
   } catch (e) {
