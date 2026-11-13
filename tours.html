@@ -658,7 +658,8 @@ function shuffled(arr){
 }
 
 function productLink(p){
-  return p.link || ('product.html?id=' + encodeURIComponent(p.id));
+  /* 상품마다 따로 있는 짧은 주소(/p/상품id) — 검색엔진이 상품 쪽을 하나씩 따로 읽습니다 (2026-11) */
+  return p.link || ('/p/' + encodeURIComponent(p.id));
 }
 
 /* ---------- 카드 사진 ----------

@@ -146,7 +146,7 @@
         (p ? '<b>' + esc(p.title) + '</b> ' : '') + '예약문의를 남겼어요<span class="tm">' + 언제 + '</span></span>' +
         '<button type="button" class="x" aria-label="알림 닫기">✕</button>';
       if (p && typeof window.productLink === 'function') 판.href = window.productLink(p);
-      else if (p) 판.href = 'product.html?id=' + encodeURIComponent(p.id);
+      else if (p) 판.href = '/p/' + encodeURIComponent(p.id);
       else 판.removeAttribute('href');
       판.classList.add('show');
       타이머 = setTimeout(function () {
@@ -171,7 +171,8 @@
       });
   }
   function 카드id(a) {
-    var m = /[?&]id=([^&#]+)/.exec(a.getAttribute('href') || '');
+    var h = a.getAttribute('href') || '';
+    var m = /[?&]id=([^&#]+)/.exec(h) || /\/p\/([^/?#]+)/.exec(h);   /* product.html?id=… 또는 /p/상품id */
     return m ? decodeURIComponent(m[1]) : '';
   }
   function 베스트붙이기(grid) {

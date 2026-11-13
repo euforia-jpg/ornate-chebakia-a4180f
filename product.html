@@ -2746,7 +2746,7 @@ function euCarFlightInit(product, redraw){
           h += '<div class="fl-st"><h5>다음 날 이어 타기<small>' + 도곳 + ' 출발 차량</small></h5><div class="fl-next">' +
             이어.slice(0,4).map(function(p){
               var 값 = p.요금 && p.요금.값 ? '€' + p.요금.값 : '';
-              return '<a href="product.html?id=' + encodeURIComponent(p.id) + '">' + '<span>' + 날글 + ' · ' + String(p.title).replace(/^\[[^\]]*\]\s*/, '') + '</span><span>' + 값 + '</span></a>';
+              return '<a href="/p/' + encodeURIComponent(p.id) + '">' + '<span>' + 날글 + ' · ' + String(p.title).replace(/^\[[^\]]*\]\s*/, '') + '</span><span>' + 값 + '</span></a>';
             }).join('') +
             (이어.length > 4 ? '<a class="more" href="tours.html?cat=transfer&from=' + encodeURIComponent(도곳) + '">' + 도곳 + ' 출발 차량 ' + 이어.length + '개 모두 보기 →</a>' : '') +
             '</div></div>';

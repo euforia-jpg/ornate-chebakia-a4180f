@@ -367,7 +367,7 @@
   container.innerHTML = withAudio.map(p => `
     <div class="group-title">
       ${p.title}
-      <a href="product.html?id=${encodeURIComponent(p.id)}">상품 보기 →</a>
+      <a href="/p/${encodeURIComponent(p.id)}">상품 보기 →</a>
     </div>
     <div class="audio-grid">
       ${p.audioGuide.map(a => `
