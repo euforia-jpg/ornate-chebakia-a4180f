@@ -2,7 +2,9 @@
   "enabled": true,
   "days": [
     1,
-    4
+    3,
+    5,
+    6
   ],
   "hour": 5,
   "anchor": "2026-09-14",
@@ -27,6 +29,62 @@
       "title": "[포르투갈 · 스페인 남부 골프] 럭셔리 7박 9일",
       "text": "[포르투갈 · 스페인 ] [포르투갈 · 스페인 남부 골프] 럭셔리 7박 9일\n스페인 & 포르투갈 남부 골프 18홀 4라운드 7박 18홀 4라운드 럭셔리 골프투어예요.\n일정 7박 9일\n요금 1인 2,796 유로 (6인 기준)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #포르투갈·스페인",
       "image": "images/threads/golf-spain-portugal-card-mw8wut0e.jpg",
+      "off": false
+    },
+    {
+      "slug": "portugal-north-spain-17days",
+      "title": "[포르투갈 · 북스페인] 리스본 IN · 마드리드 OUT 15박 17일",
+      "text": "[SPAIN · PORTUGAL] [포르투갈 · 북스페인] 리스본 IN · 마드리드 OUT 15박 17일\n리스본으로 들어가 포르투갈을 북으로 거슬러 오르고, 산티아고에서 스페인 북부 해안을 동쪽으로 건너, 바스크와 카스티야를 지나 마드리드에서 나오는 일정이에요. 같은 길을 두 번 밟지 않습니다.\n일정 15박 17일\n요금 1인 4,236 유로 (20인 기준)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #SPAIN·PORTUGAL",
+      "image": "images/threads/portugal-north-spain-17days-card-mwfgxo95.jpg",
+      "off": false
+    },
+    {
+      "slug": "white-towns-morocco-6days-madrid",
+      "title": "[하얀 마을 · 북아프리카] 안달루시아 하얀 마을과 모로코 · 마드리드 출발 5박 6일",
+      "text": "[SPAIN · MOROCCO] [하얀 마을 · 북아프리카] 안달루시아 하얀 마을과 모로코 · 마드리드 출발 5박 6일\n고속철도로 안달루시아에 내려가 하얀 마을 베헤르 · 아르코스를 둘러보고, 페리로 지브롤터 해협을 건너 모로코 탕헤르 · 테투안 · 푸른 마을 셰프샤우엔, 스페인령 세우타까지 다녀오는 6일 일정이에요\n일정 5박 6일\n요금 1인 3,110 유로 (4인 기준)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #SPAIN·MOROCCO",
+      "image": "images/threads/white-towns-morocco-6days-madrid-card-mwfgy7b7.jpg",
+      "off": false
+    },
+    {
+      "slug": "north-cantabria-basque",
+      "title": "[스페인북부] 칸타브리아와 바스크 5박 6일",
+      "text": "[스페인북부] [스페인북부] 칸타브리아와 바스크 5박 6일\n대서양이 만든 초록색 스페인 — 칸타브리아의 중세 마을과 가우디의 첫 집에서 시작해 비스케이 만의 어촌을 지나 빌바오 구겐하임과 산세바스티안까지 가는 5박 6일이에요.\n일정 5박 6일\n요금 1인 1,398 유로 (20인 기준)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #스페인북부",
+      "image": "images/threads/north-cantabria-basque-card-mwfgymin.jpg",
+      "off": false
+    },
+    {
+      "slug": "car-lisbon-benagil-sevilla",
+      "title": "[차량 & 기사] 리스본 – 베나길 – 세비야",
+      "text": "[차량 & 기사] [차량 & 기사] 리스본 – 베나길 – 세비야\n하루에 만나는 스페인의 절경과 낭만, 두 도시의 매력! 리스본에서 출발해 세계적인 해식 동굴 마을 베나길을 거쳐 세비야까지 이동하는 프리미엄 당일 차량투어예요.\n일정 당일 (08:00~18:00)\n요금 1인 213유로 (4인 이상 출발 기준)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #차량&기사",
+      "image": "images/threads/car-lisbon-benagil-sevilla-card-mwfgyucn.jpg",
+      "off": false
+    },
+    {
+      "slug": "car-sevilla-ronda-nerja-granada",
+      "title": "[차량 & 기사] 세비야 – 론다 – 프리힐리아나 – 네르하 – 그라나다",
+      "text": "[차량 & 기사] [차량 & 기사] 세비야 – 론다 – 프리힐리아나 – 네르하 – 그라나다\n안달루시아 핵심 명소를 하루에! 세비야에서 출발해 절벽 위 도시 론다, 하얀 마을 프리힐리아나, 해안 도시 네르하를 거쳐 그라나다까지 이동하는 프리미엄 당일 차량투어예요.\n일정 당일 (08:00~18:00)\n요금 1인 150유로 (4인 이상 출발 기준)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #차량&기사",
+      "image": "images/threads/car-sevilla-ronda-nerja-granada-card-mwfgzfem.jpg",
+      "off": false
+    },
+    {
+      "slug": "cruise-mariner-italy-spain-riviera-9days-rome",
+      "title": "[크루즈 · 프렌치 리비에라 · 이탈리아] 로열캐리비안 마리너호 바르셀로나 → 치비타베키아 8박 9일",
+      "text": "[SPAIN · FRANCE · ITALY] [크루즈 · 프렌치 리비에라 · 이탈리아] 로열캐리비안 마리너호 바르셀로나 → 치비타베키아 8박 9일\n로열캐리비안 「마리너 오브 더 시즈」로 바르셀로나에서 출발해 팔마 데 마요르카 · 툴롱 · 니스 · 피렌체/피사 · 시칠리아 · 아말피 해안 · 로마를 지나 치비타베키아에서 내리는 크루즈예요. 출항\n일정 8박 9일\n요금 1인 920 유로 (내측 · 2인 1실 · 최저가)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #SPAIN·FRANCE·ITALY",
+      "image": "images/threads/cruise-mariner-italy-spain-riviera-9days-card-mwfgzotb.jpg",
+      "off": false
+    },
+    {
+      "slug": "car-malaga-antequera-granada",
+      "title": "[차량 & 기사] 말라가 – 안테케라(엘 토르칼) – 그라나다",
+      "text": "[차량 & 기사] [차량 & 기사] 말라가 – 안테케라(엘 토르칼) – 그라나다\n말라가에서 그라나다까지, 기암괴석의 엘 토르칼 자연공원과 세계유산 고인돌 유적지 안테케라를 들르는 프리미엄 당일 차량투어예요.\n일정 당일 (09:00~17:00)\n요금 1인 170유로 (4인 이상 출발 기준)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #차량&기사",
+      "image": "images/threads/car-malaga-antequera-granada-card-mwfh0ps3.jpg",
+      "off": false
+    },
+    {
+      "slug": "costa-brava-france-6days-barcelona",
+      "title": "[코스타 브라바 · 남프랑스] 엠푸리아브라바 5박 · 바르셀로나 출발 5박 6일",
+      "text": "[SPAIN · FRANCE] [코스타 브라바 · 남프랑스] 엠푸리아브라바 5박 · 바르셀로나 출발 5박 6일\n코스타 브라바의 운하 마을 엠푸리아브라바에 5박을 머물며, 화산 지대와 중세 마을 베살루 · 지로나 · 달리 극장 박물관, 그리고 국경 너머 남프랑스 카르카손까지 당일로 다녀오는 일정이에요.\n일정 5박 6일\n요금 1인 2,325 유로 (4인 기준)\n\n예약·문의 toureplus.co.kr\n#유포리아투어 #스페인여행 #SPAIN·FRANCE",
+      "image": "images/threads/costa-brava-france-6days-barcelona-card-mwfh1p9q.jpg",
       "off": false
     }
   ]
