@@ -48,6 +48,11 @@ const 일반 = [
   ['plan.html', 0.6, 'monthly'],
   ['audio-guide.html', 0.5, 'monthly'],
   ['faq.html', 0.5, 'yearly'],
+  ['guide.html', 0.6, 'monthly'],
+  ['guide-airport.html', 0.6, 'monthly'],
+  ['guide-barcelona-madrid.html', 0.6, 'monthly'],
+  ['guide-madrid-daytrip.html', 0.6, 'monthly'],
+  ['guide-laliga.html', 0.6, 'monthly'],
   ['deposit.html', 0.4, 'yearly'],
   ['cancel.html', 0.3, 'yearly'],
 ];
