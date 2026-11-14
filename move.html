@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>바르셀로나 · 마드리드 공항 픽업 서비스 — EUFORIA MOVE | 유포리아투어</title>
-  <meta name="description" content="바르셀로나 공항 픽업 서비스와 마드리드 공항 픽업 — 스페인·포르투갈 도시 간 이동과 시간제 대절 차량을 한국어로 미리 예약하세요. 확정 요금, 직영 차량과 협력사 차량 운영.">
+<title>바르셀로나·마드리드 공항 픽업, 바르셀로나 현지 투어 — 유포리아투어 MOVE</title>
+  <meta name="description" content="바르셀로나·마드리드 공항 픽업, 바르셀로나 현지 투어와 스페인 차량 기사 투어를 한국어로 예약하세요. 도시 간 이동·시간제 대절도 운영합니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <!-- 한글 글꼴 Pretendard — 윈도우에서 한글이 뭉개지지 않게 (2026-10) -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -260,6 +260,13 @@
     margin-top:5px; line-height:1.6; }
 
 /* ----- 예약 확정 절차 ----- */
+  /* 스페인 차량 기사 투어 소개 (2026-11) */
+  .mv-drive{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px; }
+  .mv-drive .dv{ background:#fff; border:2px solid var(--line); border-radius:var(--radius); padding:18px 20px; }
+  .mv-drive .dv b{ display:block; color:var(--navy); font-size:15px; font-weight:800; margin-bottom:6px; }
+  .mv-drive .dv em{ display:block; font-style:normal; color:var(--muted); font-size:12.5px; font-weight:600; line-height:1.7; }
+  .mv-drive-go{ display:inline-block; margin-top:16px; padding:10px 18px; border-radius:999px; background:var(--navy); color:#fff; font-size:12.5px; font-weight:800; text-decoration:none; }
+  @media (max-width:760px){ .mv-drive{ grid-template-columns:1fr; } }
   .mv-flow{ display:grid; grid-template-columns:repeat(7,1fr); gap:0; margin-top:26px; position:relative; }
   .mv-flow .st{ position:relative; padding:0 9px; text-align:center; }
   .mv-flow .st::before{ content:''; position:absolute; top:17px; left:-50%; width:100%; height:2px;
@@ -336,16 +343,16 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Euforia Tour 유포리아투어">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="바르셀로나 · 마드리드 공항 픽업 서비스 — EUFORIA MOVE | 유포리아투어">
-<meta property="og:description" content="바르셀로나 공항 픽업 서비스와 마드리드 공항 픽업 — 스페인·포르투갈 도시 간 이동과 시간제 대절 차량을 한국어로 미리 예약하세요. 확정 요금, 직영 차량과 협력사 차량 운영.">
+<meta property="og:title" content="바르셀로나·마드리드 공항 픽업, 바르셀로나 현지 투어 — 유포리아투어 MOVE">
+<meta property="og:description" content="바르셀로나·마드리드 공항 픽업, 바르셀로나 현지 투어와 스페인 차량 기사 투어를 한국어로 예약하세요. 도시 간 이동·시간제 대절도 운영합니다.">
 <meta property="og:url" content="https://toureplus.co.kr/move.html">
 <meta property="og:image" content="https://toureplus.co.kr/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="유포리아투어 — 스페인·포르투갈·모로코 전문 여행사">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="바르셀로나 · 마드리드 공항 픽업 서비스 — EUFORIA MOVE | 유포리아투어">
-<meta name="twitter:description" content="바르셀로나 공항 픽업 서비스와 마드리드 공항 픽업 — 스페인·포르투갈 도시 간 이동과 시간제 대절 차량을 한국어로 미리 예약하세요. 확정 요금, 직영 차량과 협력사 차량 운영.">
+<meta name="twitter:title" content="바르셀로나·마드리드 공항 픽업, 바르셀로나 현지 투어 — 유포리아투어 MOVE">
+<meta name="twitter:description" content="바르셀로나·마드리드 공항 픽업, 바르셀로나 현지 투어와 스페인 차량 기사 투어를 한국어로 예약하세요. 도시 간 이동·시간제 대절도 운영합니다.">
 <meta name="twitter:image" content="https://toureplus.co.kr/og-image.png">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -448,7 +455,7 @@
 
       <span class="mv-tag">Euforia Move</span>
       <h1>바르셀로나 · 마드리드 <span class="hl">공항 픽업</span>,<br>미리 예약하고 편하게 이동하세요</h1>
-      <p>바르셀로나 공항 픽업 서비스와 마드리드 공항 픽업부터 도시 간 장거리 이동, 하루 전세 차량까지 — 직영 차량과 협력사 차량을 한국어로 미리 예약하실 수 있습니다. 낯선 곳에서 차를 잡느라 시간을 쓰지 않으셔도 됩니다.</p>
+      <p>바르셀로나 공항 픽업 서비스와 마드리드 공항 픽업, 기사님과 함께하는 바르셀로나 현지 투어부터 도시 간 장거리 이동, 하루 전세 차량까지 — 직영 차량과 협력사 차량을 한국어로 미리 예약하실 수 있습니다. 낯선 곳에서 차를 잡느라 시간을 쓰지 않으셔도 됩니다.</p>
       <div class="mv-chips">
         <span>공항 픽업 · 샌딩</span>
         <span>도시 간 이동</span>
@@ -694,6 +701,19 @@
           <a href="tours.html" style="display:inline-block;padding:10px 18px;border-radius:999px;background:var(--navy);color:#fff;font-size:12.5px;font-weight:800;text-decoration:none;">여행상품 보러가기 →</a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-inner" style="max-width:1000px;margin:0 auto;">
+      <h2>스페인 차량 기사 투어</h2>
+      <div class="sub">기사님이 운전하는 전용 차량으로 하루 동안 원하는 곳을 둘러보세요. 위 신청서에서 시간제 대절이나 근교 당일 투어를 고르시면 됩니다.</div>
+      <div class="mv-drive">
+        <div class="dv"><b>바르셀로나 현지 투어</b><em>시내 명소와 몬세라트를 일행끼리만 차량으로 편하게 둘러봅니다</em></div>
+        <div class="dv"><b>마드리드 근교 투어</b><em>톨레도 · 세고비아를 하루 코스로 다녀옵니다</em></div>
+        <div class="dv"><b>안달루시아 · 포르투갈</b><em>론다 같은 근교 방문과 도시 간 이동을 한 번에 묶을 수 있습니다</em></div>
+      </div>
+      <a class="mv-drive-go" href="#moveForm">차량 투어 신청하기 →</a>
     </div>
   </div>
 

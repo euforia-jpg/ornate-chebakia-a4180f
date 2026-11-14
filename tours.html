@@ -62,7 +62,7 @@
   .section-head .sub{ color:var(--muted); font-size:13px; font-weight:600; }
 
   .filters{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; }
-  .chip{ padding:8px 18px; border-radius:999px; border:2px solid var(--line); font-size:13px; color:var(--navy); cursor:pointer; background:#fff; transition: all .12s ease; font-weight:700; }
+  .chip{ display:inline-block; text-decoration:none; padding:8px 18px; border-radius:999px; border:2px solid var(--line); font-size:13px; color:var(--navy); cursor:pointer; background:#fff; transition: all .12s ease; font-weight:700; }
   .chip.active{ background:var(--violet); border-color:var(--violet); color:#fff; }
   .chip:hover:not(.active){ border-color:var(--violet); }
   /* ===== 차량 & 기사 — 출발 · 도착 도시로 찾기 ===== */
@@ -585,6 +585,42 @@ function 세어(list, i){
   return Object.keys(n).sort((a, b) => n[b] - n[a] || a.localeCompare(b, 'ko')).map(c => [c, n[c]]);
 }
 function rfEsc(t){ return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+/* 고른 분류에 맞춰 쪽 제목·설명을 바꿉니다 (검색에 「포르투갈 여행」으로 잡히도록, 2026-11)
+   지금은 포르투갈만 따로 둡니다. 다른 분류는 원래 제목·설명으로 돌아갑니다. */
+const CAT_META = {
+  portugal: {
+    title: '포르투갈 여행 · 포르투갈 패키지 — 유포리아투어',
+    desc: '리스본·포르투 일주부터 스페인과 묶는 이베리아 일정까지, 포르투갈 여행 패키지와 차량 투어를 마드리드 현지 여행사가 맞춤으로 운영합니다.',
+    h1: '포르투갈 여행 · 포르투갈 패키지, 일정에 <span class="hl">맞춤</span>으로'
+  }
+};
+const CAT_META0 = (function(){
+  const g = s => document.querySelector(s);
+  const h = g('.page-hero h1');
+  return { title: document.title, h1: h ? h.innerHTML : '',
+    desc: (g('meta[name="description"]')||{}).content || '',
+    can: (g('link[rel="canonical"]')||{}).href || '' };
+})();
+function catMetaSync(){
+  try{
+    const m = CAT_META[activeFilter] || null;
+    const 한국어 = !document.documentElement.lang || document.documentElement.lang.indexOf('ko') === 0;
+    const set = (sel, attr, v) => { const e = document.querySelector(sel); if (e && v) e.setAttribute(attr, v); };
+    const d = m ? m.desc : CAT_META0.desc;
+    const t = m ? m.title : CAT_META0.title;
+    if (한국어) document.title = t;
+    set('meta[name="description"]', 'content', d);
+    set('meta[property="og:description"]', 'content', d);
+    set('meta[name="twitter:description"]', 'content', d);
+    set('meta[property="og:title"]', 'content', t);
+    set('meta[name="twitter:title"]', 'content', t);
+    set('link[rel="canonical"]', 'href', m ? 'https://toureplus.co.kr/tours.html?cat=' + activeFilter : CAT_META0.can);
+    set('meta[property="og:url"]', 'content', m ? 'https://toureplus.co.kr/tours.html?cat=' + activeFilter : CAT_META0.can);
+    const h = document.querySelector('.page-hero h1');
+    const want = m ? m.h1 : CAT_META0.h1;
+    if (h && want && h.getAttribute('data-cat') !== (m ? activeFilter : '')) { h.innerHTML = want; h.setAttribute('data-cat', m ? activeFilter : ''); }
+  }catch(e){}
+}
 function rfSync(){
   try{
     const u = new URL(location.href);
@@ -593,6 +629,7 @@ function rfSync(){
     if (activeFilter === 'transfer' && rfTo) u.searchParams.set('to', rfTo); else u.searchParams.delete('to');
     history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
   }catch(e){}
+  catMetaSync();
 }
 function renderRouteFind(){
   const el = document.getElementById('routeFind');
@@ -635,6 +672,7 @@ document.addEventListener('click', function(e){
     rfTo = (q.get('to') || '').trim();
   }catch(e){}
 })();
+catMetaSync();
 
 /* ===== 상품 노출 순서 무작위 섞기 =====
    페이지에 들어올 때마다, 그리고 필터를 바꿀 때마다 카드 순서를 새로 섞어요.
@@ -736,11 +774,12 @@ function 제휴배지(p){
 function renderFilters(){
   const wrap = document.getElementById('filters');
   wrap.innerHTML = FILTER_LABELS.map(f =>
-    `<button class="chip${f.key===activeFilter?' active':''}" data-key="${f.key}">${f.label}</button>`
+    `<a class="chip${f.key===activeFilter?' active':''}" data-key="${f.key}" href="tours.html${f.key==='all'?'':'?cat='+f.key}">${f.label}</a>`
   ).join('');
   renderRouteFind();
   wrap.querySelectorAll('.chip').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
+    btn.addEventListener('click', (ev)=>{
+      ev.preventDefault();
       activeFilter = btn.getAttribute('data-key');
       rfFrom = ''; rfTo = '';
       renderFilters();
