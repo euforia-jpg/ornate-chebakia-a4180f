@@ -182,6 +182,118 @@ async function cardPhotos() {
   }
 }
 
+/*
+  ===========================================================
+  네이버 블로그 새 글 → 쓰레드 자동 소개 (2026-11)
+  -----------------------------------------------------------
+  발행 시각이 되면 먼저 블로그 RSS 를 읽어
+  최근 7일 안에 올린 글 중 아직 쓰레드에 소개하지 않은 글이 있는지 봅니다.
+  있으면 이번 회차는 상품 대신 그 블로그 글을 소개합니다.
+
+  · 블로그 글과 상품 광고는 번갈아 나갑니다 (블로그를 올린 다음 회차는 상품).
+  · 한 번 소개한 글은 저장소(Blobs, euforia-threads 의 blog/state)에 적어 두어
+    다시 올리지 않습니다.
+  · 사진은 홈페이지 상품카드 사진을 씁니다.
+      ① 블로그 글 안에 홈페이지 상품 주소(/p/상품id)가 있으면 그 상품의 카드 사진
+      ② 없으면 블로그 제목과 가장 많이 겹치는 상품의 카드 사진
+      ③ 그래도 없으면 홈페이지 대표 사진(og-image.png)
+  · 블로그 아이디는 아래 「블로그기본」에 적습니다.
+    (설정 파일에 "blogId" 가 있거나, 넷리파이 환경변수 NAVER_BLOG_ID 가 있으면 그쪽이 먼저입니다)
+  · 블로그 소개를 잠시 끄려면 설정 파일(data/threads-auto.json)에 "blog": false 를 넣으면 됩니다.
+  ===========================================================
+*/
+const 블로그기본 = 'euforia-spain';
+const 블로그며칠 = 7;
+
+function 블로그아이디(cfg) {
+  return String((cfg && cfg.blogId) || process.env.NAVER_BLOG_ID || 블로그기본 || '').trim().replace(/^__.*__$/, '');
+}
+
+function 풀기(s) {
+  return String(s || '')
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+    .replace(/\s+/g, ' ').trim();
+}
+
+/* 블로그 RSS 에서 아직 소개하지 않은 가장 오래된 새 글 하나 */
+async function 블로그새글(id, 올린것) {
+  const r = await fetch('https://rss.blog.naver.com/' + encodeURIComponent(id) + '.xml',
+    { headers: { 'User-Agent': 'Mozilla/5.0 (EuforiaTour Threads)' } });
+  if (!r.ok) throw new Error('블로그 RSS ' + r.status);
+  const x = await r.text();
+  const 기준 = Date.now() - 블로그며칠 * 86400000;
+  const 글들 = [];
+  x.replace(/<item>([\s\S]*?)<\/item>/g, function (_, b) {
+    const 칸 = function (n) { const m = b.match(new RegExp('<' + n + '[^>]*>([\\s\\S]*?)</' + n + '>')); return m ? m[1] : ''; };
+    const 주소 = 풀기(칸('guid') || 칸('link')).split('?')[0];
+    글들.push({ 제목: 풀기(칸('title')), 주소: 주소, 요약: 풀기(칸('description')), 때: Date.parse(풀기(칸('pubDate'))) || 0 });
+    return '';
+  });
+  return 글들
+    .filter(function (g) { return g.주소 && g.제목 && g.때 >= 기준 && (올린것 || []).indexOf(g.주소) === -1; })
+    .sort(function (a, b) { return a.때 - b.때; })[0] || null;
+}
+
+/* products.js → [{id, title, 사진}] */
+async function 상품표() {
+  try {
+    const r = await fetch(SITE() + '/products.js?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) return [];
+    const s = await r.text();
+    const i = s.indexOf('['), j = s.indexOf('\n];');
+    if (i < 0 || j < 0) return [];
+    return JSON.parse(s.slice(i, j + 2)).map(function (p) {
+      return { id: p.id, title: String(p.title || ''), 사진: String(p['카드사진'] || '').trim() };
+    }).filter(function (p) { return p.id && p.사진 && !/\s/.test(p.사진); });
+  } catch (e) { return []; }
+}
+
+/* 블로그 글에 맞는 상품카드 사진 고르기 */
+async function 블로그사진(id, 글) {
+  const 상품 = await 상품표();
+  const 찾기 = function (pid) { return 상품.find(function (p) { return p.id === pid; }); };
+  /* ① 글 안의 홈페이지 상품 주소 */
+  const no = (글.주소.match(/\/(\d+)$/) || [])[1];
+  if (no) {
+    try {
+      const r = await fetch('https://blog.naver.com/PostView.naver?blogId=' + encodeURIComponent(id) + '&logNo=' + no,
+        { headers: { 'User-Agent': 'Mozilla/5.0 (EuforiaTour Threads)' } });
+      const h = r.ok ? await r.text() : '';
+      const re = /toureplus\.co\.kr(?:%2F|\/)p(?:%2F|\/)([A-Za-z0-9-]+)/gi;
+      let m;
+      while ((m = re.exec(h))) { const p = 찾기(m[1]); if (p) return { 사진: p.사진, 상품: p.id, 근거: '글 안 상품 링크' }; }
+    } catch (e) { /* 못 읽으면 아래로 */ }
+  }
+  /* ② 제목 낱말이 가장 많이 겹치는 상품 */
+  const 낱말 = (글.제목 + ' ' + 글.요약.slice(0, 200)).split(/[^가-힣A-Za-z]+/).filter(function (w) { return w.length >= 2; });
+  let 최고 = null, 점수 = 0;
+  상품.forEach(function (p) {
+    const n = 낱말.filter(function (w) { return p.title.indexOf(w) !== -1; }).length;
+    if (n > 점수) { 점수 = n; 최고 = p; }
+  });
+  if (최고) return { 사진: 최고.사진, 상품: 최고.id, 근거: '제목 낱말 ' + 점수 + '개 겹침' };
+  /* ③ 대표 사진 */
+  return { 사진: '/og-image.png', 상품: '', 근거: '대표 사진' };
+}
+
+function 블로그글(글) {
+  const 요약 = 글.요약.length > 110 ? 글.요약.slice(0, 110).replace(/\s+\S*$/, '') + '…' : 글.요약;
+  const t = '📝 블로그 새 글\n' + 글.제목 + '\n\n' + 요약 + '\n\n👉 ' + 글.주소 + '\n\n#유포리아투어 #스페인여행';
+  return t.length > 500 ? t.slice(0, 500) : t;
+}
+
+async function 블로그기록읽기(창고) {
+  try { return (await 창고.get('blog/state', { type: 'json' })) || { posted: [], last: '' }; }
+  catch (e) { return { posted: [], last: '' }; }
+}
+async function 블로그기록쓰기(창고, 기록) {
+  try { 기록.posted = (기록.posted || []).slice(-60); await 창고.setJSON('blog/state', 기록); }
+  catch (e) { console.error('[쓰레드 자동] 블로그 기록 저장 실패:', e.message); }
+}
+
 function imageUrl(image) {
   const v = String(image || '').trim();
   if (!v) return '';
@@ -290,6 +402,38 @@ exports.handler = async function (event) {
     }
   }
 
+  /* ---------- 블로그 새 글이 있으면 이번 회차는 블로그 소개 (상품과 번갈아) ---------- */
+  const 블로그 = 블로그아이디(cfg);
+  const 블로그창고 = (블로그 && cfg.blog !== false) ? 자리창고(event) : null;
+  let 블로그상태 = null;
+  if (블로그창고) {
+    블로그상태 = await 블로그기록읽기(블로그창고);
+    if (블로그상태.last !== 'blog' || q.blog) {
+      let 글 = null;
+      try { 글 = await 블로그새글(블로그, 블로그상태.posted); }
+      catch (e) { console.error('[쓰레드 자동] 블로그 RSS 확인 실패:', e.message); }
+      if (글) {
+        const 사진 = await 블로그사진(블로그, 글);
+        const bItem = { text: 블로그글(글), image: 사진.사진 };
+        const bPreview = { 현지: now, 종류: '블로그 새 글', 제목: 글.제목, 주소: 글.주소,
+          사진: imageUrl(사진.사진) + '  (' + 사진.근거 + (사진.상품 ? ' · ' + 사진.상품 : '') + ')', 본문: bItem.text };
+        if (dry) return json(200, { dryRun: true, 올릴내용: bPreview });
+        const 먼저b = await 이미올렸나(bItem.text, 3);
+        if (먼저b) return json(200, { skipped: '같은 블로그 소개를 3시간 안에 이미 올렸습니다 (중복 방지)', 기존글: 먼저b.id });
+        try {
+          const rb = await publish(bItem);
+          if (rb && rb.dup) return json(200, { skipped: '올리는 사이 같은 글이 먼저 올라가 멈췄습니다 (중복 방지)', 기존글: rb.dup });
+          블로그상태.posted = (블로그상태.posted || []).concat([글.주소]);
+          블로그상태.last = 'blog';
+          await 블로그기록쓰기(블로그창고, 블로그상태);
+          return json(200, { ok: true, id: rb && rb.id, 올린내용: bPreview });
+        } catch (e) {
+          console.error('[쓰레드 자동] 블로그 소개 발행 실패, 상품으로 넘어갑니다:', e.message);
+        }
+      }
+    }
+  }
+
   /* ---------- 사진이 빈 항목은 상품카드 사진으로 채웁니다 ---------- */
   if ((cfg.items || []).some(function (it) { return it && !String(it.image || '').trim(); })) {
     const cards = await cardPhotos();
@@ -340,6 +484,7 @@ exports.handler = async function (event) {
     const r = await publish(item);
     if (r && r.dup) return json(200, { skipped: '올리는 사이 같은 글이 먼저 올라가 멈췄습니다 (중복 방지)', 기존글: r.dup, 올리려던내용: preview });
     const id = r && r.id;
+    if (블로그창고 && 블로그상태 && 블로그상태.last !== 'product') { 블로그상태.last = 'product'; await 블로그기록쓰기(블로그창고, 블로그상태); }
     return json(200, { ok: true, id: id, 올린내용: preview });
   } catch (e) {
     return json(200, { error: '발행에 실패했습니다', detail: e.message, 올리려던내용: preview });
