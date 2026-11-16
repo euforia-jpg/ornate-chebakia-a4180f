@@ -100,6 +100,12 @@ function 지도주소(u) {
 }
 
 /* 손님이 보낸 예약을 정리합니다 — 모르는 칸은 버리고, 길이를 자릅니다 */
+function 하루더(s, n) {
+  const d = new Date(s + 'T12:00:00Z');
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
 function 다듬기(b, 예전) {
   예전 = 예전 || {};
   const o = {
@@ -143,8 +149,15 @@ function 다듬기(b, 예전) {
       cur: (p && p.cur === 'KRW') ? 'KRW' : 'EUR',
       due: 날짜(p && p.due),
       paid: !!(p && p.paid),
+      auto: !!(p && p.auto),
     };
   }).filter(function (p) { return p.label || p.amount; });
+  /* 입금 기한을 비워 두면 — 예약금 30% = 이용 7일 전, 잔금 70% = 이용 당일 (2026-11) */
+  o.pay.forEach(function (p) {
+    if (p.due || !o.start) return;
+    if (/30\s*%|예약금/.test(p.label)) { p.due = 하루더(o.start, -7); p.auto = true; }
+    else if (/70\s*%|잔금/.test(p.label)) { p.due = o.start; p.auto = true; }
+  });
   return o;
 }
 
