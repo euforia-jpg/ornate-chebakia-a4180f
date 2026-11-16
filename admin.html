@@ -687,6 +687,7 @@
   .bk-h{ font-size:14px; color:var(--navy); margin:22px 0 10px; }
   .bk-h span{ font-size:11.5px; color:var(--muted); font-weight:600; margin-left:8px; }
   .bk-tbl{ min-width:760px; }
+  .bk-tbl tr.c1 td:not(.act){ border-bottom:none; }
   .bk-tbl textarea{ width:100%; padding:7px 9px; border:1.5px solid var(--line); border-radius:8px; font:inherit; font-size:12.5px; resize:vertical; outline:none; }
   .bk-tbl textarea:focus{ border-color:var(--violet); }
   .bk-acts{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:10px; }
@@ -5277,7 +5278,7 @@
   function bkNew(){
     if(bkDirty && !confirm('저장하지 않은 변경이 있습니다. 그래도 새 예약을 만들까요?')) return;
     bkCur = { code:'', status:1, surname:'', name:'', people:'', start:'', end:'', product:'', productUrl:'', notice:'',
-              email:'', phone:'', memo:'', days:[], docs:[], msgs:[],
+              email:'', phone:'', memo:'', days:[], cars:[], docs:[], msgs:[],
               pay:[ { label:'예약금 30%', amount:'', cur:'EUR', due:'', paid:false, auto:true },
                     { label:'잔금 70%', amount:'', cur:'EUR', due:'', paid:false, auto:true } ] };
     bkUrl = ''; bkClosed = '';
@@ -5350,6 +5351,20 @@
       }).join('') : '<tr><td colspan="6" class="empty" style="padding:16px">아직 일정이 없습니다.</td></tr>') +
       '</tbody></table></div><div class="bk-acts"><button type="button" class="btn sm" data-act="addDay">＋ 하루 추가</button>' +
       '<button type="button" class="btn sm" data-act="fillDays">여행 날짜로 하루씩 채우기</button></div>');
+
+    /* 기사 · 차량 */
+    h.push('<h3 class="bk-h">기사 · 차량 <span>손님 화면에 그대로 나옵니다 · 비워 두면 손님 화면에 이 칸이 나오지 않습니다</span></h3><div class="tbl-wrap"><table class="bk-tbl"><thead><tr>' +
+      '<th>날짜 · 구간</th><th>기사 이름</th><th>연락처</th><th>차량</th><th style="width:110px">번호판</th><th style="width:40px"></th></tr></thead><tbody>' +
+      ((b.cars || []).length ? b.cars.map(function(c, i){
+        return '<tr class="c1"><td><input data-c="' + i + '" data-ck="when" value="' + esc(c.when) + '" placeholder="예) 전 일정 · 12/18~20"></td>' +
+          '<td><input data-c="' + i + '" data-ck="name" value="' + esc(c.name) + '" placeholder="예) Carlos"></td>' +
+          '<td><input data-c="' + i + '" data-ck="phone" value="' + esc(c.phone) + '" placeholder="+34 6xx xxx xxx"></td>' +
+          '<td><input data-c="' + i + '" data-ck="car" value="' + esc(c.car) + '" placeholder="예) 벤츠 V클래스 · 검정"></td>' +
+          '<td><input data-c="' + i + '" data-ck="plate" value="' + esc(c.plate) + '" placeholder="1234 ABC"></td>' +
+          '<td class="act" rowspan="2"><button type="button" class="icon-btn" data-delc="' + i + '" title="이 기사 · 차량 지우기">✕</button></td></tr>' +
+          '<tr><td colspan="5" style="padding-top:0"><input data-c="' + i + '" data-ck="note" value="' + esc(c.note) + '" placeholder="손님께 드릴 메모 (선택) — 예) 공항 도착층 출구에서 이름표를 들고 기다립니다 · 한국어 조금 가능"></td></tr>';
+      }).join('') : '<tr><td colspan="6" class="empty" style="padding:16px">아직 배정된 기사 · 차량이 없습니다.</td></tr>') +
+      '</tbody></table></div><div class="bk-acts"><button type="button" class="btn sm" data-act="addCar">＋ 기사 · 차량 추가</button></div>');
 
     /* 결제 */
     h.push('<h3 class="bk-h">결제 <span>기한을 비워 두면 예약금 30% = 이용 7일 전, 잔금 70% = 이용 당일로 자동으로 들어갑니다</span></h3><div class="tbl-wrap"><table class="bk-tbl"><thead><tr>' +
@@ -5501,6 +5516,7 @@
       return;
     }
     if(t.dataset.d !== undefined && t.dataset.dk){ bkCur.days[+t.dataset.d][t.dataset.dk] = t.value; bkSetDirty(true); return; }
+    if(t.dataset.c !== undefined && t.dataset.ck){ bkCur.cars[+t.dataset.c][t.dataset.ck] = t.value; bkSetDirty(true); return; }
     if(t.dataset.p !== undefined && t.dataset.pk){
       bkCur.pay[+t.dataset.p][t.dataset.pk] = t.type === 'checkbox' ? t.checked : t.value;
       if(t.dataset.pk === 'due') bkCur.pay[+t.dataset.p].auto = false;   /* 손으로 고친 기한은 그대로 둡니다 */
@@ -5522,12 +5538,14 @@
     var a = t.dataset.act;
     if(t.dataset.step !== undefined){ bkCur.status = +t.dataset.step; bkSetDirty(true); bkRenderEd(); return; }
     if(t.dataset.deld !== undefined){ bkCur.days.splice(+t.dataset.deld, 1); bkSetDirty(true); bkRenderEd(); return; }
+    if(t.dataset.delc !== undefined){ bkCur.cars.splice(+t.dataset.delc, 1); bkSetDirty(true); bkRenderEd(); return; }
     if(t.dataset.delp !== undefined){ bkCur.pay.splice(+t.dataset.delp, 1); bkSetDirty(true); bkRenderEd(); return; }
     if(t.dataset.dl){ bkDownload(t.dataset.dl); return; }
     if(t.dataset.deldoc){ if(confirm('이 서류를 지울까요? 되돌릴 수 없습니다.')) bkSimple({ action:'docDel', id:t.dataset.deldoc }, '서류를 지웠습니다.'); return; }
     if(a === 'save') bkSave();
     if(a === 'addDay'){ (bkCur.days = bkCur.days || []).push({ date:'', title:'', desc:'', meet:'', map:'' }); bkSetDirty(true); bkRenderEd(); }
     if(a === 'fillDays') bkFill();
+    if(a === 'addCar'){ (bkCur.cars = bkCur.cars || []).push({ when:'전 일정', name:'', phone:'', car:'', plate:'', note:'' }); bkSetDirty(true); bkRenderEd(); }
     if(a === 'addPay'){ (bkCur.pay = bkCur.pay || []).push({ label:'', amount:'', cur:'EUR', due:'', paid:false }); bkSetDirty(true); bkRenderEd(); }
     if(a === 'copy') bkCopy(bkUrl, '손님 전용 링크를 복사했습니다.');
     if(a === 'kakao') bkCopy('[유포리아투어] ' + (bkCur.surname || '') + ' 님, 예약 확인 페이지를 보내 드립니다.\n' +

@@ -8,11 +8,6 @@
 <title>예약 확인 — 유포리아투어</title>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&family=Cormorant+Garamond:wght@500;600&display=swap">
 <!--
   손님 전용 예약 페이지 — https://toureplus.co.kr/my/<링크열쇠>
   _redirects 의 「/my/*  /my.html  200」 규칙으로 이 파일이 열립니다.
@@ -26,10 +21,9 @@
   :root{
     --ink:#1F2328; --muted:#77706A; --line:#E7E0D7; --paper:#FFFFFF; --bg:#F3EFE9;
     --coral:#D9575F; --coral-soft:#FBEDEB; --ok:#2F7D5B; --wait:#B4561D;
-    --serif:'Noto Serif KR','Noto Serif CJK KR','Cormorant Garamond',serif;
-    --latin:'Cormorant Garamond','Noto Serif KR',serif;
-    --sans:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
-    --mono:'SF Mono','Menlo','Consolas',monospace;
+    /* 글꼴은 전부 맑은 고딕 (2026-11) — 맑은 고딕이 없는 아이폰 · 맥은 애플 고딕으로 보입니다 */
+    --sans:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    --serif:var(--sans); --latin:var(--sans); --mono:var(--sans);
   }
   *{ box-sizing:border-box; }
   html{ font-synthesis:none; -webkit-text-size-adjust:100%; }
@@ -62,7 +56,7 @@
   .day{ display:grid; grid-template-columns:58px 1fr; gap:12px; padding:13px 0; border-top:1px solid var(--line); }
   .day:first-child{ border-top:none; padding-top:2px; }
   .dd{ font-family:var(--latin); line-height:1.1; }
-  .dd b{ display:block; font-size:24px; font-weight:600; }
+  .dd b{ display:block; font-size:21px; font-weight:700; }
   .dd small{ font-family:var(--sans); font-size:11px; color:var(--muted); letter-spacing:.3px; }
   .dt{ font-weight:700; font-size:15px; }
   .dt em{ font-style:normal; font-weight:500; color:var(--muted); font-size:12px; margin-right:6px; }
@@ -76,7 +70,7 @@
   .pay .l b{ display:block; font-weight:600; }
   .pay .l small{ color:var(--muted); font-size:12.5px; }
   .pay .r{ text-align:right; white-space:nowrap; }
-  .amt{ font-family:var(--latin); font-size:21px; font-weight:600; line-height:1.2; }
+  .amt{ font-family:var(--latin); font-size:18px; font-weight:700; line-height:1.3; }
   .krw{ display:block; font-size:12px; color:var(--muted); } .krw:empty{ display:none; }
   .st{ display:inline-block; margin-top:3px; font-size:12px; font-weight:700; }
   .st.ok{ color:var(--ok); } .st.no{ color:var(--wait); }
@@ -86,7 +80,7 @@
   .acc{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:9px 0; border-bottom:1px dashed var(--line); }
   .acc:last-child{ border-bottom:none; }
   .acc .n{ font-size:12.5px; color:var(--muted); }
-  .acc .v{ font-family:var(--mono); font-size:13px; letter-spacing:-.2px; font-weight:600; word-break:break-all; }
+  .acc .v{ font-family:var(--mono); font-size:14px; letter-spacing:0; font-weight:600; word-break:break-all; }
   .acc .o{ font-size:11.5px; color:var(--muted); }
   .cp{ all:unset; cursor:pointer; font-size:12px; font-weight:700; color:var(--ink); border:1px solid var(--ink); border-radius:999px; padding:4px 11px; white-space:nowrap; }
   .small{ font-size:12.5px; color:var(--muted); margin-top:10px; }
@@ -124,15 +118,29 @@
   .spin{ width:26px; height:26px; border:2px solid var(--line); border-top-color:var(--coral); border-radius:50%; margin:90px auto 12px; animation:sp .9s linear infinite; }
   @keyframes sp{ to{ transform:rotate(360deg); } }
 
+  /* 기사 · 차량 (2026-11) */
+  .car{ padding:14px 0; border-top:1px solid var(--line); }
+  .car:first-child{ border-top:none; padding-top:2px; }
+  .car .w{ font-size:12px; font-weight:700; color:var(--coral); margin-bottom:6px; }
+  .car .p{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .car .p b{ font-size:16px; font-weight:700; }
+  .car .p small{ display:block; color:var(--muted); font-size:13px; }
+  .car .bt{ display:flex; flex-direction:column; gap:6px; align-items:stretch; }
+  .car .bt a{ display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:700; text-decoration:none; border:1px solid var(--ink); border-radius:999px; padding:5px 11px; white-space:nowrap; justify-content:center; }
+  .car .bt a.wa{ border-color:#1F9D55; color:#1F7A44; }
+  .car .v{ display:flex; gap:10px; align-items:center; margin-top:10px; padding:10px 12px; background:#F7F4EF; border-radius:6px; font-size:14px; }
+  .car .pl{ display:inline-block; border:1.5px solid var(--ink); border-radius:4px; padding:0 7px; font-weight:700; letter-spacing:1px; font-size:13.5px; background:#fff; white-space:nowrap; }
+  .car .nt{ margin-top:8px; font-size:13.5px; color:#4c4741; white-space:pre-line; }
+
   /* ====================== 예약 확정서 모양 (2026-11 확정) ====================== */
   .th-a .sheet{ background:var(--paper); margin:14px 12px; border-radius:4px; box-shadow:0 1px 0 #E2D9CE, 0 18px 40px -30px rgba(60,40,20,.35); }
   .th-a .hd{ padding:22px 22px 20px; border-bottom:1px solid var(--line); position:relative; }
   .th-a .hd::before{ content:''; position:absolute; left:0; right:0; top:0; height:4px; background:var(--coral); border-radius:4px 4px 0 0; }
   .th-a .hd-top{ display:flex; justify-content:space-between; align-items:center; }
   .th-a .lg{ height:42px; width:auto; }
-  .th-a .doc-t{ text-align:right; font-family:var(--latin); font-size:12px; letter-spacing:2px; color:var(--muted); line-height:1.3; }
+  .th-a .doc-t{ text-align:right; font-family:var(--latin); font-size:11px; letter-spacing:1.5px; color:var(--muted); line-height:1.3; }
   .th-a .doc-t b{ display:block; font-family:var(--serif); letter-spacing:0; font-size:13px; color:var(--ink); }
-  .th-a h1{ font-family:var(--serif); font-weight:700; font-size:25px; letter-spacing:-.4px; margin:22px 0 4px; }
+  .th-a h1{ font-family:var(--serif); font-weight:700; font-size:20px; letter-spacing:-.3px; margin:20px 0 4px; }
   .th-a h1 span{ color:var(--coral); }
   .th-a .sub{ color:var(--muted); font-size:14px; margin:0 0 16px; }
   .th-a .sec + .sec{ border-top:1px solid var(--line); }
@@ -165,6 +173,7 @@
     chat:'<path d="M21 12c0 4-4 7-9 7a11 11 0 0 1-2.6-.3L4.5 20.5l1-3.6A6.7 6.7 0 0 1 3 12c0-4 4-7 9-7s9 3 9 7z"/>',
     phone:'<path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5z"/>',
     mail:'<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.6 7l8.4 6 8.4-6"/>',
+    car:'<path d="M5 16.5h14M4 16.5V12l2-5h12l2 5v4.5"/><path d="M4 12h16"/><circle cx="7.5" cy="16.5" r="1.8"/><circle cx="16.5" cy="16.5" r="1.8"/>',
     arrow:'<path d="M9 6l6 6-6 6"/>'
   };
   function ic(n){ return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">' + 선[n] + '</svg>'; }
@@ -182,6 +191,14 @@
   function 시각(iso){
     try { var d = new Date(iso), t = new Date(), hm = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
           return d.toDateString() === t.toDateString() ? '오늘 ' + hm : (d.getMonth()+1) + '/' + d.getDate() + ' ' + hm; } catch(e){ return ''; }
+  }
+
+  /* 기사 연락처 — 전화 · 왓츠앱 (스페인 휴대폰 9자리는 +34 를 붙입니다) */
+  function 번호(s){
+    var d = String(s || '').replace(/[^\d+]/g, '');
+    if(d.indexOf('00') === 0) d = '+' + d.slice(2);
+    if(/^[67]\d{8}$/.test(d)) d = '+34' + d;
+    return d;
   }
 
   /* 입금 기한 — 비어 있으면 예약금 30% = 이용 7일 전, 잔금 70% = 이용 당일 */
@@ -241,6 +258,17 @@
           '<div><div class="dt"><em>' + (i+1) + '일차</em>' + esc(d.title || '') + '</div>' + (d.desc ? '<div class="dx">' + esc(d.desc) + '</div>' : '') +
           (d.meet || d.map ? '<div class="meet">' + ic('pin') + '<div>' + esc(d.meet || '') + (d.map ? (d.meet ? '<br>' : '') + '<a href="' + esc(d.map) + '" target="_blank" rel="noopener">지도에서 보기</a>' : '') + '</div></div>' : '') + '</div></div>';
       }).join('') + (b.days.length > 3 ? '<button class="more" id="more">' + (다보기 ? '접기' : '전체 일정 보기 (' + b.days.length + '일)') + '</button>' : '')));
+    }
+
+    if((b.cars || []).length){
+      h.push(칸('기사 · 차량', b.cars.map(function(c){
+        var 전 = 번호(c.phone), wa = 전.replace(/\D/g, '');
+        return '<div class="car">' + (c.when ? '<div class="w">' + esc(c.when) + '</div>' : '') +
+          '<div class="p"><div><b>' + esc(c.name || '배정 기사') + '</b><small>전용 차량 기사' + (c.phone ? ' · ' + esc(c.phone) : '') + '</small></div>' +
+          (전 ? '<div class="bt"><a href="tel:' + esc(전) + '">' + ic('phone') + '전화</a>' + (wa.length >= 10 ? '<a class="wa" href="https://wa.me/' + wa + '" target="_blank" rel="noopener">' + ic('chat') + 'WhatsApp</a>' : '') + '</div>' : '') + '</div>' +
+          (c.car || c.plate ? '<div class="v">' + ic('car') + '<span>' + esc(c.car || '') + '</span>' + (c.plate ? '<span class="pl">' + esc(c.plate) + '</span>' : '') + '</div>' : '') +
+          (c.note ? '<div class="nt">' + esc(c.note) + '</div>' : '') + '</div>';
+      }).join('') + '<div class="small">기사님 연락이 닿지 않으면 카카오톡으로 알려 주세요. 바로 연결해 드립니다.</div>'));
     }
 
     if((b.pay || []).length){
