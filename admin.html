@@ -5278,8 +5278,8 @@
     if(bkDirty && !confirm('저장하지 않은 변경이 있습니다. 그래도 새 예약을 만들까요?')) return;
     bkCur = { code:'', status:1, surname:'', name:'', people:'', start:'', end:'', product:'', productUrl:'', notice:'',
               email:'', phone:'', memo:'', days:[], docs:[], msgs:[],
-              pay:[ { label:'예약금 30%', amount:'', cur:'EUR', due:'', paid:false },
-                    { label:'잔금 70%', amount:'', cur:'EUR', due:'', paid:false } ] };
+              pay:[ { label:'예약금 30%', amount:'', cur:'EUR', due:'', paid:false, auto:true },
+                    { label:'잔금 70%', amount:'', cur:'EUR', due:'', paid:false, auto:true } ] };
     bkUrl = ''; bkClosed = '';
     bkSetDirty(true); bkRenderEd(); bkRenderList();
     setTimeout(function(){ var f = document.querySelector('#bkEd [data-k="surname"]'); if(f) f.focus(); }, 50);
@@ -5352,7 +5352,7 @@
       '<button type="button" class="btn sm" data-act="fillDays">여행 날짜로 하루씩 채우기</button></div>');
 
     /* 결제 */
-    h.push('<h3 class="bk-h">결제 <span>금액 · 기한 · 입금 확인이 손님 화면에 나옵니다</span></h3><div class="tbl-wrap"><table class="bk-tbl"><thead><tr>' +
+    h.push('<h3 class="bk-h">결제 <span>기한을 비워 두면 예약금 30% = 이용 7일 전, 잔금 70% = 이용 당일로 자동으로 들어갑니다</span></h3><div class="tbl-wrap"><table class="bk-tbl"><thead><tr>' +
       '<th>구분</th><th style="width:130px">금액</th><th style="width:90px">통화</th><th style="width:150px">기한</th><th style="width:90px">입금 확인</th><th style="width:40px"></th></tr></thead><tbody>' +
       (b.pay || []).map(function(p, i){
         return '<tr><td><input data-p="' + i + '" data-pk="label" value="' + esc(p.label) + '"></td>' +
@@ -5387,6 +5387,20 @@
     }
     ed.innerHTML = h.join('');
     var ms = $('bkMsgs'); if(ms) ms.scrollTop = ms.scrollHeight;
+  }
+
+  /* 입금 기한 자동 — 예약금 30% = 이용 7일 전, 잔금 70% = 이용 당일 (기한을 손으로 고친 줄은 건드리지 않음) */
+  function bkAutoDue(){
+    if(!bkCur || !/^\d{4}-\d{2}-\d{2}$/.test(bkCur.start || '')) return;
+    var 전 = new Date(bkCur.start + 'T12:00:00Z'); 전.setUTCDate(전.getUTCDate() - 7);
+    var 칠일전 = 전.toISOString().slice(0, 10);
+    (bkCur.pay || []).forEach(function(p, i){
+      if(p.due && !p.auto) return;
+      var d = /30\s*%|예약금/.test(p.label || '') ? 칠일전 : /70\s*%|잔금/.test(p.label || '') ? bkCur.start : '';
+      if(!d) return;
+      p.due = d; p.auto = true;
+      var inp = document.querySelector('#bkEd [data-p="' + i + '"][data-pk="due"]'); if(inp) inp.value = d;
+    });
   }
 
   function bkSave(){
@@ -5481,10 +5495,17 @@
   });
   $('bkEd').addEventListener('input', function(e){
     var t = e.target; if(!bkCur) return;
-    if(t.dataset.k){ bkCur[t.dataset.k] = t.value; bkSetDirty(true); return; }
+    if(t.dataset.k){
+      bkCur[t.dataset.k] = t.value; bkSetDirty(true);
+      if(t.dataset.k === 'start') bkAutoDue();
+      return;
+    }
     if(t.dataset.d !== undefined && t.dataset.dk){ bkCur.days[+t.dataset.d][t.dataset.dk] = t.value; bkSetDirty(true); return; }
     if(t.dataset.p !== undefined && t.dataset.pk){
-      bkCur.pay[+t.dataset.p][t.dataset.pk] = t.type === 'checkbox' ? t.checked : t.value; bkSetDirty(true); return;
+      bkCur.pay[+t.dataset.p][t.dataset.pk] = t.type === 'checkbox' ? t.checked : t.value;
+      if(t.dataset.pk === 'due') bkCur.pay[+t.dataset.p].auto = false;   /* 손으로 고친 기한은 그대로 둡니다 */
+      if(t.dataset.pk === 'label') bkAutoDue();
+      bkSetDirty(true); return;
     }
   });
   $('bkEd').addEventListener('change', function(e){
