@@ -657,6 +657,51 @@
   .st-note b{ color:var(--navy); }
   .st-note code{ background:#fff; border:1px solid var(--line); border-radius:6px;
     padding:2px 6px; font-size:12px; word-break:break-all; }
+  /* ---------- 예약 관리 (2026-11) ---------- */
+  .bk-wrap{ display:grid; grid-template-columns:340px 1fr; gap:16px; align-items:start; }
+  @media (max-width:980px){ .bk-wrap{ grid-template-columns:1fr; } }
+  .bk-wrap .card{ margin-bottom:0; }
+  .bk-row{ border:2px solid var(--line); border-radius:12px; padding:11px 13px; margin-bottom:8px; cursor:pointer; background:#fff; }
+  .bk-row:hover{ border-color:#cfc6f5; }
+  .bk-row.on{ border-color:var(--violet); background:#FAF8FF; }
+  .bk-row .t{ display:flex; justify-content:space-between; gap:8px; font-weight:800; font-size:13.5px; }
+  .bk-row .t i{ font-style:normal; font-weight:600; color:var(--muted); font-size:12px; }
+  .bk-row .s{ color:var(--muted); font-size:12px; margin-top:3px; line-height:1.5; }
+  .bk-new{ color:var(--pink); white-space:nowrap; } .bk-lock{ color:var(--danger); white-space:nowrap; }
+  .bk-pill{ font-size:10.5px; font-weight:800; border-radius:999px; padding:2px 8px; white-space:nowrap; background:#f0f0f0; color:#777; }
+  .bk-pill.s0{ background:#eef0ff; color:#4b56c9; } .bk-pill.s1{ background:#efeaff; color:var(--violet); }
+  .bk-pill.s2{ background:#fff1e6; color:#c45500; } .bk-pill.s3{ background:#e9f6ff; color:#1772b3; }
+  .bk-pill.s4{ background:#e8fbf7; color:#0a8a77; }
+  .bk-link{ background:var(--navy); color:#fff; border-radius:14px; padding:14px 16px; margin-bottom:16px; }
+  .bk-link.off{ background:#F5F3FE; color:var(--muted); font-weight:700; font-size:12.5px; }
+  .bk-link .u{ font-family:'Menlo','Consolas',monospace; font-size:12.5px; background:rgba(255,255,255,.1); padding:8px 10px; border-radius:8px; margin:8px 0; word-break:break-all; }
+  .bk-link .b{ display:flex; gap:6px; flex-wrap:wrap; }
+  .bk-link .b button{ all:unset; cursor:pointer; background:rgba(255,255,255,.14); border-radius:8px; padding:7px 11px; font-weight:800; font-size:12px; }
+  .bk-link .b button:hover{ background:rgba(255,255,255,.26); }
+  .bk-link .i{ font-size:11.5px; opacity:.72; margin-top:9px; line-height:1.6; }
+  .bk-link .warn{ color:#ffb4c6; font-weight:800; opacity:1; }
+  .bk-steps{ display:flex; gap:5px; margin:0 0 16px; }
+  .bk-steps button{ all:unset; cursor:pointer; flex:1; text-align:center; padding:8px 2px; border-radius:9px; font-size:12px; font-weight:800; background:#f1effa; color:var(--muted); }
+  .bk-steps button.d{ background:var(--teal); color:#fff; } .bk-steps button.n{ background:var(--violet); color:#fff; }
+  .bk-grid{ grid-template-columns:repeat(2,1fr); margin-bottom:6px; }
+  .bk-h{ font-size:14px; color:var(--navy); margin:22px 0 10px; }
+  .bk-h span{ font-size:11.5px; color:var(--muted); font-weight:600; margin-left:8px; }
+  .bk-tbl{ min-width:760px; }
+  .bk-tbl textarea{ width:100%; padding:7px 9px; border:1.5px solid var(--line); border-radius:8px; font:inherit; font-size:12.5px; resize:vertical; outline:none; }
+  .bk-tbl textarea:focus{ border-color:var(--violet); }
+  .bk-acts{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:10px; }
+  .bk-acts select{ padding:7px 10px; border:1.5px solid var(--line); border-radius:9px; font:inherit; font-size:12.5px; }
+  .bk-doc{ display:flex; gap:8px; align-items:center; padding:8px 0; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .bk-doc span{ flex:1; min-width:180px; font-weight:700; } .bk-doc span i{ font-style:normal; color:var(--muted); font-weight:600; font-size:11.5px; }
+  .bk-doc select{ padding:6px 9px; border:1.5px solid var(--line); border-radius:8px; font:inherit; font-size:12px; }
+  .bk-msgs{ max-height:340px; overflow-y:auto; border:1.5px solid var(--line); border-radius:12px; padding:10px; background:#fff; }
+  .bk-msg{ border-radius:10px; padding:9px 11px; margin-bottom:7px; white-space:pre-wrap; word-break:break-word; font-size:13px; }
+  .bk-msg b{ display:block; font-size:11px; margin-bottom:2px; }
+  .bk-msg.g{ background:#faf8ff; margin-right:60px; } .bk-msg.g b{ color:var(--violet); }
+  .bk-msg.o{ background:#f1f9f7; margin-left:60px; } .bk-msg.o b{ color:#0a8a77; }
+  .bk-reply{ display:flex; gap:8px; margin-top:8px; align-items:flex-end; }
+  .bk-reply textarea{ flex:1; padding:10px 12px; border:2px solid var(--line); border-radius:10px; font:inherit; font-size:13px; resize:vertical; outline:none; }
+  .bk-reply textarea:focus{ border-color:var(--violet); }
 </style>
 </head>
 <body>
@@ -691,6 +736,7 @@
     <button type="button" data-tab="threads">쓰레드 광고</button>
     <button type="button" data-tab="pages">페이지 갱신</button>
     <button type="button" data-tab="inbox">문의함<span class="tab-badge" id="ibBadge" hidden>0</span></button>
+    <button type="button" data-tab="bookings">예약 관리<span class="tab-badge" id="bkBadge" hidden>0</span></button>
     <button type="button" data-tab="stats">방문 통계</button>
     <button type="button" data-tab="deploy">배포 · 이력</button>
   </div>
@@ -1125,6 +1171,23 @@
       </div>
     </div>
 
+    <!-- ---------- 예약 관리 (손님 전용 링크) ---------- -->
+    <div class="panel" id="p-bookings">
+      <div class="bk-wrap">
+        <div class="card">
+          <h2>예약 목록 <span class="count" id="bkCount"></span></h2>
+          <div class="sub">예약마다 손님 전용 링크(toureplus.co.kr/my/…)가 만들어집니다. 손님은 그 링크로 일정 · 결제 · 서류를 보고 메시지를 남길 수 있습니다.</div>
+          <div class="bar">
+            <input type="search" id="bkSearch" placeholder="이름 · 예약코드 · 상품 찾기">
+            <button type="button" class="btn primary sm" id="bkNew">＋ 새 예약</button>
+            <button type="button" class="btn sm" id="bkReload">새로고침</button>
+          </div>
+          <div id="bkListBox"><div class="empty">불러오는 중…</div></div>
+        </div>
+        <div class="card" id="bkEd"></div>
+      </div>
+    </div>
+
     <!-- ---------- 방문 통계 ---------- -->
     <div class="panel" id="p-stats">
 
@@ -1308,6 +1371,7 @@
     $('app').hidden = false;
     loadTab('products');
     ntStart();          /* 새 문의 지켜보기 시작 */
+    bkPollStart();      /* 예약 손님 메시지 지켜보기 */
   }
 
   /* ---------------------------------------------------- 탭 */
@@ -1438,6 +1502,7 @@
     if(name === 'threads') renderThreads();
     if(name === 'pages') renderPages();
     if(name === 'inbox') renderInbox();
+    if(name === 'bookings') bkLoad();
     if(name === 'stats') renderStats();
   }
 
@@ -5125,6 +5190,348 @@
 
   /* ---------------------------------------------------- 연결 */
   $('loginBtn').addEventListener('click', login);
+  /* ====================================================================
+     예약 관리 — 손님 전용 링크(/my/…)로 손님과 같이 보는 예약 (2026-11)
+     --------------------------------------------------------------------
+     자료는 netlify/functions/booking.js 가 Netlify 저장소에 보관합니다.
+     GitHub 에 올라가지 않으므로 「저장」해도 다시 배포되지 않습니다.
+     ==================================================================== */
+  var BK_API = '/.netlify/functions/booking';
+  var BK_STEPS = ['문의','확정','잔금','출발 준비','여행 중','종료'];
+  var bkList = [], bkCur = null, bkUrl = '', bkClosed = '', bkDirty = false, bkBusy = false, bkPollT = null;
+
+  function bkCall(payload){
+    return fetch(BK_API, { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(Object.assign({ token: token }, payload || {})) })
+      .then(function(r){
+        if(r.status === 401){ logout(true); throw new Error('로그인이 필요합니다'); }
+        if(r.status === 404 && !payload.code && payload.action === 'list'){
+          return r.text().then(function(){ throw new Error('booking 함수를 찾지 못했습니다. netlify/functions/booking.js 가 올라갔는지 확인해 주세요.'); });
+        }
+        return r.json().catch(function(){ return { error:'응답을 읽지 못했습니다 (' + r.status + ')' }; })
+          .then(function(j){ if(!r.ok) throw new Error(j.error || ('오류 ' + r.status)); return j; });
+      });
+  }
+  function bkBadge(n){ var b = $('bkBadge'); if(!b) return; b.textContent = n; b.hidden = !n; }
+  function bkDay(s){ if(!/^\d{4}-\d{2}-\d{2}$/.test(s || '')) return ''; var p = s.split('-'); return (+p[1]) + '/' + (+p[2]); }
+  function bkWhen(iso){
+    if(!iso) return '';
+    try { var d = new Date(iso); return (d.getMonth()+1) + '/' + d.getDate() + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); }
+    catch(e){ return ''; }
+  }
+  function bkMoney(p){
+    if(!p.amount) return '';
+    return p.cur === 'KRW' ? Number(p.amount).toLocaleString('ko-KR') + '원' : '€ ' + Number(p.amount).toLocaleString('de-DE');
+  }
+  function bkSetDirty(on){
+    bkDirty = on;
+    var s = $('bkSave'); if(s) s.textContent = on ? '저장 *' : '저장';
+  }
+
+  function bkLoad(){
+    $('bkListBox').innerHTML = '<div class="empty">불러오는 중…</div>';
+    bkCall({ action:'list' }).then(function(j){
+      bkList = j.items || [];
+      bkBadge(j.unread || 0);
+      bkRenderList();
+      if(!bkCur && !$('bkEd').dataset.ready) bkRenderEd();
+    }).catch(function(e){ $('bkListBox').innerHTML = '<div class="empty">' + esc(e.message) + '</div>'; });
+  }
+
+  function bkRenderList(){
+    var q = ($('bkSearch').value || '').trim().toLowerCase();
+    var list = bkList.filter(function(b){
+      return !q || [b.code, b.surname, b.name, b.product].join(' ').toLowerCase().indexOf(q) !== -1;
+    });
+    $('bkCount').textContent = bkList.length ? bkList.length + '건' : '';
+    if(!list.length){
+      $('bkListBox').innerHTML = '<div class="empty">' + (bkList.length ? '찾는 예약이 없습니다.' : '아직 예약이 없습니다.<br>「＋ 새 예약」을 눌러 만들어 보세요.') + '</div>';
+      return;
+    }
+    $('bkListBox').innerHTML = list.map(function(b){
+      var 기간 = bkDay(b.start) + (b.end && b.end !== b.start ? '~' + bkDay(b.end) : '');
+      return '<div class="bk-row' + (bkCur && bkCur.code === b.code ? ' on' : '') + '" data-code="' + esc(b.code) + '">' +
+        '<div class="t"><span>' + esc(b.surname || '(이름 없음)') + (b.name ? ' <i>' + esc(b.name) + '</i>' : '') + '</span>' +
+        '<span class="bk-pill s' + b.status + '">' + esc(BK_STEPS[b.status] || '') + '</span></div>' +
+        '<div class="s">' + esc(b.code) + (기간 ? ' · ' + 기간 : '') + (b.product ? ' · ' + esc(b.product) : '') +
+        (b.unread ? ' <b class="bk-new">● 새 메시지 ' + b.unread + '</b>' : '') +
+        (b.locked ? ' <b class="bk-lock">링크 막힘</b>' : '') + '</div></div>';
+    }).join('');
+  }
+
+  function bkOpen(code){
+    if(bkDirty && !confirm('저장하지 않은 변경이 있습니다. 그래도 다른 예약을 열까요?')) return;
+    bkCall({ action:'get', code:code }).then(function(j){
+      bkCur = j.booking; bkUrl = j.url || ''; bkClosed = j.닫힘 || '';
+      bkSetDirty(false); bkRenderEd(); bkRenderList();
+      if(bkCur.unread){
+        bkCall({ action:'read', code:code }).then(function(){
+          bkList.forEach(function(b){ if(b.code === code) b.unread = 0; });
+          bkBadge(bkList.reduce(function(n, b){ return n + (b.unread || 0); }, 0));
+          bkRenderList();
+        }).catch(function(){});
+      }
+    }).catch(function(e){ toast(e.message, true); });
+  }
+
+  function bkNew(){
+    if(bkDirty && !confirm('저장하지 않은 변경이 있습니다. 그래도 새 예약을 만들까요?')) return;
+    bkCur = { code:'', status:1, surname:'', name:'', people:'', start:'', end:'', product:'', productUrl:'', notice:'',
+              email:'', phone:'', memo:'', days:[], docs:[], msgs:[],
+              pay:[ { label:'예약금 30%', amount:'', cur:'EUR', due:'', paid:false },
+                    { label:'잔금 70%', amount:'', cur:'EUR', due:'', paid:false } ] };
+    bkUrl = ''; bkClosed = '';
+    bkSetDirty(true); bkRenderEd(); bkRenderList();
+    setTimeout(function(){ var f = document.querySelector('#bkEd [data-k="surname"]'); if(f) f.focus(); }, 50);
+  }
+
+  function bkField(k, label, type, hint, full){
+    var v = bkCur[k] == null ? '' : bkCur[k];
+    var inner = type === 'textarea'
+      ? '<textarea data-k="' + k + '" rows="3">' + esc(v) + '</textarea>'
+      : '<input data-k="' + k + '" type="' + (type || 'text') + '" value="' + esc(v) + '">';
+    return '<div class="f' + (full ? ' full' : '') + '"><label>' + label + '</label>' + inner + (hint ? '<div class="hint">' + hint + '</div>' : '') + '</div>';
+  }
+
+  function bkRenderEd(){
+    var ed = $('bkEd'); ed.dataset.ready = '1';
+    if(!bkCur){
+      ed.innerHTML = '<div class="empty">왼쪽에서 예약을 고르거나 「＋ 새 예약」을 눌러 주세요.<br><br>' +
+        '예약을 저장하면 손님 전용 링크가 만들어집니다. 그 링크를 카카오톡이나 메일로 보내 드리면,<br>손님은 로그인 없이 일정 · 결제 · 서류를 보고 메시지를 남길 수 있습니다.</div>';
+      return;
+    }
+    var b = bkCur, h = [];
+    h.push('<div class="editor-head"><div><h2>' + (b.code ? esc(b.code) + ' · ' : '새 예약 · ') + esc(b.surname || '') + '</h2>' +
+           '<div class="id">' + esc(b.product || '') + '</div></div>' +
+           '<div class="ed-acts">' + (b.code ? '<button type="button" class="btn sm danger" data-act="delete">예약 지우기</button>' : '') +
+           '<button type="button" class="btn primary" id="bkSave" data-act="save">' + (bkDirty ? '저장 *' : '저장') + '</button></div></div>');
+
+    if(b.code && bkUrl){
+      h.push('<div class="bk-link"><b>손님 전용 링크</b><div class="u">' + esc(bkUrl) + '</div><div class="b">' +
+        '<button type="button" data-act="copy">📋 링크 복사</button>' +
+        '<button type="button" data-act="kakao">💬 카톡 안내문 복사</button>' +
+        '<button type="button" data-act="preview">👀 손님 화면 열기</button>' +
+        '<button type="button" data-act="relink">🔄 링크 새로 만들기</button>' +
+        '<button type="button" data-act="lock">' + (b.locked ? '▶ 링크 다시 열기' : '⏸ 링크 잠시 막기') + '</button></div>' +
+        '<div class="i">' + (bkClosed ? '<span class="warn">지금 손님이 열 수 없음 — ' + esc(bkClosed) + '</span><br>' : '') +
+        '여행 끝난 날에서 30일이 지나면 저절로 닫힙니다 · 「링크 새로 만들기」를 누르면 예전 링크는 바로 막힙니다' +
+        (b.lastSeen ? ' · 손님이 마지막으로 연 시각 ' + esc(bkWhen(b.lastSeen)) : ' · 손님이 아직 열어 보지 않았습니다') + '</div></div>');
+    } else {
+      h.push('<div class="bk-link off">처음 저장하면 예약코드와 손님 전용 링크가 만들어집니다.</div>');
+    }
+
+    h.push('<div class="bk-steps">' + BK_STEPS.map(function(n, i){
+      return '<button type="button" data-step="' + i + '" class="' + (i < b.status ? 'd' : i === b.status ? 'n' : '') + '">' + n + '</button>';
+    }).join('') + '</div>');
+
+    h.push('<div class="grid bk-grid">' +
+      bkField('surname', '대표자 영문 성 <em>(필수 · 손님 화면 제목)</em>') +
+      bkField('name', '손님 이름 <em>(관리용)</em>') +
+      bkField('people', '인원 <em>예) 성인 4</em>') +
+      bkField('product', '상품 이름') +
+      bkField('start', '여행 시작일', 'date') +
+      bkField('end', '여행 끝나는 날', 'date') +
+      bkField('productUrl', '상품 주소 <em>(선택 · 예: /p/portugal-8days)</em>') +
+      bkField('notice', '손님 안내 한 줄 <em>(비우면 결제 상태로 자동)</em>') +
+      bkField('email', '손님 메일 <em>(관리용 · 손님 화면에 안 나옴)</em>', 'email') +
+      bkField('phone', '손님 연락처 <em>(관리용)</em>') +
+      bkField('memo', '내부 메모 <em>(손님에게 보이지 않음)</em>', 'textarea', '', true) + '</div>');
+
+    /* 일자별 일정 */
+    h.push('<h3 class="bk-h">일자별 일정 <span>손님 화면에 그대로 나옵니다</span></h3><div class="tbl-wrap"><table class="bk-tbl"><thead><tr>' +
+      '<th style="width:130px">날짜</th><th style="width:170px">제목</th><th>내용</th><th>미팅 안내</th><th style="width:150px">지도 링크</th><th style="width:40px"></th></tr></thead><tbody>' +
+      ((b.days || []).length ? b.days.map(function(d, i){
+        return '<tr><td><input type="date" data-d="' + i + '" data-dk="date" value="' + esc(d.date) + '"></td>' +
+          '<td><input data-d="' + i + '" data-dk="title" value="' + esc(d.title) + '" placeholder="예) 마드리드 도착"></td>' +
+          '<td><textarea data-d="' + i + '" data-dk="desc" rows="2">' + esc(d.desc) + '</textarea></td>' +
+          '<td><textarea data-d="' + i + '" data-dk="meet" rows="2" placeholder="예) T4 도착층 출구, 이름표">' + esc(d.meet) + '</textarea></td>' +
+          '<td><input data-d="' + i + '" data-dk="map" value="' + esc(d.map) + '" placeholder="https://maps…"></td>' +
+          '<td class="act"><button type="button" class="icon-btn" data-deld="' + i + '" title="이 날 지우기">✕</button></td></tr>';
+      }).join('') : '<tr><td colspan="6" class="empty" style="padding:16px">아직 일정이 없습니다.</td></tr>') +
+      '</tbody></table></div><div class="bk-acts"><button type="button" class="btn sm" data-act="addDay">＋ 하루 추가</button>' +
+      '<button type="button" class="btn sm" data-act="fillDays">여행 날짜로 하루씩 채우기</button></div>');
+
+    /* 결제 */
+    h.push('<h3 class="bk-h">결제 <span>금액 · 기한 · 입금 확인이 손님 화면에 나옵니다</span></h3><div class="tbl-wrap"><table class="bk-tbl"><thead><tr>' +
+      '<th>구분</th><th style="width:130px">금액</th><th style="width:90px">통화</th><th style="width:150px">기한</th><th style="width:90px">입금 확인</th><th style="width:40px"></th></tr></thead><tbody>' +
+      (b.pay || []).map(function(p, i){
+        return '<tr><td><input data-p="' + i + '" data-pk="label" value="' + esc(p.label) + '"></td>' +
+          '<td><input data-p="' + i + '" data-pk="amount" inputmode="decimal" value="' + esc(p.amount || '') + '"></td>' +
+          '<td><select data-p="' + i + '" data-pk="cur"><option value="EUR"' + (p.cur !== 'KRW' ? ' selected' : '') + '>€ 유로</option><option value="KRW"' + (p.cur === 'KRW' ? ' selected' : '') + '>원</option></select></td>' +
+          '<td><input type="date" data-p="' + i + '" data-pk="due" value="' + esc(p.due) + '"></td>' +
+          '<td style="text-align:center"><input type="checkbox" data-p="' + i + '" data-pk="paid"' + (p.paid ? ' checked' : '') + ' style="width:18px;height:18px;accent-color:var(--teal)"></td>' +
+          '<td class="act"><button type="button" class="icon-btn" data-delp="' + i + '" title="이 줄 지우기">✕</button></td></tr>';
+      }).join('') +
+      '</tbody></table></div><div class="bk-acts"><button type="button" class="btn sm" data-act="addPay">＋ 결제 줄 추가</button></div>');
+
+    /* 서류 */
+    if(b.code){
+      h.push('<h3 class="bk-h">서류 <span>PDF · 사진 4MB 까지 · 「잔금 후 공개」는 결제 줄이 모두 입금 확인되면 열립니다</span></h3>' +
+        '<div class="bk-docs">' + ((b.docs || []).length ? b.docs.map(function(d){
+          return '<div class="bk-doc"><span>📄 ' + esc(d.name) + ' <i>' + Math.max(1, Math.round((d.size || 0) / 1024)) + 'KB</i></span>' +
+            '<select data-show="' + esc(d.id) + '"><option value="public"' + (d.show === 'public' ? ' selected' : '') + '>손님 공개</option>' +
+            '<option value="paid"' + (d.show === 'paid' ? ' selected' : '') + '>잔금 후 공개</option>' +
+            '<option value="hidden"' + (d.show === 'hidden' ? ' selected' : '') + '>숨김</option></select>' +
+            '<button type="button" class="btn sm" data-dl="' + esc(d.id) + '">내려받기</button>' +
+            '<button type="button" class="btn sm danger" data-deldoc="' + esc(d.id) + '">지우기</button></div>';
+        }).join('') : '<div class="hint" style="margin-bottom:8px">아직 올린 서류가 없습니다.</div>') + '</div>' +
+        '<div class="bk-acts"><label class="btn sm">＋ 서류 올리기<input type="file" id="bkFile" accept=".pdf,image/*" hidden></label>' +
+        '<select id="bkFileShow"><option value="public">손님 공개</option><option value="paid">잔금 후 공개</option><option value="hidden">숨김</option></select></div>');
+
+      /* 메시지 */
+      h.push('<h3 class="bk-h">손님 메시지 <span>답장은 손님 화면에 바로 보입니다 (손님에게 메일은 가지 않습니다)</span></h3><div class="bk-msgs" id="bkMsgs">' +
+        ((b.msgs || []).length ? b.msgs.map(function(m){
+          return '<div class="bk-msg ' + (m.from === 'guest' ? 'g' : 'o') + '"><b>' + (m.from === 'guest' ? '손님' : '유포리아투어') + ' · ' + esc(bkWhen(m.at)) + '</b>' + esc(m.text) + '</div>';
+        }).join('') : '<div class="hint">아직 메시지가 없습니다.</div>') +
+        '</div><div class="bk-reply"><textarea id="bkReply" rows="2" placeholder="답장 쓰기"></textarea><button type="button" class="btn dark" data-act="reply">보내기</button></div>');
+    }
+    ed.innerHTML = h.join('');
+    var ms = $('bkMsgs'); if(ms) ms.scrollTop = ms.scrollHeight;
+  }
+
+  function bkSave(){
+    if(bkBusy) return;
+    if(!String(bkCur.surname || '').trim()){ toast('대표자 영문 성을 넣어 주세요', true); return; }
+    bkBusy = true; $('bkSave').disabled = true;
+    bkCall({ action:'save', booking: bkCur }).then(function(j){
+      var 새 = !bkCur.code;
+      bkCur = j.booking; bkUrl = j.url || '';
+      bkSetDirty(false); bkRenderEd(); bkLoad();
+      toast(새 ? '예약을 만들었습니다 — 손님 전용 링크를 복사해 보내 주세요.' : '저장했습니다.');
+    }).catch(function(e){ toast(e.message, true); })
+      .finally(function(){ bkBusy = false; var s = $('bkSave'); if(s) s.disabled = false; });
+  }
+
+  function bkSimple(payload, msg){
+    if(bkDirty && !confirm('저장하지 않은 변경이 있습니다. 변경은 버리고 진행할까요?')) return;
+    return bkCall(Object.assign({ code: bkCur.code }, payload)).then(function(j){
+      if(j.booking){ bkCur = j.booking; }
+      if(j.url !== undefined) bkUrl = j.url;
+      if(j.닫힘 !== undefined) bkClosed = j.닫힘;
+      bkSetDirty(false); bkRenderEd(); bkLoad();
+      if(msg) toast(msg);
+    }).catch(function(e){ toast(e.message, true); });
+  }
+
+  function bkCopy(text, msg){
+    (navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(text) : Promise.reject())
+      .then(function(){ toast(msg); })
+      .catch(function(){ window.prompt('아래 내용을 복사해 주세요.', text); });
+  }
+
+  function bkFill(){
+    if(!bkCur.start){ toast('여행 시작일을 먼저 넣어 주세요', true); return; }
+    var s = new Date(bkCur.start + 'T12:00:00Z'), e = new Date((bkCur.end || bkCur.start) + 'T12:00:00Z');
+    var n = Math.round((e - s) / 86400000) + 1;
+    if(n < 1 || n > 60){ toast('여행 날짜를 확인해 주세요', true); return; }
+    var 있음 = {}; (bkCur.days || []).forEach(function(d){ if(d.date) 있음[d.date] = d; });
+    var out = [];
+    for(var i = 0; i < n; i++){
+      var d = new Date(s.getTime() + i * 86400000).toISOString().slice(0, 10);
+      out.push(있음[d] || { date:d, title:'', desc:'', meet:'', map:'' });
+    }
+    (bkCur.days || []).forEach(function(d){ if(!d.date) out.push(d); });
+    bkCur.days = out; bkSetDirty(true); bkRenderEd();
+  }
+
+  function bkUpload(file){
+    if(!file) return;
+    if(file.size > 4 * 1024 * 1024){ toast('파일이 너무 큽니다 (4MB 까지)', true); return; }
+    if(bkDirty && !confirm('저장하지 않은 변경이 있습니다. 변경은 버리고 서류를 올릴까요?')) return;
+    var rd = new FileReader();
+    rd.onload = function(){
+      toast('서류를 올리는 중입니다…');
+      bkCall({ action:'upload', code: bkCur.code, name: file.name, type: file.type, show: $('bkFileShow').value,
+               data: String(rd.result).split(',')[1] || '' })
+        .then(function(j){ bkCur = j.booking; bkSetDirty(false); bkRenderEd(); toast('서류를 올렸습니다.'); })
+        .catch(function(e){ toast(e.message, true); });
+    };
+    rd.readAsDataURL(file);
+  }
+
+  function bkDownload(id){
+    fetch(BK_API, { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ token: token, action:'file', code: bkCur.code, id: id }) })
+      .then(function(r){ if(!r.ok) throw new Error('내려받지 못했습니다 (' + r.status + ')'); return r.blob(); })
+      .then(function(bl){
+        var d = (bkCur.docs || []).find(function(x){ return x.id === id; }) || {};
+        var a = document.createElement('a'); a.href = URL.createObjectURL(bl); a.download = d.name || 'file';
+        document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+      }).catch(function(e){ toast(e.message, true); });
+  }
+
+  function bkPollStart(){
+    if(bkPollT) return;
+    var tick = function(){
+      if(!token || document.hidden) return;
+      bkCall({ action:'list' }).then(function(j){
+        bkBadge(j.unread || 0);
+        if(tab === 'bookings' && !bkDirty){ bkList = j.items || []; bkRenderList(); }
+      }).catch(function(){});
+    };
+    tick(); bkPollT = setInterval(tick, 120000);
+  }
+
+  $('bkNew').addEventListener('click', bkNew);
+  $('bkReload').addEventListener('click', bkLoad);
+  $('bkSearch').addEventListener('input', bkRenderList);
+  $('bkListBox').addEventListener('click', function(e){
+    var r = e.target.closest ? e.target.closest('.bk-row') : null;
+    if(r) bkOpen(r.dataset.code);
+  });
+  $('bkEd').addEventListener('input', function(e){
+    var t = e.target; if(!bkCur) return;
+    if(t.dataset.k){ bkCur[t.dataset.k] = t.value; bkSetDirty(true); return; }
+    if(t.dataset.d !== undefined && t.dataset.dk){ bkCur.days[+t.dataset.d][t.dataset.dk] = t.value; bkSetDirty(true); return; }
+    if(t.dataset.p !== undefined && t.dataset.pk){
+      bkCur.pay[+t.dataset.p][t.dataset.pk] = t.type === 'checkbox' ? t.checked : t.value; bkSetDirty(true); return;
+    }
+  });
+  $('bkEd').addEventListener('change', function(e){
+    var t = e.target; if(!bkCur) return;
+    if(t.id === 'bkFile'){ bkUpload(t.files && t.files[0]); t.value = ''; return; }
+    if(t.dataset.p !== undefined && t.dataset.pk){
+      bkCur.pay[+t.dataset.p][t.dataset.pk] = t.type === 'checkbox' ? t.checked : t.value; bkSetDirty(true); return;
+    }
+    if(t.dataset.show){ bkSimple({ action:'docShow', id:t.dataset.show, show:t.value }, '공개 범위를 바꿨습니다.'); }
+  });
+  $('bkEd').addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('button') : null;
+    if(!t || !bkCur) return;
+    var a = t.dataset.act;
+    if(t.dataset.step !== undefined){ bkCur.status = +t.dataset.step; bkSetDirty(true); bkRenderEd(); return; }
+    if(t.dataset.deld !== undefined){ bkCur.days.splice(+t.dataset.deld, 1); bkSetDirty(true); bkRenderEd(); return; }
+    if(t.dataset.delp !== undefined){ bkCur.pay.splice(+t.dataset.delp, 1); bkSetDirty(true); bkRenderEd(); return; }
+    if(t.dataset.dl){ bkDownload(t.dataset.dl); return; }
+    if(t.dataset.deldoc){ if(confirm('이 서류를 지울까요? 되돌릴 수 없습니다.')) bkSimple({ action:'docDel', id:t.dataset.deldoc }, '서류를 지웠습니다.'); return; }
+    if(a === 'save') bkSave();
+    if(a === 'addDay'){ (bkCur.days = bkCur.days || []).push({ date:'', title:'', desc:'', meet:'', map:'' }); bkSetDirty(true); bkRenderEd(); }
+    if(a === 'fillDays') bkFill();
+    if(a === 'addPay'){ (bkCur.pay = bkCur.pay || []).push({ label:'', amount:'', cur:'EUR', due:'', paid:false }); bkSetDirty(true); bkRenderEd(); }
+    if(a === 'copy') bkCopy(bkUrl, '손님 전용 링크를 복사했습니다.');
+    if(a === 'kakao') bkCopy('[유포리아투어] ' + (bkCur.surname || '') + ' 님, 예약 확인 페이지를 보내 드립니다.\n' +
+        '일정 · 결제 · 서류를 아래 링크에서 확인하시고, 궁금한 점은 페이지 아래 메시지로 남겨 주세요.\n\n' + bkUrl +
+        '\n\n※ 예약하신 분만 보실 수 있는 전용 링크입니다. 다른 분께 전달하지 말아 주세요.', '카톡 안내문을 복사했습니다.');
+    if(a === 'preview') window.open(bkUrl, '_blank', 'noopener');
+    if(a === 'relink' && confirm('새 링크를 만들까요?\n지금 손님이 가진 링크는 바로 열리지 않게 됩니다.')) bkSimple({ action:'relink' }, '새 링크를 만들었습니다 — 손님께 다시 보내 주세요.');
+    if(a === 'lock') bkSimple({ action:'lock', locked: !bkCur.locked }, bkCur.locked ? '링크를 다시 열었습니다.' : '링크를 잠시 막았습니다.');
+    if(a === 'delete' && confirm(bkCur.code + ' 예약을 지울까요?\n일정 · 메시지 · 올린 서류가 모두 지워지고 되돌릴 수 없습니다.')){
+      bkCall({ action:'delete', code: bkCur.code }).then(function(){ bkCur = null; bkSetDirty(false); bkRenderEd(); bkLoad(); toast('예약을 지웠습니다.'); })
+        .catch(function(e){ toast(e.message, true); });
+    }
+    if(a === 'reply'){
+      var txt = ($('bkReply').value || '').trim(); if(!txt) return;
+      t.disabled = true;
+      bkCall({ action:'reply', code: bkCur.code, text: txt }).then(function(j){
+        var keep = bkCur; bkCur = Object.assign(keep, { msgs: j.booking.msgs, unread: 0 });
+        bkRenderEd(); toast('답장을 올렸습니다.');
+      }).catch(function(e){ toast(e.message, true); t.disabled = false; });
+    }
+  });
+  window.addEventListener('beforeunload', function(e){
+    if(bkDirty && tab === 'bookings'){ e.preventDefault(); e.returnValue = ''; }
+  });
+
   $('pw').addEventListener('keydown', function(e){ if(e.key === 'Enter') login(); });
   $('logoutBtn').addEventListener('click', function(){
     if(changed() && !confirm('저장하지 않은 변경이 있습니다. 로그아웃할까요?')) return;
