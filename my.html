@@ -118,6 +118,13 @@
   .spin{ width:26px; height:26px; border:2px solid var(--line); border-top-color:var(--coral); border-radius:50%; margin:90px auto 12px; animation:sp .9s linear infinite; }
   @keyframes sp{ to{ transform:rotate(360deg); } }
 
+  /* 손님 전용 안내 박스 (2026-11) */
+  .only{ display:flex; gap:12px; align-items:flex-start; margin:0 0 18px; padding:14px 16px; background:var(--coral-soft); border:1px solid #F1CFCB; border-radius:8px; }
+  .only .k{ flex:0 0 34px; height:34px; border-radius:50%; background:#fff; color:var(--coral); display:flex; align-items:center; justify-content:center; }
+  .only .k .ic{ width:18px; height:18px; flex-basis:18px; vertical-align:0; }
+  .only b{ display:block; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:3px; }
+  .only p{ margin:0; font-size:13.5px; line-height:1.65; color:#5b4f49; }
+
   /* 기사 · 차량 (2026-11) */
   .car{ padding:14px 0; border-top:1px solid var(--line); }
   .car:first-child{ border-top:none; padding-top:2px; }
@@ -173,6 +180,7 @@
     chat:'<path d="M21 12c0 4-4 7-9 7a11 11 0 0 1-2.6-.3L4.5 20.5l1-3.6A6.7 6.7 0 0 1 3 12c0-4 4-7 9-7s9 3 9 7z"/>',
     phone:'<path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5z"/>',
     mail:'<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.6 7l8.4 6 8.4-6"/>',
+    key:'<circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M16 7l3 3M18 5l2 2"/>',
     car:'<path d="M5 16.5h14M4 16.5V12l2-5h12l2 5v4.5"/><path d="M4 12h16"/><circle cx="7.5" cy="16.5" r="1.8"/><circle cx="16.5" cy="16.5" r="1.8"/>',
     arrow:'<path d="M9 6l6 6-6 6"/>'
   };
@@ -233,6 +241,8 @@
     return '<div class="sheet"><header class="hd"><div class="hd-top"><img class="lg" src="' + LOGO + '" alt="유포리아투어">' +
       '<div class="doc-t">RESERVATION<b>예약 확정서</b></div></div>' +
       '<h1><span>' + esc(b.surname) + '</span> 님의 여행</h1><p class="sub">' + 부제 + '</p>' +
+      '<div class="only"><span class="k">' + ic('key') + '</span><div><b>' + esc(b.surname) + ' 님만을 위한 전용 페이지입니다</b>' +
+      '<p>여행을 마치실 때까지 이 링크 하나로 일정 · 결제 · 서류 등 모든 예약 내용을 확인하실 수 있습니다. 변경 사항도 이 페이지에 바로 반영됩니다.</p></div></div>' +
       '<div class="meta"><div><small>예약코드</small><b class="code-v">' + esc(b.code) + '</b></div><div><small>인원</small><b>' + esc(b.people || '-') + '</b></div>' +
       '<div class="full"><small>여행 기간</small><b>' + esc(기간 || '-') + '</b></div></div></header>';
   }
