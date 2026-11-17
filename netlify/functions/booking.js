@@ -152,6 +152,17 @@ function 다듬기(b, 예전) {
       auto: !!(p && p.auto),
     };
   }).filter(function (p) { return p.label || p.amount; });
+  /* 기사 · 차량 (2026-11) — 손님 화면에 그대로 나옵니다 */
+  o.cars = (Array.isArray(b.cars) ? b.cars : []).slice(0, 8).map(function (c) {
+    return {
+      when: 글(c && c.when, 60).trim(),
+      name: 글(c && c.name, 60).trim(),
+      phone: 글(c && c.phone, 40).trim(),
+      car: 글(c && c.car, 80).trim(),
+      plate: 글(c && c.plate, 20).trim().toUpperCase(),
+      note: 글(c && c.note, 300).trim(),
+    };
+  }).filter(function (c) { return c.name || c.phone || c.car || c.plate; });
   /* 입금 기한을 비워 두면 — 예약금 30% = 이용 7일 전, 잔금 70% = 이용 당일 (2026-11) */
   o.pay.forEach(function (p) {
     if (p.due || !o.start) return;
@@ -200,6 +211,7 @@ function 손님용(b) {
     start: b.start, end: b.end, product: b.product, productUrl: b.productUrl,
     status: b.status, 단계: 단계, notice: b.notice,
     days: b.days || [],
+    cars: b.cars || [],
     pay: (b.pay || []).map(function (p) { return { label: p.label, amount: p.amount, cur: p.cur, due: p.due, paid: p.paid }; }),
     docs: (b.docs || []).filter(function (d) { return d.show !== 'hidden'; }).map(function (d) {
       const 열림 = d.show === 'public' || (d.show === 'paid' && 완납);
