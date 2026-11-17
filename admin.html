@@ -661,6 +661,15 @@
   .bk-wrap{ display:grid; grid-template-columns:340px 1fr; gap:16px; align-items:start; }
   @media (max-width:980px){ .bk-wrap{ grid-template-columns:1fr; } }
   .bk-wrap .card{ margin-bottom:0; }
+  .bk-months{ display:flex; gap:6px; overflow-x:auto; padding:2px 0 8px; margin-top:4px; scrollbar-width:thin; }
+  .bk-months button{ flex:0 0 auto; border:1.5px solid var(--line); background:#fff; border-radius:999px; padding:5px 11px; font:inherit; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; white-space:nowrap; }
+  .bk-months button i{ font-style:normal; font-weight:600; color:var(--muted); margin-left:4px; }
+  .bk-months button.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .bk-months button.on i{ color:#cfcbe8; }
+  .bk-months button.now:not(.on){ border-color:var(--violet); }
+  .bk-msum{ font-size:12px; color:var(--muted); margin:0 0 10px; } .bk-msum:empty{ display:none; } .bk-msum b{ color:var(--navy); }
+  .bk-mh{ font-size:12px; font-weight:800; color:var(--navy); margin:14px 0 6px; padding-bottom:4px; border-bottom:1.5px solid var(--line); }
+  .bk-mh:first-child{ margin-top:2px; }
   .bk-row{ border:2px solid var(--line); border-radius:12px; padding:11px 13px; margin-bottom:8px; cursor:pointer; background:#fff; }
   .bk-row:hover{ border-color:#cfc6f5; }
   .bk-row.on{ border-color:var(--violet); background:#FAF8FF; }
@@ -1183,6 +1192,8 @@
             <button type="button" class="btn primary sm" id="bkNew">＋ 새 예약</button>
             <button type="button" class="btn sm" id="bkReload">새로고침</button>
           </div>
+          <div class="bk-months" id="bkMonths"></div>
+          <div class="bk-msum" id="bkMSum"></div>
           <div id="bkListBox"><div class="empty">불러오는 중…</div></div>
         </div>
         <div class="card" id="bkEd"></div>
@@ -5199,6 +5210,7 @@
      ==================================================================== */
   var BK_API = '/.netlify/functions/booking';
   var BK_STEPS = ['문의','확정','잔금','출발 준비','여행 중','종료'];
+  var bkMonth = '';   /* 'YYYY-MM' · 'all' · 'none'(날짜 없음) — 처음엔 이번 달 */
   var bkList = [], bkCur = null, bkUrl = '', bkClosed = '', bkDirty = false, bkBusy = false, bkPollT = null;
 
   function bkCall(payload){
@@ -5239,25 +5251,60 @@
     }).catch(function(e){ $('bkListBox').innerHTML = '<div class="empty">' + esc(e.message) + '</div>'; });
   }
 
+  function bkThisMonth(){ var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
+  function bkMKey(b){ return /^\d{4}-\d{2}/.test(b.start || '') ? b.start.slice(0, 7) : 'none'; }
+  function bkMName(k, full){
+    if(k === 'all') return '전체'; if(k === 'none') return '날짜 미정';
+    var y = +k.slice(0, 4), m = +k.slice(5, 7);
+    return (full || y !== new Date().getFullYear() ? y + '년 ' : '') + m + '월';
+  }
+  function bkRowHtml(b){
+    var 기간 = bkDay(b.start) + (b.end && b.end !== b.start ? '~' + bkDay(b.end) : '');
+    return '<div class="bk-row' + (bkCur && bkCur.code === b.code ? ' on' : '') + '" data-code="' + esc(b.code) + '">' +
+      '<div class="t"><span>' + esc(b.surname || '(이름 없음)') + (b.name ? ' <i>' + esc(b.name) + '</i>' : '') + '</span>' +
+      '<span class="bk-pill s' + b.status + '">' + esc(BK_STEPS[b.status] || '') + '</span></div>' +
+      '<div class="s">' + esc(b.code) + (기간 ? ' · ' + 기간 : '') + (b.product ? ' · ' + esc(b.product) : '') +
+      (b.unpaid ? ' · <b style="color:#B4561D">입금 대기 ' + b.unpaid + '</b>' : '') +
+      (b.unread ? ' <b class="bk-new">● 새 메시지 ' + b.unread + '</b>' : '') +
+      (b.locked ? ' <b class="bk-lock">링크 막힘</b>' : '') + '</div></div>';
+  }
+  /* 예약 목록 — 여행 시작일 기준 월별 (2026-11) */
   function bkRenderList(){
     var q = ($('bkSearch').value || '').trim().toLowerCase();
+    var now = bkThisMonth();
+    if(!bkMonth) bkMonth = now;
+    var 달수 = {}; bkList.forEach(function(b){ var k = bkMKey(b); 달수[k] = (달수[k] || 0) + 1; });
+    var 달들 = Object.keys(달수).filter(function(k){ return k !== 'none'; });
+    if(달들.indexOf(now) === -1) 달들.push(now);
+    달들.sort();
+    if(달수.none) 달들.push('none');
+    $('bkMonths').innerHTML = ['all'].concat(달들).map(function(k){
+      var n = k === 'all' ? bkList.length : (달수[k] || 0);
+      return '<button type="button" data-m="' + k + '" class="' + (k === bkMonth ? 'on' : '') + (k === now ? ' now' : '') + '">' +
+        bkMName(k) + '<i>' + n + '</i></button>';
+    }).join('');
+    var on = $('bkMonths').querySelector('.on'); if(on && on.scrollIntoView) on.scrollIntoView({ block:'nearest', inline:'center' });
+
     var list = bkList.filter(function(b){
-      return !q || [b.code, b.surname, b.name, b.product].join(' ').toLowerCase().indexOf(q) !== -1;
-    });
+      if(q) return [b.code, b.surname, b.name, b.product].join(' ').toLowerCase().indexOf(q) !== -1;   /* 찾기는 모든 달에서 */
+      return bkMonth === 'all' || bkMKey(b) === bkMonth;
+    }).sort(function(a, b){ return (a.start || '9999').localeCompare(b.start || '9999') || String(a.code).localeCompare(String(b.code)); });
+
     $('bkCount').textContent = bkList.length ? bkList.length + '건' : '';
+    var 대기 = list.filter(function(b){ return b.unpaid; }).length, 새글 = list.filter(function(b){ return b.unread; }).length;
+    $('bkMSum').innerHTML = q ? '모든 달에서 찾은 예약 <b>' + list.length + '건</b>' :
+      (bkMonth === 'all' ? '전체 예약 <b>' : bkMonth === 'none' ? '<b>날짜 미정</b> 예약 <b>' : '<b>' + bkMName(bkMonth, true) + '</b> 출발 예약 <b>') + list.length + '건</b>' + (대기 ? ' · 입금 대기 ' + 대기 + '건' : '') + (새글 ? ' · 새 메시지 ' + 새글 + '건' : '');
     if(!list.length){
-      $('bkListBox').innerHTML = '<div class="empty">' + (bkList.length ? '찾는 예약이 없습니다.' : '아직 예약이 없습니다.<br>「＋ 새 예약」을 눌러 만들어 보세요.') + '</div>';
+      $('bkListBox').innerHTML = '<div class="empty">' + (q ? '찾는 예약이 없습니다.' : bkList.length ? bkMName(bkMonth, true) + '에 출발하는 예약이 없습니다.' : '아직 예약이 없습니다.<br>「＋ 새 예약」을 눌러 만들어 보세요.') + '</div>';
       return;
     }
-    $('bkListBox').innerHTML = list.map(function(b){
-      var 기간 = bkDay(b.start) + (b.end && b.end !== b.start ? '~' + bkDay(b.end) : '');
-      return '<div class="bk-row' + (bkCur && bkCur.code === b.code ? ' on' : '') + '" data-code="' + esc(b.code) + '">' +
-        '<div class="t"><span>' + esc(b.surname || '(이름 없음)') + (b.name ? ' <i>' + esc(b.name) + '</i>' : '') + '</span>' +
-        '<span class="bk-pill s' + b.status + '">' + esc(BK_STEPS[b.status] || '') + '</span></div>' +
-        '<div class="s">' + esc(b.code) + (기간 ? ' · ' + 기간 : '') + (b.product ? ' · ' + esc(b.product) : '') +
-        (b.unread ? ' <b class="bk-new">● 새 메시지 ' + b.unread + '</b>' : '') +
-        (b.locked ? ' <b class="bk-lock">링크 막힘</b>' : '') + '</div></div>';
-    }).join('');
+    if(bkMonth === 'all' || q){
+      var h = [], 앞 = null;
+      list.forEach(function(b){ var k = bkMKey(b); if(k !== 앞){ h.push('<div class="bk-mh">' + bkMName(k, true) + '</div>'); 앞 = k; } h.push(bkRowHtml(b)); });
+      $('bkListBox').innerHTML = h.join('');
+    } else {
+      $('bkListBox').innerHTML = list.map(bkRowHtml).join('');
+    }
   }
 
   function bkOpen(code){
@@ -5425,6 +5472,7 @@
     bkCall({ action:'save', booking: bkCur }).then(function(j){
       var 새 = !bkCur.code;
       bkCur = j.booking; bkUrl = j.url || '';
+      if(bkMonth !== 'all') bkMonth = bkMKey(bkCur);   /* 저장한 예약이 있는 달로 */
       bkSetDirty(false); bkRenderEd(); bkLoad();
       toast(새 ? '예약을 만들었습니다 — 손님 전용 링크를 복사해 보내 주세요.' : '저장했습니다.');
     }).catch(function(e){ toast(e.message, true); })
@@ -5503,6 +5551,10 @@
 
   $('bkNew').addEventListener('click', bkNew);
   $('bkReload').addEventListener('click', bkLoad);
+  $('bkMonths').addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('[data-m]') : null; if(!t) return;
+    bkMonth = t.dataset.m; $('bkSearch').value = ''; bkRenderList();
+  });
   $('bkSearch').addEventListener('input', bkRenderList);
   $('bkListBox').addEventListener('click', function(e){
     var r = e.target.closest ? e.target.closest('.bk-row') : null;
