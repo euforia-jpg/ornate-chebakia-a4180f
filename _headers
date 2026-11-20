@@ -1,0 +1,28 @@
+# ─────────────────────────────────────────────────────────────
+# 검색에 나오면 안 되는 작업용 파일 (2026-11)
+#   주소로 열어 보는 것은 지금처럼 됩니다. 구글·네이버에만 「목록에 올리지 마세요」라고 알립니다.
+#   한글 이름 파일은 넷리파이가 어느 모양으로 읽어도 걸리도록 두 가지로 적었습니다.
+# ─────────────────────────────────────────────────────────────
+/메타점검_안내.html
+  X-Robots-Tag: noindex, nofollow
+
+/%EB%A9%94%ED%83%80%EC%A0%90%EA%B2%80_%EC%95%88%EB%82%B4.html
+  X-Robots-Tag: noindex, nofollow
+
+/matchday-적용안내.html
+  X-Robots-Tag: noindex, nofollow
+
+/matchday-%EC%A0%81%EC%9A%A9%EC%95%88%EB%82%B4.html
+  X-Robots-Tag: noindex, nofollow
+
+/matchday-삽입블록.html
+  X-Robots-Tag: noindex, nofollow
+
+/matchday-%EC%82%BD%EC%9E%85%EB%B8%94%EB%A1%9D.html
+  X-Robots-Tag: noindex, nofollow
+
+/cruise-mockup.html
+  X-Robots-Tag: noindex, nofollow
+
+/tours1.html
+  X-Robots-Tag: noindex, nofollow
