@@ -1086,5 +1086,37 @@ window.toggleAudioGuide = function(btn){
 
 <!-- 다국어 (한국어 / English / 中文) -->
 <script src="/i18n.js" defer></script>
+
+<!-- ══ 검색엔진용 상품 목록 (2026-11) ═══════════════════════════════════
+     구글이 여행상품 목록(이름 · 주소 · 사진)을 한꺼번에 읽을 수 있게 알려 줍니다.
+     화면에는 아무것도 보이지 않습니다. products.js 에서 그때그때 만들므로
+     대쉬보드에서 상품을 더하거나 빼도 따로 고치실 것이 없습니다.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  try{
+    if(typeof PRODUCTS === 'undefined' || !PRODUCTS.length) return;
+    var 뿌리 = 'https://toureplus.co.kr';
+    function 절대(u){ if(!u) return ''; if(/^https?:\/\//.test(u)) return u; return 뿌리 + (u.charAt(0) === '/' ? '' : '/') + u; }
+    var 목록 = PRODUCTS.filter(function(p){ return p && p.id && p.title; }).map(function(p, i){
+      var 줄 = { '@type':'ListItem', position: i + 1, url: 절대(p.link || ('/p/' + encodeURIComponent(p.id))), name: p.title };
+      if(p['카드사진']) 줄.image = 절대(p['카드사진']);
+      return 줄;
+    });
+    var 자료 = {
+      '@context':'https://schema.org',
+      '@type':'ItemList',
+      name:'스페인 포르투갈 패키지 · 여행상품 — 유포리아투어',
+      url: 뿌리 + '/tours.html',
+      numberOfItems: 목록.length,
+      itemListElement: 목록
+    };
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.text = JSON.stringify(자료);
+    document.head.appendChild(s);
+  }catch(e){ /* 검색엔진용 정보라 실패해도 화면에는 영향이 없습니다 */ }
+})();
+</script>
 </body>
 </html>
