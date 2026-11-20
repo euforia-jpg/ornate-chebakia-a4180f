@@ -860,6 +860,27 @@ button.price-chip:hover{ background:var(--wash-violet); border-color:#E0E5E8; bo
 <meta name="twitter:image" content="https://toureplus.co.kr/og-image.png">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<!-- 상품 내용이 그려지기 전에는 아래 회사 정보를 감춰 화면이 밀리지 않게 합니다 (2026-11) -->
+<script>document.documentElement.classList.add('eu-wait');setTimeout(function(){document.documentElement.classList.remove('eu-wait');},8000);</script>
+<style>
+  html.eu-wait .euf-footer{ display:none; }
+  html.eu-wait #content{ min-height:calc(100vh - 150px); }
+  html.eu-wait #content > *{ display:none !important; }   /* /p/ 주소에 미리 채워진 검색용 본문도 그리기 전까지는 감춥니다 */
+  html.eu-wait #content::before{
+    content:''; display:block; max-width:1100px; height:460px; margin:8px auto 0; border-radius:18px;
+    background:
+      linear-gradient(#ECEAF3,#ECEAF3) 24px 28px / 64px 22px no-repeat,
+      linear-gradient(#ECEAF3,#ECEAF3) 24px 72px / calc(100% - 48px) 46px no-repeat,
+      linear-gradient(#ECEAF3,#ECEAF3) 24px 146px / 72% 30px no-repeat,
+      linear-gradient(#ECEAF3,#ECEAF3) 24px 190px / 55% 18px no-repeat,
+      linear-gradient(#F3F1F8,#F3F1F8) 24px 240px / calc(100% - 48px) 190px no-repeat,
+      #fff;
+    box-shadow:0 1px 0 rgba(0,0,0,.03);
+    animation:euWaitPulse 1.2s ease-in-out infinite alternate;
+  }
+  @keyframes euWaitPulse{ from{ opacity:1; } to{ opacity:.55; } }
+  @media (prefers-reduced-motion:reduce){ html.eu-wait #content::before{ animation:none; } }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -2959,7 +2980,8 @@ function initAvailCalendar(product){
   if(크첫) 날고름(크첫, false);
 }
 
-render();
+/* 다 그리고 나면(못 찾았거나 오류가 나도) 회사 정보를 다시 보여 줍니다 */
+try { render(); } finally { document.documentElement.classList.remove('eu-wait'); }
 </script>
 <script>
   if('serviceWorker' in navigator){
