@@ -1063,6 +1063,10 @@
             <div class="au-lab">시각 <span class="count">스페인 현지</span></div>
             <select id="auHour"></select>
           </div>
+          <div>
+            <div class="au-lab">하루 여러 번 <span class="count">스페인 시각, 쉼표로 · 비우면 위 시각 한 번</span></div>
+            <input id="auHours" placeholder="예: 1, 5, 12" style="padding:10px 13px;border:2px solid var(--line);border-radius:10px;font-family:inherit;font-size:13px;width:150px">
+          </div>
         </div>
 
         <div class="bar" style="margin-top:16px">
@@ -6132,14 +6136,19 @@
     var live = auCfg.items.filter(function(x){ return !x.off && (x.image || auCardSrc(findProduct(x.slug))); }).length;
     $('auState').textContent = auCfg.enabled
       ? ('켜짐 — ' + AU_DAYS.filter(function(_,i){ return auCfg.days.indexOf(i)!==-1; }).join('·') +
-         '요일 ' + auCfg.hour + '시 · 올릴 상품 ' + live + '개')
+         '요일 ' + (auHoursOf(auCfg).join('·')) + '시 · 올릴 상품 ' + live + '개')
       : '꺼짐 — 저장해도 자동으로 올라가지 않습니다';
   }
 
+  function auHoursOf(c){
+    var hs = (Array.isArray(c.hours) && c.hours.length) ? c.hours : [c.hour];
+    return hs.map(Number).filter(function(h){ return h>=0 && h<24 && h===Math.floor(h); });
+  }
   function auRender(){
     if(!auCfg) return;
     $('auOn').checked = !!auCfg.enabled;
     $('auHour').value = String(auCfg.hour);
+    $('auHours').value = (Array.isArray(auCfg.hours) && auCfg.hours.length) ? auCfg.hours.join(', ') : '';
     auPaintDays();
     auFillPick();
     auRenderList();
@@ -6320,6 +6329,13 @@
   $('auHour').addEventListener('change', function(){
     if(!auCfg) return; auCfg.hour = Number(this.value); auTouch();
   });
+  $('auHours').addEventListener('change', function(){
+    if(!auCfg) return;
+    var hs = this.value.split(/[^0-9]+/).filter(Boolean).map(Number).filter(function(h){ return h>=0 && h<24; });
+    hs = hs.filter(function(h,i,a){ return a.indexOf(h)===i; }).sort(function(a,b){ return a-b; });
+    if(hs.length){ auCfg.hours = hs; auCfg.hour = hs[0]; $('auHour').value = String(hs[0]); } else { delete auCfg.hours; }
+    this.value = hs.join(', '); auTouch();
+  });
 
   $('auAdd').addEventListener('click', function(){
     if(!auCfg) return;
@@ -6355,6 +6371,9 @@
         return { slug:x.slug, title:x.title, text:x.text, image:x.image, off:!!x.off };
       })
     };
+    if(Array.isArray(auCfg.hours) && auCfg.hours.length) body.hours = auCfg.hours;
+    if('blog' in auCfg) body.blog = auCfg.blog;
+    if(auCfg.blogId) body.blogId = auCfg.blogId;
     api({ action:'save', file:'threadsauto', items:body, sha:auCfg.__sha })
       .then(function(j){
         auCfg.__sha = j.sha || null;

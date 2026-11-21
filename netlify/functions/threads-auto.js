@@ -375,6 +375,11 @@ exports.handler = async function (event) {
 
   const days = Array.isArray(cfg.days) && cfg.days.length ? cfg.days : [1, 3, 5];
   const hour = Number.isFinite(Number(cfg.hour)) ? Number(cfg.hour) : 10;
+  /* 하루 여러 번: "hours": [1, 5, 12] 처럼 적으면 그 시각마다 한 번씩 올립니다 (없으면 hour 한 번) */
+  const hours = (Array.isArray(cfg.hours) ? cfg.hours : [hour])
+    .map(Number).filter(function (h) { return Number.isInteger(h) && h >= 0 && h < 24; })
+    .filter(function (h, i, a) { return a.indexOf(h) === i; }).sort(function (a, b) { return a - b; });
+  if (!hours.length) hours.push(hour);
   const now  = madridNow(new Date());
 
   /* ---------- 지금이 그 시각인가 ---------- */
@@ -382,8 +387,8 @@ exports.handler = async function (event) {
     if (days.indexOf(now.day) === -1) {
       return json(200, { skipped: '오늘은 발행 요일이 아닙니다', 현지: now });
     }
-    if (now.hour !== hour) {
-      return json(200, { skipped: '아직 발행 시각이 아닙니다', 현지: now, 설정시각: hour });
+    if (hours.indexOf(now.hour) === -1) {
+      return json(200, { skipped: '아직 발행 시각이 아닙니다', 현지: now, 설정시각: hours });
     }
   }
 
@@ -449,7 +454,8 @@ exports.handler = async function (event) {
   }
 
   const anchor = /^\d{4}-\d{2}-\d{2}$/.test(cfg.anchor || '') ? cfg.anchor : '2026-01-05';
-  const idx = slotsSince(anchor, now.date, days) % list.length;
+  const 회차 = Math.max(0, hours.indexOf(now.hour));
+  const idx = (slotsSince(anchor, now.date, days) * hours.length + 회차) % list.length;
   const item = list[idx];
 
   /* ---------- 계정 확인 (다른 계정이면 올리지 않습니다) ---------- */
