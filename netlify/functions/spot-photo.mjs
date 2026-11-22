@@ -605,6 +605,54 @@ const 직접표 = {
   "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
   "발렌시아 — 예술과 과학의 도시 · 발렌시아 대성당 · 중앙시장": "City of Arts and Sciences, Valencia",
   "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca"
+ },
+ "cruise-costa-toscana-western-med-8days-barcelona": {
+  "코스타 「토스카나」 — 엑셀런스급 · LNG 추진": "",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca",
+  "팔레르모 — 노르만 왕궁 · 몬레알레 대성당": "Palermo Cathedral",
+  "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸": "Colosseum, Rome",
+  "사보나 — 리비에라 항구 도시 · 제노바 · 포르토피노 근교": "Portofino",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille"
+ },
+ "cruise-costa-pacifica-italy-tunisia-8days-barcelona": {
+  "코스타 「파시피카」 — 콩코르디아급": "",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille",
+  "사보나 — 리비에라 항구 도시 · 제노바 · 포르토피노 근교": "Portofino",
+  "나폴리 — 폼페이 · 카프리섬 · 나폴리 구시가지": "Pompeii Archaeological Park",
+  "팔레르모 — 노르만 왕궁 · 몬레알레 대성당": "Palermo Cathedral",
+  "튀니스 — 카르타고 유적 · 시디 부 사이드 하얀 마을": "Sidi Bou Said"
+ },
+ "cruise-msc-euribia-italy-tunisia-8days-barcelona": {
+  "MSC 「에우리비아」 — LNG 추진 · 2023년 취항": "",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille",
+  "제노바 — 대항구 도시 · 가리발디 거리 궁전들 · 친퀘테레 · 포르토피노 근교": "Via Garibaldi, Genoa",
+  "나폴리 — 폼페이 · 카프리섬 · 나폴리 구시가지": "Pompeii Archaeological Park",
+  "팔레르모 — 노르만 왕궁 · 몬레알레 대성당": "Palermo Cathedral",
+  "튀니스 — 카르타고 유적 · 시디 부 사이드 하얀 마을": "Sidi Bou Said"
+ },
+ "cruise-msc-world-asia-italy-malta-8days-barcelona": {
+  "MSC 「월드 아시아」 — 2026년 12월 취항하는 월드급 신조선": "",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille",
+  "제노바 — 대항구 도시 · 가리발디 거리 궁전들 · 친퀘테레 · 포르토피노 근교": "Via Garibaldi, Genoa",
+  "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸": "Colosseum, Rome",
+  "메시나 — 타오르미나 · 에트나 화산으로 가는 항구": "Teatro Antico di Taormina",
+  "발레타 — 성 요한 대성당 · 요새 도시 발레타 구시가지": "St. John's Co-Cathedral, Valletta"
+ },
+ "cruise-msc-sinfonia-italy-valencia-8days-barcelona": {
+  "MSC 「신포니아」 — 리리카급 (2015년 연장 개조)": "",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille",
+  "제노바 — 대항구 도시 · 가리발디 거리 궁전들 · 친퀘테레 · 포르토피노 근교": "Via Garibaldi, Genoa",
+  "리보르노 — 피렌체 · 피사로 가는 항구": "Leaning Tower of Pisa",
+  "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸": "Colosseum, Rome",
+  "발렌시아 — 예술과 과학의 도시 · 발렌시아 대성당 · 중앙시장": "City of Arts and Sciences, Valencia"
+ },
+ "cruise-msc-fantasia-canary-madeira-8days-tenerife": {
+  "MSC 「판타지아」 — 판타지아급": "",
+  "푸에르테벤투라 — 끝없는 모래 해변과 사구의 섬": "Corralejo Natural Park",
+  "마데이라 — 대서양의 꽃섬 · 푼샬 구시가지": "Mercado dos Lavradores, Funchal",
+  "란사로테 — 화산섬 · 티만파야 국립공원": "Timanfaya National Park",
+  "그란 카나리아 — 라스 팔마스 구시가지 · 카나리아 해변": "Vegueta, Las Palmas de Gran Canaria",
+  "라 팔마 — 「아름다운 섬」 · 화산 분화구와 별빛 하늘": "Caldera de Taburiente National Park"
  }
 };
 
