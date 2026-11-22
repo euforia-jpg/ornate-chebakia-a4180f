@@ -663,6 +663,24 @@ const 직접표 = {
   "튀니스 — 카르타고 유적 · 시디 부 사이드 하얀 마을": "Sidi Bou Said",
   "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
   "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga"
+ },
+ "cruise-celebrity-infinity-canary-morocco-13days-barcelona": {
+  "셀러브리티 「인피니티」 — 밀레니엄급 · 프리미엄 선사": "",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
+  "테네리페 — 테이데 국립공원 · 산타 크루스": "Teide National Park",
+  "그란 카나리아 — 라스 팔마스 구시가지 · 카나리아 해변": "Vegueta, Las Palmas de Gran Canaria",
+  "란사로테 — 화산섬 · 티만파야 국립공원": "Timanfaya National Park",
+  "지브롤터 — 지브롤터 바위산 · 야생 원숭이 · 해협 전망": "Rock of Gibraltar"
+ },
+ "cruise-carnival-sunshine-spain-portugal-france-9days-barcelona": {
+  "카니발 「선샤인」 — 2013년 전면 개조 · 2025년 리뉴얼": "",
+  "카디스 — 3,000년 항구 도시 · 세비야 대성당 · 스페인 광장까지 다녀올 수 있는 기항지": "Cádiz Cathedral",
+  "리스본 — 벨렝 탑 · 알파마 골목 · 신트라까지": "Belém Tower",
+  "지브롤터 — 지브롤터 바위산 · 야생 원숭이 · 해협 전망": "Rock of Gibraltar",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille"
  }
 };
 
