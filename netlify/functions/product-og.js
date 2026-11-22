@@ -106,8 +106,8 @@ function 상품뽑기(글) {
 }
 
 /* 상품 자료와 쪽 틀을 함께 가져옵니다 */
-async function 가져오기(바탕) {
-  if (캐시.상품 && 캐시.틀 && (Date.now() - 캐시.때) < 캐시시간) return 캐시;
+async function 가져오기(바탕, 새로) {
+  if (!새로 && 캐시.상품 && 캐시.틀 && (Date.now() - 캐시.때) < 캐시시간) return 캐시;
   const [a, b] = await Promise.all([
     fetch(바탕 + '/products.js', { headers: { 'Cache-Control': 'no-cache' } }),
     fetch(바탕 + '/product.html', { headers: { 'Cache-Control': 'no-cache' } }),
@@ -304,9 +304,20 @@ exports.handler = async function (event) {
     };
   }
 
-  const p = 자료.상품.find(function (x) {
+  let p = 자료.상품.find(function (x) {
     return x && x.id === 아이디 && x.detail;
   });
+
+  /* 방금 올린 새 상품은 10분 기억 안에 없을 수 있습니다.
+     못 찾았고 기억이 30초보다 오래됐으면 한 번 새로 읽어 봅니다. */
+  if (!p && (Date.now() - 캐시.때) > 30 * 1000) {
+    try {
+      자료 = await 가져오기(바탕, true);
+      p = 자료.상품.find(function (x) { return x && x.id === 아이디 && x.detail; });
+    } catch (e) {
+      console.error('[product-og] 새로 읽기 실패:', e && e.message);
+    }
+  }
 
   /* 그런 상품이 없으면 틀을 손대지 않고 그대로 — product.html 이
      「상품을 찾을 수 없어요」를 스스로 보여 줍니다 */
@@ -314,10 +325,13 @@ exports.handler = async function (event) {
     return {
       statusCode: 404,
       headers: 주기,
-      body: 자료.틀.replace(
-        '</head>',
-        '<script>window.__EU_PID=' + 스크립트안전(아이디) + ';</script></head>'
-      ),
+      /* <base> 가 없으면 /p/products.js 를 찾다가 쪽이 통째로 비어 보입니다 */
+      body: 자료.틀
+        .replace(/<head([^>]*)>/i, 자료.틀.indexOf('<base ') === -1 ? '<head$1><base href="' + 도메인 + '/">' : '<head$1>')
+        .replace(
+          '</head>',
+          '<script>window.__EU_PID=' + 스크립트안전(아이디) + ';</script></head>'
+        ),
     };
   }
 
