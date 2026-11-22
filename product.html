@@ -1277,7 +1277,7 @@ function euCruiseFare(product, 제휴){
     '<div class="cz-days">' + 칩 + '</div>' +
     '<div class="cz-memo" data-memo' + (첫['메모'] ? '' : ' hidden') + '>' + 이스(첫['메모']) + '</div>' +
     '<div class="cz-cabs">' + 줄 + '</div>' +
-    '<div class="cz-ft">2인 1실 기준 1인 요금 · 항만세 · 세금 포함 · 선상 팁 별도<br>' +
+    '<div class="cz-ft">' + (크['요금안내'] || '2인 1실 기준 1인 요금 · 항만세 · 세금 포함 · 선상 팁 별도') + '<br>' +
       (크['조회'] ? 크['조회'] + ' 조회 기준이며, 선사 재고에 따라 바뀔 수 있어 예약 시 확정해 안내해 드립니다.' : '') +
       ' <span data-ratenote>' + euRateNote() + '</span>' +
       (크['선실출처'] ? '<br><span class="cz-src">' + 이스(크['선실출처']) + '</span>' : '') + '</div>' +
@@ -1521,6 +1521,12 @@ var EU_PLACES = {
   '세우타':      [-5.32, 35.89, 1, 'R', 'ES'],
   '탕헤르':      [-5.80, 35.78, 1, 'L', 'MA'],
   '카사블랑카':   [-7.58, 33.53, 1, 'R', 'MA'],
+  '사보나': [  8.48, 44.31, 1, 'R', 'IT'],
+  '튀니스': [ 10.31, 36.82, 1, 'R', 'TN'],
+  '제노바': [  8.92, 44.41, 1, 'L', 'IT'],
+  '메시나': [ 15.56, 38.19, 1, 'R', 'IT'],
+  '푸에르테벤투라': [-13.86, 28.50, 1, 'R', 'ES'],
+  '라 팔마': [-17.76, 28.68, 1, 'L', 'ES'],
   '세트': [  3.70, 43.40, 1, 'R', 'FR'],
   /* ── 크루즈 기항지 (위키백과 좌표) ── */
   '팔마 데 마요르카': [  2.65, 39.57, 1, 'R', 'ES'],
@@ -2588,7 +2594,7 @@ function euFlightInit(product, redraw){
   var 집합 = 앞 < 0;
   fetch('/flights.json', { cache:'no-cache' }).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }).then(function(D){
     if(!D || !D.편) return;
-    var 사 = D.항공사 || {}, 도시 = Object.assign({ FCO:'로마', ATH:'아테네', BLQ:'볼로냐', VCE:'베네치아' }, D.도시 || {}), 끔 = {}, 왕복만 = false;
+    var 사 = D.항공사 || {}, 도시 = Object.assign({ FCO:'로마', ATH:'아테네', BLQ:'볼로냐', VCE:'베네치아', TFN:'테네리페' }, D.도시 || {}), 끔 = {}, 왕복만 = false;
     var 시작 = 날짜(D.시작), 끝 = 날짜(D.끝);
     var 요일 = ['일','월','화','수','목','금','토'];
     function 날짜(iso){ var a = String(iso).split('-').map(Number); return new Date(a[0], a[1]-1, a[2]); }
