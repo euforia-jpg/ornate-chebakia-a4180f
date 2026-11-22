@@ -653,6 +653,16 @@ const 직접표 = {
   "란사로테 — 화산섬 · 티만파야 국립공원": "Timanfaya National Park",
   "그란 카나리아 — 라스 팔마스 구시가지 · 카나리아 해변": "Vegueta, Las Palmas de Gran Canaria",
   "라 팔마 — 「아름다운 섬」 · 화산 분화구와 별빛 하늘": "Caldera de Taburiente National Park"
+ },
+ "cruise-costa-pacifica-italy-tunisia-morocco-13days-barcelona": {
+  "코스타 「파시피카」 — 콩코르디아급": "",
+  "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당": "Notre-Dame de la Garde, Marseille",
+  "사보나 — 리비에라 항구 도시 · 제노바 · 포르토피노 근교": "Portofino",
+  "나폴리 — 폼페이 · 카프리섬 · 나폴리 구시가지": "Pompeii Archaeological Park",
+  "팔레르모 — 노르만 왕궁 · 몬레알레 대성당": "Palermo Cathedral",
+  "튀니스 — 카르타고 유적 · 시디 부 사이드 하얀 마을": "Sidi Bou Said",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga"
  }
 };
 
