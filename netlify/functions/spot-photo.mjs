@@ -580,6 +580,31 @@ const 직접표 = {
   "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
   "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
   "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca"
+ },
+ "cruise-celestyal-spain-gibraltar-morocco-8days-lisbon": {
+  "셀레스티얼 「셀레스티얼 디스커버리」 — 주요 식사 · 기본 와이파이 포함": "",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga",
+  "지브롤터 — 지브롤터 바위산 · 야생 원숭이 · 해협 전망": "Rock of Gibraltar",
+  "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
+  "카디스 — 3,000년 항구 도시 · 세비야 대성당 · 스페인 광장까지 다녀올 수 있는 기항지": "Cádiz Cathedral"
+ },
+ "cruise-celestyal-portugal-morocco-france-8days-tarragona": {
+  "셀레스티얼 「셀레스티얼 디스커버리」 — 주요 식사 · 기본 와이파이 포함": "",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "발렌시아 — 예술과 과학의 도시 · 발렌시아 대성당 · 중앙시장": "City of Arts and Sciences, Valencia",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca",
+  "세트 — 운하가 흐르는 남프랑스 항구 마을 · 몽펠리에 근교": "Canal Royal, Sète"
+ },
+ "cruise-celestyal-iberia-odyssey-15days-tarragona": {
+  "셀레스티얼 「셀레스티얼 디스커버리」 — 주요 식사 · 기본 와이파이 포함": "",
+  "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지": "Alcazaba of Málaga",
+  "지브롤터 — 지브롤터 바위산 · 야생 원숭이 · 해협 전망": "Rock of Gibraltar",
+  "카사블랑카 — 바다 위에 세운 하산 2세 모스크 · 코르니슈 해안길": "Hassan II Mosque, Casablanca",
+  "카디스 — 3,000년 항구 도시 · 세비야 대성당 · 스페인 광장까지 다녀올 수 있는 기항지": "Cádiz Cathedral",
+  "리스본 — 벨렝 탑 · 알파마 골목 · 신트라까지": "Belém Tower",
+  "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나": "Kasbah Museum, Tangier",
+  "발렌시아 — 예술과 과학의 도시 · 발렌시아 대성당 · 중앙시장": "City of Arts and Sciences, Valencia",
+  "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성": "Palma Cathedral, Mallorca"
  }
 };
 
