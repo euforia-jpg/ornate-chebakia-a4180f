@@ -22,3 +22,8 @@
 # 메시지는 보내지 않습니다.
 [functions."kakao-keepalive"]
   schedule = "@daily"
+
+# 인스타그램 자동 게시 (하루 1개)
+# 매시 정각에 깨어나되, 실제로 올리는 시각은 data/insta-auto.json 의 hour(마드리드)로 정합니다.
+[functions."insta-cron"]
+  schedule = "0 * * * *"
