@@ -133,7 +133,7 @@ function madridNow(now) {
   const DAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
   return {
     day: DAYS[p.weekday],
-    hour: Number(p.hour),
+    hour: Number(p.hour) % 24,   /* 자정이 "24" 로 나오는 환경 대비 */
     date: p.year + '-' + p.month + '-' + p.day,
   };
 }
@@ -279,9 +279,9 @@ async function 블로그사진(id, 글) {
   return { 사진: '/og-image.png', 상품: '', 근거: '대표 사진' };
 }
 
-function 블로그글(글) {
-  const 요약 = 글.요약.length > 110 ? 글.요약.slice(0, 110).replace(/\s+\S*$/, '') + '…' : 글.요약;
-  const t = '📝 블로그 새 글\n' + 글.제목 + '\n\n' + 요약 + '\n\n👉 ' + 글.주소 + '\n\n#유포리아투어 #스페인여행';
+function 블로그글(글, 링크본문) {
+  const 요약 = 문장끝(글.요약, 160);
+  const t = 글.제목 + '\n\n' + 요약 + '\n\n' + (링크본문 ? '👉 ' + 글.주소 : '전체 글은 첫 댓글에 남겨 둘게요. 여러분은 어떻게 다니셨나요?') + '\n\n' + 태그;
   return t.length > 500 ? t.slice(0, 500) : t;
 }
 
@@ -292,6 +292,96 @@ async function 블로그기록읽기(창고) {
 async function 블로그기록쓰기(창고, 기록) {
   try { 기록.posted = (기록.posted || []).slice(-60); await 창고.setJSON('blog/state', 기록); }
   catch (e) { console.error('[쓰레드 자동] 블로그 기록 저장 실패:', e.message); }
+}
+
+
+/*
+  ===========================================================
+  글 형식 개편 (2026-11-22 김 지시 — 조회수 올리기)
+  -----------------------------------------------------------
+  · 상품 글: 첫 줄은 말을 거는 한 줄(훅) → 상품명 → 한두 문장 → 일정·요금 → 질문.
+    주제 태그는 하나만(#스페인여행). 쓰레드는 글 하나에 태그 하나만 인정합니다.
+    링크는 본문에 넣지 않고 「첫 댓글」로 답니다.
+  · 하루 3개 중 상품은 productHours 시각 한 번뿐, 나머지는 현지 정보 글
+    (data/threads-tips.json, 광고 없음 · 질문으로 끝남).
+  · 댓글 달기가 실패하면(권한 없음 등) 저장소에 표시해 두고, 7일 동안은 링크를 본문 끝에 붙입니다.
+  ===========================================================
+*/
+const 태그 = '#스페인여행';
+
+function 문장끝(s, max) {
+  s = String(s || '').replace(/\s+/g, ' ').trim();
+  if (!s) return '';
+  const cut = s.length > max ? s.slice(0, max) : s;
+  let best = -1;
+  ['요.', '다.', '. ', '!', '?'].forEach(function (m) { const i = cut.lastIndexOf(m); if (i > best) best = i + (m === '. ' ? 1 : m.length); });
+  if (/[.!?]$/.test(cut) && cut.length === s.length) return cut;
+  if (best > 20) return cut.slice(0, best).trim();
+  const sp = cut.lastIndexOf(' ');
+  return (sp > 20 ? cut.slice(0, sp) : cut).trim() + '…';
+}
+
+function 섞기수(str) { let h = 0; String(str || '').split('').forEach(function (c) { h = (h * 31 + c.charCodeAt(0)) >>> 0; }); return h; }
+
+function 훅(title, slug) {
+  const t = String(title || '');
+  if (/크루즈/.test(t)) return '짐은 한 번만 풀고, 아침마다 다른 나라 항구에서 눈을 뜨는 여행입니다.';
+  if (/골프/.test(t)) return '스페인·포르투갈 남부는 겨울에도 비교적 따뜻해 라운드하기 좋습니다.';
+  if (/축구|라리가|경기|매치/.test(t)) return '스페인 여행에서 축구 경기 직관, 생각보다 어렵지 않습니다.';
+  if (/공항|픽업|샌딩|이동|차량|MOVE/i.test(t)) return '낯선 공항에서 택시 줄 서는 시간, 미리 줄일 수 있습니다.';
+  if (/포르투갈/.test(t)) return '스페인과 포르투갈을 한 번에 돈다면, 동선이 여행의 절반입니다.';
+  const 기본 = [
+    '스페인 일정 짜다가 막히셨다면, 이 코스부터 보세요.',
+    '마드리드에 사무실을 둔 현지 여행사가 직접 운영하는 일정입니다.',
+    '처음 가는 스페인, 동선만 잘 짜도 여행이 달라집니다.'
+  ];
+  return 기본[섞기수(slug || t) % 기본.length];
+}
+
+function 상품주소(item) {
+  const slug = String(item.slug || '').trim();
+  return slug ? SITE() + '/p/' + encodeURIComponent(slug) : SITE() + '/tours';
+}
+
+/* 상품 항목 → 쓰레드 글 (본문 + 첫 댓글) */
+function 상품글(item, 링크본문) {
+  const lines = String(item.text || '').split('\n').map(function (l) { return l.trim(); });
+  let title = String(item.title || '').trim() || String(lines[0] || '').replace(/^\[[^\]]*\]\s*/, '');
+  title = title.replace(/\s+/g, ' ');
+  const desc0 = lines.slice(1).find(function (l) { return l && !/^(일정|요금|예약|#)/.test(l); }) || '';
+  const desc = 문장끝(desc0, 150);
+  const info = lines.filter(function (l) { return /^(일정|요금)\s/.test(l); }).map(function (l) { return '· ' + l; });
+  const link = 상품주소(item);
+  const parts = [훅(title, item.slug), '', title];
+  if (desc) parts.push('', desc);
+  if (info.length) parts.push('', info.join('\n'));
+  parts.push('', 링크본문 ? '자세히 보기 👉 ' + link : '어떤 점이 가장 궁금하세요? 댓글로 물어봐 주세요.');
+  parts.push('', 태그);
+  let text = parts.join('\n');
+  if (text.length > 500) text = text.slice(0, 497) + '…';
+  return { text: text, image: item.image, reply: 링크본문 ? '' : '일정·요금 자세히 보기 👉 ' + link };
+}
+
+/* 현지 정보 글 목록 (광고 아님) */
+async function 팁목록() {
+  try {
+    const r = await fetch(SITE() + '/data/threads-tips.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) return [];
+    const j = await r.json();
+    return (Array.isArray(j) ? j : (j && j.items) || []).filter(function (x) { return x && !x.off && String(x.text || '').trim(); });
+  } catch (e) { return []; }
+}
+
+/* 댓글(답글)로 링크 달기 */
+async function 댓글달기(postId, text) {
+  const box = await th('/' + uid() + '/threads', { media_type: 'TEXT', text: String(text).slice(0, 500), reply_to_id: postId }, 'POST');
+  if (!box || !box.id) throw new Error('댓글 상자를 만들지 못했습니다');
+  await new Promise(function (r) { setTimeout(r, 1500); });
+  return th('/' + uid() + '/threads_publish', { creation_id: box.id }, 'POST');
+}
+async function 댓글고장(창고) {
+  if (!창고) return false;
+  try { const v = await 창고.get('reply/broken', { type: 'json' }); return !!(v && Date.now() - Date.parse(v.at) < 7 * 86400000); } catch (e) { return false; }
 }
 
 function imageUrl(image) {
@@ -321,7 +411,17 @@ async function publish(item) {
   if (겹침) return { dup: 겹침.id };
 
   const out = await th('/' + uid() + '/threads_publish', { creation_id: box.id }, 'POST');
-  return { id: out && out.id };
+  const id = out && out.id;
+  let replyErr = '';
+  if (id && item.reply) {
+    try { await 댓글달기(id, item.reply); }
+    catch (e) {
+      replyErr = e.message;
+      console.error('[쓰레드 자동] 첫 댓글(링크) 실패:', e.message);
+      if (item.__창고) { try { await item.__창고.setJSON('reply/broken', { at: new Date().toISOString(), why: e.message }); } catch (x) { /* 무시 */ } }
+    }
+  }
+  return { id: id, replyErr: replyErr };
 }
 
 /* 대쉬보드 로그인 토큰 확인 — 사람이 주소로 부를 때만 씁니다 */
@@ -407,6 +507,34 @@ exports.handler = async function (event) {
     }
   }
 
+  /* ---------- 이번 시각이 상품 차례인가, 현지 정보 글 차례인가 ---------- */
+  const anchor0 = /^\d{4}-\d{2}-\d{2}$/.test(cfg.anchor || '') ? cfg.anchor : '2026-01-05';
+  const 상품시각 = (Array.isArray(cfg.productHours) ? cfg.productHours : hours).map(Number).filter(function (h) { return hours.indexOf(h) !== -1; });
+  const 팁시각 = hours.filter(function (h) { return 상품시각.indexOf(h) === -1; });
+  const 종류 = q.kind === 'tip' ? 'tip' : q.kind === 'product' ? 'product' : (팁시각.indexOf(now.hour) !== -1 ? 'tip' : 'product');
+  const 창고0 = 자리창고(event);
+  const 링크본문 = cfg.linkReply === false || await 댓글고장(창고0);
+
+  if (종류 === 'tip') {
+    const 팁 = await 팁목록();
+    if (!팁.length) return json(200, { skipped: '현지 정보 글(data/threads-tips.json)이 없습니다' });
+    const k = Math.max(0, 팁시각.indexOf(now.hour));
+    const ti = (slotsSince(anchor0, now.date, days) * Math.max(1, 팁시각.length) + k) % 팁.length;
+    const tip = 팁[ti];
+    let tText = String(tip.text).trim();
+    if (tText.indexOf('#') === -1) tText += '\n\n' + 태그;
+    const tItem = { text: tText.slice(0, 500), image: tip.image || '', __창고: 창고0 };
+    const tPreview = { 현지: now, 종류: '현지 정보 글', 차례: ti + 1, 전체: 팁.length, 본문: tItem.text };
+    if (dry) return json(200, { dryRun: true, 올릴내용: tPreview });
+    const 먼저t = await 이미올렸나(tItem.text, 3);
+    if (먼저t) return json(200, { skipped: '같은 글을 3시간 안에 이미 올렸습니다 (중복 방지)', 기존글: 먼저t.id });
+    try {
+      const rt = await publish(tItem);
+      if (rt && rt.dup) return json(200, { skipped: '올리는 사이 같은 글이 먼저 올라가 멈췄습니다 (중복 방지)', 기존글: rt.dup });
+      return json(200, { ok: true, id: rt && rt.id, 올린내용: tPreview });
+    } catch (e) { return json(200, { error: '발행에 실패했습니다', detail: e.message, 올리려던내용: tPreview }); }
+  }
+
   /* ---------- 블로그 새 글이 있으면 이번 회차는 블로그 소개 (상품과 번갈아) ---------- */
   const 블로그 = 블로그아이디(cfg);
   const 블로그창고 = (블로그 && cfg.blog !== false) ? 자리창고(event) : null;
@@ -419,7 +547,7 @@ exports.handler = async function (event) {
       catch (e) { console.error('[쓰레드 자동] 블로그 RSS 확인 실패:', e.message); }
       if (글) {
         const 사진 = await 블로그사진(블로그, 글);
-        const bItem = { text: 블로그글(글), image: 사진.사진 };
+        const bItem = { text: 블로그글(글, 링크본문), image: 사진.사진, reply: 링크본문 ? '' : '전체 글 읽기 👉 ' + 글.주소, __창고: 창고0 };
         const bPreview = { 현지: now, 종류: '블로그 새 글', 제목: 글.제목, 주소: 글.주소,
           사진: imageUrl(사진.사진) + '  (' + 사진.근거 + (사진.상품 ? ' · ' + 사진.상품 : '') + ')', 본문: bItem.text };
         if (dry) return json(200, { dryRun: true, 올릴내용: bPreview });
@@ -456,7 +584,9 @@ exports.handler = async function (event) {
   const anchor = /^\d{4}-\d{2}-\d{2}$/.test(cfg.anchor || '') ? cfg.anchor : '2026-01-05';
   const 회차 = Math.max(0, hours.indexOf(now.hour));
   const idx = (slotsSince(anchor, now.date, days) * hours.length + 회차) % list.length;
-  const item = list[idx];
+  const item0 = list[idx];
+  const 글 = 상품글(item0, 링크본문);
+  const item = Object.assign({}, item0, { text: 글.text, reply: 글.reply, __창고: 창고0 });
 
   /* ---------- 계정 확인 (다른 계정이면 올리지 않습니다) ---------- */
   const want = String(process.env.THREADS_ACCOUNT || '').trim().replace(/^@/, '');
@@ -477,7 +607,7 @@ exports.handler = async function (event) {
     현지: now, 차례: idx + 1, 전체: list.length,
     상품: item.title || item.slug || '',
     사진: (imageUrl(item.image) || '(없음)') + (item.__card ? '  (상품카드 사진 자동)' : ''),
-    본문: String(item.text || '').slice(0, 120),
+    본문: item.text, 첫댓글: item.reply || '(링크 본문 포함)',
   };
 
   if (dry) return json(200, { dryRun: true, 올릴내용: preview });

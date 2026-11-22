@@ -6374,6 +6374,8 @@
     if(Array.isArray(auCfg.hours) && auCfg.hours.length) body.hours = auCfg.hours;
     if('blog' in auCfg) body.blog = auCfg.blog;
     if(auCfg.blogId) body.blogId = auCfg.blogId;
+    if(Array.isArray(auCfg.productHours)) body.productHours = auCfg.productHours;
+    if('linkReply' in auCfg) body.linkReply = auCfg.linkReply;
     api({ action:'save', file:'threadsauto', items:body, sha:auCfg.__sha })
       .then(function(j){
         auCfg.__sha = j.sha || null;
