@@ -60,4 +60,15 @@
 # 이 주소로 들어오면 my.html 이 열리고, 내용은 booking 함수가
 # 링크열쇠를 확인한 뒤에만 보여 줍니다. (메뉴 · 사이트맵에는 넣지 않습니다)
 # ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# 크루즈 선사 로고 (2026-11)
+#   /logo/cruise/ 폴더에 같은 이름의 파일을 올리시면 그 파일이 먼저 쓰이고,
+#   없을 때만 아래 위키미디어 공개 로고를 넷리파이가 대신 받아 보여 줍니다.
+#   (끝에 느낌표가 없어서 「파일이 있으면 파일 우선」입니다)
+# ─────────────────────────────────────────────────────────────
+/logo/cruise/royal-caribbean.svg   https://upload.wikimedia.org/wikipedia/commons/1/15/Royal_Caribbean_logo_%282024%29.svg  200
+/logo/cruise/msc.png               https://upload.wikimedia.org/wikipedia/commons/8/83/MSC_Cruises_Logo.png  200
+/logo/cruise/costa.svg             https://upload.wikimedia.org/wikipedia/commons/f/fc/Costa-logo-2021.svg  200
+/logo/cruise/celebrity.svg         https://upload.wikimedia.org/wikipedia/commons/e/ec/Celebrity-Cruises-Logo.svg  200
+
 /my/*                                          /my.html  200
