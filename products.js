@@ -13405,29 +13405,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://upload.wikimedia.org/wikipedia/commons/6/68/Costa_Pacifica_-_Cabin_6287_2011-05-29_036.jpg",
+          "사진설명": "예시 · 선실 내부 (코스타 파시피카)"
         },
         {
           "이름": "오션뷰",
           "크기": "",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://live.staticflickr.com/1967/30539554577_1c99dc6562_b.jpg",
+          "사진설명": "예시 · 오션뷰 1인 선실 (코스타 파시노사)"
         },
         {
           "이름": "발코니",
           "크기": "",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Costa_Favolosa_cabin_2.jpg/1280px-Costa_Favolosa_cabin_2.jpg",
+          "사진설명": "예시 · 발코니 선실 (코스타 파볼로사)"
         },
         {
           "이름": "스위트",
           "크기": "",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://live.staticflickr.com/5235/5898985404_4a7e3d2a2e_b.jpg",
+          "사진설명": "예시 · 스위트 (코스타 파볼로사)"
         }
       ],
       "출항": [
@@ -13534,7 +13534,7 @@ const PRODUCTS = [
       ],
       "마진": 1.15,
       "조회": "2026-11-22",
-      "선실출처": "선실 사진은 준비 중입니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다.",
+      "선실출처": "선실 사진은 코스타 크루즈 배들의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다. 사진: Kharlosluz (Wikimedia Commons, CC BY-SA 3.0) · Aunti Juli (Flickr, CC BY 2.0) · Rachmaninoff (Wikimedia Commons, CC BY-SA 4.0) · Michela Simoncini (Flickr, CC BY 2.0)",
       "배정보": {
         "톤수": "186,364 GT",
         "승객": "최대 6,554명",
@@ -13811,29 +13811,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://upload.wikimedia.org/wikipedia/commons/6/68/Costa_Pacifica_-_Cabin_6287_2011-05-29_036.jpg",
+          "사진설명": "예시 · 선실 내부 (코스타 파시피카)"
         },
         {
           "이름": "오션뷰",
           "크기": "",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://live.staticflickr.com/1967/30539554577_1c99dc6562_b.jpg",
+          "사진설명": "예시 · 오션뷰 1인 선실 (코스타 파시노사)"
         },
         {
           "이름": "발코니",
           "크기": "",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Costa_Favolosa_cabin_2.jpg/1280px-Costa_Favolosa_cabin_2.jpg",
+          "사진설명": "예시 · 발코니 선실 (코스타 파볼로사)"
         },
         {
           "이름": "스위트",
           "크기": "",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://live.staticflickr.com/5235/5898985404_4a7e3d2a2e_b.jpg",
+          "사진설명": "예시 · 스위트 (코스타 파볼로사)"
         }
       ],
       "출항": [
@@ -13900,7 +13900,7 @@ const PRODUCTS = [
       ],
       "마진": 1.15,
       "조회": "2026-11-22",
-      "선실출처": "선실 사진은 준비 중입니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다.",
+      "선실출처": "선실 사진은 코스타 크루즈 배들의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다. 사진: Kharlosluz (Wikimedia Commons, CC BY-SA 3.0) · Aunti Juli (Flickr, CC BY 2.0) · Rachmaninoff (Wikimedia Commons, CC BY-SA 4.0) · Michela Simoncini (Flickr, CC BY 2.0)",
       "배정보": {
         "톤수": "114,500 GT",
         "승객": "최대 3,780명",
@@ -16109,29 +16109,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://upload.wikimedia.org/wikipedia/commons/6/68/Costa_Pacifica_-_Cabin_6287_2011-05-29_036.jpg",
+          "사진설명": "예시 · 선실 내부 (코스타 파시피카)"
         },
         {
           "이름": "오션뷰",
           "크기": "",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://live.staticflickr.com/1967/30539554577_1c99dc6562_b.jpg",
+          "사진설명": "예시 · 오션뷰 1인 선실 (코스타 파시노사)"
         },
         {
           "이름": "발코니",
           "크기": "",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Costa_Favolosa_cabin_2.jpg/1280px-Costa_Favolosa_cabin_2.jpg",
+          "사진설명": "예시 · 발코니 선실 (코스타 파볼로사)"
         },
         {
           "이름": "스위트",
           "크기": "",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://live.staticflickr.com/5235/5898985404_4a7e3d2a2e_b.jpg",
+          "사진설명": "예시 · 스위트 (코스타 파볼로사)"
         }
       ],
       "출항": [
@@ -16158,7 +16158,7 @@ const PRODUCTS = [
       ],
       "마진": 1.15,
       "조회": "2026-11-22",
-      "선실출처": "선실 사진은 준비 중입니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다.",
+      "선실출처": "선실 사진은 코스타 크루즈 배들의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다. 사진: Kharlosluz (Wikimedia Commons, CC BY-SA 3.0) · Aunti Juli (Flickr, CC BY 2.0) · Rachmaninoff (Wikimedia Commons, CC BY-SA 4.0) · Michela Simoncini (Flickr, CC BY 2.0)",
       "배정보": {
         "톤수": "114,500 GT",
         "승객": "최대 3,780명",
