@@ -823,13 +823,16 @@ function renderFilters(){
   });
 }
 
+function 크루즈박수(p){ const m = /(\d+)\s*박/.exec(p.days || ''); return m ? +m[1] : 999; }
+function 첫출항(p){ const o = (p['크루즈'] && p['크루즈']['출항']) || []; return o.map(x => x['날']).sort()[0] || '9999'; }
 function renderGrid(){
   const grid = document.getElementById('tourGrid');
   let base = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cats.includes(activeFilter));
   if (activeFilter === 'transfer' && (rfFrom || rfTo)){
     base = base.filter(p => { const e = 차량양끝(p); return (!rfFrom || e[0] === rfFrom) && (!rfTo || e[1] === rfTo); });
   }
-  const list = shuffled(base);
+  /* 크루즈 탭은 박수가 짧은 상품부터 (같은 박수는 가까운 출항일 순) — 2026-11 */
+  const list = activeFilter === 'cruise' ? base.slice().sort((x, y) => 크루즈박수(x) - 크루즈박수(y) || 첫출항(x).localeCompare(첫출항(y))) : shuffled(base);
   grid.innerHTML = list.map(p => `
     <a class="tour-card pc ${p.topClass}${p['카드사진'] ? ' has-shot' : ''}" href="${productLink(p)}">
       <div class="pc-bg"${카드사진(p)}></div>

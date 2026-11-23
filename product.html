@@ -1266,7 +1266,8 @@ function euFareCalc(f, 설, 제휴){
      마진:1.15, 조회:'2026-11-07'
    }
    보이는 값 = 선사 요금 × 마진 (5유로 단위 올림). 사진이 없으면 「선실 사진 준비 중」 칸이 대신 섭니다. */
-function euCruisePrice(v, 마진){ return v == null ? null : Math.ceil(v * (마진 || 1) / 5) * 5; }
+/* 마진 1 = 선사 공식 홈페이지 요금 그대로 (반올림 없이) · 그 밖에는 마진을 곱해 5유로 단위로 올림 */
+function euCruisePrice(v, 마진){ if(v == null) return null; if(!마진 || 마진 === 1) return v; return Math.ceil(v * 마진 / 5) * 5; }
 function euCruiseFare(product, 제휴){
   var 크 = product['크루즈'], 출 = 크['출항'] || [], 선 = 크['선실'] || [];
   var 마진 = 크['마진'] || 1;
