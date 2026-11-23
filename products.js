@@ -7435,7 +7435,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 카디스(세비야) · 카사블랑카 · 탕헤르 · 말라가<br>\n📅 출항 3회 (2027년) — 5.11 · 7.16 · 10.14",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_cruise_ship.jpg\" target=\"_blank\" rel=\"noopener\">Rene Cortin</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 마리너 오브 더 시즈 — 보이저급 · 승객 약 3,300명",
         "카디스 기항 · 세비야 스페인 광장 · 세비야 대성당 (세계유산)",
@@ -7719,82 +7719,36 @@ const PRODUCTS = [
           }
         ]
       },
-      "사진": [
-        {
-          "주소": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Mariner_of_the_Seas_cruise_ship.jpg/1280px-Mariner_of_the_Seas_cruise_ship.jpg",
-          "제목": "마리너 오브 더 시즈",
-          "말": "이번 크루즈의 배 — 2023년 모습",
-          "누구": "Rene Cortin",
-          "원본": "https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_cruise_ship.jpg",
-          "허가": "CC BY-SA 4.0",
-          "허가주소": "https://creativecommons.org/licenses/by-sa/4.0"
-        },
-        {
-          "주소": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "제목": "주니어 스위트 — 침실",
-          "말": "선실 예시 · 같은 보이저급 자매선 「익스플로러 오브 더 시즈」",
-          "누구": "Mitch Ames",
-          "원본": "https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_junior_suite_02.jpg",
-          "허가": "CC BY-SA 4.0",
-          "허가주소": "https://creativecommons.org/licenses/by-sa/4.0"
-        },
-        {
-          "주소": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Explorer_of_the_Seas_junior_suite_05.jpg/960px-Explorer_of_the_Seas_junior_suite_05.jpg",
-          "제목": "발코니에서 보는 바다",
-          "말": "선실 예시 · 자매선 주니어 스위트 발코니",
-          "누구": "Mitch Ames",
-          "원본": "https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_junior_suite_05.jpg",
-          "허가": "CC BY-SA 4.0",
-          "허가주소": "https://creativecommons.org/licenses/by-sa/4.0"
-        },
-        {
-          "주소": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Explorer_of_the_Seas_junior_suite_04.jpg/960px-Explorer_of_the_Seas_junior_suite_04.jpg",
-          "제목": "주니어 스위트 — 화장대 · 수납",
-          "말": "선실 예시 · 자매선 「익스플로러 오브 더 시즈」",
-          "누구": "Mitch Ames",
-          "원본": "https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_junior_suite_04.jpg",
-          "허가": "CC BY-SA 4.0",
-          "허가주소": "https://creativecommons.org/licenses/by-sa/4.0"
-        },
-        {
-          "주소": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/RockwallMS.JPG/960px-RockwallMS.JPG",
-          "제목": "갑판 위 암벽 등반",
-          "말": "마리너 오브 더 시즈 선내 시설",
-          "누구": "Saskjon",
-          "원본": "https://commons.wikimedia.org/wiki/File:RockwallMS.JPG",
-          "허가": "CC BY-SA 3.0",
-          "허가주소": "https://creativecommons.org/licenses/by-sa/3.0"
-        }
-      ],
-      "사진안내": "선실 사진은 같은 보이저급 자매선의 주니어 스위트 예시입니다. 실제 선실의 배치와 꾸밈은 선실 번호마다 다를 수 있습니다. 내측 · 오션뷰 선실은 자유 이용 사진이 없어 선사 안내로 대신합니다.",
+      "사진": [{"주소": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/ships/mariner/mariner-of-the-seas-docked-pier-aerial.jpg?wid=1600", "제목": "마리너 오브 더 시즈", "말": "이번 크루즈의 배", "누구": "Royal Caribbean International", "원본": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas", "허가": "공식 사진", "허가주소": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas"}, {"주소": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-js.jpg", "제목": "주니어 스위트", "말": "마리너 오브 더 시즈 · 공식 선실 사진", "누구": "Royal Caribbean International", "원본": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas", "허가": "공식 사진", "허가주소": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas"}, {"주소": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-d.jpg", "제목": "발코니 선실", "말": "마리너 오브 더 시즈 · 공식 선실 사진", "누구": "Royal Caribbean International", "원본": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas", "허가": "공식 사진", "허가주소": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas"}, {"주소": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-n.jpg", "제목": "오션뷰 선실", "말": "마리너 오브 더 시즈 · 공식 선실 사진", "누구": "Royal Caribbean International", "원본": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas", "허가": "공식 사진", "허가주소": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas"}, {"주소": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-v.jpg", "제목": "내측 선실", "말": "마리너 오브 더 시즈 · 공식 선실 사진", "누구": "Royal Caribbean International", "원본": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas", "허가": "공식 사진", "허가주소": "https://www.royalcaribbean.com/esp/es/cruise-ships/mariner-of-the-seas"}],
+      "사진안내": "사진은 로열캐리비안 공식 홈페이지 사진입니다. 실제 선실의 배치와 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "선실": [
         {
           "이름": "내측",
           "크기": "9.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-v.jpg",
+          "사진설명": "내측 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-n.jpg",
+          "사진설명": "오션뷰 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-d.jpg",
+          "사진설명": "발코니 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-js.jpg",
+          "사진설명": "주니어 스위트 · 마리너 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -7819,7 +7773,7 @@ const PRODUCTS = [
       "선사": "로열캐리비안",
       "배": "마리너 오브 더 시즈",
       "등급": "보이저급",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "139,863 GT",
         "승객": "3,114명",
@@ -7854,7 +7808,7 @@ const PRODUCTS = [
         "출처": "선박 정보: 위키백과 영문판 (2026년 11월 확인) · 선내 시설은 선사 사정에 따라 바뀔 수 있습니다."
       }
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Mariner_of_the_Seas_cruise_ship.jpg/1280px-Mariner_of_the_Seas_cruise_ship.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/ships/mariner/mariner-of-the-seas-docked-pier-aerial.jpg?wid=1600",
     "항공": {
       "IN": "BCN",
       "OUT": "BCN",
@@ -7881,7 +7835,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 8박 9일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 탕헤르 · 카사블랑카 · 카디스(세비야) · 말라가 · 팔마 데 마요르카<br>\n📅 출항 1회 (2027년) — 6.24",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_04-04-2017.jpg\" target=\"_blank\" rel=\"noopener\">LN9267</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나",
@@ -7906,7 +7860,7 @@ const PRODUCTS = [
       ],
       "duration": "8박 9일 (바르셀로나 승선 · 바르셀로나 하선 · 출항 1회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Mariner_of_the_Seas_04-04-2017.jpg/1280px-Mariner_of_the_Seas_04-04-2017.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/royal/data/ship/mariner-of-the-seas/mariner-of-the-seas-aerial-view-skypad.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -8125,29 +8079,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "9.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-v.jpg",
+          "사진설명": "내측 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-n.jpg",
+          "사진설명": "오션뷰 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-d.jpg",
+          "사진설명": "발코니 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-js.jpg",
+          "사진설명": "주니어 스위트 · 마리너 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -8159,7 +8113,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "139,863 GT",
         "승객": "3,114명",
@@ -8220,7 +8174,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 9박 10일 · 바르셀로나 승선 → 리스본 하선<br>\n⚓ 말라가 · 탕헤르 · 카사블랑카 · 마데이라 · 포르투<br>\n📅 출항 1회 (2027년) — 5.18",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Bon_Voyage_(3834660471).jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지",
@@ -8245,7 +8199,7 @@ const PRODUCTS = [
       ],
       "duration": "9박 10일 (바르셀로나 승선 · 리스본 하선 · 출항 1회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Bon_Voyage_%283834660471%29.jpg/1280px-Bon_Voyage_%283834660471%29.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/ships/mariner/mariner-of-the-seas-docked-pier-aerial.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -8475,29 +8429,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "9.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-v.jpg",
+          "사진설명": "내측 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-n.jpg",
+          "사진설명": "오션뷰 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-d.jpg",
+          "사진설명": "발코니 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-js.jpg",
+          "사진설명": "주니어 스위트 · 마리너 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -8509,7 +8463,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "139,863 GT",
         "승객": "3,114명",
@@ -8570,7 +8524,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「레전드 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 팔마 데 마요르카 · 마르세유 · 피렌체/피사 · 로마 · 나폴리<br>\n📅 출항 25회 (2027년) — 5.9 · 5.16 · 5.23 · 5.30 · 6.6 · 6.13 외",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 같은 아이콘급 자매선 아이콘 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Icon_of_the_Seas.jpg\" target=\"_blank\" rel=\"noopener\">Chakie2</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 레전드 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「레전드 오브 더 시즈」 — 아이콘급 · 2026년 취항",
         "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성",
@@ -8595,7 +8549,7 @@ const PRODUCTS = [
       ],
       "duration": "7박 8일 (바르셀로나 승선 · 바르셀로나 하선 · 출항 25회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Icon_of_the_Seas.jpg/1280px-Icon_of_the_Seas.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/ships/legend/legend-of-the-seas-ship-aerial-aft.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -8794,29 +8748,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "14.5 ~ 26.5㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/icon/interior/ic-v4-1.jpg",
+          "사진설명": "내측 선실 · 아이콘급 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "14.9 ~ 25.8㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/icon/ocean-view/ic-n1-1.jpg",
+          "사진설명": "오션뷰 선실 · 아이콘급 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.1 ~ 34.8㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/icon/infinite-ocean-view-balcony/ic-i1-1.jpg",
+          "사진설명": "인피니트 발코니 · 아이콘급 (공식 사진)"
         },
         {
           "이름": "로열 스위트 클래스",
           "크기": "25.1 ~ 194.0㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/icon/grand-suite/ic-gs-1.jpg",
+          "사진설명": "그랜드 스위트 · 아이콘급 (공식 사진)"
         }
       ],
       "출항": [
@@ -8948,7 +8902,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 — 레전드 오브 더 시즈는 공식 홈페이지가 같은 아이콘급 선실 사진으로 안내합니다. 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "승객": "5,610명",
         "승무원": "2,350명",
@@ -9010,7 +8964,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 9박 10일 · 바르셀로나 승선 → 리스본 하선<br>\n⚓ 탕헤르 · 카사블랑카 · 마데이라(1박 정박) · 포르투<br>\n📅 출항 1회 (2027년) — 9.25",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Full_Speed_Ahead_!_(3837134913).jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나",
@@ -9034,7 +8988,7 @@ const PRODUCTS = [
       ],
       "duration": "9박 10일 (바르셀로나 승선 · 리스본 하선 · 출항 1회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Full_Speed_Ahead_%21_%283837134913%29.jpg/1280px-Full_Speed_Ahead_%21_%283837134913%29.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/royal/data/ship/mariner-of-the-seas/mariner-of-the-seas-aerial-view-skypad.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -9265,29 +9219,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "9.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-v.jpg",
+          "사진설명": "내측 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-n.jpg",
+          "사진설명": "오션뷰 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-d.jpg",
+          "사진설명": "발코니 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-js.jpg",
+          "사진설명": "주니어 스위트 · 마리너 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -9299,7 +9253,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "139,863 GT",
         "승객": "3,114명",
@@ -9360,7 +9314,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「익스플로러 오브 더 시즈」 · 7박 8일 · 로마(치비타베키아) 승선 → 바르셀로나 하선<br>\n⚓ 피렌체/피사 · 산타 마르게리타 · 니스 · 마르세유 · 팔마 데 마요르카<br>\n📅 출항 5회 (2027년) — 5.24 · 6.14 · 7.26 · 8.16 · 9.6",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_Bayonne_(cropped).jpg\" target=\"_blank\" rel=\"noopener\">slgc (Flickr)</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급",
         "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸",
@@ -9386,7 +9340,7 @@ const PRODUCTS = [
       ],
       "duration": "7박 8일 (로마(치비타베키아) 승선 · 바르셀로나 하선 · 출항 5회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Explorer_of_the_Seas_Bayonne_%28cropped%29.jpg/1280px-Explorer_of_the_Seas_Bayonne_%28cropped%29.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/content/fleet-landing/explorer-of-the-seas-aerial.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -9582,29 +9536,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "14.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-v-interior-8115-living.jpg",
+          "사진설명": "내측 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-n-ocean-view-2614-living.jpg.jpg",
+          "사진설명": "오션뷰 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-d-balcony-1538-living.jpg",
+          "사진설명": "발코니 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-js-suite-9548-living.jpg",
+          "사진설명": "주니어 스위트 · 익스플로러 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -9636,7 +9590,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "138,194 GT",
         "승객": "3,286명",
@@ -9698,7 +9652,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「익스플로러 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 피레우스 하선<br>\n⚓ 발레타(몰타) · 산토리니 · 쿠샤다스(에페소) · 미코노스 · 아테네<br>\n📅 출항 1회 (2027년) — 8.23",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_(7328422294).jpg\" target=\"_blank\" rel=\"noopener\">Dale Morton</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급",
         "발레타 — 성 요한 대성당 · 요새 도시 발레타 구시가지",
@@ -9722,7 +9676,7 @@ const PRODUCTS = [
       ],
       "duration": "7박 8일 (바르셀로나 승선 · 피레우스 하선 · 출항 1회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Explorer_of_the_Seas_%287328422294%29.jpg/1280px-Explorer_of_the_Seas_%287328422294%29.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/content/fleet-landing/explorer-of-the-seas-aerial.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -9915,29 +9869,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "14.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-v-interior-8115-living.jpg",
+          "사진설명": "내측 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-n-ocean-view-2614-living.jpg.jpg",
+          "사진설명": "오션뷰 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-d-balcony-1538-living.jpg",
+          "사진설명": "발코니 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-js-suite-9548-living.jpg",
+          "사진설명": "주니어 스위트 · 익스플로러 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -9949,7 +9903,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "138,194 GT",
         "승객": "3,286명",
@@ -10011,7 +9965,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 10박 11일 · 바르셀로나 승선 → 리스본 하선<br>\n⚓ 팔마 데 마요르카 · 말라가 · 탕헤르 · 카사블랑카 · 마데이라 · 포르투<br>\n📅 출항 1회 (2027년) — 9.6",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_04-04-2017(2).jpg\" target=\"_blank\" rel=\"noopener\">LN9267</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성",
@@ -10037,7 +9991,7 @@ const PRODUCTS = [
       ],
       "duration": "10박 11일 (바르셀로나 승선 · 리스본 하선 · 출항 1회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Mariner_of_the_Seas_04-04-2017%282%29.jpg/1280px-Mariner_of_the_Seas_04-04-2017%282%29.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/ships/mariner/mariner-of-the-seas-docked-pier-aerial.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -10290,29 +10244,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "9.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-v.jpg",
+          "사진설명": "내측 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-n.jpg",
+          "사진설명": "오션뷰 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-d.jpg",
+          "사진설명": "발코니 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-js.jpg",
+          "사진설명": "주니어 스위트 · 마리너 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -10324,7 +10278,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "139,863 GT",
         "승객": "3,114명",
@@ -10385,7 +10339,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 10박 11일 · 리스본 승선 → 바르셀로나 하선<br>\n⚓ 마데이라 · 테네리페 · 그란 카나리아 · 카사블랑카 · 탕헤르 · 팔마 데 마요르카<br>\n📅 출항 1회 (2027년) — 10.4",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_leavin_San_Pedro_Harbor.jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "마데이라 — 대서양의 꽃섬 · 푼샬 구시가지",
@@ -10411,7 +10365,7 @@ const PRODUCTS = [
       ],
       "duration": "10박 11일 (리스본 승선 · 바르셀로나 하선 · 출항 1회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Mariner_of_the_Seas_leavin_San_Pedro_Harbor.jpg/1280px-Mariner_of_the_Seas_leavin_San_Pedro_Harbor.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/royal/data/ship/mariner-of-the-seas/mariner-of-the-seas-aerial-view-skypad.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -10662,29 +10616,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "9.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-v.jpg",
+          "사진설명": "내측 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-n.jpg",
+          "사진설명": "오션뷰 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-d.jpg",
+          "사진설명": "발코니 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-js.jpg",
+          "사진설명": "주니어 스위트 · 마리너 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -10696,7 +10650,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "139,863 GT",
         "승객": "3,114명",
@@ -10757,7 +10711,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「익스플로러 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 라벤나 하선<br>\n⚓ 툴롱 · 아작시오 · 로마 · 아말피 해안 · 시칠리아 · 라벤나<br>\n📅 출항 2회 (2027년) — 5.10 · 9.13",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_seas_in_Port_Melbourne.jpg\" target=\"_blank\" rel=\"noopener\">Michael Sandy Peters</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급",
         "툴롱 — 프로방스 해안 · 지중해 군항 도시",
@@ -10782,7 +10736,7 @@ const PRODUCTS = [
       ],
       "duration": "7박 8일 (바르셀로나 승선 · 라벤나 하선 · 출항 2회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Explorer_of_the_seas_in_Port_Melbourne.jpg/1280px-Explorer_of_the_seas_in_Port_Melbourne.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/content/fleet-landing/explorer-of-the-seas-aerial.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -10981,29 +10935,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "14.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-v-interior-8115-living.jpg",
+          "사진설명": "내측 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-n-ocean-view-2614-living.jpg.jpg",
+          "사진설명": "오션뷰 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-d-balcony-1538-living.jpg",
+          "사진설명": "발코니 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-js-suite-9548-living.jpg",
+          "사진설명": "주니어 스위트 · 익스플로러 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -11020,7 +10974,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "138,194 GT",
         "승객": "3,286명",
@@ -11082,7 +11036,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「익스플로러 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 피레우스 하선<br>\n⚓ 팔레르모 · 미코노스 · 쿠샤다스(에페소) · 산토리니 · 아테네<br>\n📅 출항 1회 (2027년) — 5.31",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_seas_in_Port_Melbourne.jpg\" target=\"_blank\" rel=\"noopener\">Michael Sandy Peters</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급",
         "팔레르모 — 노르만 왕궁 · 몬레알레 대성당",
@@ -11106,7 +11060,7 @@ const PRODUCTS = [
       ],
       "duration": "7박 8일 (바르셀로나 승선 · 피레우스 하선 · 출항 1회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Explorer_of_the_seas_in_Port_Melbourne.jpg/1280px-Explorer_of_the_seas_in_Port_Melbourne.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/content/fleet-landing/explorer-of-the-seas-aerial.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -11302,29 +11256,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "14.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-v-interior-8115-living.jpg",
+          "사진설명": "내측 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-n-ocean-view-2614-living.jpg.jpg",
+          "사진설명": "오션뷰 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-d-balcony-1538-living.jpg",
+          "사진설명": "발코니 선실 · 익스플로러 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/media/shared_assets/images/fleet/voyager-class/explorer-of-the-seas/staterooms/nv-ex-js-suite-9548-living.jpg",
+          "사진설명": "주니어 스위트 · 익스플로러 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -11336,7 +11290,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "138,194 GT",
         "승객": "3,286명",
@@ -11398,7 +11352,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 8박 9일 · 바르셀로나 승선 → 치비타베키아 하선<br>\n⚓ 팔마 데 마요르카 · 툴롱 · 니스 · 피렌체/피사 · 시칠리아 · 아말피 해안 · 로마<br>\n📅 출항 1회 (2027년) — 8.20",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_cruise_ship.jpg\" target=\"_blank\" rel=\"noopener\">Rene Cortin</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: Royal Caribbean International (로열캐리비안 공식 홈페이지)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성",
@@ -11424,7 +11378,7 @@ const PRODUCTS = [
       ],
       "duration": "8박 9일 (바르셀로나 승선 · 치비타베키아 하선 · 출항 1회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Mariner_of_the_Seas_cruise_ship.jpg/1280px-Mariner_of_the_Seas_cruise_ship.jpg",
+    "카드사진": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/ships/mariner/mariner-of-the-seas-docked-pier-aerial.jpg?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -11642,29 +11596,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "9.9 ~ 23.8㎡",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://live.staticflickr.com/4013/4463572645_c90218d91c_b.jpg",
-          "사진설명": "예시 · 내측 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-v.jpg",
+          "사진설명": "내측 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "15.0 ~ 30.5㎡",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "https://live.staticflickr.com/4065/4568709940_c8f6a536e6_b.jpg",
-          "사진설명": "예시 · 오션뷰 선실 (래디언스 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-n.jpg",
+          "사진설명": "오션뷰 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "18.4 ~ 19.2㎡",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/8111/8484261036_58e3a8a707_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (프리덤 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-d.jpg",
+          "사진설명": "발코니 선실 · 마리너 오브 더 시즈 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "25.7 ~ 50.8㎡",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Explorer_of_the_Seas_junior_suite_02.jpg/960px-Explorer_of_the_Seas_junior_suite_02.jpg",
-          "사진설명": "예시 · 주니어 스위트 (익스플로러 오브 더 시즈)"
+          "사진": "https://www.royalcaribbean.com/content/dam/royal/booking-funnel/stateroom-image-gallery/mariner/assets/ma-js.jpg",
+          "사진설명": "주니어 스위트 · 마리너 오브 더 시즈 (공식 사진)"
         }
       ],
       "출항": [
@@ -11676,7 +11630,7 @@ const PRODUCTS = [
       ],
       "마진": 1,
       "조회": "2026-11-23",
-      "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
+      "선실출처": "선실 사진: 로열캐리비안 공식 홈페이지 (선실 종류별 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다.",
       "배정보": {
         "톤수": "139,863 GT",
         "승객": "3,114명",
