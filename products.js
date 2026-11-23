@@ -7425,7 +7425,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · MOROCCO",
     "days": "7박 8일",
-    "price": "1인 740 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,170 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 스페인 · 모로코] 로열캐리비안 마리너호 바르셀로나 왕복 7박 8일",
     "summary": "로열캐리비안 「마리너 오브 더 시즈」를 타고 바르셀로나에서 출발해 카디스(세비야) · 카사블랑카 · 탕헤르 · 말라가를 돌아오는 크루즈예요. 기항지마다 전용 차량 투어를 골라 더하실 수 있어요.",
     "tags": [
@@ -7435,7 +7435,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 카디스(세비야) · 카사블랑카 · 탕헤르 · 말라가<br>\n📅 출항 3회 (2027년) — 5.11 · 7.16 · 10.14",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_cruise_ship.jpg\" target=\"_blank\" rel=\"noopener\">Rene Cortin</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_cruise_ship.jpg\" target=\"_blank\" rel=\"noopener\">Rene Cortin</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 마리너 오브 더 시즈 — 보이저급 · 승객 약 3,300명",
         "카디스 기항 · 세비야 스페인 광장 · 세비야 대성당 (세계유산)",
@@ -7800,37 +7800,22 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-05-11",
-          "값": [
-            642,
-            801,
-            904,
-            1527
-          ],
+          "값": [899, 1104, 1555, 2134],
           "메모": ""
         },
         {
           "날": "2027-07-16",
-          "값": [
-            900,
-            1226,
-            1482,
-            2327
-          ],
+          "값": [1245, 1755, 2453, 3501],
           "메모": "7월 · 10월 출항은 탕헤르 → 카사블랑카 → 카디스 → 말라가 순서로 들릅니다."
         },
         {
           "날": "2027-10-14",
-          "값": [
-            838,
-            972,
-            1236,
-            1732
-          ],
+          "값": [1185, 1457, 1916, 2887],
           "메모": "7월 · 10월 출항은 탕헤르 → 카사블랑카 → 카디스 → 말라가 순서로 들릅니다."
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선사": "로열캐리비안",
       "배": "마리너 오브 더 시즈",
       "등급": "보이저급",
@@ -7886,7 +7871,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · MOROCCO",
     "days": "8박 9일",
-    "price": "1인 900 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,490 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 스페인 · 모로코 · 마요르카] 로열캐리비안 마리너호 바르셀로나 왕복 8박 9일",
     "summary": "로열캐리비안 「마리너 오브 더 시즈」로 바르셀로나에서 출발해 탕헤르 · 카사블랑카 · 카디스(세비야) · 말라가 · 팔마 데 마요르카를 돌아오는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -7896,7 +7881,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 8박 9일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 탕헤르 · 카사블랑카 · 카디스(세비야) · 말라가 · 팔마 데 마요르카<br>\n📅 출항 1회 (2027년) — 6.24",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_04-04-2017.jpg\" target=\"_blank\" rel=\"noopener\">LN9267</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_04-04-2017.jpg\" target=\"_blank\" rel=\"noopener\">LN9267</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나",
@@ -8168,17 +8153,12 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-06-24",
-          "값": [
-            780,
-            996,
-            1152,
-            2498
-          ],
+          "값": [1143, 1353, 2036, 3989],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "139,863 GT",
@@ -8230,7 +8210,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · MOROCCO · PORTUGAL",
     "days": "9박 10일",
-    "price": "1인 1,010 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,575 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 스페인 · 모로코 · 마데이라 · 포르투갈] 로열캐리비안 마리너호 바르셀로나 → 리스본 9박 10일",
     "summary": "로열캐리비안 「마리너 오브 더 시즈」로 바르셀로나에서 출발해 말라가 · 탕헤르 · 카사블랑카 · 마데이라 · 포르투를 지나 리스본에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -8240,7 +8220,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 9박 10일 · 바르셀로나 승선 → 리스본 하선<br>\n⚓ 말라가 · 탕헤르 · 카사블랑카 · 마데이라 · 포르투<br>\n📅 출항 1회 (2027년) — 5.18",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Bon_Voyage_(3834660471).jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Bon_Voyage_(3834660471).jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "말라가 — 알카사바 · 피카소 미술관, 그라나다 알함브라까지",
@@ -8523,17 +8503,12 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-05-18",
-          "값": [
-            874,
-            1035,
-            1692,
-            2461
-          ],
+          "값": [1208, 1621, 2839, 3489],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "139,863 GT",
@@ -8585,7 +8560,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · FRANCE · ITALY",
     "days": "7박 8일",
-    "price": "1인 1,640 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 2,520 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 서지중해] 로열캐리비안 레전드호 바르셀로나 왕복 7박 8일",
     "summary": "로열캐리비안 「레전드 오브 더 시즈」로 바르셀로나에서 출발해 팔마 데 마요르카 · 마르세유 · 피렌체/피사 · 로마 · 나폴리를 돌아오는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -8595,7 +8570,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「레전드 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 팔마 데 마요르카 · 마르세유 · 피렌체/피사 · 로마 · 나폴리<br>\n📅 출항 25회 (2027년) — 5.9 · 5.16 · 5.23 · 5.30 · 6.6 · 6.13 외",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 같은 아이콘급 자매선 아이콘 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Icon_of_the_Seas.jpg\" target=\"_blank\" rel=\"noopener\">Chakie2</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 같은 아이콘급 자매선 아이콘 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Icon_of_the_Seas.jpg\" target=\"_blank\" rel=\"noopener\">Chakie2</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「레전드 오브 더 시즈」 — 아이콘급 · 2026년 취항",
         "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성",
@@ -8847,257 +8822,132 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-05-09",
-          "값": [
-            1660,
-            1678,
-            1691,
-            3208
-          ],
+          "값": [2425, 2439, 2437, 4116],
           "메모": ""
         },
         {
           "날": "2027-05-16",
-          "값": [
-            1676,
-            1785,
-            1883,
-            3247
-          ],
+          "값": [2312, 2471, 2600, 4456],
           "메모": ""
         },
         {
           "날": "2027-05-23",
-          "값": [
-            1507,
-            1926,
-            1915,
-            3597
-          ],
+          "값": [2312, 2819, 2818, 5001],
           "메모": ""
         },
         {
           "날": "2027-05-30",
-          "값": [
-            1446,
-            1691,
-            1788,
-            null
-          ],
+          "값": [1935, 2363, 2356, null],
           "메모": ""
         },
         {
           "날": "2027-06-06",
-          "값": [
-            1553,
-            1821,
-            1875,
-            3425
-          ],
+          "값": [2642, 2778, 2859, 4960],
           "메모": ""
         },
         {
           "날": "2027-06-13",
-          "값": [
-            1454,
-            1797,
-            1904,
-            3547
-          ],
+          "값": [2070, 2376, 2503, 5137],
           "메모": ""
         },
         {
           "날": "2027-06-20",
-          "값": [
-            1582,
-            1863,
-            2141,
-            3606
-          ],
+          "값": [2393, 2845, 3281, 4973],
           "메모": ""
         },
         {
           "날": "2027-06-27",
-          "값": [
-            1550,
-            1782,
-            1971,
-            3637
-          ],
+          "값": [2313, 2612, 2883, 5025],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-07-04",
-          "값": [
-            1600,
-            1997,
-            2320,
-            3571
-          ],
+          "값": [2323, 2866, 3509, 4930],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-07-11",
-          "값": [
-            1627,
-            2069,
-            2308,
-            4002
-          ],
+          "값": [2472, 3190, 3563, 5555],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-07-18",
-          "값": [
-            1868,
-            2320,
-            2582,
-            5060
-          ],
+          "값": [2476, 3047, 3509, 7092],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-07-25",
-          "값": [
-            1686,
-            1964,
-            2308,
-            4330
-          ],
+          "값": [2526, 3019, 3400, 6031],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-08-01",
-          "값": [
-            1946,
-            2469,
-            2573,
-            5229
-          ],
+          "값": [2662, 3471, 3604, 7336],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-08-08",
-          "값": [
-            1786,
-            2178,
-            2432,
-            3954
-          ],
+          "값": [2462, 3151, 3545, 6081],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-08-15",
-          "값": [
-            1608,
-            2175,
-            2591,
-            3702
-          ],
+          "값": [2313, 3151, 3785, 5396],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-08-22",
-          "값": [
-            1778,
-            2130,
-            2330,
-            3861
-          ],
+          "값": [2702, 3256, 3930, 5638],
           "메모": "6월 말 ~ 8월 출항은 마르세유 대신 해상일이 하루 들어가며, 팔마 출항이 18:00입니다."
         },
         {
           "날": "2027-08-29",
-          "값": [
-            1634,
-            1768,
-            2065,
-            3484
-          ],
+          "값": [2569, 2793, 3128, 5055],
           "메모": ""
         },
         {
           "날": "2027-09-05",
-          "값": [
-            1688,
-            1941,
-            1943,
-            3082
-          ],
+          "값": [2560, 2697, 2900, 4212],
           "메모": ""
         },
         {
           "날": "2027-09-12",
-          "값": [
-            1554,
-            1842,
-            1990,
-            2969
-          ],
+          "값": [2480, 2856, 2751, 4470],
           "메모": ""
         },
         {
           "날": "2027-09-19",
-          "값": [
-            1463,
-            1830,
-            1896,
-            2946
-          ],
+          "값": [2221, 2534, 2614, 4015],
           "메모": ""
         },
         {
           "날": "2027-09-26",
-          "값": [
-            1482,
-            1723,
-            1715,
-            3222
-          ],
+          "값": [2207, 2343, 2356, 4415],
           "메모": ""
         },
         {
           "날": "2027-10-03",
-          "값": [
-            1599,
-            1634,
-            1715,
-            2828
-          ],
+          "값": [2207, 2465, 2587, 4049],
           "메모": ""
         },
         {
           "날": "2027-10-10",
-          "값": [
-            1482,
-            2238,
-            1952,
-            2941
-          ],
+          "값": [2275, 2906, 2954, 4008],
           "메모": ""
         },
         {
           "날": "2027-10-17",
-          "값": [
-            1426,
-            2057,
-            1868,
-            2707
-          ],
+          "값": [2316, 2977, 2777, 4021],
           "메모": ""
         },
         {
           "날": "2027-10-24",
-          "값": [
-            1661,
-            1669,
-            1681,
-            2744
-          ],
+          "값": [2290, 2302, 2533, 3913],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "승객": "5,610명",
@@ -9150,7 +9000,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · MOROCCO · PORTUGAL",
     "days": "9박 10일",
-    "price": "1인 850 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,705 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 베스트 포르투갈 · 모로코] 로열캐리비안 마리너호 바르셀로나 → 리스본 9박 10일",
     "summary": "로열캐리비안 「마리너 오브 더 시즈」로 바르셀로나에서 출발해 탕헤르 · 카사블랑카 · 마데이라(1박 정박) · 포르투를 지나 리스본에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -9160,7 +9010,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 9박 10일 · 바르셀로나 승선 → 리스본 하선<br>\n⚓ 탕헤르 · 카사블랑카 · 마데이라(1박 정박) · 포르투<br>\n📅 출항 1회 (2027년) — 9.25",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Full_Speed_Ahead_!_(3837134913).jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Full_Speed_Ahead_!_(3837134913).jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "탕헤르 — 지브롤터 해협의 관문 · 카스바 · 메디나",
@@ -9443,17 +9293,12 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-09-25",
-          "값": [
-            736,
-            802,
-            1067,
-            2312
-          ],
+          "값": [1310, 1377, 2161, 3679],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "139,863 GT",
@@ -9505,7 +9350,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "ITALY · FRANCE · SPAIN",
     "days": "7박 8일",
-    "price": "1인 780 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,315 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 이탈리아 · 프렌치 리비에라 · 스페인] 로열캐리비안 익스플로러호 로마(치비타베키아) → 바르셀로나 7박 8일",
     "summary": "로열캐리비안 「익스플로러 오브 더 시즈」로 로마(치비타베키아)에서 출발해 피렌체/피사 · 산타 마르게리타 · 니스 · 마르세유 · 팔마 데 마요르카를 지나 바르셀로나에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -9515,7 +9360,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「익스플로러 오브 더 시즈」 · 7박 8일 · 로마(치비타베키아) 승선 → 바르셀로나 하선<br>\n⚓ 피렌체/피사 · 산타 마르게리타 · 니스 · 마르세유 · 팔마 데 마요르카<br>\n📅 출항 5회 (2027년) — 5.24 · 6.14 · 7.26 · 8.16 · 9.6",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_Bayonne_(cropped).jpg\" target=\"_blank\" rel=\"noopener\">slgc (Flickr)</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_Bayonne_(cropped).jpg\" target=\"_blank\" rel=\"noopener\">slgc (Flickr)</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급",
         "치비타베키아 — 로마로 가는 항구 · 콜로세움 · 바티칸",
@@ -9765,57 +9610,32 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-05-24",
-          "값": [
-            678,
-            847,
-            1123,
-            1942
-          ],
+          "값": [1450, 1739, 2805, 2948],
           "메모": ""
         },
         {
           "날": "2027-06-14",
-          "값": [
-            904,
-            914,
-            1489,
-            2425
-          ],
+          "값": [1392, 1269, 2638, 3432],
           "메모": ""
         },
         {
           "날": "2027-07-26",
-          "값": [
-            1082,
-            1358,
-            1707,
-            2772
-          ],
+          "값": [1499, 1793, 2994, 3990],
           "메모": ""
         },
         {
           "날": "2027-08-16",
-          "값": [
-            860,
-            1001,
-            1179,
-            2017
-          ],
+          "값": [1362, 1611, 1809, 2810],
           "메모": ""
         },
         {
           "날": "2027-09-06",
-          "값": [
-            717,
-            877,
-            1073,
-            1621
-          ],
+          "값": [1010, 1081, 1531, 2138],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "138,194 GT",
@@ -9868,7 +9688,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · MALTA · GREECE",
     "days": "7박 8일",
-    "price": "1인 1,180 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,680 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 몰타 · 그리스 섬 · 에페소] 로열캐리비안 익스플로러호 바르셀로나 → 피레우스 7박 8일",
     "summary": "로열캐리비안 「익스플로러 오브 더 시즈」로 바르셀로나에서 출발해 발레타(몰타) · 산토리니 · 쿠샤다스(에페소) · 미코노스 · 아테네를 지나 피레우스에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -9878,7 +9698,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「익스플로러 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 피레우스 하선<br>\n⚓ 발레타(몰타) · 산토리니 · 쿠샤다스(에페소) · 미코노스 · 아테네<br>\n📅 출항 1회 (2027년) — 8.23",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_(7328422294).jpg\" target=\"_blank\" rel=\"noopener\">Dale Morton</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_(7328422294).jpg\" target=\"_blank\" rel=\"noopener\">Dale Morton</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급",
         "발레타 — 성 요한 대성당 · 요새 도시 발레타 구시가지",
@@ -10123,17 +9943,12 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-08-23",
-          "값": [
-            1023,
-            1154,
-            1253,
-            1406
-          ],
+          "값": [1291, 1505, 1695, 2252],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "138,194 GT",
@@ -10186,7 +10001,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · MOROCCO · PORTUGAL",
     "days": "10박 11일",
-    "price": "1인 695 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,895 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 스페인 · 모로코 · 마데이라 · 포르투갈] 로열캐리비안 마리너호 바르셀로나 → 리스본 10박 11일",
     "summary": "로열캐리비안 「마리너 오브 더 시즈」로 바르셀로나에서 출발해 팔마 데 마요르카 · 말라가 · 탕헤르 · 카사블랑카 · 마데이라 · 포르투를 지나 리스본에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -10196,7 +10011,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 10박 11일 · 바르셀로나 승선 → 리스본 하선<br>\n⚓ 팔마 데 마요르카 · 말라가 · 탕헤르 · 카사블랑카 · 마데이라 · 포르투<br>\n📅 출항 1회 (2027년) — 9.6",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_04-04-2017(2).jpg\" target=\"_blank\" rel=\"noopener\">LN9267</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_04-04-2017(2).jpg\" target=\"_blank\" rel=\"noopener\">LN9267</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성",
@@ -10503,17 +10318,12 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-09-06",
-          "값": [
-            604,
-            784,
-            1244,
-            2254
-          ],
+          "값": [1455, 1972, 3307, 3087],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "139,863 GT",
@@ -10565,7 +10375,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "PORTUGAL · SPAIN · MOROCCO",
     "days": "10박 11일",
-    "price": "1인 1,140 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 2,290 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 마데이라 · 카나리아 제도 · 모로코] 로열캐리비안 마리너호 리스본 → 바르셀로나 10박 11일",
     "summary": "로열캐리비안 「마리너 오브 더 시즈」로 리스본에서 출발해 마데이라 · 테네리페 · 그란 카나리아 · 카사블랑카 · 탕헤르 · 팔마 데 마요르카를 지나 바르셀로나에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -10575,7 +10385,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 10박 11일 · 리스본 승선 → 바르셀로나 하선<br>\n⚓ 마데이라 · 테네리페 · 그란 카나리아 · 카사블랑카 · 탕헤르 · 팔마 데 마요르카<br>\n📅 출항 1회 (2027년) — 10.4",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_leavin_San_Pedro_Harbor.jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_leavin_San_Pedro_Harbor.jpg\" target=\"_blank\" rel=\"noopener\">Prayitno</a>, <a href=\"https://creativecommons.org/licenses/by/2.0\" target=\"_blank\" rel=\"noopener\">CC BY 2.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "마데이라 — 대서양의 꽃섬 · 푼샬 구시가지",
@@ -10880,17 +10690,12 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-10-04",
-          "값": [
-            988,
-            1113,
-            1781,
-            3243
-          ],
+          "값": [1761, 2269, 4343, 4532],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "139,863 GT",
@@ -10942,7 +10747,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · FRANCE · ITALY",
     "days": "7박 8일",
-    "price": "1인 870 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,435 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 프랑스 · 코르시카 · 이탈리아] 로열캐리비안 익스플로러호 바르셀로나 → 라벤나 7박 8일",
     "summary": "로열캐리비안 「익스플로러 오브 더 시즈」로 바르셀로나에서 출발해 툴롱 · 아작시오 · 로마 · 아말피 해안 · 시칠리아 · 라벤나를 지나 라벤나에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -10952,7 +10757,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「익스플로러 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 라벤나 하선<br>\n⚓ 툴롱 · 아작시오 · 로마 · 아말피 해안 · 시칠리아 · 라벤나<br>\n📅 출항 2회 (2027년) — 5.10 · 9.13",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_seas_in_Port_Melbourne.jpg\" target=\"_blank\" rel=\"noopener\">Michael Sandy Peters</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_seas_in_Port_Melbourne.jpg\" target=\"_blank\" rel=\"noopener\">Michael Sandy Peters</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급",
         "툴롱 — 프로방스 해안 · 지중해 군항 도시",
@@ -11204,27 +11009,17 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-05-10",
-          "값": [
-            753,
-            842,
-            1212,
-            2030
-          ],
+          "값": [1123, 1176, 1666, 2836],
           "메모": ""
         },
         {
           "날": "2027-09-13",
-          "값": [
-            805,
-            884,
-            1299,
-            1739
-          ],
+          "값": [1101, 1146, 2055, 2408],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "138,194 GT",
@@ -11277,7 +11072,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · ITALY · GREECE",
     "days": "7박 8일",
-    "price": "1인 955 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,460 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 시칠리아 · 그리스 섬 · 에페소] 로열캐리비안 익스플로러호 바르셀로나 → 피레우스 7박 8일",
     "summary": "로열캐리비안 「익스플로러 오브 더 시즈」로 바르셀로나에서 출발해 팔레르모 · 미코노스 · 쿠샤다스(에페소) · 산토리니 · 아테네를 지나 피레우스에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -11287,7 +11082,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「익스플로러 오브 더 시즈」 · 7박 8일 · 바르셀로나 승선 → 피레우스 하선<br>\n⚓ 팔레르모 · 미코노스 · 쿠샤다스(에페소) · 산토리니 · 아테네<br>\n📅 출항 1회 (2027년) — 5.31",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_seas_in_Port_Melbourne.jpg\" target=\"_blank\" rel=\"noopener\">Michael Sandy Peters</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 익스플로러 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Explorer_of_the_seas_in_Port_Melbourne.jpg\" target=\"_blank\" rel=\"noopener\">Michael Sandy Peters</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「익스플로러 오브 더 시즈」 — 보이저급",
         "팔레르모 — 노르만 왕궁 · 몬레알레 대성당",
@@ -11535,17 +11330,12 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-05-31",
-          "값": [
-            828,
-            949,
-            1284,
-            1986
-          ],
+          "값": [1122, 1393, 2247, 2738],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "138,194 GT",
@@ -11598,7 +11388,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · FRANCE · ITALY",
     "days": "8박 9일",
-    "price": "1인 920 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 1,935 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 프렌치 리비에라 · 이탈리아] 로열캐리비안 마리너호 바르셀로나 → 치비타베키아 8박 9일",
     "summary": "로열캐리비안 「마리너 오브 더 시즈」로 바르셀로나에서 출발해 팔마 데 마요르카 · 툴롱 · 니스 · 피렌체/피사 · 시칠리아 · 아말피 해안 · 로마를 지나 치비타베키아에서 내리는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -11608,7 +11398,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 로열캐리비안 「마리너 오브 더 시즈」 · 8박 9일 · 바르셀로나 승선 → 치비타베키아 하선<br>\n⚓ 팔마 데 마요르카 · 툴롱 · 니스 · 피렌체/피사 · 시칠리아 · 아말피 해안 · 로마<br>\n📅 출항 1회 (2027년) — 8.20",
-      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 7일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_cruise_ship.jpg\" target=\"_blank\" rel=\"noopener\">Rene Cortin</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "description": "로열캐리비안 크루즈 일정입니다. 요금은 2026년 11월 23일 선사 조회 기준 2인 1실 1인 요금(항만세 · 세금 포함)에 여행사 수수료를 더한 금액이며, 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 마리너 오브 더 시즈: <a href=\"https://commons.wikimedia.org/wiki/File:Mariner_of_the_Seas_cruise_ship.jpg\" target=\"_blank\" rel=\"noopener\">Rene Cortin</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
       "highlights": [
         "로열캐리비안 「마리너 오브 더 시즈」 — 보이저급",
         "팔마 데 마요르카 — 지중해의 섬 · 팔마 대성당 · 벨베르 성",
@@ -11880,17 +11670,12 @@ const PRODUCTS = [
       "출항": [
         {
           "날": "2027-08-20",
-          "값": [
-            800,
-            1054,
-            1124,
-            2092
-          ],
+          "값": [1488, 1783, 2573, 3265],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-07",
+      "마진": 1.3,
+      "조회": "2026-11-23",
       "선실출처": "선실 사진은 같은 선사 다른 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진: Prayitno (Flickr, CC BY 2.0) · themissy (Flickr, CC BY 2.0) · Mitch Ames (Wikimedia Commons, CC BY-SA 4.0)",
       "배정보": {
         "톤수": "139,863 GT",
