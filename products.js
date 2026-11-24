@@ -13675,7 +13675,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · FRANCE · ITALY",
     "days": "7박 8일",
-    "price": "1인 580 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 473 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 이탈리아 · 튀니지 · 남프랑스] MSC 에우리비아호 바르셀로나 왕복 7박 8일",
     "summary": "MSC 「MSC 에우리비아」로 바르셀로나에서 출발해 마르세유 · 제노바 · 나폴리 · 팔레르모 · 튀니스를 돌아오는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -13684,8 +13684,8 @@ const PRODUCTS = [
       "바르셀로나 왕복"
     ],
     "detail": {
-      "lead": "🚢 MSC 「MSC 에우리비아」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 마르세유 · 제노바 · 나폴리 · 팔레르모 · 튀니스<br>\n📅 출항 17회 (2026~2027) — 12.5 · 12.12 · 12.19 · 1.2 · 1.9 · 1.16 외",
-      "description": "MSC 크루즈 일정입니다. 요금은 2026년 11월 22일 MSC 공식 사이트 조회 기준 2인 1실 1인 요금에 여행사 수수료를 더한 금액이며, 요금에 항만세와 의무 호텔 서비스 요금이 포함되어 있습니다. 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — MSC 에우리비아: <a href=\"https://commons.wikimedia.org/wiki/File:MSC_Euribia_-_Saint-Nazaire_-_3_juin_2023.jpg\" target=\"_blank\" rel=\"noopener\">ND44</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "lead": "🚢 MSC 「MSC 에우리비아」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 마르세유 · 제노바 · 나폴리 · 팔레르모 · 튀니스<br>\n📅 출항 18회 (2026~2027) — 12.5 · 12.12 · 12.19 · 12.26 · 1.2 · 1.9 외",
+      "description": "MSC 크루즈 일정입니다. 요금은 MSC 크루즈 공식 홈페이지(스페인) 2026년 11월 24일 조회 기준 2인 1실 1인 요금이며, 요금에 항만세와 의무 호텔 서비스 요금이 포함되어 있습니다. 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — MSC 에우리비아: MSC Cruises (MSC 크루즈 공식 홈페이지)</p>",
       "highlights": [
         "MSC 「에우리비아」 — LNG 추진 · 2023년 취항",
         "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당",
@@ -13707,9 +13707,9 @@ const PRODUCTS = [
         "여행자 보험 · 개인 경비",
         "승선 전 · 하선 후 숙박과 공항 · 터미널 차량 (선택)"
       ],
-      "duration": "7박 8일 (바르셀로나 승선 · 바르셀로나 하선 · 출항 17회)"
+      "duration": "7박 8일 (바르셀로나 승선 · 바르셀로나 하선 · 출항 18회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/MSC_Euribia_-_Saint-Nazaire_-_3_juin_2023.jpg/1280px-MSC_Euribia_-_Saint-Nazaire_-_3_juin_2023.jpg",
+    "카드사진": "https://assets.msccruises.com/is/image/msccruises/msc-euribia-new?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -13904,29 +13904,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/MSC_Cruise_cabin_%28%D0%9A%D0%B0%D1%8E%D1%82%D0%B0%29.jpg/1280px-MSC_Cruise_cabin_%28%D0%9A%D0%B0%D1%8E%D1%82%D0%B0%29.jpg",
-          "사진설명": "예시 · 내측 선실 (MSC 크루즈)"
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc23020685?wid=1600",
+          "사진설명": "내측 선실 · MSC 에우리비아 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc23020104?wid=1600",
+          "사진설명": "오션뷰 선실 · MSC 에우리비아 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/5518/11106662546_8895985f8c_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (MSC 디비나)"
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc23020704?wid=1600",
+          "사진설명": "발코니 선실 · MSC 에우리비아 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc23020692?wid=1600",
+          "사진설명": "스위트 · MSC 에우리비아 (공식 사진)"
         }
       ],
       "출항": [
@@ -13935,7 +13935,7 @@ const PRODUCTS = [
           "값": [
             null,
             null,
-            703,
+            543,
             null
           ],
           "메모": ""
@@ -13943,7 +13943,7 @@ const PRODUCTS = [
         {
           "날": "2026-12-12",
           "값": [
-            503,
+            473,
             593,
             643,
             1263
@@ -13955,7 +13955,17 @@ const PRODUCTS = [
           "값": [
             1103,
             1173,
-            1313,
+            1303,
+            null
+          ],
+          "메모": ""
+        },
+        {
+          "날": "2026-12-26",
+          "값": [
+            1523,
+            1793,
+            1923,
             null
           ],
           "메모": ""
@@ -13983,8 +13993,8 @@ const PRODUCTS = [
         {
           "날": "2027-01-16",
           "값": [
-            573,
             null,
+            613,
             743,
             1353
           ],
@@ -13993,9 +14003,9 @@ const PRODUCTS = [
         {
           "날": "2027-01-23",
           "값": [
-            573,
             null,
-            733,
+            null,
+            773,
             null
           ],
           "메모": ""
@@ -14003,8 +14013,8 @@ const PRODUCTS = [
         {
           "날": "2027-01-30",
           "값": [
-            null,
-            null,
+            543,
+            563,
             713,
             1333
           ],
@@ -14026,7 +14036,7 @@ const PRODUCTS = [
             773,
             833,
             903,
-            null
+            1643
           ],
           "메모": ""
         },
@@ -14036,7 +14046,7 @@ const PRODUCTS = [
             733,
             823,
             903,
-            null
+            1693
           ],
           "메모": ""
         },
@@ -14055,8 +14065,8 @@ const PRODUCTS = [
           "값": [
             783,
             833,
-            993,
-            null
+            943,
+            1583
           ],
           "메모": ""
         },
@@ -14065,7 +14075,7 @@ const PRODUCTS = [
           "값": [
             803,
             1013,
-            1153,
+            1103,
             null
           ],
           "메모": ""
@@ -14073,9 +14083,9 @@ const PRODUCTS = [
         {
           "날": "2027-03-20",
           "값": [
-            1253,
+            1243,
             null,
-            null,
+            1703,
             null
           ],
           "메모": ""
@@ -14083,10 +14093,10 @@ const PRODUCTS = [
         {
           "날": "2027-03-27",
           "값": [
-            883,
+            943,
             1213,
             1333,
-            null
+            2293
           ],
           "메모": ""
         },
@@ -14096,14 +14106,14 @@ const PRODUCTS = [
             1053,
             1183,
             1223,
-            null
+            1873
           ],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-22",
-      "선실출처": "선실 사진은 같은 선사 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진이 없는 칸은 자유 이용 사진이 없어 준비 중입니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다. 사진: Almagul Ibragimova (Wikimedia Commons, CC0) · Gary Bembridge (Flickr, CC BY 2.0)",
+      "마진": 1,
+      "조회": "2026-11-24",
+      "선실출처": "선실 사진: MSC 크루즈 공식 홈페이지 (배별 선실 종류 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다.",
       "배정보": {
         "톤수": "184,011 GT",
         "승객": "최대 6,327명",
@@ -14149,7 +14159,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · FRANCE · ITALY",
     "days": "7박 8일",
-    "price": "1인 880 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 743 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 이탈리아 · 시칠리아 · 몰타] MSC 월드 아시아호 바르셀로나 왕복 7박 8일",
     "summary": "MSC 「MSC 월드 아시아」로 바르셀로나에서 출발해 마르세유 · 제노바 · 로마(치비타베키아) · 메시나 · 발레타를 돌아오는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -14158,8 +14168,8 @@ const PRODUCTS = [
       "바르셀로나 왕복"
     ],
     "detail": {
-      "lead": "🚢 MSC 「MSC 월드 아시아」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 마르세유 · 제노바 · 로마(치비타베키아) · 메시나 · 발레타<br>\n📅 출항 16회 (2026~2027) — 12.25 · 1.1 · 1.8 · 1.15 · 1.22 · 1.29 외",
-      "description": "MSC 크루즈 일정입니다. 요금은 2026년 11월 22일 MSC 공식 사이트 조회 기준 2인 1실 1인 요금에 여행사 수수료를 더한 금액이며, 요금에 항만세와 의무 호텔 서비스 요금이 포함되어 있습니다. 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — 같은 월드급 자매선 MSC 월드 유로파: <a href=\"https://commons.wikimedia.org/wiki/File:MSC_World_Europa-Exterior-2026_02.jpg\" target=\"_blank\" rel=\"noopener\">Alberto-g-rovi</a>, <a href=\"https://creativecommons.org/licenses/by/4.0\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a> (Wikimedia Commons)</p>",
+      "lead": "🚢 MSC 「MSC 월드 아시아」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 마르세유 · 제노바 · 로마(치비타베키아) · 메시나 · 발레타<br>\n📅 출항 17회 (2026~2027) — 12.18 · 12.25 · 1.1 · 1.8 · 1.15 · 1.22 외",
+      "description": "MSC 크루즈 일정입니다. 요금은 MSC 크루즈 공식 홈페이지(스페인) 2026년 11월 24일 조회 기준 2인 1실 1인 요금이며, 요금에 항만세와 의무 호텔 서비스 요금이 포함되어 있습니다. 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — MSC 월드 아시아: MSC Cruises (MSC 크루즈 공식 홈페이지)</p>",
       "highlights": [
         "MSC 「월드 아시아」 — 2026년 12월 취항하는 월드급 신조선",
         "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당",
@@ -14181,9 +14191,9 @@ const PRODUCTS = [
         "여행자 보험 · 개인 경비",
         "승선 전 · 하선 후 숙박과 공항 · 터미널 차량 (선택)"
       ],
-      "duration": "7박 8일 (바르셀로나 승선 · 바르셀로나 하선 · 출항 16회)"
+      "duration": "7박 8일 (바르셀로나 승선 · 바르셀로나 하선 · 출항 17회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/MSC_World_Europa-Exterior-2026_02.jpg/1280px-MSC_World_Europa-Exterior-2026_02.jpg",
+    "카드사진": "https://assets.msccruises.com/is/image/msccruises/MSC25035184_1920x1080_300dpi?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -14379,38 +14389,48 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/MSC_Cruise_cabin_%28%D0%9A%D0%B0%D1%8E%D1%82%D0%B0%29.jpg/1280px-MSC_Cruise_cabin_%28%D0%9A%D0%B0%D1%8E%D1%82%D0%B0%29.jpg",
-          "사진설명": "예시 · 내측 선실 (MSC 크루즈)"
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc25042109?wid=1600",
+          "사진설명": "내측 선실 · MSC 월드 아시아 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc25042066?wid=1600",
+          "사진설명": "오션뷰 선실 · MSC 월드 아시아 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/5518/11106662546_8895985f8c_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (MSC 디비나)"
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc25042040?wid=1600",
+          "사진설명": "발코니 선실 · MSC 월드 아시아 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc25042090?wid=1600",
+          "사진설명": "스위트 · MSC 월드 아시아 (공식 사진)"
         }
       ],
       "출항": [
         {
+          "날": "2026-12-18",
+          "값": [
+            null,
+            null,
+            null,
+            1793
+          ],
+          "메모": ""
+        },
+        {
           "날": "2026-12-25",
           "값": [
-            1133,
+            933,
             null,
-            null,
+            2153,
             null
           ],
           "메모": ""
@@ -14420,7 +14440,7 @@ const PRODUCTS = [
           "값": [
             903,
             null,
-            1123,
+            1133,
             null
           ],
           "메모": ""
@@ -14429,9 +14449,9 @@ const PRODUCTS = [
           "날": "2027-01-08",
           "값": [
             763,
-            863,
+            null,
             943,
-            null
+            2343
           ],
           "메모": ""
         },
@@ -14439,7 +14459,7 @@ const PRODUCTS = [
           "날": "2027-01-15",
           "값": [
             null,
-            null,
+            953,
             933,
             1453
           ],
@@ -14459,9 +14479,9 @@ const PRODUCTS = [
           "날": "2027-01-29",
           "값": [
             763,
-            883,
+            1013,
             923,
-            null
+            2283
           ],
           "메모": ""
         },
@@ -14471,7 +14491,7 @@ const PRODUCTS = [
             843,
             1213,
             1293,
-            null
+            2853
           ],
           "메모": ""
         },
@@ -14481,17 +14501,17 @@ const PRODUCTS = [
             793,
             null,
             983,
-            null
+            2393
           ],
           "메모": ""
         },
         {
           "날": "2027-02-19",
           "값": [
-            783,
+            743,
             null,
-            1053,
-            null
+            1043,
+            1703
           ],
           "메모": ""
         },
@@ -14501,7 +14521,7 @@ const PRODUCTS = [
             873,
             1013,
             1043,
-            null
+            1743
           ],
           "메모": ""
         },
@@ -14511,7 +14531,7 @@ const PRODUCTS = [
             953,
             1233,
             1263,
-            null
+            1903
           ],
           "메모": ""
         },
@@ -14521,7 +14541,7 @@ const PRODUCTS = [
             953,
             1253,
             1373,
-            null
+            2193
           ],
           "메모": ""
         },
@@ -14530,8 +14550,8 @@ const PRODUCTS = [
           "값": [
             1283,
             null,
-            null,
-            null
+            1553,
+            1943
           ],
           "메모": ""
         },
@@ -14539,8 +14559,8 @@ const PRODUCTS = [
           "날": "2027-03-26",
           "값": [
             1193,
-            null,
-            null,
+            1763,
+            1813,
             null
           ],
           "메모": ""
@@ -14550,8 +14570,8 @@ const PRODUCTS = [
           "값": [
             1003,
             null,
-            null,
-            null
+            1813,
+            2863
           ],
           "메모": ""
         },
@@ -14560,15 +14580,15 @@ const PRODUCTS = [
           "값": [
             1013,
             null,
-            null,
-            null
+            1513,
+            2213
           ],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-22",
-      "선실출처": "선실 사진은 같은 선사 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진이 없는 칸은 자유 이용 사진이 없어 준비 중입니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다. 사진: Almagul Ibragimova (Wikimedia Commons, CC0) · Gary Bembridge (Flickr, CC BY 2.0)",
+      "마진": 1,
+      "조회": "2026-11-24",
+      "선실출처": "선실 사진: MSC 크루즈 공식 홈페이지 (배별 선실 종류 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다.",
       "배정보": {
         "톤수": "216,636 GT",
         "승객": "최대 6,762명",
@@ -14614,7 +14634,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · FRANCE · ITALY",
     "days": "7박 8일",
-    "price": "1인 510 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 443 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 서지중해 · 피렌체 · 로마 · 발렌시아] MSC 신포니아호 바르셀로나 왕복 7박 8일",
     "summary": "MSC 「MSC 신포니아」로 바르셀로나에서 출발해 마르세유 · 제노바 · 피렌체/피사(리보르노) · 로마(치비타베키아) · 발렌시아를 돌아오는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -14623,8 +14643,8 @@ const PRODUCTS = [
       "바르셀로나 왕복"
     ],
     "detail": {
-      "lead": "🚢 MSC 「MSC 신포니아」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 마르세유 · 제노바 · 피렌체/피사(리보르노) · 로마(치비타베키아) · 발렌시아<br>\n📅 출항 12회 (2026~2027) — 12.6 · 12.13 · 12.20 · 12.27 · 1.3 · 2.7 외",
-      "description": "MSC 크루즈 일정입니다. 요금은 2026년 11월 22일 MSC 공식 사이트 조회 기준 2인 1실 1인 요금에 여행사 수수료를 더한 금액이며, 요금에 항만세와 의무 호텔 서비스 요금이 포함되어 있습니다. 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — MSC 신포니아: <a href=\"https://commons.wikimedia.org/wiki/File:MSC_Sinfonia_Kiel.JPG\" target=\"_blank\" rel=\"noopener\">HenSti</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a> (Wikimedia Commons)</p>",
+      "lead": "🚢 MSC 「MSC 신포니아」 · 7박 8일 · 바르셀로나 승선 → 바르셀로나 하선<br>\n⚓ 마르세유 · 제노바 · 피렌체/피사(리보르노) · 로마(치비타베키아) · 발렌시아<br>\n📅 출항 11회 (2026~2027) — 12.6 · 12.13 · 12.20 · 12.27 · 2.7 · 2.14 외",
+      "description": "MSC 크루즈 일정입니다. 요금은 MSC 크루즈 공식 홈페이지(스페인) 2026년 11월 24일 조회 기준 2인 1실 1인 요금이며, 요금에 항만세와 의무 호텔 서비스 요금이 포함되어 있습니다. 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — MSC 신포니아: MSC Cruises (MSC 크루즈 공식 홈페이지)</p>",
       "highlights": [
         "MSC 「신포니아」 — 리리카급 (2015년 연장 개조)",
         "마르세유 — 구항구 · 노트르담 드 라 가르드 대성당",
@@ -14646,9 +14666,9 @@ const PRODUCTS = [
         "여행자 보험 · 개인 경비",
         "승선 전 · 하선 후 숙박과 공항 · 터미널 차량 (선택)"
       ],
-      "duration": "7박 8일 (바르셀로나 승선 · 바르셀로나 하선 · 출항 12회)"
+      "duration": "7박 8일 (바르셀로나 승선 · 바르셀로나 하선 · 출항 11회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/MSC_Sinfonia_Kiel.JPG/1280px-MSC_Sinfonia_Kiel.JPG",
+    "카드사진": "https://assets.msccruises.com/is/image/msccruises/sx-msc15003699?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -14842,29 +14862,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/MSC_Opera_Cruise_cabin_%28July_2022%29.jpg/1280px-MSC_Opera_Cruise_cabin_%28July_2022%29.jpg",
-          "사진설명": "예시 · 내측 선실 (MSC 오페라 · 같은 급 자매선)"
+          "사진": "https://assets.msccruises.com/is/image/msccruises/sx-interior-05?wid=1600",
+          "사진설명": "내측 선실 · MSC 신포니아 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://assets.msccruises.com/is/image/msccruises/sx-ocean-view-03?wid=1600",
+          "사진설명": "오션뷰 선실 · MSC 신포니아 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/5518/11106662546_8895985f8c_b.jpg",
-          "사진설명": "예시 · 발코니 선실 (MSC 디비나)"
+          "사진": "https://assets.msccruises.com/is/image/msccruises/sx-balcony-02?wid=1600",
+          "사진설명": "발코니 선실 · MSC 신포니아 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://assets.msccruises.com/is/image/msccruises/sx-suite-01?wid=1600",
+          "사진설명": "스위트 · MSC 신포니아 (공식 사진)"
         }
       ],
       "출항": [
@@ -14873,7 +14893,7 @@ const PRODUCTS = [
           "값": [
             null,
             503,
-            553,
+            583,
             863
           ],
           "메모": ""
@@ -14891,7 +14911,7 @@ const PRODUCTS = [
         {
           "날": "2026-12-20",
           "값": [
-            null,
+            733,
             813,
             null,
             1283
@@ -14909,19 +14929,9 @@ const PRODUCTS = [
           "메모": ""
         },
         {
-          "날": "2027-01-03",
-          "값": [
-            553,
-            633,
-            null,
-            993
-          ],
-          "메모": ""
-        },
-        {
           "날": "2027-02-07",
           "값": [
-            573,
+            603,
             623,
             783,
             1003
@@ -14971,7 +14981,7 @@ const PRODUCTS = [
         {
           "날": "2027-03-14",
           "값": [
-            673,
+            663,
             723,
             883,
             1233
@@ -14989,9 +14999,9 @@ const PRODUCTS = [
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-22",
-      "선실출처": "선실 사진은 같은 선사 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진이 없는 칸은 자유 이용 사진이 없어 준비 중입니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다. 사진: Dr Salvus (Wikimedia Commons, CC BY-SA 4.0) · Gary Bembridge (Flickr, CC BY 2.0)",
+      "마진": 1,
+      "조회": "2026-11-24",
+      "선실출처": "선실 사진: MSC 크루즈 공식 홈페이지 (배별 선실 종류 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다.",
       "배정보": {
         "톤수": "65,542 GT",
         "승객": "최대 2,646명",
@@ -15037,7 +15047,7 @@ const PRODUCTS = [
     "topClass": "spain",
     "region": "SPAIN · PORTUGAL",
     "days": "7박 8일",
-    "price": "1인 720 유로 (내측 · 2인 1실 · 최저가)",
+    "price": "1인 623 유로 (내측 · 2인 1실 · 최저가)",
     "title": "[크루즈 · 카나리아 제도 · 마데이라] MSC 판타지아호 테네리페 왕복 7박 8일",
     "summary": "MSC 「MSC 판타지아」로 테네리페에서 출발해 푸에르테벤투라 · 마데이라(푼샬) · 란사로테 · 그란 카나리아 · 라 팔마를 돌아오는 크루즈예요. 출항일마다 선실별 요금을 바로 확인하실 수 있어요.",
     "tags": [
@@ -15047,7 +15057,7 @@ const PRODUCTS = [
     ],
     "detail": {
       "lead": "🚢 MSC 「MSC 판타지아」 · 7박 8일 · 테네리페 승선 → 테네리페 하선<br>\n⚓ 푸에르테벤투라 · 마데이라(푼샬) · 란사로테 · 그란 카나리아 · 라 팔마<br>\n📅 출항 14회 (2026~2027) — 12.13 · 12.20 · 1.3 · 1.10 · 1.17 · 1.24 외",
-      "description": "MSC 크루즈 일정입니다. 요금은 2026년 11월 22일 MSC 공식 사이트 조회 기준 2인 1실 1인 요금에 여행사 수수료를 더한 금액이며, 요금에 항만세와 의무 호텔 서비스 요금이 포함되어 있습니다. 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — MSC 판타지아: <a href=\"https://commons.wikimedia.org/wiki/File:Msc_fantasia.jpg\" target=\"_blank\" rel=\"noopener\">Matthias Süßen</a>, <a href=\"https://creativecommons.org/licenses/by/3.0\" target=\"_blank\" rel=\"noopener\">CC BY 3.0</a> (Wikimedia Commons)</p>",
+      "description": "MSC 크루즈 일정입니다. 요금은 MSC 크루즈 공식 홈페이지(스페인) 2026년 11월 24일 조회 기준 2인 1실 1인 요금이며, 요금에 항만세와 의무 호텔 서비스 요금이 포함되어 있습니다. 예약 시점의 선사 재고에 따라 확정해 안내해 드립니다. 입항 · 출항 시각은 선사 사정과 기상에 따라 바뀔 수 있습니다.<p class=\"photo-credit\" style=\"font-size:11px;opacity:.6;margin-top:14px;\">대표 사진 — MSC 판타지아: MSC Cruises (MSC 크루즈 공식 홈페이지)</p>",
       "highlights": [
         "MSC 「판타지아」 — 판타지아급",
         "푸에르테벤투라 — 끝없는 모래 해변과 사구의 섬",
@@ -15071,7 +15081,7 @@ const PRODUCTS = [
       ],
       "duration": "7박 8일 (테네리페 승선 · 테네리페 하선 · 출항 14회)"
     },
-    "카드사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Msc_fantasia.jpg/1280px-Msc_fantasia.jpg",
+    "카드사진": "https://assets.msccruises.com/is/image/msccruises/MSC_FANTASIA_1920x1080?wid=1600",
     "minPeople": 1,
     "maxPeople": 20,
     "link": "",
@@ -15262,29 +15272,29 @@ const PRODUCTS = [
           "이름": "내측",
           "크기": "",
           "말": "창 없는 실내 선실 · 가장 합리적인 선택",
-          "사진": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/MSC_Cruise_cabin_%28%D0%9A%D0%B0%D1%8E%D1%82%D0%B0%29.jpg/1280px-MSC_Cruise_cabin_%28%D0%9A%D0%B0%D1%8E%D1%82%D0%B0%29.jpg",
-          "사진설명": "예시 · 내측 선실 (MSC 크루즈)"
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc18015835?wid=1600",
+          "사진설명": "내측 선실 · MSC 판타지아 (공식 사진)"
         },
         {
           "이름": "오션뷰",
           "크기": "",
           "말": "바다가 보이는 창이 있는 선실",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc18015821?wid=1600",
+          "사진설명": "오션뷰 선실 · MSC 판타지아 (공식 사진)"
         },
         {
           "이름": "발코니",
           "크기": "",
           "말": "개별 발코니에서 바다를 바라보는 선실",
-          "사진": "https://live.staticflickr.com/7011/6816092183_59514605e8_b.jpg",
-          "사진설명": "발코니 선실 (MSC 판타지아)"
+          "사진": "https://assets.msccruises.com/is/image/msccruises/fa-balcony?wid=1600",
+          "사진설명": "발코니 선실 · MSC 판타지아 (공식 사진)"
         },
         {
           "이름": "스위트",
           "크기": "",
           "말": "넓은 객실 · 스위트 전용 혜택",
-          "사진": "",
-          "사진설명": ""
+          "사진": "https://assets.msccruises.com/is/image/msccruises/msc13015297?wid=1600",
+          "사진설명": "스위트 · MSC 판타지아 (공식 사진)"
         }
       ],
       "출항": [
@@ -15294,7 +15304,7 @@ const PRODUCTS = [
             623,
             673,
             793,
-            null
+            1663
           ],
           "메모": ""
         },
@@ -15304,17 +15314,17 @@ const PRODUCTS = [
             null,
             null,
             1183,
-            null
+            1533
           ],
           "메모": ""
         },
         {
           "날": "2027-01-03",
           "값": [
-            663,
+            623,
             713,
             783,
-            null
+            1513
           ],
           "메모": ""
         },
@@ -15331,10 +15341,10 @@ const PRODUCTS = [
         {
           "날": "2027-01-17",
           "값": [
-            743,
+            753,
             833,
-            963,
-            null
+            1033,
+            1573
           ],
           "메모": ""
         },
@@ -15344,17 +15354,17 @@ const PRODUCTS = [
             643,
             743,
             843,
-            null
+            1553
           ],
           "메모": ""
         },
         {
           "날": "2027-01-31",
           "값": [
-            673,
+            663,
             733,
             873,
-            null
+            1383
           ],
           "메모": ""
         },
@@ -15364,7 +15374,7 @@ const PRODUCTS = [
             663,
             843,
             973,
-            null
+            1563
           ],
           "메모": ""
         },
@@ -15372,7 +15382,7 @@ const PRODUCTS = [
           "날": "2027-02-21",
           "값": [
             783,
-            1163,
+            1203,
             963,
             1493
           ],
@@ -15384,7 +15394,7 @@ const PRODUCTS = [
             783,
             null,
             973,
-            null
+            1493
           ],
           "메모": ""
         },
@@ -15394,7 +15404,7 @@ const PRODUCTS = [
             823,
             923,
             983,
-            null
+            1413
           ],
           "메모": ""
         },
@@ -15402,19 +15412,19 @@ const PRODUCTS = [
           "날": "2027-03-14",
           "값": [
             913,
-            1133,
+            null,
             1073,
-            null
+            1423
           ],
           "메모": ""
         },
         {
           "날": "2027-03-21",
           "값": [
-            903,
+            893,
             973,
             1053,
-            null
+            1743
           ],
           "메모": ""
         },
@@ -15422,16 +15432,16 @@ const PRODUCTS = [
           "날": "2027-03-28",
           "값": [
             883,
-            973,
-            1013,
-            null
+            993,
+            1063,
+            1683
           ],
           "메모": ""
         }
       ],
-      "마진": 1.15,
-      "조회": "2026-11-22",
-      "선실출처": "선실 사진은 같은 선사 배의 예시이며, 실제 선실의 크기 · 배치 · 꾸밈과 다를 수 있습니다. 사진이 없는 칸은 자유 이용 사진이 없어 준비 중입니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다. 사진: Almagul Ibragimova (Wikimedia Commons, CC0) · wvllvam (Flickr, CC BY 2.0)",
+      "마진": 1,
+      "조회": "2026-11-24",
+      "선실출처": "선실 사진: MSC 크루즈 공식 홈페이지 (배별 선실 종류 대표 사진). 실제 선실의 크기 · 배치 · 꾸밈은 선실 번호마다 다를 수 있습니다. 요금이 「문의」인 칸은 조회일에 선사 판매가 없던 선실입니다.",
       "배정보": {
         "톤수": "137,936 GT",
         "승객": "최대 3,959명",
