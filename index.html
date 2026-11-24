@@ -554,60 +554,76 @@
   .plan-card .pc-foot b{ color:#fff; font-weight:800; }
   @media (prefers-reduced-motion: reduce){ .plan-card .pc-go{ animation:none; } }
 
-  /* ---- 크리스마스 마켓 팝업 ---- */
-  .xmas-box{ max-width:560px; padding:0 !important; overflow:hidden; border-radius:22px; }
-  .xmas-art{ position:relative; display:block; width:100%; height:auto; }
-  /* 닫기(✕) 단추가 밤하늘 위에서도 잘 보이게 — 이 팝업에서만 바뀝니다 */
-  .xmas-box .feature-close{ color:#fff; background:rgba(24,36,44,.45); }
-  .xmas-box .feature-close:hover{ background:rgba(24,36,44,.75); }
-  .xmas-body{ padding:22px clamp(20px,4vw,30px) 26px; }
+  /* ---- 1월 차량 & 기사 예약 선물 팝업 (올리브유 250ml) ---- */
+  .oil-box{ max-width:560px; padding:0 !important; overflow:hidden; border-radius:22px; }
+  .oil-art{ position:relative; display:block; width:100%; height:auto; }
+  .oil-body{ padding:22px clamp(20px,4vw,30px) 26px; }
 
-  /* 트리 꼭대기 별 반짝임 */
-  .xmas-tip, .xmas-glow{ transform-box:fill-box; transform-origin:center; }
-  .xmas-tip{ animation:xmasTwinkle 2.6s ease-in-out infinite; }
-  .xmas-glow{ animation:xmasGlow 2.6s ease-in-out infinite; }
-  @keyframes xmasTwinkle{
-    0%, 100%{ opacity:1;   transform:scale(1); }
-    45%     { opacity:.55; transform:scale(.84); }
-  }
-  @keyframes xmasGlow{
-    0%, 100%{ opacity:.9;  transform:scale(1); }
-    45%     { opacity:.25; transform:scale(.62); }
-  }
-  /* 화면 움직임 줄이기를 켜 두신 분께는 멈춰 둡니다 */
-  @media (prefers-reduced-motion: reduce){
-    .xmas-tip, .xmas-glow{ animation:none; opacity:1; }
-  }
-  .xmas-eyebrow{ display:inline-flex; align-items:center; gap:6px; padding:6px 14px;
-    border-radius:999px; background:#F5F1EB; color:#7A5A3E;
+  /* 올리브 열매가 살짝 흔들립니다 */
+  .oil-sway{ transform-box:fill-box; transform-origin:0% 0%; animation:oilSway 4.2s ease-in-out infinite; }
+  @keyframes oilSway{ 0%,100%{ transform:rotate(0deg); } 50%{ transform:rotate(2.2deg); } }
+  @media (prefers-reduced-motion: reduce){ .oil-sway{ animation:none; } }
+
+  .oil-eyebrow{ display:inline-flex; align-items:center; gap:6px; padding:6px 14px;
+    border-radius:999px; background:#EEF1E6; color:#4F6232;
     font-size:11.5px; font-weight:800; letter-spacing:.04em; }
-  .xmas-box h3{ margin:12px 0 10px; font-family:'Kanit','Pretendard Variable',Pretendard,sans-serif; font-style:normal;
-    font-weight:800; font-size:clamp(20px,3.4vw,25px); line-height:1.3; color:var(--navy);
-    letter-spacing:-.02em; }
-  .xmas-box h3 em{ font-style:normal; color:var(--violet); }
-  .xmas-lead{ margin:0 0 18px; font-size:13.5px; font-weight:600; line-height:1.85; color:var(--muted); }
-  .xmas-lead b{ color:var(--navy); font-weight:800; }
+  .oil-box h3{ margin:12px 0 10px; font-family:'Kanit','Pretendard Variable',Pretendard,sans-serif; font-style:normal;
+    font-weight:800; font-size:clamp(20px,3.4vw,25px); line-height:1.3; color:var(--navy); letter-spacing:-.02em; }
+  .oil-box h3 em{ font-style:normal; color:#5E7536; }
+  .oil-lead{ margin:0 0 18px; font-size:13.5px; font-weight:600; line-height:1.85; color:var(--muted); }
+  .oil-lead b{ color:var(--navy); font-weight:800; }
 
-  .xmas-two{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
-  .xmas-city{ border:1.5px solid var(--line); border-radius:14px; padding:13px 14px; background:#FDFDFD; }
-  .xmas-city b{ display:block; font-size:13px; font-weight:800; color:var(--navy); margin-bottom:4px; }
-  .xmas-city span{ display:block; font-size:11.5px; font-weight:600; color:var(--muted); line-height:1.7; }
-  .xmas-city i{ font-style:normal; display:block; margin-top:6px; font-size:11px; font-weight:800;
-    color:#7A5A3E; }
+  .oil-two{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
+  .oil-card{ border:1.5px solid var(--line); border-radius:14px; padding:13px 14px; background:#FDFDFB; }
+  .oil-card small{ display:block; font-size:10.5px; font-weight:800; letter-spacing:.08em; color:#7C8A5C; margin-bottom:5px; }
+  .oil-card b{ display:block; font-size:13px; font-weight:800; color:var(--navy); margin-bottom:3px; }
+  .oil-card span{ display:block; font-size:11.5px; font-weight:600; color:var(--muted); line-height:1.65; }
 
-  .xmas-when{ display:flex; gap:9px; align-items:flex-start; margin:0 0 18px; padding:11px 14px;
-    border-radius:12px; background:#F7F8F9; border:1.5px solid #E3E8EB;
+  .oil-when{ display:flex; gap:9px; align-items:flex-start; margin:0 0 18px; padding:11px 14px;
+    border-radius:12px; background:#F6F7F1; border:1.5px solid #E2E6D6;
     font-size:12px; font-weight:600; color:var(--muted); line-height:1.7; }
-  .xmas-when b{ color:var(--navy); font-weight:800; }
+  .oil-when b{ color:var(--navy); font-weight:800; }
 
-  .xmas-cta{ display:flex; gap:9px; flex-wrap:wrap; }
-  .xmas-cta a{ flex:1 1 0; min-width:150px; text-align:center; text-decoration:none;
+  .oil-cta{ display:flex; gap:9px; flex-wrap:wrap; }
+  .oil-cta a{ flex:1 1 0; min-width:150px; text-align:center; text-decoration:none;
     padding:14px 16px; border-radius:12px; font-size:13.5px; font-weight:800; }
-  .xmas-cta .go{ background:linear-gradient(90deg,#8F2E14,#94634A); color:#fff;
-    box-shadow:0 10px 20px -10px rgba(180,18,63,.6); }
-  .xmas-cta .go:hover{ filter:brightness(1.08); }
-  .xmas-cta .sub{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
-  .xmas-cta .sub:hover{ border-color:var(--violet); color:var(--violet); }
+  .oil-cta .go{ background:linear-gradient(90deg,#4F6232,#7A8B45); color:#fff;
+    box-shadow:0 10px 20px -10px rgba(79,98,50,.65); }
+  .oil-cta .go:hover{ filter:brightness(1.08); }
+  .oil-cta .sub{ background:#fff; color:var(--navy); border:1.5px solid var(--line); }
+  .oil-cta .sub:hover{ border-color:#5E7536; color:#5E7536; }
+
+  /* 휴대폰: 화면을 꽉 채우지 않고 가운데 작게 띄웁니다 */
+  .oil-m{ display:none; }
+  @media (max-width:520px){
+    .feature-overlay{ padding:28px 22px; }
+    .oil-box{ max-width:330px; margin:0 auto; border-radius:18px;
+      max-height:calc(100vh - 80px); max-height:calc(100dvh - 80px); display:flex; flex-direction:column; }
+    .oil-art{ flex:0 0 auto; height:112px; }
+    .oil-body{ padding:13px 15px 15px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+    .oil-eyebrow{ padding:4px 10px; font-size:10px; }
+    .oil-box h3{ margin:8px 0 6px; font-size:17px; line-height:1.3; }
+    .oil-lead{ margin:0 0 11px; font-size:12px; line-height:1.65; }
+    .oil-two{ gap:7px; margin-bottom:11px; }
+    .oil-card{ padding:9px 10px; border-radius:11px; }
+    .oil-card small{ font-size:9.5px; margin-bottom:3px; }
+    .oil-card b{ font-size:12px; margin-bottom:2px; }
+    .oil-card span{ font-size:10.5px; line-height:1.5; }
+    .oil-when{ margin:0 0 11px; padding:8px 10px; gap:6px; font-size:11px; line-height:1.55; }
+    .oil-cta{ gap:7px; }
+    .oil-cta a{ min-width:0; padding:11px 8px; font-size:12.5px; border-radius:11px; }
+    .oil-box .feature-foot button{ padding:11px 14px; font-size:12px; }
+    .oil-pc{ display:none; } .oil-m{ display:inline; }   /* 휴대폰에선 단추 글자를 짧게 */
+    .oil-card b{ font-size:11.5px; }
+  }
+
+  /* 팝업이 화면보다 길면 바깥에서 내려 볼 수 있게 */
+  #featureOverlay{ overflow-y:auto; }
+  #featureOverlay .oil-box{ margin:auto; max-height:calc(100vh - 40px); max-height:calc(100dvh - 40px); display:flex; flex-direction:column; }
+  #featureOverlay .oil-art, #featureOverlay .feature-foot{ flex:0 0 auto; }
+  #featureOverlay .oil-body{ flex:1 1 auto; min-height:0; overflow-y:auto; }
+  /* 키가 낮은 노트북 화면에선 그림을 낮춰 막대(닫기)까지 한 화면에 */
+  @media (min-width:521px) and (max-height:780px){ #featureOverlay .oil-art{ height:150px; } }
 
   /* ---- 팝업 아래 막대: 오늘 하루 보이지 않기 · 닫기 ---- */
   .feature-foot{ display:flex; align-items:stretch; border-top:1px solid #E3E7EA; background:#F6F7F8; }
@@ -619,39 +635,10 @@
   .feature-foot button:hover{ background:#ECEFF1; color:var(--navy); }
   .feature-foot button:focus-visible{ outline:2px solid var(--violet); outline-offset:-2px; }
 
-  /* ---- 휴대폰: 팝업이 화면을 넘지 않도록 줄입니다 ---- */
+  /* ---- 휴대폰: 팝업 아래 막대 ---- */
   @media (max-width:520px){
-    .feature-overlay{ padding:12px; }
-    .xmas-box{ max-width:100%; border-radius:18px;
-      max-height:calc(100vh - 24px); max-height:calc(100dvh - 24px);
-      display:flex; flex-direction:column; }
-    .xmas-art{ flex:0 0 auto; }
-    .xmas-body{ padding:15px 16px 18px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
-    .xmas-box .feature-close{ top:10px; right:10px; width:30px; height:30px; font-size:14px; }
-    .xmas-eyebrow{ padding:5px 11px; font-size:10.5px; }
-    .xmas-box h3{ margin:9px 0 7px; font-size:19px; line-height:1.28; }
-    .xmas-lead{ margin:0 0 13px; font-size:12.5px; line-height:1.7; }
-    .xmas-two{ grid-template-columns:1fr; gap:8px; margin-bottom:13px; }
-    .xmas-city{ padding:10px 12px; border-radius:12px; }
-    .xmas-city b{ font-size:12.5px; margin-bottom:3px; }
-    .xmas-city span{ font-size:11px; line-height:1.6; }
-    .xmas-city i{ margin-top:4px; font-size:10.5px; }
-    .xmas-when{ margin:0 0 13px; padding:9px 11px; gap:7px; font-size:11.5px; line-height:1.6; }
-    .xmas-cta{ gap:8px; }
-    .xmas-cta a{ flex:1 1 100%; min-width:0; padding:12px 14px; font-size:13px; }
     .feature-foot{ flex:0 0 auto; }
     .feature-foot button{ padding:13px 15px; font-size:12.5px; }
-  }
-  @media (max-width:400px){
-    .xmas-art{ height:102px; }
-    .xmas-body{ padding:13px 14px 16px; }
-    .xmas-box h3{ font-size:17.5px; margin:8px 0 6px; }
-    .xmas-lead{ font-size:12px; line-height:1.6; margin-bottom:11px; }
-    .xmas-two{ gap:7px; margin-bottom:11px; }
-    .xmas-city{ padding:9px 11px; }
-    .xmas-city span{ line-height:1.55; }
-    .xmas-when{ margin-bottom:11px; padding:8px 10px; line-height:1.55; }
-    .xmas-cta a{ padding:11px 12px; }
   }
 
   /* 짙은 띠(.stats-band) 안에서는 강조색을 밝은 짝으로 씁니다 —
@@ -1270,185 +1257,178 @@ window.toggleAudioGuide = function(btn){
 };
 </script>
   <div class="feature-overlay" id="featureOverlay">
-  <div class="feature-box xmas-box">
-    <svg class="xmas-art" viewBox="0 0 560 206" preserveAspectRatio="xMidYMid slice" role="img"
-         aria-label="밤하늘 아래 마드리드와 바르셀로나의 크리스마스 마켓 그림">
+  <!-- 1월 차량 & 기사 예약 선물 (올리브유 250ml) — 2027년 2월 1일부터는 저절로 안 보입니다 -->
+  <div class="feature-box oil-box" data-pop="euf-popup-oil-hide-until" data-pop-end="2027-02-01">
+    <svg class="oil-art" viewBox="0 0 560 206" preserveAspectRatio="xMidYMid slice" role="img"
+         aria-label="올리브 밭 언덕 앞에 놓인 선물 상자와 올리브 가지 그림">
       <defs>
-        <linearGradient id="xhanul" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#18242C"/><stop offset="55%" stop-color="#2A343B"/>
-          <stop offset="100%" stop-color="#12304F"/>
+        <linearGradient id="osky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#F7EBCB"/><stop offset=".7" stop-color="#EDE6C9"/><stop offset="1" stop-color="#E2E3C3"/>
         </linearGradient>
-        <radialGradient id="xbul" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#E6CBA2" stop-opacity=".95"/>
-          <stop offset="100%" stop-color="#E6CBA2" stop-opacity="0"/>
+        <radialGradient id="osun" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#FFE3A3"/><stop offset=".6" stop-color="#F8D488" stop-opacity=".55"/><stop offset="1" stop-color="#F8D488" stop-opacity="0"/>
         </radialGradient>
-        <linearGradient id="xnun" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#F1F3F4"/><stop offset="100%" stop-color="#DCE2E6"/>
-        </linearGradient>
       </defs>
 
-      <rect width="560" height="206" fill="url(#xhanul)"/>
+      <rect width="560" height="206" fill="url(#osky)"/>
+      <circle cx="452" cy="62" r="70" fill="url(#osun)"/>
+      <circle cx="452" cy="62" r="24" fill="#FBE0A0"/>
 
-      <!-- 별 -->
-      <g fill="#fff">
-        <circle cx="46" cy="30" r="1.3" opacity=".8"/><circle cx="120" cy="18" r="1" opacity=".6"/>
-        <circle cx="190" cy="38" r="1.5" opacity=".9"/><circle cx="265" cy="22" r="1" opacity=".5"/>
-        <circle cx="330" cy="34" r="1.2" opacity=".75"/><circle cx="412" cy="20" r="1.4" opacity=".85"/>
-        <circle cx="486" cy="40" r="1" opacity=".6"/><circle cx="525" cy="26" r="1.3" opacity=".8"/>
-        <circle cx="84" cy="56" r="1" opacity=".5"/><circle cx="360" cy="58" r="1" opacity=".5"/>
-      </g>
+      <!-- 언덕 -->
+      <path d="M0 132 C 90 104, 170 112, 250 124 S 420 100, 560 118 L560 206 L0 206 Z" fill="#B9BF8B"/>
+      <path d="M0 154 C 110 132, 210 140, 300 150 S 470 132, 560 146 L560 206 L0 206 Z" fill="#9BA66A"/>
+      <path d="M0 180 C 120 166, 260 172, 360 178 S 500 168, 560 174 L560 206 L0 206 Z" fill="#7E8C4D"/>
 
-      <!-- 왼쪽: 마드리드 플라자 마요르 (아케이드 + 쌍탑) -->
-      <g fill="#2C3C48">
-        <rect x="18" y="96" width="196" height="76"/>
-        <rect x="54" y="66" width="22" height="34"/><polygon points="65,50 54,68 76,68"/>
-        <rect x="156" y="66" width="22" height="34"/><polygon points="167,50 156,68 178,68"/>
-        <rect x="100" y="78" width="34" height="22"/><polygon points="117,62 98,80 136,80"/>
+      <!-- 올리브 나무 -->
+      <g fill="#7D8A58">
+        <g><rect x="232" y="116" width="2.6" height="10" fill="#6B5A3E"/><ellipse cx="233" cy="113" rx="11" ry="7.5"/></g>
+        <g><rect x="296" y="114" width="2.6" height="10" fill="#6B5A3E"/><ellipse cx="297" cy="111" rx="12" ry="8"/></g>
+        <g><rect x="360" y="108" width="2.6" height="10" fill="#6B5A3E"/><ellipse cx="361" cy="105" rx="11" ry="7.5"/></g>
+        <g><rect x="420" y="110" width="2.6" height="9"  fill="#6B5A3E"/><ellipse cx="421" cy="107" rx="10" ry="7"/></g>
+        <g><rect x="486" y="106" width="2.6" height="10" fill="#6B5A3E"/><ellipse cx="487" cy="103" rx="11" ry="7.5"/></g>
       </g>
-      <g fill="#D9B072" opacity=".9">
-        <rect x="30" y="112" width="9" height="13" rx="1"/><rect x="50" y="112" width="9" height="13" rx="1"/>
-        <rect x="70" y="112" width="9" height="13" rx="1"/><rect x="90" y="112" width="9" height="13" rx="1"/>
-        <rect x="110" y="112" width="9" height="13" rx="1"/><rect x="130" y="112" width="9" height="13" rx="1"/>
-        <rect x="150" y="112" width="9" height="13" rx="1"/><rect x="170" y="112" width="9" height="13" rx="1"/>
-        <rect x="190" y="112" width="9" height="13" rx="1"/>
-      </g>
-      <g fill="#18242C">
-        <path d="M26 172v-22a10 10 0 0 1 20 0v22z"/><path d="M56 172v-22a10 10 0 0 1 20 0v22z"/>
-        <path d="M86 172v-22a10 10 0 0 1 20 0v22z"/><path d="M116 172v-22a10 10 0 0 1 20 0v22z"/>
-        <path d="M146 172v-22a10 10 0 0 1 20 0v22z"/><path d="M176 172v-22a10 10 0 0 1 20 0v22z"/>
+      <g fill="#66764A">
+        <g><rect x="262" y="140" width="3" height="12" fill="#5E4E34"/><ellipse cx="263.5" cy="136" rx="14" ry="9.5"/></g>
+        <g><rect x="338" y="142" width="3" height="12" fill="#5E4E34"/><ellipse cx="339.5" cy="138" rx="15" ry="10"/></g>
+        <g><rect x="414" y="136" width="3" height="12" fill="#5E4E34"/><ellipse cx="415.5" cy="132" rx="14" ry="9.5"/></g>
+        <g><rect x="500" y="138" width="3" height="12" fill="#5E4E34"/><ellipse cx="501.5" cy="134" rx="15" ry="10"/></g>
       </g>
 
-      <!-- 오른쪽: 바르셀로나 사그라다 파밀리아 (첨탑) -->
-      <g fill="#2C3C48">
-        <polygon points="372,172 372,96 384,54 396,96 396,172"/>
-        <polygon points="402,172 402,86 416,36 430,86 430,172"/>
-        <polygon points="436,172 436,96 448,54 460,96 460,172"/>
-        <polygon points="466,172 466,106 476,70 486,106 486,172"/>
-        <rect x="368" y="138" width="124" height="34"/>
-      </g>
-      <g fill="#D9B072" opacity=".85">
-        <circle cx="384" cy="70" r="2.4"/><circle cx="416" cy="52" r="2.8"/>
-        <circle cx="448" cy="70" r="2.4"/><circle cx="476" cy="84" r="2"/>
-        <rect x="378" y="148" width="7" height="11" rx="1"/><rect x="398" y="148" width="7" height="11" rx="1"/>
-        <rect x="418" y="148" width="7" height="11" rx="1"/><rect x="438" y="148" width="7" height="11" rx="1"/>
-        <rect x="458" y="148" width="7" height="11" rx="1"/><rect x="478" y="148" width="7" height="11" rx="1"/>
-      </g>
+      <!-- 바닥 그림자 -->
+      <ellipse cx="128" cy="192" rx="62" ry="7" fill="#3F4A22" opacity=".28"/>
 
-      <!-- 가운데 크리스마스 트리 -->
+      <!-- 선물 상자 (올리브유 250ml) -->
       <g>
-        <polygon points="280,58 258,104 302,104" fill="#46705F"/>
-        <polygon points="280,86 252,134 308,134" fill="#12945F"/>
-        <polygon points="280,116 246,166 314,166" fill="#46705F"/>
-        <rect x="274" y="166" width="12" height="12" fill="#4A2F17"/>
-        <g class="xmas-star">
-          <circle class="xmas-glow" cx="280" cy="56" r="20" fill="url(#xbul)"/>
-          <polygon class="xmas-tip" points="280,40 284,52 296,52 286,60 290,72 280,64 270,72 274,60 264,52 276,52" fill="#E6CBA2"/>
+        <!-- 상자 몸통 -->
+        <rect x="80" y="118" width="96" height="70" rx="4" fill="#5E7536"/>
+        <rect x="80" y="118" width="96" height="10" fill="#4F6232"/>
+        <!-- 뚜껑 -->
+        <rect x="74" y="102" width="108" height="20" rx="4" fill="#6E8540"/>
+        <rect x="74" y="117" width="108" height="5" fill="#5E7536" opacity=".7"/>
+        <!-- 리본 -->
+        <rect x="121" y="102" width="14" height="86" fill="#B0473A"/>
+        <rect x="121" y="102" width="4" height="86" fill="#C8604F" opacity=".7"/>
+        <path d="M128 100 c-22 -22 -40 -10 -28 2 c6 6 18 2 28 -2 z" fill="#B0473A"/>
+        <path d="M128 100 c22 -22 40 -10 28 2 c-6 6 -18 2 -28 -2 z" fill="#B0473A"/>
+        <path d="M128 100 c-14 -14 -26 -8 -20 0" fill="none" stroke="#8E3328" stroke-width="1.4"/>
+        <path d="M128 100 c14 -14 26 -8 20 0" fill="none" stroke="#8E3328" stroke-width="1.4"/>
+        <path d="M124 104 l-8 18 l6 -2 l2 6 z" fill="#9A3A2E"/>
+        <path d="M132 104 l8 18 l-6 -2 l-2 6 z" fill="#9A3A2E"/>
+        <ellipse cx="128" cy="101" rx="6" ry="5" fill="#8E3328"/>
+        <!-- 꼬리표 -->
+        <path d="M176 132 C 186 134, 190 140, 192 148" fill="none" stroke="#C9B48A" stroke-width="1.2"/>
+        <g transform="rotate(8 206 162)">
+          <path d="M184 150 h44 a3 3 0 0 1 3 3 v22 a3 3 0 0 1 -3 3 h-44 l-8 -14 z" fill="#F8F2E2" stroke="#D9CBA6" stroke-width="1"/>
+          <circle cx="186" cy="164" r="2" fill="#C9B48A"/>
+          <text x="208" y="162" text-anchor="middle" font-family="Georgia,serif" font-size="6.4" font-weight="700" fill="#3C4A22" textLength="36" lengthAdjust="spacingAndGlyphs">ACEITE ECO</text>
+          <text x="208" y="172" text-anchor="middle" font-family="Georgia,serif" font-size="7" font-weight="700" fill="#8E6139">250 ml</text>
         </g>
-        <g fill="#D9B072"><circle cx="268" cy="98" r="2.6"/><circle cx="292" cy="98" r="2.6"/>
-          <circle cx="262" cy="126" r="2.6"/><circle cx="298" cy="126" r="2.6"/><circle cx="280" cy="112" r="2.6"/>
-          <circle cx="256" cy="156" r="2.6"/><circle cx="304" cy="156" r="2.6"/><circle cx="280" cy="146" r="2.6"/></g>
+        <!-- 상자 위 올리브 잎 -->
+        <g transform="translate(98 110)">
+          <ellipse cx="-6" cy="-3" rx="8" ry="2.8" transform="rotate(-24)" fill="#A8B86E"/>
+          <ellipse cx="6" cy="-4" rx="8" ry="2.8" transform="rotate(20)" fill="#A8B86E"/>
+          <ellipse cx="0" cy="1" rx="3.6" ry="4.4" fill="#2F3A15"/>
+        </g>
       </g>
 
-      <!-- 전구 줄 -->
-      <path d="M0 44 Q140 86 280 44 Q420 2 560 44" fill="none" stroke="#64707A" stroke-width="1.2" opacity=".55"/>
-      <g>
-        <circle cx="70" cy="64" r="3.4" fill="#E6CBA2"/><circle cx="140" cy="70" r="3.4" fill="#C58B52"/>
-        <circle cx="210" cy="62" r="3.4" fill="#E6CBA2"/><circle cx="350" cy="24" r="3.4" fill="#C58B52"/>
-        <circle cx="420" cy="18" r="3.4" fill="#E6CBA2"/><circle cx="490" cy="28" r="3.4" fill="#C58B52"/>
+      <!-- 올리브 가지 -->
+      <g class="oil-sway">
+        <path d="M176 12 C 196 40, 214 70, 232 104" stroke="#6B5A3E" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <g fill="#6E8540">
+          <ellipse cx="186" cy="28" rx="13" ry="4.2" transform="rotate(-30 186 28)"/>
+          <ellipse cx="198" cy="34" rx="13" ry="4.2" transform="rotate(38 198 34)"/>
+          <ellipse cx="200" cy="54" rx="14" ry="4.4" transform="rotate(-24 200 54)"/>
+          <ellipse cx="214" cy="62" rx="13" ry="4.2" transform="rotate(42 214 62)"/>
+          <ellipse cx="214" cy="82" rx="14" ry="4.4" transform="rotate(-18 214 82)"/>
+          <ellipse cx="230" cy="90" rx="12" ry="4" transform="rotate(46 230 90)"/>
+        </g>
+        <g fill="#8FA15C" opacity=".7">
+          <ellipse cx="190" cy="44" rx="10" ry="3.2" transform="rotate(30 190 44)"/>
+          <ellipse cx="206" cy="72" rx="10" ry="3.2" transform="rotate(28 206 72)"/>
+        </g>
+        <ellipse cx="193" cy="46" rx="5.2" ry="6.6" fill="#3D4A1C"/>
+        <ellipse cx="206" cy="47" rx="4.8" ry="6.2" fill="#55662A"/>
+        <ellipse cx="208" cy="74" rx="5.2" ry="6.6" fill="#2F3A15"/>
+        <circle cx="191.5" cy="44" r="1.3" fill="#fff" opacity=".45"/>
+        <circle cx="206.5" cy="72" r="1.3" fill="#fff" opacity=".45"/>
       </g>
 
-      <!-- 마켓 가판대 -->
-      <g>
-        <g transform="translate(96,150)">
-          <polygon points="0,10 30,10 36,0 -6,0" fill="#94634A"/>
-          <rect x="0" y="10" width="30" height="24" fill="#F1F3F4"/>
-          <rect x="6" y="16" width="18" height="12" fill="#D9B072"/>
-        </g>
-        <g transform="translate(196,154)">
-          <polygon points="0,10 30,10 36,0 -6,0" fill="#46705F"/>
-          <rect x="0" y="10" width="30" height="20" fill="#F1F3F4"/>
-          <rect x="6" y="15" width="18" height="10" fill="#D9B072"/>
-        </g>
-        <g transform="translate(304,150)">
-          <polygon points="0,10 30,10 36,0 -6,0" fill="#94634A"/>
-          <rect x="0" y="10" width="30" height="24" fill="#F1F3F4"/>
-          <rect x="6" y="16" width="18" height="12" fill="#D9B072"/>
-        </g>
-        <g transform="translate(404,154)">
-          <polygon points="0,10 30,10 36,0 -6,0" fill="#46705F"/>
-          <rect x="0" y="10" width="30" height="20" fill="#F1F3F4"/>
-          <rect x="6" y="15" width="18" height="10" fill="#D9B072"/>
-        </g>
-      </g>
-      <ellipse cx="111" cy="186" rx="86" ry="24" fill="url(#xbul)"/>
-      <ellipse cx="319" cy="186" rx="86" ry="24" fill="url(#xbul)"/>
-
-      <!-- 눈 쌓인 바닥 -->
-      <path d="M0 182 Q140 170 280 180 Q420 190 560 176 L560 206 L0 206 Z" fill="url(#xnun)"/>
-      <g fill="#fff" opacity=".9">
-        <circle cx="40" cy="92" r="1.6"/><circle cx="150" cy="120" r="1.4"/><circle cx="238" cy="76" r="1.5"/>
-        <circle cx="330" cy="112" r="1.6"/><circle cx="470" cy="118" r="1.4"/><circle cx="520" cy="86" r="1.5"/>
-        <circle cx="92" cy="140" r="1.3"/><circle cx="364" cy="136" r="1.3"/>
-      </g>
+      <!-- 오른쪽 작은 글씨 -->
+      <text x="530" y="190" text-anchor="end" font-family="Georgia,serif" font-style="italic" font-size="12" fill="#F7F3E4" opacity=".92">Regalo de enero · 2027</text>
     </svg>
 
-    <div class="xmas-body">
-      <span class="xmas-eyebrow">🎄 겨울에만 열리는 스페인</span>
-      <h3>마드리드와 바르셀로나가<br><em>가장 반짝이는</em> 한 달</h3>
-      <p class="xmas-lead">
-        광장에 불이 켜지고 추로스 냄새가 나기 시작하면, 스페인의 겨울이 시작됩니다.
-        <b>두 도시의 크리스마스 마켓을 한 일정에</b> 담아 드립니다.
+    <div class="oil-body">
+      <span class="oil-eyebrow">🫒 2027년 1월 · 차량 &amp; 기사 예약 고객 선물</span>
+      <h3>1월에 차량 &amp; 기사를 이용하시면<br><em>현지 프리미엄 유기농 올리브유</em>를 드립니다</h3>
+      <p class="oil-lead">
+        올리브 나라 스페인에서 고른 <b>프리미엄 유기농 엑스트라 버진 올리브유 250ml</b>를
+        2027년 1월에 <b>차량 &amp; 기사</b>를 이용하시는 손님께 감사의 마음으로 선물해 드립니다.
       </p>
 
-      <div class="xmas-two">
-        <div class="xmas-city">
-          <b>마드리드 · 플라자 마요르</b>
-          <span>400년 된 광장을 가득 채우는 구유 장식과 손수 만든 공예품</span>
-          <i>도심 한복판 · 걸어서 이동</i>
+      <div class="oil-two">
+        <div class="oil-card">
+          <small>GIFT</small>
+          <b>유기농 올리브유 250ml</b>
+          <span>스페인 현지 프리미엄 · 엑스트라 버진</span>
         </div>
-        <div class="xmas-city">
-          <b>바르셀로나 · 산타 루시아</b>
-          <span>대성당 앞에서 열리는 카탈루냐 최고(最古)의 크리스마스 장</span>
-          <i>카가 티오 · 전통 장식</i>
+        <div class="oil-card">
+          <small>WHO</small>
+          <b>차량 &amp; 기사 예약 고객</b>
+          <span>1월 1일 ~ 31일 이용 일정</span>
         </div>
       </div>
 
-      <div class="xmas-when">
-        <span>🗓️</span>
-        <span><b>11월 말 ~ 12월 말</b>에 열립니다. 해마다 기간이 조금씩 달라지니,
-          가시려는 날짜를 알려 주시면 그 해 운영 일정에 맞춰 잡아 드립니다.</span>
+      <div class="oil-when">
+        <span>🎁</span>
+        <span><b>예약 1건당 1개</b>를 여행 중 현지에서 전해 드립니다.
+          준비 수량이 다 떨어지면 행사가 일찍 끝날 수 있습니다.</span>
       </div>
 
-      <div class="xmas-cta">
-        <a class="go" href="builder.html">크리스마스 일정 만들기 →</a>
-        <a class="sub" href="contact.html">바로 문의하기</a>
+      <div class="oil-cta">
+        <a class="go" href="contact.html"><span class="oil-pc">차량 &amp; 기사 예약 문의 →</span><span class="oil-m">예약 문의 →</span></a>
+        <a class="sub" href="tours.html?cat=transfer"><span class="oil-pc">차량 &amp; 기사 상품 보기</span><span class="oil-m">상품 보기</span></a>
       </div>
     </div>
     <div class="feature-foot">
-      <button type="button" class="ff-today" id="featureToday">오늘 하루 보이지 않기</button>
-      <button type="button" class="ff-close" id="featureClose" aria-label="닫기">닫기 <span aria-hidden="true">✕</span></button>
+      <button type="button" class="ff-today" data-pop-today>오늘 하루 보이지 않기</button>
+      <button type="button" class="ff-close" data-pop-close aria-label="닫기">닫기 <span aria-hidden="true">✕</span></button>
     </div>
   </div>
 </div>
 <script>
 (function(){
+  /* 팝업 상자마다 따로 닫힙니다. data-pop = 「오늘 하루 보이지 않기」를 기억하는 칸 이름,
+     data-pop-end = 이 날짜(그 나라 시각 0시)부터는 띄우지 않음 */
   const overlay = document.getElementById('featureOverlay');
-  const closeBtn = document.getElementById('featureClose');
-  const todayBtn = document.getElementById('featureToday');
-  /* 「오늘 하루 보이지 않기」 — 그 기기에서 오늘 자정까지 팝업을 띄우지 않습니다 */
-  const 칸 = 'euf-popup-hide-until';
-  let 숨김 = 0;
-  try { 숨김 = Number(localStorage.getItem(칸)) || 0; } catch(e) {}
-  if (Date.now() < 숨김) { overlay.remove(); return; }
-  setTimeout(() => overlay.classList.add('show'), 700);
-  function closeFeature(){ overlay.classList.remove('show'); }
-  closeBtn.addEventListener('click', closeFeature);
-  todayBtn.addEventListener('click', () => {
-    const 자정 = new Date(); 자정.setHours(24, 0, 0, 0);
-    try { localStorage.setItem(칸, String(자정.getTime())); } catch(e) {}
-    closeFeature();
+  if (!overlay) return;
+  const 지금 = Date.now();
+  overlay.querySelectorAll('[data-pop]').forEach(function(b){
+    let 숨김 = 0;
+    try { 숨김 = Number(localStorage.getItem(b.getAttribute('data-pop'))) || 0; } catch(e) {}
+    const 끝 = b.getAttribute('data-pop-end');
+    if (지금 < 숨김 || (끝 && 지금 >= new Date(끝 + 'T00:00:00').getTime())) b.remove();
   });
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFeature(); });
+  function 보이는상자(){
+    return Array.prototype.filter.call(overlay.querySelectorAll('[data-pop]'), function(b){ return getComputedStyle(b).display !== 'none'; });
+  }
+  if (!보이는상자().length) { overlay.remove(); return; }
+  setTimeout(() => overlay.classList.add('show'), 700);
+  function 닫기(b){
+    if (b) b.remove();
+    if (!보이는상자().length) overlay.classList.remove('show');
+  }
+  overlay.addEventListener('click', (e) => {
+    const 닫기단추 = e.target.closest('[data-pop-close]');
+    const 오늘단추 = e.target.closest('[data-pop-today]');
+    if (닫기단추) { 닫기(닫기단추.closest('[data-pop]')); return; }
+    if (오늘단추) {
+      const b = 오늘단추.closest('[data-pop]');
+      const 자정 = new Date(); 자정.setHours(24, 0, 0, 0);
+      try { localStorage.setItem(b.getAttribute('data-pop'), String(자정.getTime())); } catch(e) {}
+      닫기(b); return;
+    }
+    if (e.target === overlay) overlay.classList.remove('show');
+  });
 })();
 </script>
 <script>

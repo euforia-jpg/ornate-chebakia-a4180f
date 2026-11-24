@@ -20,7 +20,7 @@
 (function () {
   'use strict';
 
-  var 사전판 = '8';
+  var 사전판 = '9';
   var 저장칸 = 'euforia-lang';
   var 사전칸 = 'euforia-dict-';
 
